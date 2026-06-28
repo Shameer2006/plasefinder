@@ -1,19 +1,76 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/AuthContext';
 import { useGameStore } from '@/lib/store';
+import { updateDailyChallengeStreak } from '@/lib/userProfile';
+import { getCountFromServer, collection } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 import Game from './components/Game';
 import dynamic from 'next/dynamic';
 
 const MultiplayerGame = dynamic(() => import('./components/MultiplayerGame'), { ssr: false });
 
 export default function Home() {
-  const { user, userProfile, loading, loginAnonymously, loginWithGoogle, logout } = useAuth();
-  const { gameState, setGameState, difficulty, setDifficulty } = useGameStore();
+  const { user, userProfile, loading, loginWithGoogle, logout } = useAuth();
+  const { gameState, setGameState, setDifficulty } = useGameStore();
   const [isQueuing, setIsQueuing] = useState(false);
   const [queueSub, setQueueSub] = useState(null);
+  const [showSettings, setShowSettings] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
+  const [streak, setStreak] = useState(0);
+  const [playedToday, setPlayedToday] = useState(false);
+  const [onlineCount, setOnlineCount] = useState('...');
 
-  if (loading) return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '2rem' }}>Loading PlaceFinder...</div>;
+  useEffect(() => {
+    const fetchUserCount = async () => {
+      try {
+        if (!db) return;
+        const coll = collection(db, 'users');
+        const snapshot = await getCountFromServer(coll);
+        setOnlineCount(snapshot.data().count);
+      } catch (err) {
+        console.error("Failed to fetch user count", err);
+      }
+    };
+    fetchUserCount();
+  }, []);
+
+  useEffect(() => {
+    if (!userProfile) {
+      setStreak(0);
+      setPlayedToday(false);
+      return;
+    }
+
+    // Initialize Streak from userProfile
+    const lastPlayed = userProfile.lastDailyChallengeDate;
+    const currentStreak = userProfile.dailyChallengeStreak || 0;
+    const today = new Date().toDateString();
+
+    if (lastPlayed) {
+      const lastDate = new Date(lastPlayed);
+      const todayDate = new Date(today);
+      const diffTime = Math.abs(todayDate - lastDate);
+      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)); 
+      
+      if (diffDays === 0) {
+        setPlayedToday(true);
+        setStreak(currentStreak);
+      } else if (diffDays === 1) {
+        setStreak(currentStreak);
+      } else {
+        setStreak(0);
+        if (currentStreak > 0) {
+          updateDailyChallengeStreak(userProfile.uid, 0, lastPlayed);
+        }
+      }
+    } else {
+      setStreak(currentStreak);
+    }
+  }, [userProfile]);
+
+
+  if (loading) return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '2rem' }}>Loading...</div>;
 
   if (gameState.startsWith('MULTIPLAYER_')) {
     const gameId = gameState.replace('MULTIPLAYER_', '');
@@ -30,7 +87,7 @@ export default function Home() {
   };
 
   const startMatchmaking = async () => {
-    if (!userProfile) return alert("Please login first to play ranked duels!");
+    if (!userProfile) return alert("Please login first to play multiplayer!");
     
     const { joinQueue, leaveQueue } = await import('@/lib/matchmaking');
     setIsQueuing(true);
@@ -56,116 +113,275 @@ export default function Home() {
     setIsQueuing(false);
   };
 
+  const handleDailyChallenge = async () => {
+    if (!userProfile) {
+      alert("You must sign in to play the Daily Challenge!");
+      return;
+    }
+    if (playedToday) {
+      alert("You already played the daily challenge today! Come back tomorrow.");
+      return;
+    }
+    
+    const today = new Date().toDateString();
+    const newStreak = streak + 1;
+    
+    // Update state & Firestore
+    setStreak(newStreak);
+    setPlayedToday(true);
+    await updateDailyChallengeStreak(userProfile.uid, newStreak, today);
+    
+    handleStart('HARD'); // Start game
+  };
+
   return (
-    <div style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
-      
-      {/* Header */}
-      <header style={{ position: 'absolute', top: 0, left: 0, right: 0, padding: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', zIndex: 10 }}>
-        <div style={{ background: 'rgba(0,0,0,0.5)', padding: '8px 16px', borderRadius: '8px', fontWeight: '800', letterSpacing: '2px', color: 'rgba(255,255,255,0.7)' }}>
-          PF
-        </div>
-        
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <button className="btn" style={{ background: '#3b82f6' }}>Join Party</button>
-            {(!user || user.isAnonymous) ? (
-              <button className="btn" style={{ background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', gap: '8px' }} onClick={loginWithGoogle}>
-                <span style={{ fontSize: '1.2rem' }}>G</span> Login
-              </button>
-            ) : (
-              <button className="btn" style={{ background: 'rgba(255,255,255,0.1)' }} onClick={logout}>
-                Logout {userProfile && `(${userProfile.displayName})`}
-              </button>
-            )}
-          </div>
-          
-          <div style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '12px', padding: '8px 16px', color: '#10b981', textAlign: 'center', minWidth: '140px' }}>
-            <div style={{ fontSize: '0.7rem', fontWeight: 'bold', letterSpacing: '1px', opacity: 0.9 }}>SEASON 12</div>
-            <div style={{ fontSize: '1rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
-              <span style={{ fontSize: '1.2rem' }}>✪</span> {userProfile ? userProfile.elo : 0} Points
-            </div>
-          </div>
-        </div>
-      </header>
+    <div style={{
+      minHeight: '100vh',
+      width: '100vw',
+      backgroundImage: 'url(/bg.jpg)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      position: 'relative',
+      overflow: 'hidden',
+      color: 'white'
+    }}>
+      {/* Left Gradient Overlay */}
+      <div style={{
+        position: 'absolute',
+        top: 0, left: 0, bottom: 0,
+        width: '60%',
+        background: 'linear-gradient(to right, rgba(80, 10, 10, 0.95) 0%, rgba(80, 10, 10, 0.8) 40%, transparent 100%)',
+        zIndex: 1
+      }}></div>
 
-      {/* Main Content Centered */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem' }}>
+      {/* Main Content Container (z-index 2) */}
+      <div style={{ position: 'relative', zIndex: 2, padding: '3rem', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
         
-        <div className="glass-panel" style={{ padding: '3rem 2rem', maxWidth: '450px', width: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {/* Top Right Controls */}
+        <div style={{ position: 'absolute', top: '2rem', right: '2rem', display: 'flex', flexDirection: 'row', gap: '1rem', alignItems: 'center' }}>
+          <button className="btn" style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '6px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
+            <span>Maps</span>
+          </button>
           
-          {/* Globe Icon */}
-          <div style={{ 
-            width: '80px', height: '80px', borderRadius: '50%', 
-            background: 'linear-gradient(135deg, #60a5fa, #3b82f6)', 
-            boxShadow: '0 0 30px rgba(59, 130, 246, 0.6), inset -10px -10px 20px rgba(0,0,0,0.3)',
-            position: 'relative', marginBottom: '1.5rem', overflow: 'hidden'
-          }}>
-            <div style={{ position: 'absolute', width: '40%', height: '50%', background: '#34d399', borderRadius: '40%', top: '10%', left: '10%', transform: 'rotate(20deg)' }}></div>
-            <div style={{ position: 'absolute', width: '30%', height: '30%', background: '#34d399', borderRadius: '50%', bottom: '15%', right: '15%' }}></div>
-          </div>
-
-          <h1 className="gradient-text" style={{ fontSize: '2rem', marginBottom: '1rem', fontWeight: '800' }}>Welcome to PlaceFinder!</h1>
-          
-          {isQueuing ? (
-            <div style={{ padding: '2rem 0', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
-              <div style={{ fontSize: '1.2rem', animation: 'pulse-glow 1.5s infinite', color: 'var(--primary-color)' }}>
-                Searching for opponent...
-              </div>
-              <button className="btn btn-secondary" onClick={cancelMatchmaking}>Cancel</button>
-            </div>
+          {(!user || user.isAnonymous) ? (
+            <button className="btn" style={{ background: '#2f7a44', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 16px', borderRadius: '6px' }} onClick={loginWithGoogle}>
+              <span style={{ fontWeight: 'bold' }}>G</span> Login
+            </button>
           ) : (
-            <>
-              <p style={{ marginBottom: '2rem', fontSize: '1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.5', maxWidth: '300px' }}>
-                You've been dropped somewhere on Earth.<br/>
-                Look for clues and guess where you are!
-              </p>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', marginBottom: '2rem' }}>
-                
-                {/* Ranked Duel Mode */}
-                <div className="game-mode-card" style={{ position: 'relative', borderColor: '#3b82f6' }} onClick={startMatchmaking}>
-                  <div style={{ position: 'absolute', top: '-10px', right: '15px', background: '#3b82f6', color: '#fff', fontSize: '0.65rem', fontWeight: '800', padding: '4px 8px', borderRadius: '10px', letterSpacing: '0.5px', boxShadow: '0 0 10px rgba(59,130,246,0.5)' }}>
-                    MULTIPLAYER
-                  </div>
-                  <div style={{ fontSize: '2rem', background: 'rgba(59,130,246,0.1)', padding: '10px', borderRadius: '12px' }}>⚔️</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '4px', color: '#60a5fa' }}>Ranked Duel</div>
-                    <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)' }}>1v1 Matchmaking (Earn ELO)</div>
-                  </div>
-                </div>
-
-                {/* Country Guesser Mode */}
-                <div className="game-mode-card" style={{ position: 'relative' }} onClick={() => handleStart('EASY')}>
-                  <div style={{ position: 'absolute', top: '-10px', right: '15px', background: '#34d399', color: '#000', fontSize: '0.65rem', fontWeight: '800', padding: '4px 8px', borderRadius: '10px', letterSpacing: '0.5px' }}>
-                    BEST FOR BEGINNERS
-                  </div>
-                  <div style={{ fontSize: '2rem', background: 'rgba(255,255,255,0.05)', padding: '10px', borderRadius: '12px' }}>🏳️</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '4px' }}>Country Guesser</div>
-                    <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)' }}>Just choose the right country</div>
-                  </div>
-                </div>
-
-                {/* Classic Mode */}
-                <div className="game-mode-card" onClick={() => handleStart('HARD')}>
-                  <div style={{ fontSize: '2rem', background: 'rgba(255,255,255,0.05)', padding: '10px', borderRadius: '12px' }}>🗺️</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '4px' }}>Classic</div>
-                    <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)' }}>Try to guess the exact location</div>
-                  </div>
-                </div>
-                
-              </div>
-
-              <button style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', fontSize: '0.9rem' }}>
-                Skip tutorial →
-              </button>
-            </>
+            <img 
+              src={user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName}`} 
+              alt="Profile"
+              onClick={() => setShowProfile(true)}
+              style={{ width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer', border: '2px solid rgba(255,255,255,0.2)', objectFit: 'cover' }}
+              className="menu-item-hover"
+            />
           )}
-
         </div>
-      </div>
 
+        {/* Left Menu Area */}
+        <div style={{ marginTop: '2rem', maxWidth: '400px' }}>
+          {showSettings ? (
+            <SettingsMenu onBack={() => setShowSettings(false)} />
+          ) : showProfile ? (
+            <ProfileMenu onBack={() => setShowProfile(false)} userProfile={userProfile} logout={logout} />
+          ) : (
+            <MainMenu 
+              onSingleplayer={() => handleStart('EASY')} 
+              onFindMatch={startMatchmaking} 
+              isQueuing={isQueuing} 
+              cancelMatchmaking={cancelMatchmaking} 
+              onDailyChallenge={handleDailyChallenge}
+              streak={streak}
+              playedToday={playedToday}
+            />
+          )}
+        </div>
+
+        {/* Bottom Area */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', width: '100%' }}>
+          {/* Left icons */}
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <IconButton 
+              icon={<img src="/settings.png" alt="Settings" style={{ width: '24px', height: '24px' }} />} 
+              color="#7f1d1d" 
+              onClick={() => setShowSettings(true)} 
+            />
+          </div>
+
+          {/* Right online count */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+             <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#34d399', boxShadow: '0 0 8px #34d399' }}></div>
+             <span style={{ fontWeight: 'bold', fontSize: '1.3rem', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>{onlineCount} online</span>
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 }
+
+const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+    <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>Pinpoint</h1>
+    <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
+    
+    <MenuItem text="Singleplayer" onClick={onSingleplayer} />
+    {isQueuing ? (
+      <MenuItem text="Cancel Matchmaking..." onClick={cancelMatchmaking} />
+    ) : (
+      <MenuItem text="Find a Match" onClick={onFindMatch} />
+    )}
+    
+    <div style={{ height: '2px', background: 'white', width: '100%', margin: '0.5rem 0' }}></div>
+    
+    <MenuItem text="Create Party" onClick={() => {}} />
+    <MenuItem text="Join Party" onClick={() => {}} />
+    
+    <div style={{ height: '2px', background: 'white', width: '100%', margin: '0.5rem 0' }}></div>
+    
+    <div onClick={onDailyChallenge} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: playedToday ? 'not-allowed' : 'pointer', fontSize: '1.2rem', fontWeight: '600', opacity: playedToday ? 0.6 : 1 }} className={playedToday ? "" : "menu-item-hover"}>
+      Daily Challenge 
+      <span style={{ background: '#fb923c', color: 'white', padding: '2px 8px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 'bold', marginLeft: '0.5rem', display: 'flex', alignItems: 'center', boxShadow: '0 0 12px rgba(251, 146, 60, 0.8)' }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '2px' }}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+        {streak} day{streak !== 1 ? 's' : ''}
+      </span>
+    </div>
+  </div>
+);
+
+const SettingsMenu = ({ onBack }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <h1 style={{ fontSize: '2.2rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>Settings</h1>
+    <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
+    
+    <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
+      Back
+    </div>
+
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '1.1rem', fontWeight: 'bold' }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <span style={{ width: '180px' }}>Units:</span>
+        <select style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
+          <option>Metric (km)</option>
+          <option>Imperial (mi)</option>
+        </select>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <span style={{ width: '180px' }}>Map Type:</span>
+        <select style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
+          <option>Normal</option>
+          <option>Satellite</option>
+        </select>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <span style={{ width: '180px' }}>Language:</span>
+        <select style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
+          <option>English</option>
+        </select>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <span style={{ width: '180px' }}>Show RAM Usage</span>
+        <input type="checkbox" style={{ transform: 'scale(1.2)' }} />
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <span style={{ width: '300px' }}>Multiplayer emote reactions</span>
+        <input type="checkbox" defaultChecked style={{ transform: 'scale(1.2)' }} />
+      </div>
+    </div>
+  </div>
+);
+
+const ProfileMenu = ({ onBack, userProfile, logout }) => {
+  if (!userProfile) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <h1 style={{ fontSize: '2.2rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>Account Profile</h1>
+        <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
+        <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
+          Back
+        </div>
+        <div style={{ fontSize: '1.2rem', textAlign: 'center', marginTop: '2rem', background: 'rgba(0,0,0,0.5)', padding: '2rem', borderRadius: '12px' }}>
+          You must be logged in to view your profile!
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <h1 style={{ fontSize: '2.2rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>{userProfile.displayName}'s Profile</h1>
+      <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
+      
+      <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
+        Back
+      </div>
+
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: '1fr 1fr', 
+        gap: '1rem',
+        background: 'rgba(0,0,0,0.4)',
+        padding: '1.5rem',
+        borderRadius: '16px',
+        border: '1px solid rgba(255,255,255,0.1)'
+      }}>
+        <ProfileStat 
+          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '4px'}}><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg> ELO Rating</>} 
+          value={userProfile.elo} 
+        />
+        <ProfileStat 
+          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '4px'}}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Total XP</>} 
+          value={userProfile.totalXp} 
+        />
+        <ProfileStat 
+          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '4px'}}><path d="M14.5 4h5v5"></path><polyline points="19.5 4 12 11.5 8 7.5 2 13.5"></polyline></svg> Duels Won</>} 
+          value={userProfile.duels_wins} 
+        />
+        <ProfileStat 
+          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '4px'}}><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Duels Lost</>} 
+          value={userProfile.duels_losses} 
+        />
+        <ProfileStat 
+          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '4px'}}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> Daily Streak</>} 
+          value={userProfile.dailyChallengeStreak || 0} 
+        />
+        <ProfileStat 
+          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '4px'}}><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Joined</>} 
+          value={new Date(userProfile.createdAt).toLocaleDateString()} 
+        />
+      </div>
+
+      <button className="btn" style={{ background: '#b91c1c', marginTop: '1rem', padding: '12px', borderRadius: '8px', fontSize: '1.1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }} onClick={logout}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        Log Out
+      </button>
+    </div>
+  );
+};
+
+const ProfileStat = ({ label, value }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '8px' }}>
+    <span style={{ fontSize: '0.9rem', color: '#9ca3af', display: 'flex', alignItems: 'center' }}>{label}</span>
+    <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{value}</span>
+  </div>
+);
+
+const MenuItem = ({ text, onClick }) => (
+  <div onClick={onClick} style={{ fontSize: '1.3rem', fontWeight: '600', cursor: 'pointer' }} className="menu-item-hover">
+    {text}
+  </div>
+);
+
+const IconButton = ({ icon, color, onClick }) => (
+  <button onClick={onClick} style={{ 
+    width: '40px', height: '40px', 
+    borderRadius: '8px', 
+    background: color, 
+    border: 'none', 
+    display: 'flex', justifyContent: 'center', alignItems: 'center',
+    fontSize: '1.2rem', cursor: 'pointer', color: 'white'
+  }} className="btn">
+    {icon}
+  </button>
+);

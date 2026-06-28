@@ -18,9 +18,20 @@ export const getOrCreateUserProfile = async (user) => {
       totalXp: 0,
       duels_wins: 0,
       duels_losses: 0,
+      dailyChallengeStreak: 0,
+      lastDailyChallengeDate: null,
       createdAt: new Date().toISOString()
     };
     await setDoc(userRef, newProfile);
     return newProfile;
   }
+};
+
+export const updateDailyChallengeStreak = async (uid, newStreak, dateString) => {
+  if (!db || !uid) return;
+  const userRef = doc(db, 'users', uid);
+  await setDoc(userRef, {
+    dailyChallengeStreak: newStreak,
+    lastDailyChallengeDate: dateString
+  }, { merge: true });
 };

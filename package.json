@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^2.1.1",
+    "@tailwindcss/postcss": "^4.3.1",
     "firebase": "^12.15.0",
     "firebase-admin": "^14.1.0",
     "leaflet": "^1.9.4",
@@ -20,7 +21,10 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "autoprefixer": "^10.5.2",
     "eslint": "^9",
-    "eslint-config-next": "16.2.9"
+    "eslint-config-next": "16.2.9",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^4.3.1"
   }
 }

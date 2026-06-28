@@ -43,8 +43,8 @@ export default function GuessingMap() {
         position: 'absolute',
         bottom: 20,
         right: 20,
-        width: isExpanded ? '600px' : '300px',
-        height: isExpanded ? '400px' : '200px',
+        width: isExpanded ? '80vw' : '300px',
+        height: isExpanded ? '60vh' : '200px',
         transition: 'all 0.3s ease',
         zIndex: 10,
         overflow: 'hidden',
@@ -57,12 +57,12 @@ export default function GuessingMap() {
       <div style={{ flex: 1, position: 'relative' }}>
         <MapContainer 
           center={[20, 0]} 
-          zoom={1} 
+          zoom={2} 
           style={{ height: '100%', width: '100%' }}
           attributionControl={false}
         >
           <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
           />
           <MapClickHandler onLocationSelect={setMarkerPos} />
           {markerPos && <Marker position={markerPos} icon={customIcon} />}

@@ -32,7 +32,7 @@ export default function ResultScreen() {
   useEffect(() => {
     let earned = 0;
     if (difficulty === 'EASY') {
-      if (userGuess === currentLocation.state) earned = 5000;
+      if (userGuess?.country === currentLocation.country) earned = 5000;
     } else {
       if (userGuess && userGuess.lat && userGuess.lng) {
         const dist = getDistanceFromLatLonInKm(currentLocation.lat, currentLocation.lng, userGuess.lat, userGuess.lng);
@@ -65,13 +65,23 @@ export default function ResultScreen() {
         <div style={{ margin: '2.5rem 0', fontSize: '1.4rem', background: 'rgba(0,0,0,0.3)', padding: '2rem', borderRadius: '16px' }}>
           {difficulty === 'EASY' ? (
             <>
-              <p style={{ marginBottom: '1rem' }}>Your guess: <strong style={{ color: 'var(--primary-color)' }}>{userGuess || 'None'}</strong></p>
-              <p>Correct answer: <strong style={{ color: userGuess === currentLocation.state ? 'var(--success-color)' : 'var(--error-color)' }}>{currentLocation.state}</strong></p>
+              <p style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                Your guess: 
+                <strong style={{ color: 'var(--primary-color)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {userGuess ? <><img src={`https://flagcdn.com/w40/${userGuess.iso}.png`} width="24" alt={userGuess.country} /> {userGuess.country}</> : 'None'}
+                </strong>
+              </p>
+              <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                Correct answer: 
+                <strong style={{ color: userGuess?.country === currentLocation.country ? 'var(--success-color)' : 'var(--error-color)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <img src={`https://flagcdn.com/w40/${currentLocation.iso}.png`} width="24" alt={currentLocation.country} /> {currentLocation.country}
+                </strong>
+              </p>
             </>
           ) : (
             <>
               <p style={{ marginBottom: '1rem' }}>Distance from location: <strong style={{ color: 'var(--primary-color)' }}>{distanceKm} km</strong></p>
-              <p>Actual Location: {currentLocation.state}, {currentLocation.country}</p>
+              <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>Actual Location: <img src={`https://flagcdn.com/w40/${currentLocation.iso}.png`} width="24" alt={currentLocation.country} /> {currentLocation.country}, {currentLocation.state}</p>
             </>
           )}
         </div>
