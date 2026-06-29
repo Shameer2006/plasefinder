@@ -94,7 +94,7 @@ export default function FlagGame({ onReturnToMenu }) {
   }
 
   return (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#0a0a0a' }}>
+    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       
       {/* HUD overlay */}
       <div style={{ position: 'absolute', top: 20, left: 20, zIndex: 10, display: 'flex', gap: '1rem' }}>
