@@ -19,7 +19,18 @@ export default function PanoramaViewer() {
     );
   }
 
-  const embedUrl = `https://www.google.com/maps/embed/v1/streetview?key=${apiKey}&location=${currentLocation.lat},${currentLocation.lng}&heading=210&pitch=10&fov=90`;
+  // Build embed URL — prefer panoId for guaranteed Street View coverage
+  const heading = currentLocation.heading ?? 210;
+  const pitch = currentLocation.pitch ?? 10;
+  let embedUrl;
+
+  if (currentLocation.panoId) {
+    // Use pano= for guaranteed panorama (no "Sorry, no imagery" errors)
+    embedUrl = `https://www.google.com/maps/embed/v1/streetview?key=${apiKey}&pano=${currentLocation.panoId}&heading=${heading}&pitch=${pitch}&fov=90`;
+  } else {
+    // Fallback to lat/lng (Google finds nearest coverage, may fail)
+    embedUrl = `https://www.google.com/maps/embed/v1/streetview?key=${apiKey}&location=${currentLocation.lat},${currentLocation.lng}&heading=${heading}&pitch=${pitch}&fov=90`;
+  }
 
   return (
     <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>

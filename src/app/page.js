@@ -6,7 +6,9 @@ import { updateDailyChallengeStreak } from '@/lib/userProfile';
 import { getCountFromServer, collection } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import Game from './components/Game';
+import FlagGame from './components/FlagGame';
 import dynamic from 'next/dynamic';
+import PartyLobby from './components/PartyLobby';
 
 const MultiplayerGame = dynamic(() => import('./components/MultiplayerGame'), { ssr: false });
 
@@ -17,6 +19,11 @@ export default function Home() {
   const [queueSub, setQueueSub] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const [showDifficulty, setShowDifficulty] = useState(false);
+  const [showJoinModal, setShowJoinModal] = useState(false);
+  const [joinCode, setJoinCode] = useState('');
+  const [joinError, setJoinError] = useState('');
+  const [isJoining, setIsJoining] = useState(false);
   const [streak, setStreak] = useState(0);
   const [playedToday, setPlayedToday] = useState(false);
   const [onlineCount, setOnlineCount] = useState('...');
@@ -76,6 +83,15 @@ export default function Home() {
     const gameId = gameState.replace('MULTIPLAYER_', '');
     return <MultiplayerGame gameId={gameId} />;
   }
+  
+  if (gameState.startsWith('PARTY_LOBBY_')) {
+    const gameId = gameState.replace('PARTY_LOBBY_', '');
+    return <PartyLobby gameId={gameId} />;
+  }
+
+  if (gameState === 'FLAG_GAME') {
+    return <FlagGame onReturnToMenu={() => setGameState('MENU')} />;
+  }
 
   if (gameState !== 'MENU') {
     return <Game />;
@@ -111,6 +127,42 @@ export default function Home() {
       setQueueSub(null);
     }
     setIsQueuing(false);
+  };
+
+  const handleCreateParty = async () => {
+    if (!userProfile) return alert("Please login first to create a party!");
+    const { createParty } = await import('@/lib/matchmaking');
+    try {
+      const gameId = await createParty(userProfile);
+      if (gameId) {
+        setGameState(`PARTY_LOBBY_${gameId}`);
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Failed to create party.");
+    }
+  };
+
+  const handleJoinPartySubmit = async (e) => {
+    e.preventDefault();
+    if (!userProfile) return alert("Please login first to join a party!");
+    if (joinCode.length !== 6) return setJoinError('Code must be 6 characters');
+    
+    setIsJoining(true);
+    setJoinError('');
+    const { joinParty } = await import('@/lib/matchmaking');
+    try {
+      const gameId = await joinParty(userProfile, joinCode);
+      if (gameId) {
+        setShowJoinModal(false);
+        setGameState(`PARTY_LOBBY_${gameId}`);
+      }
+    } catch (e) {
+      console.error(e);
+      setJoinError(e.message || 'Failed to join party.');
+    } finally {
+      setIsJoining(false);
+    }
   };
 
   const handleDailyChallenge = async () => {
@@ -185,15 +237,20 @@ export default function Home() {
             <SettingsMenu onBack={() => setShowSettings(false)} />
           ) : showProfile ? (
             <ProfileMenu onBack={() => setShowProfile(false)} userProfile={userProfile} logout={logout} />
+          ) : showDifficulty ? (
+            <DifficultyMenu onBack={() => setShowDifficulty(false)} onSelect={handleStart} />
           ) : (
             <MainMenu 
-              onSingleplayer={() => handleStart('EASY')} 
+              onSingleplayer={() => setShowDifficulty(true)} 
               onFindMatch={startMatchmaking} 
               isQueuing={isQueuing} 
               cancelMatchmaking={cancelMatchmaking} 
               onDailyChallenge={handleDailyChallenge}
               streak={streak}
               playedToday={playedToday}
+              onFlagGuesser={() => setGameState('FLAG_GAME')}
+              onCreateParty={handleCreateParty}
+              onJoinParty={() => setShowJoinModal(true)}
             />
           )}
         </div>
@@ -215,13 +272,38 @@ export default function Home() {
              <span style={{ fontWeight: 'bold', fontSize: '1.3rem', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>{onlineCount} online</span>
           </div>
         </div>
-
       </div>
+
+      {/* Join Party Modal */}
+      {showJoinModal && (
+        <div style={{ position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.7)', zIndex: 50 }}>
+          <div className="glass-panel" style={{ padding: '2rem', width: '90%', maxWidth: '400px' }}>
+            <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 'bold' }}>Join Party</h2>
+            <form onSubmit={handleJoinPartySubmit}>
+              <input 
+                type="text" 
+                value={joinCode}
+                onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
+                placeholder="Enter 6-digit code"
+                maxLength={6}
+                style={{ width: '100%', padding: '10px', fontSize: '1.2rem', textTransform: 'uppercase', textAlign: 'center', letterSpacing: '4px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', borderRadius: '8px', marginBottom: '1rem' }}
+              />
+              {joinError && <div style={{ color: '#f87171', marginBottom: '1rem', textAlign: 'center' }}>{joinError}</div>}
+              
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <button type="button" className="btn" style={{ flex: 1, background: 'rgba(255,255,255,0.1)' }} onClick={() => setShowJoinModal(false)}>Cancel</button>
+                <button type="submit" className="btn" style={{ flex: 1 }} disabled={isJoining}>{isJoining ? 'Joining...' : 'Join'}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
 
-const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday }) => (
+const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onFlagGuesser, onCreateParty, onJoinParty }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
     <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>Pinpoint</h1>
     <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
@@ -235,8 +317,10 @@ const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, o
     
     <div style={{ height: '2px', background: 'white', width: '100%', margin: '0.5rem 0' }}></div>
     
-    <MenuItem text="Create Party" onClick={() => {}} />
-    <MenuItem text="Join Party" onClick={() => {}} />
+    <MenuItem text="Create Party" onClick={onCreateParty} />
+    <MenuItem text="Join Party" onClick={onJoinParty} />
+    <MenuItem text="Flag Guesser" onClick={onFlagGuesser} />
+
     
     <div style={{ height: '2px', background: 'white', width: '100%', margin: '0.5rem 0' }}></div>
     
@@ -384,4 +468,18 @@ const IconButton = ({ icon, color, onClick }) => (
   }} className="btn">
     {icon}
   </button>
+);
+
+const DifficultyMenu = ({ onBack, onSelect }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+    <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>Select Difficulty</h1>
+    <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
+    <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
+      Back
+    </div>
+    
+    <MenuItem text="Easy (Multiple Choice)" onClick={() => onSelect('EASY')} />
+    <MenuItem text="Medium (Mixed)" onClick={() => onSelect('MEDIUM')} />
+    <MenuItem text="Hard (Map Pinning)" onClick={() => onSelect('HARD')} />
+  </div>
 );

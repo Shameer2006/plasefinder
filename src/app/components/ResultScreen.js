@@ -29,9 +29,11 @@ export default function ResultScreen() {
   const [roundScore, setRoundScore] = useState(0);
   const [distanceKm, setDistanceKm] = useState(0);
 
+  const isChoiceMode = difficulty === 'EASY' || (difficulty === 'MEDIUM' && currentRound % 2 !== 0);
+
   useEffect(() => {
     let earned = 0;
-    if (difficulty === 'EASY') {
+    if (isChoiceMode) {
       if (userGuess?.country === currentLocation.country) earned = 5000;
     } else {
       if (userGuess && userGuess.lat && userGuess.lng) {
@@ -63,7 +65,7 @@ export default function ResultScreen() {
         <h2 className="gradient-text glow-text" style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>Round {currentRound} Result</h2>
         
         <div style={{ margin: '2.5rem 0', fontSize: '1.4rem', background: 'rgba(0,0,0,0.3)', padding: '2rem', borderRadius: '16px' }}>
-          {difficulty === 'EASY' ? (
+          {isChoiceMode ? (
             <>
               <p style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
                 Your guess: 
@@ -81,7 +83,7 @@ export default function ResultScreen() {
           ) : (
             <>
               <p style={{ marginBottom: '1rem' }}>Distance from location: <strong style={{ color: 'var(--primary-color)' }}>{distanceKm} km</strong></p>
-              <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>Actual Location: <img src={`https://flagcdn.com/w40/${currentLocation.iso}.png`} width="24" alt={currentLocation.country} /> {currentLocation.country}, {currentLocation.state}</p>
+              <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>Actual Location: <img src={`https://flagcdn.com/w40/${currentLocation.iso}.png`} width="24" alt={currentLocation.country} /> {currentLocation.country}, {currentLocation.state || 'Unknown State'}</p>
             </>
           )}
         </div>

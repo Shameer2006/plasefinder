@@ -60,7 +60,7 @@ export default function Game() {
 
       <PanoramaViewer />
 
-      {difficulty === 'EASY' ? (
+      {difficulty === 'EASY' || (difficulty === 'MEDIUM' && currentRound % 2 !== 0) ? (
         <MultipleChoicePanel />
       ) : (
         <GuessingMap />

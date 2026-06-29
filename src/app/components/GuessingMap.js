@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useGameStore } from '@/lib/store';
@@ -24,15 +24,49 @@ function MapClickHandler({ onLocationSelect }) {
   return null;
 }
 
-export default function GuessingMap() {
+function MapResizer({ isExpanded }) {
+  const map = useMap();
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      map.invalidateSize();
+    }, 300); // Wait for CSS transition
+    return () => clearTimeout(timeout);
+  }, [isExpanded, map]);
+  return null;
+}
+
+function MapCenterer({ country }) {
+  const map = useMap();
+  useEffect(() => {
+    if (country && country !== 'WORLDWIDE') {
+      fetch('/countryCoordinates.json')
+        .then(res => res.json())
+        .then(coords => {
+          if (coords[country]) {
+            // Set view to country center with appropriate zoom
+            map.setView([coords[country].lat, coords[country].lng], 5);
+          }
+        });
+    } else {
+      map.setView([20, 0], 1);
+    }
+  }, [country, map]);
+  return null;
+}
+
+export default function GuessingMap({ onGuess, country }) {
   const [markerPos, setMarkerPos] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const { setUserGuess, setGameState } = useGameStore();
 
   const handleGuess = () => {
     if (markerPos) {
-      setUserGuess({ lat: markerPos.lat, lng: markerPos.lng });
-      setGameState('RESULT');
+      if (onGuess) {
+        onGuess(markerPos.lat, markerPos.lng);
+      } else {
+        setUserGuess({ lat: markerPos.lat, lng: markerPos.lng });
+        setGameState('RESULT');
+      }
     }
   };
 
@@ -43,8 +77,8 @@ export default function GuessingMap() {
         position: 'absolute',
         bottom: 20,
         right: 20,
-        width: isExpanded ? '80vw' : '300px',
-        height: isExpanded ? '60vh' : '200px',
+        width: isExpanded ? '550px' : '300px',
+        height: isExpanded ? '400px' : '200px',
         transition: 'all 0.3s ease',
         zIndex: 10,
         overflow: 'hidden',
@@ -57,7 +91,7 @@ export default function GuessingMap() {
       <div style={{ flex: 1, position: 'relative' }}>
         <MapContainer 
           center={[20, 0]} 
-          zoom={2} 
+          zoom={1} 
           style={{ height: '100%', width: '100%' }}
           attributionControl={false}
         >
@@ -65,6 +99,8 @@ export default function GuessingMap() {
             url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
           />
           <MapClickHandler onLocationSelect={setMarkerPos} />
+          <MapResizer isExpanded={isExpanded} />
+          <MapCenterer country={country} />
           {markerPos && <Marker position={markerPos} icon={customIcon} />}
         </MapContainer>
       </div>
