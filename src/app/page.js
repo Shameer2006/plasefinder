@@ -319,8 +319,8 @@ export default function Home() {
 }
 
 const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onFlagGuesser, onCreateParty, onJoinParty }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-    <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>LostStreet</h1>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', alignItems: 'center' }}>
+    <img src="/logo.png" alt="LostStreet" style={{ width: '100%', maxWidth: '280px', marginBottom: '0.5rem' }} />
     <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
     
     <MenuItem text="Singleplayer" onClick={onSingleplayer} />
