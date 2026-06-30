@@ -196,41 +196,69 @@ export default function MultiplayerGame({ gameId }) {
     );
   }
 
+  const [showMapOnly, setShowMapOnly] = useState(false);
+
+  useEffect(() => {
+    if (isRoundOver && !isMultipleChoice) {
+      setShowMapOnly(true);
+      const timer = setTimeout(() => setShowMapOnly(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isRoundOver, isMultipleChoice]);
+
   if (isRoundOver) {
+    if (showMapOnly) {
+      return (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
+          <ResultsMap location={matchData.location} players={Object.values(matchData.players)} />
+          <div style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(0,0,0,0.8)', padding: '1rem 2rem', borderRadius: '50px', zIndex: 1000 }}>
+            <h2 style={{ color: 'white', margin: 0 }}>Reviewing Map...</h2>
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem' }}>
-        <div className="glass-panel" style={{ padding: '3rem', maxWidth: '600px', width: '100%', textAlign: 'center' }}>
-          <h2 className="gradient-text glow-text" style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Round {matchData.round} Result</h2>
-          
-          <div style={{ marginBottom: '1.5rem' }}>
-            <p style={{ fontSize: '1.2rem' }}>You earned <strong style={{ color: 'var(--primary-color)' }}>+{roundPoints}</strong> pts</p>
-            {isMultipleChoice && (
-               <p style={{ color: '#ccc' }}>{lastGuessDistance === 0 ? 'Correct Choice!' : 'Wrong Choice!'}</p>
+      <div style={{ position: 'relative', minHeight: '100vh' }}>
+        {/* Background Map */}
+        {!isMultipleChoice && (
+          <div style={{ position: 'absolute', inset: 0, zIndex: 0, filter: 'brightness(0.4)' }}>
+            <ResultsMap location={matchData.location} players={Object.values(matchData.players)} />
+          </div>
+        )}
+        
+        <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem' }}>
+          <div className="glass-panel" style={{ padding: '3rem', maxWidth: '600px', width: '100%', textAlign: 'center', background: 'rgba(26, 26, 46, 0.85)', backdropFilter: 'blur(10px)' }}>
+            <h2 className="gradient-text glow-text" style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Round {matchData.round} Result</h2>
+            
+            <div style={{ marginBottom: '1.5rem', background: 'rgba(0,0,0,0.4)', padding: '1.5rem', borderRadius: '12px' }}>
+              <p style={{ fontSize: '1.2rem' }}>You earned <strong style={{ color: 'var(--primary-color)' }}>+{roundPoints}</strong> pts</p>
+              {isMultipleChoice && (
+                 <p style={{ color: '#ccc' }}>{lastGuessDistance === 0 ? 'Correct Choice!' : 'Wrong Choice!'}</p>
+              )}
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '1.5rem 0', maxHeight: '200px', overflowY: 'auto', textAlign: 'left' }}>
+              {sortedPlayers.map((player, idx) => (
+                <div key={player.uid} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px' }}>
+                  <span style={{ fontSize: '1.1rem' }}>
+                    <span style={{ marginRight: '10px', color: '#ccc' }}>#{idx + 1}</span>
+                    {player.displayName}
+                  </span>
+                  <span style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>{player.score}</span>
+                </div>
+              ))}
+            </div>
+            {isHost ? (
+              <button className="btn" onClick={startNextRound} style={{ marginTop: '1rem', width: '100%' }}>
+                {matchData.round < (matchData.options?.rounds || 5) ? 'Next Round' : 'Finish Game'}
+              </button>
+            ) : (
+              <div style={{ padding: '10px', color: '#ccc', marginTop: '1rem' }}>Waiting for host to continue...</div>
             )}
           </div>
-          
-          <ResultsMap location={matchData.location} players={Object.values(matchData.players)} />
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '1.5rem 0', maxHeight: '200px', overflowY: 'auto', textAlign: 'left' }}>
-            {sortedPlayers.map((player, idx) => (
-              <div key={player.uid} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px' }}>
-                <span style={{ fontSize: '1.1rem' }}>
-                  <span style={{ marginRight: '10px', color: '#ccc' }}>#{idx + 1}</span>
-                  {player.displayName}
-                </span>
-                <span style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>{player.score}</span>
-              </div>
-            ))}
-          </div>
-          {isHost ? (
-            <button className="btn" onClick={startNextRound} style={{ marginTop: '1rem' }}>
-              {matchData.round < (matchData.options?.rounds || 5) ? 'Next Round' : 'Finish Game'}
-            </button>
-          ) : (
-            <div style={{ padding: '10px', color: '#ccc', marginTop: '1rem' }}>Waiting for host to continue...</div>
-          )}
+          <PartyChat gameId={gameId} matchData={matchData} />
         </div>
-        <PartyChat gameId={gameId} matchData={matchData} />
       </div>
     );
   }

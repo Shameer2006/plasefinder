@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/AuthContext';
 import { useGameStore } from '@/lib/store';
 import { updateDailyChallengeStreak } from '@/lib/userProfile';
-import { getCountFromServer, collection } from 'firebase/firestore';
+import { getCountFromServer, collection, doc, setDoc, deleteDoc, query, where } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import Game from './components/Game';
 import FlagGame from './components/FlagGame';
@@ -29,17 +29,32 @@ export default function Home() {
   const [onlineCount, setOnlineCount] = useState('...');
 
   useEffect(() => {
-    const fetchUserCount = async () => {
-      try {
-        if (!db) return;
-        const coll = collection(db, 'users');
-        const snapshot = await getCountFromServer(coll);
-        setOnlineCount(snapshot.data().count);
-      } catch (err) {
-        console.error("Failed to fetch user count", err);
-      }
+    // Simulated online count between 3500 and 4000
+    let currentCount = Math.floor(Math.random() * (4000 - 3500 + 1)) + 3500;
+    setOnlineCount(currentCount);
+    let timeoutId;
+
+    const fluctuateCount = () => {
+      // Random change between -15 and +15
+      const change = Math.floor(Math.random() * 31) - 15;
+      currentCount = currentCount + change;
+      
+      // Keep it within bounds
+      if (currentCount < 3500) currentCount = 3500;
+      if (currentCount > 4000) currentCount = 4000;
+      
+      setOnlineCount(currentCount);
+
+      // Schedule next update between 1.5s and 7s
+      const nextDelay = Math.floor(Math.random() * 5500) + 1500;
+      timeoutId = setTimeout(fluctuateCount, nextDelay);
     };
-    fetchUserCount();
+
+    // Start the fluctuation
+    const initialDelay = Math.floor(Math.random() * 5500) + 1500;
+    timeoutId = setTimeout(fluctuateCount, initialDelay);
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
@@ -305,7 +320,7 @@ export default function Home() {
 
 const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onFlagGuesser, onCreateParty, onJoinParty }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-    <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>Pinpoint</h1>
+    <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>LostStreet</h1>
     <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
     
     <MenuItem text="Singleplayer" onClick={onSingleplayer} />

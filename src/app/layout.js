@@ -2,7 +2,7 @@ import "./globals.css";
 import { AuthProvider } from "@/lib/AuthContext";
 
 export const metadata = {
-  title: "PlaceFinder - Explore the World",
+  title: "LostStreet - Explore the World",
   description: "A completely original geography exploration game.",
 };
 
