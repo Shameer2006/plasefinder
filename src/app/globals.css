@@ -17,7 +17,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  cursor: url('/cursor.svg') 16 29, auto !important;
+  cursor: url('/cursor.svg') 7 7, auto !important;
 }
 
 body {
