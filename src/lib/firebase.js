@@ -12,7 +12,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase only if config is provided
-const app = !getApps().length && firebaseConfig.apiKey ? initializeApp(firebaseConfig) : getApp();
+let app = null;
+if (!getApps().length) {
+  if (firebaseConfig.apiKey) {
+    app = initializeApp(firebaseConfig);
+  }
+} else {
+  app = getApp();
+}
 
 const auth = app ? getAuth(app) : null;
 const db = app ? getFirestore(app) : null;
