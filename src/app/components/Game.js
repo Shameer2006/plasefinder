@@ -48,7 +48,7 @@ export default function Game() {
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
       {/* HUD overlay */}
-      <div style={{ position: 'absolute', top: 20, left: 20, zIndex: 10, display: 'flex', gap: '1rem' }}>
+      <div className="hud-container" style={{ zIndex: 10 }}>
         <div className="glass-panel" style={{ padding: '0.5rem 1rem', fontWeight: 'bold' }}>
           Round: {currentRound} / {maxRounds}
         </div>

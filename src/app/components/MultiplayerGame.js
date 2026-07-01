@@ -176,8 +176,8 @@ export default function MultiplayerGame({ gameId }) {
   if (matchData.status === 'finished') {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem' }}>
-        <div className="glass-panel" style={{ padding: '3rem', maxWidth: '600px', width: '100%', textAlign: 'center' }}>
-          <h2 className="gradient-text glow-text" style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>Match Finished!</h2>
+        <div className="glass-panel modal-content" style={{ textAlign: 'center' }}>
+          <h2 className="gradient-text glow-text responsive-title" style={{ marginBottom: '1.5rem' }}>Match Finished!</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '2rem 0', maxHeight: '300px', overflowY: 'auto' }}>
             {sortedPlayers.map((player, idx) => (
               <div key={player.uid} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px' }}>
@@ -228,8 +228,8 @@ export default function MultiplayerGame({ gameId }) {
         )}
         
         <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem' }}>
-          <div className="glass-panel" style={{ padding: '3rem', maxWidth: '600px', width: '100%', textAlign: 'center', background: 'rgba(26, 26, 46, 0.85)', backdropFilter: 'blur(10px)' }}>
-            <h2 className="gradient-text glow-text" style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Round {matchData.round} Result</h2>
+          <div className="glass-panel modal-content" style={{ textAlign: 'center', background: 'rgba(26, 26, 46, 0.85)' }}>
+            <h2 className="gradient-text glow-text responsive-title" style={{ marginBottom: '1rem' }}>Round {matchData.round} Result</h2>
             
             <div style={{ marginBottom: '1.5rem', background: 'rgba(0,0,0,0.4)', padding: '1.5rem', borderRadius: '12px' }}>
               <p style={{ fontSize: '1.2rem' }}>You earned <strong style={{ color: 'var(--primary-color)' }}>+{roundPoints}</strong> pts</p>
@@ -269,16 +269,10 @@ export default function MultiplayerGame({ gameId }) {
         <PanoramaViewer />
       </div>
 
-      <div style={{ 
-        position: 'absolute', 
-        top: '20px', 
-        left: '50%', 
-        transform: 'translateX(-50%)',
+      <div className="hud-center" style={{ 
         background: 'rgba(0,0,0,0.8)',
         padding: '10px 20px',
         borderRadius: '20px',
-        display: 'flex',
-        gap: '2rem',
         zIndex: 10,
         boxShadow: '0 4px 15px rgba(0,0,0,0.5)'
       }}>

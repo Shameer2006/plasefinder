@@ -88,14 +88,14 @@ export default function PartyLobby({ gameId }) {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem' }}>
-      <div className="glass-panel" style={{ padding: '3rem', maxWidth: '800px', width: '100%', display: 'flex', gap: '2rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '1rem' }}>
+      <div className="glass-panel party-lobby-panel">
         
         {/* Left Side: Lobby Info & Players */}
         <div style={{ flex: 1 }}>
-          <h2 className="gradient-text glow-text" style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>Party Lobby</h2>
-          <div style={{ fontSize: '1.2rem', marginBottom: '2rem', color: '#ccc' }}>
-            Game Code: <strong style={{ fontSize: '2rem', color: 'white', letterSpacing: '2px', background: 'rgba(0,0,0,0.5)', padding: '5px 15px', borderRadius: '8px', marginLeft: '10px' }}>{matchData.code}</strong>
+          <h2 className="gradient-text glow-text responsive-title" style={{ marginBottom: '0.5rem' }}>Party Lobby</h2>
+          <div className="responsive-text" style={{ marginBottom: '2rem', color: '#ccc' }}>
+            Game Code: <strong style={{ fontSize: '1.8rem', color: 'white', letterSpacing: '2px', background: 'rgba(0,0,0,0.5)', padding: '5px 15px', borderRadius: '8px', marginLeft: '10px' }}>{matchData.code}</strong>
           </div>
 
           <div style={{ textAlign: 'left', background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: '12px', marginBottom: '2rem', maxHeight: '300px', overflowY: 'auto' }}>

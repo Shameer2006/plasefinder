@@ -72,13 +72,8 @@ export default function GuessingMap({ onGuess, country }) {
 
   return (
     <div 
-      className="glass-panel"
+      className={`glass-panel map-container ${isExpanded ? 'expanded' : ''}`}
       style={{
-        position: 'absolute',
-        bottom: 20,
-        right: 20,
-        width: isExpanded ? '550px' : '300px',
-        height: isExpanded ? '400px' : '200px',
         transition: 'all 0.3s ease',
         zIndex: 10,
         overflow: 'hidden',

@@ -213,19 +213,17 @@ export default function Home() {
       color: 'white'
     }}>
       {/* Left Gradient Overlay */}
-      <div style={{
+      <div className="left-gradient-overlay" style={{
         position: 'absolute',
         top: 0, left: 0, bottom: 0,
-        width: '60%',
-        background: 'linear-gradient(to right, rgba(80, 10, 10, 0.95) 0%, rgba(80, 10, 10, 0.8) 40%, transparent 100%)',
         zIndex: 1
       }}></div>
 
       {/* Main Content Container (z-index 2) */}
-      <div style={{ position: 'relative', zIndex: 2, padding: '3rem', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div className="container-padding" style={{ position: 'relative', zIndex: 2, height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
         
         {/* Top Right Controls */}
-        <div style={{ position: 'absolute', top: '2rem', right: '2rem', display: 'flex', flexDirection: 'row', gap: '1rem', alignItems: 'center' }}>
+        <div className="top-right-controls">
           <button className="btn" style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '6px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
             <span>Maps</span>
@@ -247,7 +245,7 @@ export default function Home() {
         </div>
 
         {/* Left Menu Area */}
-        <div style={{ marginTop: '2rem', maxWidth: '400px' }}>
+        <div className="left-menu-container">
           {showSettings ? (
             <SettingsMenu onBack={() => setShowSettings(false)} />
           ) : showProfile ? (
@@ -271,7 +269,7 @@ export default function Home() {
         </div>
 
         {/* Bottom Area */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', width: '100%' }}>
+        <div className="bottom-controls">
           {/* Left icons */}
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <IconButton 
@@ -292,7 +290,7 @@ export default function Home() {
       {/* Join Party Modal */}
       {showJoinModal && (
         <div style={{ position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.7)', zIndex: 50 }}>
-          <div className="glass-panel" style={{ padding: '2rem', width: '90%', maxWidth: '400px' }}>
+          <div className="glass-panel modal-content">
             <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 'bold' }}>Join Party</h2>
             <form onSubmit={handleJoinPartySubmit}>
               <input 
@@ -320,7 +318,7 @@ export default function Home() {
 
 const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onFlagGuesser, onCreateParty, onJoinParty }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-    <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>LostStreet</h1>
+    <h1 className="responsive-title" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>LostStreet</h1>
     <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
     
     <MenuItem text="Singleplayer" onClick={onSingleplayer} />
@@ -351,7 +349,7 @@ const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, o
 
 const SettingsMenu = ({ onBack }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-    <h1 style={{ fontSize: '2.2rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>Settings</h1>
+    <h1 className="responsive-subtitle" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>Settings</h1>
     <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
     
     <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
@@ -395,7 +393,7 @@ const ProfileMenu = ({ onBack, userProfile, logout }) => {
   if (!userProfile) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <h1 style={{ fontSize: '2.2rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>Account Profile</h1>
+        <h1 className="responsive-subtitle" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>Account Profile</h1>
         <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
         <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
           Back
@@ -409,7 +407,7 @@ const ProfileMenu = ({ onBack, userProfile, logout }) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <h1 style={{ fontSize: '2.2rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>{userProfile.displayName}'s Profile</h1>
+      <h1 className="responsive-subtitle" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>{userProfile.displayName}'s Profile</h1>
       <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
       
       <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
@@ -467,7 +465,7 @@ const ProfileStat = ({ label, value }) => (
 );
 
 const MenuItem = ({ text, onClick }) => (
-  <div onClick={onClick} style={{ fontSize: '1.3rem', fontWeight: '600', cursor: 'pointer' }} className="menu-item-hover">
+  <div onClick={onClick} style={{ fontWeight: '600', cursor: 'pointer' }} className="menu-item-hover responsive-text">
     {text}
   </div>
 );
@@ -487,7 +485,7 @@ const IconButton = ({ icon, color, onClick }) => (
 
 const DifficultyMenu = ({ onBack, onSelect }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-    <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>Select Difficulty</h1>
+    <h1 className="responsive-title" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>Select Difficulty</h1>
     <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
     <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
       Back
