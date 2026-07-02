@@ -1,6 +1,6 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { onAuthStateChanged, signInAnonymously, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { onAuthStateChanged, signInAnonymously, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signOut } from 'firebase/auth';
 import { auth } from './firebase';
 
 import { getOrCreateUserProfile } from './userProfile';
@@ -45,7 +45,12 @@ export const AuthProvider = ({ children }) => {
     if (!auth) return;
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        await signInWithRedirect(auth, provider);
+      } else {
+        await signInWithPopup(auth, provider);
+      }
     } catch (error) {
       console.error("Error signing in with Google:", error);
     }

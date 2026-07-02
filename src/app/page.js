@@ -21,6 +21,9 @@ export default function Home() {
   const [showProfile, setShowProfile] = useState(false);
   const [showDifficulty, setShowDifficulty] = useState(false);
   const [showJoinModal, setShowJoinModal] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+  const [showObjectives, setShowObjectives] = useState(false);
   const [joinCode, setJoinCode] = useState('');
   const [joinError, setJoinError] = useState('');
   const [isJoining, setIsJoining] = useState(false);
@@ -205,7 +208,7 @@ export default function Home() {
     <div style={{
       minHeight: '100vh',
       width: '100vw',
-      backgroundImage: 'url(/bg.jpg)',
+      backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/bg.jpg)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       position: 'relative',
@@ -279,6 +282,15 @@ export default function Home() {
             />
           </div>
 
+          {/* Footer content - Only shown on the absolute main menu */}
+          {!showSettings && !showProfile && !showDifficulty && (
+            <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.9rem', color: '#ffffff', fontWeight: '600', alignItems: 'center', justifyContent: 'center' }}>
+               <span onClick={() => setShowPrivacy(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">Privacy Policy</span>
+               <span onClick={() => setShowAbout(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">About Us</span>
+               <span onClick={() => setShowObjectives(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">Objectives</span>
+            </div>
+          )}
+
           {/* Right online count */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
              <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#34d399', boxShadow: '0 0 8px #34d399' }}></div>
@@ -312,9 +324,44 @@ export default function Home() {
         </div>
       )}
 
+      {/* Info Modals */}
+      {showPrivacy && (
+        <InfoModal title="Privacy Policy" onClose={() => setShowPrivacy(false)}>
+          <p>Your privacy is important to us. We do not sell your personal data.</p>
+          <p>We use Firebase for authentication and game data storage, and we only collect data necessary for the game to function properly (like your score, stats, and profile).</p>
+        </InfoModal>
+      )}
+
+      {showAbout && (
+        <InfoModal title="About Us" onClose={() => setShowAbout(false)}>
+          <p>LostStreet is a geo-guessing game where you explore the world and test your geographical knowledge.</p>
+          <p>Created by passionate map enthusiasts, our goal is to make learning geography fun and competitive.</p>
+        </InfoModal>
+      )}
+
+      {showObjectives && (
+        <InfoModal title="Objectives of the Game" onClose={() => setShowObjectives(false)}>
+          <p>The main objective is to guess your location as accurately as possible.</p>
+          <p>Drop a pin on the map where you think you are! The closer you are to the actual location, the more points you get.</p>
+          <p>Compete in multiplayer mode, create parties with friends, or challenge yourself daily to climb the ranks!</p>
+        </InfoModal>
+      )}
+
     </div>
   );
 }
+
+const InfoModal = ({ title, onClose, children }) => (
+  <div style={{ position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.7)', zIndex: 100 }}>
+    <div className="glass-panel modal-content" style={{ maxWidth: '600px', width: '90%', padding: '2rem' }}>
+      <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', fontWeight: 'bold', borderBottom: '2px solid rgba(255,255,255,0.2)', paddingBottom: '0.5rem' }}>{title}</h2>
+      <div style={{ fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem', color: '#e5e7eb' }}>
+        {children}
+      </div>
+      <button className="btn" style={{ width: '100%', background: 'rgba(255,255,255,0.1)' }} onClick={onClose}>Close</button>
+    </div>
+  </div>
+);
 
 const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onFlagGuesser, onCreateParty, onJoinParty }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
