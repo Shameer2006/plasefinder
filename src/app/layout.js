@@ -11,14 +11,13 @@ export const metadata = {
     url: "https://www.loststreet.online",
     siteName: "LostStreet",
     type: "website",
-    // We will need to add an actual image later, but we can set up the metadata now.
-    // images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "LostStreet - Free GeoGuessr Alternative",
     description: "Guess locations from street views. Play solo or with friends. 100% free.",
-    // images: ["/og-image.png"],
+    images: ["/og-image.png"],
   },
   // We will need a favicon.ico and apple-touch-icon.png later
   // icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
