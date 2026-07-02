@@ -9,13 +9,6 @@ const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
-// Detect mobile/touch device
-function isMobileDevice() {
-  if (typeof window === 'undefined') return false;
-  return /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-    || window.matchMedia("(pointer: coarse)").matches;
-}
-
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
@@ -27,8 +20,7 @@ export const AuthProvider = ({ children }) => {
       return;
     }
 
-    // Handle redirect result first (for mobile sign-in flow)
-    // This must resolve before we rely on onAuthStateChanged
+    // Handle any pending redirect result (from fallback redirect sign-in)
     getRedirectResult(auth)
       .then((result) => {
         if (result?.user) {
@@ -36,9 +28,8 @@ export const AuthProvider = ({ children }) => {
         }
       })
       .catch((err) => {
-        // Common: "auth/redirect-cancelled-by-user" — not a real error
         if (err.code !== 'auth/redirect-cancelled-by-user') {
-          console.warn("Redirect result error:", err.code, err.message);
+          console.warn("Redirect result error:", err.code);
         }
       });
 
@@ -66,22 +57,30 @@ export const AuthProvider = ({ children }) => {
 
   const loginWithGoogle = async () => {
     if (!auth) return;
+    const provider = new GoogleAuthProvider();
+
     try {
-      const provider = new GoogleAuthProvider();
-      
-      if (isMobileDevice()) {
-        // On mobile: redirect the entire page (no popup issues)
-        await signInWithRedirect(auth, provider);
-        // Page will redirect away — code below won't run
-      } else {
-        // On desktop: use popup (faster UX)
-        await signInWithPopup(auth, provider);
-      }
+      // Always try popup first — it works on most mobile browsers too
+      // and properly maintains auth state (unlike redirect which has bugs in Firebase v9+)
+      await signInWithPopup(auth, provider);
     } catch (error) {
-      if (error.code === 'auth/popup-closed-by-user' || error.code === 'auth/cancelled-popup-request') {
-        console.log("Sign-in popup was closed.");
+      // If popup was blocked by the browser, fall back to redirect
+      if (error.code === 'auth/popup-blocked') {
+        console.log("Popup blocked, falling back to redirect...");
+        try {
+          await signInWithRedirect(auth, provider);
+        } catch (redirectError) {
+          console.error("Redirect sign-in also failed:", redirectError);
+        }
         return;
       }
+
+      // User closed the popup — not an error
+      if (error.code === 'auth/popup-closed-by-user' || error.code === 'auth/cancelled-popup-request') {
+        console.log("Sign-in popup was closed by user.");
+        return;
+      }
+
       console.error("Error signing in with Google:", error);
     }
   };
