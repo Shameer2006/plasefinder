@@ -1,6 +1,6 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { onAuthStateChanged, signInAnonymously, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signOut } from 'firebase/auth';
+import { onAuthStateChanged, signInAnonymously, GoogleAuthProvider, signInWithPopup, getRedirectResult, signOut } from 'firebase/auth';
 import { auth } from './firebase';
 
 import { getOrCreateUserProfile } from './userProfile';
@@ -19,6 +19,12 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
       return;
     }
+
+    // Handle any pending redirect result (fallback for older sessions)
+    getRedirectResult(auth).catch((err) => {
+      console.warn("Redirect result check:", err.message);
+    });
+
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser && !currentUser.isAnonymous) {
@@ -45,13 +51,13 @@ export const AuthProvider = ({ children }) => {
     if (!auth) return;
     try {
       const provider = new GoogleAuthProvider();
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      if (isMobile) {
-        await signInWithRedirect(auth, provider);
-      } else {
-        await signInWithPopup(auth, provider);
-      }
+      await signInWithPopup(auth, provider);
     } catch (error) {
+      // If popup is blocked or closed by user, don't show a scary error
+      if (error.code === 'auth/popup-closed-by-user' || error.code === 'auth/cancelled-popup-request') {
+        console.log("Sign-in popup was closed.");
+        return;
+      }
       console.error("Error signing in with Google:", error);
     }
   };
