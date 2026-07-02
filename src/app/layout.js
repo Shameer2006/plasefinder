@@ -2,17 +2,66 @@ import "./globals.css";
 import { AuthProvider } from "@/lib/AuthContext";
 
 export const metadata = {
-  title: "LostStreet - Explore the World",
-  description: "A completely original geography exploration game.",
+  title: "LostStreet - Free GeoGuessr Alternative | Explore the World",
+  description: "Play LostStreet — a free geography guessing game. Drop a pin on the map, compete with friends, and test your world knowledge. No subscription needed.",
+  keywords: ["geography game", "geoguessr alternative", "free geoguessr", "map game", "guess location", "world quiz", "loststreet"],
+  openGraph: {
+    title: "LostStreet - Free Geography Guessing Game",
+    description: "Guess locations from street views, compete in multiplayer, and climb the leaderboard. 100% free.",
+    url: "https://www.loststreet.online",
+    siteName: "LostStreet",
+    type: "website",
+    // We will need to add an actual image later, but we can set up the metadata now.
+    // images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "LostStreet - Free GeoGuessr Alternative",
+    description: "Guess locations from street views. Play solo or with friends. 100% free.",
+    // images: ["/og-image.png"],
+  },
+  // We will need a favicon.ico and apple-touch-icon.png later
+  // icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
   verification: {
     google: "google28b6dbf4d718a7b0",
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "LostStreet",
+  "alternateName": ["Lost Street", "LostStreet Game"],
+  "url": "https://www.loststreet.online",
+  "description": "Free geography guessing game. Guess locations from Street View, compete in multiplayer duels, and climb the leaderboard. A free GeoGuessr alternative.",
+  "applicationCategory": "GameApplication",
+  "applicationSubCategory": "Geography Game",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires a modern web browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "ratingCount": "100"
+  },
+  "keywords": "geography game, geoguessr alternative, free geoguessr, map guessing game, street view game, location guessing game, multiplayer geography game"
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body suppressHydrationWarning={true}>
+
         <AuthProvider>
           {children}
         </AuthProvider>

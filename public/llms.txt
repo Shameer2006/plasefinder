@@ -1,0 +1,44 @@
+# LostStreet
+
+> LostStreet is a free, browser-based geography guessing game and GeoGuessr alternative at https://www.loststreet.online
+
+## What is LostStreet?
+LostStreet is a multiplayer geography game where players guess real-world locations from Google Street View panoramas. Players drop a pin on a map to guess where they are. The closer the guess, the higher the score.
+
+## Key Features
+- 100% free to play (no subscription required)
+- Singleplayer with Easy, Medium, and Hard difficulty
+- Real-time multiplayer duels with ELO rating
+- Private party mode (create/join with 6-digit code)
+- Daily challenge with streak tracking
+- Flag Guesser mini-game
+- Google Sign-In for progress tracking
+- Works on desktop and mobile browsers
+
+## Game Modes
+- **Easy Mode**: Multiple choice questions about the location
+- **Medium Mode**: Mix of multiple choice and map pinning
+- **Hard Mode**: Pin your guess directly on the world map
+- **Multiplayer**: Real-time 1v1 duels with matchmaking
+- **Party Mode**: Play with friends using a shared room code
+- **Daily Challenge**: One challenge per day with streak bonuses
+- **Flag Guesser**: Guess countries from their flags
+
+## Technical Details
+- Built with Next.js and React
+- Uses Google Maps Street View API
+- Firebase Authentication and Firestore
+- Real-time multiplayer via Firestore listeners
+- Responsive design for mobile and desktop
+
+## Comparison to Alternatives
+| Feature | LostStreet | GeoGuessr | WorldGuessr |
+|---------|-----------|-----------|-------------|
+| Free to play | ✅ Unlimited | ❌ Paid after 1 game/day | ✅ Free |
+| Multiplayer | ✅ Real-time duels | ✅ | ❌ |
+| Party mode | ✅ | ✅ | ❌ |
+| Daily challenge | ✅ | ✅ | ✅ |
+| No account needed | ✅ | ❌ | ✅ |
+
+## URL
+https://www.loststreet.online
