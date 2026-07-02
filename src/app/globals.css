@@ -381,4 +381,27 @@ body {
   .mc-mobile-overlay {
     display: flex;
   }
+
+  /* On mobile: hide the small map when collapsed, show expanded fullscreen */
+  .map-container:not(.expanded) {
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .map-container.expanded {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    height: 65vh !important;
+    border-radius: 24px 24px 0 0 !important;
+    z-index: 100 !important;
+  }
+
+  .mobile-map-toggle {
+    animation: pulse-glow 2s infinite;
+  }
 }

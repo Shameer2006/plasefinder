@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -57,9 +57,22 @@ function MapCenterer({ country }) {
 export default function GuessingMap({ onGuess, country }) {
   const [markerPos, setMarkerPos] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { setUserGuess, setGameState } = useGameStore();
 
-  const handleGuess = () => {
+  // Detect touch/mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      const touch = window.matchMedia("(pointer: coarse)").matches;
+      const narrow = window.innerWidth <= 768;
+      setIsMobile(touch || narrow);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const handleGuess = useCallback(() => {
     if (markerPos) {
       if (onGuess) {
         onGuess(markerPos.lat, markerPos.lng);
@@ -68,50 +81,102 @@ export default function GuessingMap({ onGuess, country }) {
         setGameState('RESULT');
       }
     }
-  };
+  }, [markerPos, onGuess, setUserGuess, setGameState]);
+
+  const toggleExpand = useCallback(() => {
+    setIsExpanded(prev => !prev);
+  }, []);
 
   return (
-    <div 
-      className={`glass-panel map-container ${isExpanded ? 'expanded' : ''}`}
-      style={{
-        transition: 'all 0.3s ease',
-        zIndex: 10,
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column'
-      }}
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
-    >
-      <div style={{ flex: 1, position: 'relative' }}>
-        <MapContainer 
-          center={[20, 0]} 
-          zoom={1} 
-          style={{ height: '100%', width: '100%' }}
-          attributionControl={false}
-        >
-          <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-          />
-          <MapClickHandler onLocationSelect={setMarkerPos} />
-          <MapResizer isExpanded={isExpanded} />
-          <MapCenterer country={country} />
-          {markerPos && <Marker position={markerPos} icon={customIcon} />}
-        </MapContainer>
-      </div>
-      
-      {isExpanded && (
-        <div style={{ padding: '0.5rem', display: 'flex', justifyContent: 'center' }}>
-          <button 
-            className="btn" 
-            style={{ width: '100%', padding: '0.8rem' }}
-            disabled={!markerPos}
-            onClick={handleGuess}
+    <>
+      {/* The map panel */}
+      <div 
+        className={`glass-panel map-container ${isExpanded ? 'expanded' : ''}`}
+        style={{
+          transition: 'all 0.3s ease',
+          zIndex: 10,
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+        onMouseEnter={() => { if (!isMobile) setIsExpanded(true); }}
+        onMouseLeave={() => { if (!isMobile) setIsExpanded(false); }}
+      >
+        <div style={{ flex: 1, position: 'relative' }}>
+          <MapContainer 
+            center={[20, 0]} 
+            zoom={1} 
+            style={{ height: '100%', width: '100%' }}
+            attributionControl={false}
           >
-            {markerPos ? 'Make Guess' : 'Place a pin on the map'}
-          </button>
+            <TileLayer
+              url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+            />
+            <MapClickHandler onLocationSelect={setMarkerPos} />
+            <MapResizer isExpanded={isExpanded} />
+            <MapCenterer country={country} />
+            {markerPos && <Marker position={markerPos} icon={customIcon} />}
+          </MapContainer>
         </div>
+        
+        {/* Submit button - shown when expanded (desktop hover or mobile toggle) */}
+        {isExpanded && (
+          <div style={{ padding: '0.5rem', display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+            <button 
+              className="btn" 
+              style={{ flex: 1, padding: '0.8rem' }}
+              disabled={!markerPos}
+              onClick={handleGuess}
+            >
+              {markerPos ? 'Make Guess' : 'Place a pin on the map'}
+            </button>
+            {/* Close button on mobile */}
+            {isMobile && (
+              <button 
+                className="btn" 
+                style={{ padding: '0.8rem 1rem', background: 'rgba(255,255,255,0.15)' }}
+                onClick={toggleExpand}
+              >
+                ✕
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Mobile-only floating toggle button */}
+      {isMobile && !isExpanded && (
+        <button
+          className="btn mobile-map-toggle"
+          onClick={toggleExpand}
+          style={{
+            position: 'fixed',
+            bottom: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 11,
+            padding: '14px 28px',
+            fontSize: '1.1rem',
+            fontWeight: '700',
+            borderRadius: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+            boxShadow: '0 4px 20px rgba(59, 130, 246, 0.5)',
+            touchAction: 'manipulation',
+            WebkitTapHighlightColor: 'rgba(59, 130, 246, 0.3)',
+          }}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+            <line x1="9" y1="3" x2="9" y2="18"></line>
+            <line x1="15" y1="6" x2="15" y2="21"></line>
+          </svg>
+          {markerPos ? 'View Map & Guess' : 'Open Map'}
+        </button>
       )}
-    </div>
+    </>
   );
 }
+
