@@ -2,12 +2,13 @@
 import { useState, useEffect } from 'react';
 import continentMapping from '../../../public/continentMapping.json'; // relative to src/app/components
 
-const MAX_ROUNDS = 5;
 const countryCodes = Object.keys(continentMapping);
 
 export default function FlagGame({ onReturnToMenu }) {
   const [round, setRound] = useState(1);
+  const [maxRounds, setMaxRounds] = useState(5);
   const [score, setScore] = useState(0);
+  const [usedFlags, setUsedFlags] = useState([]);
   const [target, setTarget] = useState(null);
   const [options, setOptions] = useState([]);
   const [roundState, setRoundState] = useState('LOADING'); // 'LOADING', 'PLAYING', 'RESULT', 'FINISHED'
@@ -23,7 +24,12 @@ export default function FlagGame({ onReturnToMenu }) {
     setRoundState('LOADING');
     
     // Pick target
-    const targetCode = countryCodes[Math.floor(Math.random() * countryCodes.length)];
+    let targetCode = countryCodes[Math.floor(Math.random() * countryCodes.length)];
+    // Prevent repeating flags if possible
+    while (usedFlags.includes(targetCode) && usedFlags.length < countryCodes.length) {
+      targetCode = countryCodes[Math.floor(Math.random() * countryCodes.length)];
+    }
+    setUsedFlags(prev => [...prev, targetCode]);
     
     // Pick 3 wrong options
     const wrongCodes = [];
@@ -66,7 +72,7 @@ export default function FlagGame({ onReturnToMenu }) {
   };
 
   const handleNext = () => {
-    if (round < MAX_ROUNDS) {
+    if (round < maxRounds) {
       startNextRound(round + 1);
     } else {
       setRoundState('FINISHED');
@@ -85,9 +91,17 @@ export default function FlagGame({ onReturnToMenu }) {
           <div style={{ margin: '2.5rem 0', fontSize: '2rem', background: 'rgba(0,0,0,0.3)', padding: '2rem', borderRadius: '16px' }}>
             Total Score: <strong style={{ color: 'var(--primary-color)' }}>{score}</strong>
           </div>
-          <button className="btn" style={{ fontSize: '1.3rem', padding: '16px 32px' }} onClick={onReturnToMenu}>
-            Return to Menu
-          </button>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button className="btn secondary-btn" style={{ fontSize: '1.2rem', padding: '16px 24px', background: 'rgba(255,255,255,0.1)' }} onClick={onReturnToMenu}>
+              Return to Menu
+            </button>
+            <button className="btn" style={{ fontSize: '1.2rem', padding: '16px 24px', background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))' }} onClick={() => {
+              setMaxRounds(prev => prev + 5);
+              startNextRound(round + 1);
+            }}>
+              Continue to Round {maxRounds + 5}
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -99,7 +113,7 @@ export default function FlagGame({ onReturnToMenu }) {
       {/* HUD overlay */}
       <div style={{ position: 'absolute', top: 20, left: 20, zIndex: 10, display: 'flex', gap: '1rem' }}>
         <div className="glass-panel" style={{ padding: '0.5rem 1rem', fontWeight: 'bold' }}>
-          Round: {round} / {MAX_ROUNDS}
+          Round: {round} / {maxRounds}
         </div>
         <div className="glass-panel" style={{ padding: '0.5rem 1rem', fontWeight: 'bold' }}>
           Score: {score}
@@ -165,7 +179,7 @@ export default function FlagGame({ onReturnToMenu }) {
         {roundState === 'RESULT' && (
           <div style={{ marginTop: '2.5rem', animation: 'fade-in 0.3s ease' }}>
             <button className="btn" style={{ padding: '1rem 3rem', fontSize: '1.3rem' }} onClick={handleNext}>
-              {round < MAX_ROUNDS ? 'Next Round' : 'See Final Score'}
+              {round < maxRounds ? 'Next Round' : 'See Final Score'}
             </button>
           </div>
         )}
