@@ -1,14 +1,26 @@
 'use client';
 import { useState } from 'react';
 import { useGameStore } from '@/lib/store';
+import { sounds } from '@/lib/sounds';
 
 export default function MultipleChoicePanel() {
-  const { options, setUserGuess, setGameState } = useGameStore();
+  const { currentLocation, options, setUserGuess, setGameState } = useGameStore();
   const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const handleGuess = (option) => {
+    setSelectedOption(option);
     setUserGuess(option);
-    setGameState('RESULT');
+    
+    if (option.iso === currentLocation.iso) {
+      sounds.playCorrect();
+    } else {
+      sounds.playWrong();
+    }
+
+    setTimeout(() => {
+      setGameState('RESULT');
+    }, 1500);
   };
 
   // On desktop: show options directly (no toggle needed)

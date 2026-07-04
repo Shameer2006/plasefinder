@@ -28,6 +28,11 @@ export const metadata = {
   verification: {
     google: "google28b6dbf4d718a7b0",
   },
+  manifest: "/manifest.json",
+};
+
+export const viewport = {
+  themeColor: "#0a0a0a",
 };
 
 const jsonLd = {
@@ -54,13 +59,51 @@ const jsonLd = {
   "keywords": "geography game, geoguessr alternative, free geoguessr, map guessing game, street view game, location guessing game, multiplayer geography game"
 };
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is LostStreet free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, LostStreet is 100% free to play with no subscription required. Play unlimited rounds, multiplayer duels, and daily challenges at no cost." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is LostStreet a GeoGuessr alternative?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, LostStreet is a free alternative to GeoGuessr with multiplayer support, daily challenges, party mode, and multiple difficulty levels." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I play LostStreet on mobile?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, LostStreet works on all modern mobile browsers including Chrome, Safari, and Firefox. No app download needed." }
+    },
+    {
+      "@type": "Question",
+      "name": "How does multiplayer work?",
+      "acceptedAnswer": { "@type": "Answer", "text": "LostStreet features real-time 1v1 matchmaking with ELO ratings, and a party mode where you can create or join private games with a 6-digit code." }
+    },
+    {
+      "@type": "Question",
+      "name": "What difficulty levels are available?",
+      "acceptedAnswer": { "@type": "Answer", "text": "LostStreet offers three difficulty levels: Easy (multiple choice), Medium (mix of multiple choice and map pinning), and Hard (pin your guess directly on the world map)." }
+    }
+  ]
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <meta name="theme-color" content="#0a0a0a" />
+        <link rel="manifest" href="/manifest.json" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       </head>
       <body suppressHydrationWarning={true}>

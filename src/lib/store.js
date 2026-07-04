@@ -1,9 +1,10 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { sounds } from './sounds';
 
 export const useGameStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       gameState: 'MENU', // MENU, LOADING, EXPLORING, RESULT
       difficulty: 'EASY', // EASY (multiple choice), HARD (map)
       score: 0,
@@ -12,6 +13,8 @@ export const useGameStore = create(
       currentLocation: null,
       options: [], // For multiple choice
       userGuess: null, // String for EASY, { lat, lng } for HARD
+      soundEnabled: true,
+      soundVolume: 0.5,
       
       setGameState: (state) => set({ gameState: state }),
       setDifficulty: (diff) => set({ difficulty: diff }),
@@ -22,6 +25,21 @@ export const useGameStore = create(
       setCurrentLocation: (loc) => set({ currentLocation: loc }),
       setOptions: (options) => set({ options }),
       setUserGuess: (guess) => set({ userGuess: guess }),
+      
+      setSoundEnabled: (enabled) => {
+        sounds.setEnabled(enabled);
+        set({ soundEnabled: enabled });
+      },
+      setSoundVolume: (volume) => {
+        sounds.setVolume(volume);
+        set({ soundVolume: volume });
+      },
+      // Initialize sounds when store loads
+      initSounds: () => {
+        const state = get();
+        sounds.setEnabled(state.soundEnabled);
+        sounds.setVolume(state.soundVolume);
+      }
     }),
     {
       name: 'game-storage', // name of the item in the storage (must be unique)

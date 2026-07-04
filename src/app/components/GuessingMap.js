@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-lea
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useGameStore } from '@/lib/store';
+import { sounds } from '@/lib/sounds';
 
 // Fix for default Leaflet icon in Next.js
 const customIcon = new L.Icon({
@@ -19,6 +20,7 @@ function MapClickHandler({ onLocationSelect }) {
   useMapEvents({
     click(e) {
       onLocationSelect(e.latlng);
+      sounds.playPinDrop();
     },
   });
   return null;

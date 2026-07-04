@@ -1,10 +1,12 @@
 'use client';
 import { useEffect } from 'react';
+import { sounds } from '@/lib/sounds';
 
 export default function LevelUpOverlay({ data, onClose }) {
   // Prevent scrolling while overlay is active
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    sounds.playLevelUp();
     return () => { document.body.style.overflow = 'auto'; };
   }, []);
 

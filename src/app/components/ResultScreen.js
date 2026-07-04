@@ -166,13 +166,49 @@ export default function ResultScreen() {
               Next Round
             </button>
           ) : (
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <button className="btn secondary-btn" style={{ fontSize: '1.2rem', padding: '16px 24px', background: 'rgba(255,255,255,0.1)' }} onClick={handleFinish}>
-                Finish & Collect XP
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
+              <button 
+                className="btn" 
+                style={{ 
+                  fontSize: '1.2rem', 
+                  padding: '16px 24px', 
+                  background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
+                  color: '#000',
+                  fontWeight: 'bold',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '8px'
+                }} 
+                onClick={async () => {
+                  const shareText = `🌍 LostStreet — ${isChoiceMode ? 'Easy/Medium' : 'Hard'} Mode\nScore: ${score.toLocaleString()} pts\nPlay free → https://www.loststreet.online`;
+                  if (navigator.share) {
+                    try {
+                      await navigator.share({
+                        title: 'My LostStreet Score',
+                        text: shareText,
+                      });
+                    } catch (e) {
+                      console.error('Error sharing:', e);
+                    }
+                  } else {
+                    navigator.clipboard.writeText(shareText);
+                    alert('Score copied to clipboard!');
+                  }
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                Share Result
               </button>
-              <button className="btn" style={{ fontSize: '1.2rem', padding: '16px 24px', background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))' }} onClick={handleContinueGame}>
-                Continue to Round {maxRounds + 5}
-              </button>
+              
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <button className="btn secondary-btn" style={{ fontSize: '1.2rem', padding: '16px 24px', background: 'rgba(255,255,255,0.1)' }} onClick={handleFinish}>
+                  Finish & Collect XP
+                </button>
+                <button className="btn" style={{ fontSize: '1.2rem', padding: '16px 24px', background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))' }} onClick={handleContinueGame}>
+                  Continue to Round {maxRounds + 5}
+                </button>
+              </div>
             </div>
           )}
         </div>

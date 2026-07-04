@@ -14,7 +14,7 @@ const MultiplayerGame = dynamic(() => import('./components/MultiplayerGame'), { 
 
 export default function Home() {
   const { user, userProfile, loading, loginWithGoogle, logout } = useAuth();
-  const { gameState, setGameState, setDifficulty } = useGameStore();
+  const { gameState, setGameState, setDifficulty, soundEnabled, setSoundEnabled, initSounds } = useGameStore();
   const [isQueuing, setIsQueuing] = useState(false);
   const [queueSub, setQueueSub] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
@@ -22,7 +22,6 @@ export default function Home() {
   const [showDifficulty, setShowDifficulty] = useState(false);
   const [showJoinModal, setShowJoinModal] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
-  const [showAbout, setShowAbout] = useState(false);
   const [showObjectives, setShowObjectives] = useState(false);
   const [joinCode, setJoinCode] = useState('');
   const [joinError, setJoinError] = useState('');
@@ -56,9 +55,12 @@ export default function Home() {
     // Start the fluctuation
     const initialDelay = Math.floor(Math.random() * 5500) + 1500;
     timeoutId = setTimeout(fluctuateCount, initialDelay);
+    
+    // Initialize sound engine
+    initSounds();
 
     return () => clearTimeout(timeoutId);
-  }, []);
+  }, [initSounds]);
 
   useEffect(() => {
     if (!userProfile) {
@@ -267,6 +269,8 @@ export default function Home() {
               onFlagGuesser={() => setGameState('FLAG_GAME')}
               onCreateParty={handleCreateParty}
               onJoinParty={() => setShowJoinModal(true)}
+              onLeaderboard={() => window.location.href = '/leaderboard'}
+              onAbout={() => window.location.href = '/about'}
             />
           )}
         </div>
@@ -286,7 +290,6 @@ export default function Home() {
           {!showSettings && !showProfile && !showDifficulty && (
             <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.9rem', color: '#ffffff', fontWeight: '600', alignItems: 'center', justifyContent: 'center' }}>
                <span onClick={() => setShowPrivacy(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">Privacy Policy</span>
-               <span onClick={() => setShowAbout(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">About Us</span>
                <span onClick={() => setShowObjectives(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">Objectives</span>
             </div>
           )}
@@ -332,13 +335,6 @@ export default function Home() {
         </InfoModal>
       )}
 
-      {showAbout && (
-        <InfoModal title="About Us" onClose={() => setShowAbout(false)}>
-          <p>LostStreet is a geo-guessing game where you explore the world and test your geographical knowledge.</p>
-          <p>Created by passionate map enthusiasts, our goal is to make learning geography fun and competitive.</p>
-        </InfoModal>
-      )}
-
       {showObjectives && (
         <InfoModal title="Objectives of the Game" onClose={() => setShowObjectives(false)}>
           <p>The main objective is to guess your location as accurately as possible.</p>
@@ -363,7 +359,7 @@ const InfoModal = ({ title, onClose, children }) => (
   </div>
 );
 
-const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onFlagGuesser, onCreateParty, onJoinParty }) => (
+const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onFlagGuesser, onCreateParty, onJoinParty, onLeaderboard, onAbout }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
     <h1 className="responsive-title" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>LostStreet</h1>
     <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
@@ -380,6 +376,11 @@ const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, o
     <MenuItem text="Create Party" onClick={onCreateParty} />
     <MenuItem text="Join Party" onClick={onJoinParty} />
     <MenuItem text="Flag Guesser" onClick={onFlagGuesser} />
+    
+    <div style={{ height: '2px', background: 'white', width: '100%', margin: '0.5rem 0' }}></div>
+    
+    <MenuItem text="Leaderboard" onClick={onLeaderboard} />
+    <MenuItem text="About" onClick={onAbout} />
 
     
     <div style={{ height: '2px', background: 'white', width: '100%', margin: '0.5rem 0' }}></div>
@@ -394,47 +395,56 @@ const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, o
   </div>
 );
 
-const SettingsMenu = ({ onBack }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-    <h1 className="responsive-subtitle" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>Settings</h1>
-    <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
-    
-    <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
-      Back
-    </div>
+const SettingsMenu = ({ onBack }) => {
+  const { soundEnabled, setSoundEnabled } = useGameStore();
+  
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <h1 className="responsive-subtitle" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>Settings</h1>
+      <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
+      
+      <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
+        Back
+      </div>
 
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '1.1rem', fontWeight: 'bold' }}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <span style={{ width: '180px' }}>Units:</span>
-        <select style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
-          <option>Metric (km)</option>
-          <option>Imperial (mi)</option>
-        </select>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <span style={{ width: '180px' }}>Map Type:</span>
-        <select style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
-          <option>Normal</option>
-          <option>Satellite</option>
-        </select>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <span style={{ width: '180px' }}>Language:</span>
-        <select style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
-          <option>English</option>
-        </select>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <span style={{ width: '180px' }}>Show RAM Usage</span>
-        <input type="checkbox" style={{ transform: 'scale(1.2)' }} />
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <span style={{ width: '300px' }}>Multiplayer emote reactions</span>
-        <input type="checkbox" defaultChecked style={{ transform: 'scale(1.2)' }} />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '1.1rem', fontWeight: 'bold' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span style={{ width: '180px' }}>Units:</span>
+          <select style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
+            <option>Metric (km)</option>
+            <option>Imperial (mi)</option>
+          </select>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span style={{ width: '180px' }}>Map Type:</span>
+          <select style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
+            <option>Normal</option>
+            <option>Satellite</option>
+          </select>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span style={{ width: '180px' }}>Language:</span>
+          <select style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
+            <option>English</option>
+          </select>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span style={{ width: '180px' }}>Sound Effects:</span>
+          <input 
+            type="checkbox" 
+            checked={soundEnabled} 
+            onChange={(e) => setSoundEnabled(e.target.checked)} 
+            style={{ transform: 'scale(1.2)' }} 
+          />
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span style={{ width: '300px' }}>Multiplayer emote reactions</span>
+          <input type="checkbox" defaultChecked style={{ transform: 'scale(1.2)' }} />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const ProfileMenu = ({ onBack, userProfile, logout }) => {
   if (!userProfile) {

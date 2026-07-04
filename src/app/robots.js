@@ -3,7 +3,7 @@ export default function robots() {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
+        allow: ['/', '/about', '/leaderboard'],
       },
       {
         userAgent: 'GPTBot',

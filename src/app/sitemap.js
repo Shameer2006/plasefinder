@@ -6,6 +6,17 @@ export default function sitemap() {
       changeFrequency: 'daily',
       priority: 1,
     },
-    // Add additional dynamic routes here later if they exist (e.g. /play, /about)
+    {
+      url: 'https://www.loststreet.online/about',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://www.loststreet.online/leaderboard',
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.8,
+    },
   ]
 }
