@@ -205,7 +205,7 @@ export default function Home() {
   };
 
   return (
-    <div style={{
+    <main style={{
       minHeight: '100vh',
       width: '100vw',
       backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/bg.jpg)',
@@ -223,7 +223,7 @@ export default function Home() {
       }}></div>
 
       {/* Main Content Container (z-index 2) */}
-      <div className="container-padding" style={{ position: 'relative', zIndex: 2, height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <section className="container-padding" style={{ position: 'relative', zIndex: 2, height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
         
         {/* Top Right Controls */}
         <div className="top-right-controls">
@@ -297,7 +297,7 @@ export default function Home() {
              <span style={{ fontWeight: 'bold', fontSize: '1.3rem', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>{onlineCount} online</span>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Join Party Modal */}
       {showJoinModal && (
@@ -347,7 +347,7 @@ export default function Home() {
         </InfoModal>
       )}
 
-    </div>
+    </main>
   );
 }
 

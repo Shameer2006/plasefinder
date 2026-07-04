@@ -4,6 +4,10 @@ import { AuthProvider } from "@/lib/AuthContext";
 export const metadata = {
   title: "LostStreet - Free GeoGuessr Alternative | Explore the World",
   description: "Play LostStreet — a free geography guessing game. Drop a pin on the map, compete with friends, and test your world knowledge. No subscription needed.",
+  metadataBase: new URL("https://www.loststreet.online"),
+  alternates: {
+    canonical: "/",
+  },
   keywords: ["geography game", "geoguessr alternative", "free geoguessr", "map game", "guess location", "world quiz", "loststreet"],
   openGraph: {
     title: "LostStreet - Free Geography Guessing Game",
