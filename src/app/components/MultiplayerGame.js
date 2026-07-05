@@ -31,6 +31,19 @@ export default function MultiplayerGame({ gameId }) {
   const [matchData, setMatchData] = useState(null);
   const [lastGuessDistance, setLastGuessDistance] = useState(0);
   const [roundPoints, setRoundPoints] = useState(0);
+  const [showMapOnly, setShowMapOnly] = useState(false);
+
+  const difficulty = matchData?.options?.difficulty || 'Medium';
+  const isMultipleChoice = difficulty === 'Easy' || (difficulty === 'Medium' && matchData?.round % 2 === 1);
+  const isRoundOver = matchData?.players ? Object.values(matchData.players).every(p => p.ready) : false;
+
+  useEffect(() => {
+    if (isRoundOver && !isMultipleChoice) {
+      setShowMapOnly(true);
+      const timer = setTimeout(() => setShowMapOnly(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isRoundOver, isMultipleChoice]);
 
   useEffect(() => {
     if (!db || !gameId) return;
@@ -124,10 +137,7 @@ export default function MultiplayerGame({ gameId }) {
     });
   };
 
-  const difficulty = matchData.options?.difficulty || 'Medium';
-  const isMultipleChoice = difficulty === 'Easy' || (difficulty === 'Medium' && matchData.round % 2 === 1);
-
-  const isRoundOver = Object.values(matchData.players).every(p => p.ready);
+  // Variables moved to the top level
 
   const startNextRound = async () => {
     if (!userProfile) return;
@@ -230,15 +240,7 @@ export default function MultiplayerGame({ gameId }) {
     );
   }
 
-  const [showMapOnly, setShowMapOnly] = useState(false);
-
-  useEffect(() => {
-    if (isRoundOver && !isMultipleChoice) {
-      setShowMapOnly(true);
-      const timer = setTimeout(() => setShowMapOnly(false), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [isRoundOver, isMultipleChoice]);
+  // Hook moved to the top level
 
   if (isRoundOver) {
     if (showMapOnly) {
