@@ -181,7 +181,8 @@ export default function ResultScreen() {
                   gap: '8px'
                 }} 
                 onClick={async () => {
-                  const shareText = `🌍 LostStreet — ${isChoiceMode ? 'Easy/Medium' : 'Hard'} Mode\nScore: ${score.toLocaleString()} pts\nPlay free → https://www.loststreet.online`;
+                  const shareUrl = `https://www.loststreet.online/share/${score}`;
+                  const shareText = `🌍 LostStreet — ${isChoiceMode ? 'Easy/Medium' : 'Hard'} Mode\nScore: ${score.toLocaleString()} pts\nPlay free → ${shareUrl}`;
                   if (navigator.share) {
                     try {
                       await navigator.share({

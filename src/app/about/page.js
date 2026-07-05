@@ -42,8 +42,23 @@ const faqItems = [
 ];
 
 export default function AboutPage() {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqItems.map(item => ({
+      "@type": "Question",
+      "name": item.q,
+      "acceptedAnswer": { "@type": "Answer", "text": item.a }
+    }))
+  };
+
   return (
-    <div style={{
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <div style={{
       minHeight: '100vh',
       background: 'linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a1a 100%)',
       color: '#f3f4f6',
@@ -337,5 +352,6 @@ export default function AboutPage() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
