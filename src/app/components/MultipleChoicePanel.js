@@ -34,26 +34,50 @@ export default function MultipleChoicePanel() {
         <div className="glass-panel" style={{ padding: '1.5rem', background: 'rgba(20,20,20,0.85)' }}>
           <h3 style={{ textAlign: 'center', marginBottom: '1.5rem', fontSize: '1.4rem' }}>Where are we?</h3>
           <div className="options-grid">
-            {options.map((option, idx) => (
-              <button
-                key={idx}
-                className="btn btn-secondary"
-                style={{
-                  flex: 1,
-                  padding: '1.2rem',
-                  fontSize: '1.2rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                  minHeight: '60px'
-                }}
-                onClick={() => handleGuess(option)}
-              >
-                <img src={`https://flagcdn.com/w40/${option.iso}.png`} width="30" alt={option.country} />
-                <span>{option.country}</span>
-              </button>
-            ))}
+            {options.map((option, idx) => {
+              const isSelected = selectedOption !== null;
+              const isCorrect = option.iso === currentLocation.iso;
+              const isCurrentGuess = selectedOption?.iso === option.iso;
+              
+              const style = {
+                flex: 1,
+                padding: '1.2rem',
+                fontSize: '1.2rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                minHeight: '60px',
+                transition: 'all 0.2s ease',
+              };
+
+              if (isSelected) {
+                if (isCorrect) {
+                  style.background = 'var(--success-color)';
+                  style.borderColor = 'var(--success-color)';
+                  style.color = 'white';
+                } else if (isCurrentGuess) {
+                  style.background = 'var(--error-color)';
+                  style.borderColor = 'var(--error-color)';
+                  style.color = 'white';
+                } else {
+                  style.opacity = 0.5;
+                }
+              }
+
+              return (
+                <button
+                  key={idx}
+                  className="btn btn-secondary"
+                  style={style}
+                  onClick={() => handleGuess(option)}
+                  disabled={isSelected}
+                >
+                  <img src={`https://flagcdn.com/w40/${option.iso}.png`} width="30" alt={option.country} />
+                  <span>{option.country}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -101,27 +125,51 @@ export default function MultipleChoicePanel() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-              {options.map((option, idx) => (
-                <button
-                  key={idx}
-                  className="btn btn-secondary"
-                  style={{
-                    padding: '1.2rem',
-                    fontSize: '1.2rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                    minHeight: '60px',
-                    touchAction: 'manipulation'
-                  }}
-                  onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); handleGuess(option); }}
-                  onClick={() => handleGuess(option)}
-                >
-                  <img src={`https://flagcdn.com/w40/${option.iso}.png`} width="30" alt={option.country} />
-                  <span>{option.country}</span>
-                </button>
-              ))}
+              {options.map((option, idx) => {
+                const isSelected = selectedOption !== null;
+                const isCorrect = option.iso === currentLocation.iso;
+                const isCurrentGuess = selectedOption?.iso === option.iso;
+                
+                const style = {
+                  padding: '1.2rem',
+                  fontSize: '1.2rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  minHeight: '60px',
+                  touchAction: 'manipulation',
+                  transition: 'all 0.2s ease',
+                };
+
+                if (isSelected) {
+                  if (isCorrect) {
+                    style.background = 'var(--success-color)';
+                    style.borderColor = 'var(--success-color)';
+                    style.color = 'white';
+                  } else if (isCurrentGuess) {
+                    style.background = 'var(--error-color)';
+                    style.borderColor = 'var(--error-color)';
+                    style.color = 'white';
+                  } else {
+                    style.opacity = 0.5;
+                  }
+                }
+
+                return (
+                  <button
+                    key={idx}
+                    className="btn btn-secondary"
+                    style={style}
+                    onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); if (!isSelected) handleGuess(option); }}
+                    onClick={() => { if (!isSelected) handleGuess(option); }}
+                    disabled={isSelected}
+                  >
+                    <img src={`https://flagcdn.com/w40/${option.iso}.png`} width="30" alt={option.country} />
+                    <span>{option.country}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

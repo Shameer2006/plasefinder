@@ -32,18 +32,28 @@ export default function MultiplayerGame({ gameId }) {
   const [lastGuessDistance, setLastGuessDistance] = useState(0);
   const [roundPoints, setRoundPoints] = useState(0);
   const [showMapOnly, setShowMapOnly] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const difficulty = matchData?.options?.difficulty || 'Medium';
   const isMultipleChoice = difficulty === 'Easy' || (difficulty === 'Medium' && matchData?.round % 2 === 1);
   const isRoundOver = matchData?.players ? Object.values(matchData.players).every(p => p.ready) : false;
 
   useEffect(() => {
-    if (isRoundOver && !isMultipleChoice) {
+    if (isRoundOver) {
       setShowMapOnly(true);
       const timer = setTimeout(() => setShowMapOnly(false), 3000);
       return () => clearTimeout(timer);
     }
-  }, [isRoundOver, isMultipleChoice]);
+  }, [isRoundOver]);
 
   useEffect(() => {
     if (!db || !gameId) return;
@@ -85,6 +95,74 @@ export default function MultiplayerGame({ gameId }) {
       });
     }
   }, [matchData, userProfile, gameId]);
+
+  // Bot opponent simulation
+  useEffect(() => {
+    if (!matchData || matchData.status !== 'playing' || !db || !gameId) return;
+
+    const botId = Object.keys(matchData.players).find(id => matchData.players[id].isBot);
+    if (!botId) return;
+
+    const botData = matchData.players[botId];
+    if (botData.ready) return;
+
+    // Simulate bot thinking and making a guess
+    const delay = 4000 + Math.random() * 6000; // 4 to 10 seconds delay
+    const timer = setTimeout(async () => {
+      const difficulty = matchData.options?.difficulty || 'Medium';
+      const isMultipleChoice = difficulty === 'Easy' || (difficulty === 'Medium' && matchData.round % 2 === 1);
+
+      if (isMultipleChoice) {
+        // 60% chance to be correct
+        const isCorrect = Math.random() < 0.6;
+        const points = isCorrect ? 5000 : 0;
+        
+        let chosenOption = matchData.locationOptions?.find(opt => opt.iso === matchData.location.iso);
+        if (!isCorrect && matchData.locationOptions) {
+          const wrongOpts = matchData.locationOptions.filter(opt => opt.iso !== matchData.location.iso);
+          if (wrongOpts.length > 0) {
+            chosenOption = wrongOpts[Math.floor(Math.random() * wrongOpts.length)];
+          }
+        }
+
+        if (!chosenOption && matchData.locationOptions) {
+          chosenOption = matchData.locationOptions[0];
+        }
+
+        await updateDoc(doc(db, 'matches', gameId), {
+          [`players.${botId}.score`]: botData.score + points,
+          [`players.${botId}.ready`]: true,
+          [`players.${botId}.lastGuess`]: {
+            lat: matchData.location.lat,
+            lng: matchData.location.lng,
+            choice: chosenOption ? chosenOption.country : 'Unknown',
+            isCorrect
+          }
+        });
+      } else {
+        // Map guess: generate random offset near correct location
+        // Offset decreases if bot ELO is higher
+        const eloFactor = Math.max(0.1, 1 - (botData.elo - 800) / 1000); // lower ELO = larger offset
+        const maxOffset = 5 + eloFactor * 25; // max degrees of latitude/longitude offset
+        
+        const offsetLat = (Math.random() - 0.5) * maxOffset;
+        const offsetLng = (Math.random() - 0.5) * maxOffset;
+        const botLat = matchData.location.lat + offsetLat;
+        const botLng = matchData.location.lng + offsetLng;
+
+        const distance = calculateDistance(botLat, botLng, matchData.location.lat, matchData.location.lng);
+        const points = Math.max(0, Math.round(5000 * Math.exp(-distance / 2000)));
+
+        await updateDoc(doc(db, 'matches', gameId), {
+          [`players.${botId}.score`]: botData.score + points,
+          [`players.${botId}.ready`]: true,
+          [`players.${botId}.lastGuess`]: { lat: botLat, lng: botLng }
+        });
+      }
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [matchData?.status, matchData?.round, matchData?.location, gameId]);
 
   if (!matchData || !userProfile) {
     return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '2rem' }}>Loading Match...</div>;
@@ -158,10 +236,12 @@ export default function MultiplayerGame({ gameId }) {
           const opScore = matchData.players[opponentId].score;
           
           const myNewElo = myScore >= opScore ? myData.elo + 25 : myData.elo - 25;
-          const opNewElo = opScore > myScore ? opponentData.elo + 25 : opponentData.elo - 25;
-          
           await updateDoc(doc(db, 'users', userProfile.uid), { elo: Math.max(0, myNewElo) });
-          await updateDoc(doc(db, 'users', opponentId), { elo: Math.max(0, opNewElo) });
+          
+          if (!opponentData.isBot) {
+            const opNewElo = opScore > myScore ? opponentData.elo + 25 : opponentData.elo - 25;
+            await updateDoc(doc(db, 'users', opponentId), { elo: Math.max(0, opNewElo) });
+          }
         }
       } else {
         import('@/lib/locationManager').then(({ fetchRandomLocation }) => {
@@ -246,7 +326,7 @@ export default function MultiplayerGame({ gameId }) {
     if (showMapOnly) {
       return (
         <div style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
-          <ResultsMap location={matchData.location} players={Object.values(matchData.players)} />
+          <ResultsMap location={matchData.location} players={Object.values(matchData.players)} height="100%" />
           <div style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(0,0,0,0.8)', padding: '1rem 2rem', borderRadius: '50px', zIndex: 1000 }}>
             <h2 style={{ color: 'white', margin: 0 }}>Reviewing Map...</h2>
           </div>
@@ -257,11 +337,9 @@ export default function MultiplayerGame({ gameId }) {
     return (
       <div style={{ position: 'relative', minHeight: '100vh' }}>
         {/* Background Map */}
-        {!isMultipleChoice && (
-          <div style={{ position: 'absolute', inset: 0, zIndex: 0, filter: 'brightness(0.4)' }}>
-            <ResultsMap location={matchData.location} players={Object.values(matchData.players)} />
-          </div>
-        )}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, filter: 'brightness(0.4)' }}>
+          <ResultsMap location={matchData.location} players={Object.values(matchData.players)} height="100%" />
+        </div>
         
         <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem' }}>
           <div className="glass-panel modal-content" style={{ textAlign: 'center', background: 'rgba(26, 26, 46, 0.85)' }}>
@@ -307,75 +385,127 @@ export default function MultiplayerGame({ gameId }) {
 
       <div className="hud-center" style={{ 
         background: 'rgba(0,0,0,0.8)',
-        padding: '10px 20px',
+        padding: isMobile ? '6px 12px' : '10px 20px',
         borderRadius: '20px',
         zIndex: 10,
-        boxShadow: '0 4px 15px rgba(0,0,0,0.5)'
+        boxShadow: '0 4px 15px rgba(0,0,0,0.5)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        maxWidth: isMobile ? '95vw' : 'auto'
       }}>
-        <div style={{ fontSize: '1.5rem', fontWeight: '800', opacity: 0.5 }}>R{matchData.round}/{matchData.options?.rounds || 5}</div>
-        <div style={{ display: 'flex', gap: '1.5rem', overflowX: 'auto', maxWidth: '60vw' }}>
+        <div style={{ fontSize: isMobile ? '1.1rem' : '1.5rem', fontWeight: '800', opacity: 0.5 }}>R{matchData.round}/{matchData.options?.rounds || 5}</div>
+        <div style={{ display: 'flex', gap: isMobile ? '0.8rem' : '1.5rem', overflowX: 'auto', maxWidth: isMobile ? '55vw' : '60vw' }}>
           {sortedPlayers.slice(0, 3).map((player) => (
-            <div key={player.uid} style={{ textAlign: 'center', minWidth: '80px' }}>
-              <div style={{ fontSize: '0.8rem', color: '#ccc', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <div key={player.uid} style={{ textAlign: 'center', minWidth: isMobile ? '60px' : '80px' }}>
+              <div style={{ fontSize: isMobile ? '0.75rem' : '0.8rem', color: '#ccc', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {player.uid === userProfile.uid ? 'You' : player.displayName}
               </div>
-              <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: player.uid === userProfile.uid ? 'var(--primary-color)' : 'white' }}>
+              <div style={{ fontSize: isMobile ? '1rem' : '1.2rem', fontWeight: 'bold', color: player.uid === userProfile.uid ? 'var(--primary-color)' : 'white' }}>
                 {player.score}
               </div>
             </div>
           ))}
           {sortedPlayers.length > 3 && (
-            <div style={{ textAlign: 'center', minWidth: '40px', display: 'flex', alignItems: 'center', color: '#ccc' }}>
+            <div style={{ textAlign: 'center', minWidth: '40px', display: 'flex', alignItems: 'center', color: '#ccc', fontSize: isMobile ? '0.8rem' : '1rem' }}>
               +{sortedPlayers.length - 3}
             </div>
           )}
         </div>
       </div>
 
-      {!myData.ready ? (
-        isMultipleChoice ? (
-          <div style={{
+      {isMultipleChoice ? (
+        <div 
+          className="mc-desktop-panel"
+          style={{
             position: 'absolute',
-            bottom: '40px',
+            bottom: isMobile ? '15px' : '2rem',
             left: '50%',
             transform: 'translateX(-50%)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px',
-            width: '90%',
-            maxWidth: '500px',
-            zIndex: 10
-          }}>
-            {matchData.locationOptions?.map((opt, i) => (
-              <button
-                key={i}
-                className="btn"
-                style={{
-                  padding: '15px',
-                  fontSize: '1.2rem',
-                  background: 'rgba(0,0,0,0.8)',
-                  border: '2px solid rgba(255,255,255,0.2)',
+            width: '95%',
+            maxWidth: isMobile ? '500px' : '800px',
+            zIndex: 1000
+          }}
+        >
+          <div className="glass-panel" style={{ padding: isMobile ? '10px' : '1.5rem', background: 'rgba(20,20,20,0.85)', borderRadius: '24px' }}>
+            {myData.ready ? (
+              <h3 style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '1.2rem', color: 'var(--primary-color)' }}>
+                Waiting for other players...
+              </h3>
+            ) : (
+              !isMobile && <h3 style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '1.2rem', color: '#ccc' }}>Where are we?</h3>
+            )}
+            <div style={{
+              display: isMobile ? 'grid' : 'flex',
+              gridTemplateColumns: isMobile ? '1fr 1fr' : 'none',
+              gap: isMobile ? '6px' : '1rem',
+              width: '100%'
+            }}>
+              {matchData.locationOptions?.map((opt, i) => {
+                const isSelected = myData.ready;
+                const isCorrect = opt.iso === matchData.location.iso;
+                const isMyGuess = myData.lastGuess?.choice === opt.country;
+                
+                let btnStyle = {
+                  flex: 1,
+                  padding: isMobile ? '10px' : '1.2rem',
+                  fontSize: isMobile ? '0.85rem' : '1.1rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  minHeight: isMobile ? '45px' : '60px',
+                  background: 'rgba(30, 30, 30, 0.75)',
+                  border: '2px solid rgba(255,255,255,0.15)',
                   borderRadius: '12px',
-                  textAlign: 'center',
-                  width: '100%',
-                  backdropFilter: 'blur(5px)'
-                }}
-                onClick={() => handleChoiceGuess(opt.iso, opt.country)}
-              >
-                {opt.country}
-              </button>
-            ))}
-          </div>
-        ) : (
-          <GuessingMap onGuess={handleMapGuess} country={matchData.options?.country} />
-        )
-      ) : (
-        <div style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)', background: 'rgba(0,0,0,0.8)', padding: '15px 30px', borderRadius: '12px', zIndex: 10 }}>
-          <h3 style={{ color: 'var(--primary-color)', margin: 0, padding: 0 }}>Waiting for others...</h3>
-          <div style={{ fontSize: '0.9rem', color: '#ccc', marginTop: '5px' }}>
-            {Object.values(matchData.players).filter(p => p.ready).length} / {Object.keys(matchData.players).length} guessed
+                  color: 'white',
+                  backdropFilter: 'blur(5px)',
+                  transition: 'all 0.2s ease',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  cursor: isSelected ? 'default' : 'pointer'
+                };
+
+                if (isSelected) {
+                  if (isCorrect) {
+                    btnStyle.background = 'var(--success-color)';
+                    btnStyle.borderColor = 'var(--success-color)';
+                  } else if (isMyGuess) {
+                    btnStyle.background = 'var(--error-color)';
+                    btnStyle.borderColor = 'var(--error-color)';
+                  } else {
+                    btnStyle.opacity = 0.5;
+                  }
+                }
+
+                return (
+                  <button
+                    key={i}
+                    className="btn"
+                    style={btnStyle}
+                    onClick={() => handleChoiceGuess(opt.iso, opt.country)}
+                    disabled={isSelected}
+                  >
+                    <img src={`https://flagcdn.com/w40/${opt.iso}.png`} width={isMobile ? "20" : "30"} alt={opt.country} />
+                    <span>{opt.country}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
+      ) : (
+        !myData.ready ? (
+          <GuessingMap onGuess={handleMapGuess} country={matchData.options?.country} />
+        ) : (
+          <div style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)', background: 'rgba(0,0,0,0.8)', padding: '15px 30px', borderRadius: '12px', zIndex: 10 }}>
+            <h3 style={{ color: 'var(--primary-color)', margin: 0, padding: 0 }}>Waiting for others...</h3>
+            <div style={{ fontSize: '0.9rem', color: '#ccc', marginTop: '5px' }}>
+              {Object.values(matchData.players).filter(p => p.ready).length} / {Object.keys(matchData.players).length} guessed
+            </div>
+          </div>
+        )
       )}
       
       <PartyChat gameId={gameId} matchData={matchData} />

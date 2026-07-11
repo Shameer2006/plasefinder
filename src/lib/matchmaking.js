@@ -8,7 +8,7 @@ export const joinQueue = async (userProfile, onMatchFound) => {
   const queueRef = collection(db, 'queue');
   
   // Try to find someone waiting
-  const q = query(queueRef, where('status', '==', 'waiting'), orderBy('createdAt'), limit(1));
+  const q = query(queueRef, where('status', '==', 'waiting'), limit(1));
   const querySnapshot = await getDocs(q);
 
   if (!querySnapshot.empty) {
@@ -63,16 +63,65 @@ export const joinQueue = async (userProfile, onMatchFound) => {
     createdAt: serverTimestamp()
   });
 
+  let isMatched = false;
+
+  // Set up bot matching timer (8 to 20 seconds)
+  const botTimerDuration = 8000 + Math.random() * 12000;
+  const botTimer = setTimeout(async () => {
+    if (isMatched) return;
+    isMatched = true;
+
+    // 1. Unsubscribe from the queue snapshot
+    if (unsubscribe) unsubscribe();
+
+    // 2. Delete the queue document
+    await deleteDoc(myQueueRef);
+
+    // 3. Create bot match
+    const gameId = `game_bot_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const botNames = ['MapMaster 🤖', 'GlobalGuesser 🤖', 'StreetExplorer 🤖', 'GeoPro 🤖', 'LostFinder 🤖'];
+    const selectedBotName = botNames[Math.floor(Math.random() * botNames.length)];
+    const botElo = Math.max(400, userProfile.elo + Math.round((Math.random() - 0.5) * 120));
+
+    const gameRef = doc(db, 'matches', gameId);
+    await setDoc(gameRef, {
+      players: {
+        [userProfile.uid]: { displayName: userProfile.displayName, elo: userProfile.elo, score: 0, ready: false },
+        'bot_opponent': { 
+          displayName: selectedBotName, 
+          elo: botElo, 
+          score: 0, 
+          ready: false, 
+          isBot: true 
+        }
+      },
+      status: 'waiting_for_players',
+      round: 1,
+      createdAt: serverTimestamp()
+    });
+
+    // 4. Trigger match found
+    onMatchFound(gameId);
+  }, botTimerDuration);
+
   // Listen for someone to match with us
   const unsubscribe = onSnapshot(myQueueRef, (snapshot) => {
     const data = snapshot.data();
     if (data && data.status === 'matched' && data.gameId) {
+      isMatched = true;
+      clearTimeout(botTimer); // Clear bot timer
       onMatchFound(data.gameId);
       deleteDoc(myQueueRef); // Cleanup
     }
   });
 
-  return { unsubscribe, queueId: myQueueRef.id };
+  return { 
+    unsubscribe: () => {
+      clearTimeout(botTimer);
+      if (unsubscribe) unsubscribe();
+    }, 
+    queueId: myQueueRef.id 
+  };
 };
 
 export const leaveQueue = async (uid) => {

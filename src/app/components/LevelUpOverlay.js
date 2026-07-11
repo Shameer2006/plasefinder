@@ -3,6 +3,17 @@ import { useEffect } from 'react';
 import { sounds } from '@/lib/sounds';
 
 export default function LevelUpOverlay({ data, onClose }) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Prevent scrolling while overlay is active
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -50,13 +61,13 @@ export default function LevelUpOverlay({ data, onClose }) {
       ))}
 
       {/* Main Content */}
-      <div style={{ animation: 'pop-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards', zIndex: 10, textAlign: 'center' }}>
+      <div style={{ animation: 'pop-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards', zIndex: 10, textAlign: 'center', padding: '1rem', maxWidth: '100%', boxSizing: 'border-box' }}>
         
         {/* Illustration Graphic */}
-        <div style={{ position: 'relative', width: '250px', height: '250px', margin: '0 auto 2rem' }}>
+        <div style={{ position: 'relative', width: isMobile ? '160px' : '250px', height: isMobile ? '160px' : '250px', margin: '0 auto 1.5rem' }}>
           {/* Sunburst background */}
           <div style={{ 
-            position: 'absolute', inset: -50, background: 'conic-gradient(from 0deg, transparent, rgba(251, 191, 36, 0.4), transparent 40deg)', 
+            position: 'absolute', inset: -30, background: 'conic-gradient(from 0deg, transparent, rgba(251, 191, 36, 0.4), transparent 40deg)', 
             animation: 'spin-slow 10s linear infinite', borderRadius: '50%' 
           }} />
           
@@ -65,25 +76,25 @@ export default function LevelUpOverlay({ data, onClose }) {
             background: 'linear-gradient(135deg, #f59e0b, #d97706)',
             borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
             boxShadow: '0 0 60px rgba(245, 158, 11, 0.6), inset 0 0 30px rgba(255,255,255,0.6)',
-            border: '8px solid #fef3c7'
+            border: '6px solid #fef3c7'
           }}>
-            <span style={{ fontSize: '7rem', textShadow: '0 5px 15px rgba(0,0,0,0.3)' }}>🏆</span>
+            <span style={{ fontSize: isMobile ? '4.5rem' : '7rem', textShadow: '0 5px 15px rgba(0,0,0,0.3)' }}>🏆</span>
           </div>
         </div>
         
-        <h1 className="gradient-text glow-text" style={{ fontSize: '4.5rem', marginBottom: '1rem', background: 'linear-gradient(to right, #fbbf24, #f59e0b)' }}>
+        <h1 className="gradient-text glow-text" style={{ fontSize: isMobile ? '2.5rem' : '4.5rem', marginBottom: '0.8rem', background: 'linear-gradient(to right, #fbbf24, #f59e0b)' }}>
           LEVEL UP!
         </h1>
         
-        <div style={{ background: 'rgba(0,0,0,0.5)', padding: '1.5rem 3rem', borderRadius: '24px', marginBottom: '3rem', display: 'inline-block', border: '1px solid rgba(251, 191, 36, 0.3)' }}>
-          <p style={{ fontSize: '2rem', color: 'white', margin: 0 }}>
-            You reached Level <strong style={{ color: '#fbbf24', fontSize: '2.5rem' }}>{data?.newLevel || 2}</strong>
+        <div style={{ background: 'rgba(0,0,0,0.5)', padding: isMobile ? '1rem 2rem' : '1.5rem 3rem', borderRadius: '24px', marginBottom: isMobile ? '2rem' : '3rem', display: 'inline-block', border: '1px solid rgba(251, 191, 36, 0.3)' }}>
+          <p style={{ fontSize: isMobile ? '1.25rem' : '2rem', color: 'white', margin: 0 }}>
+            You reached Level <strong style={{ color: '#fbbf24', fontSize: isMobile ? '1.6rem' : '2.5rem' }}>{data?.newLevel || 2}</strong>
           </p>
         </div>
         
         <div>
           <button className="btn" onClick={onClose} style={{ 
-            fontSize: '1.5rem', padding: '18px 48px', 
+            fontSize: isMobile ? '1.1rem' : '1.5rem', padding: isMobile ? '12px 36px' : '18px 48px', 
             background: 'linear-gradient(135deg, #fbbf24, #d97706)', 
             color: '#111', fontWeight: 'bold', border: 'none',
             boxShadow: '0 10px 25px rgba(245, 158, 11, 0.5)'

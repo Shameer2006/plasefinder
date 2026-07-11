@@ -97,7 +97,7 @@ export default function Home() {
   }, [userProfile]);
 
 
-  if (loading) return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '2rem' }}>Loading...</div>;
+  if (loading) return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100dvh', fontSize: '2rem' }}>Loading...</div>;
 
   if (gameState.startsWith('MULTIPLAYER_')) {
     const gameId = gameState.replace('MULTIPLAYER_', '');
@@ -208,13 +208,13 @@ export default function Home() {
 
   return (
     <main style={{
-      minHeight: '100vh',
+      minHeight: '100dvh',
       width: '100vw',
       backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/bg.jpg)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       position: 'relative',
-      overflow: 'hidden',
+      overflowY: 'auto',
       color: 'white'
     }}>
       {/* Left Gradient Overlay */}
@@ -225,7 +225,7 @@ export default function Home() {
       }}></div>
 
       {/* Main Content Container (z-index 2) */}
-      <section className="container-padding" style={{ position: 'relative', zIndex: 2, height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <section className="container-padding" style={{ position: 'relative', zIndex: 2, minHeight: '100dvh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '2rem' }}>
         
         {/* Top Right Controls */}
         <div className="top-right-controls">
@@ -288,7 +288,7 @@ export default function Home() {
 
           {/* Footer content - Only shown on the absolute main menu */}
           {!showSettings && !showProfile && !showDifficulty && (
-            <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.9rem', color: '#ffffff', fontWeight: '600', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem 1.5rem', fontSize: '0.9rem', color: '#ffffff', fontWeight: '600', alignItems: 'center', justifyContent: 'center' }}>
                <span onClick={() => setShowPrivacy(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">Privacy Policy</span>
                <span onClick={() => setShowObjectives(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">Objectives</span>
             </div>
@@ -473,10 +473,10 @@ const ProfileMenu = ({ onBack, userProfile, logout }) => {
 
       <div style={{ 
         display: 'grid', 
-        gridTemplateColumns: '1fr 1fr', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', 
         gap: '1rem',
         background: 'rgba(0,0,0,0.4)',
-        padding: '1.5rem',
+        padding: '1rem',
         borderRadius: '16px',
         border: '1px solid rgba(255,255,255,0.1)'
       }}>

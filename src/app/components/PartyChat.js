@@ -9,6 +9,16 @@ export default function PartyChat({ gameId, matchData }) {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
   const messagesEndRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const messages = matchData?.chat || [];
 
@@ -43,10 +53,11 @@ export default function PartyChat({ gameId, matchData }) {
   return (
     <div style={{
       position: 'absolute',
-      bottom: '20px',
-      left: '20px',
+      bottom: isMobile ? '90px' : '20px',
+      left: isMobile ? '10px' : '20px',
+      right: isMobile ? '10px' : 'auto',
       zIndex: 50,
-      width: '300px',
+      width: isMobile ? 'auto' : '300px',
       display: 'flex',
       flexDirection: 'column',
       pointerEvents: 'auto'

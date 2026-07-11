@@ -37,14 +37,7 @@ export default function ArticlePage() {
         color: '#f3f4f6',
         fontFamily: "'Outfit', sans-serif",
       }}>
-        <header style={{
-          padding: '1.5rem 2rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
-          background: 'rgba(10,10,10,0.8)',
-        }}>
+        <header className="responsive-header">
           <Link href="/guides" style={{ textDecoration: 'none', color: '#9ca3af', fontSize: '1rem', fontWeight: 600 }}>
             ← Back to Guides
           </Link>

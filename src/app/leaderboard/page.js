@@ -1,29 +1,81 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { db } from '@/lib/firebase';
+import { useAuth } from '@/lib/AuthContext';
+import { collection, query, orderBy, limit, getDocs, getCountFromServer, where } from 'firebase/firestore';
 
 export default function LeaderboardPage() {
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sortBy, setSortBy] = useState('elo');
+  const { userProfile } = useAuth();
+
+  const [myRank, setMyRank] = useState(null);
+  const [myScore, setMyScore] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
+      setError(null);
       try {
-        const res = await fetch(`/api/leaderboard?sort=${sortBy}`);
-        if (!res.ok) throw new Error('Failed to fetch');
-        const data = await res.json();
-        setPlayers(data.players || []);
+        if (!db) {
+          throw new Error('Database connection is not initialized.');
+        }
+
+        const firestoreField = sortBy === 'xp' ? 'totalXp' : 'elo';
+        const q = query(
+          collection(db, 'users'),
+          orderBy(firestoreField, 'desc'),
+          limit(50)
+        );
+
+        const snapshot = await getDocs(q);
+        const list = [];
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          list.push({
+            uid: doc.id,
+            displayName: data.displayName || 'Anonymous',
+            elo: data.elo || 1000,
+            totalXp: data.totalXp || 0,
+            duels_wins: data.duels_wins || 0,
+            duels_losses: data.duels_losses || 0,
+            dailyChallengeStreak: data.dailyChallengeStreak || 0,
+            countryCode: data.countryCode || null
+          });
+        });
+        setPlayers(list);
+
+        if (userProfile && userProfile.uid) {
+          const userScore = userProfile[firestoreField] || (sortBy === 'elo' ? 1000 : 0);
+          setMyScore(userScore);
+
+          const loadedIndex = list.findIndex(p => p.uid === userProfile.uid);
+          if (loadedIndex !== -1) {
+            setMyRank(loadedIndex + 1);
+          } else {
+            const countQ = query(
+              collection(db, 'users'),
+              where(firestoreField, '>', userScore)
+            );
+            const countSnapshot = await getCountFromServer(countQ);
+            setMyRank(countSnapshot.data().count + 1);
+          }
+        } else {
+          setMyRank(null);
+          setMyScore(null);
+        }
       } catch (e) {
+        console.error('Leaderboard error:', e);
         setError(e.message);
       } finally {
         setLoading(false);
       }
     };
     fetchData();
-  }, [sortBy]);
+  }, [sortBy, userProfile]);
 
   const getRankStyle = (index) => {
     if (index === 0) return { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#000' };
@@ -47,18 +99,7 @@ export default function LeaderboardPage() {
       fontFamily: "'Outfit', sans-serif",
     }}>
       {/* Header */}
-      <header style={{
-        padding: '1.5rem 2rem',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
-        backdropFilter: 'blur(10px)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
-        background: 'rgba(10,10,10,0.8)',
-      }}>
+      <header className="responsive-header">
         <Link href="/" style={{ textDecoration: 'none', color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800 }}>
           LostStreet
         </Link>
@@ -70,6 +111,7 @@ export default function LeaderboardPage() {
           borderRadius: '50px',
           fontWeight: 600,
           fontSize: '0.95rem',
+          whiteSpace: 'nowrap'
         }}>
           ▶ Play Now
         </Link>
@@ -99,6 +141,7 @@ export default function LeaderboardPage() {
           justifyContent: 'center',
           gap: '0.5rem',
           marginBottom: '2rem',
+          flexWrap: 'wrap',
         }}>
           <button
             onClick={() => setSortBy('elo')}
@@ -165,9 +208,52 @@ export default function LeaderboardPage() {
           </div>
         )}
 
+        {/* Your Rank Card */}
+        {!loading && !error && myRank && userProfile && (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1.5rem',
+            padding: '1.2rem 2rem',
+            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)',
+            border: '2px solid rgba(16, 185, 129, 0.3)',
+            borderRadius: '16px',
+            marginBottom: '2rem',
+            boxShadow: '0 8px 32px rgba(16, 185, 129, 0.15)',
+            backdropFilter: 'blur(10px)',
+          }}>
+            <div style={{
+              fontSize: '1.8rem',
+              fontWeight: 900,
+              background: 'linear-gradient(135deg, #10b981, #3b82f6)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              flexShrink: 0
+            }}>
+              #{myRank}
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: '0.85rem', color: '#10b981', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.2rem' }}>
+                Your Rank
+              </div>
+              <div style={{ fontWeight: 700, fontSize: '1.2rem', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {userProfile.displayName || 'You'}
+              </div>
+            </div>
+            <div style={{ textAlign: 'right', flexShrink: 0 }}>
+              <div style={{ fontWeight: 800, fontSize: '1.4rem', color: sortBy === 'elo' ? '#10b981' : '#3b82f6' }}>
+                {myScore ? myScore.toLocaleString() : '0'}
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 600 }}>
+                {sortBy === 'elo' ? 'ELO' : 'XP'}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Podium — Top 3 */}
         {!loading && !error && players.length >= 3 && (
-          <div style={{
+          <div className="podium-container" style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'flex-end',
@@ -176,19 +262,19 @@ export default function LeaderboardPage() {
             padding: '0 1rem',
           }}>
             {/* 2nd place */}
-            <PodiumCard player={players[1]} rank={2} height="140px" />
+            <PodiumCard player={players[1]} rank={2} height="140px" sortBy={sortBy} />
             {/* 1st place */}
-            <PodiumCard player={players[0]} rank={1} height="180px" />
+            <PodiumCard player={players[0]} rank={1} height="180px" sortBy={sortBy} />
             {/* 3rd place */}
-            <PodiumCard player={players[2]} rank={3} height="110px" />
+            <PodiumCard player={players[2]} rank={3} height="110px" sortBy={sortBy} />
           </div>
         )}
 
         {/* Full List */}
         {!loading && !error && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {players.slice(3).map((player, i) => {
-              const rank = i + 4;
+            {(players.length >= 3 ? players.slice(3) : players).map((player, i) => {
+              const rank = players.length >= 3 ? i + 4 : i + 1;
               return (
                 <div key={player.uid} style={{
                   display: 'flex',
@@ -263,7 +349,7 @@ export default function LeaderboardPage() {
   );
 }
 
-function PodiumCard({ player, rank, height }) {
+function PodiumCard({ player, rank, height, sortBy }) {
   const colors = {
     1: { bg: 'linear-gradient(135deg, #fbbf24, #f59e0b)', glow: 'rgba(251,191,36,0.3)', emoji: '👑' },
     2: { bg: 'linear-gradient(135deg, #e5e7eb, #9ca3af)', glow: 'rgba(156,163,175,0.2)', emoji: '🥈' },
@@ -280,7 +366,7 @@ function PodiumCard({ player, rank, height }) {
       flex: rank === 1 ? '1.2' : '1',
     }}>
       <span style={{ fontSize: rank === 1 ? '2rem' : '1.5rem' }}>{c.emoji}</span>
-      <div style={{
+      <div className="podium-card-title" style={{
         fontWeight: 700,
         fontSize: rank === 1 ? '1rem' : '0.9rem',
         textAlign: 'center',
@@ -291,7 +377,7 @@ function PodiumCard({ player, rank, height }) {
       }}>
         {player.displayName}
       </div>
-      <div style={{
+      <div className="podium-column-box" style={{
         width: '100%',
         height,
         background: c.bg,
@@ -304,10 +390,10 @@ function PodiumCard({ player, rank, height }) {
         gap: '0.25rem',
       }}>
         <span style={{ fontSize: rank === 1 ? '1.8rem' : '1.4rem', fontWeight: 800, color: rank === 2 ? '#000' : '#fff' }}>
-          {player.elo}
+          {sortBy === 'elo' ? player.elo : player.totalXp.toLocaleString()}
         </span>
         <span style={{ fontSize: '0.75rem', fontWeight: 600, color: rank === 2 ? '#374151' : 'rgba(255,255,255,0.8)' }}>
-          ELO
+          {sortBy === 'elo' ? 'ELO' : 'XP'}
         </span>
       </div>
     </div>

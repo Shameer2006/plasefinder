@@ -13,6 +13,16 @@ export default function FlagGame({ onReturnToMenu }) {
   const [options, setOptions] = useState([]);
   const [roundState, setRoundState] = useState('LOADING'); // 'LOADING', 'PLAYING', 'RESULT', 'FINISHED'
   const [userGuess, setUserGuess] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
 
@@ -108,42 +118,61 @@ export default function FlagGame({ onReturnToMenu }) {
   }
 
   return (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ 
+      position: 'relative', 
+      width: '100vw', 
+      minHeight: '100dvh', 
+      overflowY: 'auto', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      padding: isMobile ? '5.5rem 1rem 2rem' : '2rem'
+    }}>
       
       {/* HUD overlay */}
-      <div style={{ position: 'absolute', top: 20, left: 20, zIndex: 10, display: 'flex', gap: '1rem' }}>
-        <div className="glass-panel" style={{ padding: '0.5rem 1rem', fontWeight: 'bold' }}>
+      <div style={{ 
+        position: isMobile ? 'absolute' : 'absolute', 
+        top: isMobile ? 12 : 20, 
+        left: isMobile ? 12 : 20, 
+        right: isMobile ? 12 : 'auto',
+        zIndex: 10, 
+        display: 'flex', 
+        gap: isMobile ? '0.5rem' : '1rem',
+        justifyContent: isMobile ? 'space-between' : 'flex-start'
+      }}>
+        <div className="glass-panel" style={{ padding: '0.4rem 0.8rem', fontWeight: 'bold', fontSize: isMobile ? '0.85rem' : '1rem' }}>
           Round: {round} / {maxRounds}
         </div>
-        <div className="glass-panel" style={{ padding: '0.5rem 1rem', fontWeight: 'bold' }}>
+        <div className="glass-panel" style={{ padding: '0.4rem 0.8rem', fontWeight: 'bold', fontSize: isMobile ? '0.85rem' : '1rem' }}>
           Score: {score}
         </div>
-        <button className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }} onClick={onReturnToMenu}>Quit</button>
+        <button className="btn btn-secondary" style={{ padding: '0.4rem 0.8rem', fontSize: isMobile ? '0.8rem' : '0.9rem' }} onClick={onReturnToMenu}>Quit</button>
       </div>
 
-      <div className="glass-panel" style={{ padding: '2rem', width: '90%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <h2 style={{ fontSize: '2rem', marginBottom: '2rem' }}>Which country does this flag belong to?</h2>
+      <div className="glass-panel" style={{ padding: isMobile ? '1.2rem' : '2rem', width: '90%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <h2 style={{ fontSize: isMobile ? '1.25rem' : '2rem', marginBottom: isMobile ? '1.2rem' : '2rem', textAlign: 'center', lineHeight: 1.3 }}>Which country does this flag belong to?</h2>
         
         {/* Flag Display */}
         <div style={{ 
-          marginBottom: '3rem', 
+          marginBottom: isMobile ? '1.5rem' : '3rem', 
           background: 'white', 
-          padding: '10px', 
+          padding: '8px', 
           borderRadius: '12px',
           boxShadow: '0 8px 32px rgba(0,0,0,0.5)'
         }}>
           <img 
             src={`https://flagcdn.com/w320/${target?.iso}.png`} 
             alt="Flag" 
-            style={{ display: 'block', maxWidth: '100%', height: 'auto', maxHeight: '300px', borderRadius: '4px' }} 
+            style={{ display: 'block', maxWidth: '100%', height: 'auto', maxHeight: isMobile ? '150px' : '300px', borderRadius: '4px' }} 
           />
         </div>
 
         {/* Options */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', width: '100%' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '0.6rem' : '1rem', width: '100%' }}>
           {options.map((option, idx) => {
             let btnClass = "btn btn-secondary";
-            let style = { padding: '1.2rem', fontSize: '1.2rem' };
+            let style = { padding: isMobile ? '0.8rem 1rem' : '1.2rem', fontSize: isMobile ? '0.95rem' : '1.2rem', minHeight: isMobile ? '50px' : '60px' };
             
             if (roundState === 'RESULT') {
               if (option.iso === target.iso) {
@@ -177,8 +206,8 @@ export default function FlagGame({ onReturnToMenu }) {
 
         {/* Result Action */}
         {roundState === 'RESULT' && (
-          <div style={{ marginTop: '2.5rem', animation: 'fade-in 0.3s ease' }}>
-            <button className="btn" style={{ padding: '1rem 3rem', fontSize: '1.3rem' }} onClick={handleNext}>
+          <div style={{ marginTop: isMobile ? '1.5rem' : '2.5rem', animation: 'fade-in 0.3s ease' }}>
+            <button className="btn" style={{ padding: isMobile ? '0.8rem 2rem' : '1rem 3rem', fontSize: isMobile ? '1.1rem' : '1.3rem' }} onClick={handleNext}>
               {round < maxRounds ? 'Next Round' : 'See Final Score'}
             </button>
           </div>

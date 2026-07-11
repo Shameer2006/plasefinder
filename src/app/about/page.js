@@ -65,18 +65,7 @@ export default function AboutPage() {
       fontFamily: "'Outfit', sans-serif",
     }}>
       {/* Header */}
-      <header style={{
-        padding: '1.5rem 2rem',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
-        backdropFilter: 'blur(10px)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
-        background: 'rgba(10,10,10,0.8)',
-      }}>
+      <header className="responsive-header">
         <Link href="/" style={{ textDecoration: 'none', color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800 }}>
           LostStreet
         </Link>
@@ -89,6 +78,7 @@ export default function AboutPage() {
           fontWeight: 600,
           fontSize: '0.95rem',
           transition: 'transform 0.2s, box-shadow 0.2s',
+          whiteSpace: 'nowrap'
         }}>
           ▶ Play Now — It&apos;s Free
         </Link>
@@ -230,13 +220,8 @@ export default function AboutPage() {
         <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>
           LostStreet vs GeoGuessr
         </h2>
-        <div style={{
-          background: 'rgba(255,255,255,0.03)',
-          border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: '20px',
-          overflow: 'hidden',
-        }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.95rem' }}>
+        <div className="table-wrapper">
+          <table style={{ borderCollapse: 'collapse', fontSize: '0.95rem' }}>
             <thead>
               <tr style={{ background: 'rgba(255,255,255,0.05)', textAlign: 'left' }}>
                 <th style={{ padding: '1rem 1.5rem', fontWeight: 700 }}>Feature</th>

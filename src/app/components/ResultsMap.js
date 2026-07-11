@@ -50,14 +50,14 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return R * c; // Distance in km
 }
 
-export default function ResultsMap({ location, players }) {
+export default function ResultsMap({ location, players, height = '400px' }) {
   const actualPos = [location.lat, location.lng];
   
   // Prepare bounds starting with the actual location
   const bounds = [actualPos];
   
   const playerMarkers = players.map(player => {
-    if (!player.lastGuess) return null;
+    if (!player.lastGuess || typeof player.lastGuess.lat !== 'number' || typeof player.lastGuess.lng !== 'number') return null;
     const guessPos = [player.lastGuess.lat, player.lastGuess.lng];
     bounds.push(guessPos);
     
@@ -72,7 +72,7 @@ export default function ResultsMap({ location, players }) {
   }).filter(Boolean);
 
   return (
-    <div style={{ height: '400px', width: '100%', borderRadius: '12px', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.2)' }}>
+    <div style={{ height, width: '100%', borderRadius: '12px', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.2)' }}>
       <MapContainer 
         center={actualPos} 
         zoom={2} 
