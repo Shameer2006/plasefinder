@@ -10,7 +10,14 @@ export const metadata = {
   alternates: {
     canonical: "/",
   },
-  keywords: ["geography game", "geoguessr alternative", "free geoguessr", "map game", "guess location", "world quiz", "loststreet"],
+  keywords: [
+    "loststreet", "loststreet game", "loststreet online", "play loststreet", "loststreet geography game", "lost street",
+    "geoguessr alternative", "free geography guessing game", "street view guessing game", "guess the location game", "guess the country game online", "panorama guessing game", "world geography game online", "guess where game", "random street view game", "location guessing game free",
+    "play geography game online free", "play street view game", "online map guessing game", "play world map game", "geography quiz game online", "free online geography game", "multiplayer geography game", "geography game no download",
+    "game where you guess your location", "game to guess country from street view", "spawn random location guess game", "AI hint geography game", "blur mode guessing game", "guess the city from photo game", "street view geography quiz", "explore random places online game", "virtual travel guessing game", "panoramic view country guesser", "daily geography guessing game", "geography challenge game online",
+    "geography learning game online", "fun way to learn world map", "educational geography game free", "geography practice game", "learn countries game online", "map skills game online", "geography trivia game free",
+    "geography game for mobile", "browser based geography game", "no download geography game", "free to play map game", "lightweight geography web game"
+  ],
   openGraph: {
     title: "LostStreet - Free Geography Guessing Game",
     description: "Guess locations from street views, compete in multiplayer, and climb the leaderboard. 100% free.",
@@ -69,7 +76,7 @@ const jsonLd = {
     "ratingValue": "4.5",
     "ratingCount": "100"
   },
-  "keywords": "geography game, geoguessr alternative, free geoguessr, map guessing game, street view game, location guessing game, multiplayer geography game"
+  "keywords": "loststreet, loststreet game, loststreet online, play loststreet, loststreet geography game, lost street, geoguessr alternative, free geography guessing game, street view guessing game, guess the location game, guess the country game online, panorama guessing game, world geography game online, guess where game, random street view game, location guessing game free, play geography game online free, play street view game, online map guessing game, play world map game, geography quiz game online, free online geography game, multiplayer geography game, geography game no download, game where you guess your location, game to guess country from street view, spawn random location guess game, AI hint geography game, blur mode guessing game, guess the city from photo game, street view geography quiz, explore random places online game, virtual travel guessing game, panoramic view country guesser, daily geography guessing game, geography challenge game online, geography learning game online, fun way to learn world map, educational geography game free, geography practice game, learn countries game online, map skills game online, geography trivia game free, geography game for mobile, browser based geography game, no download geography game, free to play map game, lightweight geography web game"
 };
 
 

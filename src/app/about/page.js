@@ -322,6 +322,46 @@ export default function AboutPage() {
         </Link>
       </section>
 
+      {/* Popular Searches */}
+      <section style={{
+        padding: '3rem 2rem',
+        maxWidth: '900px',
+        margin: '0 auto',
+        borderTop: '1px solid rgba(255,255,255,0.06)'
+      }}>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '1rem', color: '#9ca3af' }}>
+          Popular Searches
+        </h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+          {[
+            "geoguessr alternative", "free geography guessing game", "street view guessing game", "guess the location game", 
+            "guess the country game online", "panorama guessing game", "world geography game online", "guess where game", 
+            "random street view game", "location guessing game free", "play geography game online free", "play street view game", 
+            "online map guessing game", "play world map game", "geography quiz game online", "free online geography game", 
+            "multiplayer geography game", "geography game no download", "game where you guess your location", 
+            "game to guess country from street view", "spawn random location guess game", "AI hint geography game", 
+            "blur mode guessing game", "guess the city from photo game", "street view geography quiz", 
+            "explore random places online game", "virtual travel guessing game", "panoramic view country guesser", 
+            "daily geography guessing game", "geography challenge game online", "geography learning game online", 
+            "fun way to learn world map", "educational geography game free", "geography practice game", 
+            "learn countries game online", "map skills game online", "geography trivia game free", 
+            "geography game for mobile", "browser based geography game", "no download geography game", 
+            "free to play map game", "lightweight geography web game", "loststreet game", "loststreet online"
+          ].map(tag => (
+            <span key={tag} style={{
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              padding: '0.25rem 0.75rem',
+              borderRadius: '50px',
+              fontSize: '0.75rem',
+              color: '#6b7280'
+            }}>
+              {tag}
+            </span>
+          ))}
+        </div>
+      </section>
+
       {/* Footer */}
       <footer style={{
         padding: '2rem',
