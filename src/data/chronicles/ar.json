@@ -1,0 +1,63 @@
+{
+  "code": "AR",
+  "name": "Argentina",
+  "capital": "Buenos Aires",
+  "continent": "South America",
+  "population": "46.2 Million",
+  "currency": "Argentine Peso (ARS)",
+  "languages": [
+    "Spanish"
+  ],
+  "seoTitle": "History of Argentina: Viceroyalty Borders, Sun of May Flag, and liberation wars",
+  "metaDescription": "Explore the rich history of Argentina. Discover its transition from the Viceroyalty of Rio de la Plata, the symbolism of its blue and white flag, and its path to independence.",
+  "mapFormation": "Argentina is the second-largest country in South America, stretching from the high peaks of the Andes Mountains in the west to the Atlantic Ocean in the east. Its borders evolved from the Spanish Viceroyalty of the Río de the Plata, established in 1776, which encompassed modern Argentina, Uruguay, Paraguay, and parts of Bolivia. Following independence, the region split into separate states, and Argentina went through decades of violent civil conflict between the Unitarians (who favored a centralized government in Buenos Aires) and the Federalists (who defended provincial autonomy). The modern border with Chile along the Andes was negotiated through the Boundary Treaty of 1881, which split Patagonia. During the late 19th-century 'Conquest of the Desert' campaigns, the Argentine state forcefully expanded its southern frontiers into Indigenous Mapuche territories, stabilizing the modern map bordering <a href=\"/chronicles/bo\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Bolivia</a> and <a href=\"/chronicles/br\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Brazil</a>.",
+  "flagHistory": "The national flag of Argentina was created by military commander Manuel Belgrano during the War of Independence and raised for the first time in Rosario on February 27, 1812. It consists of three horizontal bands of light blue, white, and light blue. According to tradition, Belgrano chose the colors to match the cockade used by the revolutionary forces, which itself was based on the colors of the Spanish House of Bourbon. In 1818, the Congress of Tucumán approved the addition of the Sun of May ('Sol de Mayo') to the center white band. The sun features a human face and 32 alternating straight and wavy rays, representing the Incan sun god Inti and the miraculous breakthrough of the sun through the clouds during the first revolutionary assembly on May 25, 1810.",
+  "freedomStory": "Argentina's struggle for independence began during the May Revolution in 1810, when local citizens deposed the Spanish Viceroy Baltasar Hidalgo de Cisneros and established the Primera Junta. This started the Argentine War of Independence. On July 9, 1816, the Congress of Tucumán formally declared the independence of the United Provinces of the Río de la Plata. To secure this freedom, General José de San Martín organized the Army of the Andes, executing a legendary crossing of the mountain range to liberate Chile and Peru from Spanish forces. This secured Argentina's borders and cemented San Martín's legacy as the national 'Father of the Fatherland'.",
+  "challenges": "Argentina struggles with severe and persistent macroeconomic difficulties. The country has gone through a recurring cycle of hyperinflation, currency devaluations, fiscal deficits, and sovereign debt defaults (most notably in 2001 and 2014), which have eroded public trust in the national currency and hampered long-term investments. This economic instability is exacerbated by deep political polarization, known locally as 'La Grieta' (The Rift), which hinders consensus on tax and spending reforms. Argentina also faces social challenges, including high rates of poverty and youth unemployment, alongside an ongoing territorial dispute with the United Kingdom over the Falkland Islands (Islas Malvinas), which led to a war in 1982.",
+  "aiSummary": {
+    "geo": "Second-largest South American nation; borders finalized via the 1881 treaty with Chile dividing Patagonia.",
+    "flag": "Three horizontal bands of light blue and white, with the Incan-themed Sun of May added to the center in 1818.",
+    "freedom": "Began with the 1810 May Revolution; officially declared on July 9, 1816, and secured by Jose de San Martin.",
+    "challenge": "Persistent inflation, currency devaluations, political polarization, and the Falkland Islands dispute."
+  },
+  "faqs": [
+    {
+      "question": "What is the origin of Argentina's 'Sun of May'?",
+      "answer": "The Sun of May represents the Incan sun god Inti and honors the sun breaking through the clouds during the revolutionary assembly on May 25, 1810."
+    },
+    {
+      "question": "Who was Jose de San Martin?",
+      "answer": "He was Argentina's primary liberator, famous for leading the Army of the Andes to secure the independence of Argentina, Chile, and Peru."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1776",
+      "event": "Spain establishes the Viceroyalty of the Río de la Plata, with Buenos Aires as its capital."
+    },
+    {
+      "year": "1810",
+      "event": "The May Revolution deposes the Spanish Viceroy and establishes the first local government junta."
+    },
+    {
+      "year": "1812",
+      "event": "Manuel Belgrano designs and raises the light blue and white Argentine flag."
+    },
+    {
+      "year": "1816",
+      "event": "The Congress of Tucumán formally declares independence from Spanish colonial rule on July 9."
+    },
+    {
+      "year": "1881",
+      "event": "Argentina and Chile sign a boundary treaty, dividing Patagonia and establishing the Andean border."
+    },
+    {
+      "year": "1982",
+      "event": "Argentina invades the Falkland Islands, leading to a brief, losing war against the United Kingdom."
+    },
+    {
+      "year": "2001",
+      "event": "A severe economic crisis leads to massive protests, the resignation of the president, and a record debt default."
+    }
+  ]
+}

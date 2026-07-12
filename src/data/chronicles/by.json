@@ -1,0 +1,56 @@
+{
+  "code": "BY",
+  "name": "Belarus",
+  "capital": "Minsk",
+  "continent": "Europe",
+  "population": "9.2 Million",
+  "currency": "Belarusian Ruble (BYN)",
+  "languages": [
+    "Belarusian",
+    "Russian"
+  ],
+  "seoTitle": "History of Belarus: Eastern European Plain, Woven Ornament Flag, and Independence",
+  "metaDescription": "Discover the detailed history of Belarus. Explore its flat plains geography, the traditional ornament flag, and its path to post-Soviet independence.",
+  "mapFormation": "Belarus is a landlocked nation in Eastern Europe, dominated by flat plains, rolling hills, and extensive marshlands in the south (the Pripyat Marshes). Historically part of the Grand Duchy of Lithuania, the Polish-Lithuanian Commonwealth, and the Russian Empire, Belarus's modern borders emerged from the divisions of World War I and II. Following the Soviet-Polish War of 1919-1921, the territory was split, but after the Soviet invasion of Poland in 1939, western Belarusian lands were annexed to the Byelorussian Soviet Socialist Republic. These administrative borders were finalized after World War II and remained unchanged when the country achieved sovereignty in 1991, neighboring central nations like <a href=\"/chronicles/be\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Belgium</a>.",
+  "flagHistory": "The flag of Belarus consists of a red upper horizontal band and a green lower horizontal band, with a vertical red-on-white traditional Belarusian ornamental pattern along the hoist. Red represents the historical battles of the nation, including the Battle of Grunwald and World War II; green symbolizes the country's vast forests and fields. The ornamental pattern, designed in 1917 by Matrena Markevich, represents Belarusian cultural heritage, agricultural labor, and unity. The design was adopted in 1995 following a national referendum, replacing the white-red-white flag used briefly after independence.",
+  "freedomStory": "Belarus declared independence briefly in 1918 as the Belarusian Democratic Republic before being invaded by the Red Army and becoming a founding republic of the Soviet Union in 1922. During World War II, Belarus suffered catastrophic devastation, losing a third of its population. As the Soviet Union dissolved, the Supreme Soviet of Belarus declared state sovereignty on July 27, 1990, and full independence was declared on August 25, 1991, marked by the signing of the Belovezha Accords in December.",
+  "challenges": "Belarus struggles under an autocratic political system led by Alexander Lukashenko since 1994, which has suppressed democratic movements and civil liberties. Following contested elections in 2020, the country went through mass protests and subsequent crackdowns. This political climate has resulted in severe international sanctions and economic isolation, leaving Belarus highly dependent on political and economic support from neighboring Russia, while its state-dominated economy faces modernization hurdles.",
+  "aiSummary": {
+    "geo": "Landlocked East European plain; borders solidified after WWII annexations of former Polish territories.",
+    "flag": "Horizontal red and green stripes with a traditional red-on-white hoist embroidery ornament designed in 1917.",
+    "freedom": "Independence declared on August 25, 1991, from the USSR, following the signing of the Belovezha Accords.",
+    "challenge": "Authoritarian system under Alexander Lukashenko, heavy economic reliance on Russia, and international sanctions."
+  },
+  "faqs": [
+    {
+      "question": "What is the origin of the hoist ornament on the Belarusian flag?",
+      "answer": "The design is a traditional peasant weaving pattern created in 1917 by Matrena Markevich, representing family and agricultural heritage."
+    },
+    {
+      "question": "What was the significance of the Belovezha Accords?",
+      "answer": "Signed in Belarus in December 1991, the accords officially declared the dissolution of the Soviet Union and founded the Commonwealth of Independent States (CIS)."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1918",
+      "event": "The Belarusian Democratic Republic declares independence, which is short-lived due to Soviet invasion."
+    },
+    {
+      "year": "1922",
+      "event": "Belarus becomes a founding member of the Union of Soviet Socialist Republics (USSR)."
+    },
+    {
+      "year": "1941-1944",
+      "event": "Nazi occupation devastates Belarus, destroying hundreds of towns and villages."
+    },
+    {
+      "year": "1991",
+      "event": "Belarus declares full independence from the Soviet Union following the Belovezha Accords."
+    },
+    {
+      "year": "2020",
+      "event": "Contested presidential elections spark the largest pro-democracy protests in Belarusian history."
+    }
+  ]
+}

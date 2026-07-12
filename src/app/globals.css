@@ -464,3 +464,60 @@ body {
     font-size: 1.2rem !important;
   }
 }
+
+/* Flags Explorer Styles */
+.flag-card-interactive:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 12px 30px rgba(0, 242, 254, 0.2), 0 0 15px rgba(0, 242, 254, 0.1);
+  border-color: rgba(0, 242, 254, 0.4) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.flag-card-interactive:hover .flag-image-hover {
+  transform: scale(1.06);
+}
+
+.btn-hover:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.btn-hover-close:hover {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+}
+
+.btn-hover-swipe:hover {
+  color: #00f2fe !important;
+}
+
+.input-focus-glow:focus {
+  border-color: rgba(0, 242, 254, 0.4) !important;
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.2) !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.chronicle-article-section {
+  transition: all 0.3s ease;
+}
+
+.chronicle-article-section:hover {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "code": "BH",
+  "name": "Bahrain",
+  "capital": "Manama",
+  "continent": "Asia",
+  "population": "1.5 Million",
+  "currency": "Bahraini Dinar (BHD)",
+  "languages": [
+    "Arabic"
+  ],
+  "seoTitle": "History of Bahrain: Dilmun Trade Roots, Serrated Flag, and Persian Gulf Sovereignty",
+  "metaDescription": "Explore the history of Bahrain, from the ancient Dilmun civilization and Al Khalifa rule to its serrated red and white flag and independence.",
+  "mapFormation": "Bahrain is a flat island nation in the Persian Gulf, comprising a small archipelago centered around Bahrain Island. Historically the center of the ancient Dilmun civilization, Bahrain has served as a strategic maritime trading hub linking Mesopotamia and India. Its territorial boundaries are defined by the surrounding shallow waters of the Gulf, situated between Saudi Arabia and Qatar. The ruling Al Khalifa dynasty established control over the islands in 1783, expelling Persian garrisons. Modern borders were stabilized through British protectorate treaties in the 19th century and a 2001 International Court of Justice ruling resolving island disputes with Qatar.",
+  "flagHistory": "The flag of Bahrain consists of a red field with a vertical white band on the hoist side, separated by a serrated line of five triangles. The red color is traditional for the flags of Persian Gulf states; the white band represents peace. The five serrated points symbolize the Five Pillars of Islam (Shahada, Salah, Zakat, Sawm, and Hajj). The design was officially adopted in February 2002 when the country was declared a kingdom, reducing the number of serrated points from eight to five to clarify its Islamic symbolism.",
+  "freedomStory": "Bahrain became a British protectorate in 1861 to protect its rulers from Ottoman and Persian expansion in exchange for maritime security. Following Great Britain's decision to withdraw its forces east of Suez in the late 1960s, Bahrain declared its full independence on August 15, 1971, under Sheikh Isa bin Salman Al Khalifa. Bahrain declined to join the United Arab Emirates, opting instead to establish an independent sovereign state and joining the United Nations and Arab League as a separate nation.",
+  "challenges": "Bahrain faces social and economic difficulties. The country struggles with sectarian tensions between the Shia majority population and the ruling Sunni Al Khalifa royal family, which erupted into mass protests in 2011. Economically, Bahrain has smaller oil reserves than its neighbors and has had to rely on financial support from Saudi Arabia while striving to develop its banking, financial services, and tourism sectors. The nation also faces environmental challenges, including severe freshwater depletion and coastal reclamation impacts.",
+  "aiSummary": {
+    "geo": "Persian Gulf archipelago; strategic trade borders defined by maritime channels and treaty arbitration with Qatar.",
+    "flag": "Red field with a vertical white band separated by a 5-pointed serration representing the Pillars of Islam.",
+    "freedom": "Sovereignty declared on August 15, 1971, ending the British protectorate status and declining integration into the UAE.",
+    "challenge": "Socio-political sectarian reforms, oil reserve depletion, and severe groundwater exhaustion."
+  },
+  "faqs": [
+    {
+      "question": "What was the Dilmun civilization?",
+      "answer": "Dilmun was an ancient Semitic-speaking polity in the eastern Arabian Peninsula, active from the 4th millennium BCE, serving as a hub on the Sumerian-Indus trade route."
+    },
+    {
+      "question": "Why did Bahrain choose not to join the UAE?",
+      "answer": "Bahrain opted for separate sovereignty in 1971 due to differences in governance agreements and its established administrative state structures."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1783",
+      "event": "The Al Khalifa family establishes control over Bahrain, ending Persian administration."
+    },
+    {
+      "year": "1861",
+      "event": "Bahrain signs a protectorate treaty with Great Britain, securing naval protection."
+    },
+    {
+      "year": "1932",
+      "event": "Discovery of oil in Bahrain, the first on the Arab side of the Persian Gulf."
+    },
+    {
+      "year": "1971",
+      "event": "Bahrain declares full independence, ending the British treaty system on August 15."
+    },
+    {
+      "year": "2011",
+      "event": "Pro-democracy protests erupt in Manama as part of the regional Arab Spring."
+    }
+  ]
+}

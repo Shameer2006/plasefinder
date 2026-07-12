@@ -1,0 +1,59 @@
+{
+  "code": "AL",
+  "name": "Albania",
+  "capital": "Tirana",
+  "continent": "Europe",
+  "population": "2.8 Million",
+  "currency": "Albanian Lek (ALL)",
+  "languages": [
+    "Albanian"
+  ],
+  "seoTitle": "History of Albania: Map Borders, Black Eagle Flag, and Path to Freedom",
+  "metaDescription": "Explore the history of Albania, from its ancient Illyrian roots and the formation of its borders to its legendary double-headed eagle flag and post-communist transition.",
+  "mapFormation": "Albania lies in the western part of the Balkan Peninsula, bordering the Adriatic and Ionian Seas. The country's borders are a product of its ancient Illyrian heritage, centuries of Roman, Byzantine, and Ottoman rule, and the complex geopolitics of the Balkan Wars. When Albania declared its independence in 1912, the Great Powers (Austria-Hungary, Britain, France, Germany, Italy, and Russia) convened the London Conference of 1913 to delineate the country's boundaries. Yielding to pressure from neighboring states, the conference drew borders that excluded more than half of the ethnic Albanian population, leaving Kosovo under Serbian sovereignty and other Albanian-populated areas in modern Montenegro and North Macedonia. These decisions established a geographical layout that generated decades of regional ethnic tension, but the core territory remained a distinct Mediterranean country defined by the rugged Accursed Mountains (Prokletije) and fertile coastal plains.",
+  "flagHistory": "The national flag of Albania is one of the most distinctive in Europe, consisting of a deep red field charged with a black double-headed eagle in the center. The origin of this symbol dates back to the Byzantine Empire, where the double-headed eagle represented the dual authority of the emperor over church and state. It was adopted in the 15th century by Gjergj Kastrioti, known as Skanderbeg, Albania's national hero. Skanderbeg united the Albanian principalities and led a legendary 25-year rebellion against the invading Ottoman Empire. In 1443, he raised the red flag with the black eagle over the fortress of Krujë to proclaim freedom. When Albania declared independence in 1912, this historical emblem was officially revived to represent national unity and unyielding resistance to oppression.",
+  "freedomStory": "Albania endured nearly five centuries of Ottoman rule, during which much of its population converted to Islam and its cultural institutions were suppressed. The national awakening in the late 19th century culminated in the first Balkan War. Seizing the opportunity as the Ottoman Empire collapsed, Albanian delegates gathered at the Assembly of Vlorë. On November 28, 1912, Ismail Qemali read the declaration of independence and raised the national flag, establishing the provisional government of Albania. While the country's independence was recognized by the Treaty of London in 1913, its borders were occupied during World War I. Sovereignty was consolidated at the Congress of Lushnjë in 1920, and after World War II, the country became a highly isolated socialist republic before transitioning to a parliamentary democracy in 1991.",
+  "challenges": "Following the collapse of one of the world's most repressive communist regimes in 1991, Albania went through a turbulent economic transition, including a major financial crisis in 1997 caused by the collapse of pyramid schemes. Today, its primary challenges are socio-economic. Albania suffers from a massive 'brain drain' as young, educated citizens emigrate to Western Europe in search of better opportunities. The government continues to fight corruption and organized crime, which are key requirements for its ongoing accession talks to join the European Union. Environmental concerns, such as waste management and river pollution, also pose challenges as the country rapidly develops its coastal tourism sector.",
+  "aiSummary": {
+    "geo": "Balkan coast terrain; 1913 boundaries excluded over half of ethnic Albanians, causing regional friction.",
+    "flag": "Red field bearing Skanderbeg's medieval black double-headed eagle emblem.",
+    "freedom": "Gained from the Ottoman Empire on November 28, 1912; transitioned from communism in 1991.",
+    "challenge": "EU integration requirements, systemic corruption, and severe youth emigration."
+  },
+  "faqs": [
+    {
+      "question": "Who designed the modern flag of Albania?",
+      "answer": "The flag is based on the historic seal of Skanderbeg, Gjergj Kastrioti, who raised the black double-headed eagle flag in 1443."
+    },
+    {
+      "question": "What happened during Albania's 1997 crisis?",
+      "answer": "A severe financial collapse occurred due to failed pyramid investment schemes, leading to nationwide riots and temporary anarchy."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1443",
+      "event": "Skanderbeg raises the red double-headed eagle flag at Krujë, leading a 25-year crusade against the Ottoman Empire."
+    },
+    {
+      "year": "1912",
+      "event": "Ismail Qemali declares Albanian independence from the Ottoman Empire in Vlorë."
+    },
+    {
+      "year": "1913",
+      "event": "The London Conference of 1913 establishes the borders of Albania, leaving half of ethnic Albanians outside."
+    },
+    {
+      "year": "1944",
+      "event": "Enver Hoxha establishes a strict, isolationist Marxist-Leninist regime."
+    },
+    {
+      "year": "1991",
+      "event": "First democratic elections are held, marking the transition away from communism."
+    },
+    {
+      "year": "1997",
+      "event": "Anarchy erupts following the collapse of nationwide pyramid investment schemes."
+    }
+  ]
+}

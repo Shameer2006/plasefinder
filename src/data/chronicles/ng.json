@@ -1,0 +1,50 @@
+{
+  "code": "NG",
+  "name": "Nigeria",
+  "capital": "Abuja",
+  "continent": "Africa",
+  "population": "218.5 Million",
+  "currency": "Nigerian Naira (NGN)",
+  "languages": [
+    "English",
+    "Hausa",
+    "Yoruba",
+    "Igbo"
+  ],
+  "seoTitle": "Detailed History of Nigeria: Map Formation, Flag Origin, and Independence",
+  "metaDescription": "Discover the rich history of Nigeria. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
+  "mapFormation": "The geographical formation of Nigeria is a key element of its national identity in Africa. Characterized by its Guinea Gulf coast and northern savannas, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Nigeria came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
+  "flagHistory": "The national flag of Nigeria is a powerful symbol of the country's sovereignty and cultural heritage. The design features a vertical bands of green, white, and green. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
+  "freedomStory": "The path to freedom and sovereignty for Nigeria involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the United Kingdom in 1960. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Nigeria, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
+  "challenges": "Today, Nigeria faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to Boko Haram terrorism and oil revenue theft, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Nigeria continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "aiSummary": {
+    "geo": "Located in Africa; borders shaped by regional administrative history and physical terrain.",
+    "flag": "A distinct banner featuring vertical bands of green, white, and green representing national sovereignty.",
+    "freedom": "Gained sovereignty from the United Kingdom in 1960 through historical national movements.",
+    "challenge": "Currently facing developmental tasks related to Boko Haram terrorism and oil revenue theft."
+  },
+  "faqs": [
+    {
+      "question": "When did Nigeria gain independence?",
+      "answer": "Nigeria attained its full sovereignty and recognized independence from the United Kingdom in 1960."
+    },
+    {
+      "question": "What are the main geographical characteristics of Nigeria?",
+      "answer": "Nigeria is located in Africa and features a geographical layout characterized by Guinea Gulf coast and northern savannas."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1800s",
+      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+    },
+    {
+      "year": "1900s",
+      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+    },
+    {
+      "year": "Sovereignty",
+      "event": "Official declaration of independence and international recognition of Nigeria."
+    }
+  ]
+}

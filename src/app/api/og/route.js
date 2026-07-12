@@ -10,6 +10,55 @@ export async function GET(request) {
     const hasScore = searchParams.has('score');
     const score = hasScore ? searchParams.get('score') : null;
     const mode = searchParams.get('mode') || 'LostStreet';
+    const hasChronicle = searchParams.has('chronicle');
+    
+    if (hasChronicle) {
+      const code = searchParams.get('chronicle');
+      const countryName = searchParams.get('name') || 'Country';
+      return new ImageResponse(
+        (
+          <div
+            style={{
+              height: '100%',
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#050816',
+              backgroundImage: 'radial-gradient(circle at 50% 50%, #1a1a2e 0%, #050816 100%)',
+              color: 'white',
+            }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px' }}>
+              <img src={`https://flagcdn.com/w320/${code}.png`} width="320" style={{ borderRadius: '20px', border: '8px solid white', marginBottom: '40px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} />
+              <h1 style={{
+                fontSize: 80,
+                fontWeight: 900,
+                color: '#ffffff',
+                margin: 0,
+                padding: 0,
+                textAlign: 'center'
+              }}>
+                History of {countryName}
+              </h1>
+              <p style={{ fontSize: 40, color: '#38bdf8', marginTop: 20, fontWeight: 700 }}>
+                LostStreet Encyclopedia
+              </p>
+              <div style={{ display: 'flex', gap: '20px', marginTop: '40px' }}>
+                <div style={{ background: 'rgba(255,255,255,0.1)', padding: '15px 30px', borderRadius: '30px', fontSize: 30, color: '#d1d5db' }}>🌍 Geography</div>
+                <div style={{ background: 'rgba(255,255,255,0.1)', padding: '15px 30px', borderRadius: '30px', fontSize: 30, color: '#d1d5db' }}>🚩 Flags</div>
+                <div style={{ background: 'rgba(255,255,255,0.1)', padding: '15px 30px', borderRadius: '30px', fontSize: 30, color: '#d1d5db' }}>📜 History</div>
+              </div>
+            </div>
+          </div>
+        ),
+        {
+          width: 1200,
+          height: 630,
+        }
+      );
+    }
 
     // If no score is provided, just return a generic OG image
     if (!hasScore) {

@@ -1,0 +1,55 @@
+{
+  "code": "BF",
+  "name": "Burkina Faso",
+  "capital": "Ouagadougou",
+  "continent": "Africa",
+  "population": "22.6 Million",
+  "currency": "West African CFA Franc (XOF)",
+  "languages": [
+    "French"
+  ],
+  "seoTitle": "History of Burkina Faso: Upper Volta Borders, Sankara Revolution, and Flag History",
+  "metaDescription": "Read the history of Burkina Faso, from French Upper Volta colonization to Thomas Sankara's revolution, the name change, and its red and green flag.",
+  "mapFormation": "Burkina Faso is a landlocked nation situated in the heart of West Africa's Sahel region. Evolving from the historic Mossi kingdoms, the country's borders were drawn by French colonial authorities in the late 19th and early 20th centuries. French forces established the colony of French Upper Volta in 1919. The colony was dismantled in 1932, dividing its territory between Ivory Coast, Mali, and Niger, before being restored to its current borders in 1947 to maintain administrative unity. These landlocked borders encompass flat savanna plains and dry Sahelian plateaus, bordering six nations, including West African neighbors like <a href=\"/chronicles/bj\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Benin</a>.",
+  "flagHistory": "The flag of Burkina Faso features two horizontal bands of red on top and green on the bottom, with a central yellow five-pointed star. Red represents the socialist revolution and the blood shed during the national struggle; green symbolizes the natural wealth, agriculture, and forests of the country. The yellow star represents the guiding light of the revolution and progress. The flag was adopted on August 4, 1984, by revolutionary leader Thomas Sankara to replace the flag of Upper Volta, reflecting a break with the colonial past.",
+  "freedomStory": "The colony of French Upper Volta gained independence from France on August 5, 1960, under President Maurice Yameogo. The post-colonial era was characterized by military coups and economic stagnation. In 1983, a revolutionary government led by Captain Thomas Sankara took power. Sankara launched major social and economic reforms, promoted self-reliance, and changed the country's name from Upper Volta to Burkina Faso (meaning 'Land of Incorruptible People') in 1984, before he was assassinated in a coup in 1987.",
+  "challenges": "Burkina Faso faces severe security and humanitarian crises. The country has been severely affected by Islamist militant insurgencies spilling over from neighboring Mali since 2015, resulting in thousands of civilian casualties and displacing over 2 million people. This security crisis has led to severe political instability, including two military coups in 2022. Additionally, Burkina Faso struggles with high poverty rates, water scarcity, and desertification due to climate change.",
+  "aiSummary": {
+    "geo": "Landlocked Sahelian plains; colonial borders dismantled in 1932 and reconstituted in 1947 to consolidate French administrative control.",
+    "flag": "Horizontal red (socialist revolution) and green (nature) panels with a central yellow star of guiding progress.",
+    "freedom": "Sovereignty won from France in 1960; named Burkina Faso in 1984 by revolutionary leader Thomas Sankara.",
+    "challenge": "Severe Sahelian jihadist insurgency, political coups, and water scarcity from climate desertification."
+  },
+  "faqs": [
+    {
+      "question": "What does the name 'Burkina Faso' mean?",
+      "answer": "It translates to 'Land of the Incorruptible (or Upright) People', combining words from the local Mossi and Dyula languages."
+    },
+    {
+      "question": "Who was Thomas Sankara?",
+      "answer": "He was a charismatic Marxist revolutionary leader who governed from 1983 to 1987, known as 'Africa's Che Guevara' for his progressive anti-colonial policies."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1896",
+      "event": "French forces capture Ouagadougou, establishing a colonial protectorate over the Mossi kingdoms."
+    },
+    {
+      "year": "1919",
+      "event": "France establishes the colony of French Upper Volta, delineating its administrative borders."
+    },
+    {
+      "year": "1960",
+      "event": "Upper Volta gains independence from France on August 5 under President Maurice Yameogo."
+    },
+    {
+      "year": "1984",
+      "event": "Thomas Sankara renames the country Burkina Faso and adopts the red-green flag with the yellow star."
+    },
+    {
+      "year": "2022",
+      "event": "Two successive military coups occur in January and September, driven by security crises."
+    }
+  ]
+}

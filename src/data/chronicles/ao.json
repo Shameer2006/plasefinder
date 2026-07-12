@@ -1,0 +1,55 @@
+{
+  "code": "AO",
+  "name": "Angola",
+  "capital": "Luanda",
+  "continent": "Africa",
+  "population": "35.6 Million",
+  "currency": "Angolan Kwanza (AOA)",
+  "languages": [
+    "Portuguese"
+  ],
+  "seoTitle": "History of Angola: Berlin Conference Borders, Machete Flag, and Post-Colonial Wars",
+  "metaDescription": "Explore the history of Angola. Discover the creation of its borders, the socialist symbolism of its red and black flag, and its transition from Portuguese rule.",
+  "mapFormation": "Angola is located on the southwestern coast of Africa, bordering the Atlantic Ocean. Its modern borders were carved out in the late 19th century during the Scramble for Africa, specifically through treaties negotiated at the Berlin Conference of 1884-1885. Portuguese colonial authorities drew boundaries that merged several distinct, historically powerful African states—including the Kingdom of Kongo, the Kingdom of Ndongo, and the Kingdom of Matamba—into a single administrative territory. The conference also established the border of the Cabinda Province, a small exclave separated from the rest of Angola by the Congo River and a strip of territory belonging to the Democratic Republic of the Congo. This colonial border design united ethnically diverse populations, setting the stage for complex internal divisions following independence.",
+  "flagHistory": "The national flag of Angola is divided horizontally into two bands: red on top and black on the bottom. In the center sits a yellow emblem composed of a five-pointed star, a machete, and a segment of a cogwheel. The red band symbolizes the blood shed by Angolans during colonial oppression, the national liberation struggle, and the defense of the country; the black band represents the African continent. The yellow emblem represents the country's workers and resources: the cogwheel symbolizes industrial laborers, the machete represents agricultural workers and the armed struggle, and the star represents international solidarity and progress. The colors and symbols reflect the influence of the ruling MPLA party's socialist history, officially adopted on November 11, 1975.",
+  "freedomStory": "Angola fought a prolonged and bloody independence struggle against Portuguese colonial rule from 1961 to 1974. The conflict was fought by three rival nationalist movements: the MPLA (supported by the Soviet Union and Cuba), the FNLA, and UNITA (supported by the United States and South Africa). Following the Carnation Revolution in Portugal in 1974, which overthrew the Lisbon dictatorship, Portugal agreed to withdraw from its colonies. Angola officially declared independence on November 11, 1975. However, instead of forming a unified government, the rival factions immediately plunged the country into a devastating 27-year civil war. The civil war became a major proxy arena of the Cold War and lasted until the death of UNITA leader Jonas Savimbi in 2002.",
+  "challenges": "Angola's primary difficulties stem from the legacy of its long civil war and its economic structure. The conflict left the country with destroyed infrastructure, thousands of internally displaced persons, and millions of unexploded landmines that restrict agricultural reclamation. Economically, Angola is heavily dependent on oil exports, which generate the majority of government revenues. This dependence has led to severe wealth inequality, high inflation, and vulnerability to fluctuations in global oil prices. The capital, Luanda, is one of the most expensive cities in the world for expatriates, yet a significant percentage of the country's rural population lives in extreme poverty with limited access to clean water, healthcare, and education.",
+  "aiSummary": {
+    "geo": "Southwest African coast borders drawn at the 1885 Berlin Conference, including the separate Cabinda exclave.",
+    "flag": "Red (colonial blood) and black (African continent) horizontal bands with a yellow cogwheel, machete, and star emblem.",
+    "freedom": "Sovereignty won from Portugal in 1975, followed by a 27-year Cold War proxy civil war ending in 2002.",
+    "challenge": "Post-war landmine removal, oil export dependency, Luanda inflation, and wealth inequality."
+  },
+  "faqs": [
+    {
+      "question": "What does the machete on Angola's flag represent?",
+      "answer": "The machete represents agricultural workers, the peasantry, and the armed struggle for national liberation."
+    },
+    {
+      "question": "Why is Cabinda physically separated from the rest of Angola?",
+      "answer": "Cabinda was established as a Portuguese protectorate separately and was later integrated, separated by the Congo River strip given to the DRC in the Berlin Conference."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1482",
+      "event": "Portuguese explorer Diogo Cão reaches the mouth of the Congo River, establishing contact with the Kingdom of Kongo."
+    },
+    {
+      "year": "1884-1885",
+      "event": "The Berlin Conference delineates the colonial borders of Portuguese West Africa (Angola)."
+    },
+    {
+      "year": "1961",
+      "event": "The Angolan War of Independence begins with uprisings in Luanda and northern plantations."
+    },
+    {
+      "year": "1975",
+      "event": "Angola gains independence from Portugal on November 11, and the Angolan Civil War begins immediately."
+    },
+    {
+      "year": "2002",
+      "event": "UNITA leader Jonas Savimbi is killed, leading to a peace agreement that ends the 27-year civil war."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "code": "BG",
+  "name": "Bulgaria",
+  "capital": "Sofia",
+  "continent": "Europe",
+  "population": "6.4 Million",
+  "currency": "Bulgarian Lev (BGN)",
+  "languages": [
+    "Bulgarian"
+  ],
+  "seoTitle": "History of Bulgaria: Balkan Border Shifts, Tricolor Flag, and Ottoman Liberation",
+  "metaDescription": "Explore the history of Bulgaria, from the medieval kingdoms and Ottoman conquest to its white, green, red flag and 1908 independence.",
+  "mapFormation": "Bulgaria is situated in the eastern Balkan Peninsula, bordering the Black Sea to the east. Evolving from the medieval Bulgarian Empires, which dominated the Balkans, the country's modern borders were shaped by the collapse of the Ottoman Empire. Following the Russo-Turkish War of 1877-1878, the Treaty of Berlin (1878) created an autonomous Bulgarian principality but restricted its borders, excluding Macedonia and Eastern Rumelia. Eastern Rumelia was unified with Bulgaria in 1885, and subsequent border changes occurred following the Balkan Wars and World War I, establishing the modern map bordering five nations, including <a href=\"/chronicles/al\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Albania</a> (via near-Balkan regions).",
+  "flagHistory": "The national flag of Bulgaria is a horizontal tricolor of white, green, and red. White represents peace, love, and freedom; green symbolizes the agriculture, lush forests, and fertility of the land; and red represents the blood shed by national heroes during the struggle for independence. The flag was originally adopted in 1879 by the Tarnovo Constitution following the country's liberation from Ottoman rule. It was modified during the communist era (1947-1990) to include the state emblem, before being restored to its original design in 1990.",
+  "freedomStory": "Bulgaria was under Ottoman rule for nearly five centuries (1396-1878), during which its cultural and religious institutions were restricted. The national revival in the 19th century led to the April Uprising of 1876, which was suppressed by Ottoman forces. The resulting international outcry led to the Russo-Turkish War, which liberated Bulgaria. On October 5, 1908, Bulgaria officially declared its full independence from the Ottoman Empire, upgrading its status from an autonomous principality to an independent kingdom under Tsar Ferdinand I.",
+  "challenges": "Bulgaria faces severe demographic and economic challenges. The country has one of the fastest-declining populations in the world, driven by low birth rates and high emigration of young professionals to Western Europe. Economically, Bulgaria remains the poorest member state of the European Union, struggling with high rates of corruption, organized crime, and political instability, which have led to frequent snap elections and slowed its integration into the Schengen Area and Eurozone.",
+  "aiSummary": {
+    "geo": "Balkan Black Sea coastline; borders shaped by the post-Ottoman 1878 Treaty of Berlin and subsequent Balkan War treaties.",
+    "flag": "Horizontal white (peace/liberty), green (farming/land), and red (valiance/martyrs' blood) tricolor.",
+    "freedom": "Declared full sovereignty on October 5, 1908, ending nominal Ottoman suzerainty under Tsar Ferdinand I.",
+    "challenge": "Poorest EU member state, severe corruption hurdles, and one of the world's fastest-declining populations."
+  },
+  "faqs": [
+    {
+      "question": "What was the Tarnovo Constitution?",
+      "answer": "Adopted in 1879, it was Bulgaria's first constitution, established as one of the most progressive and democratic charters in Europe at the time."
+    },
+    {
+      "question": "Why did Bulgaria change the order of the traditional Slavic colors?",
+      "answer": "Bulgaria replaced the blue stripe of the Pan-Slavic tricolor with green to represent its agricultural wealth and natural landscape."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "681 AD",
+      "event": "The First Bulgarian Empire is established, recognized by the Byzantine Empire."
+    },
+    {
+      "year": "1396",
+      "event": "The Ottoman Empire conquers Bulgaria, initiating nearly five centuries of Ottoman rule."
+    },
+    {
+      "year": "1878",
+      "event": "The Treaty of San Stefano and Treaty of Berlin establish an autonomous Bulgarian principality."
+    },
+    {
+      "year": "1908",
+      "event": "Bulgaria declares full independence from the Ottoman Empire on October 5."
+    },
+    {
+      "year": "2007",
+      "event": "Bulgaria officially joins the European Union, initiating structural economic reforms."
+    }
+  ]
+}

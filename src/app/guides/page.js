@@ -33,7 +33,8 @@ export default function GuidesPage() {
       color: '#f3f4f6',
       fontFamily: "'Outfit', sans-serif",
     }}>
-      <header className="responsive-header">
+      <header className="responsive-header" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <img src="/logo.png" alt="LostStreet Logo" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.1)' }} />
         <Link href="/" style={{ textDecoration: 'none', color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800 }}>
           LostStreet
         </Link>

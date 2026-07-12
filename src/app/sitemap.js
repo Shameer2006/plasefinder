@@ -1,10 +1,12 @@
+import { countriesData } from '@/lib/countriesData';
+
 export default function sitemap() {
-  return [
+  const baseRoutes = [
     {
       url: 'https://www.loststreet.online',
       lastModified: new Date(),
       changeFrequency: 'daily',
-      priority: 1,
+      priority: 1.0,
     },
     {
       url: 'https://www.loststreet.online/about',
@@ -36,5 +38,20 @@ export default function sitemap() {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
-  ]
+    {
+      url: 'https://www.loststreet.online/chronicles',
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.9,
+    }
+  ];
+
+  const countryRoutes = Object.keys(countriesData).map(code => ({
+    url: `https://www.loststreet.online/chronicles/${code.toLowerCase()}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  }));
+
+  return [...baseRoutes, ...countryRoutes];
 }

@@ -1,0 +1,55 @@
+{
+  "code": "CV",
+  "name": "Cabo Verde",
+  "capital": "Praia",
+  "continent": "Africa",
+  "population": "590,000",
+  "currency": "Cape Verdean Escudo (CVE)",
+  "languages": [
+    "Portuguese"
+  ],
+  "seoTitle": "History of Cabo Verde: Volcanic Archipelago, Star-Stripe Flag, and Slave Trade History",
+  "metaDescription": "Read the history of Cabo Verde, from its discovery by Portuguese explorers to its role in the transatlantic slave trade, its ten-star flag, and independence.",
+  "mapFormation": "Cabo Verde is a volcanic archipelago of ten islands and five islets located in the Atlantic Ocean, approximately 570 kilometers west of Senegal. The islands were uninhabited by humans until Portuguese explorers arrived in 1460. Portuguese colonists settled the main island of Santiago in 1462, establishing the town of Ribeira Grande as the first permanent European settlement in the tropics. Due to its strategic location, the archipelago became a key transit point for the transatlantic slave trade and maritime refueling, defining its maritime boundaries and isolated island territory, sharing Portuguese colonial history with states like <a href=\"/chronicles/ao\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Angola</a>.",
+  "flagHistory": "The flag of Cabo Verde, adopted on September 22, 1992, features a blue field with three horizontal stripes of white, red, and white, charged with a circle of ten gold five-pointed stars offset hoistward. Blue represents the vast Atlantic Ocean and sky; white symbolizes peace and progress; and red represents the effort and blood of the people. The circle of ten gold stars represents the ten main islands of the archipelago, and the circular arrangement symbolizes the unity of the nation's scattered territories.",
+  "freedomStory": "Cabo Verde was governed as an overseas province of Portugal for five centuries. In the mid-20th century, the African Party for the Independence of Guinea and Cape Verde (PAIGC), founded by Amílcar Cabral, launched a combined liberation struggle for both colonies. Following Portugal's Carnation Revolution in 1974, which deposed the Estado Novo regime, Portugal agreed to decolonization. Cabo Verde officially declared its independence on July 5, 1975, establishing a sovereign republic.",
+  "challenges": "Cabo Verde faces challenges related to its geography and climate. The islands have a semi-arid volcanic terrain and suffer from severe, prolonged droughts, making agriculture difficult and requiring the country to import over 80% of its food. The national economy is heavily dependent on international tourism, foreign aid, and remittances from its large global diaspora, leaving it vulnerable to global economic shocks and water shortages.",
+  "aiSummary": {
+    "geo": "Volcanic island group in the Atlantic; uninhabited until colonized by Portugal in 1462 as a slave trade transit port.",
+    "flag": "Blue ocean background with red-white stripes and a circle of ten gold stars symbolizing the ten main islands.",
+    "freedom": "Independence declared on July 5, 1975, following a joint liberation campaign with Guinea-Bissau led by Amilcar Cabral.",
+    "challenge": "Severe droughts limiting local crops, food import dependency, and climate water scarcity."
+  },
+  "faqs": [
+    {
+      "question": "Who was Amilcar Cabral?",
+      "answer": "He was a key revolutionary theorist and leader of PAIGC who organized the liberation of both Cape Verde and Guinea-Bissau from Portugal."
+    },
+    {
+      "question": "Is Cabo Verde's diaspora larger than its domestic population?",
+      "answer": "Yes, it is estimated that more Cape Verdeans live abroad (primarily in the US and Europe) than on the islands themselves."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1460",
+      "event": "Portuguese navigators discover the uninhabited islands of Cape Verde, claiming them for Portugal."
+    },
+    {
+      "year": "1462",
+      "event": "Ribeira Grande (modern Cidade Velha) is established, becoming a hub for the slave trade."
+    },
+    {
+      "year": "1956",
+      "event": "Amílcar Cabral founds the PAIGC, launching the joint struggle for Cape Verde and Guinea-Bissau."
+    },
+    {
+      "year": "1975",
+      "event": "Cabo Verde officially achieves independence from Portugal on July 5."
+    },
+    {
+      "year": "1991",
+      "event": "First multi-party democratic elections are held, transitioning from single-party rule."
+    }
+  ]
+}

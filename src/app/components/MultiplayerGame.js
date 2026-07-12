@@ -33,6 +33,7 @@ export default function MultiplayerGame({ gameId }) {
   const [roundPoints, setRoundPoints] = useState(0);
   const [showMapOnly, setShowMapOnly] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -177,6 +178,48 @@ export default function MultiplayerGame({ gameId }) {
     .map(([uid, data]) => ({ uid, ...data }))
     .sort((a, b) => b.score - a.score);
   
+  // Round Timer Logic
+  useEffect(() => {
+    if (!matchData || matchData.status !== 'playing' || isRoundOver || !matchData.roundStartTime) {
+      setTimeLeft(null);
+      return;
+    }
+    
+    const timeLimit = matchData.options?.timeLimit || 60;
+    const interval = setInterval(() => {
+      const elapsed = (Date.now() - matchData.roundStartTime) / 1000;
+      const remaining = Math.max(0, Math.ceil(timeLimit - elapsed));
+      setTimeLeft(remaining);
+      
+      if (remaining <= 0) {
+        if (!myData?.ready) {
+           updateDoc(doc(db, 'matches', gameId), {
+             [`players.${userProfile.uid}.ready`]: true,
+             [`players.${userProfile.uid}.score`]: myData?.score || 0,
+             [`players.${userProfile.uid}.lastGuess`]: { choice: 'Timeout', isCorrect: false, lat: 0, lng: 0 }
+           });
+        }
+        
+        setTimeout(() => {
+           let needsUpdate = false;
+           const updates = {};
+           Object.entries(matchData.players).forEach(([uid, pData]) => {
+             if (!pData.ready) {
+                updates[`players.${uid}.ready`] = true;
+                updates[`players.${uid}.lastGuess`] = { choice: 'Timeout', isCorrect: false, lat: 0, lng: 0 };
+                needsUpdate = true;
+             }
+           });
+           if (needsUpdate && matchData.status === 'playing') {
+             updateDoc(doc(db, 'matches', gameId), updates);
+           }
+        }, 2000);
+      }
+    }, 1000);
+    
+    return () => clearInterval(interval);
+  }, [matchData?.status, matchData?.round, matchData?.roundStartTime, isRoundOver, myData?.ready, myData?.score, gameId, userProfile?.uid]);
+
   const handleMapGuess = async (lat, lng) => {
     if (myData.ready || matchData.status !== 'playing') return;
     
@@ -251,6 +294,7 @@ export default function MultiplayerGame({ gameId }) {
               locationOptions: options,
               status: 'playing',
               round: matchData.round + 1,
+              roundStartTime: Date.now()
             };
             // Reset ready state for all players
             playerIds.forEach(id => {
@@ -379,9 +423,15 @@ export default function MultiplayerGame({ gameId }) {
 
   return (
     <div style={{ display: 'flex', width: '100vw', height: '100vh', position: 'relative' }}>
-      <div style={{ flex: 1, position: 'relative' }}>
-        <PanoramaViewer />
-      </div>
+      {matchData.options?.mode === 'Flag Guesser' ? (
+        <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#111' }}>
+          <img src={`https://flagcdn.com/w320/${matchData.location.iso}.png`} style={{ maxWidth: '80%', maxHeight: '60%', border: '4px solid white', borderRadius: '10px', boxShadow: '0 10px 30px rgba(0,0,0,0.8)' }} />
+        </div>
+      ) : (
+        <div style={{ flex: 1, position: 'relative' }}>
+          <PanoramaViewer />
+        </div>
+      )}
 
       <div className="hud-center" style={{ 
         background: 'rgba(0,0,0,0.8)',
@@ -392,9 +442,22 @@ export default function MultiplayerGame({ gameId }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        flexDirection: 'column',
         maxWidth: isMobile ? '95vw' : 'auto'
       }}>
-        <div style={{ fontSize: isMobile ? '1.1rem' : '1.5rem', fontWeight: '800', opacity: 0.5 }}>R{matchData.round}/{matchData.options?.rounds || 5}</div>
+        <div style={{ display: 'flex', gap: '15px', alignItems: 'center', width: '100%', justifyContent: 'space-between', marginBottom: '8px' }}>
+          <div style={{ fontSize: isMobile ? '1.1rem' : '1.5rem', fontWeight: '800', opacity: 0.5 }}>R{matchData.round}/{matchData.options?.rounds || 5}</div>
+          {timeLeft !== null && (
+            <div style={{ 
+              fontSize: isMobile ? '1.1rem' : '1.5rem', 
+              fontWeight: '900', 
+              color: timeLeft <= 10 ? '#ef4444' : '#fbbf24',
+              textShadow: '0 0 10px rgba(0,0,0,0.5)'
+            }}>
+              {timeLeft}s
+            </div>
+          )}
+        </div>
         <div style={{ display: 'flex', gap: isMobile ? '0.8rem' : '1.5rem', overflowX: 'auto', maxWidth: isMobile ? '55vw' : '60vw' }}>
           {sortedPlayers.slice(0, 3).map((player) => (
             <div key={player.uid} style={{ textAlign: 'center', minWidth: isMobile ? '60px' : '80px' }}>

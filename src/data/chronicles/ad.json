@@ -1,0 +1,51 @@
+{
+  "code": "AD",
+  "name": "Andorra",
+  "capital": "Andorra la Vella",
+  "continent": "Europe",
+  "population": "80,000",
+  "currency": "Euro (EUR)",
+  "languages": [
+    "Catalan"
+  ],
+  "seoTitle": "History of Andorra: Pyrenean Valley Borders, Co-Princes, and Flag Symbolism",
+  "metaDescription": "Explore the unique history of Andorra. Discover how its medieval mountain borders were stabilized in 1278 and learn about its joint French-Spanish sovereignty.",
+  "mapFormation": "Andorra is a small landlocked co-principality located in the eastern Pyrenees mountains between France and Spain. Its territory is composed of three high-altitude valleys carved out by the Valira River, surrounded by rugged peaks reaching over 2,900 meters. The formation of Andorra's borders is deeply rooted in medieval feudal charters. According to tradition, Emperor Charlemagne granted a charter to the Andorran people in the early 9th century in exchange for their help fighting the Moors. The territory's modern borders were officially stabilized by the Paréages of 1278 and 1288—agreements signed between the Spanish Bishop of Urgell and the French Count of Foix, establishing shared sovereignty over the valleys. This feudal division created a neutral mountain buffer zone whose geographical borders have remained completely unchanged for nearly 750 years.",
+  "flagHistory": "The flag of Andorra is a vertical tricolor consisting of blue, yellow, and red bands, with the national coat of arms in the center. The design combines the national colors of France (blue and red) and Spain (yellow and red), reflecting the unique co-principality status of the nation. In the center of the flag lies the coat of arms, which is divided into four quarters. The quarters show: the mitre and crozier of the Bishop of Urgell; the three red bars of the Count of Foix; the four red bars of the Crown of Aragon (Spain); and the two red cows of the Viscount of Béarn. Below the shield is the national motto in Latin: 'Virtus Unita Fortior' (Virtue United is Stronger), which highlights the strength of its dual protection.",
+  "freedomStory": "Andorra's path to modern sovereignty is unique because it never fought a war of independence. Instead, it preserved its medieval feudal arrangement for centuries, paying a nominal tribute (the questia) to its co-princes: the Spanish Bishop of Urgell and the French head of state (historically the Count of Foix, then the King of France, and now the President of France). In the late 20th century, Andorrans sought to modernize their government and establish full sovereignty. On March 14, 1993, the country held a national referendum and adopted its first democratic constitution. The constitution formally established Andorra as a parliamentary democracy. It retained the Bishop of Urgell and the President of France as joint, ceremonial heads of state (co-princes), but transferred legislative and foreign policy power to the elected General Council of the Valleys.",
+  "challenges": "Andorra faces distinct challenges associated with its mountain geography and economic scale. Historically a tax haven, the country has had to reform its financial laws and introduce income taxes to comply with European Union regulations. Its economy is heavily dependent on tourism and retail shopping, which attracts millions of visitors annually, leaving it vulnerable to regional economic downturns. Furthermore, Andorrans face a severe housing affordability crisis due to the geographic limits of narrow mountain valleys, where building space is extremely scarce. On the environmental front, climate change presents a major threat to the winter ski resorts that form the backbone of its winter economy.",
+  "aiSummary": {
+    "geo": "Landlocked East Pyrenean territory; borders stabilized in 1278 by medieval co-sovereignty treaties.",
+    "flag": "Vertical blue, yellow, and red bands combining French and Spanish colors, with the co-feudal coat of arms.",
+    "freedom": "Sovereignty established democratically in 1993 via constitution, preserving ceremonial French-Spanish co-princes.",
+    "challenge": "Severe housing scarcity in mountain corridors, banking reforms, and climate impacts on winter tourism."
+  },
+  "faqs": [
+    {
+      "question": "Who are the current co-princes of Andorra?",
+      "answer": "Andorra's unique co-princes are the Bishop of Urgell in Catalonia, Spain, and the President of France."
+    },
+    {
+      "question": "What is Andorra's official language?",
+      "answer": "Andorra is the only country in the world where Catalan is the sole official language, although Spanish and French are widely spoken."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "805",
+      "event": "Charlemagne grants a charter of sovereignty to the people of Andorra for their assistance in the wars against the Saracens."
+    },
+    {
+      "year": "1278",
+      "event": "The signing of the first Paréage establishes joint Spanish-French sovereignty over Andorra, founding the co-principality."
+    },
+    {
+      "year": "1419",
+      "event": "The Council of the Land (Consell de la Terra) is established, one of the oldest parliaments in Europe."
+    },
+    {
+      "year": "1993",
+      "event": "Andorra adopts its first written constitution, establishing a sovereign democratic parliamentary system."
+    }
+  ]
+}

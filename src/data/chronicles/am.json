@@ -1,0 +1,63 @@
+{
+  "code": "AM",
+  "name": "Armenia",
+  "capital": "Yerevan",
+  "continent": "Asia",
+  "population": "2.8 Million",
+  "currency": "Armenian Dram (AMD)",
+  "languages": [
+    "Armenian"
+  ],
+  "seoTitle": "History of Armenia: Caucasus Highlands, Tricolor Flag, and Independence",
+  "metaDescription": "Discover the detailed history of Armenia, from its ancient kingdoms and the Division of the Caucasus to its red, blue, and orange tricolor and post-Soviet path.",
+  "mapFormation": "Armenia is a landlocked, mountainous country situated in the South Caucasus region. Modern Armenia occupies only a small fraction of the vast historical Armenian Highlands, which stretched across eastern Anatolia and the southern Caucasus. The country's borders were shaped by centuries of partition between the Ottoman, Safavid Persian, and Russian Empires. Following the collapse of the Russian Empire after World War I, the first independent Armenian Republic was established in 1918. However, in 1920, the republic was partitioned between Turkey and the Soviet Union, and its borders were locked as the Armenian Soviet Socialist Republic. These Soviet borders, which include the landlocked territory surrounding Yerevan, became the internationally recognized boundaries of modern Armenia following the collapse of the Soviet Union in 1991, neighboring countries like <a href=\"/chronicles/az\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Azerbaijan</a>.",
+  "flagHistory": "The national flag of Armenia features three equal horizontal bands of red, blue, and orange. The design was originally adopted by the First Republic of Armenia in 1918, and it was revived on August 24, 1990, following the restoration of independence. The colors hold deep symbolic meanings defined in the Armenian constitution: the red band represents the Armenian Highlands, the Armenian people's struggle for survival, the preservation of the Christian faith, and the nation's independence and freedom; the blue band symbolizes the peaceful sky and the will of the people to live under calm skies; and the orange band represents the creative talent and hard-working nature of the Armenian nation.",
+  "freedomStory": "Armenia is one of the oldest Christian civilizations in the world, adopting Christianity as its state religion in 301 AD. After centuries of foreign rule and the tragic Armenian Genocide of 1915 perpetrated by the Ottoman Empire, Armenia briefly achieved independence as the First Republic on May 28, 1918. This independence was short-lived; in December 1920, the Red Army invaded, and Armenia was incorporated into the Soviet Union. Over the next 70 years, Armenia remained a Soviet republic. As the Soviet Union began to dissolve, Armenia held a national referendum on September 21, 1991, where over 99% of voters chose independence. September 21 is now celebrated as Independence Day.",
+  "challenges": "Armenia faces severe geopolitical and economic difficulties. The country is landlocked and has suffered from a long-standing land blockade by two of its four neighbors, Turkey and Azerbaijan, due to the conflict over Nagorno-Karabakh. This blockade isolates Armenia economically, restricting its trade routes to Georgia and Iran. Politically, the country has faced intense volatility following military defeats in conflicts with Azerbaijan, leading to refugee crises and security concerns along its borders. Furthermore, Armenia's economy is heavily dependent on remittances from its vast global diaspora, and the country lies in a highly active seismic zone, requiring continuous investment in earthquake-resilient infrastructure.",
+  "aiSummary": {
+    "geo": "Mountainous Caucasus enclave; modern boundaries formed as a Soviet Republic following imperial partitions.",
+    "flag": "Three horizontal bands of red (survival/faith), blue (peaceful skies), and orange (work/creative talent).",
+    "freedom": "Declared on September 21, 1991, following a referendum to secede from the dissolving Soviet Union.",
+    "challenge": "Land blockade by Turkey and Azerbaijan, Nagorno-Karabakh conflict effects, and high earthquake risks."
+  },
+  "faqs": [
+    {
+      "question": "What is the historical significance of Christianity in Armenia?",
+      "answer": "Armenia was the first country in the world to adopt Christianity as its official state religion, doing so in 301 AD."
+    },
+    {
+      "question": "Why is Armenia's border with Turkey closed?",
+      "answer": "Turkey closed the border in 1893 in support of Azerbaijan during the Nagorno-Karabakh conflict, isolating Armenia's western frontier."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "301 AD",
+      "event": "King Tiridates III declares Christianity as Armenia's state religion, making it the first nation to do so."
+    },
+    {
+      "year": "1915",
+      "event": "The Ottoman Empire begins the systemic deportation and massacre of Armenians, known as the Armenian Genocide."
+    },
+    {
+      "year": "1918",
+      "event": "Following the collapse of the Russian Empire, the First Republic of Armenia declares its independence."
+    },
+    {
+      "year": "1920",
+      "event": "The Red Army enters Yerevan, and Armenia is annexed into the Soviet Union."
+    },
+    {
+      "year": "1988",
+      "event": "A devastating earthquake strikes northern Armenia, killing over 25,000 people."
+    },
+    {
+      "year": "1991",
+      "event": "Armenia declares its independence from the collapsing Soviet Union on September 21."
+    },
+    {
+      "year": "2020",
+      "event": "The Second Nagorno-Karabakh War erupts, resulting in significant territorial shifts and geopolitical challenges."
+    }
+  ]
+}

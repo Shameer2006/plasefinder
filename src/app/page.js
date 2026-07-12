@@ -229,7 +229,11 @@ export default function Home() {
         
         {/* Top Right Controls */}
         <div className="top-right-controls">
-          <button className="btn" style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '6px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <button 
+            className="btn" 
+            style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '6px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}
+            onClick={() => window.location.href = '/chronicles'}
+          >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
             <span>Maps</span>
           </button>
@@ -361,7 +365,10 @@ const InfoModal = ({ title, onClose, children }) => (
 
 const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onFlagGuesser, onCreateParty, onJoinParty, onLeaderboard, onAbout }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-    <h1 className="responsive-title" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>LostStreet</h1>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '0.2rem' }}>
+      <img src="/logo.png" alt="LostStreet Logo" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,255,255,0.1)' }} />
+      <h1 className="responsive-title" style={{ fontWeight: 'bold', margin: 0 }}>LostStreet</h1>
+    </div>
     <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
     
     <MenuItem text="Singleplayer" onClick={onSingleplayer} />

@@ -1,0 +1,57 @@
+{
+  "code": "BZ",
+  "name": "Belize",
+  "capital": "Belmopan",
+  "continent": "North America",
+  "population": "405,000",
+  "currency": "Belize Dollar (BZD)",
+  "languages": [
+    "English",
+    "Spanish",
+    "Kriol"
+  ],
+  "seoTitle": "History of Belize: Logwood Coast Borders, Woodcutters Flag, and Border Disputes",
+  "metaDescription": "Discover the detailed history of Belize, from Mayan civilization and British logging colonies to its woodcutters flag and Guatemalan border claims.",
+  "mapFormation": "Belize is located on the eastern Caribbean coast of Central America, bordered by Mexico and Guatemala. The country's borders emerged from 18th-century treaties between Great Britain and Spain. British logwood cutters, known as Baymen, established settlements along the coast, and treaties defined limits for timber extraction. The southern border along the Sarstoon River was formalized by the Wyke-Martin Treaty of 1859 between Britain and Guatemala. However, Guatemala later renounced the treaty, claiming the southern half of Belize, creating a territorial dispute that delayed Belize's path to independence for decades.",
+  "flagHistory": "Adopted on September 21, 1981, the flag of Belize features a royal blue field with a thin red horizontal stripe at the top and bottom, charged with the national coat of arms on a central white disc. The coat of arms depicts two woodcutters (one Mestizo, one of African descent) holding logging tools next to a mahogany tree, reflecting the country's multi-ethnic population and its historical reliance on the forestry industry. The red stripes were added at independence to represent the opposition party, symbolizing national unity.",
+  "freedomStory": "Formerly known as British Honduras, the colony gained self-governance in 1964 and changed its name to Belize in 1973. Led by George Cadle Price, the country actively campaigned for sovereignty at the United Nations. Belize achieved full independence from the United Kingdom on September 21, 1981. However, due to Guatemalan invasion threats, British troops remained in Belize for years after independence to guarantee its security until relations improved.",
+  "challenges": "Belize faces difficulties from natural disasters and economic vulnerabilities. The country lies in the Caribbean hurricane corridor, requiring the capital to be moved inland from Belize City to Belmopan in 1970 following Hurricane Hattie. The nation also struggles with high public debt, high youth unemployment, and an ongoing border claim by Guatemala, which was referred to the International Court of Justice in 2019 for final resolution.",
+  "aiSummary": {
+    "geo": "Central American Caribbean coast; southern borders defined by the 1859 treaty with Guatemala, which sparked a long territorial claim.",
+    "flag": "Royal blue field with red border stripes and a central white disc depicting two woodcutters, symbolizing historical mahogany logging.",
+    "freedom": "Formerly British Honduras; achieved sovereignty on September 21, 1981, led by George Cadle Price.",
+    "challenge": "High public debt, hurricane vulnerability, and resolving the border dispute with Guatemala via the ICJ."
+  },
+  "faqs": [
+    {
+      "question": "Why did Belize change its name from British Honduras?",
+      "answer": "The name was changed to Belize in 1973 as a step toward independence, asserting a local identity separate from British colonial rule."
+    },
+    {
+      "question": "What is unique about the two woodcutters on the Belize flag?",
+      "answer": "The flag depicts two woodcutters of different racial backgrounds (Mestizo and Afro-Belizean) to represent the country's diverse, multi-ethnic population."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1798",
+      "event": "British settlers defeat a Spanish naval force at the Battle of St. George's Caye, securing control."
+    },
+    {
+      "year": "1859",
+      "event": "The Anglo-Guatemalan Treaty defines the borders of British Honduras."
+    },
+    {
+      "year": "1970",
+      "event": "Belmopan is established as the new inland capital after Hurricane Hattie devastates Belize City."
+    },
+    {
+      "year": "1981",
+      "event": "Belize achieves full independence from the United Kingdom on September 21."
+    },
+    {
+      "year": "2019",
+      "event": "Belizeans vote in a referendum to refer the Guatemalan border dispute to the International Court of Justice."
+    }
+  ]
+}

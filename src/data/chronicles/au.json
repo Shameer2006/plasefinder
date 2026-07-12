@@ -1,0 +1,63 @@
+{
+  "code": "AU",
+  "name": "Australia",
+  "capital": "Canberra",
+  "continent": "Oceania",
+  "population": "26.2 Million",
+  "currency": "Australian Dollar (AUD)",
+  "languages": [
+    "English"
+  ],
+  "seoTitle": "History of Australia: Colonization Borders, Southern Cross Flag, and Sovereignty",
+  "metaDescription": "Discover the detailed history of Australia, from Indigenous heritage and British penal colonization to federation and the Southern Cross flag.",
+  "mapFormation": "Australia is the only nation that occupies an entire continent, surrounded by the Indian and Pacific Oceans. Indigenous Australians have inhabited the continent for over 65,000 years, maintaining deep spiritual connections to the land. The modern borders of the nation began to form with the arrival of the British First Fleet in 1788, which established the colony of New South Wales as a penal settlement. Over the next century, British authorities established five additional colonies: Tasmania, Western Australia, South Australia, Victoria, and Queensland. These colonies were separated by straight longitudinal and latitudinal lines drawn across the vast, arid interior (the Outback) to divide resources and administrative control. In 1901, these six separate colonies agreed to unite and form a single federal commonwealth, establishing the continental borders of modern Australia.",
+  "flagHistory": "The national flag of Australia was chosen through a worldwide public competition in 1901 following federation. It features a dark blue field divided into three key elements. In the upper hoist canton is the British Union Jack, representing the country's historic colonial links to the United Kingdom. Below the Union Jack is a large seven-pointed white star known as the Commonwealth Star; six of the points represent the original six federating colonies, while the seventh point represents the territories. On the fly half of the flag is the Southern Cross constellation, composed of five white stars of varying points, which is visible in the night sky across the Southern Hemisphere and has served as a navigation guide for centuries.",
+  "freedomStory": "Australia's transition from a collection of British colonies to an independent nation was a peaceful, gradual process. On January 1, 1901, the six colonies federated to form the Commonwealth of Australia, adopting a federal constitution. While Australia gained control over its domestic affairs, Britain retained influence over its foreign policy and defense. Australia's independence was formalized internationally when it signed the Treaty of Versailles in 1919 and joined the League of Nations. The British Parliament passed the Statute of Westminster in 1931, which granted full legislative independence to dominions, and Australia formally adopted it in 1942. The final legal ties were severed by the Australia Act 1986, which ended all remaining avenues of appeal from Australian courts to the British Privy Council, establishing absolute judicial sovereignty.",
+  "challenges": "Australia faces critical environmental and social difficulties. The continent is one of the most arid inhabited lands on Earth, making it highly vulnerable to the impacts of climate change. This includes rising temperatures, prolonged droughts, catastrophic bushfires (such as the 'Black Summer' of 2019-2020), and extensive bleaching of the Great Barrier Reef. Socially, Australia struggles with addressing the severe socio-economic inequalities, health disparities, and historical injustices faced by its Indigenous Aboriginal and Torres Strait Islander populations. Additionally, the nation faces geopolitical challenges in balancing its historic security alliance with the United States against its heavy economic dependence on trade with China.",
+  "aiSummary": {
+    "geo": "Continental island; borders constructed by internal colonial longitudinal partitions uniting in 1901.",
+    "flag": "Blue field with the British Union Jack, the 7-pointed Commonwealth Star, and the Southern Cross constellation.",
+    "freedom": "Evolved gradually from federation in 1901 to complete constitutional independence via the Australia Act 1986.",
+    "challenge": "Extreme climate vulnerability (bushfires/reef bleaching), Indigenous inequality, and US-China geopolitical balancing."
+  },
+  "faqs": [
+    {
+      "question": "What is the meaning of the seven-pointed star on the Australian flag?",
+      "answer": "It is the Commonwealth Star; six points represent the six founding states, and the seventh point represents Australia's territories."
+    },
+    {
+      "question": "When did Australia achieve full independence from Britain?",
+      "answer": "While federation occurred in 1901, full constitutional independence was only finalized with the passage of the Australia Act in 1986."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1788",
+      "event": "The British First Fleet arrives at Port Jackson, establishing Sydney as a penal colony."
+    },
+    {
+      "year": "1851",
+      "event": "Discovery of gold in New South Wales and Victoria triggers a massive gold rush and immigration wave."
+    },
+    {
+      "year": "1901",
+      "event": "The six colonies federate to form the Commonwealth of Australia on January 1."
+    },
+    {
+      "year": "1915",
+      "event": "Australian and New Zealand forces (ANZAC) land at Gallipoli during WWI, cementing a national military legacy."
+    },
+    {
+      "year": "1931",
+      "event": "The Statute of Westminster is passed, granting legislative independence to Australia."
+    },
+    {
+      "year": "1986",
+      "event": "The passage of the Australia Act severs all remaining constitutional ties with the United Kingdom."
+    },
+    {
+      "year": "2019-2020",
+      "event": "The devastating Black Summer bushfires burn over 24 million hectares of land."
+    }
+  ]
+}

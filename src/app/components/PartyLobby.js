@@ -55,7 +55,7 @@ export default function PartyLobby({ gameId }) {
   const isHost = matchData.players[userProfile.uid]?.host;
   const playersList = Object.entries(matchData.players).map(([uid, data]) => ({ uid, ...data }));
   
-  const defaultOptions = { rounds: 5, difficulty: 'Medium', country: 'WORLDWIDE' };
+  const defaultOptions = { rounds: 5, difficulty: 'Medium', country: 'WORLDWIDE', mode: 'Street View', timeLimit: 60 };
   const options = { ...defaultOptions, ...(matchData.options || {}) };
 
   const filteredCountries = countries.filter(c => c.name.toLowerCase().includes(countrySearch.toLowerCase()));
@@ -77,7 +77,8 @@ export default function PartyLobby({ gameId }) {
           location: location,
           locationOptions: locationOptions, // Store the multiple choice options here
           status: 'playing',
-          round: 1
+          round: 1,
+          roundStartTime: Date.now()
         });
       });
     });
@@ -131,6 +132,45 @@ export default function PartyLobby({ gameId }) {
           <h3 style={{ color: '#93c5fd', margin: 0 }}>Game Settings</h3>
           
           <div>
+            <label style={{ display: 'block', marginBottom: '8px', color: '#ccc' }}>Game Mode</label>
+            <select 
+              value={options.mode}
+              disabled={!isHost}
+              onChange={(e) => updateOption('mode', e.target.value)}
+              style={{ width: '100%', padding: '10px', borderRadius: '8px', background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)', marginBottom: '1.5rem' }}
+            >
+              <option value="Street View" style={{ color: 'black' }}>Street View (Standard)</option>
+              <option value="Flag Guesser" style={{ color: 'black' }}>Flag Guesser</option>
+            </select>
+            
+            <label style={{ display: 'block', marginBottom: '8px', color: '#ccc' }}>Time Limit (Seconds)</label>
+            <div style={{ display: 'flex', gap: '10px', marginBottom: '1.5rem' }}>
+              <select 
+                value={[30, 60, 120, 180, 300].includes(options.timeLimit) ? options.timeLimit : 'Custom'}
+                disabled={!isHost}
+                onChange={(e) => updateOption('timeLimit', e.target.value === 'Custom' ? 60 : parseInt(e.target.value))}
+                style={{ flex: 1, padding: '10px', borderRadius: '8px', background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)' }}
+              >
+                <option value={30} style={{ color: 'black' }}>30s</option>
+                <option value={60} style={{ color: 'black' }}>60s (1m)</option>
+                <option value={120} style={{ color: 'black' }}>120s (2m)</option>
+                <option value={180} style={{ color: 'black' }}>180s (3m)</option>
+                <option value={300} style={{ color: 'black' }}>300s (5m)</option>
+                <option value="Custom" style={{ color: 'black' }}>Custom</option>
+              </select>
+              {![30, 60, 120, 180, 300].includes(options.timeLimit) && (
+                <input 
+                  type="number"
+                  min="10"
+                  max="3600"
+                  value={options.timeLimit}
+                  disabled={!isHost}
+                  onChange={(e) => updateOption('timeLimit', parseInt(e.target.value) || 60)}
+                  style={{ width: '80px', padding: '10px', borderRadius: '8px', background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)' }}
+                />
+              )}
+            </div>
+
             <label style={{ display: 'block', marginBottom: '8px', color: '#ccc' }}>Rounds: {options.rounds}</label>
             <input 
               type="range" 
