@@ -1,5 +1,7 @@
 import "./globals.css";
 import { AuthProvider } from "@/lib/AuthContext";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: "LostStreet - Free GeoGuessr Alternative | Explore the World",
@@ -23,8 +25,15 @@ export const metadata = {
     description: "Guess locations from street views. Play solo or with friends. 100% free.",
     images: ["/og-image.png"],
   },
-  // We will need a favicon.ico and apple-touch-icon.png later
-  // icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
+  icons: {
+    icon: [
+      { url: '/icon.png' },
+      { url: '/icon.png', sizes: '48x48', type: 'image/png' },
+      { url: '/icon.png', sizes: '96x96', type: 'image/png' },
+      { url: '/icon.png', sizes: '144x144', type: 'image/png' }
+    ],
+    apple: '/icon.png'
+  },
   verification: {
     google: "google28b6dbf4d718a7b0",
   },
@@ -80,6 +89,8 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           {children}
         </AuthProvider>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
