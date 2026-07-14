@@ -165,25 +165,14 @@ export default function MultiplayerGame({ gameId }) {
     return () => clearTimeout(timer);
   }, [matchData?.status, matchData?.round, matchData?.location, gameId]);
 
-  if (!matchData || !userProfile) {
-    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '2rem' }}>Loading Match...</div>;
-  }
-
-  const myData = matchData.players[userProfile.uid];
-  const playerIds = Object.keys(matchData.players);
-  const isHost = matchData.players[userProfile.uid]?.host || playerIds[0] === userProfile.uid;
-  
-  // Sort players by score for leaderboards
-  const sortedPlayers = Object.entries(matchData.players)
-    .map(([uid, data]) => ({ uid, ...data }))
-    .sort((a, b) => b.score - a.score);
-  
   // Round Timer Logic
   useEffect(() => {
-    if (!matchData || matchData.status !== 'playing' || isRoundOver || !matchData.roundStartTime) {
+    if (!matchData || matchData.status !== 'playing' || isRoundOver || !matchData.roundStartTime || !userProfile) {
       setTimeLeft(null);
       return;
     }
+    
+    const myData = matchData.players?.[userProfile.uid];
     
     const timeLimit = matchData.options?.timeLimit || 60;
     const interval = setInterval(() => {
@@ -218,7 +207,20 @@ export default function MultiplayerGame({ gameId }) {
     }, 1000);
     
     return () => clearInterval(interval);
-  }, [matchData?.status, matchData?.round, matchData?.roundStartTime, isRoundOver, myData?.ready, myData?.score, gameId, userProfile?.uid]);
+  }, [matchData?.status, matchData?.round, matchData?.roundStartTime, isRoundOver, matchData?.players, gameId, userProfile?.uid]);
+
+  if (!matchData || !userProfile) {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '2rem' }}>Loading Match...</div>;
+  }
+
+  const myData = matchData.players[userProfile.uid];
+  const playerIds = Object.keys(matchData.players);
+  const isHost = matchData.players[userProfile.uid]?.host || playerIds[0] === userProfile.uid;
+  
+  // Sort players by score for leaderboards
+  const sortedPlayers = Object.entries(matchData.players)
+    .map(([uid, data]) => ({ uid, ...data }))
+    .sort((a, b) => b.score - a.score);
 
   const handleMapGuess = async (lat, lng) => {
     if (myData.ready || matchData.status !== 'playing') return;
