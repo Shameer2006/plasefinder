@@ -15,6 +15,12 @@ export default function sitemap() {
       priority: 0.8,
     },
     {
+      url: 'https://www.loststreet.online/privacy',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
       url: 'https://www.loststreet.online/leaderboard',
       lastModified: new Date(),
       changeFrequency: 'daily',

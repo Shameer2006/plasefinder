@@ -293,7 +293,7 @@ export default function Home() {
           {/* Footer content - Only shown on the absolute main menu */}
           {!showSettings && !showProfile && !showDifficulty && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem 1.5rem', fontSize: '0.9rem', color: '#ffffff', fontWeight: '600', alignItems: 'center', justifyContent: 'center' }}>
-               <span onClick={() => setShowPrivacy(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">Privacy Policy</span>
+               <span onClick={() => window.location.href = '/privacy'} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">Privacy Policy</span>
                <span onClick={() => setShowObjectives(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">Objectives</span>
             </div>
           )}
