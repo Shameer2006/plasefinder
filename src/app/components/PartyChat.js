@@ -65,6 +65,8 @@ export default function PartyChat({ gameId, matchData }) {
       {/* Toggle Button */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={`Party Chat. ${messages.length} messages. ${isOpen ? 'Close' : 'Open'} chat`}
+        aria-expanded={isOpen}
         style={{
           background: 'rgba(0,0,0,0.8)',
           color: 'white',

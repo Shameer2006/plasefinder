@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import continentMapping from '../../../public/continentMapping.json'; // relative to src/app/components
+import Spinner from './Spinner';
 
 const countryCodes = Object.keys(continentMapping);
 
@@ -90,7 +91,7 @@ export default function FlagGame({ onReturnToMenu }) {
   };
 
   if (roundState === 'LOADING') {
-    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '1.5rem' }}>Loading Flag...</div>;
+    return <Spinner text="Loading Flag..." />;
   }
 
   if (roundState === 'FINISHED') {

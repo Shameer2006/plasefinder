@@ -1,5 +1,6 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import Link from 'next/link';
 import { useAuth } from '@/lib/AuthContext';
 import { useGameStore } from '@/lib/store';
 import { updateDailyChallengeStreak } from '@/lib/userProfile';
@@ -9,54 +10,78 @@ import Game from './components/Game';
 import FlagGame from './components/FlagGame';
 import dynamic from 'next/dynamic';
 import PartyLobby from './components/PartyLobby';
+import Spinner from './components/Spinner';
+import { useToast } from './components/Toast';
+import { sounds } from '@/lib/sounds';
+import ProfileModal from './components/ProfileModal';
+import OnboardingModal from './components/OnboardingModal';
 
 const MultiplayerGame = dynamic(() => import('./components/MultiplayerGame'), { ssr: false });
 
 export default function Home() {
   const { user, userProfile, loading, loginWithGoogle, logout } = useAuth();
-  const { gameState, setGameState, setDifficulty, soundEnabled, setSoundEnabled, initSounds } = useGameStore();
+  const { gameState, setGameState, setDifficulty, soundEnabled, setSoundEnabled, initSounds, units, setUnits, mapType, setMapType, emotesEnabled, setEmotesEnabled } = useGameStore();
   const [isQueuing, setIsQueuing] = useState(false);
   const [queueSub, setQueueSub] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showDifficulty, setShowDifficulty] = useState(false);
   const [showJoinModal, setShowJoinModal] = useState(false);
-  const [showPrivacy, setShowPrivacy] = useState(false);
   const [showObjectives, setShowObjectives] = useState(false);
+  const [showMatchmaking, setShowMatchmaking] = useState(false);
   const [joinCode, setJoinCode] = useState('');
   const [joinError, setJoinError] = useState('');
   const [isJoining, setIsJoining] = useState(false);
   const [streak, setStreak] = useState(0);
   const [playedToday, setPlayedToday] = useState(false);
   const [onlineCount, setOnlineCount] = useState('...');
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [matchFoundData, setMatchFoundData] = useState(null);
+  const toast = useToast();
+
+  // Browser history integration (#8)
+  useEffect(() => {
+    const handlePopState = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && (
+          ['MENU', 'LOADING', 'EXPLORING', 'RESULT', 'FLAG_GAME'].includes(hash) ||
+          hash.startsWith('MULTIPLAYER_') ||
+          hash.startsWith('PARTY_LOBBY_')
+      )) {
+        setGameState(hash);
+      } else if (!hash) {
+        setGameState('MENU');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [setGameState]);
 
   useEffect(() => {
-    // Simulated online count between 3500 and 4000
+    if (gameState !== 'MENU') {
+      window.history.pushState({ gameState }, '', `#${gameState}`);
+    } else {
+      window.history.pushState({ gameState: 'MENU' }, '', window.location.pathname);
+    }
+  }, [gameState]);
+
+  useEffect(() => {
     let currentCount = Math.floor(Math.random() * (4000 - 3500 + 1)) + 3500;
     setOnlineCount(currentCount);
     let timeoutId;
 
     const fluctuateCount = () => {
-      // Random change between -15 and +15
       const change = Math.floor(Math.random() * 31) - 15;
       currentCount = currentCount + change;
-      
-      // Keep it within bounds
       if (currentCount < 3500) currentCount = 3500;
       if (currentCount > 4000) currentCount = 4000;
-      
       setOnlineCount(currentCount);
-
-      // Schedule next update between 1.5s and 7s
       const nextDelay = Math.floor(Math.random() * 5500) + 1500;
       timeoutId = setTimeout(fluctuateCount, nextDelay);
     };
 
-    // Start the fluctuation
     const initialDelay = Math.floor(Math.random() * 5500) + 1500;
     timeoutId = setTimeout(fluctuateCount, initialDelay);
-    
-    // Initialize sound engine
     initSounds();
 
     return () => clearTimeout(timeoutId);
@@ -69,7 +94,6 @@ export default function Home() {
       return;
     }
 
-    // Initialize Streak from userProfile
     const lastPlayed = userProfile.lastDailyChallengeDate;
     const currentStreak = userProfile.dailyChallengeStreak || 0;
     const today = new Date().toDateString();
@@ -78,7 +102,7 @@ export default function Home() {
       const lastDate = new Date(lastPlayed);
       const todayDate = new Date(today);
       const diffTime = Math.abs(todayDate - lastDate);
-      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)); 
+      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
       
       if (diffDays === 0) {
         setPlayedToday(true);
@@ -96,25 +120,62 @@ export default function Home() {
     }
   }, [userProfile]);
 
+  if (loading) return <Spinner text="Loading LostStreet..." />;
 
-  if (loading) return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100dvh', fontSize: '2rem' }}>Loading...</div>;
+  if (matchFoundData) {
+    return (
+      <div style={{ position: 'fixed', inset: 0, zIndex: 10000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(10, 10, 26, 0.95)', backdropFilter: 'blur(15px)' }}>
+        <style>{`
+          @keyframes clash-left {
+            0% { transform: translateX(-100vw) rotate(-10deg); opacity: 0; }
+            100% { transform: translateX(0) rotate(0deg); opacity: 1; }
+          }
+          @keyframes clash-right {
+            0% { transform: translateX(100vw) rotate(10deg); opacity: 0; }
+            100% { transform: translateX(0) rotate(0deg); opacity: 1; }
+          }
+          @keyframes vs-pop {
+            0% { transform: scale(0.1) rotate(-20deg); opacity: 0; }
+            50% { transform: scale(1.5) rotate(10deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+          }
+        `}</style>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '3rem', margin: '0 auto', maxWidth: '800px' }}>
+          <div style={{ animation: 'clash-left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards', textAlign: 'center' }}>
+            <img src={user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName}`} style={{ width: '120px', height: '120px', borderRadius: '50%', border: '4px solid var(--primary-color)', boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' }} />
+            <h3 style={{ fontSize: '1.5rem', marginTop: '1rem', color: 'white' }}>{user.displayName}</h3>
+          </div>
+          <div style={{ animation: 'vs-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.3s', opacity: 0, fontSize: '4rem', fontWeight: '900', fontStyle: 'italic', background: 'linear-gradient(to bottom, #fbbf24, #f59e0b)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            VS
+          </div>
+          <div style={{ animation: 'clash-right 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards', textAlign: 'center' }}>
+            <div style={{ width: '120px', height: '120px', borderRadius: '50%', border: '4px solid #ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(239, 68, 68, 0.2)', boxShadow: '0 0 20px rgba(239, 68, 68, 0.5)' }}>
+              <span style={{ fontSize: '4rem' }}>?</span>
+            </div>
+            <h3 style={{ fontSize: '1.5rem', marginTop: '1rem', color: 'white' }}>Opponent</h3>
+          </div>
+        </div>
+        <h2 style={{ animation: 'fade-in 0.5s ease forwards 1s', opacity: 0, marginTop: '3rem', color: '#ccc', fontSize: '1.2rem', letterSpacing: '2px' }}>PREPARING MATCH...</h2>
+      </div>
+    );
+  }
 
   if (gameState.startsWith('MULTIPLAYER_')) {
     const gameId = gameState.replace('MULTIPLAYER_', '');
-    return <MultiplayerGame gameId={gameId} />;
+    return <div className="game-area"><MultiplayerGame gameId={gameId} /></div>;
   }
   
   if (gameState.startsWith('PARTY_LOBBY_')) {
     const gameId = gameState.replace('PARTY_LOBBY_', '');
-    return <PartyLobby gameId={gameId} />;
+    return <div className="game-area"><PartyLobby gameId={gameId} /></div>;
   }
 
   if (gameState === 'FLAG_GAME') {
-    return <FlagGame onReturnToMenu={() => setGameState('MENU')} />;
+    return <div className="game-area"><FlagGame onReturnToMenu={() => setGameState('MENU')} /></div>;
   }
 
   if (gameState !== 'MENU') {
-    return <Game />;
+    return <div className="game-area"><Game /></div>;
   }
 
   const handleStart = (mode) => {
@@ -122,15 +183,28 @@ export default function Home() {
     setGameState('LOADING');
   };
 
-  const startMatchmaking = async () => {
-    if (!userProfile) return alert("Please login first to play multiplayer!");
+  const startMatchmaking = async (type = 'unranked') => {
+    if (!userProfile) {
+      toast.error("Please login first to play multiplayer!");
+      return;
+    }
     
-    const { joinQueue, leaveQueue } = await import('@/lib/matchmaking');
+    const { joinRankedQueue, leaveRankedQueue, joinUnrankedQueue, leaveUnrankedQueue } = await import('@/lib/matchmaking');
     setIsQueuing(true);
+    toast.info(`Searching for an opponent... (${type})`);
     
+    const joinQueue = type === 'ranked' ? joinRankedQueue : joinUnrankedQueue;
+    const leaveQueue = type === 'ranked' ? leaveRankedQueue : leaveUnrankedQueue;
+
     const result = await joinQueue(userProfile, (gameId) => {
       setIsQueuing(false);
-      setGameState(`MULTIPLAYER_${gameId}`);
+      sounds.playMatchFound();
+      toast.success("Match found!");
+      setMatchFoundData({ gameId, type });
+      setTimeout(() => {
+        setMatchFoundData(null);
+        setGameState(`MULTIPLAYER_${gameId}`);
+      }, 2500); // Wait 2.5 seconds to show the VS screen
     });
 
     if (result && result.unsubscribe) {
@@ -147,10 +221,14 @@ export default function Home() {
       setQueueSub(null);
     }
     setIsQueuing(false);
+    toast.info("Matchmaking cancelled.");
   };
 
   const handleCreateParty = async () => {
-    if (!userProfile) return alert("Please login first to create a party!");
+    if (!userProfile) {
+      toast.error("Please login first to create a party!");
+      return;
+    }
     const { createParty } = await import('@/lib/matchmaking');
     try {
       const gameId = await createParty(userProfile);
@@ -159,14 +237,20 @@ export default function Home() {
       }
     } catch (e) {
       console.error(e);
-      alert("Failed to create party.");
+      toast.error("Failed to create party.");
     }
   };
 
   const handleJoinPartySubmit = async (e) => {
     e.preventDefault();
-    if (!userProfile) return alert("Please login first to join a party!");
-    if (joinCode.length !== 6) return setJoinError('Code must be 6 characters');
+    if (!userProfile) {
+      toast.error("Please login first to join a party!");
+      return;
+    }
+    if (joinCode.length !== 6) {
+      setJoinError('Code must be 6 characters');
+      return;
+    }
     
     setIsJoining(true);
     setJoinError('');
@@ -187,27 +271,26 @@ export default function Home() {
 
   const handleDailyChallenge = async () => {
     if (!userProfile) {
-      alert("You must sign in to play the Daily Challenge!");
+      toast.error("You must sign in to play the Daily Challenge!");
       return;
     }
     if (playedToday) {
-      alert("You already played the daily challenge today! Come back tomorrow.");
+      toast.warning("You already played the daily challenge today! Come back tomorrow.");
       return;
     }
     
     const today = new Date().toDateString();
     const newStreak = streak + 1;
     
-    // Update state & Firestore
     setStreak(newStreak);
     setPlayedToday(true);
     await updateDailyChallengeStreak(userProfile.uid, newStreak, today);
     
-    handleStart('HARD'); // Start game
+    handleStart('HARD');
   };
 
   return (
-    <main style={{
+    <main id="main-content" style={{
       minHeight: '100dvh',
       width: '100vw',
       backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/bg.jpg)',
@@ -217,71 +300,76 @@ export default function Home() {
       overflowY: 'auto',
       color: 'white'
     }}>
-      {/* Left Gradient Overlay */}
       <div className="left-gradient-overlay" style={{
         position: 'absolute',
         top: 0, left: 0, bottom: 0,
         zIndex: 1
       }}></div>
 
-      {/* Main Content Container (z-index 2) */}
       <section className="container-padding" style={{ position: 'relative', zIndex: 2, minHeight: '100dvh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '2rem' }}>
         
-        {/* Top Right Controls */}
         <div className="top-right-controls">
           <button 
             className="btn" 
             style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '6px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}
             onClick={() => window.location.href = '/chronicles'}
+            aria-label="View country chronicles"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
             <span>Maps</span>
           </button>
           
           {(!user || user.isAnonymous) ? (
-            <button className="btn" style={{ background: '#2f7a44', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 16px', borderRadius: '6px' }} onClick={loginWithGoogle}>
+            <button className="btn" style={{ background: '#2f7a44', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 16px', borderRadius: '6px' }} onClick={loginWithGoogle} aria-label="Sign in with Google">
               <span style={{ fontWeight: 'bold' }}>G</span> Login
             </button>
           ) : (
-            <img 
-              src={user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName}`} 
-              alt="Profile"
+            <button
               onClick={() => setShowProfile(true)}
-              style={{ width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer', border: '2px solid rgba(255,255,255,0.2)', objectFit: 'cover' }}
-              className="menu-item-hover"
-            />
+              style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+              aria-label="Open profile"
+            >
+              <img 
+                src={user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName}`} 
+                alt="Profile"
+                style={{ width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer', border: '2px solid rgba(255,255,255,0.2)', objectFit: 'cover' }}
+                className="menu-item-hover"
+              />
+            </button>
           )}
         </div>
 
-        {/* Left Menu Area */}
         <div className="left-menu-container">
           {showSettings ? (
-            <SettingsMenu onBack={() => setShowSettings(false)} />
-          ) : showProfile ? (
-            <ProfileMenu onBack={() => setShowProfile(false)} userProfile={userProfile} logout={logout} />
+            <SettingsMenu onBack={() => setShowSettings(false)} units={units} setUnits={setUnits} mapType={mapType} setMapType={setMapType} emotesEnabled={emotesEnabled} setEmotesEnabled={setEmotesEnabled} soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled} />
           ) : showDifficulty ? (
             <DifficultyMenu onBack={() => setShowDifficulty(false)} onSelect={handleStart} />
+          ) : showMatchmaking ? (
+            <MatchmakingMenu onBack={() => setShowMatchmaking(false)} onSelect={(type) => { setShowMatchmaking(false); startMatchmaking(type); }} />
           ) : (
-            <MainMenu 
-              onSingleplayer={() => setShowDifficulty(true)} 
-              onFindMatch={startMatchmaking} 
-              isQueuing={isQueuing} 
-              cancelMatchmaking={cancelMatchmaking} 
-              onDailyChallenge={handleDailyChallenge}
-              streak={streak}
-              playedToday={playedToday}
-              onFlagGuesser={() => setGameState('FLAG_GAME')}
-              onCreateParty={handleCreateParty}
-              onJoinParty={() => setShowJoinModal(true)}
-              onLeaderboard={() => window.location.href = '/leaderboard'}
-              onAbout={() => window.location.href = '/about'}
-            />
+            <>
+              {showOnboarding && (
+                <OnboardingTooltip onDismiss={() => setShowOnboarding(false)} />
+              )}
+              <MainMenu 
+                onSingleplayer={() => setShowDifficulty(true)} 
+                onFindMatchClick={() => setShowMatchmaking(true)} 
+                isQueuing={isQueuing} 
+                cancelMatchmaking={cancelMatchmaking} 
+                onDailyChallenge={handleDailyChallenge}
+                streak={streak}
+                playedToday={playedToday}
+                onFlagGuesser={() => setGameState('FLAG_GAME')}
+                onCreateParty={handleCreateParty}
+                onJoinParty={() => setShowJoinModal(true)}
+                onLeaderboard={() => window.location.href = '/leaderboard'}
+                onAbout={() => window.location.href = '/about'}
+              />
+            </>
           )}
         </div>
 
-        {/* Bottom Area */}
         <div className="bottom-controls">
-          {/* Left icons */}
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <IconButton 
               icon={<img src="/settings.png" alt="Settings" style={{ width: '24px', height: '24px' }} />} 
@@ -290,15 +378,13 @@ export default function Home() {
             />
           </div>
 
-          {/* Footer content - Only shown on the absolute main menu */}
-          {!showSettings && !showProfile && !showDifficulty && (
+          {!showSettings && !showProfile && !showDifficulty && !showMatchmaking && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem 1.5rem', fontSize: '0.9rem', color: '#ffffff', fontWeight: '600', alignItems: 'center', justifyContent: 'center' }}>
-               <span onClick={() => window.location.href = '/privacy'} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">Privacy Policy</span>
-               <span onClick={() => setShowObjectives(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">Objectives</span>
+               <button onClick={() => window.location.href = '/privacy'} style={{ cursor: 'inherit', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', background: 'none', border: 'none', color: 'inherit', font: 'inherit' }} className="menu-item-hover">Privacy Policy</button>
+               <button onClick={() => setShowObjectives(true)} style={{ cursor: 'inherit', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', background: 'none', border: 'none', color: 'inherit', font: 'inherit' }} className="menu-item-hover">Objectives</button>
             </div>
           )}
 
-          {/* Right online count */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
              <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#34d399', boxShadow: '0 0 8px #34d399' }}></div>
              <span style={{ fontWeight: 'bold', fontSize: '1.3rem', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>{onlineCount} online</span>
@@ -306,10 +392,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Join Party Modal */}
       {showJoinModal && (
-        <div style={{ position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.7)', zIndex: 50 }}>
-          <div className="glass-panel modal-content">
+        <FocusTrapModal onClose={() => setShowJoinModal(false)}>
+          <div className="glass-panel modal-content" role="dialog" aria-modal="true" aria-label="Join Party">
             <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 'bold' }}>Join Party</h2>
             <form onSubmit={handleJoinPartySubmit}>
               <input 
@@ -318,9 +403,10 @@ export default function Home() {
                 onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
                 placeholder="Enter 6-digit code"
                 maxLength={6}
+                aria-label="Party code"
                 style={{ width: '100%', padding: '10px', fontSize: '1.2rem', textTransform: 'uppercase', textAlign: 'center', letterSpacing: '4px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', borderRadius: '8px', marginBottom: '1rem' }}
               />
-              {joinError && <div style={{ color: '#f87171', marginBottom: '1rem', textAlign: 'center' }}>{joinError}</div>}
+              {joinError && <div role="alert" style={{ color: '#f87171', marginBottom: '1rem', textAlign: 'center' }}>{joinError}</div>}
               
               <div style={{ display: 'flex', gap: '1rem' }}>
                 <button type="button" className="btn" style={{ flex: 1, background: 'rgba(255,255,255,0.1)' }} onClick={() => setShowJoinModal(false)}>Cancel</button>
@@ -328,46 +414,125 @@ export default function Home() {
               </div>
             </form>
           </div>
-        </div>
-      )}
-
-      {/* Info Modals */}
-      {showPrivacy && (
-        <InfoModal title="Privacy Policy" onClose={() => setShowPrivacy(false)}>
-          <p>Your privacy is important to us. We do not sell your personal data.</p>
-          <p>We use Firebase for authentication and game data storage, and we only collect data necessary for the game to function properly (like your score, stats, and profile).</p>
-        </InfoModal>
+        </FocusTrapModal>
       )}
 
       {showObjectives && (
-        <InfoModal title="Objectives of the Game" onClose={() => setShowObjectives(false)}>
-          <p>The main objective is to guess your location as accurately as possible.</p>
-          <p>Drop a pin on the map where you think you are! The closer you are to the actual location, the more points you get.</p>
-          <p>Compete in multiplayer mode, create parties with friends, or challenge yourself daily to climb the ranks!</p>
-        </InfoModal>
+        <FocusTrapModal onClose={() => setShowObjectives(false)}>
+          <div className="glass-panel modal-content" role="dialog" aria-modal="true" aria-label="Objectives of the Game" style={{ maxWidth: '600px', width: '90%', padding: '2rem' }}>
+            <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', fontWeight: 'bold', borderBottom: '2px solid rgba(255,255,255,0.2)', paddingBottom: '0.5rem' }}>Objectives of the Game</h2>
+            <div style={{ fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem', color: '#e5e7eb' }}>
+              <p>The main objective is to guess your location as accurately as possible.</p>
+              <p>Drop a pin on the map where you think you are! The closer you are to the actual location, the more points you get.</p>
+              <p>Compete in multiplayer mode, create parties with friends, or challenge yourself daily to climb the ranks!</p>
+            </div>
+            <button className="btn" style={{ width: '100%', background: 'rgba(255,255,255,0.1)' }} onClick={() => setShowObjectives(false)}>Close</button>
+          </div>
+        </FocusTrapModal>
+      )}
+
+      {userProfile && !userProfile.onboardingComplete && (
+        <OnboardingModal 
+          user={user} 
+          onComplete={(updates) => {
+            // Profile is refreshed automatically if listening, or we can force reload.
+            // But AuthContext updates the profile object when we write to Firestore in onboarding.
+            // Wait, we exposed setUserProfile in AuthContext. Let's just use it? No, page doesn't have setUserProfile.
+            // It will update on next snapshot fetch or we can do nothing since AuthContext handles it.
+            window.location.reload(); // Simple solution to force full refresh of stats
+          }}
+        />
+      )}
+
+      {showProfile && (
+        <ProfileModal 
+          userProfile={userProfile} 
+          user={user}
+          onClose={() => setShowProfile(false)}
+          onProfileUpdate={(updates) => {
+             // Let auth context handle it or reload if needed, but since it's an overlay it should be fine.
+             // Usually auth context handles snapshot updates.
+          }}
+        />
       )}
 
     </main>
   );
 }
 
-const InfoModal = ({ title, onClose, children }) => (
-  <div style={{ position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.7)', zIndex: 100 }}>
-    <div className="glass-panel modal-content" style={{ maxWidth: '600px', width: '90%', padding: '2rem' }}>
-      <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', fontWeight: 'bold', borderBottom: '2px solid rgba(255,255,255,0.2)', paddingBottom: '0.5rem' }}>{title}</h2>
-      <div style={{ fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem', color: '#e5e7eb' }}>
-        {children}
+function FocusTrapModal({ onClose, children }) {
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    const timer = setTimeout(() => {
+      const focusable = modalRef.current?.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable && focusable.length > 0) focusable[0].focus();
+    }, 100);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      clearTimeout(timer);
+    };
+  }, [onClose]);
+
+  return (
+    <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }} ref={modalRef} tabIndex={-1}>
+      {children}
+    </div>
+  );
+}
+
+const OnboardingTooltip = ({ onDismiss }) => (
+  <div className="onboarding-tooltip" style={{ marginBottom: '1rem' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
+      <div>
+        <p style={{ fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--primary-color)' }}>Welcome to LostStreet!</p>
+        <p style={{ fontSize: '0.95rem', color: '#d1d5db', lineHeight: 1.5 }}>
+          Pick a game mode below. In <strong>Singleplayer</strong>, guess locations from street views. 
+          In <strong>Multiplayer</strong>, compete against other players. You can also create a <strong>Party</strong> to play with friends!
+        </p>
       </div>
-      <button className="btn" style={{ width: '100%', background: 'rgba(255,255,255,0.1)' }} onClick={onClose}>Close</button>
+      <button 
+        onClick={onDismiss} 
+        style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer', fontSize: '1.2rem', padding: '4px', flexShrink: 0 }}
+        aria-label="Dismiss tutorial"
+      >
+        ✕
+      </button>
     </div>
   </div>
 );
 
-const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onFlagGuesser, onCreateParty, onJoinParty, onLeaderboard, onAbout }) => (
+const MainMenu = ({ onSingleplayer, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onFlagGuesser, onCreateParty, onJoinParty, onLeaderboard, onAbout }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '0.2rem' }}>
       <img src="/logo.png" alt="LostStreet Logo" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,255,255,0.1)' }} />
-      <h1 className="responsive-title" style={{ fontWeight: 'bold', margin: 0 }}>LostStreet</h1>
+      <h1 className="responsive-title" style={{ fontWeight: 'bold', margin: 0, fontFamily: '"Outfit", sans-serif' }}>LostStreet</h1>
     </div>
     <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
     
@@ -375,7 +540,7 @@ const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, o
     {isQueuing ? (
       <MenuItem text="Cancel Matchmaking..." onClick={cancelMatchmaking} />
     ) : (
-      <MenuItem text="Find a Match" onClick={onFindMatch} />
+      <MenuItem text="Find a Match" onClick={onFindMatchClick} />
     )}
     
     <div style={{ height: '2px', background: 'white', width: '100%', margin: '0.5rem 0' }}></div>
@@ -389,63 +554,53 @@ const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, o
     <MenuItem text="Leaderboard" onClick={onLeaderboard} />
     <MenuItem text="About" onClick={onAbout} />
 
-    
     <div style={{ height: '2px', background: 'white', width: '100%', margin: '0.5rem 0' }}></div>
     
-    <div onClick={onDailyChallenge} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: playedToday ? 'not-allowed' : 'pointer', fontSize: '1.2rem', fontWeight: '600', opacity: playedToday ? 0.6 : 1 }} className={playedToday ? "" : "menu-item-hover"}>
+    <button onClick={onDailyChallenge} disabled={playedToday} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: playedToday ? 'not-allowed' : 'inherit', fontSize: '1.2rem', fontWeight: 'bold', opacity: playedToday ? 0.6 : 1, background: 'none', border: 'none', color: 'inherit', font: 'inherit', padding: 0 }} className={playedToday ? "" : "menu-item-hover"} aria-label={`Daily Challenge. ${streak} day streak${playedToday ? '. Already played today.' : ''}`}>
       Daily Challenge 
       <span style={{ background: '#fb923c', color: 'white', padding: '2px 8px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 'bold', marginLeft: '0.5rem', display: 'flex', alignItems: 'center', boxShadow: '0 0 12px rgba(251, 146, 60, 0.8)' }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '2px' }}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
         {streak} day{streak !== 1 ? 's' : ''}
       </span>
-    </div>
+    </button>
 
-    {/* SEO Links: Featured Chronicles for internal linking */}
     <div style={{ marginTop: '1.5rem' }}>
       <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: '#9ca3af', marginBottom: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
         Featured History
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-        <a href="/chronicles/in" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">India</a>
-        <a href="/chronicles/bn" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">Brunei</a>
-        <a href="/chronicles/de" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">Germany</a>
-        <a href="/chronicles/ng" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">Nigeria</a>
+        <Link href="/chronicles/in" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">India</Link>
+        <Link href="/chronicles/bn" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">Brunei</Link>
+        <Link href="/chronicles/de" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">Germany</Link>
+        <Link href="/chronicles/ng" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">Nigeria</Link>
       </div>
     </div>
   </div>
 );
 
-const SettingsMenu = ({ onBack }) => {
-  const { soundEnabled, setSoundEnabled } = useGameStore();
-  
+const SettingsMenu = ({ onBack, units, setUnits, mapType, setMapType, emotesEnabled, setEmotesEnabled, soundEnabled, setSoundEnabled }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <h1 className="responsive-subtitle" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>Settings</h1>
       <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
       
-      <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
+      <button style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem', background: 'none', border: 'none', font: 'inherit', padding: 0, textAlign: 'left' }} onClick={onBack}>
         Back
-      </div>
+      </button>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '1.1rem', fontWeight: 'bold' }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <span style={{ width: '180px' }}>Units:</span>
-          <select style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
-            <option>Metric (km)</option>
-            <option>Imperial (mi)</option>
+          <select value={units} onChange={(e) => setUnits(e.target.value)} style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
+            <option value="metric">Metric (km)</option>
+            <option value="imperial">Imperial (mi)</option>
           </select>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <span style={{ width: '180px' }}>Map Type:</span>
-          <select style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
-            <option>Normal</option>
-            <option>Satellite</option>
-          </select>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ width: '180px' }}>Language:</span>
-          <select style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
-            <option>English</option>
+          <select value={mapType} onChange={(e) => setMapType(e.target.value)} style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
+            <option value="normal">Normal</option>
+            <option value="satellite">Satellite</option>
           </select>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -459,7 +614,7 @@ const SettingsMenu = ({ onBack }) => {
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <span style={{ width: '300px' }}>Multiplayer emote reactions</span>
-          <input type="checkbox" defaultChecked style={{ transform: 'scale(1.2)' }} />
+          <input type="checkbox" checked={emotesEnabled} onChange={(e) => setEmotesEnabled(e.target.checked)} style={{ transform: 'scale(1.2)' }} />
         </div>
       </div>
     </div>
@@ -472,9 +627,9 @@ const ProfileMenu = ({ onBack, userProfile, logout }) => {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <h1 className="responsive-subtitle" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>Account Profile</h1>
         <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
-        <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
+        <button style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem', background: 'none', border: 'none', font: 'inherit', padding: 0, textAlign: 'left' }} onClick={onBack}>
           Back
-        </div>
+        </button>
         <div style={{ fontSize: '1.2rem', textAlign: 'center', marginTop: '2rem', background: 'rgba(0,0,0,0.5)', padding: '2rem', borderRadius: '12px' }}>
           You must be logged in to view your profile!
         </div>
@@ -487,9 +642,9 @@ const ProfileMenu = ({ onBack, userProfile, logout }) => {
       <h1 className="responsive-subtitle" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>{userProfile.displayName}'s Profile</h1>
       <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
       
-      <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
+      <button style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem', background: 'none', border: 'none', font: 'inherit', padding: 0, textAlign: 'left' }} onClick={onBack}>
         Back
-      </div>
+      </button>
 
       <div style={{ 
         display: 'grid', 
@@ -542,13 +697,13 @@ const ProfileStat = ({ label, value }) => (
 );
 
 const MenuItem = ({ text, onClick }) => (
-  <div onClick={onClick} style={{ fontWeight: '600', cursor: 'pointer' }} className="menu-item-hover responsive-text">
+  <button onClick={onClick} style={{ fontWeight: 'bold', cursor: 'inherit', background: 'none', border: 'none', color: 'inherit', font: 'inherit', padding: '4px 0', textAlign: 'left', width: '100%', fontSize: '1.2rem' }} className="menu-item-hover">
     {text}
-  </div>
+  </button>
 );
 
 const IconButton = ({ icon, color, onClick }) => (
-  <button onClick={onClick} style={{ 
+  <button onClick={onClick} aria-label="Settings" style={{ 
     width: '40px', height: '40px', 
     borderRadius: '8px', 
     background: color, 
@@ -564,12 +719,40 @@ const DifficultyMenu = ({ onBack, onSelect }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
     <h1 className="responsive-title" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>Select Difficulty</h1>
     <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
-    <div style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem' }} onClick={onBack}>
+    <button style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem', background: 'none', border: 'none', font: 'inherit', padding: 0, textAlign: 'left' }} onClick={onBack}>
       Back
-    </div>
+    </button>
     
-    <MenuItem text="Easy (Multiple Choice)" onClick={() => onSelect('EASY')} />
-    <MenuItem text="Medium (Mixed)" onClick={() => onSelect('MEDIUM')} />
-    <MenuItem text="Hard (Map Pinning)" onClick={() => onSelect('HARD')} />
+    <button className="difficulty-card" onClick={() => onSelect('EASY')} style={{ textAlign: 'left' }}>
+      <div style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Easy (Multiple Choice)</div>
+      <div style={{ fontSize: '0.9rem', color: '#9ca3af', lineHeight: 1.4 }}>Choose the correct country from 4 options. No map needed — pure geography knowledge.</div>
+    </button>
+    <button className="difficulty-card" onClick={() => onSelect('MEDIUM')} style={{ textAlign: 'left' }}>
+      <div style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Medium (Mixed)</div>
+      <div style={{ fontSize: '0.9rem', color: '#9ca3af', lineHeight: 1.4 }}>Alternates between multiple-choice and map pinning each round. A balanced challenge.</div>
+    </button>
+    <button className="difficulty-card" onClick={() => onSelect('HARD')} style={{ textAlign: 'left' }}>
+      <div style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Hard (Map Pinning)</div>
+      <div style={{ fontSize: '0.9rem', color: '#9ca3af', lineHeight: 1.4 }}>Drop a pin anywhere on the world map. Score depends on how close you are to the actual location.</div>
+    </button>
+  </div>
+);
+
+const MatchmakingMenu = ({ onBack, onSelect }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+    <h1 className="responsive-title" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>Find a Match</h1>
+    <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
+    <button style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem', background: 'none', border: 'none', font: 'inherit', padding: 0, textAlign: 'left' }} onClick={onBack}>
+      Back
+    </button>
+    
+    <button className="difficulty-card" onClick={() => onSelect('unranked')} style={{ textAlign: 'left' }}>
+      <div style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Unranked Match</div>
+      <div style={{ fontSize: '0.9rem', color: '#9ca3af', lineHeight: 1.4 }}>Play a casual match against another player. No ELO changes.</div>
+    </button>
+    <button className="difficulty-card" onClick={() => onSelect('ranked')} style={{ textAlign: 'left' }}>
+      <div style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Ranked Duel</div>
+      <div style={{ fontSize: '0.9rem', color: '#9ca3af', lineHeight: 1.4 }}>Compete for ELO and climb the global leaderboard. Intense 1v1 action.</div>
+    </button>
   </div>
 );

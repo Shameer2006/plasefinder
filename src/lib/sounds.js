@@ -91,6 +91,18 @@ class SoundEngine {
       timeOffset += 150;
     });
   }
+
+  playMatchFound() {
+    // Two ascending chimes for match found
+    this.playTone(440, 'sine', 0.15, 0.5);
+    setTimeout(() => this.playTone(659.25, 'sine', 0.15, 0.5), 120);
+    setTimeout(() => this.playTone(880, 'sine', 0.4, 0.5), 240);
+  }
+
+  playTimeout() {
+    // Low descending tone for timeout
+    this.playTone(400, 'sine', 0.3, 0.3, 200);
+  }
 }
 
 // Singleton instance

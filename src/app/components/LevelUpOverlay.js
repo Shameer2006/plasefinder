@@ -1,9 +1,10 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { sounds } from '@/lib/sounds';
 
 export default function LevelUpOverlay({ data, onClose }) {
   const [isMobile, setIsMobile] = useState(false);
+  const touchStartY = useRef(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -14,20 +15,46 @@ export default function LevelUpOverlay({ data, onClose }) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Prevent scrolling while overlay is active
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     sounds.playLevelUp();
-    return () => { document.body.style.overflow = 'auto'; };
-  }, []);
+    
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      document.body.style.overflow = 'auto';
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose]);
+
+  const handleTouchStart = (e) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartY.current !== null) {
+      const deltaY = touchStartY.current - e.changedTouches[0].clientY;
+      if (Math.abs(deltaY) > 80) {
+        onClose();
+      }
+      touchStartY.current = null;
+    }
+  };
 
   return (
-    <div style={{ 
-      position: 'fixed', inset: 0, zIndex: 10000, 
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', 
-      background: 'rgba(10, 10, 26, 0.95)', backdropFilter: 'blur(15px)' 
-    }}>
-      {/* Background animated stars/confetti using pure CSS could go here */}
+    <div 
+      style={{ 
+        position: 'fixed', inset: 0, zIndex: 10000, 
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', 
+        background: 'rgba(10, 10, 26, 0.95)', backdropFilter: 'blur(15px)' 
+      }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <style>{`
         @keyframes float-up {
           0% { transform: translateY(100vh) scale(0.5) rotate(0deg); opacity: 0; }
@@ -45,7 +72,6 @@ export default function LevelUpOverlay({ data, onClose }) {
         }
       `}</style>
 
-      {/* Floating particles background */}
       {Array.from({ length: 20 }).map((_, i) => (
         <div key={i} style={{
           position: 'absolute',
@@ -56,16 +82,12 @@ export default function LevelUpOverlay({ data, onClose }) {
           opacity: 0.6,
           zIndex: 1
         }}>
-          ✨
+          &#10024;
         </div>
       ))}
 
-      {/* Main Content */}
       <div style={{ animation: 'pop-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards', zIndex: 10, textAlign: 'center', padding: '1rem', maxWidth: '100%', boxSizing: 'border-box' }}>
-        
-        {/* Illustration Graphic */}
         <div style={{ position: 'relative', width: isMobile ? '160px' : '250px', height: isMobile ? '160px' : '250px', margin: '0 auto 1.5rem' }}>
-          {/* Sunburst background */}
           <div style={{ 
             position: 'absolute', inset: -30, background: 'conic-gradient(from 0deg, transparent, rgba(251, 191, 36, 0.4), transparent 40deg)', 
             animation: 'spin-slow 10s linear infinite', borderRadius: '50%' 
@@ -78,7 +100,7 @@ export default function LevelUpOverlay({ data, onClose }) {
             boxShadow: '0 0 60px rgba(245, 158, 11, 0.6), inset 0 0 30px rgba(255,255,255,0.6)',
             border: '6px solid #fef3c7'
           }}>
-            <span style={{ fontSize: isMobile ? '4.5rem' : '7rem', textShadow: '0 5px 15px rgba(0,0,0,0.3)' }}>🏆</span>
+            <span style={{ fontSize: isMobile ? '4.5rem' : '7rem', textShadow: '0 5px 15px rgba(0,0,0,0.3)' }}>&#127942;</span>
           </div>
         </div>
         
@@ -102,6 +124,10 @@ export default function LevelUpOverlay({ data, onClose }) {
             Awesome!
           </button>
         </div>
+        
+        <p style={{ fontSize: '0.8rem', color: '#6b7280', marginTop: '1rem' }}>
+          {isMobile ? 'Swipe up or tap outside to dismiss' : 'Press Escape or click outside to dismiss'}
+        </p>
       </div>
     </div>
   );

@@ -9,7 +9,6 @@ function locationKey(loc) {
 function addToHistory(loc) {
   const key = locationKey(loc);
   recentlyUsed.add(key);
-  // Trim history if it exceeds the max
   if (recentlyUsed.size > MAX_HISTORY) {
     const first = recentlyUsed.values().next().value;
     recentlyUsed.delete(first);
@@ -31,66 +30,65 @@ export const fetchRandomLocation = async (gameOptions = {}) => {
   } else {
     url += '&minContinents=3';
   }
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch locations: ${response.statusText}`);
-  }
+  
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 15000);
+  
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch locations: ${response.statusText}`);
+    }
 
-  const { locations } = await response.json();
+    const { locations } = await response.json();
 
-  // Filter out recently used locations
-  let available = locations.filter(loc => !isRecent(loc));
+    let available = locations.filter(loc => !isRecent(loc));
+    if (available.length === 0) {
+      available = locations;
+    }
 
-  // If all are recent (very unlikely with 260K), use them anyway
-  if (available.length === 0) {
-    available = locations;
-  }
+    const targetIndex = Math.floor(Math.random() * available.length);
+    const location = available[targetIndex];
+    addToHistory(location);
 
-  // Pick the first available as the target location
-  const targetIndex = Math.floor(Math.random() * available.length);
-  const location = available[targetIndex];
+    const allCountries = locations.map(loc => loc.country);
+    const uniqueCountries = [...new Set(allCountries)];
+    const wrongCountries = uniqueCountries.filter(c => c !== location.country);
 
-  // Track it
-  addToHistory(location);
+    const fallbackCountries = ['US', 'JP', 'BR', 'AU', 'ZA', 'DE', 'IN', 'MX', 'NG', 'NZ'];
+    while (wrongCountries.length < 3) {
+      const fb = fallbackCountries.find(c => c !== location.country && !wrongCountries.includes(c));
+      if (fb) wrongCountries.push(fb);
+      else break;
+    }
 
-  // Build multiple-choice options from the batch
-  // Use the other locations' countries as wrong answers
-  const allCountries = locations.map(loc => loc.country);
-  const uniqueCountries = [...new Set(allCountries)];
+    const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+    wrongCountries.sort(() => Math.random() - 0.5);
+    const selectedWrong = wrongCountries.slice(0, 3).map(code => ({ 
+      country: regionNames.of(code) || code,
+      iso: code.toLowerCase() 
+    }));
 
-  // Get wrong country codes (different from the target)
-  const wrongCountries = uniqueCountries.filter(c => c !== location.country);
-
-  // If we don't have enough wrong countries from this batch, add some fallbacks
-  const fallbackCountries = ['US', 'JP', 'BR', 'AU', 'ZA', 'DE', 'IN', 'MX', 'NG', 'NZ'];
-  while (wrongCountries.length < 3) {
-    const fb = fallbackCountries.find(c => c !== location.country && !wrongCountries.includes(c));
-    if (fb) wrongCountries.push(fb);
-    else break;
-  }
-
-  const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
-
-  // Shuffle and pick 3 wrong answers
-  wrongCountries.sort(() => Math.random() - 0.5);
-  const selectedWrong = wrongCountries.slice(0, 3).map(code => ({ 
-    country: regionNames.of(code) || code,
-    iso: code.toLowerCase() 
-  }));
-
-  // Build options array (3 wrong + 1 correct), shuffled
-  const options = [...selectedWrong, { 
-    country: regionNames.of(location.country) || location.country,
-    iso: location.country.toLowerCase()
-  }];
-  options.sort(() => Math.random() - 0.5);
-
-  return {
-    location: {
-      ...location,
+    const options = [...selectedWrong, { 
       country: regionNames.of(location.country) || location.country,
       iso: location.country.toLowerCase()
-    },
-    options
-  };
+    }];
+    options.sort(() => Math.random() - 0.5);
+
+    return {
+      location: {
+        ...location,
+        country: regionNames.of(location.country) || location.country,
+        iso: location.country.toLowerCase()
+      },
+      options
+    };
+  } catch (error) {
+    clearTimeout(timeoutId);
+    if (error.name === 'AbortError') {
+      throw new Error('Request timed out. Please check your connection and try again.');
+    }
+    throw error;
+  }
 };

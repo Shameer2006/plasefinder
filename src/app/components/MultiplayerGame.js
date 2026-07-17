@@ -11,6 +11,9 @@ const GuessingMap = dynamic(() => import('./GuessingMap'), { ssr: false });
 const ResultsMap = dynamic(() => import('./ResultsMap'), { ssr: false });
 import ResultScreen from './ResultScreen';
 import PartyChat from './PartyChat';
+import DuelHealthBar from './DuelHealthBar';
+import Spinner from './Spinner';
+import MultiplayerHUD from './MultiplayerHUD';
 
 // Function to calculate distance between two coordinates in km
 function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -132,6 +135,7 @@ export default function MultiplayerGame({ gameId }) {
 
         await updateDoc(doc(db, 'matches', gameId), {
           [`players.${botId}.score`]: botData.score + points,
+          [`players.${botId}.roundScore`]: points,
           [`players.${botId}.ready`]: true,
           [`players.${botId}.lastGuess`]: {
             lat: matchData.location.lat,
@@ -156,6 +160,7 @@ export default function MultiplayerGame({ gameId }) {
 
         await updateDoc(doc(db, 'matches', gameId), {
           [`players.${botId}.score`]: botData.score + points,
+          [`players.${botId}.roundScore`]: points,
           [`players.${botId}.ready`]: true,
           [`players.${botId}.lastGuess`]: { lat: botLat, lng: botLng }
         });
@@ -185,6 +190,7 @@ export default function MultiplayerGame({ gameId }) {
            updateDoc(doc(db, 'matches', gameId), {
              [`players.${userProfile.uid}.ready`]: true,
              [`players.${userProfile.uid}.score`]: myData?.score || 0,
+             [`players.${userProfile.uid}.roundScore`]: 0,
              [`players.${userProfile.uid}.lastGuess`]: { choice: 'Timeout', isCorrect: false, lat: 0, lng: 0 }
            });
         }
@@ -193,8 +199,9 @@ export default function MultiplayerGame({ gameId }) {
            let needsUpdate = false;
            const updates = {};
            Object.entries(matchData.players).forEach(([uid, pData]) => {
-             if (!pData.ready) {
+              if (!pData.ready) {
                 updates[`players.${uid}.ready`] = true;
+                updates[`players.${uid}.roundScore`] = 0;
                 updates[`players.${uid}.lastGuess`] = { choice: 'Timeout', isCorrect: false, lat: 0, lng: 0 };
                 needsUpdate = true;
              }
@@ -210,7 +217,7 @@ export default function MultiplayerGame({ gameId }) {
   }, [matchData?.status, matchData?.round, matchData?.roundStartTime, isRoundOver, matchData?.players, gameId, userProfile?.uid]);
 
   if (!matchData || !userProfile) {
-    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '2rem' }}>Loading Match...</div>;
+    return <Spinner text="Loading Match..." />;
   }
 
   const myData = matchData.players[userProfile.uid];
@@ -235,6 +242,7 @@ export default function MultiplayerGame({ gameId }) {
     // Record guess in Firestore
     await updateDoc(doc(db, 'matches', gameId), {
       [`players.${userProfile.uid}.score`]: myData.score + points,
+      [`players.${userProfile.uid}.roundScore`]: points,
       [`players.${userProfile.uid}.ready`]: true,
       [`players.${userProfile.uid}.lastGuess`]: { lat, lng }
     });
@@ -251,6 +259,7 @@ export default function MultiplayerGame({ gameId }) {
 
     await updateDoc(doc(db, 'matches', gameId), {
       [`players.${userProfile.uid}.score`]: myData.score + points,
+      [`players.${userProfile.uid}.roundScore`]: points,
       [`players.${userProfile.uid}.ready`]: true,
       // For multiple choice, we still need a lastGuess to not break the ResultsMap
       // We can just set it to the actual location if correct, or somewhere else if wrong
@@ -267,11 +276,37 @@ export default function MultiplayerGame({ gameId }) {
     
     if (isHost) {
       const isParty = !!matchData.code;
+      const isDuel = matchData.gameType === 'ranked_duel';
       const maxRounds = matchData.options?.rounds || 5;
 
-      if (matchData.round >= maxRounds) {
-        // Game Over! Update ELOs in user profiles (Only if not a party, or simple logic)
-        await updateDoc(doc(db, 'matches', gameId), { status: 'finished' });
+      let duelKnockout = false;
+      let nextHealth = null;
+
+      if (isDuel && playerIds.length === 2) {
+        const p1 = playerIds[0];
+        const p2 = playerIds[1];
+        const rs1 = matchData.players[p1].roundScore || 0;
+        const rs2 = matchData.players[p2].roundScore || 0;
+        const h1 = matchData.health?.[p1] ?? 5000;
+        const h2 = matchData.health?.[p2] ?? 5000;
+
+        let nextH1 = h1;
+        let nextH2 = h2;
+        if (rs1 > rs2) {
+          nextH2 = Math.max(0, h2 - (rs1 - rs2));
+        } else if (rs2 > rs1) {
+          nextH1 = Math.max(0, h1 - (rs2 - rs1));
+        }
+
+        nextHealth = { [p1]: nextH1, [p2]: nextH2 };
+        if (nextH1 === 0 || nextH2 === 0) duelKnockout = true;
+      }
+
+      if (duelKnockout || matchData.round >= maxRounds) {
+        // Game Over! Update ELOs in user profiles
+        const updates = { status: 'finished' };
+        if (nextHealth) updates.health = nextHealth;
+        await updateDoc(doc(db, 'matches', gameId), updates);
         
         if (!isParty && playerIds.length === 2) {
           // Simple ELO update for 1v1 duel (winner +25, loser -25)
@@ -298,6 +333,7 @@ export default function MultiplayerGame({ gameId }) {
               round: matchData.round + 1,
               roundStartTime: Date.now()
             };
+            if (nextHealth) updates.health = nextHealth;
             // Reset ready state for all players
             playerIds.forEach(id => {
               updates[`players.${id}.ready`] = false;
@@ -314,6 +350,13 @@ export default function MultiplayerGame({ gameId }) {
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem' }}>
         <div className="glass-panel modal-content" style={{ textAlign: 'center' }}>
           <h2 className="gradient-text glow-text responsive-title" style={{ marginBottom: '1.5rem' }}>Match Finished!</h2>
+          
+          {matchData.gameType === 'ranked_duel' && (
+            <div style={{ marginBottom: '1rem', padding: '1rem' }}>
+              <DuelHealthBar players={matchData.players} health={matchData.health} isMobile={isMobile} />
+            </div>
+          )}
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '2rem 0', maxHeight: '300px', overflowY: 'auto' }}>
             {sortedPlayers.map((player, idx) => (
               <div key={player.uid} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px' }}>
@@ -398,6 +441,32 @@ export default function MultiplayerGame({ gameId }) {
               )}
             </div>
 
+            {matchData.gameType === 'ranked_duel' && (
+              <div style={{ marginBottom: '1.5rem' }}>
+                <DuelHealthBar players={matchData.players} health={matchData.health} isMobile={isMobile} />
+                {playerIds.length === 2 && (
+                  <div style={{ marginTop: '0.5rem', fontSize: '1.1rem', color: '#ccc' }}>
+                    {(() => {
+                      const rs1 = matchData.players[playerIds[0]].roundScore || 0;
+                      const rs2 = matchData.players[playerIds[1]].roundScore || 0;
+                      const dmg = Math.abs(rs1 - rs2);
+                      if (dmg === 0) return "Tie round. No damage dealt!";
+                      const winnerId = rs1 > rs2 ? playerIds[0] : playerIds[1];
+                      const loserId = rs1 > rs2 ? playerIds[1] : playerIds[0];
+                      const winnerName = winnerId === userProfile.uid ? "You" : matchData.players[winnerId].displayName;
+                      const loserName = loserId === userProfile.uid ? "You" : matchData.players[loserId].displayName;
+                      const word = winnerId === userProfile.uid ? "deal" : "deals";
+                      return (
+                        <span style={{ color: winnerId === userProfile.uid ? '#22c55e' : '#ef4444' }}>
+                          <strong>{winnerName}</strong> {word} <strong>{dmg}</strong> damage to {loserName}!
+                        </span>
+                      );
+                    })()}
+                  </div>
+                )}
+              </div>
+            )}
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '1.5rem 0', maxHeight: '200px', overflowY: 'auto', textAlign: 'left' }}>
               {sortedPlayers.map((player, idx) => (
                 <div key={player.uid} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px' }}>
@@ -435,49 +504,13 @@ export default function MultiplayerGame({ gameId }) {
         </div>
       )}
 
-      <div className="hud-center" style={{ 
-        background: 'rgba(0,0,0,0.8)',
-        padding: isMobile ? '6px 12px' : '10px 20px',
-        borderRadius: '20px',
-        zIndex: 10,
-        boxShadow: '0 4px 15px rgba(0,0,0,0.5)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        maxWidth: isMobile ? '95vw' : 'auto'
-      }}>
-        <div style={{ display: 'flex', gap: '15px', alignItems: 'center', width: '100%', justifyContent: 'space-between', marginBottom: '8px' }}>
-          <div style={{ fontSize: isMobile ? '1.1rem' : '1.5rem', fontWeight: '800', opacity: 0.5 }}>R{matchData.round}/{matchData.options?.rounds || 5}</div>
-          {timeLeft !== null && (
-            <div style={{ 
-              fontSize: isMobile ? '1.1rem' : '1.5rem', 
-              fontWeight: '900', 
-              color: timeLeft <= 10 ? '#ef4444' : '#fbbf24',
-              textShadow: '0 0 10px rgba(0,0,0,0.5)'
-            }}>
-              {timeLeft}s
-            </div>
-          )}
-        </div>
-        <div style={{ display: 'flex', gap: isMobile ? '0.8rem' : '1.5rem', overflowX: 'auto', maxWidth: isMobile ? '55vw' : '60vw' }}>
-          {sortedPlayers.slice(0, 3).map((player) => (
-            <div key={player.uid} style={{ textAlign: 'center', minWidth: isMobile ? '60px' : '80px' }}>
-              <div style={{ fontSize: isMobile ? '0.75rem' : '0.8rem', color: '#ccc', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {player.uid === userProfile.uid ? 'You' : player.displayName}
-              </div>
-              <div style={{ fontSize: isMobile ? '1rem' : '1.2rem', fontWeight: 'bold', color: player.uid === userProfile.uid ? 'var(--primary-color)' : 'white' }}>
-                {player.score}
-              </div>
-            </div>
-          ))}
-          {sortedPlayers.length > 3 && (
-            <div style={{ textAlign: 'center', minWidth: '40px', display: 'flex', alignItems: 'center', color: '#ccc', fontSize: isMobile ? '0.8rem' : '1rem' }}>
-              +{sortedPlayers.length - 3}
-            </div>
-          )}
-        </div>
-      </div>
+      <MultiplayerHUD 
+        matchData={matchData} 
+        timeLeft={timeLeft} 
+        isMobile={isMobile} 
+        sortedPlayers={sortedPlayers} 
+        userProfile={userProfile} 
+      />
 
       {isMultipleChoice ? (
         <div 

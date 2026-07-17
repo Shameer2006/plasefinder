@@ -58,7 +58,7 @@ export async function generateMetadata({ params }) {
       url: `/chronicles/${code.toLowerCase()}`,
       images: [
         {
-          url: `https://loststreet.net/api/og?chronicle=${code.toLowerCase()}&name=${encodeURIComponent(data.name)}`,
+          url: `https://www.loststreet.online/api/og?chronicle=${code.toLowerCase()}&name=${encodeURIComponent(data.name)}`,
           width: 1200,
           height: 630,
           alt: `History of ${data.name}`
@@ -89,7 +89,7 @@ export default async function CountryChroniclePage({ params }) {
     "headline": data.seoTitle,
     "description": data.metaDescription,
     "abstract": data.aiSummary ? Object.values(data.aiSummary).join(" ") : data.metaDescription,
-    "image": `https://loststreet.net/api/og?chronicle=${code.toLowerCase()}&name=${encodeURIComponent(data.name)}`,
+    "image": `https://www.loststreet.online/api/og?chronicle=${code.toLowerCase()}&name=${encodeURIComponent(data.name)}`,
     "datePublished": "2026-07-12T00:00:00Z",
     "author": {
       "@type": "Organization",
@@ -100,12 +100,12 @@ export default async function CountryChroniclePage({ params }) {
       "name": "LostStreet",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://loststreet.net/logo.png" // placeholder domain
+        "url": "https://www.loststreet.online/logo.png"
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://loststreet.net/chronicles/${code.toLowerCase()}`
+      "@id": `https://www.loststreet.online/chronicles/${code.toLowerCase()}`
     }
   };
 

@@ -151,6 +151,8 @@ export default function GuessingMap({ onGuess, country }) {
         <button
           className="btn mobile-map-toggle"
           onClick={toggleExpand}
+          aria-label={markerPos ? 'View Map and Guess' : 'Open Map'}
+          aria-expanded={isExpanded}
           style={{
             position: 'fixed',
             bottom: '20px',

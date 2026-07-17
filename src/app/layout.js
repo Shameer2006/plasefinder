@@ -1,5 +1,6 @@
 import "./globals.css";
 import { AuthProvider } from "@/lib/AuthContext";
+import { ToastProvider } from "@/app/components/Toast";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -71,11 +72,6 @@ const jsonLd = {
     "price": "0",
     "priceCurrency": "USD"
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.5",
-    "ratingCount": "100"
-  },
   "keywords": "loststreet, loststreet game, loststreet online, play loststreet, loststreet geography game, lost street, geoguessr alternative, free geography guessing game, street view guessing game, guess the location game, guess the country game online, panorama guessing game, world geography game online, guess where game, random street view game, location guessing game free, play geography game online free, play street view game, online map guessing game, play world map game, geography quiz game online, free online geography game, multiplayer geography game, geography game no download, game where you guess your location, game to guess country from street view, spawn random location guess game, AI hint geography game, blur mode guessing game, guess the city from photo game, street view geography quiz, explore random places online game, virtual travel guessing game, panoramic view country guesser, daily geography guessing game, geography challenge game online, geography learning game online, fun way to learn world map, educational geography game free, geography practice game, learn countries game online, map skills game online, geography trivia game free, geography game for mobile, browser based geography game, no download geography game, free to play map game, lightweight geography web game"
 };
 
@@ -93,9 +89,11 @@ export default function RootLayout({ children }) {
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1006713173738488" crossOrigin="anonymous"></script>
       </head>
       <body suppressHydrationWarning={true}>
-
+        <a href="#main-content" className="skip-link">Skip to main content</a>
         <AuthProvider>
-          {children}
+          <ToastProvider>
+            {children}
+          </ToastProvider>
         </AuthProvider>
         <SpeedInsights />
         <Analytics />

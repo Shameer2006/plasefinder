@@ -1,10 +1,9 @@
 'use client';
 import { useGameStore } from '@/lib/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
-// Haversine distance calculation for Hard Mode
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-  const R = 6371; // Radius of the earth in km
+  const R = 6371;
   const dLat = (lat2 - lat1) * (Math.PI / 180);
   const dLon = (lon2 - lon1) * (Math.PI / 180);
   const a = 
@@ -16,32 +15,60 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   return d;
 }
 
-
-
 import { addXp } from '@/lib/userProfile';
+import { saveGameResult } from '@/lib/db';
 import { useAuth } from '@/lib/AuthContext';
 import LevelUpOverlay from './LevelUpOverlay';
 import dynamic from 'next/dynamic';
 
 const ResultsMap = dynamic(() => import('./ResultsMap'), { ssr: false });
 
+function AnimatedCounter({ target, duration = 1500, onComplete }) {
+  const [value, setValue] = useState(0);
+  const startTime = useRef(null);
+  const rafRef = useRef(null);
+
+  useEffect(() => {
+    startTime.current = Date.now();
+    const animate = () => {
+      const elapsed = Date.now() - startTime.current;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.floor(eased * target));
+      if (progress < 1) {
+        rafRef.current = requestAnimationFrame(animate);
+      } else {
+        setValue(target);
+        onComplete?.();
+      }
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [target, duration, onComplete]);
+
+  return <span>{value.toLocaleString()}</span>;
+}
+
 export default function ResultScreen() {
   const { user } = useAuth();
   const { 
     currentLocation, userGuess, difficulty, 
-    score, setScore, 
+    score, addScore, difficulty: gameDifficulty,
     currentRound, maxRounds, setMaxRounds,
-    nextRound, setGameState, resetGame 
+    nextRound, setGameState, resetGame, addGameResult 
   } = useGameStore();
   
   const [roundScore, setRoundScore] = useState(0);
   const [distanceKm, setDistanceKm] = useState(0);
-  const isChoiceMode = difficulty === 'EASY' || (difficulty === 'MEDIUM' && currentRound % 2 !== 0);
-  
   const [showMapOnly, setShowMapOnly] = useState(true);
   const [levelUpData, setLevelUpData] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isCollectingXp, setIsCollectingXp] = useState(false);
+  const [xpCountComplete, setXpCountComplete] = useState(false);
+
+  const isChoiceMode = difficulty === 'EASY' || (difficulty === 'MEDIUM' && currentRound % 2 !== 0);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -65,7 +92,7 @@ export default function ResultScreen() {
       }
     }
     setRoundScore(earned);
-    setScore(earned);
+    addScore(earned);
 
     const timer = setTimeout(() => setShowMapOnly(false), 3000);
     return () => clearTimeout(timer);
@@ -88,17 +115,27 @@ export default function ResultScreen() {
   const handleFinish = async () => {
     setIsCollectingXp(true);
     const totalScore = score + roundScore;
-    const xpEarned = Math.floor(totalScore / 10); // Example XP calculation
+    const xpEarned = Math.floor(totalScore / 10);
     
-    // Fake a small delay for the animation
-    await new Promise(r => setTimeout(r, 2000));
+    // Save game result (#11)
+    saveGameResult(totalScore, difficulty, maxRounds);
+    addGameResult({
+      score: totalScore,
+      difficulty,
+      rounds: maxRounds,
+      date: new Date().toISOString(),
+      country: currentLocation?.country || 'Unknown'
+    });
+    
+    // Wait for XP counter animation to finish
+    await new Promise(r => setTimeout(r, 2200));
     
     if (user) {
       const xpResult = await addXp(user.uid, xpEarned);
       if (xpResult && xpResult.levelUp) {
         setIsCollectingXp(false);
         setLevelUpData(xpResult);
-        return; // Don't reset game yet, show overlay first
+        return;
       }
     }
     
@@ -116,6 +153,9 @@ export default function ResultScreen() {
   }
 
   if (isCollectingXp) {
+    const totalScore = score + roundScore;
+    const xpEarned = Math.floor(totalScore / 10);
+    
     return (
       <div style={{ position: 'fixed', inset: 0, zIndex: 10000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(10, 10, 26, 0.95)', backdropFilter: 'blur(15px)' }}>
         <style>{`
@@ -130,7 +170,6 @@ export default function ResultScreen() {
           }
         `}</style>
         
-        {/* Floating Particles */}
         {Array.from({ length: 15 }).map((_, i) => (
           <div key={i} style={{
             position: 'absolute',
@@ -139,7 +178,7 @@ export default function ResultScreen() {
             '--tx': ((Math.random() - 0.5) * 400) + 'px',
             '--ty': ((Math.random() - 0.5) * 400) + 'px',
             animationDelay: (Math.random() * 0.5) + 's'
-          }}>✨</div>
+          }}>&#10024;</div>
         ))}
 
         <div style={{ animation: 'count-up 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards', textAlign: 'center', zIndex: 10 }}>
@@ -147,7 +186,7 @@ export default function ResultScreen() {
             Collecting XP...
           </h2>
           <div style={{ fontSize: isMobile ? '3rem' : '4.5rem', fontWeight: 'bold', color: 'white', textShadow: '0 5px 15px rgba(0,0,0,0.5)' }}>
-            +{Math.floor((score + roundScore) / 10)} <span style={{ fontSize: '0.6em', color: '#fbbf24' }}>XP</span>
+            +<AnimatedCounter target={xpEarned} duration={1500} onComplete={() => setXpCountComplete(true)} /> <span style={{ fontSize: '0.6em', color: '#fbbf24' }}>XP</span>
           </div>
         </div>
       </div>
@@ -171,7 +210,6 @@ export default function ResultScreen() {
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh' }}>
-      {/* Background Map for all modes */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0, filter: 'brightness(0.4)' }}>
         <ResultsMap 
           location={currentLocation} 
@@ -247,7 +285,6 @@ export default function ResultScreen() {
                     }
                   } else {
                     navigator.clipboard.writeText(shareText);
-                    alert('Score copied to clipboard!');
                   }
                 }}
               >
