@@ -41,6 +41,7 @@ export default function ResultScreen() {
   const [showMapOnly, setShowMapOnly] = useState(true);
   const [levelUpData, setLevelUpData] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isCollectingXp, setIsCollectingXp] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -85,12 +86,17 @@ export default function ResultScreen() {
   };
 
   const handleFinish = async () => {
+    setIsCollectingXp(true);
     const totalScore = score + roundScore;
     const xpEarned = Math.floor(totalScore / 10); // Example XP calculation
+    
+    // Fake a small delay for the animation
+    await new Promise(r => setTimeout(r, 2000));
     
     if (user) {
       const xpResult = await addXp(user.uid, xpEarned);
       if (xpResult && xpResult.levelUp) {
+        setIsCollectingXp(false);
         setLevelUpData(xpResult);
         return; // Don't reset game yet, show overlay first
       }
@@ -107,6 +113,45 @@ export default function ResultScreen() {
 
   if (levelUpData) {
     return <LevelUpOverlay data={levelUpData} onClose={handleCloseLevelUp} />;
+  }
+
+  if (isCollectingXp) {
+    return (
+      <div style={{ position: 'fixed', inset: 0, zIndex: 10000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(10, 10, 26, 0.95)', backdropFilter: 'blur(15px)' }}>
+        <style>{`
+          @keyframes count-up {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+          }
+          @keyframes xp-particle {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+          }
+        `}</style>
+        
+        {/* Floating Particles */}
+        {Array.from({ length: 15 }).map((_, i) => (
+          <div key={i} style={{
+            position: 'absolute',
+            fontSize: '2rem',
+            animation: 'xp-particle 1.5s ease-out forwards',
+            '--tx': \`\${(Math.random() - 0.5) * 400}px\`,
+            '--ty': \`\${(Math.random() - 0.5) * 400}px\`,
+            animationDelay: \`\${Math.random() * 0.5}s\`
+          }}>✨</div>
+        ))}
+
+        <div style={{ animation: 'count-up 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards', textAlign: 'center', zIndex: 10 }}>
+          <h2 className="gradient-text glow-text" style={{ fontSize: isMobile ? '2rem' : '3rem', marginBottom: '1rem', background: 'linear-gradient(to right, #fbbf24, #f59e0b)' }}>
+            Collecting XP...
+          </h2>
+          <div style={{ fontSize: isMobile ? '3rem' : '4.5rem', fontWeight: 'bold', color: 'white', textShadow: '0 5px 15px rgba(0,0,0,0.5)' }}>
+            +{Math.floor((score + roundScore) / 10)} <span style={{ fontSize: '0.6em', color: '#fbbf24' }}>XP</span>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (showMapOnly) {
