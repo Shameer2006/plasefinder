@@ -82,7 +82,7 @@ export default function LevelUpOverlay({ data, onClose }) {
           </div>
         </div>
         
-        <h1 className="gradient-text glow-text" style={{ fontSize: isMobile ? '2.5rem' : '4.5rem', marginBottom: '0.8rem', background: 'linear-gradient(to right, #fbbf24, #f59e0b)' }}>
+        <h1 className="gradient-text glow-text" style={{ fontSize: isMobile ? '2.5rem' : '4.5rem', marginBottom: '0.8rem', background: 'linear-gradient(to right, #fbbf24, #f59e0b)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
           LEVEL UP!
         </h1>
         
