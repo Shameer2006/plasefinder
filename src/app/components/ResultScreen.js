@@ -136,9 +136,9 @@ export default function ResultScreen() {
             position: 'absolute',
             fontSize: '2rem',
             animation: 'xp-particle 1.5s ease-out forwards',
-            '--tx': \`\${(Math.random() - 0.5) * 400}px\`,
-            '--ty': \`\${(Math.random() - 0.5) * 400}px\`,
-            animationDelay: \`\${Math.random() * 0.5}s\`
+            '--tx': ((Math.random() - 0.5) * 400) + 'px',
+            '--ty': ((Math.random() - 0.5) * 400) + 'px',
+            animationDelay: (Math.random() * 0.5) + 's'
           }}>✨</div>
         ))}
 
