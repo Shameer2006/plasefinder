@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { sounds } from '@/lib/sounds';
 
 export default function LevelUpOverlay({ data, onClose }) {

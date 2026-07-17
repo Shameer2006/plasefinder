@@ -399,6 +399,19 @@ const MainMenu = ({ onSingleplayer, onFindMatch, isQueuing, cancelMatchmaking, o
         {streak} day{streak !== 1 ? 's' : ''}
       </span>
     </div>
+
+    {/* SEO Links: Featured Chronicles for internal linking */}
+    <div style={{ marginTop: '1.5rem' }}>
+      <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: '#9ca3af', marginBottom: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+        Featured History
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+        <a href="/chronicles/in" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">India</a>
+        <a href="/chronicles/bn" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">Brunei</a>
+        <a href="/chronicles/de" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">Germany</a>
+        <a href="/chronicles/ng" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">Nigeria</a>
+      </div>
+    </div>
   </div>
 );
 

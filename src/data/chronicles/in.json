@@ -6,47 +6,51 @@
   "population": "1.4 Billion",
   "currency": "Indian Rupee (INR)",
   "languages": [
-    "Tamil",
-    "Telugu",
-    "Malayalam",
-    "Kannada",
-    "English",
-    "etc."
+    "Hindi",
+    "English"
   ],
-  "seoTitle": "Detailed History of India: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of India. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of India is a key element of its national identity in Asia. Characterized by its Himalayas, Indo-Gangetic plain, and peninsula, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of India came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of India is a powerful symbol of the country's sovereignty and cultural heritage. The design features a horizontal bands of saffron, white, green with Ashoka Chakra. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for India involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from British Raj on August 15, 1947. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of India, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, India faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to infrastructure deficits and rapid urbanization, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of India continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of India: Independence, Map Formation, and Tricolor Flag",
+  "metaDescription": "Explore the rich history of India, from ancient civilizations to British colonial rule. Learn about the independence movement, the Tiranga flag, and its vibrant culture.",
+  "mapFormation": "The Indian subcontinent has a history spanning thousands of years, home to the Indus Valley Civilization and ancient empires like the Maurya and Gupta. The geographical boundaries of modern India were significantly shaped during the British Raj. The map as we know it today was finalized upon independence in 1947, which also resulted in the Partition of India—creating the separate nations of India and Pakistan (and later Bangladesh). Following independence, over 500 princely states were integrated into the Indian Union under the leadership of Sardar Vallabhbhai Patel. The internal map continued to evolve, with states eventually reorganized along linguistic lines in 1956.",
+  "flagHistory": "The National Flag of India, colloquially known as the Tiranga (Tricolor), was adopted on July 22, 1947. It features three horizontal bands: deep saffron (Kesari) at the top representing courage and sacrifice, white in the middle representing peace and truth, and dark green at the bottom representing faith and chivalry. In the center of the white band is a navy blue wheel with 24 spokes, the Ashoka Chakra, which represents the eternal wheel of law and dynamics of peaceful change. The flag was based on a design by Pingali Venkayya and is a profound symbol of the nation's freedom struggle and democratic values.",
+  "freedomStory": "India's struggle for independence was a massive, multi-generational movement against nearly 200 years of British colonial rule. Led by the Indian National Congress and prominent figures like Mahatma Gandhi, Jawaharlal Nehru, and Subhas Chandra Bose, the movement utilized both non-violent civil disobedience and armed struggle. Gandhi's principles of Ahimsa (non-violence) and Satyagraha (truth force) mobilized millions across the subcontinent. The long and arduous journey culminated in the Indian Independence Act, and India officially became a free and independent nation on August 15, 1947, later adopting its constitution and becoming a Republic on January 26, 1950.",
+  "challenges": "As the world's most populous democracy and a rapidly growing major economy, India faces complex challenges. While it boasts a thriving IT sector, a space program, and a massive demographic dividend, it continues to grapple with income inequality, poverty, and infrastructure deficits in rural areas. Environmental concerns, such as air pollution and water scarcity, are increasingly pressing. Additionally, navigating regional geopolitics and ensuring equitable economic growth for its diverse and massive population remain top priorities for the government.",
   "aiSummary": {
-    "geo": "Located in Asia; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring horizontal bands of saffron, white, green with Ashoka Chakra representing national sovereignty.",
-    "freedom": "Gained sovereignty from British Raj on August 15, 1947 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to infrastructure deficits and rapid urbanization."
+    "geo": "South Asian subcontinent; modern borders defined by the 1947 Partition and subsequent integration of princely states.",
+    "flag": "The Tiranga: saffron, white, and green horizontal bands with the navy blue Ashoka Chakra in the center.",
+    "freedom": "Achieved independence from British rule on August 15, 1947, largely through non-violent civil disobedience led by Mahatma Gandhi.",
+    "challenge": "Balancing rapid economic growth and technological advancement with poverty reduction and environmental sustainability."
   },
   "faqs": [
     {
       "question": "When did India gain independence?",
-      "answer": "India attained its full sovereignty and recognized independence from British Raj on August 15, 1947."
+      "answer": "India gained independence from British rule on August 15, 1947. It later became a Republic when its constitution came into effect on January 26, 1950."
     },
     {
-      "question": "What are the main geographical characteristics of India?",
-      "answer": "India is located in Asia and features a geographical layout characterized by Himalayas, Indo-Gangetic plain, and peninsula."
+      "question": "What does the Ashoka Chakra on the Indian flag signify?",
+      "answer": "The 24-spoke navy blue Ashoka Chakra represents the eternal wheel of law (Dharma) and the dynamic nature of peaceful change and progress."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1857",
+      "event": "The Indian Rebellion of 1857 (Sepoy Mutiny) marks the first major uprising against British East India Company rule."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1947",
+      "event": "India achieves independence on August 15, accompanied by the Partition into India and Pakistan."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of India."
+      "year": "1950",
+      "event": "The Constitution of India comes into effect on January 26, establishing the Republic of India."
+    },
+    {
+      "year": "1991",
+      "event": "India initiates major economic liberalization reforms, opening its economy to global trade."
+    },
+    {
+      "year": "2023",
+      "event": "India successfully lands the Chandrayaan-3 mission on the Moon's south pole."
     }
   ]
 }
