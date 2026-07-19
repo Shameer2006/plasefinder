@@ -158,7 +158,7 @@ body {
 
 /* Responsive Utility Classes */
 .container-padding {
-  padding: 3rem;
+  padding: 1.8rem 3rem;
 }
 
 .responsive-title {
@@ -189,7 +189,7 @@ body {
 }
 
 .left-menu-container {
-  margin-top: 2rem;
+  margin-top: 1rem;
   max-width: 400px;
 }
 
@@ -226,7 +226,7 @@ body {
 .map-container {
   position: absolute;
   bottom: 20px;
-  right: 20px;
+  right: 70px;
   width: 300px;
   height: 200px;
 }
@@ -329,7 +329,7 @@ body {
   }
 
   .left-menu-container {
-    margin-top: 5rem;
+    margin-top: 2.5rem;
     /* Make room for top controls */
     max-width: 100%;
   }
@@ -579,6 +579,39 @@ button:focus-visible {
   border-radius: 12px 12px 0 0;
 }
 
+/* Quick Play CTA */
+.cta-glow-btn {
+  width: 100%;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  border: none;
+  border-radius: 14px;
+  color: #fff;
+  background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: cta-pulse 2.5s ease-in-out infinite;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cta-glow-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.6), 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.cta-glow-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3); }
+  50% { box-shadow: 0 0 35px rgba(16, 185, 129, 0.6), 0 4px 20px rgba(59, 130, 246, 0.3); }
+}
+
 /* Difficulty card */
 .difficulty-card {
   padding: 1rem 1.2rem;
@@ -611,4 +644,226 @@ button:focus-visible {
   background: rgba(0,0,0,0.7);
   z-index: 100;
   animation: fade-in 0.2s ease;
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS — Full coverage for all screen sizes
+   ============================================================ */
+
+/* Game area fills viewport on all screens */
+.game-area {
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Large desktops ≥1440px ── */
+@media (min-width: 1440px) {
+  .container-padding {
+    padding: 3.5rem 4rem;
+  }
+  .responsive-title {
+    font-size: 3.2rem;
+  }
+  .left-menu-container {
+    max-width: 480px;
+  }
+  .map-container {
+    width: 340px;
+    height: 230px;
+  }
+  .map-container.expanded {
+    width: 620px;
+    height: 460px;
+  }
+}
+
+/* ── Tablet landscape + small laptop 1024-1439px ── */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .responsive-title {
+    font-size: 2.5rem;
+  }
+  .map-container {
+    width: 300px;
+    height: 200px;
+  }
+  .map-container.expanded {
+    width: 520px;
+    height: 380px;
+  }
+}
+
+/* ── Tablet portrait 768-1023px ── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container-padding {
+    padding: 2rem 2.5rem;
+  }
+  .responsive-title {
+    font-size: 2.2rem;
+  }
+  .responsive-subtitle {
+    font-size: 2rem;
+  }
+  .left-menu-container {
+    margin-top: 4rem;
+    max-width: 380px;
+  }
+  .map-container {
+    width: 260px;
+    height: 180px;
+    bottom: 15px;
+    right: 15px;
+  }
+  .map-container.expanded {
+    width: 450px;
+    height: 320px;
+  }
+  .hud-container {
+    gap: 0.75rem;
+  }
+  .party-lobby-panel {
+    max-width: 700px;
+    padding: 2rem;
+    gap: 1.5rem;
+  }
+}
+
+/* ── Mobile ≤767px (overrides the existing 768 breakpoint for more specifics) ── */
+@media (max-width: 767px) {
+  /* Menu */
+  .responsive-title {
+    font-size: clamp(1.6rem, 5vw, 2rem);
+  }
+  .responsive-subtitle {
+    font-size: clamp(1.5rem, 4.5vw, 1.8rem);
+  }
+  .responsive-text {
+    font-size: clamp(1rem, 3vw, 1.1rem);
+  }
+
+  /* HUD */
+  .hud-container {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .hud-center {
+    width: 98vw;
+    gap: 0.6rem;
+    padding: 8px;
+    top: 8px;
+  }
+
+  /* Modal */
+  .modal-content {
+    width: 95%;
+    padding: 1.2rem;
+    border-radius: 16px;
+  }
+
+  /* CTA Quick Play */
+  .cta-glow-btn {
+    font-size: 1.15rem;
+    padding: 0.85rem 1.2rem;
+  }
+
+  /* Difficulty cards */
+  .difficulty-card {
+    padding: 0.85rem 1rem;
+  }
+}
+
+/* ── Small phones ≤480px ── */
+@media (max-width: 480px) {
+  .container-padding {
+    padding: 1rem 1.2rem;
+  }
+  .responsive-title {
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+  }
+  .top-right-controls {
+    top: 1rem;
+    right: 1rem;
+    gap: 6px;
+  }
+  .left-menu-container {
+    margin-top: 3rem;
+  }
+  .glass-panel {
+    border-radius: 16px;
+  }
+  .party-lobby-panel {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .map-container.expanded {
+    height: 60vh !important;
+  }
+  .hud-container {
+    top: 6px;
+    left: 6px;
+    right: 6px;
+  }
+}
+
+/* ── Landscape mobile (short height) ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .left-menu-container {
+    margin-top: 1rem;
+  }
+  .container-padding {
+    padding: 0.5rem 1.5rem;
+  }
+  .responsive-title {
+    font-size: 1.5rem;
+  }
+  .cta-glow-btn {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+  }
+  .map-container {
+    width: 200px;
+    height: 150px;
+    bottom: 10px;
+    right: 10px;
+  }
+  .map-container.expanded {
+    width: 55vw !important;
+    height: 90vh !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    border-radius: 0 !important;
+  }
+  .bottom-controls {
+    display: none;
+  }
+}
+
+/* ── Ensure HUD glass-panel badges scale on all screens ── */
+@media (max-width: 767px) {
+  .hud-container .glass-panel {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.82rem;
+    border-radius: 10px;
+  }
+  .hud-container .btn {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.82rem;
+  }
+}
+
+/* ── Safe area insets for notch/bottom bar devices (iOS) ── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .bottom-controls {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .mc-mobile-trigger {
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  .mobile-map-toggle {
+    bottom: max(20px, calc(env(safe-area-inset-bottom) + 12px));
+  }
 }

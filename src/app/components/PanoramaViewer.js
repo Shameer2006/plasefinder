@@ -47,14 +47,18 @@ export default function PanoramaViewer() {
       <iframe
         ref={iframeRef}
         style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
           width: '100vw',
           height: 'calc(100vh + 300px)',
-          zIndex: 100,
           transform: 'translateY(-285px)',
+          zIndex: 1,
           border: 'none',
-          backgroundColor: '#1a1a2e', // Dark background to prevent white flash during loading
+          backgroundColor: '#1a1a2e',
           opacity: hasLoaded ? 1 : 0,
-          transition: 'opacity 0.5s ease-in-out' // Smooth fade in when loaded
+          transition: 'opacity 0.5s ease-in-out',
+          pointerEvents: 'auto',
         }}
         allowFullScreen
         referrerPolicy="no-referrer-when-downgrade"
@@ -64,9 +68,9 @@ export default function PanoramaViewer() {
         }}
       ></iframe>
       
-      {/* Invisible overlay to block clicking links in the iframe if needed */}
-      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '60px', zIndex: 10 }}></div>
-      <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '60px', zIndex: 10 }}></div>
+      {/* Block Google logo/links at top and bottom */}
+      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '55px', zIndex: 10, pointerEvents: 'none' }}></div>
+      <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '55px', zIndex: 10, pointerEvents: 'none' }}></div>
     </div>
   );
 }

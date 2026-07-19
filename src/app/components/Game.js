@@ -12,7 +12,7 @@ const GuessingMap = dynamic(() => import('./GuessingMap'), { ssr: false });
 
 export default function Game() {
   const { 
-    gameState, setGameState, 
+    gameState, setGameState, resetGame,
     difficulty, 
     currentRound, maxRounds, 
     score, 
@@ -70,7 +70,7 @@ export default function Game() {
         <div className="glass-panel" style={{ padding: '0.5rem 1rem', fontWeight: 'bold' }}>
           Score: {score}
         </div>
-        <button className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }} onClick={() => setGameState('MENU')}>Quit</button>
+        <button className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', backgroundColor: '#ef4444', borderColor: '#ef4444', color: 'white' }} onClick={() => resetGame()}>Quit</button>
       </div>
 
       <PanoramaViewer />

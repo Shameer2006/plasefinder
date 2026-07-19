@@ -6,8 +6,6 @@ import { useGameStore } from '@/lib/store';
 import { updateDailyChallengeStreak } from '@/lib/userProfile';
 import { getCountFromServer, collection, doc, setDoc, deleteDoc, query, where } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import Game from './components/Game';
-import FlagGame from './components/FlagGame';
 import dynamic from 'next/dynamic';
 import PartyLobby from './components/PartyLobby';
 import Spinner from './components/Spinner';
@@ -16,6 +14,8 @@ import { sounds } from '@/lib/sounds';
 import ProfileModal from './components/ProfileModal';
 import OnboardingModal from './components/OnboardingModal';
 
+const Game = dynamic(() => import('./components/Game'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
+const FlagGame = dynamic(() => import('./components/FlagGame'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
 const MultiplayerGame = dynamic(() => import('./components/MultiplayerGame'), { ssr: false });
 
 export default function Home() {
@@ -291,13 +291,14 @@ export default function Home() {
 
   return (
     <main id="main-content" style={{
-      minHeight: '100dvh',
+      height: '100dvh',
       width: '100vw',
       backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/bg.jpg)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
+      backgroundAttachment: 'fixed',
       position: 'relative',
-      overflowY: 'auto',
+      overflow: 'hidden',
       color: 'white'
     }}>
       <div className="left-gradient-overlay" style={{
@@ -306,7 +307,7 @@ export default function Home() {
         zIndex: 1
       }}></div>
 
-      <section className="container-padding" style={{ position: 'relative', zIndex: 2, minHeight: '100dvh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '2rem' }}>
+      <section className="container-padding" style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '0.5rem' }}>
         
         <div className="top-right-controls">
           <button 
@@ -352,6 +353,7 @@ export default function Home() {
                 <OnboardingTooltip onDismiss={() => setShowOnboarding(false)} />
               )}
               <MainMenu 
+                onQuickPlay={() => handleStart('MEDIUM')}
                 onSingleplayer={() => setShowDifficulty(true)} 
                 onFindMatchClick={() => setShowMatchmaking(true)} 
                 isQueuing={isQueuing} 
@@ -528,13 +530,19 @@ const OnboardingTooltip = ({ onDismiss }) => (
   </div>
 );
 
-const MainMenu = ({ onSingleplayer, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onFlagGuesser, onCreateParty, onJoinParty, onLeaderboard, onAbout }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '0.2rem' }}>
-      <img src="/logo.png" alt="LostStreet Logo" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,255,255,0.1)' }} />
-      <h1 className="responsive-title" style={{ fontWeight: 'bold', margin: 0, fontFamily: '"Outfit", sans-serif' }}>LostStreet</h1>
+const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onFlagGuesser, onCreateParty, onJoinParty, onLeaderboard, onAbout }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.25rem, 1vh, 0.55rem)' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <img src="/logo.png" alt="LostStreet Logo" style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,255,255,0.1)', flexShrink: 0 }} />
+      <h1 className="responsive-title" style={{ fontWeight: 'bold', margin: 0, fontFamily: '"Outfit", sans-serif', fontSize: 'clamp(1.6rem, 3.5vw, 2.5rem)' }}>LostStreet</h1>
     </div>
-    <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
+    <p style={{ fontSize: 'clamp(0.78rem, 1.5vw, 0.95rem)', color: '#d1d5db', margin: 0, lineHeight: 1.3 }}>Guess the location. Compete with friends. 100% Free.</p>
+    
+    <button className="cta-glow-btn" onClick={onQuickPlay} aria-label="Quick Play - start a game instantly">
+      ▶ Quick Play
+    </button>
+    
+    <div style={{ height: '1px', background: 'rgba(255,255,255,0.4)', width: '100%' }}></div>
     
     <MenuItem text="Singleplayer" onClick={onSingleplayer} />
     {isQueuing ? (
@@ -543,29 +551,29 @@ const MainMenu = ({ onSingleplayer, onFindMatchClick, isQueuing, cancelMatchmaki
       <MenuItem text="Find a Match" onClick={onFindMatchClick} />
     )}
     
-    <div style={{ height: '2px', background: 'white', width: '100%', margin: '0.5rem 0' }}></div>
+    <div style={{ height: '1px', background: 'rgba(255,255,255,0.4)', width: '100%' }}></div>
     
     <MenuItem text="Create Party" onClick={onCreateParty} />
     <MenuItem text="Join Party" onClick={onJoinParty} />
     <MenuItem text="Flag Guesser" onClick={onFlagGuesser} />
     
-    <div style={{ height: '2px', background: 'white', width: '100%', margin: '0.5rem 0' }}></div>
+    <div style={{ height: '1px', background: 'rgba(255,255,255,0.4)', width: '100%' }}></div>
     
     <MenuItem text="Leaderboard" onClick={onLeaderboard} />
     <MenuItem text="About" onClick={onAbout} />
 
-    <div style={{ height: '2px', background: 'white', width: '100%', margin: '0.5rem 0' }}></div>
+    <div style={{ height: '1px', background: 'rgba(255,255,255,0.4)', width: '100%' }}></div>
     
-    <button onClick={onDailyChallenge} disabled={playedToday} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: playedToday ? 'not-allowed' : 'inherit', fontSize: '1.2rem', fontWeight: 'bold', opacity: playedToday ? 0.6 : 1, background: 'none', border: 'none', color: 'inherit', font: 'inherit', padding: 0 }} className={playedToday ? "" : "menu-item-hover"} aria-label={`Daily Challenge. ${streak} day streak${playedToday ? '. Already played today.' : ''}`}>
+    <button onClick={onDailyChallenge} disabled={playedToday} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', cursor: playedToday ? 'not-allowed' : 'inherit', fontSize: 'clamp(0.95rem, 2vw, 1.2rem)', fontWeight: 'bold', opacity: playedToday ? 0.6 : 1, background: 'none', border: 'none', color: 'inherit', font: 'inherit', padding: 0 }} className={playedToday ? "" : "menu-item-hover"} aria-label={`Daily Challenge. ${streak} day streak${playedToday ? '. Already played today.' : ''}`}>
       Daily Challenge 
-      <span style={{ background: '#fb923c', color: 'white', padding: '2px 8px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 'bold', marginLeft: '0.5rem', display: 'flex', alignItems: 'center', boxShadow: '0 0 12px rgba(251, 146, 60, 0.8)' }}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '2px' }}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+      <span style={{ background: '#fb923c', color: 'white', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold', marginLeft: '0.3rem', display: 'flex', alignItems: 'center', boxShadow: '0 0 10px rgba(251, 146, 60, 0.7)' }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '2px' }}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
         {streak} day{streak !== 1 ? 's' : ''}
       </span>
     </button>
 
-    <div style={{ marginTop: '1.5rem' }}>
-      <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: '#9ca3af', marginBottom: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+    <div style={{ marginTop: 'clamp(0.3rem, 1vh, 0.8rem)' }}>
+      <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#9ca3af', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
         Featured History
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -697,7 +705,7 @@ const ProfileStat = ({ label, value }) => (
 );
 
 const MenuItem = ({ text, onClick }) => (
-  <button onClick={onClick} style={{ fontWeight: 'bold', cursor: 'inherit', background: 'none', border: 'none', color: 'inherit', font: 'inherit', padding: '4px 0', textAlign: 'left', width: '100%', fontSize: '1.2rem' }} className="menu-item-hover">
+  <button onClick={onClick} style={{ fontWeight: 'bold', cursor: 'inherit', background: 'none', border: 'none', color: 'inherit', font: 'inherit', padding: '2px 0', textAlign: 'left', width: '100%', fontSize: 'clamp(1rem, 2.2vw, 1.2rem)' }} className="menu-item-hover">
     {text}
   </button>
 );

@@ -148,7 +148,7 @@ export default function FlagGame({ onReturnToMenu }) {
         <div className="glass-panel" style={{ padding: '0.4rem 0.8rem', fontWeight: 'bold', fontSize: isMobile ? '0.85rem' : '1rem' }}>
           Score: {score}
         </div>
-        <button className="btn btn-secondary" style={{ padding: '0.4rem 0.8rem', fontSize: isMobile ? '0.8rem' : '0.9rem' }} onClick={onReturnToMenu}>Quit</button>
+        <button className="btn btn-secondary" style={{ padding: '0.4rem 0.8rem', fontSize: isMobile ? '0.8rem' : '0.9rem', backgroundColor: '#ef4444', borderColor: '#ef4444', color: 'white' }} onClick={onReturnToMenu}>Quit</button>
       </div>
 
       <div className="glass-panel" style={{ padding: isMobile ? '1.2rem' : '2rem', width: '90%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
