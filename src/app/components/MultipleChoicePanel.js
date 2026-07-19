@@ -2,9 +2,10 @@
 import { useState } from 'react';
 import { useGameStore } from '@/lib/store';
 import { sounds } from '@/lib/sounds';
+import { generateContextualHint } from '@/lib/hintUtils';
 
 export default function MultipleChoicePanel() {
-  const { currentLocation, options, setUserGuess, setGameState } = useGameStore();
+  const { currentLocation, options, setUserGuess, setGameState, usedHint, setUsedHint } = useGameStore();
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -23,6 +24,10 @@ export default function MultipleChoicePanel() {
     }, 1500);
   };
 
+  const handleUseHint = () => {
+    setUsedHint(true);
+  };
+
   // On desktop: show options directly (no toggle needed)
   // On mobile: show "Guess" button; when tapped, expand a full-screen overlay
   // The overlay sits OVER the iframe with pointer-events, blocking it entirely
@@ -30,9 +35,31 @@ export default function MultipleChoicePanel() {
   return (
     <>
       {/* Desktop: always-visible bottom panel */}
-      <div className="mc-desktop-panel">
+      <div className="mc-desktop-panel" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+        
+        {/* Hint Banner (Desktop) */}
+        {usedHint && (
+          <div className="glass-panel" style={{ padding: '1rem 2rem', background: 'rgba(59, 130, 246, 0.85)', color: 'white', maxWidth: '600px', textAlign: 'center', fontSize: '1.1rem', borderRadius: '16px', border: '1px solid #60a5fa' }}>
+            <strong style={{ display: 'block', marginBottom: '0.5rem', color: '#bfdbfe' }}>💡 Hint</strong>
+            {generateContextualHint(currentLocation)}
+          </div>
+        )}
+
         <div className="glass-panel" style={{ padding: '1.5rem', background: 'rgba(20,20,20,0.85)' }}>
-          <h3 style={{ textAlign: 'center', marginBottom: '1.5rem', fontSize: '1.4rem' }}>Where are we?</h3>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', marginBottom: '1.5rem' }}>
+            <h3 style={{ textAlign: 'center', fontSize: '1.4rem', margin: 0 }}>Where are we?</h3>
+            
+            {!usedHint && (
+              <button 
+                className="btn btn-secondary" 
+                style={{ position: 'absolute', right: 0, padding: '0.4rem 1rem', fontSize: '0.9rem', color: '#fbbf24', borderColor: '#fbbf24' }} 
+                onClick={handleUseHint}
+              >
+                Use Hint
+              </button>
+            )}
+          </div>
+
           <div className="options-grid">
             {options.map((option, idx) => {
               const isSelected = selectedOption !== null;
@@ -101,14 +128,34 @@ export default function MultipleChoicePanel() {
           onTouchStart={(e) => e.stopPropagation()}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="glass-panel" style={{ padding: '1.5rem', background: 'rgba(20,20,20,0.95)', width: '90%', maxWidth: '500px', borderRadius: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', marginBottom: '1.5rem' }}>
+          <div className="glass-panel" style={{ padding: '1.5rem', background: 'rgba(20,20,20,0.95)', width: '90%', maxWidth: '500px', borderRadius: '24px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            
+            {/* Hint Banner (Mobile) */}
+            {usedHint && (
+              <div style={{ padding: '1rem', background: 'rgba(59, 130, 246, 0.2)', color: 'white', textAlign: 'center', fontSize: '1rem', borderRadius: '12px', border: '1px solid #3b82f6' }}>
+                <strong style={{ display: 'block', marginBottom: '0.3rem', color: '#93c5fd' }}>💡 Hint</strong>
+                {generateContextualHint(currentLocation)}
+              </div>
+            )}
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              {!usedHint ? (
+                <button 
+                  className="btn btn-secondary" 
+                  style={{ padding: '0.4rem 0.8rem', fontSize: '0.9rem', color: '#fbbf24', borderColor: '#fbbf24' }} 
+                  onClick={handleUseHint}
+                >
+                  Use Hint
+                </button>
+              ) : (
+                <div style={{ width: '80px' }}></div>
+              )}
+
               <h3 style={{ textAlign: 'center', fontSize: '1.4rem', margin: 0 }}>Where are we?</h3>
+              
               <button
                 type="button"
                 style={{
-                  position: 'absolute',
-                  right: 0,
                   background: 'none',
                   border: 'none',
                   color: 'white',

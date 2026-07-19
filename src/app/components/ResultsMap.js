@@ -27,12 +27,22 @@ const actualIcon = new L.Icon({
 function MapFitter({ bounds }) {
   const map = useMap();
   useEffect(() => {
+    let timeoutId;
     if (bounds && bounds.length > 0) {
       // Small timeout to ensure container is fully rendered before fitting
-      setTimeout(() => {
-        map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
+      timeoutId = setTimeout(() => {
+        try {
+          if (map) {
+            map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
+          }
+        } catch (e) {
+          console.warn("Map fitBounds error:", e);
+        }
       }, 300);
     }
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [bounds, map]);
   return null;
 }

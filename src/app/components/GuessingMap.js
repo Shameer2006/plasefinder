@@ -1,10 +1,11 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
-import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Circle, useMapEvents, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useGameStore } from '@/lib/store';
 import { sounds } from '@/lib/sounds';
+import { hintCircle } from '@/lib/hintUtils';
 
 // Fix for default Leaflet icon in Next.js
 const customIcon = new L.Icon({
@@ -60,7 +61,7 @@ export default function GuessingMap({ onGuess, country }) {
   const [markerPos, setMarkerPos] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const { setUserGuess, setGameState } = useGameStore();
+  const { setUserGuess, setGameState, currentLocation, currentRound, usedHint, setUsedHint } = useGameStore();
 
   // Detect touch/mobile device
   useEffect(() => {
@@ -88,6 +89,15 @@ export default function GuessingMap({ onGuess, country }) {
   const toggleExpand = useCallback(() => {
     setIsExpanded(prev => !prev);
   }, []);
+
+  const handleUseHint = () => {
+    setUsedHint(true);
+  };
+
+  let circleHint = null;
+  if (usedHint && currentLocation) {
+    circleHint = hintCircle(currentLocation, 20000, currentRound);
+  }
 
   return (
     <>
@@ -118,12 +128,34 @@ export default function GuessingMap({ onGuess, country }) {
             <MapResizer isExpanded={isExpanded} />
             <MapCenterer country={country} />
             {markerPos && <Marker position={markerPos} icon={customIcon} />}
+            {usedHint && circleHint && (
+              <Circle
+                center={[circleHint.center.lat, circleHint.center.lng]}
+                radius={circleHint.radiusMeters}
+                pathOptions={{
+                  color: 'red',
+                  fillColor: 'red',
+                  fillOpacity: 0.2,
+                  weight: 2
+                }}
+              />
+            )}
           </MapContainer>
         </div>
         
         {/* Submit button - shown when expanded (desktop hover or mobile toggle) */}
         {isExpanded && (
           <div style={{ padding: '0.5rem', display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+            {!usedHint && (
+              <button 
+                className="btn btn-secondary" 
+                style={{ padding: '0.8rem', color: '#fbbf24', borderColor: '#fbbf24' }}
+                onClick={handleUseHint}
+                title="Use Hint (-50% Score)"
+              >
+                💡
+              </button>
+            )}
             <button 
               className="btn" 
               style={{ flex: 1, padding: '0.8rem' }}

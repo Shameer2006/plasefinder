@@ -91,6 +91,12 @@ export default function ResultScreen() {
         if (earned < 0) earned = 0;
       }
     }
+    
+    // Apply Hint Penalty
+    if (useGameStore.getState().usedHint) {
+      earned = Math.floor(earned / 2);
+    }
+
     setRoundScore(earned);
     addScore(earned);
 
@@ -248,6 +254,9 @@ export default function ResultScreen() {
 
           <div style={{ animation: 'pulse-glow 2s infinite', display: 'inline-block', padding: isMobile ? '0.6rem 1.5rem' : '1rem 2rem', borderRadius: '50px', background: 'rgba(59, 130, 246, 0.1)', marginBottom: isMobile ? '1.2rem' : '2rem' }}>
             <h3 style={{ fontSize: isMobile ? '2rem' : '3rem', color: 'var(--primary-color)', margin: 0 }}>+{roundScore} Points</h3>
+            {useGameStore.getState().usedHint && (
+              <p style={{ margin: '0.5rem 0 0 0', color: '#fbbf24', fontSize: '1rem', fontWeight: 'bold' }}>💡 Hint Used (-50%)</p>
+            )}
           </div>
           
           <p style={{ marginBottom: isMobile ? '1.5rem' : '2.5rem', opacity: 0.8, fontSize: isMobile ? '1.05rem' : '1.2rem' }}>Total Score: <strong>{score}</strong></p>
