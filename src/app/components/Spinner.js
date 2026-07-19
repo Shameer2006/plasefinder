@@ -1,13 +1,12 @@
 'use client';
-import { DotLottiePlayer } from '@dotlottie/react-player';
-import '@dotlottie/react-player/dist/index.css';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 export default function Spinner({ text = 'Loading...', fullScreen = true }) {
   if (!fullScreen) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '2rem' }}>
         <div style={{ width: '200px', height: '200px' }}>
-          <DotLottiePlayer src="/map search.lottie" autoplay loop />
+          <DotLottieReact src="/map search.lottie" autoplay loop />
         </div>
         {text && <p style={{ color: '#9ca3af', fontSize: '1rem', fontWeight: 500 }}>{text}</p>}
       </div>
@@ -21,7 +20,7 @@ export default function Spinner({ text = 'Loading...', fullScreen = true }) {
       position: 'fixed', inset: 0, zIndex: 9999,
     }}>
       <div style={{ width: '340px', height: '340px', marginBottom: '0.5rem' }}>
-        <DotLottiePlayer src="/map search.lottie" autoplay loop />
+        <DotLottieReact src="/map search.lottie" autoplay loop />
       </div>
       {text && <p style={{ color: '#9ca3af', fontSize: '1.3rem', fontWeight: 600 }}>{text}</p>}
     </div>
