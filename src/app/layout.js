@@ -81,6 +81,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta name="theme-color" content="#0a0a0a" />
+        <meta name="msvalidate.01" content="3B92B95C23615C35821E1600A4267ABE" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preload" as="image" href="/bg.jpg" />
         {/* JSON-LD structured data — static, no hydration issues */}
