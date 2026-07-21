@@ -35,7 +35,7 @@ export default function MultipleChoicePanel() {
   return (
     <>
       {/* Desktop: always-visible bottom panel */}
-      <div className="mc-desktop-panel" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+      <div className="mc-desktop-panel">
         
         {/* Hint Banner (Desktop) */}
         {usedHint && (
@@ -110,16 +110,18 @@ export default function MultipleChoicePanel() {
       </div>
 
       {/* Mobile: Guess button that opens a full-screen overlay */}
-      <div className="mc-mobile-trigger">
-        <button
-          type="button"
-          className="btn mc-guess-btn"
-          onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); setIsExpanded(true); }}
-          onClick={() => setIsExpanded(true)}
-        >
-          Guess
-        </button>
-      </div>
+      {!isExpanded && (
+        <div className="mc-mobile-trigger">
+          <button
+            type="button"
+            className="btn mc-guess-btn"
+            onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); setIsExpanded(true); }}
+            onClick={() => setIsExpanded(true)}
+          >
+            Guess
+          </button>
+        </div>
+      )}
 
       {/* Mobile: Full-screen overlay with options (blocks iframe completely) */}
       {isExpanded && (
@@ -139,36 +141,42 @@ export default function MultipleChoicePanel() {
             )}
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              {!usedHint ? (
-                <button 
-                  className="btn btn-secondary" 
-                  style={{ padding: '0.4rem 0.8rem', fontSize: '0.9rem', color: '#fbbf24', borderColor: '#fbbf24' }} 
-                  onClick={handleUseHint}
-                >
-                  Use Hint
-                </button>
-              ) : (
-                <div style={{ width: '80px' }}></div>
-              )}
+              <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-start' }}>
+                {!usedHint ? (
+                  <button 
+                    className="btn btn-secondary" 
+                    style={{ padding: '0.4rem 0.6rem', fontSize: '0.85rem', color: '#fbbf24', borderColor: '#fbbf24' }} 
+                    onClick={handleUseHint}
+                  >
+                    Hint
+                  </button>
+                ) : (
+                  <div style={{ width: '40px' }}></div>
+                )}
+              </div>
 
-              <h3 style={{ textAlign: 'center', fontSize: '1.4rem', margin: 0 }}>Where are we?</h3>
+              <div style={{ flex: 2, textAlign: 'center' }}>
+                <h3 style={{ fontSize: '1.2rem', margin: 0, whiteSpace: 'nowrap' }}>Where are we?</h3>
+              </div>
               
-              <button
-                type="button"
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: 'white',
-                  fontSize: '1.5rem',
-                  padding: '0 10px',
-                  touchAction: 'manipulation'
-                }}
-                onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); setIsExpanded(false); }}
-                onClick={() => setIsExpanded(false)}
-                aria-label="Close"
-              >
-                ✕
-              </button>
+              <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+                <button
+                  type="button"
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'white',
+                    fontSize: '1.5rem',
+                    padding: '0 8px',
+                    touchAction: 'manipulation'
+                  }}
+                  onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); setIsExpanded(false); }}
+                  onClick={() => setIsExpanded(false)}
+                  aria-label="Close"
+                >
+                  ✕
+                </button>
+              </div>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>

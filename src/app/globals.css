@@ -254,6 +254,10 @@ body {
 
 /* Multiple Choice - Desktop: bottom overlay panel */
 .mc-desktop-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   position: absolute;
   bottom: 20px;
   left: 50%;

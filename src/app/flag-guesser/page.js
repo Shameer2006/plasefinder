@@ -1,14 +1,15 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Flag Guesser - Free Online Multiplayer Flag Guessing Game',
-  description: 'Play Flag Guesser online for free. Test your knowledge of world flags in singleplayer or challenge your friends in multiplayer party mode on LostStreet.',
+  title: 'Flag Guesser Game - Free Educational Geography Quiz for Students & Trivia Fans',
+  description: 'Play the free Flag Guesser mini-game on LostStreet. A fun, educational geography trivia quiz perfect for students, teachers, and trivia fans to learn world flags.',
+  keywords: 'flag guesser, geography quiz, educational flag game, trivia fans, learn flags, students geography game, world flags quiz, loststreet, free flag game',
   alternates: {
     canonical: 'https://www.loststreet.online/flag-guesser',
   },
   openGraph: {
-    title: 'Flag Guesser - Multiplayer Flag Game',
-    description: 'Can you guess the country by its flag? Play the free Flag Guesser mode on LostStreet.',
+    title: 'Flag Guesser - Educational Trivia Game for Students',
+    description: 'Can you guess the country by its flag? Play the free Flag Guesser mode on LostStreet. Perfect for trivia fans and geography students!',
     url: 'https://www.loststreet.online/flag-guesser',
     siteName: 'LostStreet',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
@@ -21,11 +22,16 @@ const jsonLd = {
   "@type": "GameApplication",
   "name": "Flag Guesser by LostStreet",
   "url": "https://www.loststreet.online/flag-guesser",
-  "description": "A free online multiplayer flag guessing game. Test your knowledge of world flags or play against friends in party mode.",
-  "genre": "Educational Game",
+  "description": "A free online multiplayer flag guessing game. Perfect for trivia fans and students to test their knowledge of world flags in singleplayer or party mode.",
+  "genre": ["Educational Game", "Trivia Game", "Quiz"],
   "playMode": ["SinglePlayer", "MultiPlayer"],
   "applicationCategory": "GameApplication",
   "operatingSystem": "Web Browser",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Students, Trivia Fans, Teachers"
+  },
+  "educationalUse": "Geography Learning",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -65,14 +71,14 @@ export default function FlagGuesserPage() {
           The Ultimate Flag Guesser
         </h1>
         <p style={{ fontSize: '1.5rem', color: '#9ca3af', marginBottom: '3rem', maxWidth: '800px', margin: '0 auto 3rem auto', lineHeight: '1.6' }}>
-          Test your geography knowledge in the free online Flag Guesser game. Identify flags from all 196 countries in singleplayer or challenge your friends in real-time multiplayer!
+          Test your geography knowledge in the free online Flag Guesser game. Whether you are a student learning world flags, a teacher planning a classroom activity, or a hardcore trivia fan, our mini-game is perfect for you. Identify flags from all 196 countries in singleplayer or challenge your friends in real-time multiplayer!
         </p>
 
         <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/" style={{ background: '#38bdf8', color: '#050816', padding: '15px 40px', borderRadius: '30px', fontWeight: 'bold', fontSize: '1.3rem', textDecoration: 'none', boxShadow: '0 10px 25px rgba(56, 189, 248, 0.4)', transition: 'transform 0.2s' }}>
+          <Link href="/#FLAG_GAME" style={{ background: '#38bdf8', color: '#050816', padding: '15px 40px', borderRadius: '30px', fontWeight: 'bold', fontSize: '1.3rem', textDecoration: 'none', boxShadow: '0 10px 25px rgba(56, 189, 248, 0.4)', transition: 'transform 0.2s' }}>
             Play Solo
           </Link>
-          <Link href="/" style={{ background: 'rgba(255,255,255,0.1)', color: 'white', padding: '15px 40px', borderRadius: '30px', fontWeight: 'bold', fontSize: '1.3rem', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', transition: 'background 0.2s' }}>
+          <Link href="/#MENU" style={{ background: 'rgba(255,255,255,0.1)', color: 'white', padding: '15px 40px', borderRadius: '30px', fontWeight: 'bold', fontSize: '1.3rem', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', transition: 'background 0.2s' }}>
             Create Multiplayer Party
           </Link>
         </div>
@@ -100,17 +106,23 @@ export default function FlagGuesserPage() {
             <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>100% Free Forever</h3>
             <p style={{ color: '#9ca3af', lineHeight: '1.6' }}>No premium subscriptions, no daily limits, and no paywalls. Just pure geography fun.</p>
           </div>
+          
+          <div style={{ background: 'rgba(255,255,255,0.05)', padding: '30px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎓</div>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Great for Students & Trivia Fans</h3>
+            <p style={{ color: '#9ca3af', lineHeight: '1.6' }}>An excellent educational mini-game for classrooms or a fun challenge for trivia nights. Learn geography effortlessly.</p>
+          </div>
         </div>
       </section>
 
       {/* SEO Content Section */}
       <section style={{ maxWidth: '800px', margin: '0 auto', padding: '60px 20px', color: '#d1d5db', lineHeight: '1.8' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: 'white', marginBottom: '1.5rem' }}>How to play Flag Guesser</h2>
+        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: 'white', marginBottom: '1.5rem' }}>An Educational Mini-Game for Trivia Fans</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          Flag Guesser is a popular geography quiz game where players are shown the national flag of a random country and must correctly identify which country it belongs to. The game tests your knowledge of vexillology (the study of flags) and world geography.
+          Flag Guesser is a popular geography quiz game where players are shown the national flag of a random country and must correctly identify which country it belongs to. The game tests your knowledge of vexillology (the study of flags) and world geography, making it highly appealing to students and trivia enthusiasts alike.
         </p>
         <p style={{ marginBottom: '1.5rem' }}>
-          On LostStreet, we have integrated a high-performance Flag Guesser mode directly into our multiplayer party system. When you create a party lobby, the host can select "Flag Guesser" from the game mode settings, adjust the round time limit (from 30 seconds up to 5 minutes), and start the match.
+          On LostStreet, we have integrated a high-performance Flag Guesser mode directly into our multiplayer party system. When you create a party lobby, the host can select "Flag Guesser" from the game mode settings, adjust the round time limit (from 30 seconds up to 5 minutes), and start the match. It's the perfect mini-game for classroom engagement or a virtual trivia night!
         </p>
         <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginTop: '2rem', marginBottom: '1rem' }}>Tips for guessing flags</h3>
         <ul style={{ paddingLeft: '20px', marginBottom: '2rem' }}>
