@@ -157,7 +157,6 @@ export default function AboutPage() {
             { icon: '⚔️', title: 'Real-time Multiplayer', desc: '1v1 duels with ELO matchmaking and live scoring.' },
             { icon: '🎉', title: 'Party Mode', desc: 'Create or join private games with a 6-digit code.' },
             { icon: '📅', title: 'Daily Challenge', desc: 'One challenge per day with streak tracking and bonuses.' },
-            { icon: '🏁', title: 'Flag Guesser', desc: 'Test your flag knowledge in a fun mini-game.' },
             { icon: '📱', title: 'Mobile Friendly', desc: 'Plays perfectly on phones and tablets — no app needed.' },
             { icon: '🔐', title: 'Google Sign-In', desc: 'Save progress, unlock multiplayer, and track your stats.' },
           ].map((feat) => (
@@ -201,7 +200,6 @@ export default function AboutPage() {
             { mode: 'Multiplayer Duels', desc: 'Real-time 1v1 matches with ELO-based matchmaking. Compete for ranking supremacy.' },
             { mode: 'Party Mode', desc: 'Create or join a private room with a 6-digit code. Play with friends in groups of up to 20.' },
             { mode: 'Daily Challenge', desc: 'One special round per day. Build your streak and earn bonus XP for consecutive plays.' },
-            { mode: 'Flag Guesser', desc: 'A fun mini-game where you guess countries from their national flags.' },
           ].map((item) => (
             <div key={item.mode} style={{ display: 'flex', gap: '1rem', alignItems: 'baseline' }}>
               <span style={{ color: '#10b981', fontWeight: 700, fontSize: '1rem', minWidth: 'fit-content' }}>▸ {item.mode}</span>

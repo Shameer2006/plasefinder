@@ -365,6 +365,7 @@ export default function Home() {
                 onJoinParty={() => setShowJoinModal(true)}
                 onLeaderboard={() => window.location.href = '/leaderboard'}
                 onAbout={() => window.location.href = '/about'}
+                onFlagGuesser={() => setGameState('FLAG_GAME')}
               />
             </>
           )}
@@ -529,7 +530,7 @@ const OnboardingTooltip = ({ onDismiss }) => (
   </div>
 );
 
-const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout }) => (
+const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.25rem, 1vh, 0.55rem)' }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
       <img src="/logo.png" alt="LostStreet Logo" style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,255,255,0.1)', flexShrink: 0 }} />
@@ -555,11 +556,9 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, ca
     <MenuItem text="Create Party" onClick={onCreateParty} />
     <MenuItem text="Join Party" onClick={onJoinParty} />
     
-    <Link href="/flag-guesser" style={{ textDecoration: 'none', color: 'inherit' }}>
-      <button style={{ fontWeight: 'bold', cursor: 'inherit', background: 'none', border: 'none', color: 'inherit', font: 'inherit', padding: '2px 0', textAlign: 'left', width: '100%', fontSize: 'clamp(1rem, 2.2vw, 1.2rem)' }} className="menu-item-hover">
-        Flag Guesser
-      </button>
-    </Link>
+    <div style={{ height: '1px', background: 'rgba(255,255,255,0.4)', width: '100%' }}></div>
+
+    <MenuItem text="Flag Guesser" onClick={onFlagGuesser} />
     
     <div style={{ height: '1px', background: 'rgba(255,255,255,0.4)', width: '100%' }}></div>
     

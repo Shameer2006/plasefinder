@@ -496,7 +496,7 @@ export default function MultiplayerGame({ gameId }) {
     <div style={{ display: 'flex', width: '100vw', height: '100vh', position: 'relative' }}>
       {matchData.options?.mode === 'Flag Guesser' ? (
         <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#111' }}>
-          <img src={`https://flagcdn.com/w320/${matchData.location.iso}.png`} style={{ maxWidth: '80%', maxHeight: '60%', border: '4px solid white', borderRadius: '10px', boxShadow: '0 10px 30px rgba(0,0,0,0.8)' }} />
+          <img src={`https://flagcdn.com/w320/${matchData.location.iso.toLowerCase()}.png`} style={{ maxWidth: '80%', maxHeight: '60%', border: '4px solid white', borderRadius: '10px', boxShadow: '0 10px 30px rgba(0,0,0,0.8)' }} />
         </div>
       ) : (
         <div style={{ flex: 1, position: 'relative' }}>

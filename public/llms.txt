@@ -11,7 +11,6 @@ LostStreet is a multiplayer geography game where players guess real-world locati
 - Real-time multiplayer duels with ELO rating
 - Private party mode (create/join with 6-digit code)
 - Daily challenge with streak tracking
-- Flag Guesser mini-game
 - Google Sign-In for progress tracking
 - Works on desktop and mobile browsers
 
@@ -22,7 +21,6 @@ LostStreet is a multiplayer geography game where players guess real-world locati
 - **Multiplayer**: Real-time 1v1 duels with matchmaking
 - **Party Mode**: Play with friends using a shared room code
 - **Daily Challenge**: One challenge per day with streak bonuses
-- **Flag Guesser**: Guess countries from their flags
 
 ## Technical Details
 - Built with Next.js and React

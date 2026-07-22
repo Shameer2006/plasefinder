@@ -49,12 +49,6 @@ export default function sitemap() {
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.9,
-    },
-    {
-      url: 'https://www.loststreet.online/flag-guesser',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
     }
   ];
 
