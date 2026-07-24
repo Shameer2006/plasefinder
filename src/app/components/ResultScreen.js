@@ -215,8 +215,8 @@ export default function ResultScreen() {
   }
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0, filter: 'brightness(0.4)' }}>
+    <div style={{ position: 'relative', minHeight: '100vh', overflowY: 'auto' }}>
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, filter: 'brightness(0.4)', minHeight: '100%' }}>
         <ResultsMap 
           location={currentLocation} 
           players={[{ uid: 'you', displayName: 'You', lastGuess: userGuess }]} 
@@ -224,89 +224,71 @@ export default function ResultScreen() {
         />
       </div>
 
-      <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100dvh', padding: isMobile ? '1rem' : '2rem' }}>
-        <div className="glass-panel" style={{ padding: isMobile ? '1.5rem' : '4rem', maxWidth: '700px', width: '100%', textAlign: 'center', background: 'rgba(26, 26, 46, 0.85)', backdropFilter: 'blur(10px)' }}>
-          <h2 className="gradient-text glow-text" style={{ fontSize: isMobile ? '2rem' : '3rem', marginBottom: isMobile ? '1rem' : '1.5rem' }}>Round {currentRound} Result</h2>
+      <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100dvh', padding: '0.5rem', overflow: 'hidden' }}>
+        <div className="glass-panel" style={{ padding: isMobile ? '0.8rem' : '1.2rem', maxWidth: '600px', width: '100%', textAlign: 'center', background: 'rgba(26, 26, 46, 0.92)', backdropFilter: 'blur(10px)', display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '98dvh', overflowY: 'auto' }}>
+          <h2 className="gradient-text glow-text" style={{ fontSize: 'clamp(1.2rem, 4vw, 2rem)', margin: 0 }}>Round {currentRound} Result</h2>
           
-          <div style={{ margin: isMobile ? '1.5rem 0' : '2.5rem 0', fontSize: isMobile ? '1.1rem' : '1.4rem', background: 'rgba(0,0,0,0.4)', padding: isMobile ? '1.2rem' : '2rem', borderRadius: '16px' }}>
+          <div style={{ fontSize: 'clamp(0.85rem, 2vw, 1.1rem)', background: 'rgba(0,0,0,0.4)', padding: '0.8rem', borderRadius: '12px' }}>
             {isChoiceMode ? (
               <>
-                <p style={{ marginBottom: '1rem', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                <p style={{ margin: '0 0 0.5rem 0', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
                   Your guess: 
-                  <strong style={{ color: 'var(--primary-color)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    {userGuess ? <><img src={`https://flagcdn.com/w40/${userGuess.iso}.png`} width="24" alt={userGuess.country} /> {userGuess.country}</> : 'None'}
+                  <strong style={{ color: 'var(--primary-color)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    {userGuess ? <><img src={`https://flagcdn.com/w40/${userGuess.iso}.png`} width="20" alt={userGuess.country} /> {userGuess.country}</> : 'None'}
                   </strong>
                 </p>
-                <p style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                <p style={{ margin: 0, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
                   Correct answer: 
-                  <strong style={{ color: userGuess?.country === currentLocation.country ? 'var(--success-color)' : 'var(--error-color)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <img src={`https://flagcdn.com/w40/${currentLocation.iso}.png`} width="24" alt={currentLocation.country} /> {currentLocation.country}
+                  <strong style={{ color: userGuess?.country === currentLocation.country ? 'var(--success-color)' : 'var(--error-color)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <img src={`https://flagcdn.com/w40/${currentLocation.iso}.png`} width="20" alt={currentLocation.country} /> {currentLocation.country}
                   </strong>
                 </p>
               </>
             ) : (
               <>
-                <p style={{ marginBottom: '1rem' }}>Distance from location: <strong style={{ color: 'var(--primary-color)' }}>{distanceKm} km</strong></p>
-                <p style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>Actual Location: <img src={`https://flagcdn.com/w40/${currentLocation.iso}.png`} width="24" alt={currentLocation.country} /> {currentLocation.country}, {currentLocation.state || 'Unknown State'}</p>
+                <p style={{ margin: '0 0 0.5rem 0' }}>Distance: <strong style={{ color: 'var(--primary-color)' }}>{distanceKm} km</strong></p>
+                <p style={{ margin: 0, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>Location: <img src={`https://flagcdn.com/w40/${currentLocation.iso}.png`} width="20" alt={currentLocation.country} /> {currentLocation.country}</p>
               </>
             )}
           </div>
 
-          <div style={{ animation: 'pulse-glow 2s infinite', display: 'inline-block', padding: isMobile ? '0.6rem 1.5rem' : '1rem 2rem', borderRadius: '50px', background: 'rgba(59, 130, 246, 0.1)', marginBottom: isMobile ? '1.2rem' : '2rem' }}>
-            <h3 style={{ fontSize: isMobile ? '2rem' : '3rem', color: 'var(--primary-color)', margin: 0 }}>+{roundScore} Points</h3>
+          <div style={{ display: 'inline-block', padding: '0.5rem 1.2rem', borderRadius: '50px', background: 'rgba(59, 130, 246, 0.1)' }}>
+            <h3 style={{ fontSize: 'clamp(1.4rem, 5vw, 2.2rem)', color: 'var(--primary-color)', margin: 0 }}>+{roundScore} Points</h3>
             {useGameStore.getState().usedHint && (
-              <p style={{ margin: '0.5rem 0 0 0', color: '#fbbf24', fontSize: '1rem', fontWeight: 'bold' }}>💡 Hint Used (-50%)</p>
+              <p style={{ margin: '0.2rem 0 0 0', color: '#fbbf24', fontSize: '0.85rem', fontWeight: 'bold' }}>💡 Hint Used (-50%)</p>
             )}
           </div>
           
-          <p style={{ marginBottom: isMobile ? '1.5rem' : '2.5rem', opacity: 0.8, fontSize: isMobile ? '1.05rem' : '1.2rem' }}>Total Score: <strong>{score}</strong></p>
+          <p style={{ margin: 0, opacity: 0.8, fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>Total Score: <strong>{score}</strong></p>
 
           {currentRound < maxRounds ? (
-            <button className="btn" style={{ fontSize: isMobile ? '1.1rem' : '1.3rem', padding: isMobile ? '12px 24px' : '16px 32px' }} onClick={handleNext}>
+            <button className="btn" style={{ fontSize: 'clamp(1rem, 3vw, 1.2rem)', padding: '10px 24px' }} onClick={handleNext}>
               Next Round
             </button>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', width: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', width: '100%' }}>
               <button 
                 className="btn" 
-                style={{ 
-                  fontSize: isMobile ? '1.1rem' : '1.2rem', 
-                  padding: isMobile ? '12px 20px' : '16px 24px', 
-                  background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
-                  color: '#000',
-                  fontWeight: 'bold',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  gap: '8px'
-                }} 
+                style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', padding: '10px 16px', background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#000', fontWeight: 'bold', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }} 
                 onClick={async () => {
                   const shareUrl = `https://www.loststreet.online/share/${score}`;
                   const shareText = `🌍 LostStreet — ${isChoiceMode ? 'Easy/Medium' : 'Hard'} Mode\nScore: ${score.toLocaleString()} pts\nPlay free → ${shareUrl}`;
                   if (navigator.share) {
-                    try {
-                      await navigator.share({
-                        title: 'My LostStreet Score',
-                        text: shareText,
-                      });
-                    } catch (e) {
-                      console.error('Error sharing:', e);
-                    }
+                    try { await navigator.share({ title: 'My LostStreet Score', text: shareText }); } catch (e) {}
                   } else {
                     navigator.clipboard.writeText(shareText);
                   }
                 }}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                 Share Result
               </button>
-              
-              <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <button className="btn secondary-btn" style={{ fontSize: isMobile ? '1rem' : '1.2rem', padding: isMobile ? '12px 20px' : '16px 24px', background: 'rgba(255,255,255,0.1)' }} onClick={handleFinish}>
+              <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <button className="btn" style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', padding: '10px 16px', background: 'rgba(255,255,255,0.1)', flex: 1 }} onClick={handleFinish}>
                   Finish & Collect XP
                 </button>
-                <button className="btn" style={{ fontSize: isMobile ? '1rem' : '1.2rem', padding: isMobile ? '12px 20px' : '16px 24px', background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))' }} onClick={handleContinueGame}>
-                  Continue to Round {maxRounds + 5}
+                <button className="btn" style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', padding: '10px 16px', background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))', flex: 1 }} onClick={handleContinueGame}>
+                  +5 More Rounds
                 </button>
               </div>
             </div>

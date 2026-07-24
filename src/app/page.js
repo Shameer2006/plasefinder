@@ -330,12 +330,19 @@ export default function Home() {
               style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
               aria-label="Open profile"
             >
-              <img 
-                src={user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName}`} 
-                alt="Profile"
-                style={{ width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer', border: '2px solid rgba(255,255,255,0.2)', objectFit: 'cover' }}
-                className="menu-item-hover"
-              />
+              {user.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  referrerPolicy="no-referrer"
+                  alt="Profile"
+                  style={{ width: '40px', height: '40px', borderRadius: '50%', border: '2px solid rgba(255,255,255,0.2)', objectFit: 'cover', display: 'block' }}
+                  className="menu-item-hover"
+                />
+              ) : (
+                <div style={{ width: '40px', height: '40px', borderRadius: '50%', border: '2px solid rgba(255,255,255,0.2)', background: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.1rem', color: 'white' }}>
+                  {(userProfile?.username || user.displayName || 'U')[0].toUpperCase()}
+                </div>
+              )}
             </button>
           )}
         </div>
@@ -451,10 +458,8 @@ export default function Home() {
           userProfile={userProfile} 
           user={user}
           onClose={() => setShowProfile(false)}
-          onProfileUpdate={(updates) => {
-             // Let auth context handle it or reload if needed, but since it's an overlay it should be fine.
-             // Usually auth context handles snapshot updates.
-          }}
+          onLogout={logout}
+          onProfileUpdate={(updates) => {}}
         />
       )}
 

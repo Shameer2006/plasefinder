@@ -178,7 +178,7 @@ const LineChart = ({ data, dataKey, color = '#22C55E', isMobile }) => {
 };
 
 // ── Main ProfileModal Component ──────────────────────────────────────
-export default function ProfileModal({ userProfile, user, onClose, onProfileUpdate }) {
+export default function ProfileModal({ userProfile, user, onClose, onProfileUpdate, onLogout }) {
   const [isMobile, setIsMobile] = useState(false);
   const [activeTab, setActiveTab] = useState('profile');
   const [animIn, setAnimIn] = useState(false);
@@ -424,22 +424,34 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
               />
             )}
           </div>
-          <button
-            onClick={onClose}
-            style={{
-              width: '40px', height: '40px', borderRadius: '50%',
-              background: '#DC2626', border: 'none', color: 'white',
-              fontSize: '1.2rem', cursor: 'pointer', display: 'flex',
-              alignItems: 'center', justifyContent: 'center',
-              transition: 'transform 0.15s, background 0.15s',
-              flexShrink: 0,
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.background = '#EF4444'}
-            onMouseLeave={(e) => e.currentTarget.style.background = '#DC2626'}
-            aria-label="Close profile"
-          >
-            ✕
-          </button>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <button
+              onClick={() => { onLogout && onLogout(); onClose(); }}
+              style={{
+                height: '40px', padding: '0 16px', borderRadius: '20px',
+                background: '#b91c1c', border: 'none', color: 'white',
+                fontSize: '0.9rem', fontWeight: 'bold', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', gap: '6px',
+                flexShrink: 0,
+              }}
+              aria-label="Log out"
+            >
+              Log Out
+            </button>
+            <button
+              onClick={onClose}
+              style={{
+                width: '40px', height: '40px', borderRadius: '50%',
+                background: '#DC2626', border: 'none', color: 'white',
+                fontSize: '1.2rem', cursor: 'pointer', display: 'flex',
+                alignItems: 'center', justifyContent: 'center',
+                flexShrink: 0,
+              }}
+              aria-label="Close profile"
+            >
+              X
+            </button>
+          </div>
         </div>
 
         {/* ── Tab Bar ───────────────────────────────────────────── */}
