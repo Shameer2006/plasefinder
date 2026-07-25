@@ -4,6 +4,7 @@ import { ToastProvider } from "@/app/components/Toast";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
+import SiteShell from "@/app/components/SiteShell";
 
 export const metadata = {
   title: "LostStreet - Free GeoGuessr Alternative | Explore the World",
@@ -110,7 +111,7 @@ export default function RootLayout({ children }) {
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <AuthProvider>
           <ToastProvider>
-            {children}
+            <SiteShell>{children}</SiteShell>
           </ToastProvider>
         </AuthProvider>
         <SpeedInsights />

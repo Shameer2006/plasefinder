@@ -307,45 +307,53 @@ export default function Home() {
         zIndex: 1
       }}></div>
 
-      <section className="container-padding" style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '0.5rem' }}>
-        
-        <div className="top-right-controls">
-          <button 
-            className="btn" 
-            style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '6px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}
+      {/* ── Homepage header bar ── */}
+      <header style={{
+        position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10,
+        display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
+        padding: '0 clamp(1rem, 3vw, 2rem)',
+        height: '56px',
+        borderBottom: '1px solid rgba(255,255,255,0.08)',
+      }}>
+        {/* Logo — bottom-left aligned */}
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'white', paddingBottom: '10px' }}>
+          <img src="/logo.png" alt="LostStreet" style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover' }} />
+          <span style={{ fontWeight: 800, fontSize: '1.15rem', fontFamily: '"Outfit", sans-serif', letterSpacing: '0.01em' }}>LostStreet</span>
+        </Link>
+
+        {/* Right controls */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', paddingBottom: '10px' }}>
+          <button
+            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', color: 'white', padding: '5px 12px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}
             onClick={() => window.location.href = '/chronicles'}
-            aria-label="View country chronicles"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
-            <span>Maps</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
+            Maps
           </button>
-          
+          <button
+            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', color: 'white', padding: '5px 12px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}
+            onClick={() => window.location.href = '/guides'}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            Guides
+          </button>
           {(!user || user.isAnonymous) ? (
-            <button className="btn" style={{ background: '#2f7a44', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 16px', borderRadius: '6px' }} onClick={loginWithGoogle} aria-label="Sign in with Google">
-              <span style={{ fontWeight: 'bold' }}>G</span> Login
-            </button>
+            <button style={{ background: '#2f7a44', border: 'none', color: 'white', padding: '6px 14px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }} onClick={loginWithGoogle}>Login</button>
           ) : (
-            <button
-              onClick={() => setShowProfile(true)}
-              style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
-              aria-label="Open profile"
-            >
+            <button onClick={() => setShowProfile(true)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }} aria-label="Open profile">
               {user.photoURL ? (
-                <img
-                  src={user.photoURL}
-                  referrerPolicy="no-referrer"
-                  alt="Profile"
-                  style={{ width: '40px', height: '40px', borderRadius: '50%', border: '2px solid rgba(255,255,255,0.2)', objectFit: 'cover', display: 'block' }}
-                  className="menu-item-hover"
-                />
+                <img src={user.photoURL} referrerPolicy="no-referrer" alt="Profile" style={{ width: '34px', height: '34px', borderRadius: '50%', objectFit: 'cover', display: 'block', border: '2px solid rgba(255,255,255,0.25)' }} />
               ) : (
-                <div style={{ width: '40px', height: '40px', borderRadius: '50%', border: '2px solid rgba(255,255,255,0.2)', background: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.1rem', color: 'white' }}>
+                <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: '#e05a2b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem', color: 'white', border: '2px solid rgba(255,255,255,0.25)' }}>
                   {(userProfile?.username || user.displayName || 'U')[0].toUpperCase()}
                 </div>
               )}
             </button>
           )}
         </div>
+      </header>
+
+      <section className="container-padding" style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '0.5rem', paddingTop: '72px' }}>
 
         <div className="left-menu-container">
           {showSettings ? (
@@ -360,7 +368,7 @@ export default function Home() {
                 <OnboardingTooltip onDismiss={() => setShowOnboarding(false)} />
               )}
               <MainMenu 
-                onQuickPlay={() => handleStart('MEDIUM')}
+                onQuickPlay={() => handleStart('EASY')}
                 onSingleplayer={() => setShowDifficulty(true)} 
                 onFindMatchClick={() => setShowMatchmaking(true)} 
                 isQueuing={isQueuing} 
@@ -536,12 +544,8 @@ const OnboardingTooltip = ({ onDismiss }) => (
 );
 
 const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.25rem, 1vh, 0.55rem)' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-      <img src="/logo.png" alt="LostStreet Logo" style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,255,255,0.1)', flexShrink: 0 }} />
-      <h1 className="responsive-title" style={{ fontWeight: 'bold', margin: 0, fontFamily: '"Outfit", sans-serif', fontSize: 'clamp(1.6rem, 3.5vw, 2.5rem)' }}>LostStreet</h1>
-    </div>
-    <p style={{ fontSize: 'clamp(0.78rem, 1.5vw, 0.95rem)', color: '#d1d5db', margin: 0, lineHeight: 1.3 }}>Guess the location. Compete with friends. 100% Free.</p>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.18rem, 0.7vh, 0.35rem)' }}>
+    <p style={{ fontSize: 'clamp(0.78rem, 1.5vw, 0.95rem)', color: '#d1d5db', margin: 0, lineHeight: 1.3, marginBottom: '0.2rem' }}>Guess the location. Compete with friends. 100% Free.</p>
     
     <button className="cta-glow-btn" onClick={onQuickPlay} aria-label="Quick Play - start a game instantly">
       ▶ Quick Play
@@ -572,11 +576,11 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, ca
 
     <div style={{ height: '1px', background: 'rgba(255,255,255,0.4)', width: '100%' }}></div>
     
-    <button onClick={onDailyChallenge} disabled={playedToday} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', cursor: playedToday ? 'not-allowed' : 'inherit', fontSize: 'clamp(0.95rem, 2vw, 1.2rem)', fontWeight: 'bold', opacity: playedToday ? 0.6 : 1, background: 'none', border: 'none', color: 'inherit', font: 'inherit', padding: 0 }} className={playedToday ? "" : "menu-item-hover"} aria-label={`Daily Challenge. ${streak} day streak${playedToday ? '. Already played today.' : ''}`}>
-      Daily Challenge 
-      <span style={{ background: '#fb923c', color: 'white', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold', marginLeft: '0.3rem', display: 'flex', alignItems: 'center', boxShadow: '0 0 10px rgba(251, 146, 60, 0.7)' }}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '2px' }}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
-        {streak} day{streak !== 1 ? 's' : ''}
+    <button onClick={onDailyChallenge} disabled={playedToday} className="signpost-daily" aria-label={`Daily Challenge. ${streak} day streak${playedToday ? '. Already played today.' : ''}`}>
+      Daily Challenge
+      <span style={{ background: '#fb923c', color: 'white', padding: '2px 8px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', boxShadow: '0 0 10px rgba(251, 146, 60, 0.7)', flexShrink: 0 }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '2px' }}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+        {streak}d
       </span>
     </button>
 
@@ -713,9 +717,11 @@ const ProfileStat = ({ label, value }) => (
 );
 
 const MenuItem = ({ text, onClick }) => (
-  <button onClick={onClick} style={{ fontWeight: 'bold', cursor: 'inherit', background: 'none', border: 'none', color: 'inherit', font: 'inherit', padding: '2px 0', textAlign: 'left', width: '100%', fontSize: 'clamp(1rem, 2.2vw, 1.2rem)' }} className="menu-item-hover">
-    {text}
-  </button>
+  <div className="signpost-wrap">
+    <button onClick={onClick} className="signpost-btn">
+      {text}
+    </button>
+  </div>
 );
 
 const IconButton = ({ icon, color, onClick }) => (

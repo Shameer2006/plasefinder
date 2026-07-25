@@ -12,18 +12,16 @@ export const metadata = {
 
 export default function GuidesPage() {
   const guides = [
-    {
-      title: "The Best Free GeoGuessr Alternatives in 2026",
-      slug: "best-free-geoguessr-alternatives",
-      desc: "Looking to play map guessing games without paying a subscription? Here are the best free options available.",
-      date: "August 15, 2026"
-    },
-    {
-      title: "How to Guess Locations from Google Street View",
-      slug: "how-to-guess-locations-from-street-view",
-      desc: "Master the art of geography guessing games with these pro tips on identifying bollards, license plates, and architecture.",
-      date: "August 20, 2026"
-    }
+    { title: "The Best Free GeoGuessr Alternatives in 2026", slug: "best-free-geoguessr-alternatives", desc: "Looking to play map guessing games without paying a subscription? Here are the best free options available.", date: "August 15, 2026" },
+    { title: "How to Guess Locations from Google Street View", slug: "how-to-guess-locations-from-street-view", desc: "Master the art of geography guessing games with these pro tips on identifying bollards, license plates, and architecture.", date: "August 20, 2026" },
+    { title: "The 10 Hardest Countries to Guess in Street View", slug: "hardest-countries-to-guess", desc: "These countries are notoriously difficult to identify. Learn what makes them hard and the specific clues to tell them apart.", date: "August 25, 2026" },
+    { title: "How to Get Better at Geography Guessing Games", slug: "how-to-improve-at-geography-games", desc: "Practical tips and strategies to improve your score — from beginner fundamentals to advanced meta-knowledge.", date: "August 28, 2026" },
+    { title: "The Ultimate Street View Clues Guide", slug: "geography-clues-guide", desc: "A comprehensive reference to every visual clue in Google Street View — bollards, poles, road markings, sun position, and more.", date: "September 1, 2026" },
+    { title: "How to Identify African Countries in Street View", slug: "africa-street-view-guide", desc: "A complete guide to identifying African countries in geography games, covering West, East, Southern, and North Africa.", date: "September 5, 2026" },
+    { title: "How to Identify Asian Countries in Street View", slug: "asia-street-view-guide", desc: "Learn the visual clues for East Asia, Southeast Asia, South Asia, and Central Asia in geography guessing games.", date: "September 8, 2026" },
+    { title: "How to Identify European Countries in Street View", slug: "europe-street-view-guide", desc: "A complete guide to identifying European countries — Western, Eastern, Northern, and Southern Europe.", date: "September 10, 2026" },
+    { title: "How to Identify Every Country by Its Flag", slug: "flag-identification-guide", desc: "World flags grouped by visual pattern. Learn tricolours, crosses, stars, crescents, and the most easily confused flag pairs.", date: "September 12, 2026" },
+    { title: "How to Win at Multiplayer Geography Games", slug: "multiplayer-geography-tips", desc: "Advanced strategies for winning 1v1 duels — speed techniques, ELO management, and the mental game.", date: "September 15, 2026" },
   ];
 
   return (
