@@ -27,6 +27,7 @@ function SiteHeader() {
     { href: '/guides', label: 'How to Play' },
     { href: '/leaderboard', label: 'Leaderboard' },
     { href: '/chronicles', label: 'Map' },
+    { href: '/community', label: 'Community' },
     { href: '/about', label: 'About' },
   ];
 
@@ -101,6 +102,7 @@ function SiteFooter() {
     { href: '/guides', label: 'Guides' },
     { href: '/leaderboard', label: 'Leaderboard' },
     { href: '/chronicles', label: 'Chronicles' },
+    { href: '/community', label: 'Community' },
     { href: '/about', label: 'About' },
     { href: '/privacy', label: 'Privacy' },
   ];
