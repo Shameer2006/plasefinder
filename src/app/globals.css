@@ -338,6 +338,12 @@ body {
     max-width: 100%;
   }
 
+  /* Let signpost fill mobile width */
+  .signpost-menu {
+    max-width: 100%;
+    width: 100%;
+  }
+
   .bottom-controls {
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -631,94 +637,274 @@ button:focus-visible {
   transform: translateY(-2px);
 }
 
-/* Signpost arrow menu items */
-.signpost-wrap {
-  position: relative;
-  width: fit-content;
-  max-width: 100%;
+/* ── Signpost menu — colorful flat directional signs ── */
+
+:root {
+  --sign-red:    #e63329;
+  --sign-orange: #f07d2a;
+  --sign-yellow: #f5c518;
+  --sign-pole:   #7b4316;
 }
 
-.signpost-btn {
+.signpost-menu {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  padding: 0.45em 1.6em 0.45em 1em;
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #fff;
-  background: rgba(30, 20, 10, 0.82);
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  border-right: none;
-  cursor: pointer;
-  text-transform: uppercase;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-  transition: background 0.18s, transform 0.18s, border-color 0.18s;
-  /* Arrow right point via clip-path */
-  clip-path: polygon(0% 0%, calc(100% - 18px) 0%, 100% 50%, calc(100% - 18px) 100%, 0% 100%);
-  min-width: 180px;
-  box-shadow: 3px 3px 10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 0.9vh, 8px);
+  align-items: stretch;
+  width: 100%;
 }
 
-.signpost-btn::before {
+/* Brown vertical pole — centred in the container */
+.signpost-menu::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, transparent 60%);
-  pointer-events: none;
-  clip-path: inherit;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -4px;
+  bottom: -4px;
+  width: clamp(12px, 1.6vw, 18px);
+  background: linear-gradient(90deg, #5a2e0a 0%, #8b4e1a 40%, #9c5a20 55%, #7a4010 80%, #4e2408 100%);
+  border-radius: 6px;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.45), inset 1px 0 3px rgba(255,255,255,0.1);
+  z-index: 0;
 }
 
-.signpost-btn:hover {
-  background: rgba(16, 185, 129, 0.25);
-  border-color: rgba(16, 185, 129, 0.6);
-  transform: translateX(6px);
+.signpost-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
 }
 
-.signpost-btn:active {
-  transform: translateX(3px);
-}
-
-/* Keyboard accessibility */
-.signpost-btn:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 3px;
-}
-
-/* Daily challenge signpost variant */
+/* ── Base sign ── */
+.signpost-btn,
 .signpost-daily {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.5em;
-  padding: 0.45em 1.6em 0.45em 1em;
+  justify-content: center;
+  width: 100%;
+  padding: clamp(0.65em, 1.8vh, 0.9em) 2.2em;
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   color: #fff;
-  background: rgba(30, 20, 10, 0.82);
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  border-right: none;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  border: none;
   cursor: pointer;
   text-transform: uppercase;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-  transition: background 0.18s, transform 0.18s;
-  clip-path: polygon(0% 0%, calc(100% - 18px) 0%, 100% 50%, calc(100% - 18px) 100%, 0% 100%);
-  min-width: 180px;
-  box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.16s cubic-bezier(0.175,0.885,0.32,1.275), filter 0.16s;
+  /* right-pointing arrow by default */
+  clip-path: polygon(0% 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 0% 100%);
 }
 
-.signpost-daily:hover:not(:disabled) {
-  background: rgba(251, 146, 60, 0.25);
-  border-color: rgba(251, 146, 60, 0.6);
-  transform: translateX(6px);
+/* left-pointing arrow for even items */
+.signpost-wrap:nth-child(even) .signpost-btn {
+  clip-path: polygon(20px 0%, 100% 0%, 100% 100%, 20px 100%, 0% 50%);
 }
 
-.signpost-daily:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+/* colour cycling */
+.signpost-wrap:nth-child(3n+1) .signpost-btn { background: var(--sign-red); }
+.signpost-wrap:nth-child(3n+2) .signpost-btn { background: var(--sign-orange); }
+.signpost-wrap:nth-child(3n)   .signpost-btn { background: var(--sign-yellow); color: #4a2800; text-shadow: 0 1px 2px rgba(255,255,255,0.15); }
+
+.signpost-btn:hover  { filter: brightness(1.12); transform: scale(1.03); }
+.signpost-btn:active { transform: scale(0.97); }
+.signpost-btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+/* ── Daily challenge ── */
+.signpost-daily {
+  width: 100%;
+  gap: 0.6em;
+  background: var(--sign-orange);
+  clip-path: polygon(0% 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 0% 100%);
+}
+
+.signpost-daily:hover:not(:disabled) { filter: brightness(1.12); transform: scale(1.03); }
+.signpost-daily:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ── Divider (hidden — colour rhythm handles grouping) ── */
+.signpost-divider { display: none; }
+
+/* ── Green highway welcome sign ── */
+.highway-sign {
+  display: block;
+  background: #1a7a3a;
+  border: 4px solid #1a7a3a;
+  border-radius: 10px;
+  padding: 4px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  width: 100%;
+  position: relative;
+}
+
+.highway-sign-inner {
+  border: 2px solid rgba(255,255,255,0.85);
+  border-radius: 6px;
+  padding: clamp(0.6rem, 1.5vh, 1rem) clamp(0.8rem, 2vw, 1.4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+/* Corner bolt dots */
+.highway-sign-inner::before,
+.highway-sign-inner::after {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 50%;
+}
+.highway-sign-inner::before { top: 7px; left: 7px; box-shadow: calc(100% - 14px + 100%) 0 0 rgba(255,255,255,0.75); }
+.highway-sign-inner::after  { bottom: 7px; left: 7px; box-shadow: calc(100% - 14px + 100%) 0 0 rgba(255,255,255,0.75); }
+
+.highway-sign-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  line-height: 1.2;
+  display: block;
+}
+
+.highway-sign-desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(0.72rem, 1.3vw, 0.88rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.88);
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  display: block;
+}
+
+/* ── Difficulty / Matchmaking signpost cards ── */
+.signpost-back-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.3rem 0;
+  text-align: left;
+  width: fit-content;
+  letter-spacing: 0.02em;
+  transition: opacity 0.15s;
+}
+.signpost-back-btn:hover { opacity: 0.65; }
+
+.diff-signpost-menu {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(5px, 1vh, 9px);
+  width: 100%;
+}
+
+/* Base diff sign — wide rectangle with right arrow point */
+.diff-sign {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: clamp(0.7em, 1.8vh, 1em) clamp(1.2em, 2.5vw, 1.8em);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  clip-path: polygon(0% 0%, calc(100% - 24px) 0%, 100% 50%, calc(100% - 24px) 100%, 0% 100%);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  transition: transform 0.16s cubic-bezier(0.175,0.885,0.32,1.275), filter 0.16s;
+}
+
+/* alternate even items to point left — DISABLED, all point right */
+/* .diff-signpost-menu .diff-sign:nth-child(even) {
+  clip-path: polygon(24px 0%, 100% 0%, 100% 100%, 24px 100%, 0% 50%);
+} */
+
+.diff-sign:hover  { filter: brightness(1.12); transform: scale(1.02); }
+.diff-sign:active { transform: scale(0.98); }
+.diff-sign:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+.diff-sign-easy   { background: #e63329; }
+.diff-sign-medium { background: #f07d2a; }
+.diff-sign-hard   { background: #f5c518; }
+.diff-sign-hard .diff-sign-name,
+.diff-sign-hard .diff-sign-sub { color: #4a2800; }
+
+.diff-sign-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  line-height: 1.2;
+}
+
+.diff-sign-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(0.72rem, 1.3vw, 0.85rem);
+  font-weight: 500;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.4;
+  margin-top: 0.2em;
+}
+
+/* Home page header nav buttons — hide labels on very small screens */
+.home-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home-header-nav-label {
+  display: inline;
+}
+
+@media (max-width: 420px) {
+  .home-header-nav {
+    gap: 5px;
+  }
+  .home-header-nav-label {
+    display: none;
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Site nav — desktop shows links, mobile shows hamburger */
+.site-nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: inherit;
+}
+
+.site-nav-mobile-toggle {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .site-nav-desktop {
+    display: none !important;
+  }
+  .site-nav-mobile-toggle {
+    display: flex !important;
+  }
 }
 
 /* Keyboard nav for menu items */
@@ -901,6 +1087,15 @@ button:focus-visible {
     left: 6px;
     right: 6px;
   }
+  /* Signpost: tighter on small phones */
+  .signpost-btn,
+  .signpost-daily {
+    font-size: 0.95rem;
+    padding: 0.6em 1.8em;
+  }
+  .signpost-menu::before {
+    width: 13px;
+  }
 }
 
 /* ── Landscape mobile (short height) ── */
@@ -933,6 +1128,18 @@ button:focus-visible {
   }
   .bottom-controls {
     display: none;
+  }
+  /* Signpost: compact in landscape */
+  .signpost-menu {
+    gap: 4px;
+  }
+  .signpost-btn,
+  .signpost-daily {
+    padding: 0.5em 1.8em;
+    font-size: 0.92rem;
+  }
+  .signpost-divider {
+    height: 6px;
   }
 }
 

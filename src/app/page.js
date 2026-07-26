@@ -322,27 +322,27 @@ export default function Home() {
         </Link>
 
         {/* Right controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', paddingBottom: '10px' }}>
+        <div className="home-header-nav" style={{ paddingBottom: '10px' }}>
           <button
-            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', color: 'white', padding: '5px 12px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}
+            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', color: 'white', padding: '5px 10px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}
             onClick={() => window.location.href = '/chronicles'}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
-            Maps
+            <span className="home-header-nav-label">Maps</span>
           </button>
           <button
-            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', color: 'white', padding: '5px 12px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}
+            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', color: 'white', padding: '5px 10px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}
             onClick={() => window.location.href = '/guides'}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-            Guides
+            <span className="home-header-nav-label">Guides</span>
           </button>
           <button
-            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', color: 'white', padding: '5px 12px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}
+            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', color: 'white', padding: '5px 10px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}
             onClick={() => window.location.href = '/community'}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            Community
+            <span className="home-header-nav-label">Community</span>
           </button>
           {(!user || user.isAnonymous) ? (
             <button style={{ background: '#2f7a44', border: 'none', color: 'white', padding: '6px 14px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }} onClick={loginWithGoogle}>Login</button>
@@ -551,55 +551,54 @@ const OnboardingTooltip = ({ onDismiss }) => (
 );
 
 const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.18rem, 0.7vh, 0.35rem)' }}>
-    <p style={{ fontSize: 'clamp(0.78rem, 1.5vw, 0.95rem)', color: '#d1d5db', margin: 0, lineHeight: 1.3, marginBottom: '0.2rem' }}>Guess the location. Compete with friends. 100% Free.</p>
-    
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.3rem, 1vh, 0.6rem)' }}>
+    <p style={{ fontSize: 'clamp(0.75rem, 1.4vw, 0.9rem)', color: '#c9b99a', margin: 0, lineHeight: 1.3, marginBottom: '0.1rem', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', letterSpacing: '0.02em' }}>Guess the location. Compete with friends. 100% Free.</p>
+
     <button className="cta-glow-btn" onClick={onQuickPlay} aria-label="Quick Play - start a game instantly">
       ▶ Quick Play
     </button>
-    
-    <div style={{ height: '1px', background: 'rgba(255,255,255,0.4)', width: '100%' }}></div>
-    
-    <MenuItem text="Singleplayer" onClick={onSingleplayer} />
-    {isQueuing ? (
-      <MenuItem text="Cancel Matchmaking..." onClick={cancelMatchmaking} />
-    ) : (
-      <MenuItem text="Find a Match" onClick={onFindMatchClick} />
-    )}
-    
-    <div style={{ height: '1px', background: 'rgba(255,255,255,0.4)', width: '100%' }}></div>
-    
-    <MenuItem text="Create Party" onClick={onCreateParty} />
-    <MenuItem text="Join Party" onClick={onJoinParty} />
-    
-    <div style={{ height: '1px', background: 'rgba(255,255,255,0.4)', width: '100%' }}></div>
 
-    <MenuItem text="Flag Guesser" onClick={onFlagGuesser} />
-    
-    <div style={{ height: '1px', background: 'rgba(255,255,255,0.4)', width: '100%' }}></div>
-    
-    <MenuItem text="Leaderboard" onClick={onLeaderboard} />
-    <MenuItem text="About" onClick={onAbout} />
-
-    <div style={{ height: '1px', background: 'rgba(255,255,255,0.4)', width: '100%' }}></div>
-    
-    <button onClick={onDailyChallenge} disabled={playedToday} className="signpost-daily" aria-label={`Daily Challenge. ${streak} day streak${playedToday ? '. Already played today.' : ''}`}>
-      Daily Challenge
-      <span style={{ background: '#fb923c', color: 'white', padding: '2px 8px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', boxShadow: '0 0 10px rgba(251, 146, 60, 0.7)', flexShrink: 0 }}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '2px' }}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
-        {streak}d
-      </span>
-    </button>
-
-    <div style={{ marginTop: 'clamp(0.3rem, 1vh, 0.8rem)' }}>
-      <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#9ca3af', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
-        Featured History
+    <div className="signpost-menu">
+      <div className="signpost-wrap"><MenuItem text="Singleplayer" onClick={onSingleplayer} /></div>
+      <div className="signpost-wrap">
+        {isQueuing
+          ? <MenuItem text="Cancel Search…" onClick={cancelMatchmaking} />
+          : <MenuItem text="Find a Match" onClick={onFindMatchClick} />}
       </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-        <Link href="/chronicles/in" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">India</Link>
-        <Link href="/chronicles/bn" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">Brunei</Link>
-        <Link href="/chronicles/de" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">Germany</Link>
-        <Link href="/chronicles/ng" style={{ padding: '6px 14px', background: 'rgba(255,255,255,0.08)', borderRadius: '20px', fontSize: '0.95rem', color: 'white', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)' }} className="menu-item-hover">Nigeria</Link>
+
+      <div className="signpost-divider" />
+
+      <div className="signpost-wrap"><MenuItem text="Create Party" onClick={onCreateParty} /></div>
+      <div className="signpost-wrap"><MenuItem text="Join Party" onClick={onJoinParty} /></div>
+
+      <div className="signpost-divider" />
+
+      <div className="signpost-wrap"><MenuItem text="Flag Guesser" onClick={onFlagGuesser} /></div>
+
+      <div className="signpost-divider" />
+
+      <div className="signpost-wrap"><MenuItem text="Leaderboard" onClick={onLeaderboard} /></div>
+      <div className="signpost-wrap"><MenuItem text="About" onClick={onAbout} /></div>
+
+      <div className="signpost-divider" />
+
+      <div className="signpost-wrap">
+        <button onClick={onDailyChallenge} disabled={playedToday} className="signpost-daily" aria-label={`Daily Challenge. ${streak} day streak${playedToday ? '. Already played today.' : ''}`}>
+          Daily Challenge
+          <span style={{ background: '#fb923c', color: 'white', padding: '2px 7px', borderRadius: '10px', fontSize: '0.7rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', boxShadow: '0 0 8px rgba(251,146,60,0.7)', flexShrink: 0 }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '2px' }}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+            {streak}d
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div style={{ marginTop: 'clamp(0.2rem, 0.8vh, 0.6rem)' }}>
+      <div style={{ fontSize: '0.72rem', fontWeight: 'bold', color: '#8a7a60', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1.5px', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>Featured History</div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+        {[['in','India'],['bn','Brunei'],['de','Germany'],['ng','Nigeria']].map(([code, name]) => (
+          <Link key={code} href={`/chronicles/${code}`} style={{ padding: '5px 12px', background: 'rgba(44,26,8,0.7)', borderRadius: '16px', fontSize: '0.85rem', color: '#f0e8d0', textDecoration: 'none', border: '1px solid rgba(200,160,96,0.25)', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">{name}</Link>
+        ))}
       </div>
     </div>
   </div>
@@ -724,11 +723,9 @@ const ProfileStat = ({ label, value }) => (
 );
 
 const MenuItem = ({ text, onClick }) => (
-  <div className="signpost-wrap">
-    <button onClick={onClick} className="signpost-btn">
-      {text}
-    </button>
-  </div>
+  <button onClick={onClick} className="signpost-btn">
+    {text}
+  </button>
 );
 
 const IconButton = ({ icon, color, onClick }) => (
@@ -745,43 +742,45 @@ const IconButton = ({ icon, color, onClick }) => (
 );
 
 const DifficultyMenu = ({ onBack, onSelect }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-    <h1 className="responsive-title" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>Select Difficulty</h1>
-    <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
-    <button style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem', background: 'none', border: 'none', font: 'inherit', padding: 0, textAlign: 'left' }} onClick={onBack}>
-      Back
-    </button>
-    
-    <button className="difficulty-card" onClick={() => onSelect('EASY')} style={{ textAlign: 'left' }}>
-      <div style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Easy (Multiple Choice)</div>
-      <div style={{ fontSize: '0.9rem', color: '#9ca3af', lineHeight: 1.4 }}>Choose the correct country from 4 options. No map needed — pure geography knowledge.</div>
-    </button>
-    <button className="difficulty-card" onClick={() => onSelect('MEDIUM')} style={{ textAlign: 'left' }}>
-      <div style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Medium (Mixed)</div>
-      <div style={{ fontSize: '0.9rem', color: '#9ca3af', lineHeight: 1.4 }}>Alternates between multiple-choice and map pinning each round. A balanced challenge.</div>
-    </button>
-    <button className="difficulty-card" onClick={() => onSelect('HARD')} style={{ textAlign: 'left' }}>
-      <div style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Hard (Map Pinning)</div>
-      <div style={{ fontSize: '0.9rem', color: '#9ca3af', lineHeight: 1.4 }}>Drop a pin anywhere on the world map. Score depends on how close you are to the actual location.</div>
-    </button>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.3rem, 1vh, 0.6rem)' }}>
+
+    <h1 className="responsive-title" style={{ fontWeight: 800, marginBottom: '0.1rem' }}>Select Difficulty</h1>
+
+    <button className="signpost-back-btn" onClick={onBack}>← Back</button>
+
+    <div className="diff-signpost-menu">
+      <button className="diff-sign diff-sign-easy" onClick={() => onSelect('EASY')}>
+        <span className="diff-sign-name">Easy</span>
+        <span className="diff-sign-sub">Multiple Choice — pick from 4 options</span>
+      </button>
+      <button className="diff-sign diff-sign-medium" onClick={() => onSelect('MEDIUM')}>
+        <span className="diff-sign-name">Medium</span>
+        <span className="diff-sign-sub">Mixed — choice + map pinning</span>
+      </button>
+      <button className="diff-sign diff-sign-hard" onClick={() => onSelect('HARD')}>
+        <span className="diff-sign-name">Hard</span>
+        <span className="diff-sign-sub">Map Pinning — drop a pin to guess</span>
+      </button>
+    </div>
   </div>
 );
 
 const MatchmakingMenu = ({ onBack, onSelect }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-    <h1 className="responsive-title" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>Find a Match</h1>
-    <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
-    <button style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem', background: 'none', border: 'none', font: 'inherit', padding: 0, textAlign: 'left' }} onClick={onBack}>
-      Back
-    </button>
-    
-    <button className="difficulty-card" onClick={() => onSelect('unranked')} style={{ textAlign: 'left' }}>
-      <div style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Unranked Match</div>
-      <div style={{ fontSize: '0.9rem', color: '#9ca3af', lineHeight: 1.4 }}>Play a casual match against another player. No ELO changes.</div>
-    </button>
-    <button className="difficulty-card" onClick={() => onSelect('ranked')} style={{ textAlign: 'left' }}>
-      <div style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Ranked Duel</div>
-      <div style={{ fontSize: '0.9rem', color: '#9ca3af', lineHeight: 1.4 }}>Compete for ELO and climb the global leaderboard. Intense 1v1 action.</div>
-    </button>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.3rem, 1vh, 0.6rem)' }}>
+
+    <h1 className="responsive-title" style={{ fontWeight: 800, marginBottom: '0.1rem' }}>Find a Match</h1>
+
+    <button className="signpost-back-btn" onClick={onBack}>← Back</button>
+
+    <div className="diff-signpost-menu">
+      <button className="diff-sign diff-sign-easy" onClick={() => onSelect('unranked')}>
+        <span className="diff-sign-name">Unranked</span>
+        <span className="diff-sign-sub">Casual match — no ELO changes</span>
+      </button>
+      <button className="diff-sign diff-sign-hard" onClick={() => onSelect('ranked')}>
+        <span className="diff-sign-name">Ranked Duel</span>
+        <span className="diff-sign-sub">Compete for ELO &amp; climb the leaderboard</span>
+      </button>
+    </div>
   </div>
 );

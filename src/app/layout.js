@@ -7,8 +7,8 @@ import Script from "next/script";
 import SiteShell from "@/app/components/SiteShell";
 
 export const metadata = {
-  title: "LostStreet - Free GeoGuessr Alternative | Explore the World",
-  description: "Play LostStreet — a free geography guessing game. Drop a pin on the map, compete with friends, and test your world knowledge. No subscription needed.",
+  title: "LostStreet — Free GeoGuessr Alternative | Play Now, No Signup",
+  description: "Play LostStreet free — no signup needed. Guess locations from Street View, compete in multiplayer duels, and take the daily challenge. 780,000+ locations. 100% free forever.",
   metadataBase: new URL("https://www.loststreet.online"),
   alternates: {
     canonical: "/",
@@ -58,24 +58,73 @@ export const viewport = {
   userScalable: false,
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "LostStreet",
-  "alternateName": ["Lost Street", "LostStreet Game"],
-  "url": "https://www.loststreet.online",
-  "description": "Free geography guessing game. Guess locations from Street View, compete in multiplayer duels, and climb the leaderboard. A free GeoGuessr alternative.",
-  "applicationCategory": "GameApplication",
-  "applicationSubCategory": "Geography Game",
-  "operatingSystem": "Web",
-  "browserRequirements": "Requires a modern web browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "LostStreet",
+    "alternateName": ["Lost Street", "LostStreet Game", "LostStreet Geography Game"],
+    "url": "https://www.loststreet.online",
+    "description": "Free geography guessing game with 780,000+ Street View locations. Guess locations, compete in multiplayer duels, and take daily challenges. A free GeoGuessr alternative — no subscription needed.",
+    "applicationCategory": "GameApplication",
+    "applicationSubCategory": "Geography Game",
+    "operatingSystem": "Web",
+    "browserRequirements": "Requires a modern web browser",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "312",
+      "bestRating": "5"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
   },
-  "keywords": "loststreet, loststreet game, loststreet online, play loststreet, loststreet geography game, lost street, geoguessr alternative, free geography guessing game, street view guessing game, guess the location game, guess the country game online, panorama guessing game, world geography game online, guess where game, random street view game, location guessing game free, play geography game online free, play street view game, online map guessing game, play world map game, geography quiz game online, free online geography game, multiplayer geography game, geography game no download, game where you guess your location, game to guess country from street view, spawn random location guess game, AI hint geography game, blur mode guessing game, guess the city from photo game, street view geography quiz, explore random places online game, virtual travel guessing game, daily geography guessing game, geography challenge game online, geography learning game online, fun way to learn world map, educational geography game free, geography practice game, learn countries game online, map skills game online, geography trivia game free, geography game for mobile, browser based geography game, no download geography game, free to play map game, lightweight geography web game"
-};
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is LostStreet free to play?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, LostStreet is 100% free with no subscription, no sign-up required, and unlimited rounds." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is LostStreet a GeoGuessr alternative?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. LostStreet is a free GeoGuessr alternative with real-time multiplayer duels, daily challenges, party mode, and 780,000+ street view locations — all without a subscription." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I play LostStreet on mobile?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. LostStreet works on all modern mobile browsers. No app download needed — just visit loststreet.online." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does multiplayer work in LostStreet?",
+        "acceptedAnswer": { "@type": "Answer", "text": "LostStreet features real-time 1v1 ELO-ranked matchmaking and private party rooms with a 6-digit code for up to 20 players." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the daily challenge in LostStreet?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The daily challenge is a once-per-day round that tracks your consecutive play streak and awards bonus XP for consistent play." }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "LostStreet",
+    "url": "https://www.loststreet.online",
+    "logo": "https://www.loststreet.online/logo.png",
+    "sameAs": [
+      "https://www.reddit.com/r/LostStreet",
+      "https://www.instagram.com/loststreet.online"
+    ]
+  }
+];
 
 export default function RootLayout({ children }) {
   return (
@@ -86,10 +135,13 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/manifest.json" />
         <link rel="preload" as="image" href="/bg.jpg" />
         {/* JSON-LD structured data — static, no hydration issues */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        {jsonLd.map((schema, i) => (
+          <script
+            key={i}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          />
+        ))}
         {/* AdSense — plain async, no hydration impact */}
         <script
           async

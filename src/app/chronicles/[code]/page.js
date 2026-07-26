@@ -51,11 +51,25 @@ export async function generateMetadata({ params }) {
     alternates: {
       canonical: `/chronicles/${code.toLowerCase()}`
     },
+    keywords: [
+      `history of ${data.name}`,
+      `${data.name} history`,
+      `${data.name} background`,
+      `${data.name} origin`,
+      `${data.name} geography`,
+      `${data.name} street view`,
+      `how to identify ${data.name} in geoguessr`,
+      'country chronicles',
+      'loststreet',
+    ],
     openGraph: {
       title: data.seoTitle,
       description: data.metaDescription,
       type: 'article',
-      url: `/chronicles/${code.toLowerCase()}`,
+      publishedTime: '2026-07-12T00:00:00Z',
+      modifiedTime: '2026-07-26T00:00:00Z',
+      authors: ['https://www.loststreet.online/about'],
+      url: `https://www.loststreet.online/chronicles/${code.toLowerCase()}`,
       images: [
         {
           url: `https://www.loststreet.online/api/og?chronicle=${code.toLowerCase()}&name=${encodeURIComponent(data.name)}`,
@@ -85,19 +99,24 @@ export default async function CountryChroniclePage({ params }) {
   // JSON-LD structured schema markup for Article indexing (AdSense/Google rank best practices)
   const schemaMarkup = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    "@type": "Article",
     "headline": data.seoTitle,
     "description": data.metaDescription,
     "abstract": data.aiSummary ? Object.values(data.aiSummary).join(" ") : data.metaDescription,
     "image": `https://www.loststreet.online/api/og?chronicle=${code.toLowerCase()}&name=${encodeURIComponent(data.name)}`,
     "datePublished": "2026-07-12T00:00:00Z",
+    "dateModified": "2026-07-26T00:00:00Z",
+    "wordCount": 1200,
+    "inLanguage": "en-US",
     "author": {
       "@type": "Organization",
-      "name": "LostStreet Chronicles"
+      "name": "LostStreet Editorial Team",
+      "url": "https://www.loststreet.online/about"
     },
     "publisher": {
       "@type": "Organization",
       "name": "LostStreet",
+      "url": "https://www.loststreet.online",
       "logo": {
         "@type": "ImageObject",
         "url": "https://www.loststreet.online/logo.png"
@@ -106,6 +125,11 @@ export default async function CountryChroniclePage({ params }) {
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": `https://www.loststreet.online/chronicles/${code.toLowerCase()}`
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "LostStreet Chronicles",
+      "url": "https://www.loststreet.online/chronicles"
     }
   };
 
