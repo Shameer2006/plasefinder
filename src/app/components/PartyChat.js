@@ -55,9 +55,8 @@ export default function PartyChat({ gameId, matchData }) {
       position: 'absolute',
       bottom: isMobile ? '90px' : '20px',
       left: isMobile ? '10px' : '20px',
-      right: isMobile ? '10px' : 'auto',
       zIndex: 50,
-      width: isMobile ? 'auto' : '300px',
+      width: '48px',
       display: 'flex',
       flexDirection: 'column',
       pointerEvents: 'auto'
@@ -71,30 +70,35 @@ export default function PartyChat({ gameId, matchData }) {
           background: 'rgba(0,0,0,0.8)',
           color: 'white',
           border: '1px solid rgba(255,255,255,0.2)',
-          padding: '10px 15px',
-          borderRadius: '12px',
+          width: '48px',
+          height: '48px',
+          padding: 0,
+          borderRadius: '50%',
           cursor: 'pointer',
-          fontWeight: 'bold',
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
           alignItems: 'center',
           boxShadow: '0 4px 15px rgba(0,0,0,0.5)',
-          marginBottom: isOpen ? '10px' : '0'
+          position: 'relative'
         }}
       >
-        <span>💬 Party Chat ({messages.length})</span>
-        <span>{isOpen ? '▼' : '▲'}</span>
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" /><path d="M8 10h.01M12 10h.01M16 10h.01" /></svg>
+        {messages.length > 0 && <span style={{ position: 'absolute', top: '-4px', right: '-4px', minWidth: '18px', height: '18px', padding: '0 4px', borderRadius: '9px', background: '#ef4444', color: '#fff', fontSize: '0.65rem', display: 'grid', placeItems: 'center', border: '2px solid #111' }}>{messages.length}</span>}
       </button>
 
       {/* Chat Window */}
       {isOpen && (
         <div style={{
+          position: 'absolute',
+          bottom: '58px',
+          left: 0,
           background: 'rgba(0,0,0,0.8)',
           borderRadius: '12px',
           border: '1px solid rgba(255,255,255,0.2)',
           display: 'flex',
           flexDirection: 'column',
-          height: '350px',
+          height: isMobile ? 'min(350px, 52dvh)' : '350px',
+          width: isMobile ? 'min(320px, calc(100vw - 20px))' : '300px',
           boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
           overflow: 'hidden'
         }}>

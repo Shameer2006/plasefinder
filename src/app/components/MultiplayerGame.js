@@ -37,6 +37,8 @@ export default function MultiplayerGame({ gameId }) {
   const [showMapOnly, setShowMapOnly] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [timeLeft, setTimeLeft] = useState(null);
+  const [nextRoundDelay, setNextRoundDelay] = useState(34);
+  const [canAdvanceRound, setCanAdvanceRound] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -58,6 +60,27 @@ export default function MultiplayerGame({ gameId }) {
       return () => clearTimeout(timer);
     }
   }, [isRoundOver]);
+
+  useEffect(() => {
+    if (!isRoundOver || showMapOnly) {
+      setCanAdvanceRound(false);
+      setNextRoundDelay(34);
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setNextRoundDelay((seconds) => {
+        if (seconds <= 1) {
+          clearInterval(timer);
+          setCanAdvanceRound(true);
+          return 0;
+        }
+        return seconds - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isRoundOver, showMapOnly, matchData?.round]);
 
   useEffect(() => {
     if (!db || !gameId) return;
@@ -479,11 +502,15 @@ export default function MultiplayerGame({ gameId }) {
               ))}
             </div>
             {isHost ? (
-              <button className="btn" onClick={startNextRound} style={{ marginTop: '1rem', width: '100%' }}>
-                {matchData.round < (matchData.options?.rounds || 5) ? 'Next Round' : 'Finish Game'}
+              <button className="btn" onClick={startNextRound} disabled={!canAdvanceRound} style={{ marginTop: '1rem', width: '100%', opacity: canAdvanceRound ? 1 : 0.6, cursor: canAdvanceRound ? 'pointer' : 'not-allowed' }}>
+                {canAdvanceRound
+                  ? (matchData.round < (matchData.options?.rounds || 5) ? 'Next Round' : 'Finish Game')
+                  : `Next Round available in ${nextRoundDelay}s`}
               </button>
             ) : (
-              <div style={{ padding: '10px', color: '#ccc', marginTop: '1rem' }}>Waiting for host to continue...</div>
+              <div style={{ padding: '10px', color: '#ccc', marginTop: '1rem' }}>
+                {canAdvanceRound ? 'Waiting for host to continue...' : `Next round unlocks in ${nextRoundDelay}s`}
+              </div>
             )}
           </div>
           <PartyChat gameId={gameId} matchData={matchData} />

@@ -290,7 +290,7 @@ export default function Home() {
   };
 
   return (
-    <main id="main-content" style={{
+    <main id="main-content" className="home-page" style={{
       height: '100dvh',
       width: '100vw',
       backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/bg.jpg)',
@@ -298,7 +298,6 @@ export default function Home() {
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
       position: 'relative',
-      overflow: 'hidden',
       color: 'white'
     }}>
       <div className="left-gradient-overlay" style={{
@@ -360,8 +359,9 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="container-padding" style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '0.5rem', paddingTop: '72px' }}>
+      <section className="container-padding home-content" style={{ position: 'relative', zIndex: 2, height: '100%', paddingTop: '72px' }}>
 
+        <div className="home-main-row">
         <div className="left-menu-container">
           {showSettings ? (
             <SettingsMenu onBack={() => setShowSettings(false)} units={units} setUnits={setUnits} mapType={mapType} setMapType={setMapType} emotesEnabled={emotesEnabled} setEmotesEnabled={setEmotesEnabled} soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled} />
@@ -391,6 +391,28 @@ export default function Home() {
               />
             </>
           )}
+        </div>
+
+        {!showSettings && !showProfile && !showDifficulty && !showMatchmaking && (
+          <aside className="roadside-welcome" aria-label="Welcome to LostStreet">
+            <div className="highway-sign">
+              <div className="highway-sign-inner">
+                <span className="highway-sign-kicker">You are here</span>
+                <h1 className="highway-sign-title">Welcome to<br />LostStreet</h1>
+                <p className="highway-sign-desc">Explore Street View scenes from around the world, follow the clues, and pin your best guess.</p>
+                <div className="highway-sign-route">
+                  <span>Choose a route</span>
+                  <span aria-hidden="true">→</span>
+                  <span>Start exploring</span>
+                </div>
+              </div>
+            </div>
+            <div className="highway-sign-posts" aria-hidden="true"><span></span><span></span></div>
+            <button className="roadside-quick-play" onClick={() => handleStart('EASY')} aria-label="Quick Play - start a game instantly">
+              <span aria-hidden="true">▶</span> Quick Play
+            </button>
+          </aside>
+        )}
         </div>
 
         <div className="bottom-controls">
@@ -554,10 +576,6 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, ca
   <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.3rem, 1vh, 0.6rem)' }}>
     <p style={{ fontSize: 'clamp(0.75rem, 1.4vw, 0.9rem)', color: '#c9b99a', margin: 0, lineHeight: 1.3, marginBottom: '0.1rem', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', letterSpacing: '0.02em' }}>Guess the location. Compete with friends. 100% Free.</p>
 
-    <button className="cta-glow-btn" onClick={onQuickPlay} aria-label="Quick Play - start a game instantly">
-      ▶ Quick Play
-    </button>
-
     <div className="signpost-menu">
       <div className="signpost-wrap"><MenuItem text="Singleplayer" onClick={onSingleplayer} /></div>
       <div className="signpost-wrap">
@@ -592,6 +610,10 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, ca
         </button>
       </div>
     </div>
+
+    <button className="mobile-quick-play" onClick={onQuickPlay} aria-label="Quick Play - start a game instantly">
+      <span aria-hidden="true">▶</span> Quick Play
+    </button>
 
     <div style={{ marginTop: 'clamp(0.2rem, 0.8vh, 0.6rem)' }}>
       <div style={{ fontSize: '0.72rem', fontWeight: 'bold', color: '#8a7a60', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1.5px', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>Featured History</div>

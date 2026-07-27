@@ -193,6 +193,21 @@ body {
   max-width: 400px;
 }
 
+.home-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 100%;
+}
+
+.home-main-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(2rem, 8vw, 9rem);
+}
+
 .bottom-controls {
   display: flex;
   justify-content: space-between;
@@ -305,6 +320,15 @@ body {
 }
 
 @media (max-width: 768px) {
+  .home-page {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .home-content {
+    min-height: 100dvh;
+  }
+
   .container-padding {
     padding: 1.5rem;
   }
@@ -337,6 +361,38 @@ body {
     /* Make room for top controls */
     max-width: 100%;
   }
+
+  .home-main-row {
+    display: block;
+  }
+
+  .roadside-welcome {
+    display: none;
+  }
+
+  .mobile-quick-play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.15rem;
+    padding: 0.72em 1.4em;
+    border: 2px solid rgba(255,255,255,0.78);
+    border-radius: 8px;
+    background: linear-gradient(135deg, #19a96e, #1679d1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .mobile-quick-play:active { transform: scale(0.98); }
+  .mobile-quick-play:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 
   /* Let signpost fill mobile width */
   .signpost-menu {
@@ -730,23 +786,22 @@ button:focus-visible {
 
 /* ── Green highway welcome sign ── */
 .highway-sign {
-  display: block;
-  background: #1a7a3a;
-  border: 4px solid #1a7a3a;
-  border-radius: 10px;
-  padding: 4px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  background: linear-gradient(145deg, #197844 0%, #07582f 100%);
+  border: 5px solid #e9f3e7;
+  border-radius: 15px;
+  padding: 5px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.58), inset 0 0 0 3px rgba(0,0,0,0.18);
   width: 100%;
   position: relative;
 }
 
 .highway-sign-inner {
-  border: 2px solid rgba(255,255,255,0.85);
-  border-radius: 6px;
-  padding: clamp(0.6rem, 1.5vh, 1rem) clamp(0.8rem, 2vw, 1.4rem);
+  border: 2px solid rgba(255,255,255,0.94);
+  border-radius: 8px;
+  padding: clamp(1rem, 2.6vh, 1.7rem) clamp(1.2rem, 2.8vw, 2.3rem);
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.55rem;
   align-items: center;
   text-align: center;
   position: relative;
@@ -762,12 +817,45 @@ button:focus-visible {
   background: rgba(255,255,255,0.75);
   border-radius: 50%;
 }
-.highway-sign-inner::before { top: 7px; left: 7px; box-shadow: calc(100% - 14px + 100%) 0 0 rgba(255,255,255,0.75); }
-.highway-sign-inner::after  { bottom: 7px; left: 7px; box-shadow: calc(100% - 14px + 100%) 0 0 rgba(255,255,255,0.75); }
+.highway-sign-inner::before { top: 9px; left: 10px; }
+.highway-sign-inner::after  { bottom: 9px; right: 10px; }
+
+.roadside-welcome {
+  width: min(41vw, 560px);
+  margin-top: clamp(1.5rem, 10vh, 7rem);
+  margin-right: clamp(0rem, 3vw, 4rem);
+  filter: drop-shadow(0 12px 12px rgba(0,0,0,0.28));
+  animation: roadside-arrival 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.highway-sign-posts {
+  display: flex;
+  justify-content: space-around;
+  width: 78%;
+  height: clamp(110px, 19vh, 200px);
+  margin: -2px auto 0;
+}
+
+.highway-sign-posts span {
+  width: clamp(15px, 1.7vw, 23px);
+  height: 100%;
+  background: linear-gradient(90deg, #778085, #e7edf0 42%, #a9b0b4 58%, #657077);
+  border-radius: 0 0 4px 4px;
+  box-shadow: inset 2px 0 rgba(255,255,255,0.42), 3px 1px 4px rgba(0,0,0,0.35);
+}
+
+.highway-sign-kicker {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #d6f0df;
+}
 
 .highway-sign-title {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
   font-weight: 800;
   color: #fff;
   text-transform: uppercase;
@@ -779,12 +867,70 @@ button:focus-visible {
 
 .highway-sign-desc {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(0.72rem, 1.3vw, 0.88rem);
+  font-size: clamp(0.82rem, 1.45vw, 1rem);
   font-weight: 400;
   color: rgba(255,255,255,0.88);
   letter-spacing: 0.02em;
-  line-height: 1.4;
+  line-height: 1.5;
   display: block;
+  max-width: 34ch;
+  margin: 0;
+}
+
+.highway-sign-route {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 0.25rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(255,255,255,0.38);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.roadside-quick-play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  width: min(86%, 430px);
+  margin: 1.15rem auto 0;
+  padding: 0.9rem 1.4rem;
+  border: 2px solid rgba(255,255,255,0.88);
+  border-radius: 9px;
+  background: linear-gradient(135deg, #19a96e, #1679d1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 0.16s ease, filter 0.16s ease;
+}
+
+.roadside-quick-play:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.roadside-quick-play:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+.mobile-quick-play {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-quick-play {
+    display: flex;
+  }
+}
+
+@keyframes roadside-arrival {
+  from { opacity: 0; transform: translateX(40px) rotate(1.5deg); }
+  to { opacity: 1; transform: translateX(0) rotate(0); }
 }
 
 /* ── Difficulty / Matchmaking signpost cards ── */
@@ -988,6 +1134,14 @@ button:focus-visible {
   .left-menu-container {
     margin-top: 4rem;
     max-width: 380px;
+  }
+  .roadside-welcome {
+    width: min(32vw, 320px);
+    margin-right: 0;
+    margin-top: 8rem;
+  }
+  .highway-sign-posts {
+    height: 115px;
   }
   .map-container {
     width: 260px;

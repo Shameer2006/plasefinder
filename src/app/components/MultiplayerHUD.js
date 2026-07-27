@@ -1,5 +1,3 @@
-import DuelHealthBar from './DuelHealthBar';
-
 export default function MultiplayerHUD({ matchData, timeLeft, isMobile, sortedPlayers, userProfile }) {
   return (
     <div className="hud-center" style={{ 
@@ -13,14 +11,8 @@ export default function MultiplayerHUD({ matchData, timeLeft, isMobile, sortedPl
       justifyContent: 'center',
       flexDirection: 'column',
       maxWidth: isMobile ? '95vw' : '100%',
-      width: matchData.gameType === 'ranked_duel' ? (isMobile ? '95vw' : '800px') : 'auto'
+      width: 'auto'
     }}>
-      {matchData.gameType === 'ranked_duel' && (
-        <div style={{ width: '100%', marginBottom: '10px' }}>
-          <DuelHealthBar players={matchData.players} health={matchData.health} isMobile={isMobile} />
-        </div>
-      )}
-
       <div style={{ display: 'flex', gap: '15px', alignItems: 'center', width: '100%', justifyContent: 'space-between', marginBottom: '8px' }}>
         <div style={{ fontSize: isMobile ? '1.1rem' : '1.5rem', fontWeight: '800', opacity: 0.5 }}>R{matchData.round}/{matchData.options?.rounds || 5}</div>
         {timeLeft !== null && (
