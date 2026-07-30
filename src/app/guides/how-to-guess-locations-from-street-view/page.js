@@ -1,11 +1,16 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "How to Guess Locations from Google Street View — LostStreet",
-  description: "Master geography guessing games like GeoGuessr and LostStreet with these pro tips on identifying bollards, license plates, and architecture.",
+  title: "How to Guess Locations in Street View Guesser — LostStreet Guide",
+  description: "Master the street view guesser game on LostStreet. Learn pro tips for identifying 360-degree panoramas using road bollards, license plates, utility poles, and driving orientation.",
+  alternates: { canonical: "https://www.loststreet.online/guides/how-to-guess-locations-from-street-view" },
+  keywords: [
+    "street view guesser", "how to guess location street view", "loststreet guide", "street view guessing tips",
+    "bollard identification", "geoguessr alternative guide", "license plate clues geography"
+  ],
   openGraph: {
-    title: "How to Guess Locations from Google Street View",
-    description: "Master geography guessing games with these pro tips on identifying bollards, license plates, and architecture.",
+    title: "How to Guess Locations in Street View Guesser — LostStreet Guide",
+    description: "Learn pro street view guessing tips on LostStreet — identifying bollards, license plates, utility poles, and landscape visual clues.",
     url: "https://www.loststreet.online/guides/how-to-guess-locations-from-street-view",
     type: "article",
   },
@@ -14,11 +19,17 @@ export const metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "How to Guess Locations from Google Street View",
-  "description": "Master geography guessing games like GeoGuessr and LostStreet with these pro tips on identifying bollards, license plates, and architecture.",
+  "headline": "How to Guess Locations in Street View Guesser — LostStreet Guide",
+  "description": "Master the street view guesser game on LostStreet with pro tips on identifying road bollards, license plates, utility poles, and architecture visual clues.",
   "author": {
     "@type": "Organization",
-    "name": "LostStreet"
+    "name": "LostStreet",
+    "url": "https://www.loststreet.online"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LostStreet",
+    "logo": { "@type": "ImageObject", "url": "https://www.loststreet.online/icon.png" }
   },
   "datePublished": "2026-08-20T00:00:00.000Z",
   "dateModified": "2026-08-20T00:00:00.000Z"

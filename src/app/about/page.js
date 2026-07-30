@@ -1,43 +1,48 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "About LostStreet — Free GeoGuessr Alternative",
-  description: "LostStreet is a free geography guessing game. Guess locations from Google Street View, play multiplayer duels, and compete in daily challenges. A free alternative to GeoGuessr.",
+  title: "About LostStreet — The #1 Free Street View Guesser Game",
+  description: "Learn about LostStreet, the premier free street view guesser game and GeoGuessr alternative. Discover how 780k+ Street View locations, 1v1 duels, and geography meta clues power the game.",
+  alternates: { canonical: "https://www.loststreet.online/about" },
+  keywords: [
+    "loststreet", "street view guesser", "about loststreet", "free street view guesser", "street view guesser game", "lost street online",
+    "geoguessr alternative free", "geography guessing game", "how to play street view guesser", "street view clues bollards license plates"
+  ],
   openGraph: {
-    title: "About LostStreet — Free GeoGuessr Alternative",
-    description: "LostStreet is a free geography guessing game with multiplayer, daily challenges, and party mode.",
+    title: "About LostStreet — Free Street View Guesser Game",
+    description: "LostStreet is a free 360° street view guesser game with 1v1 duels, daily challenges, party mode, and 780,000+ locations.",
     url: "https://www.loststreet.online/about",
   },
 };
 
 const faqItems = [
   {
-    q: "Is LostStreet free?",
-    a: "Yes, LostStreet is 100% free to play with no subscription required. Play unlimited rounds, multiplayer duels, and daily challenges at no cost."
+    q: "What is LostStreet?",
+    a: "LostStreet is a 100% free street view guesser game and geography quiz. Players are dropped into random 360-degree Google Street View panoramas across 780,000+ locations and must pinpoint their location on an interactive world map."
   },
   {
-    q: "Is LostStreet a GeoGuessr alternative?",
-    a: "Yes, LostStreet is a free alternative to GeoGuessr with real-time multiplayer duels, daily challenges, party mode, and multiple difficulty levels — all without paying a subscription."
+    q: "Is LostStreet completely free to play?",
+    a: "Yes, LostStreet is 100% free to play with no subscriptions, no paywalls, and no round limits. Enjoy unlimited singleplayer street view guessing, 1v1 duels, and daily challenges at zero cost."
   },
   {
-    q: "Can I play LostStreet on mobile?",
-    a: "Yes, LostStreet works on all modern mobile browsers including Chrome, Safari, and Firefox. No app download is needed — just visit loststreet.online."
+    q: "Is LostStreet a free GeoGuessr alternative?",
+    a: "Yes, LostStreet is recognized as the best free GeoGuessr alternative. It offers real-time multiplayer duels with ELO ratings, private 6-digit party rooms, daily streak challenges, and flag quizzes — completely free."
+  },
+  {
+    q: "What visual clues can I use in street view guessing?",
+    a: "Pro street view guessers inspect road bollard designs, utility pole structures, license plate colors (e.g. yellow in the UK/Netherlands), driving side traffic, country-specific chevrons, language scripts, and sun compass position."
+  },
+  {
+    q: "Can I play LostStreet street view guesser on mobile?",
+    a: "Yes, LostStreet is fully optimized for all modern mobile and tablet browsers. You can play directly in Safari, Chrome, or Firefox with no app download needed."
   },
   {
     q: "How does multiplayer work in LostStreet?",
-    a: "LostStreet features real-time 1v1 matchmaking with ELO ratings. You can also create or join private party games with a 6-digit room code to play with friends."
+    a: "LostStreet features real-time 1v1 ELO-ranked matchmaking where you duel another player on identical street views, as well as private party lobbies for up to 20 players."
   },
   {
-    q: "What difficulty levels does LostStreet have?",
-    a: "LostStreet offers three difficulty levels: Easy (multiple choice), Medium (mix of multiple choice and map pinning), and Hard (drop a pin directly on the world map)."
-  },
-  {
-    q: "Do I need an account to play?",
-    a: "No, you can play singleplayer games without any account. However, signing in with Google unlocks multiplayer, daily challenges, streak tracking, and leaderboard rankings."
-  },
-  {
-    q: "What is the Daily Challenge?",
-    a: "The Daily Challenge is a once-per-day round that tracks your consecutive play streak. Sign in and play every day to build your streak and earn bonus XP."
+    q: "Do I need an account to play LostStreet?",
+    a: "No account is required for singleplayer map guessing. Signing in with Google unlocks your personal profile, multiplayer duels, global leaderboard ranking, and daily challenge streak tracking."
   },
 ];
 

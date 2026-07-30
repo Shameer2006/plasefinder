@@ -574,7 +574,9 @@ const OnboardingTooltip = ({ onDismiss }) => (
 
 const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.3rem, 1vh, 0.6rem)' }}>
-    <p style={{ fontSize: 'clamp(0.75rem, 1.4vw, 0.9rem)', color: '#c9b99a', margin: 0, lineHeight: 1.3, marginBottom: '0.1rem', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', letterSpacing: '0.02em' }}>Guess the location. Compete with friends. 100% Free.</p>
+    <h2 style={{ fontSize: 'clamp(0.75rem, 1.4vw, 0.9rem)', color: '#c9b99a', margin: 0, lineHeight: 1.3, marginBottom: '0.1rem', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', letterSpacing: '0.02em', fontWeight: 'normal' }}>
+      LostStreet — Free Street View Guesser Game. Play Solo, 1v1 Duels & Party Mode. 100% Free.
+    </h2>
 
     <div className="signpost-menu">
       <div className="signpost-wrap"><MenuItem text="Singleplayer" onClick={onSingleplayer} /></div>
@@ -616,13 +618,21 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, ca
     </button>
 
     <div style={{ marginTop: 'clamp(0.2rem, 0.8vh, 0.6rem)' }}>
-      <div style={{ fontSize: '0.72rem', fontWeight: 'bold', color: '#8a7a60', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1.5px', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>Featured History</div>
+      <div style={{ fontSize: '0.72rem', fontWeight: 'bold', color: '#8a7a60', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1.5px', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>Featured Country Guides</div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
         {[['in','India'],['bn','Brunei'],['de','Germany'],['ng','Nigeria']].map(([code, name]) => (
           <Link key={code} href={`/chronicles/${code}`} style={{ padding: '5px 12px', background: 'rgba(44,26,8,0.7)', borderRadius: '16px', fontSize: '0.85rem', color: '#f0e8d0', textDecoration: 'none', border: '1px solid rgba(200,160,96,0.25)', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">{name}</Link>
         ))}
       </div>
     </div>
+
+    {/* LSI Semantic Information Section for Crawlers & Players */}
+    <section aria-label="Street View Guesser Information" style={{ marginTop: '0.6rem', padding: '0.6rem 0.8rem', background: 'rgba(0,0,0,0.45)', borderRadius: '10px', border: '1px solid rgba(200,160,96,0.2)', color: '#d1d5db', fontSize: '0.75rem', lineHeight: 1.45 }}>
+      <h3 style={{ margin: '0 0 0.2rem 0', fontSize: '0.8rem', color: '#fbbf24', fontWeight: 600 }}>Why Play LostStreet — Free Street View Guesser?</h3>
+      <p style={{ margin: 0 }}>
+        <strong>LostStreet</strong> is a free 360° street view guesser game featuring 780,000+ hand-picked Google Street View panoramas. Test your geography skills by spotting road bollards, license plates, utility poles, and driving side clues. Play singleplayer location guessing, real-time 1v1 ELO duels, party lobby with friends, or <Link href="/guides" style={{ color: '#60a5fa', textDecoration: 'underline' }}>read geography guides</Link>.
+      </p>
+    </section>
   </div>
 );
 

@@ -7,23 +7,23 @@ import Script from "next/script";
 import SiteShell from "@/app/components/SiteShell";
 
 export const metadata = {
-  title: "LostStreet — Free GeoGuessr Alternative | Play Now, No Signup",
-  description: "Play LostStreet free — no signup needed. Guess locations from Street View, compete in multiplayer duels, and take the daily challenge. 780,000+ locations. 100% free forever.",
+  title: "LostStreet — Free Street View Guesser Game & GeoGuessr Alternative",
+  description: "Play LostStreet free — the top street view guesser game online. Guess locations from 780,000+ Google Street View panoramas, compete in 1v1 multiplayer duels, and take the daily challenge without a subscription.",
   metadataBase: new URL("https://www.loststreet.online"),
   alternates: {
     canonical: "/",
   },
   keywords: [
-    "loststreet", "loststreet game", "loststreet online", "play loststreet", "loststreet geography game", "lost street",
+    "loststreet", "street view guesser", "lost street", "loststreet game", "loststreet online", "play loststreet", "free street view guesser", "street view guesser game", "street view geography guesser", "google street view guesser",
     "geoguessr alternative", "free geography guessing game", "street view guessing game", "guess the location game", "guess the country game online", "panorama guessing game", "world geography game online", "guess where game", "random street view game", "location guessing game free",
     "play geography game online free", "play street view game", "online map guessing game", "play world map game", "geography quiz game online", "free online geography game", "multiplayer geography game", "geography game no download",
     "game where you guess your location", "game to guess country from street view", "spawn random location guess game", "AI hint geography game", "blur mode guessing game", "guess the city from photo game", "street view geography quiz", "explore random places online game", "virtual travel guessing game", "daily geography guessing game", "geography challenge game online",
     "geography learning game online", "fun way to learn world map", "educational geography game free", "geography practice game", "learn countries game online", "map skills game online", "geography trivia game free",
-    "geography game for mobile", "browser based geography game", "no download geography game", "free to play map game", "lightweight geography web game"
+    "geography game for mobile", "browser based geography game", "no download geography game", "free to play map game", "lightweight geography web game", "bollard recognition game", "license plate geography quiz", "360 panorama location guesser"
   ],
   openGraph: {
-    title: "LostStreet - Free Geography Guessing Game",
-    description: "Guess locations from street views, compete in multiplayer, and climb the leaderboard. 100% free.",
+    title: "LostStreet — Free Street View Guesser Game",
+    description: "Guess locations from 360° street view panoramas, compete in 1v1 multiplayer duels, and climb the global leaderboard. 100% free with no sign-up required.",
     url: "https://www.loststreet.online",
     siteName: "LostStreet",
     type: "website",
@@ -31,8 +31,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "LostStreet - Free GeoGuessr Alternative",
-    description: "Guess locations from street views. Play solo or with friends. 100% free.",
+    title: "LostStreet — Free Street View Guesser & GeoGuessr Alternative",
+    description: "Guess locations from street views. Play 1v1 duels or solo. 100% free with 780,000+ locations.",
     images: ["/og-image.png"],
   },
   icons: {
@@ -63,13 +63,21 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "LostStreet",
-    "alternateName": ["Lost Street", "LostStreet Game", "LostStreet Geography Game"],
+    "alternateName": ["Lost Street", "LostStreet Game", "LostStreet Street View Guesser", "Street View Guesser Game"],
     "url": "https://www.loststreet.online",
-    "description": "Free geography guessing game with 780,000+ Street View locations. Guess locations, compete in multiplayer duels, and take daily challenges. A free GeoGuessr alternative — no subscription needed.",
+    "description": "Free street view guesser game with 780,000+ Google Street View locations. Pinpoint locations from 360-degree panoramas, compete in real-time 1v1 ELO multiplayer duels, and take daily challenges. A free GeoGuessr alternative — no subscription needed.",
     "applicationCategory": "GameApplication",
     "applicationSubCategory": "Geography Game",
     "operatingSystem": "Web",
     "browserRequirements": "Requires a modern web browser",
+    "featureList": [
+      "780,000+ hand-picked Google Street View locations",
+      "Real-time 1v1 ELO multiplayer duels",
+      "Private party room codes for up to 20 players",
+      "Daily geography challenge with streak tracking",
+      "World Flag identification quiz mode",
+      "Three difficulty levels (Easy multiple choice to Hard pin drop)"
+    ],
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.8",
@@ -84,32 +92,44 @@ const jsonLd = [
   },
   {
     "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "LostStreet",
+    "alternateName": "LostStreet Street View Guesser",
+    "url": "https://www.loststreet.online",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.loststreet.online/guides?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Is LostStreet free to play?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes, LostStreet is 100% free with no subscription, no sign-up required, and unlimited rounds." }
+        "name": "What is LostStreet?",
+        "acceptedAnswer": { "@type": "Answer", "text": "LostStreet (also known as Lost Street) is a 100% free street view guesser game. Players are dropped into random 360-degree Google Street View panoramas and must guess their location on a world map." }
       },
       {
         "@type": "Question",
-        "name": "Is LostStreet a GeoGuessr alternative?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. LostStreet is a free GeoGuessr alternative with real-time multiplayer duels, daily challenges, party mode, and 780,000+ street view locations — all without a subscription." }
+        "name": "Is LostStreet a free street view guesser?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, LostStreet is a completely free street view guesser game and GeoGuessr alternative with no subscriptions, no daily game limits, and no account requirements for singleplayer play." }
       },
       {
         "@type": "Question",
-        "name": "Can I play LostStreet on mobile?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. LostStreet works on all modern mobile browsers. No app download needed — just visit loststreet.online." }
+        "name": "How do you guess locations in the LostStreet street view game?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You inspect panoramic visual clues such as road bollards, license plates, utility pole designs, architecture, driving side traffic, and vegetation, then drop a pin on the interactive world map." }
       },
       {
         "@type": "Question",
-        "name": "How does multiplayer work in LostStreet?",
-        "acceptedAnswer": { "@type": "Answer", "text": "LostStreet features real-time 1v1 ELO-ranked matchmaking and private party rooms with a 6-digit code for up to 20 players." }
+        "name": "Can I play LostStreet multiplayer with friends?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. LostStreet offers real-time 1v1 ELO-ranked duels and private party rooms with a 6-digit room code for groups of up to 20 players." }
       },
       {
         "@type": "Question",
         "name": "What is the daily challenge in LostStreet?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The daily challenge is a once-per-day round that tracks your consecutive play streak and awards bonus XP for consistent play." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The LostStreet daily challenge is a daily round where players test their street view guessing skills, track consecutive play streaks, and climb the global leaderboards." }
       }
     ]
   },
@@ -118,7 +138,7 @@ const jsonLd = [
     "@type": "Organization",
     "name": "LostStreet",
     "url": "https://www.loststreet.online",
-    "logo": "https://www.loststreet.online/logo.png",
+    "logo": "https://www.loststreet.online/icon.png",
     "sameAs": [
       "https://www.reddit.com/r/LostStreet",
       "https://www.instagram.com/loststreet.online"

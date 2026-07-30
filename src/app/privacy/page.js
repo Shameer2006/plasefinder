@@ -1,6 +1,8 @@
 export const metadata = {
-  title: "Privacy Policy | LostStreet",
-  description: "Privacy Policy for LostStreet - Understand how we collect, use, and protect your data.",
+  title: "Privacy Policy — LostStreet Free Street View Guesser",
+  description: "Privacy Policy for LostStreet street view guesser game. Understand how we collect, use, and protect player data.",
+  alternates: { canonical: "https://www.loststreet.online/privacy" },
+  keywords: ["loststreet privacy policy", "loststreet data protection", "street view guesser privacy"],
 };
 
 export default function PrivacyPolicy() {

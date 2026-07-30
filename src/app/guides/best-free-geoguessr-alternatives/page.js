@@ -1,11 +1,16 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "The Best Free GeoGuessr Alternatives in 2026 — LostStreet",
-  description: "Looking for a free map guessing game? Here are the best free GeoGuessr alternatives that don't require a subscription, featuring multiplayer and unlimited rounds.",
+  title: "Best Free GeoGuessr Alternatives & Street View Guessers (2026)",
+  description: "Discover the top free GeoGuessr alternatives and free street view guesser games in 2026. Explore LostStreet for unlimited 360° panoramas, 1v1 duels, and zero subscriptions.",
+  alternates: { canonical: "https://www.loststreet.online/guides/best-free-geoguessr-alternatives" },
+  keywords: [
+    "free geoguessr alternative", "street view guesser", "loststreet", "free geography guesser",
+    "best free street view guesser game", "geoguessr alternative no subscription", "online map guessing games"
+  ],
   openGraph: {
-    title: "The Best Free GeoGuessr Alternatives in 2026",
-    description: "Looking for a free map guessing game? Here are the best free GeoGuessr alternatives that don't require a subscription.",
+    title: "Best Free GeoGuessr Alternatives & Street View Guessers (2026)",
+    description: "Looking for a free street view guesser game? Discover the top free GeoGuessr alternatives featuring LostStreet multiplayer and unlimited rounds.",
     url: "https://www.loststreet.online/guides/best-free-geoguessr-alternatives",
     type: "article",
   },
@@ -14,11 +19,17 @@ export const metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "The Best Free GeoGuessr Alternatives in 2026",
-  "description": "Looking for a free map guessing game? Here are the best free GeoGuessr alternatives that don't require a subscription, featuring multiplayer and unlimited rounds.",
+  "headline": "The Best Free GeoGuessr Alternatives & Street View Guessers in 2026",
+  "description": "Looking for a free street view guesser game? Here are the best free GeoGuessr alternatives led by LostStreet with unlimited rounds, 1v1 duels, and no subscription.",
   "author": {
     "@type": "Organization",
-    "name": "LostStreet"
+    "name": "LostStreet",
+    "url": "https://www.loststreet.online"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LostStreet",
+    "logo": { "@type": "ImageObject", "url": "https://www.loststreet.online/icon.png" }
   },
   "datePublished": "2026-08-15T00:00:00.000Z",
   "dateModified": "2026-08-15T00:00:00.000Z"

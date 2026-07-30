@@ -1,17 +1,17 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "Geography Guides & Tips — How to Get Better at Street View Games | LostStreet",
-  description: "Master geography guessing games with expert guides. Learn Street View clues, identify countries by bollards and road markings, and beat multiplayer opponents. Free tips for GeoGuessr alternatives.",
+  title: "Street View Guesser Guides & Geography Tips — LostStreet",
+  description: "Master the street view guesser game with expert LostStreet guides. Learn Street View meta clues, bollard identification, utility poles, road markings, and 1v1 duel strategy.",
   alternates: { canonical: 'https://www.loststreet.online/guides' },
   keywords: [
-    'geography guessing game tips', 'how to get better at geoguessr', 'street view clues guide',
-    'geoguessr alternative guide', 'how to identify countries street view', 'geography game strategies',
-    'free geoguessr tips', 'loststreet guides'
+    'street view guesser', 'loststreet guides', 'free street view guesser tips', 'street view clues guide',
+    'how to guess location from street view', 'bollard identification street view', 'license plate geography quiz',
+    'geoguessr alternative guide', 'street view game strategies'
   ],
   openGraph: {
-    title: "Geography Guides & Tips — LostStreet",
-    description: "Master geography guessing games with expert guides on Street View clues, country identification, and multiplayer strategy.",
+    title: "Street View Guesser Guides & Tips — LostStreet",
+    description: "Master street view guessing with expert guides on Google Street View clues, country identification, and 1v1 multiplayer duels on LostStreet.",
     url: "https://www.loststreet.online/guides",
     type: 'website',
   },

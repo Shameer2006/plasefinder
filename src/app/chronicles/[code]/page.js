@@ -40,30 +40,31 @@ export async function generateMetadata({ params }) {
   
   if (!data) {
     return {
-      title: 'Chronicle Not Found - World Flag Chronicles',
-      description: 'The requested country chronicle history page could not be located.'
+      title: 'Chronicle Not Found - LostStreet Chronicles',
+      description: 'The requested country chronicle page could not be located.'
     };
   }
 
   return {
-    title: `${data.seoTitle} | LostStreet Chronicles`,
-    description: data.metaDescription,
+    title: `${data.name} Street View Guesser & Country Guide | LostStreet`,
+    description: `Master ${data.name} in LostStreet free street view guesser. ${data.metaDescription}`,
     alternates: {
-      canonical: `/chronicles/${code.toLowerCase()}`
+      canonical: `https://www.loststreet.online/chronicles/${code.toLowerCase()}`
     },
     keywords: [
+      `${data.name} street view guesser`,
+      `how to identify ${data.name} street view`,
+      `loststreet ${data.name}`,
       `history of ${data.name}`,
       `${data.name} history`,
-      `${data.name} background`,
-      `${data.name} origin`,
-      `${data.name} geography`,
-      `${data.name} street view`,
-      `how to identify ${data.name} in geoguessr`,
+      `${data.name} geography clues`,
+      `${data.name} bollards and license plates`,
+      `geoguessr ${data.name} tips`,
       'country chronicles',
-      'loststreet',
+      'street view guesser',
     ],
     openGraph: {
-      title: data.seoTitle,
+      title: `${data.name} Street View Guesser & Country Guide | LostStreet`,
       description: data.metaDescription,
       type: 'article',
       publishedTime: '2026-07-12T00:00:00Z',
@@ -75,7 +76,7 @@ export async function generateMetadata({ params }) {
           url: `https://www.loststreet.online/api/og?chronicle=${code.toLowerCase()}&name=${encodeURIComponent(data.name)}`,
           width: 1200,
           height: 630,
-          alt: `History of ${data.name}`
+          alt: `${data.name} Street View Guesser Guide`
         }
       ]
     }
@@ -100,7 +101,7 @@ export default async function CountryChroniclePage({ params }) {
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": data.seoTitle,
+    "headline": `${data.name} Street View Guesser & Country History Guide`,
     "description": data.metaDescription,
     "abstract": data.aiSummary ? Object.values(data.aiSummary).join(" ") : data.metaDescription,
     "image": `https://www.loststreet.online/api/og?chronicle=${code.toLowerCase()}&name=${encodeURIComponent(data.name)}`,
@@ -119,7 +120,7 @@ export default async function CountryChroniclePage({ params }) {
       "url": "https://www.loststreet.online",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.loststreet.online/logo.png"
+        "url": "https://www.loststreet.online/icon.png"
       }
     },
     "mainEntityOfPage": {
@@ -131,6 +132,31 @@ export default async function CountryChroniclePage({ params }) {
       "name": "LostStreet Chronicles",
       "url": "https://www.loststreet.online/chronicles"
     }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.loststreet.online"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Chronicles",
+        "item": "https://www.loststreet.online/chronicles"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": data.name,
+        "item": `https://www.loststreet.online/chronicles/${code.toLowerCase()}`
+      }
+    ]
   };
 
   // FAQPage Schema Markup
@@ -163,6 +189,10 @@ export default async function CountryChroniclePage({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       {faqSchema && (
         <script
