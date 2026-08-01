@@ -14,6 +14,7 @@ export const useGameStore = create(
       options: [],
       userGuess: null,
       usedHint: false,
+      googleSearchUsed: false,
       soundEnabled: true,
       soundVolume: 0.5,
       units: 'metric',
@@ -24,13 +25,14 @@ export const useGameStore = create(
       setGameState: (state) => set({ gameState: state }),
       setDifficulty: (diff) => set({ difficulty: diff }),
       addScore: (score) => set((state) => ({ score: state.score + score })),
-      nextRound: () => set((state) => ({ currentRound: state.currentRound + 1, usedHint: false })),
+      nextRound: () => set((state) => ({ currentRound: state.currentRound + 1, usedHint: false, googleSearchUsed: false })),
       setMaxRounds: (rounds) => set({ maxRounds: rounds }),
-      resetGame: () => set({ gameState: 'MENU', score: 0, currentRound: 1, maxRounds: 5, userGuess: null, usedHint: false }),
+      resetGame: () => set({ gameState: 'MENU', score: 0, currentRound: 1, maxRounds: 5, userGuess: null, usedHint: false, googleSearchUsed: false }),
       setCurrentLocation: (loc) => set({ currentLocation: loc }),
       setOptions: (options) => set({ options }),
       setUserGuess: (guess) => set({ userGuess: guess }),
       setUsedHint: (used) => set({ usedHint: used }),
+      setGoogleSearchUsed: (used) => set({ googleSearchUsed: used }),
 
       setSoundEnabled: (enabled) => {
         sounds.setEnabled(enabled);

@@ -291,8 +291,9 @@ export default function Home() {
 
   return (
     <main id="main-content" className="home-page" style={{
-      height: '100dvh',
+      minHeight: '100dvh',
       width: '100vw',
+      overflowX: 'hidden',
       backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/bg.jpg)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -302,7 +303,7 @@ export default function Home() {
     }}>
       <div className="left-gradient-overlay" style={{
         position: 'absolute',
-        top: 0, left: 0, bottom: 0,
+        top: 0, left: 0, right: 0, bottom: 0,
         zIndex: 1
       }}></div>
 
@@ -359,7 +360,7 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="container-padding home-content" style={{ position: 'relative', zIndex: 2, height: '100%', paddingTop: '72px' }}>
+      <section className="container-padding home-content" style={{ position: 'relative', zIndex: 2, minHeight: '100dvh', paddingTop: '64px' }}>
 
         <div className="home-main-row">
         <div className="left-menu-container">
@@ -419,21 +420,21 @@ export default function Home() {
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <IconButton 
               icon={<img src="/settings.png" alt="Settings" style={{ width: '24px', height: '24px' }} />} 
-              color="#7f1d1d" 
+              color="rgba(255, 255, 255, 0.12)" 
               onClick={() => setShowSettings(true)} 
             />
           </div>
 
           {!showSettings && !showProfile && !showDifficulty && !showMatchmaking && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem 1.5rem', fontSize: '0.9rem', color: '#ffffff', fontWeight: '600', alignItems: 'center', justifyContent: 'center' }}>
-               <button onClick={() => window.location.href = '/privacy'} style={{ cursor: 'inherit', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', background: 'none', border: 'none', color: 'inherit', font: 'inherit' }} className="menu-item-hover">Privacy Policy</button>
-               <button onClick={() => setShowObjectives(true)} style={{ cursor: 'inherit', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', background: 'none', border: 'none', color: 'inherit', font: 'inherit' }} className="menu-item-hover">Objectives</button>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem 1.5rem', fontSize: '0.9rem', color: '#ffffff', fontWeight: '600', alignItems: 'center', justifyContent: 'center', background: 'rgba(0, 0, 0, 0.45)', padding: '6px 18px', borderRadius: '20px', backdropFilter: 'blur(8px)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+               <button onClick={() => window.location.href = '/privacy'} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', background: 'none', border: 'none', color: 'inherit', font: 'inherit' }} className="menu-item-hover">Privacy Policy</button>
+               <button onClick={() => setShowObjectives(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', background: 'none', border: 'none', color: 'inherit', font: 'inherit' }} className="menu-item-hover">Objectives</button>
             </div>
           )}
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-             <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#34d399', boxShadow: '0 0 8px #34d399' }}></div>
-             <span style={{ fontWeight: 'bold', fontSize: '1.3rem', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>{onlineCount} online</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(0, 0, 0, 0.45)', padding: '6px 14px', borderRadius: '20px', backdropFilter: 'blur(8px)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+             <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#34d399', boxShadow: '0 0 8px #34d399' }}></div>
+             <span style={{ fontWeight: 'bold', fontSize: '1.1rem', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>{onlineCount} online</span>
           </div>
         </div>
       </section>
@@ -626,13 +627,7 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, ca
       </div>
     </div>
 
-    {/* LSI Semantic Information Section for Crawlers & Players */}
-    <section aria-label="Street View Guesser Information" style={{ marginTop: '0.6rem', padding: '0.6rem 0.8rem', background: 'rgba(0,0,0,0.45)', borderRadius: '10px', border: '1px solid rgba(200,160,96,0.2)', color: '#d1d5db', fontSize: '0.75rem', lineHeight: 1.45 }}>
-      <h3 style={{ margin: '0 0 0.2rem 0', fontSize: '0.8rem', color: '#fbbf24', fontWeight: 600 }}>Why Play LostStreet — Free Street View Guesser?</h3>
-      <p style={{ margin: 0 }}>
-        <strong>LostStreet</strong> is a free 360° street view guesser game featuring 780,000+ hand-picked Google Street View panoramas. Test your geography skills by spotting road bollards, license plates, utility poles, and driving side clues. Play singleplayer location guessing, real-time 1v1 ELO duels, party lobby with friends, or <Link href="/guides" style={{ color: '#60a5fa', textDecoration: 'underline' }}>read geography guides</Link>.
-      </p>
-    </section>
+
   </div>
 );
 

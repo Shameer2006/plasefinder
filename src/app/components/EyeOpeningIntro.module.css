@@ -1,0 +1,140 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ── Blur layer — sits behind eyelids, above game content ── */
+.blurOverlay {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  transition: all 2.5s ease-out;
+}
+
+.blurClearing {
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  background: rgba(0, 0, 0, 0);
+}
+
+/* ── Vignette — peripheral darkening for "eye" framing ── */
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(
+    ellipse 60% 50% at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 55%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  opacity: 1;
+  transition: opacity 3s ease-out;
+  pointer-events: none;
+}
+
+.vignetteClearing {
+  opacity: 0;
+}
+
+/* ── Eyelid base ── */
+.eyelid {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  background: #000;
+  z-index: 3;
+  will-change: transform;
+}
+
+/* ── Top eyelid ── */
+.top {
+  top: 0;
+  height: 53%;
+  border-radius: 0 0 50% 50% / 0 0 18% 18%;
+  transition: transform 2.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Bottom eyelid ── */
+.bottom {
+  bottom: 0;
+  height: 53%;
+  border-radius: 50% 50% 0 0 / 18% 18% 0 0;
+  transition: transform 2.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.topOpen {
+  transform: translateY(-105%);
+}
+
+.bottomOpen {
+  transform: translateY(105%);
+}
+
+/* ── Subtle shadow along eyelid edges ── */
+.eyelidEdge {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(
+    to bottom,
+    rgba(40, 40, 50, 0.8),
+    transparent
+  );
+  border-radius: 0 0 50% 50%;
+}
+
+.eyelidEdgeBottom {
+  bottom: auto;
+  top: -1px;
+  background: linear-gradient(
+    to top,
+    rgba(40, 40, 50, 0.8),
+    transparent
+  );
+  border-radius: 50% 50% 0 0;
+}
+
+/* ── "Where am I...?" text ── */
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  color: white;
+  z-index: 5;
+  white-space: nowrap;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.3),
+               0 0 80px rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.textVisible {
+  animation: textFlicker 1.8s ease-in-out forwards;
+}
+
+@keyframes textFlicker {
+  0%   { opacity: 0;   filter: blur(4px); }
+  8%   { opacity: 0.7; filter: blur(1px); }
+  12%  { opacity: 0.2; filter: blur(3px); }
+  20%  { opacity: 0.9; filter: blur(0px); }
+  30%  { opacity: 0.4; filter: blur(2px); }
+  45%  { opacity: 1;   filter: blur(0px); }
+  60%  { opacity: 0.8; filter: blur(0px); }
+  75%  { opacity: 1;   filter: blur(0px); }
+  90%  { opacity: 0.5; filter: blur(1px); }
+  100% { opacity: 0;   filter: blur(4px); }
+}

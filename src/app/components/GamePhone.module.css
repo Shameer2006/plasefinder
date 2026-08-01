@@ -1,0 +1,539 @@
+/* ═══════════════════════════════════════════════
+   GamePhone — GTA-style in-game phone widget
+   ═══════════════════════════════════════════════ */
+
+/* ── Floating toggle button ── */
+.toggleBtn {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: rgba(20, 20, 30, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  animation: phoneAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+             phonePulse 3s ease-in-out 1s infinite;
+}
+
+.toggleBtn:hover {
+  transform: translateY(-50%) scale(1.12);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 4px 30px rgba(59, 130, 246, 0.35);
+}
+
+@keyframes phoneAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) scale(0) rotate(-30deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes phonePulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); }
+  50%      { box-shadow: 0 4px 25px rgba(59, 130, 246, 0.3); }
+}
+
+/* ── Phone container ── */
+.phoneContainer {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  z-index: 50;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.phoneOpen {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+  pointer-events: auto;
+}
+
+.phoneClosed {
+  opacity: 0;
+  transform: translateY(-50%) translateX(120%);
+  pointer-events: none;
+}
+
+/* ── Phone frame ── */
+.phoneFrame {
+  width: 280px;
+  height: 540px;
+  background: #1a1a2e;
+  border-radius: 36px;
+  border: 3px solid #2a2a3e;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 0 1px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Status bar ── */
+.statusBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 6px;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.time {
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.notch {
+  width: 80px;
+  height: 24px;
+  background: #000;
+  border-radius: 0 0 14px 14px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.statusIcons {
+  display: flex;
+  gap: 4px;
+  font-size: 0.6rem;
+}
+
+/* ── Screen area ── */
+.screen {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);
+  position: relative;
+}
+
+/* Custom scrollbar inside phone */
+.screen::-webkit-scrollbar { width: 3px; }
+.screen::-webkit-scrollbar-track { background: transparent; }
+.screen::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+/* ── Home screen ── */
+.homeScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+}
+
+.appGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+/* ── App icon ── */
+.appIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  padding: 8px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.appIcon:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.appIcon:active:not(:disabled) {
+  transform: scale(0.93);
+}
+
+.appDisabled {
+  opacity: 0.45;
+  cursor: not-allowed !important;
+}
+
+.iconBg {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  transition: all 0.2s ease;
+}
+
+.lostStreetIcon {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+}
+
+.googleIcon {
+  background: linear-gradient(135deg, #4285F4, #34A853);
+  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.35);
+}
+
+.iconUsed {
+  background: linear-gradient(135deg, #374151, #1f2937) !important;
+  box-shadow: none !important;
+  filter: grayscale(1);
+}
+
+.appLabel {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── App screen (LostStreet / Google) ── */
+.appScreen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  animation: screenSlideIn 0.3s ease;
+}
+
+@keyframes screenSlideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+.appHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: #60a5fa;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.backBtn:hover {
+  background: rgba(96, 165, 250, 0.1);
+}
+
+.appTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+}
+
+/* ── LostStreet lore ── */
+.loreContent {
+  padding: 20px 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.loreLogo {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 12px;
+  animation: loreFloat 3s ease-in-out infinite;
+}
+
+@keyframes loreFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.loreTitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #10b981;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.loreDivider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #10b981, transparent);
+  margin: 16px auto;
+}
+
+.loreText {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.loreText strong {
+  color: #10b981;
+}
+
+.loreTextWarning {
+  font-size: 0.8rem;
+  color: #fbbf24;
+  line-height: 1.65;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  background: rgba(251, 191, 36, 0.08);
+  border-radius: 8px;
+  border-left: 2px solid #fbbf24;
+}
+
+.loreTextHint {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.65;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  background: rgba(59, 130, 246, 0.08);
+  border-radius: 8px;
+  border-left: 2px solid #3b82f6;
+}
+
+.loreTextHint strong {
+  color: #60a5fa;
+}
+
+.loreTextFooter {
+  text-align: center;
+  font-size: 0.9rem;
+  color: white;
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+/* ── Google search ── */
+.googleContent {
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.googleLogo {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.searchBar {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  font-size: 0.9rem;
+  font-family: 'Outfit', sans-serif;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.searchInput:focus {
+  border-color: #4285F4;
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.15);
+}
+
+.searchBtn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #4285F4, #1a73e8);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 16px;
+}
+
+.searchBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.4);
+}
+
+.searchBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.searchWarning {
+  font-size: 0.75rem;
+  color: #fbbf24;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ── Search-complete state ── */
+.searchComplete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 12px;
+  text-align: center;
+  padding: 20px;
+}
+
+.checkmark {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+.searchComplete h3 {
+  color: white;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.searchComplete p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.searchUsedLabel {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ── Home bar / bottom indicator ── */
+.homeBar {
+  padding: 8px 0 6px;
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.homeIndicator {
+  width: 100px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.homeBar:hover .homeIndicator {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* ══════════════ MOBILE ══════════════ */
+@media (max-width: 768px) {
+  .toggleBtn {
+    right: 12px;
+    top: auto;
+    bottom: 120px;
+    transform: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+  }
+
+  .toggleBtn:hover {
+    transform: scale(1.1);
+  }
+
+  @keyframes phoneAppear {
+    from { opacity: 0; transform: scale(0) rotate(-30deg); }
+    to   { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  .phoneContainer {
+    right: 10px;
+    top: auto;
+    bottom: 60px;
+    transform: none;
+  }
+
+  .phoneOpen {
+    transform: translateX(0);
+  }
+
+  .phoneClosed {
+    transform: translateX(120%);
+  }
+
+  .phoneFrame {
+    width: 240px;
+    height: 440px;
+    border-radius: 28px;
+  }
+
+  .notch {
+    width: 64px;
+    height: 20px;
+  }
+}

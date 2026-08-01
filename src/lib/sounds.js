@@ -103,6 +103,18 @@ class SoundEngine {
     // Low descending tone for timeout
     this.playTone(400, 'sine', 0.3, 0.3, 200);
   }
+
+  playEyeOpen() {
+    // Low, atmospheric rising tone — simulates waking up
+    this.playTone(60, 'sine', 3, 0.12, 250);
+    setTimeout(() => this.playTone(120, 'sine', 2, 0.06, 400), 800);
+  }
+
+  playPhoneOpen() {
+    // Short UI tap / notification
+    this.playTone(1200, 'sine', 0.08, 0.15, 900);
+    setTimeout(() => this.playTone(1400, 'sine', 0.06, 0.1), 60);
+  }
 }
 
 // Singleton instance

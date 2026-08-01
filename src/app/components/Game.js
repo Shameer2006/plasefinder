@@ -7,6 +7,8 @@ import ResultScreen from './ResultScreen';
 import { fetchRandomLocation } from '@/lib/locationManager';
 import Spinner from './Spinner';
 import dynamic from 'next/dynamic';
+import EyeOpeningIntro from './EyeOpeningIntro';
+import GamePhone from './GamePhone';
 
 const GuessingMap = dynamic(() => import('./GuessingMap'), { ssr: false });
 
@@ -19,6 +21,7 @@ export default function Game() {
     setCurrentLocation, setOptions, setUserGuess 
   } = useGameStore();
   const [error, setError] = useState(null);
+  const [showIntro, setShowIntro] = useState(false);
 
   const isLoading = gameState === 'LOADING';
 
@@ -31,6 +34,7 @@ export default function Game() {
         setCurrentLocation(location);
         setOptions(options);
         setUserGuess(null);
+        setShowIntro(true);
         setGameState('EXPLORING');
       } catch (err) {
         console.error("Error loading location:", err);
@@ -63,6 +67,11 @@ export default function Game() {
 
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
+      {/* Eye-opening cinematic intro */}
+      {showIntro && (
+        <EyeOpeningIntro onComplete={() => setShowIntro(false)} />
+      )}
+
       <div className="hud-container" style={{ zIndex: 10 }}>
         <div className="glass-panel" style={{ padding: '0.5rem 1rem', fontWeight: 'bold' }}>
           Round: {currentRound} / {maxRounds}
@@ -80,6 +89,9 @@ export default function Game() {
       ) : (
         <GuessingMap />
       )}
+
+      {/* In-game phone (appears after intro) */}
+      {!showIntro && <GamePhone />}
     </div>
   );
 }

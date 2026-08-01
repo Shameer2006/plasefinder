@@ -174,8 +174,8 @@ body {
 }
 
 .left-gradient-overlay {
-  width: 60%;
-  background: linear-gradient(to right, rgba(80, 10, 10, 0.95) 0%, rgba(80, 10, 10, 0.8) 40%, transparent 100%);
+  width: 100%;
+  background: linear-gradient(to right, rgba(10, 10, 18, 0.85) 0%, rgba(10, 10, 18, 0.55) 45%, rgba(10, 10, 18, 0.25) 100%);
 }
 
 .top-right-controls {
@@ -189,16 +189,16 @@ body {
 }
 
 .left-menu-container {
-  margin-top: 1rem;
-  max-width: 400px;
+  margin-top: 0.2rem;
+  max-width: 450px;
 }
 
 .home-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1rem;
-  min-height: 100%;
+  gap: 0.5rem;
+  min-height: 100dvh;
 }
 
 .home-main-row {
@@ -213,6 +213,8 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
+  padding-bottom: 0.5rem;
+  padding-top: 0.2rem;
 }
 
 .hud-container {
@@ -347,7 +349,7 @@ body {
 
   .left-gradient-overlay {
     width: 100%;
-    background: linear-gradient(to right, rgba(80, 10, 10, 0.95) 0%, rgba(80, 10, 10, 0.8) 60%, rgba(80, 10, 10, 0.4) 100%);
+    background: linear-gradient(to bottom, rgba(10, 10, 18, 0.75) 0%, rgba(10, 10, 18, 0.85) 60%, rgba(10, 10, 18, 0.95) 100%);
   }
 
   .top-right-controls {
@@ -719,7 +721,7 @@ button:focus-visible {
   transform: translateX(-50%);
   top: -4px;
   bottom: -4px;
-  width: clamp(12px, 1.6vw, 18px);
+  width: clamp(14px, 1.8vw, 20px);
   background: linear-gradient(90deg, #5a2e0a 0%, #8b4e1a 40%, #9c5a20 55%, #7a4010 80%, #4e2408 100%);
   border-radius: 6px;
   box-shadow: 2px 0 8px rgba(0,0,0,0.45), inset 1px 0 3px rgba(255,255,255,0.1);
@@ -740,10 +742,10 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: clamp(0.65em, 1.8vh, 0.9em) 2.2em;
+  padding: clamp(0.6em, 1.5vh, 0.85em) 2.2em;
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(1rem, 2.2vw, 1.25rem);
-  font-weight: 700;
+  font-size: clamp(1.05rem, 2.1vw, 1.25rem);
+  font-weight: 800;
   letter-spacing: 0.06em;
   color: #fff;
   text-shadow: 0 1px 3px rgba(0,0,0,0.3);
