@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Polyline, Tooltip, useMap, LayerGroup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useGameStore } from '@/lib/store';
 
 // Fix for default Leaflet icon in Next.js
 const defaultIcon = new L.Icon({
@@ -61,6 +62,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 export default function ResultsMap({ location, players, height = '400px' }) {
+  const { mapType } = useGameStore();
   const actualPos = [location.lat, location.lng];
   
   // Prepare bounds starting with the actual location
@@ -90,7 +92,10 @@ export default function ResultsMap({ location, players, height = '400px' }) {
         attributionControl={false}
       >
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+          key={mapType}
+          url={`https://mt{s}.google.com/vt/lyrs=${mapType === 'satellite' ? 'y' : 'm'}&x={x}&y={y}&z={z}&scale=2`}
+          subdomains={['0', '1', '2', '3']}
+          maxZoom={20}
         />
         
         {/* Actual Location Marker */}

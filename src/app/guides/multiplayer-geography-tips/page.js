@@ -1,24 +1,29 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'How to Win at Multiplayer Geography Games — LostStreet',
-  description: 'Advanced strategies for winning 1v1 multiplayer geography duels. Learn speed techniques, ELO management, and mental strategies for competitive geography games.',
+  title: 'How to Win Multiplayer Geography Duels (2026) — Competitive Tips | LostStreet',
+  description: 'Dominate 1v1 geography duels with speed techniques, ELO management & mental strategies. Advanced competitive tips for LostStreet multiplayer ranked matches.',
+  alternates: { canonical: 'https://www.loststreet.online/guides/multiplayer-geography-tips' },
+  keywords: ['multiplayer geography game', 'geography duel tips', '1v1 geography game', 'ELO geography', 'competitive street view guesser'],
   openGraph: {
-    title: 'How to Win at Multiplayer Geography Games',
-    description: 'Advanced strategies for winning 1v1 multiplayer geography duels.',
+    title: 'How to Win Multiplayer Geography Duels (2026)',
+    description: 'Speed techniques, ELO management & mental strategies for competitive geography duels.',
     url: 'https://www.loststreet.online/guides/multiplayer-geography-tips',
     type: 'article',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
 };
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'How to Win at Multiplayer Geography Games',
+  headline: 'How to Win Multiplayer Geography Duels (2026)',
   description: 'Advanced strategies for winning 1v1 multiplayer geography duels.',
-  author: { '@type': 'Organization', name: 'LostStreet' },
-  datePublished: '2026-09-15T00:00:00.000Z',
-  dateModified: '2026-09-15T00:00:00.000Z',
+  author: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online/about' },
+  publisher: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online', logo: { '@type': 'ImageObject', url: 'https://www.loststreet.online/icon.png' } },
+  datePublished: '2026-08-01T00:00:00.000Z',
+  dateModified: '2026-08-06T00:00:00.000Z',
+  image: 'https://www.loststreet.online/og-image.png',
 };
 
 export default function ArticlePage() {

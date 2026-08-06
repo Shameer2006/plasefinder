@@ -51,11 +51,12 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#0a0d1a",
   width: "device-width",
   initialScale: 1.0,
   maximumScale: 1.0,
   userScalable: false,
+  viewportFit: "cover",
 };
 
 const jsonLd = [
@@ -152,8 +153,12 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="theme-color" content="#0a0a0a" />
         <meta name="msvalidate.01" content="3B92B95C23615C35821E1600A4267ABE" />
+        <link rel="alternate" hrefLang="en" href="https://www.loststreet.online" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.loststreet.online" />
+        <meta name="geo.region" content="001" />
+        <meta name="geo.placename" content="Worldwide" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="preload" as="image" href="/bg.jpg" />
+
         {/* JSON-LD structured data */}
         {jsonLd.map((schema, i) => (
           <script

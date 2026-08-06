@@ -1,24 +1,29 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'How to Identify European Countries in Street View — LostStreet',
-  description: 'A complete guide to identifying European countries in geography guessing games. Learn visual clues for Western, Eastern, Northern, and Southern Europe.',
+  title: 'How to Identify European Countries in Street View (2026) — Pro Tips | LostStreet',
+  description: 'Tell European countries apart in geography games. Country-specific road signs, bollards, license plates & architecture for Western, Eastern, Nordic & Southern Europe.',
+  alternates: { canonical: 'https://www.loststreet.online/guides/europe-street-view-guide' },
+  keywords: ['europe street view', 'european countries geography game', 'identify european countries', 'europe bollards street view', 'loststreet europe guide'],
   openGraph: {
-    title: 'How to Identify European Countries in Street View',
-    description: 'Learn visual clues for identifying European countries in geography guessing games.',
+    title: 'How to Identify European Countries in Street View (2026)',
+    description: 'Country-specific road signs, bollards, license plates & architecture for European geography games.',
     url: 'https://www.loststreet.online/guides/europe-street-view-guide',
     type: 'article',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
 };
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'How to Identify European Countries in Street View',
-  description: 'A complete guide to identifying European countries in geography guessing games.',
-  author: { '@type': 'Organization', name: 'LostStreet' },
-  datePublished: '2026-09-10T00:00:00.000Z',
-  dateModified: '2026-09-10T00:00:00.000Z',
+  headline: 'How to Identify European Countries in Street View (2026)',
+  description: 'A complete visual clue guide to identifying European countries in geography guessing games.',
+  author: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online/about' },
+  publisher: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online', logo: { '@type': 'ImageObject', url: 'https://www.loststreet.online/icon.png' } },
+  datePublished: '2026-07-20T00:00:00.000Z',
+  dateModified: '2026-08-06T00:00:00.000Z',
+  image: 'https://www.loststreet.online/og-image.png',
 };
 
 export default function ArticlePage() {

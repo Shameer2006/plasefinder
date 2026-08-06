@@ -1,24 +1,29 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'How to Identify African Countries in Street View — LostStreet',
-  description: 'A complete guide to identifying African countries in geography guessing games. Learn the visual clues for West, East, Southern, and North Africa.',
+  title: 'How to Identify African Countries in Street View (2026) — Visual Clue Guide | LostStreet',
+  description: 'Master African countries in street view games. Region-by-region breakdown of visual clues for West, East, Southern & North Africa — road signs, vegetation, languages & more.',
+  alternates: { canonical: 'https://www.loststreet.online/guides/africa-street-view-guide' },
+  keywords: ['africa street view', 'african countries geography game', 'west africa street view clues', 'identify african countries', 'loststreet africa guide'],
   openGraph: {
-    title: 'How to Identify African Countries in Street View',
-    description: 'Learn the visual clues for identifying African countries in geography guessing games.',
+    title: 'How to Identify African Countries in Street View (2026)',
+    description: 'Region-by-region breakdown of visual clues for Africa in geography games.',
     url: 'https://www.loststreet.online/guides/africa-street-view-guide',
     type: 'article',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
 };
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'How to Identify African Countries in Street View',
-  description: 'A complete guide to identifying African countries in geography guessing games.',
-  author: { '@type': 'Organization', name: 'LostStreet' },
-  datePublished: '2026-09-05T00:00:00.000Z',
-  dateModified: '2026-09-05T00:00:00.000Z',
+  headline: 'How to Identify African Countries in Street View (2026)',
+  description: 'A complete visual clue guide to identifying African countries in geography guessing games.',
+  author: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online/about' },
+  publisher: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online', logo: { '@type': 'ImageObject', url: 'https://www.loststreet.online/icon.png' } },
+  datePublished: '2026-07-15T00:00:00.000Z',
+  dateModified: '2026-08-06T00:00:00.000Z',
+  image: 'https://www.loststreet.online/og-image.png',
 };
 
 export default function ArticlePage() {

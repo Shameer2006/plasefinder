@@ -61,7 +61,7 @@ export default function GuessingMap({ onGuess, country }) {
   const [markerPos, setMarkerPos] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const { setUserGuess, setGameState, currentLocation, currentRound, usedHint, setUsedHint } = useGameStore();
+  const { setUserGuess, setGameState, currentLocation, currentRound, usedHint, setUsedHint, mapType } = useGameStore();
 
   // Detect touch/mobile device
   useEffect(() => {
@@ -122,7 +122,10 @@ export default function GuessingMap({ onGuess, country }) {
             attributionControl={false}
           >
             <TileLayer
-              url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+              key={mapType}
+              url={`https://mt{s}.google.com/vt/lyrs=${mapType === 'satellite' ? 'y' : 'm'}&x={x}&y={y}&z={z}&scale=2`}
+              subdomains={['0', '1', '2', '3']}
+              maxZoom={20}
             />
             <MapClickHandler onLocationSelect={setMarkerPos} />
             <MapResizer isExpanded={isExpanded} />

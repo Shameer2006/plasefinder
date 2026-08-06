@@ -5,7 +5,7 @@ import { sounds } from '@/lib/sounds';
 import { generateContextualHint } from '@/lib/hintUtils';
 
 export default function MultipleChoicePanel() {
-  const { currentLocation, options, setUserGuess, setGameState, usedHint, setUsedHint } = useGameStore();
+  const { currentLocation, options, setUserGuess, setGameState, usedHint, setUsedHint, circleSearchActive } = useGameStore();
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -34,8 +34,8 @@ export default function MultipleChoicePanel() {
 
   return (
     <>
-      {/* Desktop: always-visible bottom panel */}
-      <div className="mc-desktop-panel">
+      {/* Desktop: always-visible bottom panel (hidden during circle search) */}
+      <div className="mc-desktop-panel" style={circleSearchActive ? { display: 'none' } : undefined}>
         
         {/* Hint Banner (Desktop) */}
         {usedHint && (
@@ -109,8 +109,8 @@ export default function MultipleChoicePanel() {
         </div>
       </div>
 
-      {/* Mobile: Guess button that opens a full-screen overlay */}
-      {!isExpanded && (
+      {/* Mobile: Guess button that opens a full-screen overlay (hidden during circle search) */}
+      {!isExpanded && !circleSearchActive && (
         <div className="mc-mobile-trigger">
           <button
             type="button"

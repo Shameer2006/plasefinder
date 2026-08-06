@@ -1,24 +1,29 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'How to Identify Every Country by Its Flag — LostStreet',
-  description: 'A complete guide to world flags grouped by region and visual pattern. Learn to identify every country flag for geography games and general knowledge.',
+  title: 'World Flag Identification Guide (2026) — Identify Any Country Flag | LostStreet',
+  description: 'Learn to identify every country flag by color, pattern & region. Tricolours, crescents, crosses, stars — plus the most commonly confused flag pairs in quiz games.',
+  alternates: { canonical: 'https://www.loststreet.online/guides/flag-identification-guide' },
+  keywords: ['identify flag', 'country flag identifier', 'flag identification', 'world flags quiz', 'flag guesser', 'country flag quiz', 'flags of the world identifier'],
   openGraph: {
-    title: 'How to Identify Every Country by Its Flag',
-    description: 'A complete guide to world flags grouped by region and visual pattern.',
+    title: 'World Flag Identification Guide (2026) — Identify Any Country Flag',
+    description: 'World flags grouped by visual pattern. Tricolours, crescents, crosses, stars & confused flag pairs.',
     url: 'https://www.loststreet.online/guides/flag-identification-guide',
     type: 'article',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
 };
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'How to Identify Every Country by Its Flag',
-  description: 'A complete guide to world flags grouped by region and visual pattern.',
-  author: { '@type': 'Organization', name: 'LostStreet' },
-  datePublished: '2026-09-12T00:00:00.000Z',
-  dateModified: '2026-09-12T00:00:00.000Z',
+  headline: 'World Flag Identification Guide (2026)',
+  description: 'A complete guide to world flags grouped by region and visual pattern for geography games.',
+  author: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online/about' },
+  publisher: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online', logo: { '@type': 'ImageObject', url: 'https://www.loststreet.online/icon.png' } },
+  datePublished: '2026-07-22T00:00:00.000Z',
+  dateModified: '2026-08-06T00:00:00.000Z',
+  image: 'https://www.loststreet.online/og-image.png',
 };
 
 const flagGroups = [

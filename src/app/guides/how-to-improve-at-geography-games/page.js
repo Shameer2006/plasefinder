@@ -1,24 +1,29 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'How to Get Better at Geography Guessing Games — LostStreet',
-  description: 'Practical tips and strategies to improve your score in geography guessing games like LostStreet and GeoGuessr. Learn meta-knowledge, practice routines, and advanced techniques.',
+  title: 'How to Get Better at Geography Games Fast (2026) — Beginner to Pro | LostStreet',
+  description: 'Practical strategies to improve your geography game scores. Practice routines, meta-knowledge tips & advanced techniques used by top-ranked GeoGuessr & LostStreet players.',
+  alternates: { canonical: 'https://www.loststreet.online/guides/how-to-improve-at-geography-games' },
+  keywords: ['get better at geography games', 'improve geography game score', 'geoguessr tips', 'street view guesser tips', 'geography game practice'],
   openGraph: {
-    title: 'How to Get Better at Geography Guessing Games',
-    description: 'Practical tips and strategies to improve your score in geography guessing games.',
+    title: 'How to Get Better at Geography Games Fast (2026)',
+    description: 'Practice routines, meta-knowledge & advanced techniques to boost your geography game scores.',
     url: 'https://www.loststreet.online/guides/how-to-improve-at-geography-games',
     type: 'article',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
 };
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'How to Get Better at Geography Guessing Games',
-  description: 'Practical tips and strategies to improve your score in geography guessing games like LostStreet and GeoGuessr.',
-  author: { '@type': 'Organization', name: 'LostStreet' },
-  datePublished: '2026-08-28T00:00:00.000Z',
-  dateModified: '2026-08-28T00:00:00.000Z',
+  headline: 'How to Get Better at Geography Guessing Games (2026)',
+  description: 'Practical tips and strategies to improve your score in geography guessing games.',
+  author: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online/about' },
+  publisher: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online', logo: { '@type': 'ImageObject', url: 'https://www.loststreet.online/icon.png' } },
+  datePublished: '2026-07-28T00:00:00.000Z',
+  dateModified: '2026-08-06T00:00:00.000Z',
+  image: 'https://www.loststreet.online/og-image.png',
 };
 
 export default function ArticlePage() {

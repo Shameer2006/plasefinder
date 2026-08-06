@@ -1,24 +1,29 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'The Ultimate Street View Clues Guide — LostStreet',
-  description: 'A comprehensive reference guide to every visual clue in Google Street View — bollards, road markings, utility poles, sun position, and more. Master geography guessing games.',
+  title: 'Ultimate Street View Clues Cheat Sheet (2026) — Bollards, Poles & More | LostStreet',
+  description: 'The complete reference to every visual clue in Google Street View. Bollards, road markings, utility poles, sun position, driving side & vegetation — master them all.',
+  alternates: { canonical: 'https://www.loststreet.online/guides/geography-clues-guide' },
+  keywords: ['street view clues', 'geoguessr clues', 'bollard identification', 'street view clues list', 'geography clues guide', 'road markings geography'],
   openGraph: {
-    title: 'The Ultimate Street View Clues Guide',
-    description: 'A comprehensive reference to every visual clue in Google Street View for geography guessing games.',
+    title: 'Ultimate Street View Clues Cheat Sheet (2026)',
+    description: 'Complete reference to every visual clue in Google Street View — bollards, poles, road markings & more.',
     url: 'https://www.loststreet.online/guides/geography-clues-guide',
     type: 'article',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
 };
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'The Ultimate Street View Clues Guide',
+  headline: 'Ultimate Street View Clues Cheat Sheet (2026)',
   description: 'A comprehensive reference guide to every visual clue in Google Street View for geography guessing games.',
-  author: { '@type': 'Organization', name: 'LostStreet' },
-  datePublished: '2026-09-01T00:00:00.000Z',
-  dateModified: '2026-09-01T00:00:00.000Z',
+  author: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online/about' },
+  publisher: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online', logo: { '@type': 'ImageObject', url: 'https://www.loststreet.online/icon.png' } },
+  datePublished: '2026-07-25T00:00:00.000Z',
+  dateModified: '2026-08-06T00:00:00.000Z',
+  image: 'https://www.loststreet.online/og-image.png',
 };
 
 export default function ArticlePage() {

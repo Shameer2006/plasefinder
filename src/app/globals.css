@@ -25,7 +25,7 @@ body, body * {
 
 body {
   font-family: 'Outfit', sans-serif;
-  background: url('/bg.jpg') center/cover no-repeat fixed;
+  background: var(--bg-color);
   color: var(--text-color);
   min-height: 100vh;
   display: flex;
@@ -1324,3 +1324,347 @@ button:focus-visible {
     bottom: max(20px, calc(env(safe-area-inset-bottom) + 12px));
   }
 }
+
+/* ==========================================
+   Hero UI Theme & Live Panorama Layout Styles
+   ========================================== */
+
+@keyframes bounce-up {
+  0%, 100% { transform: translateY(0); opacity: 0.8; }
+  50% { transform: translateY(-8px); opacity: 1; }
+}
+
+@keyframes pulse-green-dot {
+  0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+  50% { transform: scale(1.1); opacity: 0.85; box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+}
+
+.online-pulse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #34d399;
+  display: inline-block;
+  animation: pulse-green-dot 2s infinite;
+}
+
+/* Highway Chevron Arrow Signboard Menu Buttons (Image 1 Theme) */
+.hero-menu-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(0.6em, 1.4vh, 0.85em) 32px clamp(0.6em, 1.4vh, 0.85em) 14px;
+  border: none;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  clip-path: polygon(0% 0%, calc(100% - 24px) 0%, 100% 50%, calc(100% - 24px) 100%, 0% 100%);
+  transition: transform 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.18s, box-shadow 0.18s;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-menu-btn:hover {
+  transform: scale(1.02) translateX(6px);
+  filter: brightness(1.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.hero-menu-btn:active {
+  transform: scale(0.98);
+}
+
+.hero-menu-btn-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-menu-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.22);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.2);
+}
+
+/* Highway Chevron Signboard Colors */
+.hero-menu-btn.icon-red,
+.icon-red-sign { background: #e63329; color: #ffffff; }
+
+.hero-menu-btn.icon-orange,
+.icon-orange-sign { background: #f07d2a; color: #ffffff; }
+
+.hero-menu-btn.icon-gold,
+.icon-gold-sign { background: #f5c518; color: #4a2800; }
+.hero-menu-btn.icon-gold span,
+.icon-gold-sign span { color: #4a2800 !important; }
+
+.hero-menu-btn.icon-green,
+.icon-green-sign { background: #10b981; color: #ffffff; }
+
+.hero-menu-btn.icon-blue,
+.icon-blue-sign { background: #0284c7; color: #ffffff; }
+
+.hero-menu-btn.icon-purple,
+.icon-purple-sign { background: #8b5cf6; color: #ffffff; }
+
+.hero-menu-btn.icon-teal,
+.icon-teal-sign { background: #0f766e; color: #ffffff; }
+
+.hero-menu-btn.icon-rose,
+.icon-rose-sign { background: #be123c; color: #ffffff; }
+
+/* Highway Signboard Theme */
+.highway-signboard {
+  background: linear-gradient(145deg, #1b432c 0%, #0d2818 100%);
+  border: 3px solid #2f7a4d;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.15), 0 20px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  padding: 24px;
+  color: white;
+  position: relative;
+  text-align: center;
+}
+
+.highway-signboard-inner {
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.highway-quickplay-btn {
+  width: 100%;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1e1b4b;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.highway-quickplay-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.6);
+  background: linear-gradient(135deg, #fcd34d, #fbbf24);
+}
+
+/* Feature Cards Grid below Highway Sign */
+.feature-badge-card {
+  background: rgba(18, 24, 38, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  flex: 1;
+}
+
+/* Persistent Bottom Stats Bar */
+.bottom-stats-bar {
+  background: rgba(12, 16, 28, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+.stat-item-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+}
+
+.stat-item-value {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: white;
+}
+
+/* ==========================================================================
+   Comprehensive Mobile Screen Optimization (Touch & Small Viewports)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Dynamic Viewport & Base Layout */
+  html, body {
+    overflow-x: hidden;
+    touch-action: manipulation;
+  }
+
+  header {
+    padding: 8px 12px !important;
+    height: 58px !important;
+  }
+
+  header img {
+    height: 30px !important;
+  }
+
+  .home-header-nav {
+    display: none !important;
+  }
+
+  .desktop-only-pill {
+    display: none !important;
+  }
+
+  .mobile-menu-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(18, 24, 38, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    cursor: pointer;
+  }
+
+  .mobile-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: absolute;
+    top: 58px;
+    left: 0;
+    right: 0;
+    background: rgba(10, 13, 26, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 16px;
+    z-index: 1000;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+  }
+
+  .home-content {
+    padding-top: 64px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-bottom: 70px !important;
+    min-height: 100dvh !important;
+  }
+
+  .home-main-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
+  /* Left Menu Full-Width Mobile Cards */
+  .left-menu-container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .hero-menu-btn {
+    padding: 12px 28px 12px 14px !important;
+    min-height: 48px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .hero-menu-btn span {
+    font-size: 0.88rem !important;
+  }
+
+  /* Mobile Bottom Stats Bar */
+  .bottom-stats-bar {
+    padding: 8px 12px !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+
+  .stat-item-box {
+    font-size: 0.75rem !important;
+    gap: 4px !important;
+  }
+
+  .stat-item-value {
+    font-size: 0.9rem !important;
+  }
+
+  /* Game Canvas & HUD Mobile Enhancements */
+  .game-area {
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+  }
+
+  /* Guessing Map & Multiple Choice Mobile Enhancements */
+  .guessing-map-container {
+    width: calc(100vw - 20px) !important;
+    max-height: 55vh !important;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Touch-friendly Multiple Choice Grid */
+  .multiple-choice-container {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    padding: 8px !important;
+  }
+
+  .multiple-choice-btn {
+    min-height: 50px !important;
+    font-size: 0.85rem !important;
+    padding: 8px 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra Small Phone Screens (iPhone SE, Galaxy S) */
+  header {
+    gap: 6px !important;
+  }
+
+  .online-pulse-dot + span {
+    font-size: 0.75rem !important;
+  }
+
+  .hero-menu-btn {
+    clip-path: polygon(0% 0%, calc(100% - 18px) 0%, 100% 50%, calc(100% - 18px) 100%, 0% 100%) !important;
+    padding-right: 22px !important;
+  }
+
+  .multiple-choice-container {
+    grid-template-columns: 1fr !important;
+  }
+}
+

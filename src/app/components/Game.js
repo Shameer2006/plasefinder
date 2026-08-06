@@ -1,9 +1,10 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useGameStore } from '@/lib/store';
 import PanoramaViewer from './PanoramaViewer';
 import MultipleChoicePanel from './MultipleChoicePanel';
 import ResultScreen from './ResultScreen';
+import CircleToSearch from './CircleToSearch';
 import { fetchRandomLocation } from '@/lib/locationManager';
 import Spinner from './Spinner';
 import dynamic from 'next/dynamic';
@@ -15,34 +16,50 @@ const GuessingMap = dynamic(() => import('./GuessingMap'), { ssr: false });
 export default function Game() {
   const { 
     gameState, setGameState, resetGame,
-    difficulty, 
+    difficulty, gameMode,
     currentRound, maxRounds, 
     score, 
-    setCurrentLocation, setOptions, setUserGuess 
+    setCurrentLocation, setOptions, setUserGuess,
+    circleSearchActive
   } = useGameStore();
   const [error, setError] = useState(null);
   const [showIntro, setShowIntro] = useState(false);
+  const staticImgRef = useRef(null);
 
   const isLoading = gameState === 'LOADING';
 
   useEffect(() => {
     if (!isLoading) return;
     setError(null);
+
+    // 12 second safety timeout to prevent getting stuck infinitely on LOADING
+    const safetyTimeout = setTimeout(() => {
+      setError('Location loading timed out. Please check your connection and try again.');
+    }, 12000);
+
     const initRound = async () => {
       try {
         const { location, options } = await fetchRandomLocation();
+        clearTimeout(safetyTimeout);
         setCurrentLocation(location);
         setOptions(options);
         setUserGuess(null);
-        setShowIntro(true);
+        setShowIntro(useGameStore.getState().gameMode === 'STORY');
         setGameState('EXPLORING');
       } catch (err) {
+        clearTimeout(safetyTimeout);
         console.error("Error loading location:", err);
         setError(err.message || 'Failed to load location. Check your connection and try again.');
       }
     };
     initRound();
+
+    return () => clearTimeout(safetyTimeout);
   }, [isLoading, setGameState, setCurrentLocation, setOptions, setUserGuess]);
+
+  const handleStaticImageReady = useCallback((imgEl) => {
+    staticImgRef.current = imgEl;
+  }, []);
 
   if (gameState === 'LOADING') {
     return <Spinner text={`Preparing Round ${currentRound}...`} />;
@@ -68,7 +85,7 @@ export default function Game() {
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
       {/* Eye-opening cinematic intro */}
-      {showIntro && (
+      {showIntro && gameMode === 'STORY' && (
         <EyeOpeningIntro onComplete={() => setShowIntro(false)} />
       )}
 
@@ -82,7 +99,12 @@ export default function Game() {
         <button className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', backgroundColor: '#ef4444', borderColor: '#ef4444', color: 'white' }} onClick={() => resetGame()}>Quit</button>
       </div>
 
-      <PanoramaViewer />
+      <PanoramaViewer onStaticImageReady={handleStaticImageReady} />
+
+      {/* Circle to Search overlay — active when player triggers it from the phone */}
+      {circleSearchActive && (
+        <CircleToSearch staticImgRef={staticImgRef} />
+      )}
 
       {difficulty === 'EASY' || (difficulty === 'MEDIUM' && currentRound % 2 !== 0) ? (
         <MultipleChoicePanel />
@@ -91,7 +113,7 @@ export default function Game() {
       )}
 
       {/* In-game phone (appears after intro) */}
-      {!showIntro && <GamePhone />}
+      {!showIntro && gameMode === 'STORY' && <GamePhone />}
     </div>
   );
 }

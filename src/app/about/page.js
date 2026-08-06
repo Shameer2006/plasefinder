@@ -325,6 +325,50 @@ export default function AboutPage() {
         </Link>
       </section>
 
+      {/* Explore Guides & Country Pages */}
+      <section style={{ padding: '3rem 2rem', maxWidth: '900px', margin: '0 auto' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1.5rem', textAlign: 'center' }}>
+          Explore Our Guides
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+          {[
+            { title: '10 Hardest Countries to Guess', slug: '/guides/hardest-countries-to-guess' },
+            { title: 'Street View Clues Cheat Sheet', slug: '/guides/geography-clues-guide' },
+            { title: 'How to Guess Locations from Street View', slug: '/guides/how-to-guess-locations-from-street-view' },
+            { title: 'World Flag Identification Guide', slug: '/guides/flag-identification-guide' },
+            { title: 'Africa Street View Guide', slug: '/guides/africa-street-view-guide' },
+            { title: 'Free Country Flag Quiz', slug: '/flag-guesser' },
+          ].map((guide) => (
+            <Link key={guide.slug} href={guide.slug} style={{
+              background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: '12px', padding: '1rem 1.25rem', textDecoration: 'none',
+              color: '#10b981', fontWeight: 600, fontSize: '0.95rem', display: 'block',
+              transition: 'background 0.2s',
+            }}>
+              → {guide.title}
+            </Link>
+          ))}
+        </div>
+
+        <h3 style={{ fontSize: '1.2rem', fontWeight: 600, marginTop: '2rem', marginBottom: '1rem', color: '#9ca3af' }}>
+          Popular Country Guides
+        </h3>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+          {[
+            ['in', 'India'], ['bn', 'Brunei'], ['de', 'Germany'], ['ng', 'Nigeria'],
+            ['gh', 'Ghana'], ['al', 'Albania'], ['bh', 'Bahrain'], ['om', 'Oman'],
+            ['nz', 'New Zealand'], ['pa', 'Panama'], ['ee', 'Estonia'], ['na', 'Namibia']
+          ].map(([code, name]) => (
+            <Link key={code} href={`/chronicles/${code}`} style={{
+              padding: '5px 14px', background: 'rgba(255,255,255,0.04)',
+              borderRadius: '50px', fontSize: '0.85rem', color: '#d1d5db',
+              textDecoration: 'none', border: '1px solid rgba(255,255,255,0.1)',
+            }}>
+              {name}
+            </Link>
+          ))}
+        </div>
+      </section>
       {/* Popular Searches */}
       <section style={{
         padding: '3rem 2rem',
@@ -374,9 +418,13 @@ export default function AboutPage() {
         borderTop: '1px solid rgba(255,255,255,0.06)',
       }}>
         <p>© {new Date().getFullYear()} LostStreet. A free geography guessing game and GeoGuessr alternative.</p>
-        <div style={{ marginTop: '0.5rem', display: 'flex', gap: '1.5rem', justifyContent: 'center' }}>
+        <div style={{ marginTop: '0.5rem', display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link href="/" style={{ color: '#6b7280', textDecoration: 'none' }}>Home</Link>
+          <Link href="/guides" style={{ color: '#6b7280', textDecoration: 'none' }}>Guides</Link>
+          <Link href="/chronicles" style={{ color: '#6b7280', textDecoration: 'none' }}>Chronicles</Link>
+          <Link href="/flag-guesser" style={{ color: '#6b7280', textDecoration: 'none' }}>Flag Guesser</Link>
           <Link href="/leaderboard" style={{ color: '#6b7280', textDecoration: 'none' }}>Leaderboard</Link>
+          <Link href="/community" style={{ color: '#6b7280', textDecoration: 'none' }}>Community</Link>
         </div>
       </footer>
     </div>

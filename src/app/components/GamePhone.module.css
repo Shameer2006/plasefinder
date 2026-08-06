@@ -1,90 +1,108 @@
 /* ═══════════════════════════════════════════════
-   GamePhone — GTA-style in-game phone widget
+   GamePhone — Realistic mobile phone widget (LostStreet theme)
    ═══════════════════════════════════════════════ */
 
-/* ── Floating toggle button ── */
-.toggleBtn {
+/* ── Phone wrapper & hover detection ── */
+.phoneWrapper {
   position: fixed;
-  right: 20px;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
+  width: 340px;
+  height: 680px;
   z-index: 50;
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  background: rgba(20, 20, 30, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: white;
   display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  animation: phoneAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-             phonePulse 3s ease-in-out 1s infinite;
-}
-
-.toggleBtn:hover {
-  transform: translateY(-50%) scale(1.12);
-  border-color: rgba(59, 130, 246, 0.5);
-  box-shadow: 0 4px 30px rgba(59, 130, 246, 0.35);
-}
-
-@keyframes phoneAppear {
-  from {
-    opacity: 0;
-    transform: translateY(-50%) scale(0) rotate(-30deg);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(-50%) scale(1) rotate(0deg);
-  }
-}
-
-@keyframes phonePulse {
-  0%, 100% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); }
-  50%      { box-shadow: 0 4px 25px rgba(59, 130, 246, 0.3); }
+  justify-content: flex-end;
+  pointer-events: none;
 }
 
 /* ── Phone container ── */
 .phoneContainer {
-  position: fixed;
-  right: 20px;
-  top: 50%;
-  z-index: 50;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.phoneOpen {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
+  position: relative;
+  padding-right: 24px;
+  transform: translateX(280px);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: auto;
+  cursor: pointer;
 }
 
-.phoneClosed {
-  opacity: 0;
-  transform: translateY(-50%) translateX(120%);
+/* On hover (or when manually opened on mobile), slide in */
+.phoneWrapper:hover .phoneContainer,
+.phoneOpen {
+  transform: translateX(0);
+  cursor: default;
+}
+
+/* Handle for mobile / visible peek edge */
+.phonePeekEdge {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 70px;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  border-radius: 5px;
+  margin-left: 8px;
+  z-index: 100;
+  opacity: 1;
+  transition: opacity 0.3s ease;
   pointer-events: none;
+}
+
+.phoneWrapper:hover .phonePeekEdge,
+.phoneOpen .phonePeekEdge {
+  opacity: 0;
 }
 
 /* ── Phone frame ── */
 .phoneFrame {
-  width: 280px;
-  height: 540px;
-  background: #1a1a2e;
-  border-radius: 36px;
-  border: 3px solid #2a2a3e;
+  width: 300px;
+  height: 600px;
+  background: #0a0a0f;
+  border-radius: 42px;
+  border: 2px solid #1a1a2e;
   box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.6),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-    0 0 0 1px rgba(0, 0, 0, 0.5);
+    0 30px 80px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 0 0 1px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(16, 185, 129, 0.08);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   position: relative;
+}
+
+/* Subtle glow accent on frame */
+.phoneFrame::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 44px;
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.15), transparent 40%, transparent 60%, rgba(16, 185, 129, 0.1));
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Dynamic Island / Notch area ── */
+.notchArea {
+  height: 36px;
+  background: #050508;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  position: relative;
+  z-index: 10;
+}
+
+.notch {
+  width: 130px;
+  height: 5px;
+  background: #000;
+  border-radius: 0 0 8px 8px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
 }
 
 /* ── Status bar ── */
@@ -92,35 +110,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px 6px;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.7);
-  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 20px 4px;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.75);
+  background: transparent;
   position: relative;
-  z-index: 2;
+  z-index: 5;
   flex-shrink: 0;
+  height: 24px;
 }
 
 .time {
   font-weight: 600;
-  font-size: 0.75rem;
-}
-
-.notch {
-  width: 80px;
-  height: 24px;
-  background: #000;
-  border-radius: 0 0 14px 14px;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  font-size: 0.72rem;
+  letter-spacing: -0.02em;
 }
 
 .statusIcons {
   display: flex;
-  gap: 4px;
-  font-size: 0.6rem;
+  gap: 6px;
+  font-size: 0.7rem;
+  opacity: 0.85;
 }
 
 /* ── Screen area ── */
@@ -128,16 +138,34 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);
+  background: 
+    radial-gradient(ellipse at 50% 0%, rgba(16, 185, 129, 0.04) 0%, transparent 60%),
+    linear-gradient(180deg, #08080d 0%, #0a0a0f 50%, #0d0d14 100%);
   position: relative;
 }
 
+/* Home screen background image */
+.screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Custom scrollbar inside phone */
-.screen::-webkit-scrollbar { width: 3px; }
+.screen::-webkit-scrollbar { width: 4px; }
 .screen::-webkit-scrollbar-track { background: transparent; }
 .screen::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.4), rgba(16, 185, 129, 0.1));
   border-radius: 4px;
+  border: 1px solid transparent;
+  background-clip: content-box;
 }
 
 /* ── Home screen ── */
@@ -145,15 +173,87 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100%;
-  padding: 2rem;
+  padding: 12px 16px 0;
+  position: relative;
+  z-index: 1;
 }
 
+/* Greeting bar at top */
+.greetingBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 4px 16px;
+  margin-bottom: 8px;
+}
+
+.greetingText {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.greetingTime {
+  font-size: 1.8rem;
+  font-weight: 200;
+  color: white;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+/* Search widget on home screen */
+.homeSearchWidget {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.searchWidgetInner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.2s ease;
+}
+
+.searchWidgetInner:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
+}
+
+.searchWidgetIcon {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 1rem;
+}
+
+.searchWidgetText {
+  flex: 1;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.searchWidgetMic {
+  color: #10b981;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* App grid */
 .appGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px 14px;
+  width: 100%;
+  padding: 0 4px 20px;
 }
 
 /* ── App icon ── */
@@ -161,70 +261,236 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: none;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s ease;
-  padding: 8px;
+  transition: transform 0.15s ease;
+  padding: 2px;
   font-family: 'Outfit', sans-serif;
+  border-radius: 12px;
 }
 
 .appIcon:hover:not(:disabled) {
-  transform: scale(1.1);
+  transform: scale(1.06);
 }
 
 .appIcon:active:not(:disabled) {
-  transform: scale(0.93);
+  transform: scale(0.95);
 }
 
 .appDisabled {
-  opacity: 0.45;
+  opacity: 0.4;
   cursor: not-allowed !important;
 }
 
+/* App icon background */
 .iconBg {
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
+/* LostStreet app icon - uses logo.png */
 .lostStreetIcon {
-  background: linear-gradient(135deg, #10b981, #059669);
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+  background: linear-gradient(135deg, #0a0a0f 0%, #12121a 100%);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
+.lostStreetIcon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/logo.png');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.95;
+}
+
+.lostStreetIcon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(16, 185, 129, 0.15), transparent 60%);
+  pointer-events: none;
+}
+
+/* Google app icon */
 .googleIcon {
-  background: linear-gradient(135deg, #4285F4, #34A853);
-  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.35);
+  background: white;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
+.googleIcon::before {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background: 
+    linear-gradient(225deg, #4285F4 0%, #4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%);
+  border-radius: 50%;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.327,0-6.033-2.706-6.033-6.033s2.706-6.033,6.033-6.033c1.498,0,2.866,0.539,3.921,1.453l2.814-2.814C17.547,0.97,15.311,0,12.545,0C7.095,0,2.721,4.375,2.721,9.825c0,1.971,0.647,3.771,1.75,5.163L2.721,16.741C0.957,14.388,0,11.441,0,8.134C0,4.475,2.921,1.411,6.481,1.411c2.184,0,4.119,1.052,5.263,2.661l-2.367,2.367C7.822,4.935,6.219,4.239,4.438,4.239c-2.867,0-5.191,2.324-5.191,5.191s2.324,5.191,5.191,5.191c2.565,0,4.356-1.646,5.107-3.914H7.5v-3.821h5.045Z'/%3E%3C/svg%3E");
+  mask-size: cover;
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+
+/* Circle Search app icon */
+.circleSearchIcon {
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  box-shadow: 
+    0 4px 16px rgba(59, 130, 246, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.circleSearchIcon::before {
+  content: '⭕';
+  font-size: 1.4rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Used/disabled state */
 .iconUsed {
-  background: linear-gradient(135deg, #374151, #1f2937) !important;
-  box-shadow: none !important;
-  filter: grayscale(1);
+  background: linear-gradient(135deg, #1a1a24 0%, #0f0f14 100%) !important;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.03) !important;
+  filter: grayscale(0.8) brightness(0.6);
+}
+
+.iconUsed::after {
+  display: none;
 }
 
 .appLabel {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+  text-align: center;
+  max-width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
-/* ── App screen (LostStreet / Google) ── */
+/* ── Dock at bottom of home screen ── */
+.appDock {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 280px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  margin-top: auto;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.dockIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  transition: all 0.15s ease;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.dockIcon:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.1);
+}
+
+.dockIcon:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.dockIcon.lostStreetDock {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+  border: none;
+}
+
+.dockIcon.lostStreetDock::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/logo.png');
+  background-size: 55%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.95;
+}
+
+.dockDisabled {
+  opacity: 0.35;
+  cursor: not-allowed !important;
+  filter: grayscale(0.6);
+}
+
+/* ── Page indicators ── */
+.pageIndicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 0 8px;
+  margin-top: auto;
+}
+
+.pageDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.pageDot.active {
+  background: #10b981;
+  width: 20px;
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+/* ── App screen (Shared) ── */
 .appScreen {
   height: 100%;
   display: flex;
   flex-direction: column;
-  animation: screenSlideIn 0.3s ease;
+  animation: screenSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes screenSlideIn {
-  from { transform: translateX(100%); opacity: 0; }
+  from { transform: translateX(30px); opacity: 0; }
   to   { transform: translateX(0);    opacity: 1; }
 }
 
@@ -232,99 +498,110 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 16px;
-  background: rgba(0, 0, 0, 0.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 12px 16px 10px;
+  background: rgba(10, 10, 15, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .backBtn {
   background: none;
   border: none;
   color: #60a5fa;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   cursor: pointer;
   font-family: 'Outfit', sans-serif;
-  padding: 4px 8px;
-  border-radius: 8px;
-  transition: background 0.2s;
+  padding: 6px 10px;
+  border-radius: 10px;
+  transition: all 0.15s;
+  font-weight: 500;
 }
 
 .backBtn:hover {
-  background: rgba(96, 165, 250, 0.1);
+  background: rgba(96, 165, 250, 0.12);
+  color: #93c5fd;
 }
 
 .appTitle {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: white;
+  letter-spacing: -0.01em;
 }
 
-/* ── LostStreet lore ── */
+/* ── LostStreet lore app ── */
 .loreContent {
   padding: 20px 16px;
-  overflow-y: auto;
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .loreLogo {
-  font-size: 3rem;
+  font-size: 3.5rem;
   text-align: center;
-  margin-bottom: 12px;
-  animation: loreFloat 3s ease-in-out infinite;
+  margin-bottom: 16px;
+  animation: loreFloat 4s ease-in-out infinite;
 }
 
 @keyframes loreFloat {
   0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
+  50%      { transform: translateY(-8px); }
 }
 
 .loreTitle {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #10b981;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .loreDivider {
-  width: 60px;
+  width: 70px;
   height: 2px;
   background: linear-gradient(90deg, transparent, #10b981, transparent);
   margin: 16px auto;
 }
 
 .loreText {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.65;
-  margin-bottom: 10px;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.7;
+  margin-bottom: 12px;
 }
 
 .loreText strong {
   color: #10b981;
+  font-weight: 600;
 }
 
 .loreTextWarning {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: #fbbf24;
-  line-height: 1.65;
-  margin-bottom: 10px;
-  padding: 8px 10px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+  padding: 12px 14px;
   background: rgba(251, 191, 36, 0.08);
-  border-radius: 8px;
-  border-left: 2px solid #fbbf24;
+  border-radius: 12px;
+  border-left: 3px solid #fbbf24;
 }
 
 .loreTextHint {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.65;
-  margin-bottom: 10px;
-  padding: 8px 10px;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.7;
+  margin-bottom: 12px;
+  padding: 12px 14px;
   background: rgba(59, 130, 246, 0.08);
-  border-radius: 8px;
-  border-left: 2px solid #3b82f6;
+  border-radius: 12px;
+  border-left: 3px solid #3b82f6;
 }
 
 .loreTextHint strong {
@@ -333,13 +610,14 @@
 
 .loreTextFooter {
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: white;
   font-weight: 600;
-  margin-top: 16px;
+  margin-top: 20px;
+  padding-bottom: 20px;
 }
 
-/* ── Google search ── */
+/* ── Google search app ── */
 .googleContent {
   padding: 24px 16px;
   display: flex;
@@ -349,11 +627,15 @@
 }
 
 .googleLogo {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 24px;
-  letter-spacing: -1px;
+  margin-bottom: 28px;
+  letter-spacing: -0.03em;
   font-family: 'Outfit', sans-serif;
+  background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #4285F4, #34A853, #EA4335);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .searchBar {
@@ -363,45 +645,51 @@
 
 .searchInput {
   width: 100%;
-  padding: 12px 16px;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.08);
+  padding: 14px 18px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
   color: white;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-family: 'Outfit', sans-serif;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.2s;
   box-sizing: border-box;
 }
 
 .searchInput::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .searchInput:focus {
   border-color: #4285F4;
-  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.15);
+  box-shadow: 0 0 0 4px rgba(66, 133, 244, 0.12);
+  background: rgba(255, 255, 255, 0.09);
 }
 
 .searchBtn {
   width: 100%;
-  padding: 12px;
-  border-radius: 12px;
+  padding: 14px;
+  border-radius: 14px;
   border: none;
   background: linear-gradient(135deg, #4285F4, #1a73e8);
   color: white;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
   font-family: 'Outfit', sans-serif;
   cursor: pointer;
   transition: all 0.2s;
   margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(66, 133, 244, 0.3);
 }
 
 .searchBtn:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(66, 133, 244, 0.45);
+}
+
+.searchBtn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .searchBtn:disabled {
@@ -410,130 +698,238 @@
 }
 
 .searchWarning {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: #fbbf24;
   text-align: center;
   line-height: 1.5;
 }
 
-/* ── Search-complete state ── */
-.searchComplete {
+/* ── Search Results List ── */
+.searchResultsList {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  gap: 12px;
-  text-align: center;
-  padding: 20px;
+  gap: 16px;
+  padding-bottom: 24px;
 }
 
-.checkmark {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #10b981, #059669);
+.searchResultItem {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: white;
-  animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.2s;
 }
 
-@keyframes scaleIn {
-  from { transform: scale(0); }
-  to   { transform: scale(1); }
+.searchResultItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(16, 185, 129, 0.2);
 }
 
-.searchComplete h3 {
-  color: white;
-  font-size: 1.1rem;
-  margin: 0;
+.resultTitle {
+  font-size: 0.88rem;
+  color: #60a5fa;
+  text-decoration: none;
+  font-weight: 500;
+  line-height: 1.35;
 }
 
-.searchComplete p {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.8rem;
-  margin: 0;
+.resultTitle:hover {
+  text-decoration: underline;
+  color: #93c5fd;
+}
+
+.resultUrl {
+  font-size: 0.62rem;
+  color: #a7f3d0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resultSnippet {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .searchUsedLabel {
-  background: rgba(239, 68, 68, 0.15);
+  background: rgba(239, 68, 68, 0.12);
   color: #f87171;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 0.75rem;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.72rem;
   font-weight: 600;
+  text-align: center;
+  margin-bottom: 8px;
 }
+
+.searchError {
+  color: #f87171;
+  font-size: 0.82rem;
+  text-align: center;
+  padding: 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 10px;
+  width: 100%;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255, 255, 255, 0.08);
+  border-top-color: #4285F4;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Camera App styles removed — replaced by CircleToSearch overlay */
 
 /* ── Home bar / bottom indicator ── */
 .homeBar {
-  padding: 8px 0 6px;
+  padding: 10px 0 8px;
   display: flex;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
+  background: transparent;
   border: none;
   cursor: pointer;
   flex-shrink: 0;
+  width: 100%;
+  position: relative;
+  z-index: 5;
 }
 
 .homeIndicator {
-  width: 100px;
-  height: 4px;
+  width: 120px;
+  height: 5px;
   background: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  transition: background 0.2s;
+  border-radius: 3px;
+  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
-.homeBar:hover .homeIndicator {
+.homeBar:hover .homeIndicator,
+.homeBar:active .homeIndicator {
   background: rgba(255, 255, 255, 0.6);
 }
 
 /* ══════════════ MOBILE ══════════════ */
 @media (max-width: 768px) {
-  .toggleBtn {
-    right: 12px;
+  .phoneWrapper {
+    width: 280px;
+    height: 540px;
+    bottom: 80px;
     top: auto;
-    bottom: 120px;
     transform: none;
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
-  }
-
-  .toggleBtn:hover {
-    transform: scale(1.1);
-  }
-
-  @keyframes phoneAppear {
-    from { opacity: 0; transform: scale(0) rotate(-30deg); }
-    to   { opacity: 1; transform: scale(1) rotate(0deg); }
+    right: 50%;
+    margin-right: -140px;
   }
 
   .phoneContainer {
-    right: 10px;
-    top: auto;
-    bottom: 60px;
-    transform: none;
+    transform: translateX(240px);
   }
 
+  .phoneWrapper:hover .phoneContainer,
   .phoneOpen {
     transform: translateX(0);
   }
 
-  .phoneClosed {
-    transform: translateX(120%);
-  }
-
   .phoneFrame {
-    width: 240px;
-    height: 440px;
-    border-radius: 28px;
+    width: 260px;
+    height: 500px;
+    border-radius: 36px;
   }
 
   .notch {
+    width: 110px;
+    height: 5px;
+  }
+
+  .statusBar {
+    padding: 6px 16px 4px;
+  }
+
+  .appGrid {
+    gap: 14px 10px;
+    padding: 0 2px 16px;
+  }
+
+  .iconBg {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+  }
+
+  .appLabel {
+    font-size: 0.6rem;
+  }
+
+  .greetingTime {
+    font-size: 1.5rem;
+  }
+
+  .searchWidgetInner {
+    padding: 10px 14px;
+  }
+
+  .appDock {
+    padding: 8px 16px;
+  }
+
+  .dockIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .shutterBtn {
     width: 64px;
-    height: 20px;
+    height: 64px;
+  }
+
+  .homeIndicator {
+    width: 100px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .phoneContainer,
+  .appIcon,
+  .dockIcon,
+  .shutterBtn,
+  .backBtn,
+  .searchBtn,
+  .homeIndicator,
+  .pageDot,
+  .loreLogo {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .phoneFrame {
+    border-color: #fff;
+  }
+  .iconBg, .dockIcon {
+    border: 2px solid #fff;
+  }
+  .searchInput {
+    border-color: #fff;
   }
 }

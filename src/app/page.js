@@ -13,6 +13,7 @@ import { useToast } from './components/Toast';
 import { sounds } from '@/lib/sounds';
 import ProfileModal from './components/ProfileModal';
 import OnboardingModal from './components/OnboardingModal';
+import HeroPanorama from './components/HeroPanorama';
 
 const Game = dynamic(() => import('./components/Game'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
 const FlagGame = dynamic(() => import('./components/FlagGame'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
@@ -20,7 +21,7 @@ const MultiplayerGame = dynamic(() => import('./components/MultiplayerGame'), { 
 
 export default function Home() {
   const { user, userProfile, loading, loginWithGoogle, logout } = useAuth();
-  const { gameState, setGameState, setDifficulty, soundEnabled, setSoundEnabled, initSounds, units, setUnits, mapType, setMapType, emotesEnabled, setEmotesEnabled } = useGameStore();
+  const { gameState, setGameState, setDifficulty, setGameMode, soundEnabled, setSoundEnabled, initSounds, units, setUnits, mapType, setMapType, emotesEnabled, setEmotesEnabled } = useGameStore();
   const [isQueuing, setIsQueuing] = useState(false);
   const [queueSub, setQueueSub] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
@@ -37,10 +38,17 @@ export default function Home() {
   const [onlineCount, setOnlineCount] = useState('...');
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [matchFoundData, setMatchFoundData] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const toast = useToast();
 
-  // Browser history integration (#8)
+  // Always reset to MENU on fresh page load/launch, and handle popstate history
   useEffect(() => {
+    // Reset to MENU on initial mount so reopening website never freezes on old game state
+    setGameState('MENU');
+    if (typeof window !== 'undefined' && window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+
     const handlePopState = () => {
       const hash = window.location.hash.replace('#', '');
       if (hash && (
@@ -49,7 +57,7 @@ export default function Home() {
           hash.startsWith('PARTY_LOBBY_')
       )) {
         setGameState(hash);
-      } else if (!hash) {
+      } else {
         setGameState('MENU');
       }
     };
@@ -60,7 +68,7 @@ export default function Home() {
   useEffect(() => {
     if (gameState !== 'MENU') {
       window.history.pushState({ gameState }, '', `#${gameState}`);
-    } else {
+    } else if (typeof window !== 'undefined' && window.location.hash) {
       window.history.pushState({ gameState: 'MENU' }, '', window.location.pathname);
     }
   }, [gameState]);
@@ -179,7 +187,14 @@ export default function Home() {
   }
 
   const handleStart = (mode) => {
+    setGameMode('CLASSIC');
     setDifficulty(mode);
+    setGameState('LOADING');
+  };
+
+  const handleStoryMode = () => {
+    setGameMode('STORY');
+    setDifficulty('HARD');
     setGameState('LOADING');
   };
 
@@ -294,150 +309,329 @@ export default function Home() {
       minHeight: '100dvh',
       width: '100vw',
       overflowX: 'hidden',
-      backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/bg.jpg)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundAttachment: 'fixed',
       position: 'relative',
-      color: 'white'
+      color: 'white',
+      backgroundColor: '#0a0d1a'
     }}>
-      <div className="left-gradient-overlay" style={{
-        position: 'absolute',
-        top: 0, left: 0, right: 0, bottom: 0,
-        zIndex: 1
-      }}></div>
+      {/* Live 360° Panorama Background Viewer */}
+      <HeroPanorama />
 
-      {/* ── Homepage header bar ── */}
+      {/* ── Homepage Header Bar ── */}
       <header style={{
         position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10,
-        display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
-        padding: '0 clamp(1rem, 3vw, 2rem)',
-        height: '56px',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '12px clamp(1rem, 3vw, 2rem)',
+        background: 'rgba(12, 16, 28, 0.75)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+        pointerEvents: 'auto',
       }}>
-        {/* Logo — bottom-left aligned */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'white', paddingBottom: '10px' }}>
-          <img src="/logo.png" alt="LostStreet" style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover' }} />
-          <span style={{ fontWeight: 800, fontSize: '1.15rem', fontFamily: '"Outfit", sans-serif', letterSpacing: '0.01em' }}>LostStreet</span>
+        {/* Logo & Tagline */}
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'white' }}>
+          <img src="/logo.png" alt="LostStreet" style={{ width: '34px', height: '34px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.2)' }} />
+          <div>
+            <div style={{ fontWeight: 800, fontSize: '1.25rem', fontFamily: '"Outfit", sans-serif', letterSpacing: '0.01em', lineHeight: 1.1 }}>LostStreet</div>
+            <div style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>Explore. Guess. Discover.</div>
+          </div>
         </Link>
 
-        {/* Right controls */}
-        <div className="home-header-nav" style={{ paddingBottom: '10px' }}>
-          <button
-            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', color: 'white', padding: '5px 10px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}
-            onClick={() => window.location.href = '/chronicles'}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
-            <span className="home-header-nav-label">Maps</span>
+        {/* Center Nav Links (Desktop Only) */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }} className="home-header-nav">
+          <button onClick={() => window.location.href = '/chronicles'} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
+            Maps
           </button>
-          <button
-            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', color: 'white', padding: '5px 10px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}
-            onClick={() => window.location.href = '/guides'}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-            <span className="home-header-nav-label">Guides</span>
+          <button onClick={() => window.location.href = '/guides'} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            Guides
           </button>
-          <button
-            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', color: 'white', padding: '5px 10px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}
-            onClick={() => window.location.href = '/community'}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            <span className="home-header-nav-label">Community</span>
+          <button onClick={() => window.location.href = '/community'} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Community
           </button>
+        </div>
+
+        {/* Right Status Pill, Settings Button, User Avatar & Mobile Menu Toggle */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button
+            onClick={() => setShowSettings(true)}
+            style={{
+              background: 'rgba(18, 24, 38, 0.85)',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+              color: 'white',
+              padding: '6px 12px',
+              borderRadius: '12px',
+              fontSize: '0.85rem',
+              fontWeight: 700,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              cursor: 'pointer',
+              fontFamily: '"Outfit", sans-serif',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+              transition: 'all 0.2s ease'
+            }}
+            aria-label="Settings"
+            title="Open Settings"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            Settings
+          </button>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(18, 24, 38, 0.85)', padding: '6px 12px', borderRadius: '20px', border: '1px solid rgba(255, 255, 255, 0.12)', fontSize: '0.85rem', fontWeight: 700 }} className="desktop-only-pill">
+            <span className="online-pulse-dot" />
+            <span>{onlineCount} online</span>
+          </div>
+
           {(!user || user.isAnonymous) ? (
-            <button style={{ background: '#2f7a44', border: 'none', color: 'white', padding: '6px 14px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }} onClick={loginWithGoogle}>Login</button>
+            <button style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none', color: 'white', padding: '6px 14px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer', fontFamily: '"Outfit", sans-serif', boxShadow: '0 4px 12px rgba(16,185,129,0.3)' }} onClick={loginWithGoogle}>Login</button>
           ) : (
             <button onClick={() => setShowProfile(true)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }} aria-label="Open profile">
               {user.photoURL ? (
-                <img src={user.photoURL} referrerPolicy="no-referrer" alt="Profile" style={{ width: '34px', height: '34px', borderRadius: '50%', objectFit: 'cover', display: 'block', border: '2px solid rgba(255,255,255,0.25)' }} />
+                <img src={user.photoURL} referrerPolicy="no-referrer" alt="Profile" style={{ width: '34px', height: '34px', borderRadius: '50%', objectFit: 'cover', display: 'block', border: '2px solid rgba(255,255,255,0.3)' }} />
               ) : (
-                <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: '#e05a2b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem', color: 'white', border: '2px solid rgba(255,255,255,0.25)' }}>
+                <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: '#e05a2b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.9rem', color: 'white', border: '2px solid rgba(255,255,255,0.3)' }}>
                   {(userProfile?.username || user.displayName || 'U')[0].toUpperCase()}
                 </div>
               )}
             </button>
           )}
+
+          {/* Mobile Hamburger Menu Toggle Button */}
+          <button
+            className="mobile-menu-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle Navigation Menu"
+            title="Menu"
+          >
+            {mobileMenuOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            )}
+          </button>
         </div>
+
+        {/* Mobile Dropdown Navigation Drawer */}
+        {mobileMenuOpen && (
+          <div className="mobile-dropdown-menu">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '10px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', fontWeight: 700, color: '#e5e7eb' }}>
+                <span className="online-pulse-dot" />
+                <span>{onlineCount} online</span>
+              </div>
+              <button
+                onClick={() => { setMobileMenuOpen(false); setShowSettings(true); }}
+                style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)', color: 'white', padding: '6px 14px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer', fontFamily: '"Outfit", sans-serif', display: 'flex', alignItems: 'center', gap: '6px' }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                Settings
+              </button>
+            </div>
+            <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/chronicles'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
+              Maps & Locations
+            </button>
+            <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/guides'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              Guides & Tips
+            </button>
+            <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/community'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              Community
+            </button>
+            <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/leaderboard'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path></svg>
+              Leaderboard
+            </button>
+            <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/about'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              About LostStreet
+            </button>
+          </div>
+        )}
       </header>
 
-      <section className="container-padding home-content" style={{ position: 'relative', zIndex: 2, minHeight: '100dvh', paddingTop: '64px' }}>
+      {/* Main Content Area */}
+      <section className="container-padding home-content" style={{ position: 'relative', zIndex: 2, minHeight: 'calc(100dvh - 50px)', paddingTop: '74px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', pointerEvents: 'none' }}>
 
-        <div className="home-main-row">
-        <div className="left-menu-container">
-          {showSettings ? (
-            <SettingsMenu onBack={() => setShowSettings(false)} units={units} setUnits={setUnits} mapType={mapType} setMapType={setMapType} emotesEnabled={emotesEnabled} setEmotesEnabled={setEmotesEnabled} soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled} />
-          ) : showDifficulty ? (
-            <DifficultyMenu onBack={() => setShowDifficulty(false)} onSelect={handleStart} />
-          ) : showMatchmaking ? (
-            <MatchmakingMenu onBack={() => setShowMatchmaking(false)} onSelect={(type) => { setShowMatchmaking(false); startMatchmaking(type); }} />
-          ) : (
-            <>
-              {showOnboarding && (
-                <OnboardingTooltip onDismiss={() => setShowOnboarding(false)} />
-              )}
-              <MainMenu 
-                onQuickPlay={() => handleStart('EASY')}
-                onSingleplayer={() => setShowDifficulty(true)} 
-                onFindMatchClick={() => setShowMatchmaking(true)} 
-                isQueuing={isQueuing} 
-                cancelMatchmaking={cancelMatchmaking} 
-                onDailyChallenge={handleDailyChallenge}
-                streak={streak}
-                playedToday={playedToday}
-                onCreateParty={handleCreateParty}
-                onJoinParty={() => setShowJoinModal(true)}
-                onLeaderboard={() => window.location.href = '/leaderboard'}
-                onAbout={() => window.location.href = '/about'}
-                onFlagGuesser={() => setGameState('FLAG_GAME')}
-              />
-            </>
+        <div className="home-main-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '20px', flex: 1, pointerEvents: 'none' }}>
+
+          {/* Left Column Menu */}
+          <div className="left-menu-container" style={{ zIndex: 5, pointerEvents: 'auto' }}>
+            {showSettings ? (
+              <SettingsMenu onBack={() => setShowSettings(false)} units={units} setUnits={setUnits} mapType={mapType} setMapType={setMapType} emotesEnabled={emotesEnabled} setEmotesEnabled={setEmotesEnabled} soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled} />
+            ) : showDifficulty ? (
+              <DifficultyMenu onBack={() => setShowDifficulty(false)} onSelect={handleStart} />
+            ) : showMatchmaking ? (
+              <MatchmakingMenu onBack={() => setShowMatchmaking(false)} onSelect={(type) => { setShowMatchmaking(false); startMatchmaking(type); }} />
+            ) : (
+              <>
+                {showOnboarding && (
+                  <OnboardingTooltip onDismiss={() => setShowOnboarding(false)} />
+                )}
+                <MainMenu 
+                  onQuickPlay={() => handleStart('EASY')}
+                  onSingleplayer={() => setShowDifficulty(true)}
+                  onStoryMode={handleStoryMode}
+                  onFindMatchClick={() => setShowMatchmaking(true)} 
+                  isQueuing={isQueuing} 
+                  cancelMatchmaking={cancelMatchmaking} 
+                  onDailyChallenge={handleDailyChallenge}
+                  streak={streak}
+                  playedToday={playedToday}
+                  onCreateParty={handleCreateParty}
+                  onJoinParty={() => setShowJoinModal(true)}
+                  onLeaderboard={() => window.location.href = '/leaderboard'}
+                  onAbout={() => window.location.href = '/about'}
+                  onFlagGuesser={() => setGameState('FLAG_GAME')}
+                />
+              </>
+            )}
+          </div>
+
+          {/* Right Column: Mini Map Widget & Forest Green Highway Welcome Sign */}
+          {!showSettings && !showProfile && !showDifficulty && !showMatchmaking && (
+            <aside style={{ maxWidth: '340px', width: '100%', display: 'flex', flexDirection: 'column', gap: '14px', zIndex: 5, pointerEvents: 'auto' }} className="desktop-only">
+              {/* Mini Map Preview Widget */}
+              <div style={{
+                width: '100%',
+                height: '95px',
+                borderRadius: '16px',
+                background: 'rgba(18, 24, 38, 0.85)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                <svg width="240" height="85" viewBox="0 0 200 100" fill="none" opacity="0.4">
+                  <path d="M30 40 Q40 20 60 30 T90 40 T120 20 T150 50 T180 40" stroke="white" strokeWidth="1.5" strokeDasharray="3,3"/>
+                  <circle cx="120" cy="35" r="4" fill="#ef4444" />
+                  <circle cx="120" cy="35" r="8" fill="#ef4444" opacity="0.3" />
+                </svg>
+                <div style={{ position: 'absolute', bottom: '6px', fontSize: '0.65rem', color: '#9ca3af', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>World View</div>
+              </div>
+
+              {/* Forest Green Highway Signboard */}
+              <div className="highway-signboard">
+                <div className="highway-signboard-inner">
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', color: '#86efac' }}>WELCOME TO</span>
+                  <h1 style={{ fontSize: '2rem', fontWeight: 900, fontFamily: '"Outfit", sans-serif', color: '#fef08a', margin: 0, lineHeight: 1.1, textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>LOSTSTREET</h1>
+                  <div style={{ width: '60px', height: '2px', background: 'rgba(254, 240, 138, 0.4)', margin: '2px 0' }} />
+                  <p style={{ fontSize: '0.88rem', color: '#e5e7eb', lineHeight: 1.4, margin: 0 }}>
+                    Explore real streets from around the world. Follow the clues, pin your best guess and become a top explorer!
+                  </p>
+                  <button className="highway-quickplay-btn" onClick={() => handleStart('EASY')} aria-label="Quick Play - start a game instantly">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    QUICK PLAY
+                  </button>
+                </div>
+              </div>
+
+              {/* 3 Feature Badges below Highway Sign */}
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <div className="feature-badge-card">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'white' }}>Real Locations</span>
+                  <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>Explore real places</span>
+                </div>
+                <div className="feature-badge-card">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'white' }}>Smart Clues</span>
+                  <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>Find hidden hints</span>
+                </div>
+                <div className="feature-badge-card">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path></svg>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'white' }}>Compete</span>
+                  <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>Climb the ranks</span>
+                </div>
+              </div>
+            </aside>
           )}
         </div>
 
+        {/* Center Bottom Floating Clues Card */}
         {!showSettings && !showProfile && !showDifficulty && !showMatchmaking && (
-          <aside className="roadside-welcome" aria-label="Welcome to LostStreet">
-            <div className="highway-sign">
-              <div className="highway-sign-inner">
-                <span className="highway-sign-kicker">You are here</span>
-                <h1 className="highway-sign-title">Welcome to<br />LostStreet</h1>
-                <p className="highway-sign-desc">Explore Street View scenes from around the world, follow the clues, and pin your best guess.</p>
-                <div className="highway-sign-route">
-                  <span>Choose a route</span>
-                  <span aria-hidden="true">→</span>
-                  <span>Start exploring</span>
+          <div style={{ margin: '16px auto', width: '100%', maxWidth: '420px', zIndex: 5, pointerEvents: 'auto' }} className="desktop-only">
+            <div style={{
+              background: 'rgba(18, 24, 38, 0.88)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255, 255, 255, 0.12)',
+              borderRadius: '16px',
+              padding: '14px 20px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '14px',
+              boxShadow: '0 8px 30px rgba(0,0,0,0.5)'
+            }}>
+              <div style={{ width: '38px', height: '38px', borderRadius: '12px', background: 'rgba(251, 191, 36, 0.15)', border: '1px solid rgba(251, 191, 36, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#fbbf24' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'white' }}>Where are you?</div>
+                <div style={{ fontSize: '0.8rem', color: '#9ca3af', lineHeight: 1.3 }}>Explore the area, find clues and pin your best guess!</div>
+                <div style={{ display: 'flex', gap: '5px', marginTop: '6px' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#fbbf24' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
                 </div>
               </div>
             </div>
-            <div className="highway-sign-posts" aria-hidden="true"><span></span><span></span></div>
-            <button className="roadside-quick-play" onClick={() => handleStart('EASY')} aria-label="Quick Play - start a game instantly">
-              <span aria-hidden="true">▶</span> Quick Play
-            </button>
-          </aside>
+          </div>
         )}
-        </div>
 
-        <div className="bottom-controls">
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <IconButton 
-              icon={<img src="/settings.png" alt="Settings" style={{ width: '24px', height: '24px' }} />} 
-              color="rgba(255, 255, 255, 0.12)" 
-              onClick={() => setShowSettings(true)} 
-            />
-          </div>
-
-          {!showSettings && !showProfile && !showDifficulty && !showMatchmaking && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem 1.5rem', fontSize: '0.9rem', color: '#ffffff', fontWeight: '600', alignItems: 'center', justifyContent: 'center', background: 'rgba(0, 0, 0, 0.45)', padding: '6px 18px', borderRadius: '20px', backdropFilter: 'blur(8px)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
-               <button onClick={() => window.location.href = '/privacy'} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', background: 'none', border: 'none', color: 'inherit', font: 'inherit' }} className="menu-item-hover">Privacy Policy</button>
-               <button onClick={() => setShowObjectives(true)} style={{ cursor: 'pointer', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', background: 'none', border: 'none', color: 'inherit', font: 'inherit' }} className="menu-item-hover">Objectives</button>
-            </div>
-          )}
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(0, 0, 0, 0.45)', padding: '6px 14px', borderRadius: '20px', backdropFilter: 'blur(8px)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
-             <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#34d399', boxShadow: '0 0 8px #34d399' }}></div>
-             <span style={{ fontWeight: 'bold', fontSize: '1.1rem', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>{onlineCount} online</span>
-          </div>
-        </div>
       </section>
+
+      {/* Persistent Bottom Statistics Bar */}
+      <footer className="bottom-stats-bar" style={{ zIndex: 10, pointerEvents: 'auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button onClick={() => setShowSettings(true)} style={{ background: 'rgba(255,255,255,0.1)', border: 'none', width: '36px', height: '36px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'white' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </button>
+          <button onClick={() => window.location.href = '/privacy'} style={{ background: 'none', border: 'none', color: '#9ca3af', fontSize: '0.8rem', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}>Privacy</button>
+        </div>
+
+        <div className="stat-item-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <div>
+            <div className="stat-item-value">250K+</div>
+            <div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Players</div>
+          </div>
+        </div>
+
+        <div className="stat-item-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eab308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4m-2-2v4"></path><circle cx="17" cy="10" r="1" fill="currentColor"></circle><circle cx="15" cy="13" r="1" fill="currentColor"></circle></svg>
+          <div>
+            <div className="stat-item-value">10M+</div>
+            <div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Games Played</div>
+          </div>
+        </div>
+
+        <div className="stat-item-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <div>
+            <div className="stat-item-value">195+</div>
+            <div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Countries</div>
+          </div>
+        </div>
+
+        <div className="stat-item-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-7.95-12.356-8C.726 7.95.726 16 5.822 16c5.223 0 7.261-7.95 12.356-8z"></path></svg>
+          <div>
+            <div className="stat-item-value">Unlimited Fun</div>
+            <div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Always Free</div>
+          </div>
+        </div>
+      </footer>
 
       {showJoinModal && (
         <FocusTrapModal onClose={() => setShowJoinModal(false)}>
@@ -573,61 +767,180 @@ const OnboardingTooltip = ({ onDismiss }) => (
   </div>
 );
 
-const MainMenu = ({ onQuickPlay, onSingleplayer, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.3rem, 1vh, 0.6rem)' }}>
-    <h2 style={{ fontSize: 'clamp(0.75rem, 1.4vw, 0.9rem)', color: '#c9b99a', margin: 0, lineHeight: 1.3, marginBottom: '0.1rem', textShadow: '1px 1px 3px rgba(0,0,0,0.8)', letterSpacing: '0.02em', fontWeight: 'normal' }}>
-      LostStreet — Free Street View Guesser Game. Play Solo, 1v1 Duels & Party Mode. 100% Free.
-    </h2>
-
-    <div className="signpost-menu">
-      <div className="signpost-wrap"><MenuItem text="Singleplayer" onClick={onSingleplayer} /></div>
-      <div className="signpost-wrap">
-        {isQueuing
-          ? <MenuItem text="Cancel Search…" onClick={cancelMatchmaking} />
-          : <MenuItem text="Find a Match" onClick={onFindMatchClick} />}
+const HeroMenuButton = ({ title, subtitle, iconClass, svgIcon, onClick, badge, extraRight, disabled }) => (
+  <button onClick={onClick} disabled={disabled} className={`hero-menu-btn ${iconClass}`} style={{ opacity: disabled ? 0.6 : 1, cursor: disabled ? 'not-allowed' : 'pointer' }}>
+    <div className="hero-menu-btn-content">
+      <div className="hero-menu-icon-wrap">
+        {svgIcon}
       </div>
-
-      <div className="signpost-divider" />
-
-      <div className="signpost-wrap"><MenuItem text="Create Party" onClick={onCreateParty} /></div>
-      <div className="signpost-wrap"><MenuItem text="Join Party" onClick={onJoinParty} /></div>
-
-      <div className="signpost-divider" />
-
-      <div className="signpost-wrap"><MenuItem text="Flag Guesser" onClick={onFlagGuesser} /></div>
-
-      <div className="signpost-divider" />
-
-      <div className="signpost-wrap"><MenuItem text="Leaderboard" onClick={onLeaderboard} /></div>
-      <div className="signpost-wrap"><MenuItem text="About" onClick={onAbout} /></div>
-
-      <div className="signpost-divider" />
-
-      <div className="signpost-wrap">
-        <button onClick={onDailyChallenge} disabled={playedToday} className="signpost-daily" aria-label={`Daily Challenge. ${streak} day streak${playedToday ? '. Already played today.' : ''}`}>
-          Daily Challenge
-          <span style={{ background: '#fb923c', color: 'white', padding: '2px 7px', borderRadius: '10px', fontSize: '0.7rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', boxShadow: '0 0 8px rgba(251,146,60,0.7)', flexShrink: 0 }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '2px' }}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
-            {streak}d
-          </span>
-        </button>
+      <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span style={{ fontSize: '0.95rem', fontWeight: '900', letterSpacing: '0.04em' }}>{title}</span>
+          {badge && <span style={{ background: '#ffffff', color: '#111827', fontSize: '0.6rem', padding: '1px 6px', borderRadius: '4px', fontWeight: '900', letterSpacing: '0.5px' }}>{badge}</span>}
+        </div>
+        {subtitle && <span style={{ fontSize: '0.75rem', opacity: 0.88, fontWeight: '500' }}>{subtitle}</span>}
       </div>
     </div>
+    {extraRight || (
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.8 }}><polyline points="9 18 15 12 9 6"></polyline></svg>
+    )}
+  </button>
+);
 
-    <button className="mobile-quick-play" onClick={onQuickPlay} aria-label="Quick Play - start a game instantly">
-      <span aria-hidden="true">▶</span> Quick Play
-    </button>
+const MainMenu = ({ onQuickPlay, onSingleplayer, onStoryMode, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxWidth: '340px', width: '100%' }}>
+    <HeroMenuButton
+      title="SINGLEPLAYER"
+      subtitle="Play solo and explore"
+      iconClass="icon-red"
+      onClick={onSingleplayer}
+      svgIcon={
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="6"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+        </svg>
+      }
+    />
 
-    <div style={{ marginTop: 'clamp(0.2rem, 0.8vh, 0.6rem)' }}>
-      <div style={{ fontSize: '0.72rem', fontWeight: 'bold', color: '#8a7a60', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1.5px', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>Featured Country Guides</div>
+    <HeroMenuButton
+      title="FLAG GUESSER"
+      subtitle="Guess the flag, earn points"
+      iconClass="icon-orange"
+      onClick={onFlagGuesser}
+      svgIcon={
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+          <line x1="4" y1="22" x2="4" y2="15"></line>
+        </svg>
+      }
+    />
+
+    <HeroMenuButton
+      title="STORY MODE"
+      subtitle="Follow stories & challenges"
+      iconClass="icon-gold"
+      onClick={onStoryMode}
+      badge="NEW"
+      svgIcon={
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+      }
+    />
+
+    <HeroMenuButton
+      title={isQueuing ? "CANCEL SEARCH..." : "FIND A MATCH"}
+      subtitle="Play with random players"
+      iconClass="icon-green"
+      onClick={isQueuing ? cancelMatchmaking : onFindMatchClick}
+      svgIcon={
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      }
+    />
+
+    <HeroMenuButton
+      title="CREATE PARTY"
+      subtitle="Create your own party"
+      iconClass="icon-blue"
+      onClick={onCreateParty}
+      svgIcon={
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      }
+    />
+
+    <HeroMenuButton
+      title="JOIN PARTY"
+      subtitle="Join your friends"
+      iconClass="icon-purple"
+      onClick={onJoinParty}
+      svgIcon={
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="8.5" cy="7" r="4"></circle>
+          <line x1="20" y1="8" x2="20" y2="14"></line>
+          <line x1="23" y1="11" x2="17" y2="11"></line>
+        </svg>
+      }
+    />
+
+    <HeroMenuButton
+      title="LEADERBOARD"
+      subtitle="See top players"
+      iconClass="icon-teal"
+      onClick={onLeaderboard}
+      svgIcon={
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+          <path d="M4 22h16"></path>
+          <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+          <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+          <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path>
+        </svg>
+      }
+    />
+
+    <HeroMenuButton
+      title="ABOUT"
+      subtitle="About LostStreet"
+      iconClass="icon-orange"
+      onClick={onAbout}
+      svgIcon={
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+      }
+    />
+
+    <HeroMenuButton
+      title="DAILY CHALLENGE"
+      subtitle={playedToday ? "Played today" : "New challenge every day"}
+      iconClass="icon-rose"
+      onClick={onDailyChallenge}
+      disabled={playedToday}
+      svgIcon={
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+      }
+      extraRight={
+        <span style={{ background: '#f97316', color: 'white', padding: '3px 8px', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '4px', boxShadow: '0 2px 8px rgba(249, 115, 22, 0.4)' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          12:45:30
+        </span>
+      }
+    />
+
+    <div style={{ marginTop: '8px', padding: '0 4px' }}>
+      <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#9ca3af', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+        Featured Country Guides
+      </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
         {[['in','India'],['bn','Brunei'],['de','Germany'],['ng','Nigeria']].map(([code, name]) => (
-          <Link key={code} href={`/chronicles/${code}`} style={{ padding: '5px 12px', background: 'rgba(44,26,8,0.7)', borderRadius: '16px', fontSize: '0.85rem', color: '#f0e8d0', textDecoration: 'none', border: '1px solid rgba(200,160,96,0.25)', textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }} className="menu-item-hover">{name}</Link>
+          <Link key={code} href={`/chronicles/${code}`} style={{ padding: '4px 10px', background: 'rgba(18, 24, 38, 0.85)', borderRadius: '10px', fontSize: '0.78rem', color: '#e5e7eb', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.12)', fontWeight: '600' }}>
+            {name}
+          </Link>
         ))}
       </div>
     </div>
-
-
   </div>
 );
 
@@ -749,9 +1062,10 @@ const ProfileStat = ({ label, value }) => (
   </div>
 );
 
-const MenuItem = ({ text, onClick }) => (
+const MenuItem = ({ text, onClick, badge }) => (
   <button onClick={onClick} className="signpost-btn">
     {text}
+    {badge && <span style={{ marginLeft: '10px', background: '#ef4444', color: 'white', fontSize: '0.65rem', padding: '2px 6px', borderRadius: '6px', fontWeight: 'bold', letterSpacing: '1px', boxShadow: '0 0 8px rgba(239, 68, 68, 0.5)' }}>{badge}</span>}
   </button>
 );
 
