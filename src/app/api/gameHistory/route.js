@@ -7,15 +7,18 @@ export async function GET(request) {
     const uid = searchParams.get('uid');
     
     if (!uid) {
-      return NextResponse.json({ error: 'Missing UID' }, { status: 400 });
+      return NextResponse.json({ games: [], error: 'Missing UID' }, { status: 400 });
+    }
+
+    // Check if Firebase service account credentials are provided
+    if (!process.env.FIREBASE_SERVICE_ACCOUNT_KEY && !process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+      return NextResponse.json({ games: [] });
     }
 
     if (!adminDb) {
-      return NextResponse.json({ error: 'Database not initialized' }, { status: 500 });
+      return NextResponse.json({ games: [] });
     }
 
-    // Since we don't have a gameResults collection created historically in the same way 
-    // as the reference, we'll try to fetch whatever we can or return an empty list initially.
     const snapshot = await adminDb.collection('gameResults')
       .where('uid', '==', uid)
       .orderBy('date', 'desc')
@@ -27,9 +30,10 @@ export async function GET(request) {
       ...doc.data()
     }));
 
-    return NextResponse.json(history);
+    return NextResponse.json({ games: history });
   } catch (error) {
-    console.error('Error fetching game history:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.warn('Notice: Could not load game history (Firebase credentials missing or uninitialized):', error.message);
+    return NextResponse.json({ games: [] });
   }
 }
+

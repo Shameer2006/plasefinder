@@ -37,8 +37,8 @@ export default function ChroniclesCatalog() {
   // Filtering
   const filteredCountries = countriesList.filter(c => {
     const matchesSearch = c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          c.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          c.capital.toLowerCase().includes(searchTerm.toLowerCase());
+      c.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      c.capital.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesContinent = selectedContinent === 'All' || c.continent === selectedContinent;
     return matchesSearch && matchesContinent;
   }).sort((a, b) => a.name.localeCompare(b.name));
@@ -154,9 +154,9 @@ export default function ChroniclesCatalog() {
             <span style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             </span>
-            <input 
-              type="text" 
-              placeholder="Search by country name, capital, or code..." 
+            <input
+              type="text"
+              placeholder="Search by country name, capital, or code..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               style={{
@@ -325,7 +325,7 @@ export default function ChroniclesCatalog() {
                         ✓
                       </div>
                     )}
-                    
+
                     {/* Flag Container */}
                     <div style={{
                       width: '100%',
@@ -337,8 +337,8 @@ export default function ChroniclesCatalog() {
                       justifyContent: 'center',
                       borderBottom: '1px solid rgba(255,255,255,0.05)'
                     }}>
-                      <img 
-                        src={`https://flagcdn.com/w320/${c.code.toLowerCase()}.png`} 
+                      <img
+                        src={`https://flagcdn.com/w320/${c.code.toLowerCase()}.png`}
                         alt={`${c.name} Flag`}
                         loading="lazy"
                         style={{

@@ -144,6 +144,56 @@ const jsonLd = [
       "https://www.reddit.com/r/LostStreet",
       "https://www.instagram.com/loststreet.online"
     ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "LostStreet Main Navigation",
+    "itemListElement": [
+      {
+        "@type": "SiteNavigationElement",
+        "position": 1,
+        "name": "Flag Guesser Quiz",
+        "description": "Test your knowledge of world flags in our free flag identifier game.",
+        "url": "https://www.loststreet.online/flag-guesser"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 2,
+        "name": "How to Play & Guides",
+        "description": "Learn how to guess locations from street view, country clues, and geography tips.",
+        "url": "https://www.loststreet.online/guides"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 3,
+        "name": "How to Play & Guides",
+        "description": "Learn how to guess locations from street view, country clues, and geography tips.",
+        "url": "https://www.loststreet.online/guides"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 4,
+        "name": "World Map & Chronicles",
+        "description": "Explore location guides and street view panoramas by country.",
+        "url": "https://www.loststreet.online/chronicles"
+      },
+
+      {
+        "@type": "SiteNavigationElement",
+        "position": 5,
+        "name": "Community",
+        "description": "Join the LostStreet geography community and updates.",
+        "url": "https://www.loststreet.online/community"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 6,
+        "name": "About LostStreet",
+        "description": "Learn about LostStreet, the free street view guesser game.",
+        "url": "https://www.loststreet.online/about"
+      }
+    ]
   }
 ];
 

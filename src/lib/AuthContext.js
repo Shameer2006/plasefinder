@@ -39,7 +39,18 @@ export const AuthProvider = ({ children }) => {
         const profile = await getOrCreateUserProfile(currentUser);
         setUserProfile(profile);
       } else {
-        setUserProfile(null);
+        const localXp = parseInt(typeof window !== 'undefined' ? (localStorage.getItem('placefinder_total_xp') || '0') : '0', 10) || 0;
+        const localUsername = (typeof window !== 'undefined' && localStorage.getItem('placefinder_username')) || 'Guest Explorer';
+        const localCountry = (typeof window !== 'undefined' && localStorage.getItem('placefinder_country')) || 'IN';
+        setUserProfile({
+          uid: 'guest',
+          username: localUsername,
+          displayName: localUsername,
+          countryCode: localCountry,
+          totalXp: localXp,
+          createdAt: new Date().toISOString(),
+          onboardingComplete: true
+        });
       }
       setLoading(false);
     });

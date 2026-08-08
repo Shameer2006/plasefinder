@@ -92,6 +92,7 @@ export default function PanoramaViewer({ onStaticImageReady }) {
           alt=""
           crossOrigin="anonymous"
           onLoad={handleStaticLoad}
+          onError={() => setStaticLoaded(false)}
           style={{
             position: 'absolute',
             top: 0,

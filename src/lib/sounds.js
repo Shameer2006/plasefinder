@@ -115,6 +115,36 @@ class SoundEngine {
     this.playTone(1200, 'sine', 0.08, 0.15, 900);
     setTimeout(() => this.playTone(1400, 'sine', 0.06, 0.1), 60);
   }
+
+  playScoreReveal() {
+    // Rising "cha-ching" — coin-drop feel
+    this.playTone(880, 'sine', 0.12, 0.4);
+    setTimeout(() => this.playTone(1108.73, 'sine', 0.12, 0.4), 80);   // C#6
+    setTimeout(() => this.playTone(1318.51, 'sine', 0.25, 0.45), 160);  // E6
+    setTimeout(() => this.playTone(1760, 'sine', 0.4, 0.3), 280);      // A6 shimmer
+  }
+
+  playRareRound() {
+    // Dramatic ascending flourish for bonus round announcement
+    const notes = [
+      { f: 523.25, d: 0.1 },  // C5
+      { f: 659.25, d: 0.1 },  // E5
+      { f: 783.99, d: 0.1 },  // G5
+      { f: 1046.5, d: 0.35 }, // C6
+    ];
+    let t = 0;
+    notes.forEach(n => {
+      setTimeout(() => this.playTone(n.f, 'sine', n.d, 0.35), t);
+      t += 100;
+    });
+  }
+
+  playStreakUp() {
+    // Quick celebratory ascending triple-ping
+    this.playTone(659.25, 'sine', 0.12, 0.3);   // E5
+    setTimeout(() => this.playTone(783.99, 'sine', 0.12, 0.3), 100);  // G5
+    setTimeout(() => this.playTone(1046.5, 'sine', 0.3, 0.35), 200);  // C6
+  }
 }
 
 // Singleton instance

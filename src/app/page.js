@@ -20,8 +20,8 @@ const FlagGame = dynamic(() => import('./components/FlagGame'), { ssr: false, lo
 const MultiplayerGame = dynamic(() => import('./components/MultiplayerGame'), { ssr: false });
 
 export default function Home() {
-  const { user, userProfile, loading, loginWithGoogle, logout } = useAuth();
-  const { gameState, setGameState, setDifficulty, setGameMode, soundEnabled, setSoundEnabled, initSounds, units, setUnits, mapType, setMapType, emotesEnabled, setEmotesEnabled } = useGameStore();
+  const { user, userProfile, setUserProfile, loading, loginWithGoogle, logout } = useAuth();
+  const { gameState, setGameState, setDifficulty, setGameMode, setIsDailyChallenge, soundEnabled, setSoundEnabled, initSounds, units, setUnits, mapType, setMapType, emotesEnabled, setEmotesEnabled } = useGameStore();
   const [isQueuing, setIsQueuing] = useState(false);
   const [queueSub, setQueueSub] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
@@ -35,10 +35,10 @@ export default function Home() {
   const [isJoining, setIsJoining] = useState(false);
   const [streak, setStreak] = useState(0);
   const [playedToday, setPlayedToday] = useState(false);
-  const [onlineCount, setOnlineCount] = useState('...');
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [matchFoundData, setMatchFoundData] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [pendingMode, setPendingMode] = useState('CLASSIC');
   const toast = useToast();
 
   // Always reset to MENU on fresh page load/launch, and handle popstate history
@@ -52,9 +52,9 @@ export default function Home() {
     const handlePopState = () => {
       const hash = window.location.hash.replace('#', '');
       if (hash && (
-          ['MENU', 'LOADING', 'EXPLORING', 'RESULT', 'FLAG_GAME'].includes(hash) ||
-          hash.startsWith('MULTIPLAYER_') ||
-          hash.startsWith('PARTY_LOBBY_')
+        ['MENU', 'LOADING', 'EXPLORING', 'RESULT', 'FLAG_GAME'].includes(hash) ||
+        hash.startsWith('MULTIPLAYER_') ||
+        hash.startsWith('PARTY_LOBBY_')
       )) {
         setGameState(hash);
       } else {
@@ -73,26 +73,28 @@ export default function Home() {
     }
   }, [gameState]);
 
+  // Social variable reward: Friend score toast
   useEffect(() => {
-    let currentCount = Math.floor(Math.random() * (4000 - 3500 + 1)) + 3500;
-    setOnlineCount(currentCount);
-    let timeoutId;
+    if (userProfile && gameState === 'MENU') {
+      // Simulate checking recent opponent scores
+      // In a real app, you'd fetch this from the database:
+      // "SELECT * FROM gameResults WHERE uid IN (recentOpponents) AND timestamp > NOW() - 24h ORDER BY score DESC LIMIT 1"
+      // We will show a mock toast occasionally to simulate this social hook
+      const hasShownToast = sessionStorage.getItem('friendScoreToastShown');
+      if (!hasShownToast && Math.random() < 0.4) {
+        setTimeout(() => {
+          const names = ['Alex99', 'Globetrotter', 'MapMaster', 'ExplorerJane'];
+          const randomName = names[Math.floor(Math.random() * names.length)];
+          const randomScore = Math.floor(Math.random() * 5000) + 18000;
+          toast.info(`⚡ ${randomName} just scored ${randomScore.toLocaleString()} pts — can you beat it?`);
+          sessionStorage.setItem('friendScoreToastShown', 'true');
+        }, 1500);
+      }
+    }
+  }, [userProfile, gameState]);
 
-    const fluctuateCount = () => {
-      const change = Math.floor(Math.random() * 31) - 15;
-      currentCount = currentCount + change;
-      if (currentCount < 3500) currentCount = 3500;
-      if (currentCount > 4000) currentCount = 4000;
-      setOnlineCount(currentCount);
-      const nextDelay = Math.floor(Math.random() * 5500) + 1500;
-      timeoutId = setTimeout(fluctuateCount, nextDelay);
-    };
-
-    const initialDelay = Math.floor(Math.random() * 5500) + 1500;
-    timeoutId = setTimeout(fluctuateCount, initialDelay);
+  useEffect(() => {
     initSounds();
-
-    return () => clearTimeout(timeoutId);
   }, [initSounds]);
 
   useEffect(() => {
@@ -111,7 +113,7 @@ export default function Home() {
       const todayDate = new Date(today);
       const diffTime = Math.abs(todayDate - lastDate);
       const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-      
+
       if (diffDays === 0) {
         setPlayedToday(true);
         setStreak(currentStreak);
@@ -172,7 +174,7 @@ export default function Home() {
     const gameId = gameState.replace('MULTIPLAYER_', '');
     return <div className="game-area"><MultiplayerGame gameId={gameId} /></div>;
   }
-  
+
   if (gameState.startsWith('PARTY_LOBBY_')) {
     const gameId = gameState.replace('PARTY_LOBBY_', '');
     return <div className="game-area"><PartyLobby gameId={gameId} /></div>;
@@ -192,6 +194,14 @@ export default function Home() {
     setGameState('LOADING');
   };
 
+  const handleEndlessMode = (mode) => {
+    setGameMode('ENDLESS');
+    useGameStore.getState().setCurrentEndlessStreak(0);
+    useGameStore.getState().setMaxRounds(Infinity);
+    setDifficulty(mode);
+    setGameState('LOADING');
+  };
+
   const handleStoryMode = () => {
     setGameMode('STORY');
     setDifficulty('HARD');
@@ -203,11 +213,11 @@ export default function Home() {
       toast.error("Please login first to play multiplayer!");
       return;
     }
-    
+
     const { joinRankedQueue, leaveRankedQueue, joinUnrankedQueue, leaveUnrankedQueue } = await import('@/lib/matchmaking');
     setIsQueuing(true);
     toast.info(`Searching for an opponent... (${type})`);
-    
+
     const joinQueue = type === 'ranked' ? joinRankedQueue : joinUnrankedQueue;
     const leaveQueue = type === 'ranked' ? leaveRankedQueue : leaveUnrankedQueue;
 
@@ -266,7 +276,7 @@ export default function Home() {
       setJoinError('Code must be 6 characters');
       return;
     }
-    
+
     setIsJoining(true);
     setJoinError('');
     const { joinParty } = await import('@/lib/matchmaking');
@@ -293,14 +303,15 @@ export default function Home() {
       toast.warning("You already played the daily challenge today! Come back tomorrow.");
       return;
     }
-    
+
     const today = new Date().toDateString();
     const newStreak = streak + 1;
-    
+
     setStreak(newStreak);
     setPlayedToday(true);
     await updateDailyChallengeStreak(userProfile.uid, newStreak, today);
-    
+
+    setIsDailyChallenge(true);
     handleStart('HARD');
   };
 
@@ -379,11 +390,6 @@ export default function Home() {
             Settings
           </button>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(18, 24, 38, 0.85)', padding: '6px 12px', borderRadius: '20px', border: '1px solid rgba(255, 255, 255, 0.12)', fontSize: '0.85rem', fontWeight: 700 }} className="desktop-only-pill">
-            <span className="online-pulse-dot" />
-            <span>{onlineCount} online</span>
-          </div>
-
           {(!user || user.isAnonymous) ? (
             <button style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none', color: 'white', padding: '6px 14px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer', fontFamily: '"Outfit", sans-serif', boxShadow: '0 4px 12px rgba(16,185,129,0.3)' }} onClick={loginWithGoogle}>Login</button>
           ) : (
@@ -416,11 +422,7 @@ export default function Home() {
         {/* Mobile Dropdown Navigation Drawer */}
         {mobileMenuOpen && (
           <div className="mobile-dropdown-menu">
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '10px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', fontWeight: 700, color: '#e5e7eb' }}>
-                <span className="online-pulse-dot" />
-                <span>{onlineCount} online</span>
-              </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingBottom: '10px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
               <button
                 onClick={() => { setMobileMenuOpen(false); setShowSettings(true); }}
                 style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)', color: 'white', padding: '6px 14px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer', fontFamily: '"Outfit", sans-serif', display: 'flex', alignItems: 'center', gap: '6px' }}
@@ -463,7 +465,14 @@ export default function Home() {
             {showSettings ? (
               <SettingsMenu onBack={() => setShowSettings(false)} units={units} setUnits={setUnits} mapType={mapType} setMapType={setMapType} emotesEnabled={emotesEnabled} setEmotesEnabled={setEmotesEnabled} soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled} />
             ) : showDifficulty ? (
-              <DifficultyMenu onBack={() => setShowDifficulty(false)} onSelect={handleStart} />
+              <DifficultyMenu onBack={() => setShowDifficulty(false)} onSelect={(diff) => {
+                setShowDifficulty(false);
+                if (pendingMode === 'ENDLESS') {
+                  handleEndlessMode(diff);
+                } else {
+                  handleStart(diff);
+                }
+              }} />
             ) : showMatchmaking ? (
               <MatchmakingMenu onBack={() => setShowMatchmaking(false)} onSelect={(type) => { setShowMatchmaking(false); startMatchmaking(type); }} />
             ) : (
@@ -471,13 +480,14 @@ export default function Home() {
                 {showOnboarding && (
                   <OnboardingTooltip onDismiss={() => setShowOnboarding(false)} />
                 )}
-                <MainMenu 
+                <MainMenu
                   onQuickPlay={() => handleStart('EASY')}
-                  onSingleplayer={() => setShowDifficulty(true)}
+                  onSingleplayer={() => { setPendingMode('CLASSIC'); setShowDifficulty(true); }}
+                  onEndlessMode={() => { setPendingMode('ENDLESS'); setShowDifficulty(true); }}
                   onStoryMode={handleStoryMode}
-                  onFindMatchClick={() => setShowMatchmaking(true)} 
-                  isQueuing={isQueuing} 
-                  cancelMatchmaking={cancelMatchmaking} 
+                  onFindMatchClick={() => setShowMatchmaking(true)}
+                  isQueuing={isQueuing}
+                  cancelMatchmaking={cancelMatchmaking}
                   onDailyChallenge={handleDailyChallenge}
                   streak={streak}
                   playedToday={playedToday}
@@ -511,7 +521,7 @@ export default function Home() {
                 overflow: 'hidden'
               }}>
                 <svg width="240" height="85" viewBox="0 0 200 100" fill="none" opacity="0.4">
-                  <path d="M30 40 Q40 20 60 30 T90 40 T120 20 T150 50 T180 40" stroke="white" strokeWidth="1.5" strokeDasharray="3,3"/>
+                  <path d="M30 40 Q40 20 60 30 T90 40 T120 20 T150 50 T180 40" stroke="white" strokeWidth="1.5" strokeDasharray="3,3" />
                   <circle cx="120" cy="35" r="4" fill="#ef4444" />
                   <circle cx="120" cy="35" r="8" fill="#ef4444" opacity="0.3" />
                 </svg>
@@ -556,38 +566,6 @@ export default function Home() {
           )}
         </div>
 
-        {/* Center Bottom Floating Clues Card */}
-        {!showSettings && !showProfile && !showDifficulty && !showMatchmaking && (
-          <div style={{ margin: '16px auto', width: '100%', maxWidth: '420px', zIndex: 5, pointerEvents: 'auto' }} className="desktop-only">
-            <div style={{
-              background: 'rgba(18, 24, 38, 0.88)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
-              borderRadius: '16px',
-              padding: '14px 20px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '14px',
-              boxShadow: '0 8px 30px rgba(0,0,0,0.5)'
-            }}>
-              <div style={{ width: '38px', height: '38px', borderRadius: '12px', background: 'rgba(251, 191, 36, 0.15)', border: '1px solid rgba(251, 191, 36, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#fbbf24' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-              </div>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'white' }}>Where are you?</div>
-                <div style={{ fontSize: '0.8rem', color: '#9ca3af', lineHeight: 1.3 }}>Explore the area, find clues and pin your best guess!</div>
-                <div style={{ display: 'flex', gap: '5px', marginTop: '6px' }}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#fbbf24' }} />
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
       </section>
 
@@ -638,8 +616,8 @@ export default function Home() {
           <div className="glass-panel modal-content" role="dialog" aria-modal="true" aria-label="Join Party">
             <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 'bold' }}>Join Party</h2>
             <form onSubmit={handleJoinPartySubmit}>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={joinCode}
                 onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
                 placeholder="Enter 6-digit code"
@@ -648,7 +626,7 @@ export default function Home() {
                 style={{ width: '100%', padding: '10px', fontSize: '1.2rem', textTransform: 'uppercase', textAlign: 'center', letterSpacing: '4px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', borderRadius: '8px', marginBottom: '1rem' }}
               />
               {joinError && <div role="alert" style={{ color: '#f87171', marginBottom: '1rem', textAlign: 'center' }}>{joinError}</div>}
-              
+
               <div style={{ display: 'flex', gap: '1rem' }}>
                 <button type="button" className="btn" style={{ flex: 1, background: 'rgba(255,255,255,0.1)' }} onClick={() => setShowJoinModal(false)}>Cancel</button>
                 <button type="submit" className="btn" style={{ flex: 1 }} disabled={isJoining}>{isJoining ? 'Joining...' : 'Join'}</button>
@@ -673,8 +651,8 @@ export default function Home() {
       )}
 
       {userProfile && !userProfile.onboardingComplete && (
-        <OnboardingModal 
-          user={user} 
+        <OnboardingModal
+          user={user}
           onComplete={(updates) => {
             // Profile is refreshed automatically if listening, or we can force reload.
             // But AuthContext updates the profile object when we write to Firestore in onboarding.
@@ -686,12 +664,14 @@ export default function Home() {
       )}
 
       {showProfile && (
-        <ProfileModal 
-          userProfile={userProfile} 
+        <ProfileModal
+          userProfile={userProfile}
           user={user}
           onClose={() => setShowProfile(false)}
           onLogout={logout}
-          onProfileUpdate={(updates) => {}}
+          onProfileUpdate={(updates) => {
+            setUserProfile(prev => ({ ...(prev || {}), ...updates }));
+          }}
         />
       )}
 
@@ -752,12 +732,12 @@ const OnboardingTooltip = ({ onDismiss }) => (
       <div>
         <p style={{ fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--primary-color)' }}>Welcome to LostStreet!</p>
         <p style={{ fontSize: '0.95rem', color: '#d1d5db', lineHeight: 1.5 }}>
-          Pick a game mode below. In <strong>Singleplayer</strong>, guess locations from street views. 
+          Pick a game mode below. In <strong>Singleplayer</strong>, guess locations from street views.
           In <strong>Multiplayer</strong>, compete against other players. You can also create a <strong>Party</strong> to play with friends!
         </p>
       </div>
-      <button 
-        onClick={onDismiss} 
+      <button
+        onClick={onDismiss}
         style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer', fontSize: '1.2rem', padding: '4px', flexShrink: 0 }}
         aria-label="Dismiss tutorial"
       >
@@ -787,7 +767,7 @@ const HeroMenuButton = ({ title, subtitle, iconClass, svgIcon, onClick, badge, e
   </button>
 );
 
-const MainMenu = ({ onQuickPlay, onSingleplayer, onStoryMode, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => (
+const MainMenu = ({ onQuickPlay, onSingleplayer, onEndlessMode, onStoryMode, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxWidth: '340px', width: '100%' }}>
     <HeroMenuButton
       title="SINGLEPLAYER"
@@ -812,6 +792,19 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onStoryMode, onFindMatchClick, 
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
           <line x1="4" y1="22" x2="4" y2="15"></line>
+        </svg>
+      }
+    />
+
+    <HeroMenuButton
+      title="ENDLESS MODE"
+      subtitle="How far can you go?"
+      iconClass="icon-rose"
+      onClick={onEndlessMode}
+      svgIcon={
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+          <polyline points="17 6 23 6 23 12"></polyline>
         </svg>
       }
     />
@@ -906,7 +899,7 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onStoryMode, onFindMatchClick, 
 
     <HeroMenuButton
       title="DAILY CHALLENGE"
-      subtitle={playedToday ? "Played today" : "New challenge every day"}
+      subtitle={playedToday ? "Played today" : (streak > 0 ? `Don't lose your ${streak} day streak!` : "New challenge every day")}
       iconClass="icon-rose"
       onClick={onDailyChallenge}
       disabled={playedToday}
@@ -934,7 +927,7 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onStoryMode, onFindMatchClick, 
         Featured Country Guides
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-        {[['in','India'],['bn','Brunei'],['de','Germany'],['ng','Nigeria']].map(([code, name]) => (
+        {[['in', 'India'], ['bn', 'Brunei'], ['de', 'Germany'], ['ng', 'Nigeria']].map(([code, name]) => (
           <Link key={code} href={`/chronicles/${code}`} style={{ padding: '4px 10px', background: 'rgba(18, 24, 38, 0.85)', borderRadius: '10px', fontSize: '0.78rem', color: '#e5e7eb', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.12)', fontWeight: '600' }}>
             {name}
           </Link>
@@ -949,7 +942,7 @@ const SettingsMenu = ({ onBack, units, setUnits, mapType, setMapType, emotesEnab
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <h1 className="responsive-subtitle" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>Settings</h1>
       <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
-      
+
       <button style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem', background: 'none', border: 'none', font: 'inherit', padding: 0, textAlign: 'left' }} onClick={onBack}>
         Back
       </button>
@@ -971,11 +964,11 @@ const SettingsMenu = ({ onBack, units, setUnits, mapType, setMapType, emotesEnab
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <span style={{ width: '180px' }}>Sound Effects:</span>
-          <input 
-            type="checkbox" 
-            checked={soundEnabled} 
-            onChange={(e) => setSoundEnabled(e.target.checked)} 
-            style={{ transform: 'scale(1.2)' }} 
+          <input
+            type="checkbox"
+            checked={soundEnabled}
+            onChange={(e) => setSoundEnabled(e.target.checked)}
+            style={{ transform: 'scale(1.2)' }}
           />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -1007,43 +1000,43 @@ const ProfileMenu = ({ onBack, userProfile, logout }) => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <h1 className="responsive-subtitle" style={{ fontWeight: 'bold', marginBottom: '0.2rem' }}>{userProfile.displayName}'s Profile</h1>
       <div style={{ height: '2px', background: 'white', width: '100%', marginBottom: '0.5rem' }}></div>
-      
+
       <button style={{ color: '#fca5a5', fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600', marginBottom: '1rem', background: 'none', border: 'none', font: 'inherit', padding: 0, textAlign: 'left' }} onClick={onBack}>
         Back
       </button>
 
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', 
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
         gap: '1rem',
         background: 'rgba(0,0,0,0.4)',
         padding: '1rem',
         borderRadius: '16px',
         border: '1px solid rgba(255,255,255,0.1)'
       }}>
-        <ProfileStat 
-          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '4px'}}><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg> ELO Rating</>} 
-          value={userProfile.elo} 
+        <ProfileStat
+          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg> ELO Rating</>}
+          value={userProfile.elo}
         />
-        <ProfileStat 
-          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '4px'}}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Total XP</>} 
-          value={userProfile.totalXp} 
+        <ProfileStat
+          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Total XP</>}
+          value={userProfile.totalXp}
         />
-        <ProfileStat 
-          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '4px'}}><path d="M14.5 4h5v5"></path><polyline points="19.5 4 12 11.5 8 7.5 2 13.5"></polyline></svg> Duels Won</>} 
-          value={userProfile.duels_wins} 
+        <ProfileStat
+          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}><path d="M14.5 4h5v5"></path><polyline points="19.5 4 12 11.5 8 7.5 2 13.5"></polyline></svg> Duels Won</>}
+          value={userProfile.duels_wins}
         />
-        <ProfileStat 
-          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '4px'}}><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Duels Lost</>} 
-          value={userProfile.duels_losses} 
+        <ProfileStat
+          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Duels Lost</>}
+          value={userProfile.duels_losses}
         />
-        <ProfileStat 
-          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '4px'}}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> Daily Streak</>} 
-          value={userProfile.dailyChallengeStreak || 0} 
+        <ProfileStat
+          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> Daily Streak</>}
+          value={userProfile.dailyChallengeStreak || 0}
         />
-        <ProfileStat 
-          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '4px'}}><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Joined</>} 
-          value={new Date(userProfile.createdAt).toLocaleDateString()} 
+        <ProfileStat
+          label={<><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Joined</>}
+          value={new Date(userProfile.createdAt).toLocaleDateString()}
         />
       </div>
 
@@ -1070,11 +1063,11 @@ const MenuItem = ({ text, onClick, badge }) => (
 );
 
 const IconButton = ({ icon, color, onClick }) => (
-  <button onClick={onClick} aria-label="Settings" style={{ 
-    width: '40px', height: '40px', 
-    borderRadius: '8px', 
-    background: color, 
-    border: 'none', 
+  <button onClick={onClick} aria-label="Settings" style={{
+    width: '40px', height: '40px',
+    borderRadius: '8px',
+    background: color,
+    border: 'none',
     display: 'flex', justifyContent: 'center', alignItems: 'center',
     fontSize: '1.2rem', cursor: 'pointer', color: 'white'
   }} className="btn">

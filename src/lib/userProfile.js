@@ -48,26 +48,53 @@ export const getOrCreateUserProfile = async (user) => {
 
 // Username uniqueness check
 export const isUsernameTaken = async (username) => {
-  if (!db || !username) return true;
-  const usersRef = collection(db, 'users');
-  const q = query(usersRef, where('username', '==', username.toLowerCase()), limit(1));
-  const snapshot = await getDocs(q);
-  return !snapshot.empty;
+  if (!username) return true;
+  if (!db) return false;
+  try {
+    const usersRef = collection(db, 'users');
+    const q = query(usersRef, where('username', '==', username.toLowerCase()), limit(1));
+    const snapshot = await getDocs(q);
+    return !snapshot.empty;
+  } catch (e) {
+    console.error('Failed to check username taken:', e);
+    return false;
+  }
 };
 
 // Update username
 export const updateUsername = async (uid, username) => {
-  if (!db || !uid || !username) return false;
-  const userRef = doc(db, 'users', uid);
-  await setDoc(userRef, { username: username.toLowerCase() }, { merge: true });
+  if (!username) return false;
+  if (db && uid) {
+    try {
+      const userRef = doc(db, 'users', uid);
+      await setDoc(userRef, { username: username.toLowerCase() }, { merge: true });
+    } catch (e) {
+      console.warn('Firestore username write notice (saving locally):', e?.message || e);
+    }
+  }
+  try {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('placefinder_username', username);
+    }
+  } catch (e) {}
   return true;
 };
 
 // Update country code
 export const updateCountryCode = async (uid, countryCode) => {
-  if (!db || !uid) return false;
-  const userRef = doc(db, 'users', uid);
-  await setDoc(userRef, { countryCode }, { merge: true });
+  if (db && uid) {
+    try {
+      const userRef = doc(db, 'users', uid);
+      await setDoc(userRef, { countryCode }, { merge: true });
+    } catch (e) {
+      console.warn('Firestore country code write notice (saving locally):', e?.message || e);
+    }
+  }
+  try {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('placefinder_country', countryCode);
+    }
+  } catch (e) {}
   return true;
 };
 
@@ -96,40 +123,136 @@ export const incrementGamesPlayed = async (uid) => {
 export const updateDailyChallengeStreak = async (uid, newStreak, dateString) => {
   if (!db || !uid) return;
   const userRef = doc(db, 'users', uid);
+  
+  // Fetch current longestStreak to potentially update it
+  let longestStreak = newStreak;
+  try {
+    const docSnap = await getDoc(userRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      longestStreak = Math.max(newStreak, data.longestStreak || 0);
+    }
+  } catch (e) { /* ignore, we'll just use newStreak */ }
+
   await setDoc(userRef, {
     dailyChallengeStreak: newStreak,
-    lastDailyChallengeDate: dateString
+    lastDailyChallengeDate: dateString,
+    longestStreak,
   }, { merge: true });
 };
 
+// Update best score (personal best) for social reward
+export const updateBestScore = async (uid, newScore) => {
+  if (!db || !uid) return false;
+  const userRef = doc(db, 'users', uid);
+  try {
+    const docSnap = await getDoc(userRef);
+    if (!docSnap.exists()) return false;
+    const current = docSnap.data().bestScore || 0;
+    if (newScore > current) {
+      await setDoc(userRef, { bestScore: newScore }, { merge: true });
+      return true; // was a new personal best
+    }
+  } catch (e) {
+    console.error('Failed to update best score:', e);
+  }
+  return false;
+};
+
+export const updateEndlessStats = async (uid, newScore, newStreak) => {
+  if (!db || !uid) return { isNewBestScore: false, isNewBestStreak: false };
+  const userRef = doc(db, 'users', uid);
+  try {
+    const docSnap = await getDoc(userRef);
+    if (!docSnap.exists()) return { isNewBestScore: false, isNewBestStreak: false };
+    const current = docSnap.data();
+    const bestEndlessScore = current.bestEndlessScore || 0;
+    const bestEndlessStreak = current.bestEndlessStreak || 0;
+    
+    let updates = {};
+    let isNewBestScore = false;
+    let isNewBestStreak = false;
+    
+    if (newScore > bestEndlessScore) {
+      updates.bestEndlessScore = newScore;
+      isNewBestScore = true;
+    }
+    if (newStreak > bestEndlessStreak) {
+      updates.bestEndlessStreak = newStreak;
+      isNewBestStreak = true;
+    }
+    
+    if (Object.keys(updates).length > 0) {
+      await setDoc(userRef, updates, { merge: true });
+    }
+    return { isNewBestScore, isNewBestStreak };
+  } catch (e) {
+    console.error('Failed to update endless stats:', e);
+  }
+  return { isNewBestScore: false, isNewBestStreak: false };
+};
 export const calculateLevel = (xp) => {
   return Math.floor(Math.sqrt(xp / 100)) + 1;
 };
 
 export const addXp = async (uid, xpEarned) => {
-  if (!db || !uid || xpEarned <= 0) return null;
-  const userRef = doc(db, 'users', uid);
-  const docSnap = await getDoc(userRef);
-  
-  if (!docSnap.exists()) return null;
-  
-  const currentData = docSnap.data();
-  const currentXp = currentData.totalXp || 0;
+  if (xpEarned <= 0) return null;
+
+  let currentXp = 0;
+
+  // Read local XP fallback first
+  if (typeof window !== 'undefined') {
+    const localXp = parseInt(localStorage.getItem('placefinder_total_xp') || '0', 10);
+    if (!isNaN(localXp) && localXp > 0) {
+      currentXp = localXp;
+    }
+  }
+
+  // Read Firestore XP if available
+  if (db && uid) {
+    try {
+      const userRef = doc(db, 'users', uid);
+      const docSnap = await getDoc(userRef);
+      if (docSnap.exists()) {
+        const firestoreXp = docSnap.data().totalXp || 0;
+        if (firestoreXp > currentXp) {
+          currentXp = firestoreXp;
+        }
+      }
+    } catch (e) {
+      console.warn('Notice: Could not read Firestore XP in addXp:', e?.message || e);
+    }
+  }
+
   const newXp = currentXp + xpEarned;
-  
   const currentLevel = calculateLevel(currentXp);
   const newLevel = calculateLevel(newXp);
-  
-  await setDoc(userRef, { totalXp: newXp }, { merge: true });
+  const levelUp = newLevel > currentLevel;
 
-  // Save XP snapshot for graph
-  await saveXpSnapshot(uid, newXp, currentData.elo || 1000);
-  
+  // Persist locally
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem('placefinder_total_xp', newXp.toString());
+    } catch (e) {}
+  }
+
+  // Persist to Firestore if available
+  if (db && uid) {
+    try {
+      const userRef = doc(db, 'users', uid);
+      await setDoc(userRef, { totalXp: newXp }, { merge: true });
+      await saveXpSnapshot(uid, newXp, 1000);
+    } catch (e) {
+      console.warn('Notice: Could not save Firestore XP in addXp:', e?.message || e);
+    }
+  }
+
   return {
     oldXp: currentXp,
     newXp,
-    levelUp: newLevel > currentLevel,
-    newLevel
+    levelUp,
+    newLevel,
+    oldLevel: currentLevel
   };
 };
 

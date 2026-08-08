@@ -38,6 +38,7 @@ function SiteHeader() {
     { href: '/guides', label: 'How to Play' },
     { href: '/leaderboard', label: 'Leaderboard' },
     { href: '/chronicles', label: 'Map' },
+    { href: '/flag-guesser', label: 'Flag Guesser' },
     { href: '/community', label: 'Community' },
     { href: '/about', label: 'About' },
   ];
@@ -62,7 +63,7 @@ function SiteHeader() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="site-nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(1rem, 2.5vw, 2rem)' }}>
+          <nav className="site-nav-desktop" aria-label="Main Navigation" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(1rem, 2vw, 1.8rem)' }}>
             {links.map(({ href, label }) => {
               const active = pathname === href;
               return (
@@ -227,6 +228,7 @@ function SiteFooter() {
     { href: '/guides', label: 'Guides' },
     { href: '/leaderboard', label: 'Leaderboard' },
     { href: '/chronicles', label: 'Chronicles' },
+    { href: '/flag-guesser', label: 'Flag Guesser' },
     { href: '/community', label: 'Community' },
     { href: '/about', label: 'About' },
     { href: '/privacy', label: 'Privacy' },
@@ -250,7 +252,7 @@ function SiteFooter() {
             </p>
           </div>
 
-          <nav style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(0.8rem, 2vw, 2rem)' }}>
+          <nav aria-label="Footer Navigation" style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(0.8rem, 2vw, 2rem)' }}>
             {links.map(({ href, label }) => (
               <Link key={href} href={href} style={{
                 color: '#888', textDecoration: 'none', fontSize: '0.875rem',

@@ -28,7 +28,15 @@ export async function GET(request) {
     const response = await fetch(url);
     
     if (!response.ok) {
-      throw new Error(`Google Street View API responded with status: ${response.status}`);
+      console.warn(`[StreetView Proxy] Google API returned HTTP ${response.status}. Ensure 'Street View Static API' is enabled in Google Cloud Console for your API key.`);
+      return new Response(JSON.stringify({
+        error: `Google Street View API returned HTTP ${response.status}`,
+        status: response.status,
+        hint: "Enable 'Street View Static API' in Google Cloud Console and check API key restrictions."
+      }), {
+        status: response.status,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     const imageBuffer = await response.arrayBuffer();
@@ -41,7 +49,7 @@ export async function GET(request) {
       },
     });
   } catch (error) {
-    console.error('Street View proxy error:', error);
+    console.error('[StreetView Proxy Error]:', error);
     return new Response(JSON.stringify({ error: 'Failed to fetch Street View image' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },

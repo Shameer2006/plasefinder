@@ -47,7 +47,6 @@ const COUNTRIES = [
   { code: 'lv', name: 'Latvia' }, { code: 'ee', name: 'Estonia' },
 ];
 
-// ── Random name generator ────────────────────────────────────────────
 const ADJECTIVES = [
   'Swift', 'Lost', 'Wild', 'Cosmic', 'Silent', 'Brave', 'Ancient', 'Frozen',
   'Golden', 'Clever', 'Mystic', 'Roaming', 'Hidden', 'Fierce', 'Daring',
@@ -66,7 +65,6 @@ const generateRandomName = () => {
   return `${adj}${noun}${num}`;
 };
 
-// ── Time ago helper ──────────────────────────────────────────────────
 const timeAgo = (dateStr) => {
   if (!dateStr) return 'Unknown';
   const now = new Date();
@@ -78,28 +76,28 @@ const timeAgo = (dateStr) => {
   const days = Math.floor(hours / 24);
   const months = Math.floor(days / 30);
   const years = Math.floor(days / 365);
-  if (years > 0) return `${years} year${years > 1 ? 's' : ''} ago`;
-  if (months > 0) return `${months} month${months > 1 ? 's' : ''} ago`;
-  if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
-  if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-  if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+  if (years > 0) return `${years}y ago`;
+  if (months > 0) return `${months}m ago`;
+  if (days > 0) return `${days}d ago`;
+  if (hours > 0) return `${hours}h ago`;
+  if (minutes > 0) return `${minutes}m ago`;
   return 'Just now';
 };
 
 // ── SVG Line Chart Component ─────────────────────────────────────────
-const LineChart = ({ data, dataKey, color = '#22C55E', isMobile }) => {
+const LineChart = ({ data, dataKey, color = '#10b981', isMobile }) => {
   if (!data || data.length === 0) {
     return (
       <div style={{
-        textAlign: 'center', padding: '2rem', color: '#6b7280',
-        fontSize: isMobile ? '0.9rem' : '1rem'
+        textAlign: 'center', padding: '2.5rem', color: '#6b7280',
+        fontSize: isMobile ? '0.85rem' : '0.95rem', fontWeight: 600
       }}>
-        Play some games to see your progress!
+        No performance history available yet. Play a game to record stats!
       </div>
     );
   }
 
-  const width = isMobile ? 300 : 700;
+  const width = isMobile ? 300 : 720;
   const height = isMobile ? 160 : 220;
   const padL = 50, padR = 20, padT = 20, padB = 40;
   const chartW = width - padL - padR;
@@ -118,10 +116,7 @@ const LineChart = ({ data, dataKey, color = '#22C55E', isMobile }) => {
 
   const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
 
-  // Y-axis labels
   const yLabels = [minVal, minVal + range * 0.5, maxVal].map(v => Math.round(v));
-
-  // X-axis labels (show up to 5)
   const xStep = Math.max(1, Math.floor(data.length / (isMobile ? 3 : 5)));
   const xLabels = [];
   for (let i = 0; i < data.length; i += xStep) {
@@ -135,74 +130,66 @@ const LineChart = ({ data, dataKey, color = '#22C55E', isMobile }) => {
 
   return (
     <svg viewBox={`0 0 ${width} ${height}`} style={{ width: '100%', height: 'auto' }}>
-      {/* Grid lines */}
       {[0, 0.5, 1].map((f, i) => {
         const y = padT + chartH - f * chartH;
         return (
           <line key={i} x1={padL} y1={y} x2={padL + chartW} y2={y}
-            stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+            stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
         );
       })}
-      {/* Y-axis labels */}
       {yLabels.map((v, i) => {
         const y = padT + chartH - (i / 2) * chartH;
         return (
           <text key={i} x={padL - 8} y={y + 4} fill="#6b7280"
-            fontSize={isMobile ? '9' : '11'} textAnchor="end">{v}</text>
+            fontSize={isMobile ? '9' : '11'} textAnchor="end" fontWeight="600">{v}</text>
         );
       })}
-      {/* X-axis labels */}
       {xLabels.map((l) => {
         const x = padL + (l.idx / Math.max(data.length - 1, 1)) * chartW;
         return (
           <text key={l.idx} x={x} y={height - 8} fill="#6b7280"
-            fontSize={isMobile ? '8' : '10'} textAnchor="middle">
+            fontSize={isMobile ? '8' : '10'} textAnchor="middle" fontWeight="600">
             {formatDate(l.ts)}
           </text>
         );
       })}
-      {/* Line */}
-      <path d={pathD} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      {/* Area fill */}
+      <path d={pathD} fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
       <path
         d={`${pathD} L ${points[points.length - 1].x} ${padT + chartH} L ${points[0].x} ${padT + chartH} Z`}
         fill={`${color}15`}
       />
-      {/* Dots */}
       {points.map((p, i) => (
         <circle key={i} cx={p.x} cy={p.y} r={isMobile ? 3 : 4}
-          fill={color} stroke="rgba(10,10,26,1)" strokeWidth="2" />
+          fill={color} stroke="#0b0f19" strokeWidth="2" />
       ))}
     </svg>
   );
 };
 
-// ── Main ProfileModal Component ──────────────────────────────────────
+// ── Main Redesigned ProfileModal Component ───────────────────────────
 export default function ProfileModal({ userProfile, user, onClose, onProfileUpdate, onLogout }) {
   const [isMobile, setIsMobile] = useState(false);
-  const [activeTab, setActiveTab] = useState('profile');
+  const [activeTab, setActiveTab] = useState('overview');
   const [animIn, setAnimIn] = useState(false);
 
-  // Profile tab state
+  // Settings State
   const [editingName, setEditingName] = useState(false);
   const [newName, setNewName] = useState('');
   const [nameError, setNameError] = useState('');
   const [nameSaving, setNameSaving] = useState(false);
-  const [editingFlag, setEditingFlag] = useState(false);
   const [flagSearch, setFlagSearch] = useState('');
+  const [copiedLink, setCopiedLink] = useState(false);
 
-  // XP chart state
+  // XP & ELO Data
   const [xpSnapshots, setXpSnapshots] = useState([]);
   const [xpDays, setXpDays] = useState(30);
-  const [xpChartMode, setXpChartMode] = useState('xp'); // 'xp' | 'rank'
+  const [xpChartMode, setXpChartMode] = useState('xp');
   const [xpLoading, setXpLoading] = useState(false);
 
-  // ELO tab state
   const [globalRank, setGlobalRank] = useState(null);
   const [eloSnapshots, setEloSnapshots] = useState([]);
   const [eloLoading, setEloLoading] = useState(false);
 
-  // History tab state
   const [gameHistory, setGameHistory] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(false);
 
@@ -224,7 +211,6 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
     };
   }, [onClose]);
 
-  // Load XP snapshots when profile tab is active or filter changes
   const loadXpSnapshots = useCallback(async () => {
     if (!userProfile?.uid) return;
     setXpLoading(true);
@@ -239,10 +225,9 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
   }, [userProfile?.uid, xpDays]);
 
   useEffect(() => {
-    if (activeTab === 'profile') loadXpSnapshots();
+    if (activeTab === 'overview' || activeTab === 'elo') loadXpSnapshots();
   }, [activeTab, loadXpSnapshots]);
 
-  // Load ELO data when ELO tab is active
   useEffect(() => {
     if (activeTab !== 'elo' || !userProfile) return;
     const loadEloData = async () => {
@@ -263,7 +248,6 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
     loadEloData();
   }, [activeTab, userProfile]);
 
-  // Load game history when History tab is active
   useEffect(() => {
     if (activeTab !== 'history' || !userProfile?.uid) return;
     const loadHistory = async () => {
@@ -283,7 +267,6 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
     loadHistory();
   }, [activeTab, userProfile?.uid]);
 
-  // ── Handlers ─────────────────────────────────────────────────────
   const handleSaveName = async () => {
     const trimmed = newName.trim();
     if (!trimmed || trimmed.length < 3) {
@@ -297,18 +280,27 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
     setNameSaving(true);
     setNameError('');
     try {
-      const taken = await isUsernameTaken(trimmed);
-      if (taken && trimmed.toLowerCase() !== (userProfile.username || '').toLowerCase()) {
-        setNameError('Username is already taken');
-        setNameSaving(false);
-        return;
+      if (userProfile?.uid) {
+        try {
+          const taken = await isUsernameTaken(trimmed);
+          if (taken && trimmed.toLowerCase() !== (userProfile.username || '').toLowerCase()) {
+            setNameError('Username is already taken');
+            setNameSaving(false);
+            return;
+          }
+        } catch (e) {
+          // Ignore availability check errors on local mode
+        }
+        await updateUsername(userProfile.uid, trimmed);
       }
-      await updateUsername(userProfile.uid, trimmed);
-      onProfileUpdate({ ...userProfile, username: trimmed });
+      onProfileUpdate({ ...userProfile, username: trimmed, displayName: trimmed });
       setEditingName(false);
       setNewName('');
     } catch (e) {
-      setNameError('Failed to update name');
+      console.warn('Network issue saving name, updating locally:', e);
+      onProfileUpdate({ ...userProfile, username: trimmed, displayName: trimmed });
+      setEditingName(false);
+      setNewName('');
     } finally {
       setNameSaving(false);
     }
@@ -316,24 +308,53 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
 
   const handleSelectFlag = async (code) => {
     try {
-      await updateCountryCode(userProfile.uid, code);
-      onProfileUpdate({ ...userProfile, countryCode: code });
-      setEditingFlag(false);
+      await updateCountryCode(userProfile?.uid, code);
     } catch (e) {
-      console.error('Failed to update flag:', e);
+      console.warn('Network issue saving flag, updating locally:', e);
     }
+    onProfileUpdate({ ...userProfile, countryCode: code });
   };
 
-  // ── Tab definitions ──────────────────────────────────────────────
+  const copyInviteLink = () => {
+    navigator.clipboard.writeText(window.location.origin);
+    setCopiedLink(true);
+    setTimeout(() => setCopiedLink(false), 2000);
+  };
+
   const TABS = [
-    { id: 'profile', label: 'Profile', emoji: '👤' },
-    { id: 'history', label: 'History', emoji: '📖' },
-    { id: 'elo', label: 'ELO', emoji: '🏆' },
-    { id: 'friends', label: 'Friends', emoji: '👥' },
-    { id: 'moderation', label: 'Moderation', emoji: '🛡️' },
+    {
+      id: 'overview', label: 'Overview & Stats',
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+    },
+    {
+      id: 'history', label: 'Match History',
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    },
+    {
+      id: 'elo', label: 'Ranks & Leagues',
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+    },
+    {
+      id: 'settings', label: 'Settings',
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    },
+    {
+      id: 'friends', label: 'Friends',
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    },
   ];
 
   const displayName = userProfile?.username || userProfile?.displayName || 'Explorer';
+  const totalXp = userProfile?.totalXp || 0;
+  const userLevel = calculateLevel(totalXp);
+  
+  // Level Progress Calculation
+  const currentLevelMinXp = Math.pow(userLevel - 1, 2) * 100;
+  const nextLevelMinXp = Math.pow(userLevel, 2) * 100;
+  const xpInCurrentLevel = totalXp - currentLevelMinXp;
+  const xpNeededForLevel = nextLevelMinXp - currentLevelMinXp;
+  const levelProgressPct = Math.min(100, Math.max(0, Math.round((xpInCurrentLevel / (xpNeededForLevel || 1)) * 100)));
+
   const currentLeague = getLeague(userProfile?.elo || 0);
   const wins = userProfile?.duels_wins || 0;
   const losses = userProfile?.duels_losses || 0;
@@ -344,52 +365,44 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
     c.code.toLowerCase().includes(flagSearch.toLowerCase())
   );
 
-  // ── Styles ───────────────────────────────────────────────────────
-  const glassCard = {
-    background: 'rgba(26, 26, 46, 0.85)',
-    backdropFilter: 'blur(10px)',
-    border: '1px solid rgba(255,255,255,0.1)',
-    borderRadius: '16px',
-    padding: isMobile ? '1rem' : '1.5rem',
-    marginBottom: '1rem',
-  };
-
-  const greenBtn = {
-    background: 'linear-gradient(135deg, #22C55E, #16A34A)',
-    color: 'white',
-    border: 'none',
-    borderRadius: '12px',
-    padding: isMobile ? '10px 20px' : '12px 24px',
-    fontWeight: 'bold',
-    fontSize: isMobile ? '0.85rem' : '0.95rem',
-    cursor: 'pointer',
-    transition: 'transform 0.15s, box-shadow 0.15s',
+  const cardStyle = {
+    background: 'rgba(18, 24, 38, 0.85)',
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    borderRadius: '20px',
+    padding: isMobile ? '1.25rem' : '1.5rem',
+    marginBottom: '1.25rem',
+    boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)'
   };
 
   const filterBtn = (active) => ({
-    background: active ? 'rgba(34, 197, 94, 0.25)' : 'rgba(255,255,255,0.06)',
-    color: active ? '#22C55E' : '#9CA3AF',
-    border: active ? '1px solid #22C55E' : '1px solid rgba(255,255,255,0.1)',
-    borderRadius: '8px',
+    background: active ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255,255,255,0.05)',
+    color: active ? '#34d399' : '#9ca3af',
+    border: active ? '1px solid rgba(16, 185, 129, 0.5)' : '1px solid rgba(255,255,255,0.1)',
+    borderRadius: '10px',
     padding: '6px 14px',
     fontSize: '0.8rem',
-    fontWeight: 'bold',
+    fontWeight: '700',
     cursor: 'pointer',
-    transition: 'all 0.2s',
+    transition: 'all 0.2s ease',
   });
 
-  // ── Render ───────────────────────────────────────────────────────
   return (
     <div style={{
       position: 'fixed', inset: 0, zIndex: 10000,
-      background: 'rgba(10, 10, 26, 0.97)',
+      background: 'radial-gradient(circle at 30% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%), rgba(8, 12, 22, 0.96)',
+      backdropFilter: 'blur(24px)',
+      WebkitBackdropFilter: 'blur(24px)',
       overflowY: 'auto',
       opacity: animIn ? 1 : 0,
       transition: 'opacity 0.3s ease',
+      fontFamily: '"Outfit", system-ui, -apple-system, sans-serif',
+      color: '#e5e7eb'
     }}>
       <style>{`
         @keyframes profilePopIn {
-          0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+          0% { transform: scale(0.95) translateY(20px); opacity: 0; }
           100% { transform: scale(1) translateY(0); opacity: 1; }
         }
         @keyframes profileFadeIn {
@@ -399,69 +412,267 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
       `}</style>
 
       <div style={{
-        maxWidth: '900px',
+        maxWidth: '980px',
         margin: '0 auto',
         padding: isMobile ? '1rem' : '2rem',
-        animation: 'profilePopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+        animation: 'profilePopIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
       }}>
-        {/* ── Header ────────────────────────────────────────────── */}
+
+        {/* ── Hero Profile Header Card ───────────────────────────────── */}
         <div style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          marginBottom: '1.5rem', position: 'relative',
+          position: 'relative',
+          overflow: 'hidden',
+          padding: isMobile ? '1.5rem 1.25rem' : '1.75rem 2rem',
+          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(15, 23, 42, 0.92) 45%, rgba(56, 189, 248, 0.12) 100%)',
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
+          border: '1px solid rgba(255, 255, 255, 0.14)',
+          borderRadius: '24px',
+          marginBottom: '1.25rem',
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <h1 style={{
-              fontSize: isMobile ? '1.5rem' : '2rem',
-              fontWeight: 'bold', color: 'white', margin: 0,
-            }}>
-              {displayName}
-            </h1>
-            {userProfile?.countryCode && (
-              <img
-                src={`https://flagcdn.com/w40/${userProfile.countryCode.toLowerCase()}.png`}
-                alt="flag"
-                style={{ width: '32px', height: '22px', borderRadius: '4px', objectFit: 'cover' }}
-              />
-            )}
-          </div>
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          {/* Top Right Action Buttons (Log Out & Close) */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: '8px',
+            marginBottom: '1rem'
+          }}>
             <button
               onClick={() => { onLogout && onLogout(); onClose(); }}
               style={{
-                height: '40px', padding: '0 16px', borderRadius: '20px',
-                background: '#b91c1c', border: 'none', color: 'white',
-                fontSize: '0.9rem', fontWeight: 'bold', cursor: 'pointer',
-                display: 'flex', alignItems: 'center', gap: '6px',
-                flexShrink: 0,
+                background: 'rgba(239, 68, 68, 0.15)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+                color: '#fca5a5',
+                padding: '8px 14px',
+                borderRadius: '12px',
+                fontSize: '0.8rem',
+                fontWeight: 800,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                backdropFilter: 'blur(10px)',
+                transition: 'all 0.2s ease'
               }}
-              aria-label="Log out"
             >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
               Log Out
             </button>
+
             <button
               onClick={onClose}
               style={{
-                width: '40px', height: '40px', borderRadius: '50%',
-                background: '#DC2626', border: 'none', color: 'white',
-                fontSize: '1.2rem', cursor: 'pointer', display: 'flex',
-                alignItems: 'center', justifyContent: 'center',
-                flexShrink: 0,
+                width: '36px',
+                height: '36px',
+                borderRadius: '12px',
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                color: 'white',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backdropFilter: 'blur(10px)',
+                transition: 'all 0.2s ease'
               }}
               aria-label="Close profile"
             >
-              X
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
+          </div>
+
+          {/* User Profile Information */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.25rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+              {/* Glowing Gradient Avatar Circle */}
+              <div style={{ position: 'relative' }}>
+                <div style={{
+                  width: '72px',
+                  height: '72px',
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #10b981 0%, #06b6d4 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 900,
+                  fontSize: '2rem',
+                  color: 'white',
+                  border: '3px solid rgba(255, 255, 255, 0.25)',
+                  boxShadow: '0 8px 24px rgba(16, 185, 129, 0.35)'
+                }}>
+                  {user?.photoURL ? (
+                    <img src={user.photoURL} alt="" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                  ) : (
+                    displayName[0].toUpperCase()
+                  )}
+                </div>
+                <span style={{
+                  position: 'absolute',
+                  bottom: '-2px',
+                  right: '-4px',
+                  background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
+                  color: '#0f172a',
+                  fontSize: '0.68rem',
+                  fontWeight: 900,
+                  padding: '2px 8px',
+                  borderRadius: '10px',
+                  border: '2px solid #0f172a',
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.5)'
+                }}>
+                  LVL {userLevel}
+                </span>
+              </div>
+
+              <div>
+                {!editingName ? (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <h1 style={{
+                      fontSize: isMobile ? '1.5rem' : '1.9rem',
+                      fontWeight: 900, color: 'white', margin: 0,
+                      letterSpacing: '-0.02em'
+                    }}>
+                      {displayName}
+                    </h1>
+
+                    <button
+                      onClick={() => {
+                        setEditingName(true);
+                        setNewName(userProfile?.username || displayName || '');
+                        setActiveTab('settings');
+                      }}
+                      title="Edit Username"
+                      style={{
+                        background: 'rgba(16, 185, 129, 0.15)',
+                        border: '1px solid rgba(16, 185, 129, 0.3)',
+                        color: '#34d399',
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    </button>
+
+                    {userProfile?.countryCode && (
+                      <img
+                        src={`https://flagcdn.com/w40/${userProfile.countryCode.toLowerCase()}.png`}
+                        alt="flag"
+                        style={{ width: '28px', height: '19px', borderRadius: '4px', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.2)' }}
+                      />
+                    )}
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <input
+                      type="text"
+                      value={newName}
+                      onChange={(e) => { setNewName(e.target.value); setNameError(''); }}
+                      maxLength={20}
+                      placeholder="Enter username..."
+                      style={{
+                        padding: '6px 12px', background: 'rgba(0,0,0,0.5)',
+                        border: nameError ? '1px solid #ef4444' : '1px solid #10b981',
+                        borderRadius: '8px', color: 'white', fontSize: '1rem',
+                        fontWeight: 800, outline: 'none', width: '160px'
+                      }}
+                    />
+                    <button
+                      onClick={() => setNewName(generateRandomName())}
+                      style={{ padding: '6px 10px', background: 'rgba(255,255,255,0.1)', border: 'none', borderRadius: '8px', color: 'white', cursor: 'pointer', fontWeight: 800, fontSize: '0.8rem' }}
+                    >
+                      🎲
+                    </button>
+                    <button
+                      onClick={handleSaveName}
+                      disabled={nameSaving}
+                      style={{ padding: '6px 12px', background: '#10b981', border: 'none', borderRadius: '8px', color: 'white', cursor: 'pointer', fontWeight: 800, fontSize: '0.8rem' }}
+                    >
+                      {nameSaving ? '...' : 'Save'}
+                    </button>
+                    <button
+                      onClick={() => { setEditingName(false); setNameError(''); }}
+                      style={{ padding: '6px 10px', background: 'rgba(255,255,255,0.1)', border: 'none', borderRadius: '8px', color: '#9ca3af', cursor: 'pointer', fontWeight: 800, fontSize: '0.8rem' }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                )}
+
+                {nameError && (
+                  <div style={{ color: '#f87171', fontSize: '0.78rem', fontWeight: 700, marginTop: '4px' }}>{nameError}</div>
+                )}
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '6px', fontSize: '0.82rem', color: '#9ca3af', fontWeight: 600, flexWrap: 'wrap' }}>
+                  <span style={{
+                    background: 'rgba(56, 189, 248, 0.15)',
+                    border: '1px solid rgba(56, 189, 248, 0.3)',
+                    color: '#38bdf8',
+                    padding: '2px 8px',
+                    borderRadius: '6px',
+                    fontWeight: 800,
+                    fontSize: '0.75rem'
+                  }}>
+                    {currentLeague.name} Rank
+                  </span>
+                  <span>Joined {timeAgo(userProfile?.createdAt)}</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                setEditingName(true);
+                setNewName(userProfile?.username || displayName || '');
+                setActiveTab('settings');
+              }}
+              style={{
+                background: 'rgba(16, 185, 129, 0.15)',
+                border: '1px solid rgba(16, 185, 129, 0.3)',
+                color: '#34d399',
+                padding: '10px 16px',
+                borderRadius: '12px',
+                fontSize: '0.85rem',
+                fontWeight: 800,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              Edit Name
+            </button>
+          </div>
+
+          {/* XP Level Progress Bar */}
+          <div style={{ marginTop: '1.25rem', background: 'rgba(0,0,0,0.35)', padding: '12px 16px', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', fontWeight: 800, color: '#9ca3af', marginBottom: '6px' }}>
+              <span>LEVEL PROGRESSION</span>
+              <span style={{ color: '#34d399' }}>{totalXp} / {nextLevelMinXp} XP ({levelProgressPct}%)</span>
+            </div>
+            <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.08)', borderRadius: '10px', overflow: 'hidden' }}>
+              <div style={{ width: `${levelProgressPct}%`, height: '100%', background: 'linear-gradient(90deg, #10b981 0%, #38bdf8 100%)', borderRadius: '10px', transition: 'width 0.4s ease', boxShadow: '0 0 12px rgba(16, 185, 129, 0.4)' }} />
+            </div>
           </div>
         </div>
 
-        {/* ── Tab Bar ───────────────────────────────────────────── */}
+        {/* ── Tab Navigation Bar ───────────────────────────────── */}
         <div style={{
-          display: 'flex', gap: isMobile ? '4px' : '8px',
-          marginBottom: '1.5rem', overflowX: 'auto',
-          padding: '4px',
-          background: 'rgba(26, 26, 46, 0.6)',
-          borderRadius: '14px',
-          border: '1px solid rgba(255,255,255,0.08)',
+          display: 'flex',
+          gap: '6px',
+          marginBottom: '1.25rem',
+          overflowX: 'auto',
+          padding: '6px',
+          background: 'rgba(18, 24, 38, 0.7)',
+          borderRadius: '16px',
+          border: '1px solid rgba(255,255,255,0.1)',
         }}>
           {TABS.map(tab => {
             const isActive = activeTab === tab.id;
@@ -471,309 +682,149 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                 onClick={() => setActiveTab(tab.id)}
                 style={{
                   flex: isMobile ? '1 0 auto' : 1,
-                  padding: isMobile ? '8px 10px' : '10px 16px',
-                  borderRadius: '10px',
+                  padding: isMobile ? '8px 12px' : '10px 18px',
+                  borderRadius: '12px',
                   border: 'none',
                   background: isActive
-                    ? 'linear-gradient(135deg, #22C55E, #16A34A)'
+                    ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
                     : 'transparent',
-                  color: isActive ? 'white' : '#6b7280',
-                  fontWeight: isActive ? 'bold' : '500',
-                  fontSize: isMobile ? '0.7rem' : '0.85rem',
+                  color: isActive ? 'white' : '#9ca3af',
+                  fontWeight: isActive ? 800 : 600,
+                  fontSize: isMobile ? '0.78rem' : '0.88rem',
                   cursor: 'pointer',
-                  transition: 'all 0.25s ease',
+                  transition: 'all 0.2s ease',
                   whiteSpace: 'nowrap',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  gap: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  boxShadow: isActive ? '0 4px 14px rgba(16, 185, 129, 0.3)' : 'none'
                 }}
               >
-                <span style={{ fontSize: isMobile ? '0.9rem' : '1rem' }}>{tab.emoji}</span>
-                {(!isMobile || isActive) && <span>{tab.label}</span>}
+                {tab.icon}
+                <span>{tab.label}</span>
               </button>
             );
           })}
         </div>
 
-        {/* ── Tab Content ───────────────────────────────────────── */}
+        {/* ── Tab Contents ──────────────────────────────────────── */}
         <div style={{ animation: 'profileFadeIn 0.3s ease forwards' }}>
 
-          {/* ════════════ PROFILE TAB ════════════ */}
-          {activeTab === 'profile' && (
+          {/* ════════════ OVERVIEW TAB ════════════ */}
+          {activeTab === 'overview' && (
             <div>
-              {/* Stats card */}
-              <div style={glassCard}>
-                <div style={{
-                  display: 'flex', flexDirection: isMobile ? 'column' : 'row',
-                  gap: isMobile ? '0.6rem' : '2rem',
-                  fontSize: isMobile ? '0.95rem' : '1.05rem',
-                  color: '#d1d5db',
-                }}>
-                  <span>🕐 Joined {timeAgo(userProfile?.createdAt)}</span>
-                  <span>⭐ {userProfile?.totalXp || 0} XP</span>
-                  <span>🎮 {userProfile?.gamesPlayed || 0} games played</span>
+              {/* 4 Stat Cards Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', marginBottom: '1.25rem' }}>
+                
+                <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#10b981', flexShrink: 0 }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 800, textTransform: 'uppercase' }}>Total XP</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'white' }}>{totalXp}</div>
+                  </div>
+                </div>
+
+                <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(251, 191, 36, 0.15)', border: '1px solid rgba(251, 191, 36, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fbbf24', flexShrink: 0 }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 800, textTransform: 'uppercase' }}>ELO Rating</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'white' }}>{userProfile?.elo || 1000}</div>
+                  </div>
+                </div>
+
+                <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(249, 115, 22, 0.15)', border: '1px solid rgba(249, 115, 22, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f97316', flexShrink: 0 }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 800, textTransform: 'uppercase' }}>Daily Streak</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'white' }}>{userProfile?.dailyChallengeStreak || 0} Days</div>
+                  </div>
+                </div>
+
+                <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(56, 189, 248, 0.15)', border: '1px solid rgba(56, 189, 248, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#38bdf8', flexShrink: 0 }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 800, textTransform: 'uppercase' }}>Win Rate</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'white' }}>{winRate}%</div>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Endless High Scores Card */}
+              <div style={cardStyle}>
+                <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.05rem', fontWeight: 800, color: '#fca5a5', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                  ENDLESS MODE RECORDS
+                </h3>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', padding: '14px', borderRadius: '14px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 700, textTransform: 'uppercase' }}>Longest Endless Streak</div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#f97316', marginTop: '2px' }}>{userProfile?.bestEndlessStreak || 0} 🔥</div>
+                  </div>
+                  <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', padding: '14px', borderRadius: '14px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 700, textTransform: 'uppercase' }}>Highest Endless Score</div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fbbf24', marginTop: '2px' }}>{userProfile?.bestEndlessScore || 0} pts</div>
+                  </div>
                 </div>
               </div>
 
-              {/* Change Name */}
-              <div style={{ ...glassCard }}>
-                {!editingName ? (
-                  <button
-                    onClick={() => {
-                      setEditingName(true);
-                      setNewName(userProfile?.username || '');
-                    }}
-                    style={greenBtn}
-                  >
-                    CHANGE NAME
-                  </button>
-                ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <div style={{ fontSize: '0.9rem', color: '#9ca3af', fontWeight: '600' }}>
-                      Choose a new username
-                    </div>
-                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                      <input
-                        type="text"
-                        value={newName}
-                        onChange={(e) => { setNewName(e.target.value); setNameError(''); }}
-                        maxLength={20}
-                        placeholder="Enter username..."
-                        style={{
-                          flex: 1, padding: '10px 14px',
-                          background: 'rgba(0,0,0,0.4)',
-                          border: nameError ? '1px solid #EF4444' : '1px solid rgba(255,255,255,0.15)',
-                          borderRadius: '10px', color: 'white',
-                          fontSize: '1rem', outline: 'none',
-                        }}
-                      />
-                      <button
-                        onClick={() => setNewName(generateRandomName())}
-                        title="Randomize name"
-                        style={{
-                          width: '42px', height: '42px', borderRadius: '10px',
-                          background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
-                          color: 'white', fontSize: '1.2rem', cursor: 'pointer',
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        }}
-                      >
-                        🎲
-                      </button>
-                    </div>
-                    {nameError && (
-                      <div style={{ color: '#EF4444', fontSize: '0.8rem' }}>{nameError}</div>
-                    )}
-                    <div style={{ display: 'flex', gap: '8px' }}>
-                      <button
-                        onClick={handleSaveName}
-                        disabled={nameSaving}
-                        style={{ ...greenBtn, opacity: nameSaving ? 0.6 : 1 }}
-                      >
-                        {nameSaving ? 'Saving...' : 'Save'}
-                      </button>
-                      <button
-                        onClick={() => { setEditingName(false); setNameError(''); }}
-                        style={{
-                          ...greenBtn,
-                          background: 'rgba(255,255,255,0.08)',
-                        }}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Change Flag */}
-              <div style={glassCard}>
-                {!editingFlag ? (
-                  <button onClick={() => setEditingFlag(true)} style={greenBtn}>
-                    CHANGE FLAG
-                    {userProfile?.countryCode && (
-                      <img
-                        src={`https://flagcdn.com/w40/${userProfile.countryCode.toLowerCase()}.png`}
-                        alt=""
-                        style={{ width: '20px', height: '14px', marginLeft: '8px', borderRadius: '2px', verticalAlign: 'middle' }}
-                      />
-                    )}
-                  </button>
-                ) : (
-                  <div>
-                    <div style={{
-                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                      marginBottom: '12px',
-                    }}>
-                      <span style={{ color: '#9ca3af', fontWeight: '600', fontSize: '0.9rem' }}>
-                        Select your country
-                      </span>
-                      <button
-                        onClick={() => setEditingFlag(false)}
-                        style={{
-                          background: 'none', border: 'none', color: '#9ca3af',
-                          fontSize: '1.1rem', cursor: 'pointer',
-                        }}
-                      >
-                        ✕
-                      </button>
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="Search countries..."
-                      value={flagSearch}
-                      onChange={(e) => setFlagSearch(e.target.value)}
-                      style={{
-                        width: '100%', padding: '8px 12px', marginBottom: '12px',
-                        background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.12)',
-                        borderRadius: '8px', color: 'white', fontSize: '0.9rem',
-                        outline: 'none', boxSizing: 'border-box',
-                      }}
-                    />
-                    <div style={{
-                      display: 'grid',
-                      gridTemplateColumns: `repeat(auto-fill, minmax(${isMobile ? '70px' : '90px'}, 1fr))`,
-                      gap: '8px', maxHeight: '260px', overflowY: 'auto',
-                      padding: '4px',
-                    }}>
-                      {filteredCountries.map(c => {
-                        const isSelected = userProfile?.countryCode === c.code;
-                        return (
-                          <button
-                            key={c.code}
-                            onClick={() => handleSelectFlag(c.code)}
-                            style={{
-                              display: 'flex', flexDirection: 'column', alignItems: 'center',
-                              gap: '4px', padding: '8px 4px', borderRadius: '10px',
-                              background: isSelected ? 'rgba(34,197,94,0.2)' : 'rgba(255,255,255,0.04)',
-                              border: isSelected ? '2px solid #22C55E' : '1px solid rgba(255,255,255,0.08)',
-                              cursor: 'pointer', transition: 'all 0.15s',
-                              color: 'white',
-                            }}
-                          >
-                            <img
-                              src={`https://flagcdn.com/w40/${c.code}.png`}
-                              alt={c.name}
-                              style={{ width: '32px', height: '22px', borderRadius: '3px', objectFit: 'cover' }}
-                            />
-                            <span style={{ fontSize: '0.65rem', color: '#d1d5db', textAlign: 'center', lineHeight: 1.2 }}>
-                              {c.name}
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* XP Over Time */}
-              <div style={glassCard}>
-                <div style={{
-                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                  flexWrap: 'wrap', gap: '8px', marginBottom: '1rem',
-                }}>
-                  <h3 style={{ margin: 0, fontSize: isMobile ? '1rem' : '1.15rem', color: 'white' }}>
-                    XP Over Time (All Time)
-                  </h3>
-                  <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+              {/* XP Progression Graph */}
+              <div style={cardStyle}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px', marginBottom: '1rem' }}>
+                  <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'white' }}>XP Progression</h3>
+                  <div style={{ display: 'flex', gap: '6px' }}>
                     {[{ label: '7D', val: 7 }, { label: '30D', val: 30 }, { label: 'ALL', val: null }].map(f => (
-                      <button
-                        key={f.label}
-                        onClick={() => setXpDays(f.val)}
-                        style={filterBtn(xpDays === f.val)}
-                      >
+                      <button key={f.label} onClick={() => setXpDays(f.val)} style={filterBtn(xpDays === f.val)}>
                         {f.label}
                       </button>
                     ))}
-                    <button style={filterBtn(false)} disabled>CUSTOM</button>
                   </div>
-                </div>
-
-                <div style={{
-                  display: 'flex', gap: '4px', marginBottom: '1rem',
-                }}>
-                  {['xp', 'rank'].map(mode => (
-                    <button
-                      key={mode}
-                      onClick={() => setXpChartMode(mode)}
-                      style={{
-                        ...filterBtn(xpChartMode === mode),
-                        textTransform: 'uppercase',
-                      }}
-                    >
-                      {mode}
-                    </button>
-                  ))}
                 </div>
 
                 {xpLoading ? (
-                  <div style={{ textAlign: 'center', padding: '2rem', color: '#6b7280' }}>
-                    Loading chart data...
-                  </div>
+                  <div style={{ textAlign: 'center', padding: '2.5rem', color: '#9ca3af', fontWeight: 600 }}>Loading graph data...</div>
                 ) : (
-                  <LineChart
-                    data={xpSnapshots}
-                    dataKey={xpChartMode === 'xp' ? 'xp' : 'elo'}
-                    color="#22C55E"
-                    isMobile={isMobile}
-                  />
+                  <LineChart data={xpSnapshots} dataKey="xp" color="#10b981" isMobile={isMobile} />
                 )}
               </div>
             </div>
           )}
 
-          {/* ════════════ HISTORY TAB ════════════ */}
+          {/* ════════════ MATCH HISTORY TAB ════════════ */}
           {activeTab === 'history' && (
             <div>
               {historyLoading ? (
-                <div style={{ ...glassCard, textAlign: 'center', padding: '3rem', color: '#6b7280' }}>
-                  Loading game history...
-                </div>
+                <div style={{ ...cardStyle, textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 600 }}>Loading history logs...</div>
               ) : gameHistory.length === 0 ? (
-                <div style={{ ...glassCard, textAlign: 'center', padding: '3rem' }}>
-                  <div style={{ fontSize: '2.5rem', marginBottom: '0.8rem' }}>📭</div>
-                  <div style={{ color: '#9ca3af', fontSize: '1.1rem' }}>No games played yet!</div>
-                </div>
+                <div style={{ ...cardStyle, textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 600 }}>No match history recorded yet! Play a match to see your logs.</div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {gameHistory.map((game, i) => {
-                    const typeColors = {
-                      ranked: '#FBBF24',
-                      unranked: '#60A5FA',
-                      solo: '#A78BFA',
-                    };
+                    const typeColors = { ranked: '#fbbf24', unranked: '#60a5fa', solo: '#a78bfa' };
                     const gameType = (game.type || 'solo').toLowerCase();
                     return (
-                      <div key={i} style={{
-                        ...glassCard,
-                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                        flexWrap: 'wrap', gap: '8px',
-                        marginBottom: 0,
-                      }}>
+                      <div key={i} style={{ ...cardStyle, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', marginBottom: 0 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                          <span style={{
-                            padding: '3px 10px', borderRadius: '6px', fontSize: '0.75rem',
-                            fontWeight: 'bold', textTransform: 'uppercase',
-                            background: `${typeColors[gameType] || '#6b7280'}22`,
-                            color: typeColors[gameType] || '#6b7280',
-                            border: `1px solid ${typeColors[gameType] || '#6b7280'}44`,
-                          }}>
+                          <span style={{ padding: '4px 10px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', background: `${typeColors[gameType] || '#6b7280'}22`, color: typeColors[gameType] || '#6b7280', border: `1px solid ${typeColors[gameType] || '#6b7280'}44` }}>
                             {gameType}
                           </span>
-                          <span style={{ color: '#d1d5db', fontSize: '0.9rem' }}>
+                          <span style={{ color: '#d1d5db', fontSize: '0.88rem', fontWeight: 600 }}>
                             {game.date ? new Date(game.date).toLocaleDateString() : 'Unknown date'}
                           </span>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                          <span style={{ color: 'white', fontWeight: 'bold', fontSize: '1rem' }}>
-                            {game.score != null ? `${game.score} pts` : '—'}
-                          </span>
+                          <span style={{ color: 'white', fontWeight: 800, fontSize: '1rem' }}>{game.score != null ? `${game.score} pts` : '—'}</span>
                           {game.result && (
-                            <span style={{
-                              padding: '3px 10px', borderRadius: '6px', fontSize: '0.75rem',
-                              fontWeight: 'bold',
-                              background: game.result === 'win' ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)',
-                              color: game.result === 'win' ? '#22C55E' : '#EF4444',
-                            }}>
+                            <span style={{ padding: '4px 10px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 800, background: game.result === 'win' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)', color: game.result === 'win' ? '#34d399' : '#fca5a5' }}>
                               {game.result.toUpperCase()}
                             </span>
                           )}
@@ -786,146 +837,166 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
             </div>
           )}
 
-          {/* ════════════ ELO TAB ════════════ */}
+          {/* ════════════ LEAGUES & ELO TAB ════════════ */}
           {activeTab === 'elo' && (
             <div>
-              {/* Leagues */}
-              <div style={glassCard}>
-                <h3 style={{ margin: '0 0 1rem 0', fontSize: isMobile ? '1rem' : '1.15rem', color: 'white' }}>
-                  Leagues
-                </h3>
-                <div style={{
-                  display: 'flex', justifyContent: 'center',
-                  gap: isMobile ? '12px' : '24px', flexWrap: 'wrap',
-                }}>
+              <div style={cardStyle}>
+                <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.05rem', fontWeight: 800, color: 'white' }}>Competitive Leagues</h3>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: isMobile ? '12px' : '24px', flexWrap: 'wrap' }}>
                   {LEAGUES.map(league => {
                     const isCurrent = currentLeague.name === league.name;
                     return (
-                      <div key={league.name} style={{
-                        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px',
-                      }}>
-                        <div style={{
-                          width: '60px', height: '60px', borderRadius: '50%',
-                          background: `${league.color}22`,
-                          border: isCurrent ? `3px solid #FBBF24` : `2px solid ${league.color}44`,
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          fontSize: '1.8rem',
-                          boxShadow: isCurrent ? '0 0 20px rgba(251, 191, 36, 0.4)' : 'none',
-                          transition: 'all 0.3s ease',
-                        }}>
+                      <div key={league.name} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                        <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: `${league.color}22`, border: isCurrent ? `3px solid #fbbf24` : `2px solid ${league.color}44`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem', boxShadow: isCurrent ? '0 0 20px rgba(251, 191, 36, 0.4)' : 'none' }}>
                           {league.emoji}
                         </div>
-                        <span style={{
-                          fontSize: '0.75rem', fontWeight: 'bold',
-                          color: isCurrent ? '#FBBF24' : league.color,
-                        }}>
-                          {league.name}
-                        </span>
-                        <span style={{ fontSize: '0.6rem', color: '#6b7280' }}>
-                          {league.minElo}–{league.maxElo === Infinity ? '∞' : league.maxElo}
-                        </span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: isCurrent ? '#fbbf24' : league.color }}>{league.name}</span>
+                        <span style={{ fontSize: '0.65rem', color: '#9ca3af', fontWeight: 600 }}>{league.minElo}–{league.maxElo === Infinity ? '∞' : league.maxElo}</span>
                       </div>
                     );
                   })}
                 </div>
               </div>
 
-              {/* Statistics */}
-              <div style={glassCard}>
-                <h3 style={{ margin: '0 0 1rem 0', fontSize: isMobile ? '1rem' : '1.15rem', color: 'white' }}>
-                  Statistics
-                </h3>
-                <div style={{
-                  display: 'flex', gap: '10px', flexWrap: 'wrap',
-                  justifyContent: 'center',
-                }}>
+              <div style={cardStyle}>
+                <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.05rem', fontWeight: 800, color: 'white' }}>Ranked Statistics</h3>
+                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
                   {[
                     { label: 'YOUR ELO', value: userProfile?.elo || 1000, gold: true },
-                    { label: 'YOUR GLOBAL RANK', value: globalRank != null ? `#${globalRank}` : '...', gold: true },
+                    { label: 'GLOBAL RANK', value: globalRank != null ? `#${globalRank}` : '...', gold: true },
                     { label: 'DUELS WON', value: wins, gold: false },
                     { label: 'DUELS LOST', value: losses, gold: false },
                     { label: 'WIN RATE', value: `${winRate}%`, gold: true },
-                  ].map((stat) => (
-                    <div key={stat.label} style={{
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      borderRadius: '12px',
-                      padding: isMobile ? '12px 14px' : '14px 20px',
-                      minWidth: isMobile ? '130px' : '140px',
-                      flex: '1 1 auto',
-                      textAlign: 'center',
-                    }}>
-                      <div style={{
-                        fontSize: '0.7rem', color: '#6b7280', fontWeight: '600',
-                        textTransform: 'uppercase', letterSpacing: '0.5px',
-                        marginBottom: '6px',
-                      }}>
-                        {stat.label}
-                      </div>
-                      <div style={{
-                        fontSize: isMobile ? '1.3rem' : '1.6rem',
-                        fontWeight: 'bold',
-                        color: stat.gold ? '#FBBF24' : 'white',
-                      }}>
-                        {stat.value}
-                      </div>
+                  ].map(stat => (
+                    <div key={stat.label} style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '12px 16px', minWidth: '130px', flex: '1 1 auto', textAlign: 'center' }}>
+                      <div style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 800, textTransform: 'uppercase', marginBottom: '4px' }}>{stat.label}</div>
+                      <div style={{ fontSize: '1.4rem', fontWeight: 900, color: stat.gold ? '#fbbf24' : 'white' }}>{stat.value}</div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* ELO Progression Chart */}
-              <div style={glassCard}>
-                <h3 style={{ margin: '0 0 1rem 0', fontSize: isMobile ? '1rem' : '1.15rem', color: 'white' }}>
-                  ELO Progression
-                </h3>
+              <div style={cardStyle}>
+                <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.05rem', fontWeight: 800, color: 'white' }}>ELO History Graph</h3>
                 {eloLoading ? (
-                  <div style={{ textAlign: 'center', padding: '2rem', color: '#6b7280' }}>
-                    Loading chart data...
-                  </div>
+                  <div style={{ textAlign: 'center', padding: '2rem', color: '#9ca3af', fontWeight: 600 }}>Loading chart...</div>
                 ) : (
-                  <LineChart
-                    data={eloSnapshots}
-                    dataKey="elo"
-                    color="#FBBF24"
-                    isMobile={isMobile}
-                  />
+                  <LineChart data={eloSnapshots} dataKey="elo" color="#fbbf24" isMobile={isMobile} />
                 )}
+              </div>
+            </div>
+          )}
+
+          {/* ════════════ SETTINGS TAB ════════════ */}
+          {activeTab === 'settings' && (
+            <div>
+              <div style={cardStyle}>
+                <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.05rem', fontWeight: 800, color: 'white', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  ACCOUNT & USERNAME
+                </h3>
+
+                <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', padding: '14px', borderRadius: '14px' }}>
+                  {!editingName ? (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div>
+                        <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 700, textTransform: 'uppercase' }}>Current Username</div>
+                        <div style={{ fontSize: '1.1rem', fontWeight: 900, color: 'white', marginTop: '2px' }}>{displayName}</div>
+                      </div>
+                      <button
+                        onClick={() => { setEditingName(true); setNewName(userProfile?.username || ''); }}
+                        style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)', color: '#34d399', padding: '8px 16px', borderRadius: '10px', fontWeight: 800, fontSize: '0.82rem', cursor: 'pointer' }}
+                      >
+                        Change Username
+                      </button>
+                    </div>
+                  ) : (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                      <label style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 700, textTransform: 'uppercase' }}>Enter New Username</label>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <input
+                          type="text"
+                          value={newName}
+                          onChange={(e) => { setNewName(e.target.value); setNameError(''); }}
+                          maxLength={20}
+                          placeholder="Enter username..."
+                          style={{ flex: 1, padding: '10px 14px', background: 'rgba(255,255,255,0.06)', border: nameError ? '1px solid #ef4444' : '1px solid rgba(255,255,255,0.15)', borderRadius: '10px', color: 'white', fontSize: '0.95rem', outline: 'none', fontWeight: 700 }}
+                        />
+                        <button
+                          onClick={() => setNewName(generateRandomName())}
+                          style={{ padding: '0 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: 'white', fontWeight: 800, fontSize: '0.85rem', cursor: 'pointer' }}
+                        >
+                          🎲 Random
+                        </button>
+                      </div>
+                      {nameError && <div style={{ color: '#f87171', fontSize: '0.8rem', fontWeight: 600 }}>{nameError}</div>}
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <button onClick={handleSaveName} disabled={nameSaving} style={{ background: 'linear-gradient(135deg, #10b981, #059669)', color: 'white', border: 'none', borderRadius: '10px', padding: '8px 16px', fontWeight: 800, fontSize: '0.85rem', cursor: 'pointer' }}>
+                          {nameSaving ? 'Saving...' : 'Save Name'}
+                        </button>
+                        <button onClick={() => { setEditingName(false); setNameError(''); }} style={{ background: 'rgba(255,255,255,0.08)', color: '#9ca3af', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '8px 16px', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}>
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Flag Selection Card */}
+              <div style={cardStyle}>
+                <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.05rem', fontWeight: 800, color: 'white', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                  NATIONAL FLAG
+                </h3>
+
+                <input
+                  type="text"
+                  placeholder="Search countries..."
+                  value={flagSearch}
+                  onChange={(e) => setFlagSearch(e.target.value)}
+                  style={{ width: '100%', padding: '10px 14px', marginBottom: '12px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '10px', color: 'white', fontSize: '0.88rem', outline: 'none', fontWeight: 600 }}
+                />
+
+                <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(${isMobile ? '75px' : '95px'}, 1fr))`, gap: '8px', maxHeight: '250px', overflowY: 'auto', padding: '4px' }}>
+                  {filteredCountries.map(c => {
+                    const isSelected = userProfile?.countryCode?.toLowerCase() === c.code.toLowerCase();
+                    return (
+                      <button
+                        key={c.code}
+                        onClick={() => handleSelectFlag(c.code)}
+                        style={{
+                          display: 'flex', flexDirection: 'column', alignItems: 'center',
+                          gap: '4px', padding: '8px 4px', borderRadius: '10px',
+                          background: isSelected ? 'rgba(16,185,129,0.2)' : 'rgba(255,255,255,0.04)',
+                          border: isSelected ? '2px solid #10b981' : '1px solid rgba(255,255,255,0.08)',
+                          cursor: 'pointer', transition: 'all 0.15s', color: 'white'
+                        }}
+                      >
+                        <img src={`https://flagcdn.com/w40/${c.code}.png`} alt={c.name} style={{ width: '30px', height: '20px', borderRadius: '3px', objectFit: 'cover' }} />
+                        <span style={{ fontSize: '0.65rem', color: '#d1d5db', textAlign: 'center', lineHeight: 1.2, fontWeight: 600 }}>{c.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           )}
 
           {/* ════════════ FRIENDS TAB ════════════ */}
           {activeTab === 'friends' && (
-            <div style={{
-              ...glassCard, textAlign: 'center',
-              padding: isMobile ? '3rem 1.5rem' : '4rem 2rem',
-            }}>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔜</div>
-              <h3 style={{ margin: '0 0 0.5rem 0', color: 'white', fontSize: '1.3rem' }}>
-                Coming Soon!
-              </h3>
-              <p style={{ color: '#6b7280', margin: 0, fontSize: '0.95rem' }}>
-                Friend system is under development.
-              </p>
+            <div style={{ ...cardStyle, textAlign: 'center', padding: '3.5rem 1.5rem' }}>
+              <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(59, 130, 246, 0.15)', border: '1px solid rgba(59, 130, 246, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#60a5fa', margin: '0 auto 1rem auto' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <h3 style={{ margin: '0 0 0.5rem 0', color: 'white', fontSize: '1.2rem', fontWeight: 900 }}>Invite & Play With Friends</h3>
+              <p style={{ color: '#9ca3af', margin: '0 0 1.5rem 0', fontSize: '0.9rem', fontWeight: 600 }}>Share your invite link to challenge your friends to party lobbies and duels.</p>
+              <button onClick={copyInviteLink} style={{ background: copiedLink ? 'rgba(16, 185, 129, 0.2)' : 'linear-gradient(135deg, #3b82f6, #2563eb)', border: copiedLink ? '1px solid rgba(16, 185, 129, 0.5)' : 'none', color: 'white', padding: '10px 20px', borderRadius: '12px', fontWeight: 800, fontSize: '0.9rem', cursor: 'pointer' }}>
+                {copiedLink ? '✓ Link Copied!' : 'Copy Game Link'}
+              </button>
             </div>
           )}
 
-          {/* ════════════ MODERATION TAB ════════════ */}
-          {activeTab === 'moderation' && (
-            <div style={{
-              ...glassCard, textAlign: 'center',
-              padding: isMobile ? '3rem 1.5rem' : '4rem 2rem',
-            }}>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🛡️</div>
-              <h3 style={{ margin: '0 0 0.5rem 0', color: 'white', fontSize: '1.3rem' }}>
-                Coming Soon!
-              </h3>
-              <p style={{ color: '#6b7280', margin: 0, fontSize: '0.95rem' }}>
-                Moderation tools are under development.
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </div>
