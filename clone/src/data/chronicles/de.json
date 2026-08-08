@@ -1,0 +1,55 @@
+{
+  "code": "DE",
+  "name": "Germany",
+  "capital": "Berlin",
+  "continent": "Europe",
+  "population": "84.3 Million",
+  "currency": "Euro (EUR)",
+  "languages": [
+    "German"
+  ],
+  "seoTitle": "Detailed History of Germany: Map Formation, Flag Origin, and Reunification",
+  "metaDescription": "Discover the rich history of Germany. Learn about its background, geographical border formation, the origins of the black, red, and gold flag, and its path to reunification.",
+  "mapFormation": "Germany's geographical formation has been one of the most fluid in European history. Originating from a loose collection of Germanic tribes and later the sprawling Holy Roman Empire, the modern borders began to take shape after the Congress of Vienna in 1815. The German Empire was unified in 1871 under Otto von Bismarck. Following World War I and World War II, its borders were drastically redrawn, losing significant eastern territories to Poland and the Soviet Union. During the Cold War, the nation was divided into East Germany (GDR) and West Germany (FRG). The modern map of Germany was finalized upon the reunification of East and West Germany on October 3, 1990, establishing its current borders in Central Europe.",
+  "flagHistory": "The national flag of Germany consists of three equal horizontal bands displaying the national colors: black, red, and gold. The origins of these colors trace back to the Lützow Free Corps, a volunteer force that fought against Napoleon in the early 19th century, whose uniforms were black with red facings and gold buttons. These colors became a symbol of the liberal, democratic, and republican movement during the 1848 revolutions. Adopted officially by the Weimar Republic in 1919, and readopted by West Germany in 1949, the flag today stands as a symbol of unity, justice, and freedom.",
+  "freedomStory": "Germany's modern 'freedom story' is defined by its recovery from World War II and the subsequent reunification of the country. After the fall of the Nazi regime in 1945, Germany was divided into four occupation zones. The ideological divide of the Cold War split the nation into two distinct states. The fall of the Berlin Wall on November 9, 1989, marked a peaceful revolution by East German citizens demanding freedom and democratic rights. This monumental event led to the formal reunification of Germany on October 3, 1990, which is now celebrated annually as German Unity Day (Tag der Deutschen Einheit).",
+  "challenges": "Today, Germany is Europe's largest economy, but it faces significant contemporary challenges. Chief among them is the 'Energiewende' (energy transition), transitioning from fossil fuels and nuclear power to renewable energy sources while maintaining industrial competitiveness. Additionally, Germany faces an aging population and a shortage of skilled labor, requiring comprehensive immigration and integration policies. As a key leader in the European Union, Germany also navigates complex geopolitical shifts and the need to modernize its digital infrastructure and military forces.",
+  "aiSummary": {
+    "geo": "Central European nation with borders significantly shaped by WWII and the 1990 reunification.",
+    "flag": "Black, red, and gold horizontal tricolor originating from the 19th-century democratic movement.",
+    "freedom": "Modern sovereignty achieved through the peaceful revolution of 1989 and formal reunification on October 3, 1990.",
+    "challenge": "Navigating the 'Energiewende' (green energy transition), an aging workforce, and digital modernization."
+  },
+  "faqs": [
+    {
+      "question": "What is the background of the division and reunification of Germany?",
+      "answer": "Following World War II, Germany was divided into East and West by the Allied powers. It remained divided during the Cold War until the fall of the Berlin Wall in 1989, leading to official reunification in 1990."
+    },
+    {
+      "question": "What do the colors of the German flag mean?",
+      "answer": "The black, red, and gold colors originated from the uniforms of 19th-century volunteer soldiers fighting Napoleon and represent unity, justice, and freedom."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1871",
+      "event": "Unification of Germany and creation of the German Empire under Otto von Bismarck."
+    },
+    {
+      "year": "1945",
+      "event": "End of World War II; Germany is divided into four occupation zones."
+    },
+    {
+      "year": "1949",
+      "event": "Formation of West Germany (FRG) and East Germany (GDR)."
+    },
+    {
+      "year": "1989",
+      "event": "Fall of the Berlin Wall on November 9."
+    },
+    {
+      "year": "1990",
+      "event": "Official reunification of Germany on October 3."
+    }
+  ]
+}

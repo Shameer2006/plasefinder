@@ -10,7 +10,8 @@ export const saveGameResult = async (score, difficulty, rounds) => {
       score,
       difficulty,
       rounds,
-      timestamp: serverTimestamp()
+      timestamp: serverTimestamp(),
+      date: new Date().toISOString()
     });
     console.log("Game result saved with ID: ", docRef.id);
   } catch (e) {

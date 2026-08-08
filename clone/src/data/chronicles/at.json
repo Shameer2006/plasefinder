@@ -1,0 +1,59 @@
+{
+  "code": "AT",
+  "name": "Austria",
+  "capital": "Vienna",
+  "continent": "Europe",
+  "population": "9.1 Million",
+  "currency": "Euro (EUR)",
+  "languages": [
+    "German"
+  ],
+  "seoTitle": "History of Austria: Alpine Map Borders, Siege of Acre Flag, and Neutrality Path",
+  "metaDescription": "Explore the rich history of Austria. Learn about its Alpine border shifts, the medieval Siege of Acre flag legend, and its post-WWII path to neutrality.",
+  "mapFormation": "Austria is a landlocked, mountainous country situated in Central Europe, dominated by the Alps. The country's borders are the remnant of the vast Habsburg Empire, which ruled over much of Central and Eastern Europe for centuries. Following the collapse of the Austro-Hungarian Empire at the end of World War I, the Treaty of Saint-Germain-en-Laye in 1919 dismantled the empire and created the First Republic of Austria. The treaty restricted Austria's borders to its German-speaking core, separating it from industrial regions in Bohemia and agricultural lands in Hungary. The borders were temporarily erased during the Nazi annexation (Anschluss) in 1938, but were restored to their 1919 frontiers after World War II by the Allied powers, establishing the modern federal republic bordering eight European nations, including regional neighbors like <a href=\"/chronicles/be\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Belgium</a>.",
+  "flagHistory": "The national flag of Austria is one of the oldest in the world, consisting of three equal horizontal bands of red, white, and red. According to historical legend, the design dates back to the Siege of Acre in 1191 during the Third Crusade. Duke Leopold V of Austria fought so bravely that his white surcoat was completely soaked in blood. When he removed his wide sword belt, the fabric beneath remained clean and white, creating the red-white-red pattern. The Emperor later granted Leopold the right to adopt these colors as his banner. The flag was officially adopted as the national colors in 1918 with the formation of the first republic, symbolizing the country's medieval roots and democratic resilience.",
+  "freedomStory": "Following the collapse of the Habsburg monarchy in 1918, Austria struggled to find stability, leading to a brief civil war and the rise of Austrofascism, which culminated in the Nazi annexation (Anschluss) in 1938. After World War II, Austria was occupied by the four Allied powers (United States, Soviet Union, United Kingdom, and France) and divided into occupation zones. To regain its sovereignty, Austrian diplomats negotiated the Austrian State Treaty, signed on May 15, 1955. The treaty ended the Allied occupation and restored Austria's independence, under the strict condition that the Austrian Parliament pass a constitutional law declaring perpetual military neutrality, preventing it from joining military alliances like NATO.",
+  "challenges": "Austria faces modern difficulties in adapting its constitutional neutrality to a changing European security landscape. Following the escalation of conflicts in Eastern Europe, the country has had to navigate its defense policy while remaining outside NATO. Economically, Austria struggles with an aging demographic and labor shortages in key service sectors, alongside rising inflation and energy transition costs. Additionally, the country faces political challenges related to the integration of large asylum-seeker and immigrant populations that arrived during recent humanitarian crises, which has fueled domestic debates over immigration policy and social welfare spending.",
+  "aiSummary": {
+    "geo": "Landlocked Central European Alpine state; borders established in 1919 after the dismantling of the Habsburg Empire.",
+    "flag": "Horizontal red-white-red bands, historically derived from Duke Leopold V's bloodied Crusader surcoat in 1191.",
+    "freedom": "Sovereignty restored in 1955 via the Austrian State Treaty under the condition of permanent military neutrality.",
+    "challenge": "Navigating military neutrality, energy transition costs, labor shortages, and immigration reforms."
+  },
+  "faqs": [
+    {
+      "question": "Why is Austria a militarily neutral country?",
+      "answer": "Austria declared permanent neutrality in 1955 as a condition of the Austrian State Treaty to end Allied post-WWII occupation."
+    },
+    {
+      "question": "Is the Austrian flag the oldest in the world?",
+      "answer": "It is one of the oldest national flags, dating back to documented heraldic use in 1230, inspired by Crusader legends."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "996",
+      "event": "The name Ostarrîchi (Austria) is recorded for the first time in a historical document."
+    },
+    {
+      "year": "1273",
+      "event": "Rudolf I of Habsburg is elected King of Germany, beginning the rise of the Habsburg dynasty."
+    },
+    {
+      "year": "1918",
+      "event": "World War I ends, the Austro-Hungarian Empire collapses, and the First Republic of Austria is declared."
+    },
+    {
+      "year": "1938",
+      "event": "Nazi Germany annexes Austria in the Anschluss, erasing its borders."
+    },
+    {
+      "year": "1955",
+      "event": "The Austrian State Treaty is signed, ending Allied occupation and declaring permanent neutrality."
+    },
+    {
+      "year": "1995",
+      "event": "Austria joins the European Union, adapting its neutral status to regional integration."
+    }
+  ]
+}

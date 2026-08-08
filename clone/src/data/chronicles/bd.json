@@ -1,0 +1,55 @@
+{
+  "code": "BD",
+  "name": "Bangladesh",
+  "capital": "Dhaka",
+  "continent": "Asia",
+  "population": "171.2 Million",
+  "currency": "Bangladeshi Taka (BDT)",
+  "languages": [
+    "Bengali"
+  ],
+  "seoTitle": "History of Bangladesh: Bengal Partition, Red Disc Flag, and the 1971 Liberation War",
+  "metaDescription": "Read the history of Bangladesh, from the Bengal Partition of 1947 to the Language Movement, the 1971 Liberation War, and its green and red flag.",
+  "mapFormation": "Bangladesh occupies the fertile deltaic plain formed by the confluence of the Ganges, Brahmaputra, and Meghna rivers in South Asia. Its borders were drawn during the Partition of British India in 1947. British authorities divided Bengal along religious lines, designating Muslim-majority East Bengal as the eastern wing of Pakistan (East Pakistan), separated from West Pakistan by 1,600 kilometers of Indian territory. The borders are almost entirely surrounded by India, with a small border with Myanmar in the southeast and the Bay of Bengal to the south. This geographical enclosure has left Bangladesh with complex water sharing and maritime boundary challenges, close to Himalayan states like <a href=\"/chronicles/bt\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Bhutan</a>.",
+  "flagHistory": "The national flag of Bangladesh, adopted officially on January 17, 1972, features a bottle-green field with a red disc offset slightly toward the hoist. The green field represents the lush green vegetation and fertility of the deltaic land, as well as the youthful vitality of the nation; the red disc symbolizes the rising sun of independence and the blood shed by Bengalis during the 1971 Liberation War. The disc is offset slightly to the hoist so that it appears centered when the flag is flying.",
+  "freedomStory": "East Pakistan suffered from economic exploitation, political marginalization, and cultural suppression by the West Pakistani administration. This led to the historic Bengali Language Movement in 1952 and the rise of the nationalist Awami League under Sheikh Mujibur Rahman. After West Pakistan refused to hand over power following the 1970 elections, the Pakistani military launched Operation Searchlight on March 25, 1971, triggering a civil war. Following a nine-month Liberation War supported by India, Pakistani forces surrendered on December 16, 1971, establishing the sovereign state of Bangladesh.",
+  "challenges": "Bangladesh is on the frontlines of climate vulnerability. Much of its land is less than 5 meters above sea level, making it highly susceptible to monsoonal flooding, cyclones, and rising sea levels, which salinize agricultural soils. The country also struggles with extreme population density, political polarization, and infrastructural deficits. Additionally, Bangladesh hosts nearly a million Rohingya refugees who fled military violence in neighboring Myanmar, placing a strain on local resources in Cox's Bazar.",
+  "aiSummary": {
+    "geo": "Ganges delta topography; borders mapped in the 1947 Bengal Partition, separating East Pakistan from India.",
+    "flag": "Offset red disc (representing the rising sun and war blood) on a bottle-green field (delta vegetation).",
+    "freedom": "Sovereignty won in 1971 from Pakistan after a nine-month Liberation War backed by India.",
+    "challenge": "Severe monsoon flooding, sea-level salinization, massive population density, and hosting Rohingya refugees."
+  },
+  "faqs": [
+    {
+      "question": "What was the Language Movement of 1952?",
+      "answer": "It was a Bengali political movement advocating for Bengali to be recognized as an official state language of Pakistan, peaking on February 21, 1952."
+    },
+    {
+      "question": "Why is the red circle on the Bangladeshi flag offset?",
+      "answer": "The circle is offset slightly to the hoist so that it appears visually centered when the flag is hoisted and waving in the wind."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1947",
+      "event": "The Partition of British India creates East Pakistan as a province of the newly formed state of Pakistan."
+    },
+    {
+      "year": "1952",
+      "event": "The Language Movement reaches its peak on February 21, as students are killed protesting for Bengali language rights."
+    },
+    {
+      "year": "1971",
+      "event": "The Bangladesh Liberation War begins in March and ends with the surrender of Pakistani forces on December 16."
+    },
+    {
+      "year": "1975",
+      "event": "Sheikh Mujibur Rahman is assassinated in a military coup, initiating a period of political instability."
+    },
+    {
+      "year": "2017",
+      "event": "A massive influx of Rohingya refugees arrives from Myanmar, seeking shelter in southeastern districts."
+    }
+  ]
+}

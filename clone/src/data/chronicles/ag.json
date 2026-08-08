@@ -1,0 +1,59 @@
+{
+  "code": "AG",
+  "name": "Antigua and Barbuda",
+  "capital": "Saint John's",
+  "continent": "North America",
+  "population": "94,000",
+  "currency": "East Caribbean Dollar (XCD)",
+  "languages": [
+    "English"
+  ],
+  "seoTitle": "History of Antigua and Barbuda: Sugar Colonies, Rising Sun Flag, and Independence",
+  "metaDescription": "Discover the detailed history of Antigua and Barbuda, from British colonization and sugar plantation slavery to its unique rising sun flag and independence in 1981.",
+  "mapFormation": "Antigua and Barbuda is a twin-island nation situated at the boundary of the Caribbean Sea and the Atlantic Ocean, forming part of the Lesser Antilles. The islands were originally inhabited by Indigenous Siboney and Arawak populations before Christopher Columbus named Antigua in 1493. In 1632, English settlers colonized Antigua, followed by Barbuda in 1678. To optimize sugar cane cultivation and colonial administration, British authorities leased Barbuda to the Codrington family, who operated it as a private agricultural and slave-breeding colony. In 1860, the two islands were formally joined under a single colonial administration. This administrative union established the current borders, which encompass the main populated islands of Antigua and Barbuda, along with the small, uninhabited volcanic rock island of Redonda, situated not far from other island states like <a href=\"/chronicles/bb\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Barbados</a>.",
+  "flagHistory": "The national flag of Antigua and Barbuda was adopted on February 27, 1967, to mark the achievement of self-governance. Designed by national artist Sir Reginald Samuel, the flag features a red field with an inverted V-shape (a chevron) divided into bands of black, light blue, and white. Placed in the black band is a seven-pointed golden rising sun. The sun represents the dawning of a new era of freedom and hope for the nation; the red color symbolizes the energy and dynamism of the people; the black represents their African ancestry; the blue symbolizes the Caribbean Sea; and the white represents the sandy shores and hope for the future. The V-shape itself stands for 'Victory' over colonial rule.",
+  "freedomStory": "After the abolition of slavery in 1834, Antigua's economy suffered, but its population remained under British rule for over a century. The rise of organized labor in the 1940s, led by Vere Bird, spearheaded the push for self-determination. In 1967, the islands became an Associated State of the United Kingdom, gaining full control over internal affairs while Britain managed defense and foreign relations. Under the leadership of Vere Bird, who served as Premier, the nation steadily transitioned toward full sovereignty. On November 1, 1981, Antigua and Barbuda officially declared its independence from the United Kingdom. Vere Bird became the country's first Prime Minister, and the nation remained a member of the Commonwealth, retaining the British monarch as its ceremonial head of state.",
+  "challenges": "Antigua and Barbuda faces critical difficulties shared by many Small Island Developing States (SIDS). The economy is highly dependent on international tourism, which makes it extremely vulnerable to global economic shocks, travel disruptions, and pandemics. Geographically, the islands lie in the Atlantic hurricane belt and suffer from intense tropical storms; in 2017, Hurricane Irma devastated Barbuda, forcing the temporary evacuation of its entire population. The country also struggles with high public debt incurred from rebuilding infrastructure, and severe freshwater shortages due to limited natural rivers and aquifers, requiring expensive desalination plants to support the population.",
+  "aiSummary": {
+    "geo": "Twin-island Lesser Antilles boundaries unified under a single British crown administration in 1860.",
+    "flag": "Red field with a central V-shape holding black, blue, and white stripes beneath a golden rising sun.",
+    "freedom": "Sovereignty obtained peacefully from the United Kingdom on November 1, 1981, led by labor leader Vere Bird.",
+    "challenge": "Severe Atlantic hurricane vulnerability, heavy tourism dependency, and acute drinking water shortages."
+  },
+  "faqs": [
+    {
+      "question": "Who designed the flag of Antigua and Barbuda?",
+      "answer": "The flag was designed by Reginald Samuel, a local art teacher, who won a national design contest in 1967."
+    },
+    {
+      "question": "What happened to Barbuda during Hurricane Irma in 2017?",
+      "answer": "Hurricane Irma damaged 95% of Barbuda's structures, forcing the evacuation of the entire population to Antigua."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1632",
+      "event": "English colonists establish the first permanent European settlement on Antigua, planting tobacco and sugar."
+    },
+    {
+      "year": "1685",
+      "event": "The island of Barbuda is leased to the Codrington family, who establish large agricultural estates."
+    },
+    {
+      "year": "1834",
+      "event": "Slavery is officially abolished, though former slaves remain economically dependent on plantation owners."
+    },
+    {
+      "year": "1967",
+      "event": "Antigua and Barbuda becomes an Associated State, achieving self-governance in domestic affairs."
+    },
+    {
+      "year": "1981",
+      "event": "The nation achieves full independence from the United Kingdom on November 1, with Vere Bird as Prime Minister."
+    },
+    {
+      "year": "2017",
+      "event": "Category 5 Hurricane Irma strikes Barbuda, destroying 95% of its structures."
+    }
+  ]
+}

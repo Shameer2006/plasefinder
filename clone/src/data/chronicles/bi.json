@@ -1,0 +1,56 @@
+{
+  "code": "BI",
+  "name": "Burundi",
+  "capital": "Gitega",
+  "continent": "Africa",
+  "population": "12.8 Million",
+  "currency": "Burundian Franc (BIF)",
+  "languages": [
+    "Kirundi",
+    "French"
+  ],
+  "seoTitle": "History of Burundi: Great Lakes Plateau, Saltire Star Flag, and Post-Colonial Transition",
+  "metaDescription": "Explore the history of Burundi, from the ancient Tutsi-Hutu kingdom and Belgian mandate to its white saltire flag and path to independence.",
+  "mapFormation": "Burundi is a small, mountainous landlocked country in the Great Lakes region of East Africa, bordered by Rwanda, Tanzania, and the Democratic Republic of the Congo, with a coastline along Lake Tanganyika. Originally a centralized kingdom under a hereditary monarch (Mwami), Burundi's borders were preserved during European colonization. Following the Berlin Conference, Germany annexed the region as part of German East Africa, which was later transferred to Belgium as the League of Nations mandate of Ruanda-Urundi after World War I. In 1962, Belgian authorities separated the territory, establishing the sovereign borders of modern Burundi, neighboring Central African states like <a href=\"/chronicles/ao\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Angola</a>.",
+  "flagHistory": "The national flag of Burundi features a white saltire (diagonal cross) dividing the field into red upper and lower panels and green hoist and fly panels. In the center is a white disc holding three red six-pointed stars outlined in green. Red represents the blood shed during the struggle for freedom; green symbolizes hope and progress; and white represents peace. The three central stars symbolize the three constituent ethnic groups of Burundi (Hutu, Tutsi, and Twa) and the national motto: 'Unithe, Travail, Progres' (Unity, Work, Progress), adopted on November 28, 1967.",
+  "freedomStory": "Burundi transitioned to independence in the early 1960s, led by Prince Louis Rwagasore, a nationalist leader who united Hutus and Tutsis under the UPRONA party. Rwagasore was assassinated in October 1961, just before the country won independence. On July 1, 1962, Burundi officially declared its independence from Belgium as a constitutional monarchy under King Mwambutsa IV. However, the monarchy was overthrown in 1966, initiating decades of ethnic civil war and military dictatorships.",
+  "challenges": "Burundi is one of the poorest nations in the world, suffering from a high population density, economic stagnation, and lack of direct sea access. The country has been severely impacted by recurring ethnic violence and a major civil war (1993-2005) that caused mass displacement. Today, the nation faces challenges in developing its agricultural economy, improving infrastructure, and managing fiscal deficits, with a significant percentage of its population relying on subsistence farming.",
+  "aiSummary": {
+    "geo": "Mountainous Great Lakes enclave; historical borders of the Burundi Kingdom separated from Rwanda by Belgian authorities in 1962.",
+    "flag": "White diagonal cross (saltire) dividing red and green panels, with three central stars symbolizing ethnic groups and national unity.",
+    "freedom": "Won from Belgium on July 1, 1962, as a kingdom, shortly after the assassination of Prince Louis Rwagasore.",
+    "challenge": "High poverty index, geographic isolation, land fragmentation, and rebuilding post-civil war social structures."
+  },
+  "faqs": [
+    {
+      "question": "Who was Prince Louis Rwagasore?",
+      "answer": "He was a national hero and crown prince who founded the multi-ethnic UPRONA party to secure independence, assassinated in 1961."
+    },
+    {
+      "question": "What do the three stars on the flag of Burundi represent?",
+      "answer": "They represent the three national ethnic groups (Hutu, Tutsi, and Twa) as well as the national motto: Unity, Work, Progress."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1899",
+      "event": "Germany annexes the Kingdom of Burundi, incorporating it into German East Africa."
+    },
+    {
+      "year": "1916",
+      "event": "Belgian forces occupy Burundi during WWI, establishing the Ruanda-Urundi mandate."
+    },
+    {
+      "year": "1962",
+      "event": "Burundi gains independence from Belgium on July 1 as a constitutional monarchy."
+    },
+    {
+      "year": "1966",
+      "event": "The monarchy is abolished, and Captain Michel Micombero declares Burundi a republic."
+    },
+    {
+      "year": "1993-2005",
+      "event": "A civil war erupts following the assassination of President Melchior Ndadaye."
+    }
+  ]
+}

@@ -1,42 +1,77 @@
 import { collection, doc, setDoc, getDocs, query, where, orderBy, limit, runTransaction, onSnapshot, deleteDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from './firebase';
 
-// Add a player to the queue or match them with someone waiting
-export const joinQueue = async (userProfile, onMatchFound) => {
+// --- Ranked Duel Queue ---
+export const joinRankedQueue = async (userProfile, onMatchFound) => {
   if (!db || !userProfile) return null;
 
-  const queueRef = collection(db, 'queue');
-  
-  // Try to find someone waiting
-  const q = query(queueRef, where('status', '==', 'waiting'), orderBy('createdAt'), limit(1));
-  const querySnapshot = await getDocs(q);
+  const queueRef = collection(db, 'queue_ranked');
+  const userElo = userProfile.elo || 1000;
+  let eloRange = 100;
 
-  if (!querySnapshot.empty) {
-    // Found someone! Try to match with them using a transaction
-    const matchDoc = querySnapshot.docs[0];
-    const matchRef = doc(db, 'queue', matchDoc.id);
-    const gameId = `game_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  // Try to find someone within ELO range
+  const findMatch = async () => {
+    const q = query(queueRef, where('status', '==', 'waiting'));
+    const snapshot = await getDocs(q);
+    
+    for (const matchDoc of snapshot.docs) {
+      const data = matchDoc.data();
+      if (data.uid === userProfile.uid) continue;
+      if (Math.abs(data.elo - userElo) <= eloRange) {
+        return matchDoc;
+      }
+    }
+    return null;
+  };
+
+  const matchDoc = await findMatch();
+
+  if (matchDoc) {
+    const matchRef = doc(db, 'queue_ranked', matchDoc.id);
+    const matchData = matchDoc.data();
+    const gameId = `ranked_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
     try {
       await runTransaction(db, async (transaction) => {
         const sfDoc = await transaction.get(matchRef);
         if (!sfDoc.exists() || sfDoc.data().status !== 'waiting') {
-          throw "Document changed state or doesn't exist.";
+          throw "Document changed state";
         }
 
-        // Create the game session document
         const gameRef = doc(db, 'matches', gameId);
         transaction.set(gameRef, {
+          gameType: 'ranked_duel',
           players: {
-            [sfDoc.data().uid]: { displayName: sfDoc.data().displayName, elo: sfDoc.data().elo, score: 0, ready: false },
-            [userProfile.uid]: { displayName: userProfile.displayName, elo: userProfile.elo, score: 0, ready: false }
+            [matchData.uid]: {
+              displayName: matchData.username || matchData.displayName,
+              elo: matchData.elo,
+              countryCode: matchData.countryCode || '',
+              score: 0,
+              ready: false
+            },
+            [userProfile.uid]: {
+              displayName: userProfile.username || userProfile.displayName,
+              elo: userProfile.elo,
+              countryCode: userProfile.countryCode || '',
+              score: 0,
+              ready: false
+            }
+          },
+          health: {
+            [matchData.uid]: 5000,
+            [userProfile.uid]: 5000
           },
           status: 'waiting_for_players',
           round: 1,
-          createdAt: serverTimestamp()
+          roundStartTime: null,
+          createdAt: serverTimestamp(),
+          options: {
+            rounds: 5,
+            timeLimit: 60,
+            difficulty: 'HARD'
+          }
         });
 
-        // Update the queue doc so the other player knows
         transaction.update(matchRef, {
           status: 'matched',
           gameId: gameId,
@@ -44,39 +79,341 @@ export const joinQueue = async (userProfile, onMatchFound) => {
         });
       });
 
-      // Transaction succeeded, match found!
       onMatchFound(gameId);
-      return null; // We didn't create a queue listener
+      return null;
     } catch (e) {
-      console.error("Transaction failed, trying again...", e);
-      // Fall through to create our own queue document if transaction failed
+      console.error("Ranked transaction failed:", e);
     }
   }
 
-  // Nobody waiting (or transaction failed), create our own queue document
+  // No match found, create queue entry
   const myQueueRef = doc(queueRef, userProfile.uid);
   await setDoc(myQueueRef, {
     uid: userProfile.uid,
-    displayName: userProfile.displayName,
-    elo: userProfile.elo,
+    displayName: userProfile.username || userProfile.displayName,
+    elo: userProfile.elo || 1000,
+    countryCode: userProfile.countryCode || '',
     status: 'waiting',
     createdAt: serverTimestamp()
   });
 
-  // Listen for someone to match with us
+  let isMatched = false;
+
+  // Widen ELO range every 5 seconds
+  const rangeWidener = setInterval(async () => {
+    if (isMatched) { clearInterval(rangeWidener); return; }
+    eloRange = Math.min(eloRange + 100, 500);
+  }, 5000);
+
+  // Bot fallback after 20 seconds
+  const botTimer = setTimeout(async () => {
+    if (isMatched) return;
+    isMatched = true;
+    clearInterval(rangeWidener);
+    if (unsubscribe) unsubscribe();
+    await deleteDoc(myQueueRef);
+
+    const gameId = `ranked_bot_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const botNames = ['MapMaster 🤖', 'GlobalGuesser 🤖', 'StreetExplorer 🤖', 'GeoPro 🤖', 'LostFinder 🤖'];
+    const selectedBotName = botNames[Math.floor(Math.random() * botNames.length)];
+    const botElo = Math.max(400, userElo + Math.round((Math.random() - 0.5) * 100));
+
+    const gameRef = doc(db, 'matches', gameId);
+    await setDoc(gameRef, {
+      gameType: 'ranked_duel',
+      players: {
+        [userProfile.uid]: {
+          displayName: userProfile.username || userProfile.displayName,
+          elo: userProfile.elo,
+          countryCode: userProfile.countryCode || '',
+          score: 0,
+          ready: false
+        },
+        'bot_opponent': {
+          displayName: selectedBotName,
+          elo: botElo,
+          countryCode: '',
+          score: 0,
+          ready: false,
+          isBot: true
+        }
+      },
+      health: {
+        [userProfile.uid]: 5000,
+        'bot_opponent': 5000
+      },
+      status: 'waiting_for_players',
+      round: 1,
+      roundStartTime: null,
+      createdAt: serverTimestamp(),
+      options: {
+        rounds: 5,
+        timeLimit: 60,
+        difficulty: 'HARD'
+      }
+    });
+
+    onMatchFound(gameId);
+  }, 20000);
+
   const unsubscribe = onSnapshot(myQueueRef, (snapshot) => {
     const data = snapshot.data();
     if (data && data.status === 'matched' && data.gameId) {
+      isMatched = true;
+      clearTimeout(botTimer);
+      clearInterval(rangeWidener);
       onMatchFound(data.gameId);
-      deleteDoc(myQueueRef); // Cleanup
+      deleteDoc(myQueueRef);
     }
   });
 
-  return { unsubscribe, queueId: myQueueRef.id };
+  return {
+    unsubscribe: () => {
+      clearTimeout(botTimer);
+      clearInterval(rangeWidener);
+      if (unsubscribe) unsubscribe();
+    },
+    queueId: myQueueRef.id,
+    getEloRange: () => eloRange
+  };
 };
 
-export const leaveQueue = async (uid) => {
+export const leaveRankedQueue = async (uid) => {
   if (!db || !uid) return;
-  const myQueueRef = doc(db, 'queue', uid);
+  const myQueueRef = doc(db, 'queue_ranked', uid);
   await deleteDoc(myQueueRef);
+};
+
+
+// --- Unranked Queue ---
+export const joinUnrankedQueue = async (userProfile, onMatchFound) => {
+  if (!db || !userProfile) return null;
+
+  const queueRef = collection(db, 'queue_unranked');
+
+  // Try to find someone waiting
+  const q = query(queueRef, where('status', '==', 'waiting'), limit(1));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const matchDoc = querySnapshot.docs[0];
+    if (matchDoc.data().uid !== userProfile.uid) {
+      const matchRef = doc(db, 'queue_unranked', matchDoc.id);
+      const matchData = matchDoc.data();
+      const gameId = `unranked_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+      try {
+        await runTransaction(db, async (transaction) => {
+          const sfDoc = await transaction.get(matchRef);
+          if (!sfDoc.exists() || sfDoc.data().status !== 'waiting') {
+            throw "Document changed state";
+          }
+
+          const gameRef = doc(db, 'matches', gameId);
+          transaction.set(gameRef, {
+            gameType: 'unranked_multiplayer',
+            players: {
+              [matchData.uid]: {
+                displayName: matchData.username || matchData.displayName,
+                elo: matchData.elo,
+                countryCode: matchData.countryCode || '',
+                score: 0,
+                ready: false
+              },
+              [userProfile.uid]: {
+                displayName: userProfile.username || userProfile.displayName,
+                elo: userProfile.elo,
+                countryCode: userProfile.countryCode || '',
+                score: 0,
+                ready: false
+              }
+            },
+            status: 'waiting_for_players',
+            round: 1,
+            roundStartTime: null,
+            createdAt: serverTimestamp(),
+            options: {
+              rounds: 5,
+              timeLimit: 30,
+              difficulty: 'HARD'
+            }
+          });
+
+          transaction.update(matchRef, {
+            status: 'matched',
+            gameId: gameId,
+            player2: userProfile.uid
+          });
+        });
+
+        onMatchFound(gameId);
+        return null;
+      } catch (e) {
+        console.error("Unranked transaction failed:", e);
+      }
+    }
+  }
+
+  // No match found, create queue entry
+  const myQueueRef = doc(queueRef, userProfile.uid);
+  await setDoc(myQueueRef, {
+    uid: userProfile.uid,
+    displayName: userProfile.username || userProfile.displayName,
+    elo: userProfile.elo || 1000,
+    countryCode: userProfile.countryCode || '',
+    status: 'waiting',
+    createdAt: serverTimestamp()
+  });
+
+  let isMatched = false;
+
+  // Bot fallback after 10 seconds
+  const botTimer = setTimeout(async () => {
+    if (isMatched) return;
+    isMatched = true;
+    if (unsubscribe) unsubscribe();
+    await deleteDoc(myQueueRef);
+
+    const gameId = `unranked_bot_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const botNames = ['MapMaster 🤖', 'GlobalGuesser 🤖', 'StreetExplorer 🤖', 'GeoPro 🤖', 'LostFinder 🤖'];
+    const selectedBotName = botNames[Math.floor(Math.random() * botNames.length)];
+    const botElo = Math.max(400, (userProfile.elo || 1000) + Math.round((Math.random() - 0.5) * 120));
+
+    const gameRef = doc(db, 'matches', gameId);
+    await setDoc(gameRef, {
+      gameType: 'unranked_multiplayer',
+      players: {
+        [userProfile.uid]: {
+          displayName: userProfile.username || userProfile.displayName,
+          elo: userProfile.elo,
+          countryCode: userProfile.countryCode || '',
+          score: 0,
+          ready: false
+        },
+        'bot_opponent': {
+          displayName: selectedBotName,
+          elo: botElo,
+          countryCode: '',
+          score: 0,
+          ready: false,
+          isBot: true
+        }
+      },
+      status: 'waiting_for_players',
+      round: 1,
+      roundStartTime: null,
+      createdAt: serverTimestamp(),
+      options: {
+        rounds: 5,
+        timeLimit: 30,
+        difficulty: 'HARD'
+      }
+    });
+
+    onMatchFound(gameId);
+  }, 10000);
+
+  const unsubscribe = onSnapshot(myQueueRef, (snapshot) => {
+    const data = snapshot.data();
+    if (data && data.status === 'matched' && data.gameId) {
+      isMatched = true;
+      clearTimeout(botTimer);
+      onMatchFound(data.gameId);
+      deleteDoc(myQueueRef);
+    }
+  });
+
+  return {
+    unsubscribe: () => {
+      clearTimeout(botTimer);
+      if (unsubscribe) unsubscribe();
+    },
+    queueId: myQueueRef.id
+  };
+};
+
+export const leaveUnrankedQueue = async (uid) => {
+  if (!db || !uid) return;
+  const myQueueRef = doc(db, 'queue_unranked', uid);
+  await deleteDoc(myQueueRef);
+};
+
+// Legacy support — redirect to unranked
+export const joinQueue = joinUnrankedQueue;
+export const leaveQueue = leaveUnrankedQueue;
+
+
+// --- Party Lobby Functions ---
+
+const generateGameCode = () => {
+  return Math.random().toString(36).substring(2, 8).toUpperCase();
+};
+
+export const createParty = async (userProfile) => {
+  if (!db || !userProfile) return null;
+  const gameId = `party_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  const code = generateGameCode();
+  
+  const gameRef = doc(db, 'matches', gameId);
+  await setDoc(gameRef, {
+    code: code,
+    gameType: 'party',
+    status: 'waiting_for_players',
+    round: 1,
+    createdAt: serverTimestamp(),
+    players: {
+      [userProfile.uid]: { 
+        displayName: userProfile.username || userProfile.displayName, 
+        elo: userProfile.elo, 
+        countryCode: userProfile.countryCode || '',
+        score: 0, 
+        ready: false,
+        host: true 
+      }
+    },
+    options: {
+      rounds: 5
+    }
+  });
+
+  return gameId;
+};
+
+export const joinParty = async (userProfile, code) => {
+  if (!db || !userProfile || !code) return null;
+  
+  const matchesRef = collection(db, 'matches');
+  const q = query(matchesRef, where('code', '==', code.toUpperCase()), where('status', '==', 'waiting_for_players'), limit(1));
+  const querySnapshot = await getDocs(q);
+  
+  if (querySnapshot.empty) {
+    throw new Error('Party not found or already started.');
+  }
+
+  const matchDoc = querySnapshot.docs[0];
+  const gameId = matchDoc.id;
+  
+  await runTransaction(db, async (transaction) => {
+    const sfDoc = await transaction.get(matchDoc.ref);
+    if (!sfDoc.exists() || sfDoc.data().status !== 'waiting_for_players') {
+      throw new Error('Party is no longer available.');
+    }
+    
+    if (Object.keys(sfDoc.data().players).length >= 20) {
+      throw new Error('Party is full.');
+    }
+
+    transaction.update(matchDoc.ref, {
+      [`players.${userProfile.uid}`]: { 
+        displayName: userProfile.username || userProfile.displayName, 
+        elo: userProfile.elo, 
+        countryCode: userProfile.countryCode || '',
+        score: 0, 
+        ready: false,
+        host: false
+      }
+    });
+  });
+
+  return gameId;
 };

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Oswald:wght@400;500;700&display=swap');
 
 :root {
   --bg-color: #0a0a0a;
@@ -19,9 +19,13 @@
   padding: 0;
 }
 
+body, body * {
+  cursor: url('/cursor.svg') 7 7, auto !important;
+}
+
 body {
   font-family: 'Outfit', sans-serif;
-  background: radial-gradient(circle at 50% -20%, #1a1c1a 0%, var(--bg-color) 80%);
+  background: var(--bg-color);
   color: var(--text-color);
   min-height: 100vh;
   display: flex;
@@ -116,12 +120,1551 @@ body {
 }
 
 @keyframes slideUp {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes pulse-glow {
-  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
 }
+
+.menu-item-hover {
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s, text-shadow 0.2s;
+  transform-origin: left center;
+}
+
+.menu-item-hover:hover {
+  color: #fff;
+  transform: scale(1.1);
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+}
+
+/* Responsive Utility Classes */
+.container-padding {
+  padding: 1.8rem 3rem;
+}
+
+.responsive-title {
+  font-size: 2.5rem;
+}
+
+.responsive-subtitle {
+  font-size: 2.2rem;
+}
+
+.responsive-text {
+  font-size: 1.3rem;
+}
+
+.left-gradient-overlay {
+  width: 100%;
+  background: linear-gradient(to right, rgba(10, 10, 18, 0.85) 0%, rgba(10, 10, 18, 0.55) 45%, rgba(10, 10, 18, 0.25) 100%);
+}
+
+.top-right-controls {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.left-menu-container {
+  margin-top: 0.2rem;
+  max-width: 450px;
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 100dvh;
+}
+
+.home-main-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(2rem, 8vw, 9rem);
+}
+
+.bottom-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  padding-bottom: 0.5rem;
+  padding-top: 0.2rem;
+}
+
+.hud-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 1rem;
+}
+
+.hud-center {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2rem;
+}
+
+.modal-content {
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+}
+
+.map-container {
+  position: absolute;
+  bottom: 20px;
+  right: 70px;
+  width: 300px;
+  height: 200px;
+}
+
+.map-container.expanded {
+  width: 550px;
+  height: 400px;
+}
+
+.party-lobby-panel {
+  padding: 3rem;
+  max-width: 800px;
+  width: 95%;
+  display: flex;
+  gap: 2rem;
+}
+
+.options-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Multiple Choice - Desktop: bottom overlay panel */
+.mc-desktop-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 900px;
+  z-index: 10;
+}
+
+/* Multiple Choice - Mobile: trigger button (hidden on desktop) */
+.mc-mobile-trigger {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 12px 16px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+}
+
+.mc-guess-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border-radius: 16px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Multiple Choice - Mobile: full-screen overlay (hidden until expanded) */
+.mc-mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .home-content {
+    min-height: 100dvh;
+  }
+
+  .container-padding {
+    padding: 1.5rem;
+  }
+
+  .responsive-title {
+    font-size: 2rem;
+  }
+
+  .responsive-subtitle {
+    font-size: 1.8rem;
+  }
+
+  .responsive-text {
+    font-size: 1.1rem;
+  }
+
+  .left-gradient-overlay {
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(10, 10, 18, 0.75) 0%, rgba(10, 10, 18, 0.85) 60%, rgba(10, 10, 18, 0.95) 100%);
+  }
+
+  .top-right-controls {
+    top: 1.5rem;
+    right: 1.5rem;
+    gap: 0.5rem;
+  }
+
+  .left-menu-container {
+    margin-top: 2.5rem;
+    /* Make room for top controls */
+    max-width: 100%;
+  }
+
+  .home-main-row {
+    display: block;
+  }
+
+  .roadside-welcome {
+    display: none;
+  }
+
+  .mobile-quick-play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.15rem;
+    padding: 0.72em 1.4em;
+    border: 2px solid rgba(255,255,255,0.78);
+    border-radius: 8px;
+    background: linear-gradient(135deg, #19a96e, #1679d1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .mobile-quick-play:active { transform: scale(0.98); }
+  .mobile-quick-play:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+  /* Let signpost fill mobile width */
+  .signpost-menu {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .bottom-controls {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .hud-container {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .hud-center {
+    width: 95vw;
+    gap: 1rem;
+    padding: 10px;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+  }
+
+  .map-container.expanded {
+    width: calc(100vw - 20px) !important;
+    height: 50vh !important;
+    right: 10px !important;
+    bottom: 10px !important;
+  }
+
+  .party-lobby-panel {
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .options-grid {
+    flex-direction: column;
+  }
+
+  /* Hide desktop panel, show mobile trigger */
+  .mc-desktop-panel {
+    display: none;
+  }
+
+  .mc-mobile-trigger {
+    display: block;
+  }
+
+  .mc-mobile-overlay {
+    display: flex;
+  }
+
+  /* On mobile: hide the small map when collapsed, show expanded fullscreen */
+  .map-container:not(.expanded) {
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .map-container.expanded {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    height: 65vh !important;
+    border-radius: 24px 24px 0 0 !important;
+    z-index: 100 !important;
+  }
+
+  .mobile-map-toggle {
+    animation: pulse-glow 2s infinite;
+  }
+}
+
+/* Responsive Table Wrapper */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 2rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+}
+
+.table-wrapper table {
+  min-width: 650px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Responsive Header */
+.responsive-header {
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10, 10, 10, 0.8);
+}
+
+@media (max-width: 600px) {
+  .responsive-header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .podium-container {
+    gap: 0.4rem !important;
+    padding: 0 !important;
+  }
+  
+  .podium-card-title {
+    font-size: 0.8rem !important;
+    max-width: 80px !important;
+  }
+  
+  .podium-column-box {
+    font-size: 1.1rem !important;
+  }
+  
+  .podium-column-box span {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* Flags Explorer Styles */
+.flag-card-interactive:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 12px 30px rgba(0, 242, 254, 0.2), 0 0 15px rgba(0, 242, 254, 0.1);
+  border-color: rgba(0, 242, 254, 0.4) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.flag-card-interactive:hover .flag-image-hover {
+  transform: scale(1.06);
+}
+
+.btn-hover:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.btn-hover-close:hover {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+}
+
+.btn-hover-swipe:hover {
+  color: #00f2fe !important;
+}
+
+.input-focus-glow:focus {
+  border-color: rgba(0, 242, 254, 0.4) !important;
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.2) !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.chronicle-article-section {
+  transition: all 0.3s ease;
+}
+
+.chronicle-article-section:hover {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Accessibility: Focus visible styles */
+*:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 100000;
+  padding: 0.5rem 1rem;
+  background: var(--accent-color);
+  color: white;
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Onboarding tooltip */
+.onboarding-tooltip {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  position: relative;
+}
+
+.onboarding-tooltip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 12px 12px 0 0;
+}
+
+/* Quick Play CTA */
+.cta-glow-btn {
+  width: 100%;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  border: none;
+  border-radius: 14px;
+  color: #fff;
+  background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: cta-pulse 2.5s ease-in-out infinite;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cta-glow-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.6), 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.cta-glow-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3); }
+  50% { box-shadow: 0 0 35px rgba(16, 185, 129, 0.6), 0 4px 20px rgba(59, 130, 246, 0.3); }
+}
+
+/* Difficulty card */
+.difficulty-card {
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.difficulty-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+
+/* ── Signpost menu — colorful flat directional signs ── */
+
+:root {
+  --sign-red:    #e63329;
+  --sign-orange: #f07d2a;
+  --sign-yellow: #f5c518;
+  --sign-pole:   #7b4316;
+}
+
+.signpost-menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 0.9vh, 8px);
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Brown vertical pole — centred in the container */
+.signpost-menu::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -4px;
+  bottom: -4px;
+  width: clamp(14px, 1.8vw, 20px);
+  background: linear-gradient(90deg, #5a2e0a 0%, #8b4e1a 40%, #9c5a20 55%, #7a4010 80%, #4e2408 100%);
+  border-radius: 6px;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.45), inset 1px 0 3px rgba(255,255,255,0.1);
+  z-index: 0;
+}
+
+.signpost-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* ── Base sign ── */
+.signpost-btn,
+.signpost-daily {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: clamp(0.6em, 1.5vh, 0.85em) 2.2em;
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.05rem, 2.1vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.16s cubic-bezier(0.175,0.885,0.32,1.275), filter 0.16s;
+  /* right-pointing arrow by default */
+  clip-path: polygon(0% 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 0% 100%);
+}
+
+/* left-pointing arrow for even items */
+.signpost-wrap:nth-child(even) .signpost-btn {
+  clip-path: polygon(20px 0%, 100% 0%, 100% 100%, 20px 100%, 0% 50%);
+}
+
+/* colour cycling */
+.signpost-wrap:nth-child(3n+1) .signpost-btn { background: var(--sign-red); }
+.signpost-wrap:nth-child(3n+2) .signpost-btn { background: var(--sign-orange); }
+.signpost-wrap:nth-child(3n)   .signpost-btn { background: var(--sign-yellow); color: #4a2800; text-shadow: 0 1px 2px rgba(255,255,255,0.15); }
+
+.signpost-btn:hover  { filter: brightness(1.12); transform: scale(1.03); }
+.signpost-btn:active { transform: scale(0.97); }
+.signpost-btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+/* ── Daily challenge ── */
+.signpost-daily {
+  width: 100%;
+  gap: 0.6em;
+  background: var(--sign-orange);
+  clip-path: polygon(0% 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 0% 100%);
+}
+
+.signpost-daily:hover:not(:disabled) { filter: brightness(1.12); transform: scale(1.03); }
+.signpost-daily:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ── Divider (hidden — colour rhythm handles grouping) ── */
+.signpost-divider { display: none; }
+
+/* ── Green highway welcome sign ── */
+.highway-sign {
+  background: linear-gradient(145deg, #197844 0%, #07582f 100%);
+  border: 5px solid #e9f3e7;
+  border-radius: 15px;
+  padding: 5px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.58), inset 0 0 0 3px rgba(0,0,0,0.18);
+  width: 100%;
+  position: relative;
+}
+
+.highway-sign-inner {
+  border: 2px solid rgba(255,255,255,0.94);
+  border-radius: 8px;
+  padding: clamp(1rem, 2.6vh, 1.7rem) clamp(1.2rem, 2.8vw, 2.3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+/* Corner bolt dots */
+.highway-sign-inner::before,
+.highway-sign-inner::after {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 50%;
+}
+.highway-sign-inner::before { top: 9px; left: 10px; }
+.highway-sign-inner::after  { bottom: 9px; right: 10px; }
+
+.roadside-welcome {
+  width: min(41vw, 560px);
+  margin-top: clamp(1.5rem, 10vh, 7rem);
+  margin-right: clamp(0rem, 3vw, 4rem);
+  filter: drop-shadow(0 12px 12px rgba(0,0,0,0.28));
+  animation: roadside-arrival 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.highway-sign-posts {
+  display: flex;
+  justify-content: space-around;
+  width: 78%;
+  height: clamp(110px, 19vh, 200px);
+  margin: -2px auto 0;
+}
+
+.highway-sign-posts span {
+  width: clamp(15px, 1.7vw, 23px);
+  height: 100%;
+  background: linear-gradient(90deg, #778085, #e7edf0 42%, #a9b0b4 58%, #657077);
+  border-radius: 0 0 4px 4px;
+  box-shadow: inset 2px 0 rgba(255,255,255,0.42), 3px 1px 4px rgba(0,0,0,0.35);
+}
+
+.highway-sign-kicker {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #d6f0df;
+}
+
+.highway-sign-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  line-height: 1.2;
+  display: block;
+}
+
+.highway-sign-desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(0.82rem, 1.45vw, 1rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.88);
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  display: block;
+  max-width: 34ch;
+  margin: 0;
+}
+
+.highway-sign-route {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 0.25rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(255,255,255,0.38);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.roadside-quick-play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  width: min(86%, 430px);
+  margin: 1.15rem auto 0;
+  padding: 0.9rem 1.4rem;
+  border: 2px solid rgba(255,255,255,0.88);
+  border-radius: 9px;
+  background: linear-gradient(135deg, #19a96e, #1679d1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 0.16s ease, filter 0.16s ease;
+}
+
+.roadside-quick-play:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.roadside-quick-play:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+.mobile-quick-play {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-quick-play {
+    display: flex;
+  }
+}
+
+@keyframes roadside-arrival {
+  from { opacity: 0; transform: translateX(40px) rotate(1.5deg); }
+  to { opacity: 1; transform: translateX(0) rotate(0); }
+}
+
+/* ── Difficulty / Matchmaking signpost cards ── */
+.signpost-back-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.3rem 0;
+  text-align: left;
+  width: fit-content;
+  letter-spacing: 0.02em;
+  transition: opacity 0.15s;
+}
+.signpost-back-btn:hover { opacity: 0.65; }
+
+.diff-signpost-menu {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(5px, 1vh, 9px);
+  width: 100%;
+}
+
+/* Base diff sign — wide rectangle with right arrow point */
+.diff-sign {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: clamp(0.7em, 1.8vh, 1em) clamp(1.2em, 2.5vw, 1.8em);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  clip-path: polygon(0% 0%, calc(100% - 24px) 0%, 100% 50%, calc(100% - 24px) 100%, 0% 100%);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  transition: transform 0.16s cubic-bezier(0.175,0.885,0.32,1.275), filter 0.16s;
+}
+
+/* alternate even items to point left — DISABLED, all point right */
+/* .diff-signpost-menu .diff-sign:nth-child(even) {
+  clip-path: polygon(24px 0%, 100% 0%, 100% 100%, 24px 100%, 0% 50%);
+} */
+
+.diff-sign:hover  { filter: brightness(1.12); transform: scale(1.02); }
+.diff-sign:active { transform: scale(0.98); }
+.diff-sign:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+.diff-sign-easy   { background: #e63329; }
+.diff-sign-medium { background: #f07d2a; }
+.diff-sign-hard   { background: #f5c518; }
+.diff-sign-hard .diff-sign-name,
+.diff-sign-hard .diff-sign-sub { color: #4a2800; }
+
+.diff-sign-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  line-height: 1.2;
+}
+
+.diff-sign-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(0.72rem, 1.3vw, 0.85rem);
+  font-weight: 500;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.4;
+  margin-top: 0.2em;
+}
+
+/* Home page header nav buttons — hide labels on very small screens */
+.home-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home-header-nav-label {
+  display: inline;
+}
+
+@media (max-width: 420px) {
+  .home-header-nav {
+    gap: 5px;
+  }
+  .home-header-nav-label {
+    display: none;
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Site nav — desktop shows links, mobile shows hamburger */
+.site-nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: inherit;
+}
+
+.site-nav-mobile-toggle {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .site-nav-desktop {
+    display: none !important;
+  }
+  .site-nav-mobile-toggle {
+    display: flex !important;
+  }
+}
+
+/* Keyboard nav for menu items */
+.menu-item-hover:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Modal focus trap */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.7);
+  z-index: 100;
+  animation: fade-in 0.2s ease;
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS — Full coverage for all screen sizes
+   ============================================================ */
+
+/* Game area fills viewport on all screens */
+.game-area {
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Large desktops ≥1440px ── */
+@media (min-width: 1440px) {
+  .container-padding {
+    padding: 3.5rem 4rem;
+  }
+  .responsive-title {
+    font-size: 3.2rem;
+  }
+  .left-menu-container {
+    max-width: 480px;
+  }
+  .map-container {
+    width: 340px;
+    height: 230px;
+  }
+  .map-container.expanded {
+    width: 620px;
+    height: 460px;
+  }
+}
+
+/* ── Tablet landscape + small laptop 1024-1439px ── */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .responsive-title {
+    font-size: 2.5rem;
+  }
+  .map-container {
+    width: 300px;
+    height: 200px;
+  }
+  .map-container.expanded {
+    width: 520px;
+    height: 380px;
+  }
+}
+
+/* ── Tablet portrait 768-1023px ── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container-padding {
+    padding: 2rem 2.5rem;
+  }
+  .responsive-title {
+    font-size: 2.2rem;
+  }
+  .responsive-subtitle {
+    font-size: 2rem;
+  }
+  .left-menu-container {
+    margin-top: 4rem;
+    max-width: 380px;
+  }
+  .roadside-welcome {
+    width: min(32vw, 320px);
+    margin-right: 0;
+    margin-top: 8rem;
+  }
+  .highway-sign-posts {
+    height: 115px;
+  }
+  .map-container {
+    width: 260px;
+    height: 180px;
+    bottom: 15px;
+    right: 15px;
+  }
+  .map-container.expanded {
+    width: 450px;
+    height: 320px;
+  }
+  .hud-container {
+    gap: 0.75rem;
+  }
+  .party-lobby-panel {
+    max-width: 700px;
+    padding: 2rem;
+    gap: 1.5rem;
+  }
+}
+
+/* ── Mobile ≤767px (overrides the existing 768 breakpoint for more specifics) ── */
+@media (max-width: 767px) {
+  /* Menu */
+  .responsive-title {
+    font-size: clamp(1.6rem, 5vw, 2rem);
+  }
+  .responsive-subtitle {
+    font-size: clamp(1.5rem, 4.5vw, 1.8rem);
+  }
+  .responsive-text {
+    font-size: clamp(1rem, 3vw, 1.1rem);
+  }
+
+  /* HUD */
+  .hud-container {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .hud-center {
+    width: 98vw;
+    gap: 0.6rem;
+    padding: 8px;
+    top: 8px;
+  }
+
+  /* Modal */
+  .modal-content {
+    width: 95%;
+    padding: 1.2rem;
+    border-radius: 16px;
+  }
+
+  /* CTA Quick Play */
+  .cta-glow-btn {
+    font-size: 1.15rem;
+    padding: 0.85rem 1.2rem;
+  }
+
+  /* Difficulty cards */
+  .difficulty-card {
+    padding: 0.85rem 1rem;
+  }
+}
+
+/* ── Small phones ≤480px ── */
+@media (max-width: 480px) {
+  .container-padding {
+    padding: 1rem 1.2rem;
+  }
+  .responsive-title {
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+  }
+  .top-right-controls {
+    top: 1rem;
+    right: 1rem;
+    gap: 6px;
+  }
+  .left-menu-container {
+    margin-top: 3rem;
+  }
+  .glass-panel {
+    border-radius: 16px;
+  }
+  .party-lobby-panel {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .map-container.expanded {
+    height: 60vh !important;
+  }
+  .hud-container {
+    top: 6px;
+    left: 6px;
+    right: 6px;
+  }
+  /* Signpost: tighter on small phones */
+  .signpost-btn,
+  .signpost-daily {
+    font-size: 0.95rem;
+    padding: 0.6em 1.8em;
+  }
+  .signpost-menu::before {
+    width: 13px;
+  }
+}
+
+/* ── Landscape mobile (short height) ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .left-menu-container {
+    margin-top: 1rem;
+  }
+  .container-padding {
+    padding: 0.5rem 1.5rem;
+  }
+  .responsive-title {
+    font-size: 1.5rem;
+  }
+  .cta-glow-btn {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+  }
+  .map-container {
+    width: 200px;
+    height: 150px;
+    bottom: 10px;
+    right: 10px;
+  }
+  .map-container.expanded {
+    width: 55vw !important;
+    height: 90vh !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    border-radius: 0 !important;
+  }
+  .bottom-controls {
+    display: none;
+  }
+  /* Signpost: compact in landscape */
+  .signpost-menu {
+    gap: 4px;
+  }
+  .signpost-btn,
+  .signpost-daily {
+    padding: 0.5em 1.8em;
+    font-size: 0.92rem;
+  }
+  .signpost-divider {
+    height: 6px;
+  }
+}
+
+/* ── Ensure HUD glass-panel badges scale on all screens ── */
+@media (max-width: 767px) {
+  .hud-container .glass-panel {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.82rem;
+    border-radius: 10px;
+  }
+  .hud-container .btn {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.82rem;
+  }
+}
+
+/* ── Safe area insets for notch/bottom bar devices (iOS) ── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .bottom-controls {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .mc-mobile-trigger {
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  .mobile-map-toggle {
+    bottom: max(20px, calc(env(safe-area-inset-bottom) + 12px));
+  }
+}
+
+/* ==========================================
+   Hero UI Theme & Live Panorama Layout Styles
+   ========================================== */
+
+@keyframes bounce-up {
+  0%, 100% { transform: translateY(0); opacity: 0.8; }
+  50% { transform: translateY(-8px); opacity: 1; }
+}
+
+@keyframes pulse-green-dot {
+  0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+  50% { transform: scale(1.1); opacity: 0.85; box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+}
+
+.online-pulse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #34d399;
+  display: inline-block;
+  animation: pulse-green-dot 2s infinite;
+}
+
+/* Highway Chevron Arrow Signboard Menu Buttons (Image 1 Theme) */
+.hero-menu-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(0.6em, 1.4vh, 0.85em) 32px clamp(0.6em, 1.4vh, 0.85em) 14px;
+  border: none;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  clip-path: polygon(0% 0%, calc(100% - 24px) 0%, 100% 50%, calc(100% - 24px) 100%, 0% 100%);
+  transition: transform 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.18s, box-shadow 0.18s;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-menu-btn:hover {
+  transform: scale(1.02) translateX(6px);
+  filter: brightness(1.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.hero-menu-btn:active {
+  transform: scale(0.98);
+}
+
+.hero-menu-btn-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-menu-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.22);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.2);
+}
+
+/* Highway Chevron Signboard Colors */
+.hero-menu-btn.icon-red,
+.icon-red-sign { background: #e63329; color: #ffffff; }
+
+.hero-menu-btn.icon-orange,
+.icon-orange-sign { background: #f07d2a; color: #ffffff; }
+
+.hero-menu-btn.icon-gold,
+.icon-gold-sign { background: #f5c518; color: #4a2800; }
+.hero-menu-btn.icon-gold span,
+.icon-gold-sign span { color: #4a2800 !important; }
+
+.hero-menu-btn.icon-green,
+.icon-green-sign { background: #10b981; color: #ffffff; }
+
+.hero-menu-btn.icon-blue,
+.icon-blue-sign { background: #0284c7; color: #ffffff; }
+
+.hero-menu-btn.icon-purple,
+.icon-purple-sign { background: #8b5cf6; color: #ffffff; }
+
+.hero-menu-btn.icon-teal,
+.icon-teal-sign { background: #0f766e; color: #ffffff; }
+
+.hero-menu-btn.icon-rose,
+.icon-rose-sign { background: #be123c; color: #ffffff; }
+
+/* Highway Signboard Theme */
+.highway-signboard {
+  background: linear-gradient(145deg, #1b432c 0%, #0d2818 100%);
+  border: 3px solid #2f7a4d;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.15), 0 20px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  padding: 24px;
+  color: white;
+  position: relative;
+  text-align: center;
+}
+
+.highway-signboard-inner {
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.highway-quickplay-btn {
+  width: 100%;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1e1b4b;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.highway-quickplay-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.6);
+  background: linear-gradient(135deg, #fcd34d, #fbbf24);
+}
+
+/* Feature Cards Grid below Highway Sign */
+.feature-badge-card {
+  background: rgba(18, 24, 38, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  flex: 1;
+}
+
+/* Persistent Bottom Stats Bar */
+.bottom-stats-bar {
+  background: rgba(12, 16, 28, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+.stat-item-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+}
+
+.stat-item-value {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: white;
+}
+
+/* ==========================================================================
+   Comprehensive Mobile Screen Optimization (Touch & Small Viewports)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Dynamic Viewport & Base Layout */
+  html, body {
+    overflow-x: hidden;
+    touch-action: manipulation;
+  }
+
+  header {
+    padding: 8px 12px !important;
+    height: 58px !important;
+  }
+
+  header img {
+    height: 30px !important;
+  }
+
+  .home-header-nav {
+    display: none !important;
+  }
+
+  .desktop-only-pill {
+    display: none !important;
+  }
+
+  .mobile-menu-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(18, 24, 38, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    cursor: pointer;
+  }
+
+  .mobile-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: absolute;
+    top: 58px;
+    left: 0;
+    right: 0;
+    background: rgba(10, 13, 26, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 16px;
+    z-index: 1000;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+  }
+
+  .home-content {
+    padding-top: 64px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-bottom: 70px !important;
+    min-height: 100dvh !important;
+  }
+
+  .home-main-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
+  /* Left Menu Full-Width Mobile Cards */
+  .left-menu-container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .hero-menu-btn {
+    padding: 12px 28px 12px 14px !important;
+    min-height: 48px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .hero-menu-btn span {
+    font-size: 0.88rem !important;
+  }
+
+  /* Mobile Bottom Stats Bar */
+  .bottom-stats-bar {
+    padding: 8px 12px !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+
+  .stat-item-box {
+    font-size: 0.75rem !important;
+    gap: 4px !important;
+  }
+
+  .stat-item-value {
+    font-size: 0.9rem !important;
+  }
+
+  /* Game Canvas & HUD Mobile Enhancements */
+  .game-area {
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+  }
+
+  /* Guessing Map & Multiple Choice Mobile Enhancements */
+  .guessing-map-container {
+    width: calc(100vw - 20px) !important;
+    max-height: 55vh !important;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Touch-friendly Multiple Choice Grid */
+  .multiple-choice-container {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    padding: 8px !important;
+  }
+
+  .multiple-choice-btn {
+    min-height: 50px !important;
+    font-size: 0.85rem !important;
+    padding: 8px 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra Small Phone Screens (iPhone SE, Galaxy S) */
+  header {
+    gap: 6px !important;
+  }
+
+  .online-pulse-dot + span {
+    font-size: 0.75rem !important;
+  }
+
+  .hero-menu-btn {
+    clip-path: polygon(0% 0%, calc(100% - 18px) 0%, 100% 50%, calc(100% - 18px) 100%, 0% 100%) !important;
+    padding-right: 22px !important;
+  }
+
+  .multiple-choice-container {
+    grid-template-columns: 1fr !important;
+  }
+}
+

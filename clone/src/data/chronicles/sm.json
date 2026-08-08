@@ -1,0 +1,47 @@
+{
+  "code": "SM",
+  "name": "San Marino",
+  "capital": "San Marino",
+  "continent": "Europe",
+  "population": "34,000",
+  "currency": "Euro (EUR)",
+  "languages": [
+    "Italian"
+  ],
+  "seoTitle": "Detailed History of San Marino: Map Formation, Flag Origin, and Independence",
+  "metaDescription": "Discover the rich history of San Marino. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
+  "mapFormation": "The geographical formation of San Marino is a key element of its national identity in Europe. Characterized by its Apennine mountain enclave inside Italy, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of San Marino came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
+  "flagHistory": "The national flag of San Marino is a powerful symbol of the country's sovereignty and cultural heritage. The design features a horizontal white and light blue bands. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
+  "freedomStory": "The path to freedom and sovereignty for San Marino involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from monastic state founded in 301 AD. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of San Marino, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
+  "challenges": "Today, San Marino faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to economic modernization and banking integration, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of San Marino continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "aiSummary": {
+    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
+    "flag": "A distinct banner featuring horizontal white and light blue bands representing national sovereignty.",
+    "freedom": "Gained sovereignty from monastic state founded in 301 AD through historical national movements.",
+    "challenge": "Currently facing developmental tasks related to economic modernization and banking integration."
+  },
+  "faqs": [
+    {
+      "question": "When did San Marino gain independence?",
+      "answer": "San Marino attained its full sovereignty and recognized independence from monastic state founded in 301 AD."
+    },
+    {
+      "question": "What are the main geographical characteristics of San Marino?",
+      "answer": "San Marino is located in Europe and features a geographical layout characterized by Apennine mountain enclave inside Italy."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1800s",
+      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+    },
+    {
+      "year": "1900s",
+      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+    },
+    {
+      "year": "Sovereignty",
+      "event": "Official declaration of independence and international recognition of San Marino."
+    }
+  ]
+}

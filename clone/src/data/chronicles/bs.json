@@ -1,0 +1,55 @@
+{
+  "code": "BS",
+  "name": "Bahamas",
+  "capital": "Nassau",
+  "continent": "North America",
+  "population": "410,000",
+  "currency": "Bahamian Dollar (BSD)",
+  "languages": [
+    "English"
+  ],
+  "seoTitle": "History of the Bahamas: Lucayan Islands, Pirate Havens, and Independence Day",
+  "metaDescription": "Read the history of the Bahamas, from Columbus's landing and pirate settlements to its aquamarine flag and peaceful independence from Great Britain.",
+  "mapFormation": "The Bahamas is an archipelago of over 700 islands, cays, and inlets in the Atlantic Ocean, north of Cuba. Originally settled by the Lucayan people (a branch of the Taínos), the islands became the site of Christopher Columbus's first landing in the New World in 1492. Spanish slave raids depopulated the islands, and they remained mostly uninhabited until English Puritans, known as the Eleutheran Adventurers, established a settlement in 1648. During the late 17th century, the archipelago's intricate network of shallow banks and hidden channels became a notorious pirate haven. Britain claimed the islands as a crown colony in 1718, establishing maritime borders that control major shipping channels linking the Atlantic to the Gulf of Mexico, not far from other Caribbean nations like <a href=\"/chronicles/ag\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Antigua and Barbuda</a>.",
+  "flagHistory": "Adopted on July 10, 1973, to celebrate independence, the Bahamian flag features three horizontal bands of aquamarine, gold, and aquamarine, with a black equilateral triangle at the hoist. The aquamarine bands represent the clear, turquoise waters of the Caribbean and Atlantic surrounding the islands; the gold band symbolizes the warm sun and sandy shores; and the black triangle represents the strength, vigor, and determination of the Bahamian people, who are primarily of African descent. The design was chosen through a national competition to replace the British Blue Ensign.",
+  "freedomStory": "The Bahamas achieved self-governance in 1964 and gradually moved toward sovereignty. The transition was driven by the progressive majority rule movement in the 1960s, led by Lynden Pindling, who became Prime Minister in 1967. Pindling championed economic empowerment for the Afro-Bahamian majority and led negotiations for independence. On July 10, 1973, the Bahamas officially attained full independence from the United Kingdom, remaining a member of the Commonwealth of Nations and retaining a parliamentary system.",
+  "challenges": "The Bahamas faces severe challenges due to its low-lying island geography. The country is highly vulnerable to climate change-induced sea-level rise and extreme weather events; in 2019, Hurricane Dorian devastated the northern islands, causing billions in damage. The national economy is heavily reliant on foreign tourism and offshore financial services, making it vulnerable to international regulatory changes and global recessions. Additionally, the geography of dispersed islands creates high costs for maintaining infrastructure, hospitals, and schools across the archipelago.",
+  "aiSummary": {
+    "geo": "Atlantic coral archipelago of 700 islands; historical Lucayan lands colonized by English Puritans in 1648.",
+    "flag": "Aquamarine bands (ocean) and gold band (beaches) with a black triangle at the hoist representing citizens' strength.",
+    "freedom": "Achieved peacefully from the United Kingdom on July 10, 1973, led by Lynden Pindling's majority rule movement.",
+    "challenge": "Destructive Atlantic hurricanes, sea-level rise threats, and high tourism dependency."
+  },
+  "faqs": [
+    {
+      "question": "Who were the Eleutheran Adventurers?",
+      "answer": "They were English Puritans who fled religious persecution in Bermuda and established the first permanent British settlement in the Bahamas in 1648."
+    },
+    {
+      "question": "What is the economic backbone of the Bahamas?",
+      "answer": "Tourism is the primary industry, accounting for over 50% of the GDP and employing half of the national workforce."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1492",
+      "event": "Christopher Columbus makes his first landfall in the Americas on the Bahamian island of San Salvador."
+    },
+    {
+      "year": "1648",
+      "event": "English Puritans establish the Eleutheran Adventurers colony, fleeing religious persecution."
+    },
+    {
+      "year": "1718",
+      "event": "Woodes Rogers becomes first Royal Governor, successfully expelling pirates from Nassau."
+    },
+    {
+      "year": "1967",
+      "event": "The Bahamas achieves majority rule, with Lynden Pindling appointed Premier."
+    },
+    {
+      "year": "1973",
+      "event": "The Bahamas gains full independence from the United Kingdom on July 10."
+    }
+  ]
+}

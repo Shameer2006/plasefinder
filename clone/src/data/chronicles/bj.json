@@ -1,0 +1,55 @@
+{
+  "code": "BJ",
+  "name": "Benin",
+  "capital": "Porto-Novo",
+  "continent": "Africa",
+  "population": "13.4 Million",
+  "currency": "West African CFA Franc (XOF)",
+  "languages": [
+    "French"
+  ],
+  "seoTitle": "History of Benin: Dahomey Kingdom Wars, Pan-African Flag, and Democratic Transition",
+  "metaDescription": "Explore the history of Benin, from the Kingdom of Dahomey and French conquest to its tricolor flag and Marxist-to-democracy transition.",
+  "mapFormation": "Benin is a narrow, north-south oriented country in West Africa, stretching from the Bight of Benin to the Niger River. The country's borders were established during the French colonial campaigns against the Kingdom of Dahomey in the late 19th century. French military forces captured Abomey in 1892, merging the historical coastal kingdoms of Porto-Novo and Cotonou with northern tribal territories bordering Niger and Upper Volta (now Burkina Faso) into a single protectorate. This border design grouped diverse ethnic groups, principally the Fon in the south and the Bariba in the north, bordering Saharan states like <a href=\"/chronicles/dz\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Algeria</a>.",
+  "flagHistory": "The flag of Benin features a vertical green band on the hoist side, and two horizontal yellow and red bands on the fly. The colors are traditional Pan-African colors: green represents hope and the country's southern vegetation; yellow symbolizes the northern savannas; and red represents the courage of the ancestors who fought for independence. The flag was originally adopted in 1959 and was replaced during the Marxist-Leninist regime (1975-1990) with a green flag holding a red star, before being restored on August 1, 1990.",
+  "freedomStory": "Benin, then known as the Republic of Dahomey, gained independence from France on August 1, 1960, under President Hubert Maga. The early decades of independence were marked by ethnic factionalism and military coups, culminating in a Marxist-Leninist coup in 1972 led by Mathieu Kérékou, who renamed the country Benin in 1975. In 1990, facing economic collapse, Kérékou convened a historic National Conference that led to peaceful transition to multi-party democracy, a model copied across Africa.",
+  "challenges": "Benin struggles with economic limitations and security concerns. The national economy is heavily dependent on cotton production and informal transit trade with neighboring Nigeria, leaving it vulnerable to changes in Nigerian trade policies. Additionally, Benin faces emerging security challenges along its northern borders due to the spillover of Islamist militant insurgencies operating in Burkina Faso and Niger, requiring increased defense spending and border patrol efforts.",
+  "aiSummary": {
+    "geo": "Narrow West African territory; borders established by French colonial campaigns consolidating the Dahomey Kingdom and northern plains.",
+    "flag": "Pan-African tricolor: vertical green stripe (hoist) with yellow and red horizontal panels.",
+    "freedom": "Gained from France on August 1, 1960; initiated Africa's first successful peaceful 'National Conference' democratic transition in 1990.",
+    "challenge": "Cotton dependency, trade barriers with Nigeria, and rising extremist threats on northern borders."
+  },
+  "faqs": [
+    {
+      "question": "What was the Kingdom of Dahomey famous for?",
+      "answer": "Dahomey was renowned for its highly organized military, its role in the slave trade, and the Dahomey Amazons, an all-female military regiment."
+    },
+    {
+      "question": "Why did Dahomey change its name to Benin?",
+      "answer": "Mathieu Kerekou changed the name to Benin in 1975 to pick a name neutral to all ethnic groups, as Dahomey historically only referred to the Fon kingdom."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1892",
+      "event": "French forces defeat King Behanzin of Dahomey, establishing a French colonial protectorate."
+    },
+    {
+      "year": "1960",
+      "event": "Dahomey gains independence from France on August 1, with Hubert Maga as president."
+    },
+    {
+      "year": "1975",
+      "event": "The country is renamed the People's Republic of Benin under Mathieu Kérékou's Marxist regime."
+    },
+    {
+      "year": "1990",
+      "event": "The National Conference leads to democratic reforms, ending Marxist rule and restoring the original flag."
+    },
+    {
+      "year": "2016",
+      "event": "Patrice Talon is elected president, initiating major economic and constitutional reforms."
+    }
+  ]
+}

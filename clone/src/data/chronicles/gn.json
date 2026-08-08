@@ -1,0 +1,47 @@
+{
+  "code": "GN",
+  "name": "Guinea",
+  "capital": "Conakry",
+  "continent": "Africa",
+  "population": "13.8 Million",
+  "currency": "Guinean Franc (GNF)",
+  "languages": [
+    "French"
+  ],
+  "seoTitle": "Detailed History of Guinea: Map Formation, Flag Origin, and Independence",
+  "metaDescription": "Discover the rich history of Guinea. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
+  "mapFormation": "The geographical formation of Guinea is a key element of its national identity in Africa. Characterized by its mineral-rich West African highlands, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Guinea came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
+  "flagHistory": "The national flag of Guinea is a powerful symbol of the country's sovereignty and cultural heritage. The design features a vertical bands of red, yellow, and green. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
+  "freedomStory": "The path to freedom and sovereignty for Guinea involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from France in 1958. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Guinea, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
+  "challenges": "Today, Guinea faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to military junta governance and mining corruption, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Guinea continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "aiSummary": {
+    "geo": "Located in Africa; borders shaped by regional administrative history and physical terrain.",
+    "flag": "A distinct banner featuring vertical bands of red, yellow, and green representing national sovereignty.",
+    "freedom": "Gained sovereignty from France in 1958 through historical national movements.",
+    "challenge": "Currently facing developmental tasks related to military junta governance and mining corruption."
+  },
+  "faqs": [
+    {
+      "question": "When did Guinea gain independence?",
+      "answer": "Guinea attained its full sovereignty and recognized independence from France in 1958."
+    },
+    {
+      "question": "What are the main geographical characteristics of Guinea?",
+      "answer": "Guinea is located in Africa and features a geographical layout characterized by mineral-rich West African highlands."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1800s",
+      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+    },
+    {
+      "year": "1900s",
+      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+    },
+    {
+      "year": "Sovereignty",
+      "event": "Official declaration of independence and international recognition of Guinea."
+    }
+  ]
+}

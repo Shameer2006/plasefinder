@@ -1,0 +1,57 @@
+{
+  "code": "IN",
+  "name": "India",
+  "capital": "New Delhi",
+  "continent": "Asia",
+  "population": "1.4 Billion",
+  "currency": "Indian Rupee (INR)",
+  "languages": [
+    "Tamil",
+    "English",
+    "Hindi"
+  ],
+  "seoTitle": "History of India: Independence, Map Formation, and Tricolor Flag",
+  "metaDescription": "Explore the rich history of India, from ancient civilizations to British colonial rule. Learn about the independence movement, the Tiranga flag, and its vibrant culture.",
+  "mapFormation": "The Indian subcontinent has a history spanning thousands of years, home to the Indus Valley Civilization and ancient empires like the Maurya and Gupta. The geographical boundaries of modern India were significantly shaped during the British Raj. The map as we know it today was finalized upon independence in 1947, which also resulted in the Partition of India—creating the separate nations of India and Pakistan (and later Bangladesh). Following independence, over 500 princely states were integrated into the Indian Union under the leadership of Sardar Vallabhbhai Patel. The internal map continued to evolve, with states eventually reorganized along linguistic lines in 1956.",
+  "flagHistory": "The National Flag of India, colloquially known as the Tiranga (Tricolor), was adopted on July 22, 1947. It features three horizontal bands: deep saffron (Kesari) at the top representing courage and sacrifice, white in the middle representing peace and truth, and dark green at the bottom representing faith and chivalry. In the center of the white band is a navy blue wheel with 24 spokes, the Ashoka Chakra, which represents the eternal wheel of law and dynamics of peaceful change. The flag was based on a design by Pingali Venkayya and is a profound symbol of the nation's freedom struggle and democratic values.",
+  "freedomStory": "India's struggle for independence was a massive, multi-generational movement against nearly 200 years of British colonial rule. Led by the Indian National Congress and prominent figures like Mahatma Gandhi, Jawaharlal Nehru, and Subhas Chandra Bose, the movement utilized both non-violent civil disobedience and armed struggle. Gandhi's principles of Ahimsa (non-violence) and Satyagraha (truth force) mobilized millions across the subcontinent. The long and arduous journey culminated in the Indian Independence Act, and India officially became a free and independent nation on August 15, 1947, later adopting its constitution and becoming a Republic on January 26, 1950.",
+  "challenges": "As the world's most populous democracy and a rapidly growing major economy, India faces complex challenges. While it boasts a thriving IT sector, a space program, and a massive demographic dividend, it continues to grapple with income inequality, poverty, and infrastructure deficits in rural areas. Environmental concerns, such as air pollution and water scarcity, are increasingly pressing. Additionally, navigating regional geopolitics and ensuring equitable economic growth for its diverse and massive population remain top priorities for the government.",
+  "aiSummary": {
+    "geo": "South Asian subcontinent; modern borders defined by the 1947 Partition and subsequent integration of princely states.",
+    "flag": "The Tiranga: saffron, white, and green horizontal bands with the navy blue Ashoka Chakra in the center.",
+    "freedom": "Achieved independence from British rule on August 15, 1947, largely through non-violent civil disobedience led by Mahatma Gandhi.",
+    "challenge": "Balancing rapid economic growth and technological advancement with poverty reduction and environmental sustainability."
+  },
+  "faqs": [
+    {
+      "question": "When did India gain independence?",
+      "answer": "India gained independence from British rule on August 15, 1947. It later became a Republic when its constitution came into effect on January 26, 1950."
+    },
+    {
+      "question": "What does the Ashoka Chakra on the Indian flag signify?",
+      "answer": "The 24-spoke navy blue Ashoka Chakra represents the eternal wheel of law (Dharma) and the dynamic nature of peaceful change and progress."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1857",
+      "event": "The Indian Rebellion of 1857 (Sepoy Mutiny) marks the first major uprising against British East India Company rule."
+    },
+    {
+      "year": "1947",
+      "event": "India achieves independence on August 15, accompanied by the Partition into India and Pakistan."
+    },
+    {
+      "year": "1950",
+      "event": "The Constitution of India comes into effect on January 26, establishing the Republic of India."
+    },
+    {
+      "year": "1991",
+      "event": "India initiates major economic liberalization reforms, opening its economy to global trade."
+    },
+    {
+      "year": "2023",
+      "event": "India successfully lands the Chandrayaan-3 mission on the Moon's south pole."
+    }
+  ]
+}

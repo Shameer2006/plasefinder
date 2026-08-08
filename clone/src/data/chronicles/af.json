@@ -1,0 +1,60 @@
+{
+  "code": "AF",
+  "name": "Afghanistan",
+  "capital": "Kabul",
+  "continent": "Asia",
+  "population": "41.1 Million",
+  "currency": "Afghan Afghani (AFN)",
+  "languages": [
+    "Pashto",
+    "Dari"
+  ],
+  "seoTitle": "History of Afghanistan: Map Formation, Flag Symbolism, and Freedom Path",
+  "metaDescription": "Explore the detailed history of Afghanistan, including its geographical border formation, the symbolism of its red, black, and green flag, and the path to independence.",
+  "mapFormation": "Afghanistan is situated at the historic crossroads of Central, South, and Western Asia, a geographical positioning that has profoundly shaped its borders. Throughout antiquity, it served as a key artery of the Silk Road, linking ancient empires. The modern borders of the country began to crystallize in the late 19th century during the 'Great Game'—a period of intense geopolitical rivalry between the British Empire and the Russian Empire. To prevent a direct clash between the two powers, Afghanistan was designated as a neutral buffer state. In 1893, Sir Mortimer Durand negotiated the Durand Line with Emir Abdur Rahman Khan, establishing the border with British India (modern Pakistan). This boundary split ethnic Pashtun lands in two, creating lasting geopolitical challenges that persist to this day. Other borders, such as the northern frontier along the Amu Darya river, were finalized through joint Anglo-Russian commissions in the late 1800s, leaving a legacy of a highly complex, landlocked terrain surrounded by six nations, including regional neighbors like <a href=\"/chronicles/az\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Azerbaijan</a>.",
+  "flagHistory": "The flag of Afghanistan has undergone more changes than almost any other national banner in the 20th century, reflecting its turbulent political history. The classical design features three equal vertical bands of black, red, and green. The black band symbolizes the dark, war-torn history of the country; the red band represents the blood of martyrs shed during the struggle for independence; and the green band represents hope, prosperity, and the prominent role of Islam in Afghan society. At the center of the flag sits the national emblem, which features a mosque with a Mihrab (prayer niche facing Mecca) and a Minbar (pulpit), flanked by two national flags. Surrounding the mosque are sheaves of wheat, symbolizing agriculture and unity. The emblem is crowned by the Shahada (the Islamic creed) and the year 1298 of the Solar Hijri calendar (1919 CE), celebrating the year of sovereignty from British influence.",
+  "freedomStory": "Afghanistan is famously referred to as the 'Graveyard of Empires' due to its successful resistance against foreign domination. During the 19th century, the British Empire launched three Anglo-Afghan Wars (1839, 1878, and 1919) in an attempt to secure influence over the region and counter Russian expansion. While the first two wars resulted in heavy British casualties but left Britain in control of Afghanistan's foreign relations, the Third Anglo-Afghan War in 1919 led to full independence. Led by the reforming monarch King Amanullah Khan, Afghan forces pushed British forces back, leading to the signing of the Treaty of Rawalpindi on August 19, 1919. This treaty officially recognized Afghanistan's absolute sovereignty and independence in all external affairs, establishing August 19 as the country's national Independence Day.",
+  "challenges": "Modern Afghanistan faces severe and interconnected difficulties. As a landlocked country, its economic development is heavily dependent on transit trade through neighboring Pakistan and Iran, which is frequently disrupted by political disputes. The rugged, mountainous geography of the Hindu Kush range hinders the development of domestic infrastructure, making remote provinces difficult to access. Politically, the country has suffered from decades of continuous civil war, foreign interventions, and institutional instability. These crises have led to economic isolation, high rates of poverty, food insecurity, and human rights issues, particularly regarding women's education. Furthermore, the country is situated on active tectonic boundaries, making it highly vulnerable to devastating earthquakes and droughts, complicating international humanitarian assistance.",
+  "aiSummary": {
+    "geo": "Borders shaped by the 19th-century 'Great Game' buffer policies, including the disputed Durand Line.",
+    "flag": "Three vertical bands of black (history), red (martyrs' blood), and green (Islamic hope) with a central mosque crest.",
+    "freedom": "Sovereignty won from the British Empire in 1919 following the Third Anglo-Afghan War and Treaty of Rawalpindi.",
+    "challenge": "Landlocked topography, infrastructure deficits, tectonic vulnerability, and severe socio-economic crises."
+  },
+  "faqs": [
+    {
+      "question": "Why is Afghanistan called the 'Graveyard of Empires'?",
+      "answer": "Afghanistan earned this title due to its historical resilience against foreign powers, successfully repelling invasions from the British Empire, the Soviet Union, and modern coalitions."
+    },
+    {
+      "question": "What is the meaning of the year 1298 on the Afghan emblem?",
+      "answer": "The year 1298 corresponds to 1919 CE in the Solar Hijri calendar, which is the year Afghanistan gained full sovereignty in foreign relations from the United Kingdom."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "1747",
+      "event": "Ahmad Shah Durrani unites Pashtun tribes and establishes the Durrani Empire, the predecessor of modern Afghanistan."
+    },
+    {
+      "year": "1839-1842",
+      "event": "The First Anglo-Afghan War results in a disastrous defeat for British forces trying to install a puppet ruler."
+    },
+    {
+      "year": "1893",
+      "event": "The Durand Line Agreement is signed, delineating the border between Afghanistan and British India."
+    },
+    {
+      "year": "1919",
+      "event": "The Third Anglo-Afghan War concludes with the Treaty of Rawalpindi, establishing full Afghan independence."
+    },
+    {
+      "year": "1973",
+      "event": "The monarchy is overthrown, and Afghanistan is declared a republic."
+    },
+    {
+      "year": "1979-1989",
+      "event": "Soviet military intervention triggers a decade-long guerrilla war."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "South America": {
+    "file": "south-america.json",
+    "count": 84287,
+    "sizeBytes": 10482520
+  },
+  "Europe": {
+    "file": "europe.json",
+    "count": 314281,
+    "sizeBytes": 38535884
+  },
+  "Other": {
+    "file": "other.json",
+    "count": 16067,
+    "sizeBytes": 1969708
+  },
+  "Africa": {
+    "file": "africa.json",
+    "count": 90272,
+    "sizeBytes": 11135770
+  },
+  "North America": {
+    "file": "north-america.json",
+    "count": 81070,
+    "sizeBytes": 10004321
+  },
+  "Asia": {
+    "file": "asia.json",
+    "count": 172946,
+    "sizeBytes": 21187514
+  },
+  "Oceania": {
+    "file": "oceania.json",
+    "count": 25993,
+    "sizeBytes": 3208755
+  }
+}
