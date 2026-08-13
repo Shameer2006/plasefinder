@@ -91,7 +91,7 @@ export default function AboutPage() {
 
       {/* Hero */}
       <section style={{
-        padding: '5rem 2rem 3rem',
+        padding: 'clamp(2.5rem, 6vw, 5rem) clamp(1rem, 3vw, 2rem) 2rem',
         maxWidth: '900px',
         margin: '0 auto',
         textAlign: 'center',
@@ -128,7 +128,7 @@ export default function AboutPage() {
         </div>
 
         <p style={{
-          fontSize: '1.25rem',
+          fontSize: 'clamp(1.05rem, 2.5vw, 1.25rem)',
           lineHeight: 1.8,
           color: '#9ca3af',
           maxWidth: '700px',
@@ -144,17 +144,17 @@ export default function AboutPage() {
 
       {/* Features */}
       <section style={{
-        padding: '3rem 2rem',
+        padding: 'clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)',
         maxWidth: '900px',
         margin: '0 auto',
       }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>
+        <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', textAlign: 'center' }}>
           Key Features
         </h2>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '1.5rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gap: '1.25rem',
         }}>
           {[
             { icon: '🆓', title: '100% Free', desc: 'No subscription, no limits. Play unlimited rounds forever.' },
@@ -182,21 +182,21 @@ export default function AboutPage() {
 
       {/* Game Modes */}
       <section style={{
-        padding: '3rem 2rem',
+        padding: 'clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)',
         maxWidth: '900px',
         margin: '0 auto',
       }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>
+        <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', textAlign: 'center' }}>
           Game Modes
         </h2>
         <div style={{
           background: 'rgba(255,255,255,0.03)',
           border: '1px solid rgba(255,255,255,0.08)',
           borderRadius: '20px',
-          padding: '2rem',
+          padding: 'clamp(1.2rem, 3vw, 2rem)',
           display: 'flex',
           flexDirection: 'column',
-          gap: '1.5rem',
+          gap: '1.25rem',
         }}>
           {[
             { mode: 'Easy Mode', desc: 'Multiple choice questions about the location. Great for beginners learning world geography.' },
@@ -206,7 +206,7 @@ export default function AboutPage() {
             { mode: 'Party Mode', desc: 'Create or join a private room with a 6-digit code. Play with friends in groups of up to 20.' },
             { mode: 'Daily Challenge', desc: 'One special round per day. Build your streak and earn bonus XP for consecutive plays.' },
           ].map((item) => (
-            <div key={item.mode} style={{ display: 'flex', gap: '1rem', alignItems: 'baseline' }}>
+            <div key={item.mode} style={{ display: 'flex', gap: '1rem', alignItems: 'baseline', flexWrap: 'wrap' }}>
               <span style={{ color: '#10b981', fontWeight: 700, fontSize: '1rem', minWidth: 'fit-content' }}>▸ {item.mode}</span>
               <span style={{ color: '#9ca3af', fontSize: '0.95rem', lineHeight: 1.6 }}>{item.desc}</span>
             </div>
@@ -216,11 +216,11 @@ export default function AboutPage() {
 
       {/* Comparison Table */}
       <section style={{
-        padding: '3rem 2rem',
+        padding: 'clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)',
         maxWidth: '900px',
         margin: '0 auto',
       }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>
+        <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', textAlign: 'center' }}>
           LostStreet vs GeoGuessr
         </h2>
         <div className="table-wrapper">
@@ -256,11 +256,11 @@ export default function AboutPage() {
 
       {/* FAQ */}
       <section style={{
-        padding: '3rem 2rem 5rem',
+        padding: 'clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem) 4rem',
         maxWidth: '900px',
         margin: '0 auto',
       }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>
+        <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', textAlign: 'center' }}>
           Frequently Asked Questions
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -272,14 +272,17 @@ export default function AboutPage() {
               overflow: 'hidden',
             }}>
               <summary style={{
-                padding: '1.25rem 1.5rem',
+                padding: '1rem 1.25rem',
+                minHeight: '48px',
                 cursor: 'pointer',
                 fontWeight: 600,
-                fontSize: '1.05rem',
+                fontSize: '1rem',
                 listStyle: 'none',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
+                touchAction: 'manipulation',
+                WebkitTapHighlightColor: 'transparent',
               }}>
                 {item.q}
                 <span style={{ fontSize: '1.2rem', color: '#10b981', flexShrink: 0, marginLeft: '1rem' }}>+</span>

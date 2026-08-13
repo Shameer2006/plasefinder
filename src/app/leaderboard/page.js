@@ -118,9 +118,9 @@ export default function LeaderboardPage() {
       </header>
 
       {/* Content */}
-      <div style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
+      <div style={{ maxWidth: '800px', margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)' }}>
         <h1 style={{
-          fontSize: 'clamp(2rem, 5vw, 3rem)',
+          fontSize: 'clamp(1.8rem, 5vw, 3rem)',
           fontWeight: 800,
           textAlign: 'center',
           marginBottom: '0.5rem',
@@ -131,7 +131,7 @@ export default function LeaderboardPage() {
         }}>
           🏆 Leaderboard
         </h1>
-        <p style={{ textAlign: 'center', color: '#9ca3af', marginBottom: '2rem', fontSize: '1.1rem' }}>
+        <p style={{ textAlign: 'center', color: '#9ca3af', marginBottom: '1.5rem', fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)' }}>
           Top players on LostStreet
         </p>
 
@@ -139,23 +139,26 @@ export default function LeaderboardPage() {
         <div style={{
           display: 'flex',
           justifyContent: 'center',
-          gap: '0.5rem',
+          gap: '0.6rem',
           marginBottom: '2rem',
           flexWrap: 'wrap',
         }}>
           <button
             onClick={() => setSortBy('elo')}
             style={{
-              padding: '10px 24px',
+              padding: '10px 22px',
+              minHeight: '44px',
               borderRadius: '50px',
               border: 'none',
-              fontWeight: 600,
+              fontWeight: 700,
               fontSize: '0.95rem',
               cursor: 'pointer',
               fontFamily: "'Outfit', sans-serif",
               background: sortBy === 'elo' ? 'linear-gradient(135deg, #10b981, #059669)' : 'rgba(255,255,255,0.08)',
               color: '#fff',
               transition: 'all 0.2s',
+              touchAction: 'manipulation',
+              WebkitTapHighlightColor: 'transparent',
             }}
           >
             🎯 By ELO Rating
@@ -163,16 +166,19 @@ export default function LeaderboardPage() {
           <button
             onClick={() => setSortBy('xp')}
             style={{
-              padding: '10px 24px',
+              padding: '10px 22px',
+              minHeight: '44px',
               borderRadius: '50px',
               border: 'none',
-              fontWeight: 600,
+              fontWeight: 700,
               fontSize: '0.95rem',
               cursor: 'pointer',
               fontFamily: "'Outfit', sans-serif",
               background: sortBy === 'xp' ? 'linear-gradient(135deg, #3b82f6, #2563eb)' : 'rgba(255,255,255,0.08)',
               color: '#fff',
               transition: 'all 0.2s',
+              touchAction: 'manipulation',
+              WebkitTapHighlightColor: 'transparent',
             }}
           >
             ⭐ By Total XP

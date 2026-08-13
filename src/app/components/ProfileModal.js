@@ -445,15 +445,18 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                 border: '1px solid rgba(239, 68, 68, 0.3)',
                 color: '#fca5a5',
                 padding: '8px 14px',
+                minHeight: '44px',
                 borderRadius: '12px',
-                fontSize: '0.8rem',
+                fontSize: '0.85rem',
                 fontWeight: 800,
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
                 backdropFilter: 'blur(10px)',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.2s ease',
+                touchAction: 'manipulation',
+                WebkitTapHighlightColor: 'transparent',
               }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
@@ -463,8 +466,8 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
             <button
               onClick={onClose}
               style={{
-                width: '36px',
-                height: '36px',
+                minWidth: '44px',
+                minHeight: '44px',
                 borderRadius: '12px',
                 background: 'rgba(255, 255, 255, 0.08)',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
@@ -473,12 +476,12 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                backdropFilter: 'blur(10px)',
-                transition: 'all 0.2s ease'
+                touchAction: 'manipulation',
+                WebkitTapHighlightColor: 'transparent',
               }}
-              aria-label="Close profile"
+              aria-label="Close Profile"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
           </div>
 

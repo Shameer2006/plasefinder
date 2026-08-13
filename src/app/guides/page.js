@@ -19,14 +19,23 @@ export default function GuidesPage() {
 
   const guides = [
     {
+      title: "25 Pro Street View & GeoGuessr Secrets Most Players Don't Know",
+      slug: "25-pro-street-view-geoguessr-secrets",
+      desc: "Master 25 advanced meta secrets used by top-ranked geography guessing players — bollards, camera generations, sun position tricks & more.",
+      date: "August 9, 2026",
+      readTime: "12 min read",
+      category: "Street View Meta",
+      icon: "🏆",
+      featured: true
+    },
+    {
       title: "How to Guess Locations from Google Street View",
       slug: "how-to-guess-locations-from-street-view",
       desc: "Master the art of geography guessing games with these pro tips on identifying bollards, license plates, architecture, and sun position.",
       date: "August 20, 2026",
       readTime: "8 min read",
       category: "Street View Meta",
-      icon: "🔍",
-      featured: true
+      icon: "🔍"
     },
     {
       title: "The Best Free GeoGuessr Alternatives in 2026",
@@ -419,6 +428,7 @@ export default function GuidesPage() {
                   onClick={() => setSelectedCategory(cat)}
                   style={{
                     padding: '8px 18px',
+                    minHeight: '44px',
                     background: isSelected ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)' : 'rgba(255, 255, 255, 0.05)',
                     border: isSelected ? 'none' : '1px solid rgba(255, 255, 255, 0.08)',
                     color: isSelected ? 'white' : '#94a3b8',
@@ -427,6 +437,8 @@ export default function GuidesPage() {
                     cursor: 'pointer',
                     fontSize: '0.88rem',
                     transition: 'all 0.2s ease',
+                    touchAction: 'manipulation',
+                    WebkitTapHighlightColor: 'transparent',
                     boxShadow: isSelected ? '0 4px 12px rgba(16, 185, 129, 0.3)' : 'none'
                   }}
                 >

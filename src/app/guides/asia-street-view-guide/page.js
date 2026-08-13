@@ -30,25 +30,81 @@ export default function ArticlePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a1a 100%)', color: '#f3f4f6', fontFamily: "'Outfit', sans-serif" }}>
-        <header className="responsive-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/guides" style={{ textDecoration: 'none', color: '#9ca3af', fontSize: '1rem', fontWeight: 600 }}>← Back to Guides</Link>
-          <Link href="/" style={{ textDecoration: 'none', color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800 }}>LostStreet</Link>
+      <div style={{
+        minHeight: '100vh',
+        background: '#fafafa',
+        color: '#111827',
+        fontFamily: '"Merriweather", "Georgia", serif',
+        lineHeight: 1.8
+      }}>
+        {/* ── TOP STICKY NAVBAR ────────────────────────────────────────── */}
+        <header style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 100,
+          background: '#ffffff',
+          borderBottom: '1px solid #e5e7eb',
+          padding: '1rem 2.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          fontFamily: '"Inter", system-ui, -apple-system, sans-serif'
+        }}>
+          <Link href="/guides" style={{
+            color: '#4b5563',
+            textDecoration: 'none',
+            fontWeight: '600',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontSize: '0.9rem',
+          }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back to Guides</span>
+          </Link>
+
+          <Link href="/" style={{ textDecoration: 'none', color: '#111827', fontSize: '1.2rem', fontWeight: 900, letterSpacing: '-0.02em' }}>
+            LostStreet <span style={{ color: '#10b981' }}>Academy</span>
+          </Link>
         </header>
-        <main style={{ padding: '4rem 2rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.8 }}>
-          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, marginBottom: '1rem', lineHeight: 1.2 }}>
-            How to Identify Asian Countries in Street View
-          </h1>
-          <div style={{ color: '#9ca3af', marginBottom: '3rem', fontSize: '0.9rem' }}>Published: September 8, 2026 • 11 min read</div>
-          <article style={{ fontSize: '1.1rem', color: '#d1d5db', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <p>
+
+        {/* ── ARTICLE CONTAINER ────────────────────────────────────────── */}
+        <main style={{ padding: '4rem 1.5rem', maxWidth: '720px', margin: '0 auto' }}>
+          
+          <header style={{ marginBottom: '3rem', textAlign: 'center', fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
+            <span style={{ color: '#10b981', fontWeight: 700, fontSize: '0.9rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+              Continent Guides
+            </span>
+            <h1 style={{
+              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              fontWeight: 900,
+              lineHeight: 1.2,
+              margin: '1rem 0',
+              color: '#111827',
+              fontFamily: '"Merriweather", "Georgia", serif'
+            }}>
+              How to Identify Asian Countries in Street View
+            </h1>
+
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', color: '#6b7280', fontSize: '0.9rem', marginTop: '1.5rem' }}>
+              <span>Published: September 8, 2026</span>
+              <span>•</span>
+              <span>11 min read</span>
+            </div>
+          </header>
+
+          <article style={{ fontSize: '1.125rem', color: '#374151' }}>
+            
+            <p style={{ fontSize: '1.25rem', color: '#4b5563', lineHeight: 1.7, marginBottom: '2.5rem' }}>
               Asia is the largest and most populous continent, covering an enormous range of climates, cultures, and landscapes. From the frozen tundra of Siberia to the tropical beaches of Thailand, identifying Asian countries in <strong>LostStreet</strong> requires a solid understanding of each sub-region's unique visual signatures.
             </p>
 
-            <h2 style={{ fontSize: '2rem', color: '#fff', marginTop: '2rem', marginBottom: '1rem' }}>East Asia</h2>
-            <h3 style={{ fontSize: '1.3rem', color: '#10b981', marginBottom: '0.5rem' }}>Japan</h3>
+            <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '3rem 0' }} />
+
+            <h2 style={headingStyle}>East Asia</h2>
+            <h3 style={subHeadingStyle}>Japan</h3>
             <p>Japan is one of the most recognisable countries in street view games. Key clues:</p>
-            <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <ul style={listStyle}>
               <li>Left-hand traffic.</li>
               <li>Extremely dense clusters of power lines and cables on wooden poles — unlike anywhere else in the world.</li>
               <li>Japanese script (Hiragana, Katakana, Kanji) on signs.</li>
@@ -57,8 +113,8 @@ export default function ArticlePage() {
               <li>Very clean, well-maintained roads and infrastructure.</li>
             </ul>
 
-            <h3 style={{ fontSize: '1.3rem', color: '#10b981', marginBottom: '0.5rem', marginTop: '1rem' }}>South Korea</h3>
-            <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <h3 style={subHeadingStyle}>South Korea</h3>
+            <ul style={listStyle}>
               <li>Right-hand traffic.</li>
               <li>Hangul script — blocky characters with circles and lines, unique to Korea.</li>
               <li>Korean flag (Taegukgi) — white with a red and blue yin-yang symbol and black trigrams.</li>
@@ -66,8 +122,8 @@ export default function ArticlePage() {
               <li>Mountains visible in the background in most locations.</li>
             </ul>
 
-            <h3 style={{ fontSize: '1.3rem', color: '#10b981', marginBottom: '0.5rem', marginTop: '1rem' }}>China</h3>
-            <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <h3 style={subHeadingStyle}>China</h3>
+            <ul style={listStyle}>
               <li>Right-hand traffic.</li>
               <li>Simplified Chinese characters on all signs.</li>
               <li>Red flags with yellow stars (Chinese national flag) on government buildings.</li>
@@ -75,9 +131,9 @@ export default function ArticlePage() {
               <li>Green electric vehicle license plates are increasingly common.</li>
             </ul>
 
-            <h2 style={{ fontSize: '2rem', color: '#fff', marginTop: '2rem', marginBottom: '1rem' }}>Southeast Asia</h2>
-            <h3 style={{ fontSize: '1.3rem', color: '#10b981', marginBottom: '0.5rem' }}>Thailand</h3>
-            <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <h2 style={headingStyle}>Southeast Asia</h2>
+            <h3 style={subHeadingStyle}>Thailand</h3>
+            <ul style={listStyle}>
               <li>Left-hand traffic.</li>
               <li>Thai script — very distinctive circular, flowing letters unlike any other script.</li>
               <li>Buddhist temples (wats) with golden spires.</li>
@@ -85,8 +141,8 @@ export default function ArticlePage() {
               <li>Motorbikes and tuk-tuks everywhere.</li>
             </ul>
 
-            <h3 style={{ fontSize: '1.3rem', color: '#10b981', marginBottom: '0.5rem', marginTop: '1rem' }}>Vietnam</h3>
-            <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <h3 style={subHeadingStyle}>Vietnam</h3>
+            <ul style={listStyle}>
               <li>Right-hand traffic.</li>
               <li>Latin script with extensive diacritical marks (Vietnamese uses a modified Latin alphabet).</li>
               <li>Red flag with a yellow star.</li>
@@ -95,8 +151,8 @@ export default function ArticlePage() {
               <li>Terraced rice fields in northern mountainous regions.</li>
             </ul>
 
-            <h3 style={{ fontSize: '1.3rem', color: '#10b981', marginBottom: '0.5rem', marginTop: '1rem' }}>Indonesia</h3>
-            <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <h3 style={subHeadingStyle}>Indonesia</h3>
+            <ul style={listStyle}>
               <li>Left-hand traffic.</li>
               <li>Latin script (Indonesian uses standard Latin alphabet).</li>
               <li>Red and white flag (simple bicolour).</li>
@@ -105,9 +161,9 @@ export default function ArticlePage() {
               <li>Distinctive Indonesian mosque architecture (domed mosques with minarets).</li>
             </ul>
 
-            <h2 style={{ fontSize: '2rem', color: '#fff', marginTop: '2rem', marginBottom: '1rem' }}>South Asia</h2>
-            <h3 style={{ fontSize: '1.3rem', color: '#10b981', marginBottom: '0.5rem' }}>India</h3>
-            <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <h2 style={headingStyle}>South Asia</h2>
+            <h3 style={subHeadingStyle}>India</h3>
+            <ul style={listStyle}>
               <li>Left-hand traffic.</li>
               <li>Multiple scripts visible — Devanagari (Hindi), Tamil, Telugu, Bengali depending on region.</li>
               <li>Saffron, white, and green tricolour flag with blue Ashoka Chakra.</li>
@@ -116,18 +172,43 @@ export default function ArticlePage() {
               <li>Cows on the road in many areas.</li>
             </ul>
 
-            <h2 style={{ fontSize: '2rem', color: '#fff', marginTop: '2rem', marginBottom: '1rem' }}>Central Asia</h2>
+            <h2 style={headingStyle}>Central Asia</h2>
             <p>Kazakhstan, Kyrgyzstan, Uzbekistan, and Tajikistan all use Cyrillic script and share Soviet-era infrastructure. Key differentiators:</p>
-            <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <ul style={listStyle}>
               <li><strong>Kazakhstan:</strong> Flatter terrain, more industrialised, better road quality due to oil wealth.</li>
               <li><strong>Kyrgyzstan:</strong> Very mountainous — dramatic peaks visible in the background.</li>
               <li><strong>Uzbekistan:</strong> More desert landscape, distinctive Islamic architecture (blue-tiled mosques and madrasas).</li>
             </ul>
 
-            <div style={{ marginTop: '3rem', padding: '2rem', background: 'rgba(16,185,129,0.1)', borderRadius: '16px', textAlign: 'center', border: '1px solid rgba(16,185,129,0.3)' }}>
-              <h3 style={{ fontSize: '1.5rem', color: '#fff', marginBottom: '1rem' }}>Test your Asia knowledge</h3>
-              <p style={{ marginBottom: '1.5rem' }}>Play LostStreet and practice identifying Asian countries from street view clues.</p>
-              <Link href="/" style={{ background: 'linear-gradient(135deg, #10b981, #3b82f6)', color: '#fff', padding: '12px 24px', borderRadius: '50px', textDecoration: 'none', fontWeight: 700 }}>
+            <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '4rem 0' }} />
+
+            {/* ── CTA CALLOUT ────────────────────────────────────────────── */}
+            <div style={{
+              marginTop: '4rem',
+              padding: '3rem',
+              background: '#f9fafb',
+              border: '1px solid #e5e7eb',
+              borderRadius: '12px',
+              textAlign: 'center',
+              fontFamily: '"Inter", system-ui, sans-serif'
+            }}>
+              <h3 style={{ fontSize: '1.5rem', color: '#111827', margin: '0 0 16px 0', fontWeight: 800 }}>
+                Test Your Asia Knowledge!
+              </h3>
+              <p style={{ color: '#4b5563', marginBottom: '2rem', fontSize: '1.1rem' }}>
+                Play LostStreet and practice identifying Asian countries from street view clues.
+              </p>
+              <Link href="/" style={{
+                background: '#10b981',
+                color: '#fff',
+                padding: '16px 32px',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                fontWeight: 700,
+                fontSize: '1rem',
+                display: 'inline-block',
+                transition: 'background 0.2s ease'
+              }}>
                 Play LostStreet Free
               </Link>
             </div>
@@ -137,3 +218,33 @@ export default function ArticlePage() {
     </>
   );
 }
+
+const headingStyle = {
+  fontSize: '2rem',
+  fontWeight: 800,
+  color: '#111827',
+  marginTop: '3.5rem',
+  marginBottom: '1.5rem',
+  fontFamily: '"Merriweather", "Georgia", serif',
+  lineHeight: 1.3
+};
+
+const subHeadingStyle = {
+  fontSize: '1.4rem',
+  fontWeight: 700,
+  color: '#1f2937',
+  marginTop: '2.5rem',
+  marginBottom: '1rem',
+  fontFamily: '"Inter", system-ui, sans-serif'
+};
+
+const listStyle = {
+  listStyleType: 'disc',
+  paddingLeft: '1.5rem',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.75rem',
+  marginBottom: '2rem',
+  color: '#374151'
+};
+

@@ -7,9 +7,9 @@ export const metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <div style={{ minHeight: '100vh', padding: '4rem 2rem', background: '#0a0a0a', color: '#e5e5e5' }}>
-      <div style={{ maxWidth: '800px', margin: '0 auto', background: 'rgba(26, 26, 46, 0.8)', padding: '3rem', borderRadius: '16px', boxShadow: '0 4px 30px rgba(0,0,0,0.5)' }}>
-        <h1 className="gradient-text glow-text" style={{ fontSize: '2.5rem', marginBottom: '2rem', textAlign: 'center' }}>
+    <div style={{ minHeight: '100vh', padding: 'clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem)', background: '#0a0a0a', color: '#e5e5e5' }}>
+      <div style={{ maxWidth: '800px', margin: '0 auto', background: 'rgba(26, 26, 46, 0.8)', padding: 'clamp(1.25rem, 4vw, 3rem)', borderRadius: '16px', boxShadow: '0 4px 30px rgba(0,0,0,0.5)' }}>
+        <h1 className="gradient-text glow-text" style={{ fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', marginBottom: '1.5rem', textAlign: 'center' }}>
           Privacy Policy
         </h1>
         

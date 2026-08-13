@@ -125,19 +125,21 @@ function SiteHeader() {
                 background: 'none',
                 border: '1px solid rgba(255,255,255,0.2)',
                 color: '#fff',
-                width: '38px', height: '38px',
+                width: '44px', height: '44px',
                 borderRadius: '8px',
                 display: 'none',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
                 flexShrink: 0,
+                touchAction: 'manipulation',
+                WebkitTapHighlightColor: 'transparent',
               }}
             >
               {menuOpen ? (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               ) : (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
               )}
             </button>
           </div>
@@ -163,6 +165,8 @@ function SiteHeader() {
             borderBottom: '1px solid rgba(255,255,255,0.1)',
             padding: '1.2rem clamp(1rem, 4vw, 2rem)',
             display: 'flex', flexDirection: 'column', gap: '0.2rem',
+            maxHeight: 'calc(100dvh - 56px)',
+            overflowY: 'auto',
             animation: 'slideDown 0.22s ease forwards',
           }}>
             {links.map(({ href, label }) => {
@@ -178,12 +182,15 @@ function SiteHeader() {
                     fontSize: '1.05rem',
                     fontWeight: active ? 700 : 400,
                     fontFamily: '"Outfit", sans-serif',
-                    padding: '0.75rem 0.5rem',
+                    padding: '0.85rem 0.5rem',
+                    minHeight: '44px',
+                    display: 'flex',
+                    alignItems: 'center',
                     borderBottom: '1px solid rgba(255,255,255,0.06)',
                     borderLeft: active ? '3px solid #e8c84a' : '3px solid transparent',
                     paddingLeft: '0.8rem',
-                    display: 'block',
                     transition: 'color 0.15s, border-color 0.15s',
+                    touchAction: 'manipulation',
                   }}
                 >
                   {label}
@@ -198,12 +205,14 @@ function SiteHeader() {
                   background: 'transparent',
                   border: '1px solid rgba(255,255,255,0.4)',
                   color: '#fff',
-                  padding: '10px 16px',
+                  padding: '12px 16px',
+                  minHeight: '46px',
                   borderRadius: '8px',
                   fontSize: '1rem',
                   fontWeight: 500,
                   fontFamily: '"Outfit", sans-serif',
                   cursor: 'pointer',
+                  touchAction: 'manipulation',
                 }}>
                   Sign In with Google
                 </button>
@@ -211,7 +220,8 @@ function SiteHeader() {
                 <Link href="/" onClick={() => setMenuOpen(false)} style={{
                   display: 'block', textAlign: 'center',
                   color: '#e8c84a', textDecoration: 'none',
-                  fontSize: '1rem', fontWeight: 600, padding: '10px',
+                  fontSize: '1rem', fontWeight: 600, padding: '12px',
+                  minHeight: '44px',
                 }}>▶ Play Now</Link>
               )}
             </div>
@@ -252,10 +262,11 @@ function SiteFooter() {
             </p>
           </div>
 
-          <nav aria-label="Footer Navigation" style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(0.8rem, 2vw, 2rem)' }}>
+          <nav aria-label="Footer Navigation" style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(0.8rem, 2vw, 1.5rem)' }}>
             {links.map(({ href, label }) => (
               <Link key={href} href={href} style={{
                 color: '#888', textDecoration: 'none', fontSize: '0.875rem',
+                padding: '6px 4px', minHeight: '36px', display: 'inline-flex', alignItems: 'center',
                 transition: 'color 0.2s',
               }}
                 onMouseEnter={e => e.currentTarget.style.color = '#fff'}

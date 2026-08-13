@@ -104,9 +104,11 @@ export default function CommunityClient() {
           <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 1.8rem)', fontWeight: 800, marginBottom: '0.8rem' }}>Ready to Play?</h2>
           <p style={{ color: '#d1d5db', marginBottom: '1.5rem', fontSize: '1rem' }}>Jump into a game, then come share your score with the community.</p>
           <a href="/" style={{
-            display: 'inline-block', background: 'linear-gradient(135deg, #10b981, #3b82f6)',
-            color: 'white', padding: '12px 32px', borderRadius: '10px',
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            background: 'linear-gradient(135deg, #10b981, #3b82f6)',
+            color: 'white', padding: '12px 32px', minHeight: '48px', borderRadius: '10px',
             textDecoration: 'none', fontWeight: 800, fontSize: '1rem',
+            touchAction: 'manipulation', WebkitTapHighlightColor: 'transparent',
           }}>▶ Play LostStreet Free</a>
         </section>
       </div>
@@ -138,11 +140,13 @@ function SocialCard({ s }) {
         target="_blank"
         rel="noopener noreferrer"
         style={{
-          display: 'inline-block', background: s.color, color: 'white',
-          padding: '10px 20px', borderRadius: '8px', textDecoration: 'none',
+          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+          background: s.color, color: 'white',
+          padding: '10px 20px', minHeight: '44px', borderRadius: '8px', textDecoration: 'none',
           fontWeight: 700, fontSize: '0.9rem', textAlign: 'center',
           opacity: s.url === '#' ? 0.5 : 1,
           pointerEvents: s.url === '#' ? 'none' : 'auto',
+          touchAction: 'manipulation', WebkitTapHighlightColor: 'transparent',
         }}
       >
         {s.cta} →

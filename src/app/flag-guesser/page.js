@@ -93,16 +93,16 @@ export default function FlagGuesserPage() {
         </nav>
 
         {/* Hero */}
-        <section style={{ padding: '3rem 2rem', maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+        <section style={{ padding: 'clamp(2rem, 5vw, 3.5rem) clamp(1rem, 3vw, 2rem)', maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
           <h1 style={{
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, marginBottom: '1.5rem',
+            fontSize: 'clamp(1.8rem, 5vw, 3.5rem)', fontWeight: 800, marginBottom: '1.5rem',
             background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', lineHeight: 1.2,
           }}>
             Free Country Flag Identifier & Quiz
           </h1>
 
-          <p style={{ fontSize: '1.25rem', lineHeight: 1.8, color: '#9ca3af', maxWidth: '700px', margin: '0 auto 2rem' }}>
+          <p style={{ fontSize: 'clamp(1.05rem, 2.5vw, 1.25rem)', lineHeight: 1.8, color: '#9ca3af', maxWidth: '700px', margin: '0 auto 2rem' }}>
             How many of the world&apos;s 196 country flags can you identify?
             Test your knowledge with our free flag guessing game — no sign-up needed.
           </p>
@@ -110,17 +110,18 @@ export default function FlagGuesserPage() {
           <Link href="/#FLAG_GAME" style={{
             textDecoration: 'none', color: '#fff',
             background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
-            padding: '16px 40px', borderRadius: '50px', fontWeight: 700, fontSize: '1.15rem',
-            display: 'inline-block', boxShadow: '0 4px 20px rgba(251,191,36,0.3)',
+            padding: '16px 36px', borderRadius: '50px', fontWeight: 700, fontSize: '1.15rem',
+            minHeight: '48px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 4px 20px rgba(251,191,36,0.3)', touchAction: 'manipulation',
           }}>
             🏁 Start Flag Quiz — It&apos;s Free
           </Link>
         </section>
 
         {/* How It Works */}
-        <section style={{ padding: '3rem 2rem', maxWidth: '900px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>How the Flag Guesser Works</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
+        <section style={{ padding: 'clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)', maxWidth: '900px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', textAlign: 'center' }}>How the Flag Guesser Works</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
             {[
               { icon: '🏳️', title: 'See a Flag', desc: 'A random country flag is displayed. Study the colors, symbols, and patterns carefully.' },
               { icon: '🤔', title: 'Make Your Guess', desc: 'Choose the correct country from multiple choice options. The faster you answer, the more points you earn.' },
@@ -139,11 +140,11 @@ export default function FlagGuesserPage() {
         </section>
 
         {/* Tips */}
-        <section style={{ padding: '3rem 2rem', maxWidth: '900px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>Flag Identification Tips</h2>
+        <section style={{ padding: 'clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)', maxWidth: '900px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', textAlign: 'center' }}>Flag Identification Tips</h2>
           <div style={{
             background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '20px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem',
+            borderRadius: '20px', padding: 'clamp(1.2rem, 3vw, 2rem)', display: 'flex', flexDirection: 'column', gap: '1rem',
           }}>
             {[
               { pattern: 'Tricolour Flags', tip: 'France, Italy, Ireland, Belgium, Romania — learn which colors belong to which country.' },
@@ -152,7 +153,7 @@ export default function FlagGuesserPage() {
               { pattern: 'Red, White & Blue', tip: 'USA, UK, France, Netherlands, Russia — the most common color combination. Learn the patterns.' },
               { pattern: 'African Pan-Colors', tip: 'Green, yellow, red stripes appear across many African nations. Look for unique emblems.' },
             ].map((item) => (
-              <div key={item.pattern} style={{ display: 'flex', gap: '1rem', alignItems: 'baseline' }}>
+              <div key={item.pattern} style={{ display: 'flex', gap: '1rem', alignItems: 'baseline', flexWrap: 'wrap' }}>
                 <span style={{ color: '#fbbf24', fontWeight: 700, fontSize: '1rem', minWidth: 'fit-content' }}>▸ {item.pattern}</span>
                 <span style={{ color: '#9ca3af', fontSize: '0.95rem', lineHeight: 1.6 }}>{item.tip}</span>
               </div>
@@ -167,8 +168,8 @@ export default function FlagGuesserPage() {
         </section>
 
         {/* FAQ */}
-        <section style={{ padding: '3rem 2rem 5rem', maxWidth: '900px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>Frequently Asked Questions</h2>
+        <section style={{ padding: 'clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem) 4rem', maxWidth: '900px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', textAlign: 'center' }}>Frequently Asked Questions</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {faqJsonLd.mainEntity.map((faq) => (
               <details key={faq.name} style={{
@@ -176,13 +177,14 @@ export default function FlagGuesserPage() {
                 borderRadius: '12px', overflow: 'hidden',
               }}>
                 <summary style={{
-                  padding: '1.25rem 1.5rem', cursor: 'pointer', fontWeight: 600, fontSize: '1.05rem',
+                  padding: '1rem 1.25rem', minHeight: '48px', cursor: 'pointer', fontWeight: 600, fontSize: '1rem',
                   listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  touchAction: 'manipulation', WebkitTapHighlightColor: 'transparent',
                 }}>
                   {faq.name}
                   <span style={{ fontSize: '1.2rem', color: '#fbbf24', flexShrink: 0, marginLeft: '1rem' }}>+</span>
                 </summary>
-                <div style={{ padding: '0 1.5rem 1.25rem', color: '#9ca3af', lineHeight: 1.7, fontSize: '0.95rem' }}>
+                <div style={{ padding: '0 1.25rem 1.25rem', color: '#9ca3af', lineHeight: 1.7, fontSize: '0.95rem' }}>
                   {faq.acceptedAnswer.text}
                 </div>
               </details>
@@ -192,17 +194,18 @@ export default function FlagGuesserPage() {
 
         {/* CTA */}
         <section style={{
-          padding: '4rem 2rem', textAlign: 'center',
+          padding: 'clamp(2.5rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem)', textAlign: 'center',
           background: 'linear-gradient(135deg, rgba(251,191,36,0.1) 0%, rgba(245,158,11,0.1) 100%)',
           borderTop: '1px solid rgba(255,255,255,0.08)',
         }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '1rem' }}>Ready to Test Your Flag Knowledge?</h2>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 800, marginBottom: '1rem' }}>Ready to Test Your Flag Knowledge?</h2>
           <p style={{ color: '#9ca3af', marginBottom: '2rem', fontSize: '1.1rem' }}>Start the flag quiz now — no account needed.</p>
           <Link href="/#FLAG_GAME" style={{
             textDecoration: 'none', color: '#fff',
             background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
-            padding: '16px 40px', borderRadius: '50px', fontWeight: 700, fontSize: '1.15rem',
-            display: 'inline-block', boxShadow: '0 4px 20px rgba(251,191,36,0.3)',
+            padding: '16px 36px', borderRadius: '50px', fontWeight: 700, fontSize: '1.15rem',
+            minHeight: '48px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 4px 20px rgba(251,191,36,0.3)', touchAction: 'manipulation',
           }}>
             🏁 Play Flag Guesser Free
           </Link>

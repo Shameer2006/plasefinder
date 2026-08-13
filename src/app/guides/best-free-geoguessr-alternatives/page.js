@@ -44,49 +44,84 @@ export default function ArticlePage() {
       />
       <div style={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a1a 100%)',
-        color: '#f3f4f6',
-        fontFamily: "'Outfit', sans-serif",
+        background: '#fafafa',
+        color: '#111827',
+        fontFamily: '"Merriweather", "Georgia", serif',
+        lineHeight: 1.8
       }}>
-        <header className="responsive-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/guides" style={{ textDecoration: 'none', color: '#9ca3af', fontSize: '1rem', fontWeight: 600 }}>
-            ← Back to Guides
+        {/* ── TOP STICKY NAVBAR ────────────────────────────────────────── */}
+        <header style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 100,
+          background: '#ffffff',
+          borderBottom: '1px solid #e5e7eb',
+          padding: '1rem 2.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          fontFamily: '"Inter", system-ui, -apple-system, sans-serif'
+        }}>
+          <Link href="/guides" style={{
+            color: '#4b5563',
+            textDecoration: 'none',
+            fontWeight: '600',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontSize: '0.9rem',
+          }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back to Guides</span>
           </Link>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <img src="/logo.png" alt="LostStreet Logo" style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.1)' }} />
-            <Link href="/" style={{ textDecoration: 'none', color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800 }}>
-              LostStreet
-            </Link>
-          </div>
+
+          <Link href="/" style={{ textDecoration: 'none', color: '#111827', fontSize: '1.2rem', fontWeight: 900, letterSpacing: '-0.02em' }}>
+            LostStreet <span style={{ color: '#10b981' }}>Academy</span>
+          </Link>
         </header>
 
-        <main style={{ padding: '4rem 2rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.8 }}>
-          <h1 style={{
-            fontSize: 'clamp(2rem, 5vw, 3rem)',
-            fontWeight: 800,
-            marginBottom: '1rem',
-            lineHeight: 1.2,
-          }}>
-            The Best Free GeoGuessr Alternatives in 2026
-          </h1>
-          <div style={{ color: '#9ca3af', marginBottom: '3rem', fontSize: '0.9rem' }}>
-            Published: August 15, 2026 • 5 min read
-          </div>
+        {/* ── ARTICLE CONTAINER ────────────────────────────────────────── */}
+        <main style={{ padding: '4rem 1.5rem', maxWidth: '720px', margin: '0 auto' }}>
+          
+          <header style={{ marginBottom: '3rem', textAlign: 'center', fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
+            <span style={{ color: '#10b981', fontWeight: 700, fontSize: '0.9rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+              Strategy & Reviews
+            </span>
+            <h1 style={{
+              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              fontWeight: 900,
+              lineHeight: 1.2,
+              margin: '1rem 0',
+              color: '#111827',
+              fontFamily: '"Merriweather", "Georgia", serif'
+            }}>
+              The Best Free GeoGuessr Alternatives in 2026
+            </h1>
 
-          <article style={{ fontSize: '1.1rem', color: '#d1d5db', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <p>
-              If you love geography games but hate hitting a paywall or a time limit, you're not alone. When GeoGuessr introduced subscription limits, millions of players started searching for a free alternative. 
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', color: '#6b7280', fontSize: '0.9rem', marginTop: '1.5rem' }}>
+              <span>Published: August 15, 2026</span>
+              <span>•</span>
+              <span>5 min read</span>
+            </div>
+          </header>
+
+          <article style={{ fontSize: '1.125rem', color: '#374151' }}>
+            
+            <p style={{ fontSize: '1.25rem', color: '#4b5563', lineHeight: 1.7, marginBottom: '2.5rem' }}>
+              If you love geography games but hate hitting a paywall or a time limit, you're not alone. When GeoGuessr introduced subscription limits, millions of players started searching for a free alternative.
             </p>
             
             <p>
               In 2026, the landscape of free geography guessing games has evolved. Here is the definitive list of the best free GeoGuessr alternatives that let you explore the world without opening your wallet.
             </p>
 
-            <h2 style={{ fontSize: '2rem', color: '#fff', marginTop: '2rem', marginBottom: '1rem' }}>1. LostStreet</h2>
+            <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '3rem 0' }} />
+
+            <h2 style={headingStyle}>1. LostStreet</h2>
             <p>
               <strong>LostStreet</strong> is arguably the most feature-complete free alternative available today. Built with modern web technologies, it offers a beautifully smooth experience on both desktop and mobile devices.
             </p>
-            <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <ul style={listStyle}>
               <li><strong>100% Free:</strong> No daily limits and no subscriptions.</li>
               <li><strong>Multiplayer:</strong> Real-time 1v1 matchmaking with an ELO ranking system.</li>
               <li><strong>Party Mode:</strong> Create private rooms with a 6-digit code for up to 20 friends.</li>
@@ -96,31 +131,49 @@ export default function ArticlePage() {
               Because it uses an immense custom database of over 780,000 hand-picked Google Street View panoramas, the locations feel fresh and challenging.
             </p>
 
-            <h2 style={{ fontSize: '2rem', color: '#fff', marginTop: '2rem', marginBottom: '1rem' }}>2. Geotastic</h2>
+            <h2 style={headingStyle}>2. Geotastic</h2>
             <p>
               Geotastic is a fantastic crowd-funded alternative. It has strong multiplayer features and a passionate community. While it is free to play, it operates on a donation model to cover its server costs, which means occasional prompts to donate.
             </p>
 
-            <h2 style={{ fontSize: '2rem', color: '#fff', marginTop: '2rem', marginBottom: '1rem' }}>3. OpenGuessr</h2>
+            <h2 style={headingStyle}>3. OpenGuessr</h2>
             <p>
               OpenGuessr is an open-source alternative. It utilizes free APIs instead of Google Maps, which keeps costs zero. While the map coverage might differ from the official Google Street View, it's a completely free and unlimited way to test your geographical skills.
             </p>
 
-            <h2 style={{ fontSize: '2rem', color: '#fff', marginTop: '2rem', marginBottom: '1rem' }}>Why choose a free alternative?</h2>
+            <h2 style={headingStyle}>Why choose a free alternative?</h2>
             <p>
               Geography games are incredibly educational. They teach players about different cultures, architecture, biomes, and languages. Putting this educational value behind a paywall restricts access for students and casual players. Platforms like <strong>LostStreet</strong> ensure that exploring the world remains accessible to everyone.
             </p>
 
-            <div style={{ marginTop: '3rem', padding: '2rem', background: 'rgba(16,185,129,0.1)', borderRadius: '16px', textAlign: 'center', border: '1px solid rgba(16,185,129,0.3)' }}>
-              <h3 style={{ fontSize: '1.5rem', color: '#fff', marginBottom: '1rem' }}>Ready to test your knowledge?</h3>
-              <p style={{ marginBottom: '1.5rem' }}>Play LostStreet right now, completely free. No sign-up required.</p>
+            <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '4rem 0' }} />
+
+            {/* ── CTA CALLOUT ────────────────────────────────────────────── */}
+            <div style={{
+              marginTop: '4rem',
+              padding: '3rem',
+              background: '#f9fafb',
+              border: '1px solid #e5e7eb',
+              borderRadius: '12px',
+              textAlign: 'center',
+              fontFamily: '"Inter", system-ui, sans-serif'
+            }}>
+              <h3 style={{ fontSize: '1.5rem', color: '#111827', margin: '0 0 16px 0', fontWeight: 800 }}>
+                Ready to Test Your Knowledge?
+              </h3>
+              <p style={{ color: '#4b5563', marginBottom: '2rem', fontSize: '1.1rem' }}>
+                Play LostStreet right now, completely free. No sign-up required.
+              </p>
               <Link href="/" style={{
-                background: 'linear-gradient(135deg, #10b981, #3b82f6)',
+                background: '#10b981',
                 color: '#fff',
-                padding: '12px 24px',
-                borderRadius: '50px',
+                padding: '16px 32px',
+                borderRadius: '8px',
                 textDecoration: 'none',
                 fontWeight: 700,
+                fontSize: '1rem',
+                display: 'inline-block',
+                transition: 'background 0.2s ease'
               }}>
                 Play LostStreet Free
               </Link>
@@ -131,3 +184,33 @@ export default function ArticlePage() {
     </>
   );
 }
+
+const headingStyle = {
+  fontSize: '2rem',
+  fontWeight: 800,
+  color: '#111827',
+  marginTop: '3.5rem',
+  marginBottom: '1.5rem',
+  fontFamily: '"Merriweather", "Georgia", serif',
+  lineHeight: 1.3
+};
+
+const subHeadingStyle = {
+  fontSize: '1.4rem',
+  fontWeight: 700,
+  color: '#1f2937',
+  marginTop: '2.5rem',
+  marginBottom: '1rem',
+  fontFamily: '"Inter", system-ui, sans-serif'
+};
+
+const listStyle = {
+  listStyleType: 'disc',
+  paddingLeft: '1.5rem',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.75rem',
+  marginBottom: '2rem',
+  color: '#374151'
+};
+

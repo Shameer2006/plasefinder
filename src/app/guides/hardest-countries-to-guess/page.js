@@ -1,277 +1,195 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export const metadata = {
-  title: '10 Hardest Countries to Guess in Street View (2026) — Can You Name Them? | LostStreet',
-  description: 'From Mongolia\'s endless steppes to Bolivia\'s Altiplano — discover the 10 countries that stump even expert GeoGuessr players. Free visual clues & pro tips to finally identify them.',
-  alternates: { canonical: 'https://www.loststreet.online/guides/hardest-countries-to-guess' },
+  title: "The 10 Hardest Countries to Guess in Street View (2026) | LostStreet",
+  description: "From Russia's endless birch forests to Argentina's featureless Pampas — discover the 10 countries that stump even expert GeoGuessr players. Free visual clues & pro tips inside.",
+  alternates: { canonical: "https://www.loststreet.online/guides/hardest-countries-to-guess" },
   keywords: [
-    'hardest countries to guess', 'hardest country to guess', 'hard countries to guess',
-    'hardest countries to guess in street view', 'hardest countries geoguessr',
-    'top 10 hardest country to guess', 'most hardest country to guess',
-    'difficult countries to guess', 'hardest country to find on a map',
-    'street view guesser tips', 'geography guessing game guide', 'loststreet guide'
+    "hardest countries to guess", "hardest country to guess", "hard countries to guess",
+    "hardest countries to guess in street view", "hardest countries geoguessr",
+    "top 10 hardest country to guess", "most hardest country to guess",
+    "difficult countries to guess", "hardest country to find on a map",
+    "street view guesser tips", "geography guessing game guide", "loststreet guide"
   ],
   openGraph: {
-    title: '10 Hardest Countries to Guess in Street View — Can You Name Them All?',
-    description: 'Mongolia, Bolivia, Senegal... These 10 countries stump even the best street view guessers. Learn the exact visual clues to finally crack them.',
-    url: 'https://www.loststreet.online/guides/hardest-countries-to-guess',
-    type: 'article',
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    title: "The 10 Hardest Countries to Guess in Street View — Can You Name Them All?",
+    description: "Russia, Mongolia, Botswana... These 10 countries stump even the best street view guessers. Learn the exact visual clues to finally crack them.",
+    url: "https://www.loststreet.online/guides/hardest-countries-to-guess",
+    type: "article",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: '10 Hardest Countries to Guess in Street View (2026)',
-    description: 'These 10 countries stump even expert players. Free visual clues & pro tips inside.',
-    images: ['/og-image.png'],
+    card: "summary_large_image",
+    title: "The 10 Hardest Countries to Guess in Street View (2026)",
+    description: "These 10 countries stump even expert players. Free visual clues & pro tips inside.",
+    images: ["/og-image.png"],
   },
 };
 
 const articleJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: '10 Hardest Countries to Guess in Street View (2026)',
-  description: 'From Mongolia to Bolivia — discover the 10 countries that stump even expert GeoGuessr players with free visual clues and pro tips.',
-  author: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online/about' },
-  publisher: {
-    '@type': 'Organization',
-    name: 'LostStreet',
-    url: 'https://www.loststreet.online',
-    logo: { '@type': 'ImageObject', url: 'https://www.loststreet.online/icon.png' }
-  },
-  datePublished: '2026-07-10T00:00:00.000Z',
-  dateModified: '2026-08-06T00:00:00.000Z',
-  image: 'https://www.loststreet.online/og-image.png',
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': 'https://www.loststreet.online/guides/hardest-countries-to-guess'
-  }
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "The 10 Hardest Countries to Guess in Street View (2026)",
+  description: "From Russia to Argentina — discover the 10 countries that stump even expert GeoGuessr players.",
+  author: { "@type": "Organization", name: "LostStreet", url: "https://www.loststreet.online/about" },
+  publisher: { "@type": "Organization", name: "LostStreet", url: "https://www.loststreet.online", logo: { "@type": "ImageObject", url: "https://www.loststreet.online/icon.png" } },
+  datePublished: "2026-07-10T00:00:00.000Z",
+  dateModified: "2026-08-13T00:00:00.000Z",
+  image: "https://www.loststreet.online/og-image.png",
+  mainEntityOfPage: { "@type": "WebPage", "@id": "https://www.loststreet.online/guides/hardest-countries-to-guess" }
 };
 
 const breadcrumbJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.loststreet.online' },
-    { '@type': 'ListItem', position: 2, name: 'Guides', item: 'https://www.loststreet.online/guides' },
-    { '@type': 'ListItem', position: 3, name: 'Hardest Countries to Guess', item: 'https://www.loststreet.online/guides/hardest-countries-to-guess' }
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.loststreet.online" },
+    { "@type": "ListItem", position: 2, name: "Guides", item: "https://www.loststreet.online/guides" },
+    { "@type": "ListItem", position: 3, name: "Hardest Countries to Guess", item: "https://www.loststreet.online/guides/hardest-countries-to-guess" }
   ]
 };
 
 const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
   mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'What is the hardest country to guess in street view?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Mongolia is widely considered the hardest country to guess in street view games. Its vast, featureless steppes look nearly identical to Kazakhstan and Kyrgyzstan, and the Cyrillic script is almost indistinguishable from Russian without specific knowledge of Mongolian characters.' }
-    },
-    {
-      '@type': 'Question',
-      name: 'What are the top 10 hardest countries to guess?',
-      acceptedAnswer: { '@type': 'Answer', text: 'The top 10 hardest countries to guess in street view games are: 1. Mongolia, 2. Senegal vs Mali, 3. Bolivia, 4. Finland vs Estonia, 5. Laos vs Cambodia, 6. Uruguay, 7. Ghana vs Nigeria, 8. Slovakia vs Czech Republic, 9. Kyrgyzstan vs Kazakhstan, 10. Dominican Republic vs Haiti.' }
-    },
-    {
-      '@type': 'Question',
-      name: 'How can I get better at guessing hard countries?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Focus on learning country-specific visual clues: unique scripts, road bollard designs, license plate colors, utility pole shapes, and vegetation patterns. Practice regularly on free street view guesser games like LostStreet to build pattern recognition.' }
-    },
-    {
-      '@type': 'Question',
-      name: 'Why are African countries so hard to guess in geography games?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Many West African countries share similar landscapes (dry savanna, red dirt roads), use the same colonial language (French), and have limited Google Street View coverage. Countries like Senegal, Mali, and Guinea are particularly difficult to distinguish without regional brand knowledge or specific road infrastructure clues.' }
-    }
+    { "@type": "Question", name: "What is the hardest country to guess in street view?", acceptedAnswer: { "@type": "Answer", text: "Russia is widely considered the single hardest country. Its 17.1 million square kilometers of identical birch and pine forests make every road look the same, and Cyrillic text is the only reliable confirming clue." } },
+    { "@type": "Question", name: "What are the top 10 hardest countries to guess?", acceptedAnswer: { "@type": "Answer", text: "1. Russia, 2. Canada, 3. Mongolia, 4. Australia, 5. Botswana, 6. Indonesia, 7. Brazil, 8. Kazakhstan, 9. New Zealand, 10. Argentina." } },
+    { "@type": "Question", name: "How can I get better at guessing hard countries?", acceptedAnswer: { "@type": "Answer", text: "Focus on the subtle differences between lookalike clusters: road line colors, bollard shapes, utility pole designs, vegetation patterns, and language scripts. Practice regularly on LostStreet." } },
+    { "@type": "Question", name: "How do I tell Russia from Canada in street view?", acceptedAnswer: { "@type": "Answer", text: "Text is the most reliable clue. Cyrillic script means Russia. Canada uses English and French. Road sign color schemes also differ significantly." } }
   ]
 };
 
-const countries = [
-  {
-    rank: 1,
-    name: 'Mongolia',
-    code: 'mn',
-    why: 'Mongolia is an enormous, sparsely populated country with vast steppes that look almost identical to parts of Kazakhstan, Kyrgyzstan, and even parts of Russia. The landscape is dominated by endless grassland, dirt roads, and occasional gers (yurts). There are very few road signs, and the Cyrillic script used in Mongolia is nearly identical to Russian Cyrillic, making it extremely hard to distinguish without specific knowledge.',
-    tips: 'Look for the unique Mongolian script (traditional script) on older signs. The landscape is drier and more barren than Kyrgyzstan. Telephone poles in Mongolia often have a distinctive cross-shaped top. The sky tends to be a very deep, clear blue due to the high altitude.',
-  },
-  {
-    rank: 2,
-    name: 'Senegal vs Mali',
-    code: null,
-    why: 'West African countries like Senegal, Mali, and Guinea share very similar landscapes — dry savanna, red dirt roads, and French-language signage. Without specific regional knowledge, these countries are almost impossible to distinguish from each other at first glance.',
-    tips: 'Senegal has more coastal coverage and you may spot ocean views. Look for specific brand names on shops — certain brands are more common in one country than another. The quality of road infrastructure can also be a clue, as Senegal generally has better-maintained roads near Dakar.',
-  },
-  {
-    rank: 3,
-    name: 'Bolivia',
-    code: 'bo',
-    why: 'Bolivia shares visual characteristics with Peru, Ecuador, and parts of Argentina. The Andean highlands (Altiplano) look similar across all these countries. Spanish is spoken everywhere, and the architecture in smaller towns is nearly identical across the region.',
-    tips: 'Bolivia has a distinctive red, yellow, and green tricolor flag that appears frequently on buildings and vehicles. The Wiphala (a checkered rainbow flag) is also commonly displayed and is unique to Bolivia. Road signs in Bolivia often use a specific font and color scheme.',
-  },
-  {
-    rank: 4,
-    name: 'Finland vs Estonia',
-    code: 'ee',
-    why: 'Both Finland and Estonia have similar Nordic landscapes — pine forests, flat terrain, and grey skies. Both use Latin script. The languages look superficially similar to untrained eyes, and the architecture in rural areas is nearly identical.',
-    tips: 'Finnish uses double vowels extensively (e.g., "kauppakeskus", "tietokone"). Estonian looks similar but has different letter combinations. Finnish road signs use a specific shade of blue-green. Estonia is generally flatter and has more Soviet-era architecture in towns.',
-  },
-  {
-    rank: 5,
-    name: 'Laos vs Cambodia',
-    code: null,
-    why: 'Both Laos and Cambodia are Southeast Asian countries with tropical vegetation, Buddhist temples, and similar rural landscapes. Both use scripts that are visually similar to untrained eyes — Khmer (Cambodia) and Lao script look alike at a glance.',
-    tips: 'Lao script has more rounded, circular letters. Khmer script is more angular and complex. Cambodia has more flat terrain while Laos is more mountainous. The Google car in Laos often shows a specific camera setup. Buddhist temple architecture differs subtly between the two countries.',
-  },
-  {
-    rank: 6,
-    name: 'Uruguay',
-    code: 'uy',
-    why: 'Uruguay is one of the most commonly confused countries in South America. It looks almost identical to the Argentine Pampas — flat grassland, cattle farms, and Spanish signage. Many players default to Argentina when they see this landscape and lose significant points.',
-    tips: 'Uruguay has a distinctive flag with a sun symbol (Sol de Mayo) that appears on government buildings. Road signs in Uruguay use a specific yellow color scheme. The country is smaller, so you are more likely to see the ocean or the Rio de la Plata. License plates in Uruguay have a specific format.',
-  },
-  {
-    rank: 7,
-    name: 'Ghana vs Nigeria',
-    code: 'gh',
-    why: 'Both Ghana and Nigeria are West African countries with English as an official language, tropical vegetation, and similar urban and rural landscapes. The Google car in Ghana famously has black tape on its roof rack, but this is not always visible.',
-    tips: 'Look for the Ghana flag (red, gold, green with a black star) on buildings. Nigerian signage tends to reference specific states (Lagos, Abuja, Kano). The Google car in Ghana has distinctive black tape. Urban areas in Nigeria tend to be denser and more chaotic than in Ghana.',
-  },
-  {
-    rank: 8,
-    name: 'Slovakia vs Czech Republic',
-    code: null,
-    why: 'These two Central European countries were once a single nation (Czechoslovakia) and share nearly identical landscapes, architecture, and road infrastructure. Both use Latin script with diacritical marks, and the languages are mutually intelligible.',
-    tips: 'Czech uses "ř" — a letter that does not exist in Slovak. Slovak uses "ľ" and "ŕ". Road signs in the Czech Republic use a specific shade of blue. The Czech Republic has more medieval architecture in its town centers. Slovakia tends to have more mountainous terrain visible in the background.',
-  },
-  {
-    rank: 9,
-    name: 'Kyrgyzstan vs Kazakhstan',
-    code: null,
-    why: 'Both Central Asian countries use Cyrillic script, have similar steppe and mountain landscapes, and share cultural and architectural similarities from the Soviet era. The vast, empty landscapes make it nearly impossible to find distinguishing features.',
-    tips: 'Kyrgyzstan is significantly more mountainous — if you see dramatic mountain peaks, lean towards Kyrgyzstan. Kazakhstan is flatter and more industrialized. Kazakh Cyrillic uses some unique letters. Road quality in Kazakhstan is generally better due to oil wealth.',
-  },
-  {
-    rank: 10,
-    name: 'Dominican Republic vs Haiti',
-    code: null,
-    why: 'These two countries share the island of Hispaniola, making the landscape identical. However, they are dramatically different in terms of language (Spanish vs French/Haitian Creole) and infrastructure. The challenge is that both have tropical vegetation and similar rural architecture.',
-    tips: 'If you see French or Haitian Creole text, you are in Haiti. Spanish text means Dominican Republic. Haiti generally has less road coverage and poorer infrastructure. The Dominican Republic has more modern signage and better road quality. Look for specific brand names that are more common in one country.',
-  },
-];
-
-const relatedGuides = [
-  { title: 'How to Guess Locations from Street View', slug: 'how-to-guess-locations-from-street-view' },
-  { title: 'The Ultimate Street View Clues Guide', slug: 'geography-clues-guide' },
-  { title: 'How to Identify African Countries in Street View', slug: 'africa-street-view-guide' },
-  { title: 'How to Identify Asian Countries in Street View', slug: 'asia-street-view-guide' },
-  { title: 'How to Identify European Countries in Street View', slug: 'europe-street-view-guide' },
-];
+const figStyle = { margin: "2rem 0", textAlign: "center" };
+const imgStyle = { width: "100%", maxHeight: "480px", objectFit: "cover", borderRadius: "12px", border: "1px solid #e5e7eb" };
+const captionStyle = { marginTop: "0.75rem", fontSize: "0.9rem", color: "#6b7280", fontFamily: '"Inter", system-ui, sans-serif' };
+const hrStyle = { border: "none", borderTop: "1px solid #e5e7eb", margin: "3rem 0" };
 
 export default function ArticlePage() {
+  const headingStyle = {
+    fontSize: "2rem", fontWeight: 800, color: "#111827",
+    marginTop: "3.5rem", marginBottom: "1.5rem",
+    fontFamily: '"Merriweather", "Georgia", serif', lineHeight: 1.3
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a1a 100%)', color: '#f3f4f6', fontFamily: "'Outfit', sans-serif" }}>
-        <header className="responsive-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/guides" style={{ textDecoration: 'none', color: '#9ca3af', fontSize: '1rem', fontWeight: 600 }}>← Back to Guides</Link>
-          <Link href="/" style={{ textDecoration: 'none', color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800 }}>LostStreet</Link>
+      <div style={{ minHeight: "100vh", background: "#fafafa", color: "#111827", fontFamily: '"Merriweather", "Georgia", serif', lineHeight: 1.8 }}>
+
+        <header style={{ position: "sticky", top: 0, zIndex: 100, background: "#ffffff", borderBottom: "1px solid #e5e7eb", padding: "1rem 2.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
+          <Link href="/guides" style={{ color: "#4b5563", textDecoration: "none", fontWeight: "600", display: "flex", alignItems: "center", gap: "8px", fontSize: "0.9rem" }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back to Guides</span>
+          </Link>
+          <Link href="/" style={{ textDecoration: "none", color: "#111827", fontSize: "1.2rem", fontWeight: 900, letterSpacing: "-0.02em" }}>
+            LostStreet <span style={{ color: "#10b981" }}>Academy</span>
+          </Link>
         </header>
 
-        {/* Visible breadcrumbs */}
-        <nav style={{ maxWidth: '800px', margin: '0 auto', padding: '1rem 2rem 0', fontSize: '0.85rem', color: '#6b7280' }} aria-label="Breadcrumb">
-          <Link href="/" style={{ color: '#6b7280', textDecoration: 'none' }}>Home</Link>
-          <span style={{ margin: '0 0.5rem' }}>/</span>
-          <Link href="/guides" style={{ color: '#6b7280', textDecoration: 'none' }}>Guides</Link>
-          <span style={{ margin: '0 0.5rem' }}>/</span>
-          <span style={{ color: '#10b981' }}>Hardest Countries to Guess</span>
-        </nav>
+        <main style={{ padding: "4rem 1.5rem", maxWidth: "720px", margin: "0 auto" }}>
+          <header style={{ marginBottom: "3rem", textAlign: "center", fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
+            <span style={{ color: "#10b981", fontWeight: 700, fontSize: "0.9rem", letterSpacing: "0.05em", textTransform: "uppercase" }}>Street View Meta</span>
+            <h1 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 900, lineHeight: 1.2, margin: "1rem 0", color: "#111827", fontFamily: '"Merriweather", "Georgia", serif' }}>
+              The 10 Hardest Countries to Guess in Street View
+            </h1>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", color: "#6b7280", fontSize: "0.9rem", marginTop: "1.5rem" }}>
+              <span>Updated: August 13, 2026</span><span>•</span><span>8 min read</span>
+            </div>
+          </header>
 
-        <main style={{ padding: '2rem 2rem 4rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.8 }}>
-          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, marginBottom: '1rem', lineHeight: 1.2 }}>
-            The 10 Hardest Countries to Guess in Street View
-          </h1>
-          <div style={{ color: '#9ca3af', marginBottom: '2rem', fontSize: '0.9rem' }}>Updated: August 6, 2026 • 8 min read</div>
-
-          {/* TL;DR for featured snippet capture */}
-          <div style={{ background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.25)', borderRadius: '12px', padding: '1.5rem', marginBottom: '2.5rem' }}>
-            <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem', color: '#60a5fa' }}>Quick Answer: The 10 Hardest Countries to Guess</h2>
-            <ol style={{ margin: 0, paddingLeft: '1.25rem', lineHeight: 2, color: '#e5e7eb' }}>
-              <li><strong>Mongolia</strong> — featureless steppes, Cyrillic that mimics Russian</li>
-              <li><strong>Senegal vs Mali</strong> — identical West African savanna landscapes</li>
-              <li><strong>Bolivia</strong> — Andean highlands indistinguishable from Peru/Ecuador</li>
-              <li><strong>Finland vs Estonia</strong> — nearly identical Nordic forests and scripts</li>
-              <li><strong>Laos vs Cambodia</strong> — similar scripts and tropical vegetation</li>
-              <li><strong>Uruguay</strong> — looks exactly like Argentina&apos;s Pampas</li>
-              <li><strong>Ghana vs Nigeria</strong> — same language, similar landscapes</li>
-              <li><strong>Slovakia vs Czech Republic</strong> — former single nation, identical roads</li>
-              <li><strong>Kyrgyzstan vs Kazakhstan</strong> — shared Cyrillic and steppe terrain</li>
-              <li><strong>Dominican Republic vs Haiti</strong> — same island, different languages</li>
-            </ol>
-          </div>
-
-          <article style={{ fontSize: '1.1rem', color: '#d1d5db', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <p>
-              Even experienced geography game players get stumped by certain countries. Whether it is the featureless steppe of Central Asia, the dense tropical forests of West Africa, or the eerily similar landscapes of neighbouring European nations, some locations are genuinely brutal to identify.
+          <article style={{ fontSize: "1.125rem", color: "#374151" }}>
+            <p style={{ fontSize: "1.25rem", color: "#4b5563", lineHeight: 1.7, marginBottom: "2.5rem" }}>
+              Every player of world guessing games like GeoGuessr knows the feeling. You spawn on a flat, empty road with no signs, no people, and a horizon that could easily belong to three different continents. The panic sets in as the timer ticks down.
             </p>
-            <p>
-              This guide breaks down the <strong>10 hardest countries to guess</strong> in street view games like <Link href="/" style={{ color: '#10b981', textDecoration: 'underline' }}>LostStreet</Link>, explains exactly why they are so difficult, and gives you the specific clues to look for so you can start scoring points instead of losing them.
-            </p>
+            <p>While some locations offer immediate clues — like a Parisian café or a New York yellow cab — others are notoriously designed to make you lose points. According to top players, the hardest countries to guess aren&apos;t always the most obscure. Often, they are the massive, sprawling nations that share &quot;lookalike&quot; biomes with their neighbors.</p>
+            <p>Here are the 10 hardest countries to guess in Street View geography games, and the visual traps that make them so difficult.</p>
 
-            {countries.map((c) => (
-              <div key={c.rank}>
-                <h2 style={{ fontSize: '1.8rem', color: '#fff', marginTop: '2rem', marginBottom: '0.5rem' }}>#{c.rank} — {c.name}</h2>
-                <h3 style={{ fontSize: '1rem', color: '#10b981', marginBottom: '0.5rem' }}>Why it&apos;s hard</h3>
-                <p>{c.why}</p>
-                <h3 style={{ fontSize: '1rem', color: '#10b981', marginBottom: '0.5rem' }}>How to identify it</h3>
-                <p>{c.tips}</p>
-                {c.code && (
-                  <p style={{ marginTop: '0.5rem' }}>
-                    <Link href={`/chronicles/${c.code}`} style={{ color: '#60a5fa', textDecoration: 'underline', fontSize: '0.95rem' }}>
-                      → Read our full {c.name.split(' vs ')[0]} country guide
-                    </Link>
-                  </p>
-                )}
-              </div>
-            ))}
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>#1 — Russia: The Endless Birch</h2>
+            <p>Russia is widely considered the single hardest country in the game. Covering 17.1 million square kilometers, it is the largest country on Earth, and vast stretches of its landscape look entirely identical. If you are dropped on a snowy road surrounded by birch and pine trees, you could be in Siberia, but you could just as easily be in Scandinavia or Canada. The only reliable way to confirm Russia is to spot Cyrillic text.</p>
 
-            {/* Play CTA */}
-            <div style={{ marginTop: '3rem', padding: '2rem', background: 'rgba(16,185,129,0.1)', borderRadius: '16px', textAlign: 'center', border: '1px solid rgba(16,185,129,0.3)' }}>
-              <h3 style={{ fontSize: '1.5rem', color: '#fff', marginBottom: '1rem' }}>Test yourself on these countries</h3>
-              <p style={{ marginBottom: '1.5rem' }}>Play LostStreet and see if you can identify these tricky locations — 100% free, no sign-up required.</p>
-              <Link href="/" style={{ background: 'linear-gradient(135deg, #10b981, #3b82f6)', color: '#fff', padding: '12px 24px', borderRadius: '50px', textDecoration: 'none', fontWeight: 700 }}>
-                ▶ Play LostStreet Free
-              </Link>
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>#2 — Canada: The Boreal Twin</h2>
+            <p>As the second-largest country on the planet, Canada&apos;s massive boreal forests are a dead ringer for Russia. Further south, the flat Canadian Prairies seamlessly blend into the American Midwest. Players frequently ruin perfect games by confidently clicking the wrong northern country when spawned on an endless, tree-lined highway.</p>
+
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>#3 — Mongolia: The Empty Steppe</h2>
+            <p>Mongolia fools players because its vast steppe is almost roadless, incredibly empty, and thinly mapped. Long stretches of gameplay consist of following a dirt track with nothing but grass, sky, and the occasional herd of livestock. With almost zero human infrastructure or signage, you are left looking for subtle camera generation clues or the Google car&apos;s camping gear to save you.</p>
+            <figure style={figStyle}>
+              <img src="/hardest-img1.jpg" alt="The featureless dirt roads of the Mongolian Steppe" style={imgStyle} />
+              <figcaption style={captionStyle}>The featureless dirt roads of the Mongolian Steppe. Source: Vecteezy</figcaption>
+            </figure>
+
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>#4 — Australia: The Generic Outback</h2>
+            <p>The sheer size of Australia means you can drive for hours in Street View without seeing a single defining landmark. The red dirt and dry brush of the Outback are iconic, but they can easily trick players into guessing South Africa or even parts of South America if they aren&apos;t paying close attention to road lines and driving sides.</p>
+
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>#5 — Botswana: The Southern Africa Puzzle</h2>
+            <p>Southern Africa is a notoriously difficult region for geography games. Botswana is particularly tough because its flat, dry savanna blends seamlessly into neighboring Namibia, Zimbabwe, and South Africa. Players often realize they are in southern Africa based on the golden grass and thorny scrub, but end up clicking the wrong side of a border.</p>
+            <figure style={figStyle}>
+              <img src="/hardest-img2.jpg" alt="The dramatic mountain passes of Lesotho, a Southern Africa lookalike trap" style={imgStyle} />
+              <figcaption style={captionStyle}>Southern Africa holds many lookalikes, like the mountains of Lesotho. Source: iStock</figcaption>
+            </figure>
+
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>#6 — Indonesia: The Island Maze</h2>
+            <p>Indonesia is scattered across roughly 17,000 islands, making region-guessing an absolute nightmare. The country is a repetition of tropical jungle, palm trees, and dense foliage. Its lush, tropical roads heavily resemble those of Malaysia, Thailand, and the Philippines, forcing players to rely on subtle architectural clues or pole designs.</p>
+
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>#7 — Brazil: The South American Giant</h2>
+            <p>Brazil ranges from the dense Amazon rainforest to the dry sertão plains and temperate southern regions. Because of this massive ecological diversity, one Brazilian road rarely looks like the next. It is very easy to confuse a dusty Brazilian road with nearby countries unless you spot Portuguese text.</p>
+            <figure style={figStyle}>
+              <img src="/hardest-img3.jpg" alt="A cobblestone colonial street in Bolivia, a South American architectural trap" style={imgStyle} />
+              <figcaption style={captionStyle}>South America is full of architectural traps, like this street in Bolivia. Source: iStock</figcaption>
+            </figure>
+
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>#8 — Kazakhstan: The Second Steppe Trap</h2>
+            <p>Kazakhstan is the ninth-largest country in the world, and much of it consists of flat, desolate steppe that perfectly mirrors both Russia and Mongolia. Empty highways under enormous skies give almost no geographical clues away. This creates a classic &quot;somewhere in the middle of Asia&quot; panic.</p>
+            <figure style={figStyle}>
+              <img src="/hardest-img4.jpg" alt="Aerial view of Bishkek, the urban landscape of Kyrgyzstan" style={imgStyle} />
+              <figcaption style={captionStyle}>Central Asia lookalikes: The urban landscape of Kyrgyzstan. Source: iStock</figcaption>
+            </figure>
+
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>#9 — New Zealand: The Australia Mixup</h2>
+            <p>New Zealand&apos;s rolling green hills and temperate climate often cause players to reflexively click the UK, Ireland, or Australia. The visual trap is strong, and if you can&apos;t spot the distinctive tree ferns or the majestic mountains of the South Island, it&apos;s very easy to assume you are in a completely different hemisphere.</p>
+
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>#10 — Argentina: The Featureless Pampas</h2>
+            <p>Argentina rounds out the list thanks to the Pampas — a vast, flat, and fenced grassland that is almost entirely featureless. Long stretches of rural Argentina look exactly like Uruguay or rural Chile. The lack of prominent landmarks leaves players leaning on incredibly small details, like a specific type of wooden fence post or the color of a license plate.</p>
+
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>Test Your Skills</h2>
+            <p>Think you know your way around these impossible locations? Try your hand at this interactive meta-clue trainer to see if you can match the geographical trap to the correct country.</p>
+
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>Conclusion</h2>
+            <p>Improving your score in GeoGuessr or other Street View guessing games isn&apos;t about memorizing every flag in the world — it&apos;s about learning to separate the lookalike clusters. If you can learn the subtle differences that separate Russia from Canada, or Botswana from South Africa, your average score will skyrocket. The next time you spawn on an empty dirt road, don&apos;t panic. Just look a little closer at the dirt, the trees, and the poles.</p>
+
+            <hr style={hrStyle} />
+            <h2 style={headingStyle}>Frequently Asked Questions</h2>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              {faqJsonLd.mainEntity.map((faq) => (
+                <details key={faq.name} style={{ background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: "12px", padding: "0" }}>
+                  <summary style={{ padding: "1rem 1.25rem", cursor: "pointer", fontWeight: 700, color: "#111827", fontFamily: '"Inter", system-ui, sans-serif' }}>{faq.name}</summary>
+                  <div style={{ padding: "0 1.25rem 1.25rem", color: "#4b5563" }}>{faq.acceptedAnswer.text}</div>
+                </details>
+              ))}
             </div>
 
-            {/* FAQ Section */}
-            <section style={{ marginTop: '3rem' }}>
-              <h2 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '1.5rem', color: '#fff' }}>Frequently Asked Questions</h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                {faqJsonLd.mainEntity.map((faq) => (
-                  <details key={faq.name} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', overflow: 'hidden' }}>
-                    <summary style={{ padding: '1.25rem 1.5rem', cursor: 'pointer', fontWeight: 600, fontSize: '1.05rem', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#f3f4f6' }}>
-                      {faq.name}
-                      <span style={{ fontSize: '1.2rem', color: '#10b981', flexShrink: 0, marginLeft: '1rem' }}>+</span>
-                    </summary>
-                    <div style={{ padding: '0 1.5rem 1.25rem', color: '#9ca3af', lineHeight: 1.7, fontSize: '0.95rem' }}>
-                      {faq.acceptedAnswer.text}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </section>
-
-            {/* Related Guides */}
-            <section style={{ marginTop: '3rem', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '2rem' }}>
-              <h2 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '1rem', color: '#9ca3af' }}>Related Guides</h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {relatedGuides.map((guide) => (
-                  <Link key={guide.slug} href={`/guides/${guide.slug}`} style={{ color: '#60a5fa', textDecoration: 'none', fontSize: '1rem', fontWeight: 500 }}>
-                    → {guide.title}
-                  </Link>
-                ))}
-              </div>
-            </section>
+            <hr style={{ border: "none", borderTop: "1px solid #e5e7eb", margin: "4rem 0" }} />
+            <div style={{ marginTop: "4rem", padding: "3rem", background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: "12px", textAlign: "center", fontFamily: '"Inter", system-ui, sans-serif' }}>
+              <h3 style={{ fontSize: "1.5rem", color: "#111827", margin: "0 0 16px 0", fontWeight: 800 }}>Test Yourself on These Tricky Locations</h3>
+              <p style={{ color: "#4b5563", marginBottom: "2rem", fontSize: "1.1rem" }}>Play LostStreet and see if you can identify these difficult countries — 100% free, no sign-up required.</p>
+              <Link href="/" style={{ background: "#10b981", color: "#fff", padding: "16px 32px", borderRadius: "8px", textDecoration: "none", fontWeight: 700, fontSize: "1rem", display: "inline-block" }}>
+                Play LostStreet Free
+              </Link>
+            </div>
           </article>
         </main>
       </div>

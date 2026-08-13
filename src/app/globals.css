@@ -1668,3 +1668,21 @@ button:focus-visible {
   }
 }
 
+/* Touch & Mobile Input Zoom Fix & Ergo Enhancements */
+button, input, select, textarea, a, [role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important; /* Prevents auto-zoom on iOS Safari */
+  }
+  
+  /* Touch target safety helper */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+

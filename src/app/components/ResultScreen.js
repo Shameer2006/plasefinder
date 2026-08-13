@@ -576,6 +576,7 @@ export default function ResultScreen() {
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', width: '100%' }}>
+              {/* Share Result */}
               <button 
                 className="btn" 
                 style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', padding: '10px 16px', background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#000', fontWeight: 'bold', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }} 
@@ -591,6 +592,25 @@ export default function ResultScreen() {
               >
                 <ShareSvg />
                 Share Result
+              </button>
+              {/* Challenge a Friend — Viral Growth Loop */}
+              <button 
+                className="btn" 
+                style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', padding: '10px 16px', background: 'linear-gradient(135deg, #8b5cf6, #6366f1)', color: '#fff', fontWeight: 'bold', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', border: '1px solid rgba(139, 92, 246, 0.4)' }} 
+                onClick={async () => {
+                  const shareUrl = `https://www.loststreet.online/share/${score}?ref=challenge`;
+                  const challengeText = `🎯 I scored ${score.toLocaleString()} points on LostStreet! Think you can beat me?\n\n🌍 Play free — no sign-up required:\n${shareUrl}`;
+                  if (navigator.share) {
+                    try { await navigator.share({ title: 'Can you beat my score?', text: challengeText, url: shareUrl }); } catch (e) {}
+                  } else {
+                    try {
+                      await navigator.clipboard.writeText(challengeText);
+                    } catch (e) {}
+                  }
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                ⚡ Challenge a Friend
               </button>
               <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <button className="btn" style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', padding: '10px 16px', background: 'rgba(255,255,255,0.1)', flex: 1 }} onClick={handleFinish}>

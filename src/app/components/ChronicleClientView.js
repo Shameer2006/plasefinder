@@ -524,7 +524,45 @@ export default function ChronicleClientView({ countryData, countriesList }) {
 
       </section>
 
-
+      {/* RELATED GUIDES — Internal Link Equity & Retention */}
+      <section style={{
+        padding: isMobile ? '1.5rem 1rem' : '1.5rem 2rem',
+        maxWidth: '900px',
+        margin: '0 auto'
+      }}>
+        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#e5e7eb', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Improve Your Geography Skills
+        </h3>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
+          gap: '0.75rem'
+        }}>
+          {[
+            { title: '25 Pro Street View Secrets', slug: '/guides/25-pro-street-view-geoguessr-secrets', icon: '🏆', color: '#fbbf24' },
+            { title: 'Ultimate Street View Clues Guide', slug: '/guides/geography-clues-guide', icon: '🛑', color: '#ef4444' },
+            { title: 'How to Guess Locations from Street View', slug: '/guides/how-to-guess-locations-from-street-view', icon: '🔍', color: '#3b82f6' },
+            { title: 'Hardest Countries to Guess', slug: '/guides/hardest-countries-to-guess', icon: '⛰️', color: '#8b5cf6' },
+          ].map(g => (
+            <Link key={g.slug} href={g.slug} style={{
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: '12px',
+              padding: '0.9rem 1rem',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              transition: 'all 0.2s ease',
+              touchAction: 'manipulation'
+            }} className="btn-hover">
+              <span style={{ fontSize: '1.3rem' }}>{g.icon}</span>
+              <span style={{ color: '#d1d5db', fontSize: '0.88rem', fontWeight: 700 }}>{g.title}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* BOTTOM ACTION BUTTON */}
       <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0 4rem' }}>

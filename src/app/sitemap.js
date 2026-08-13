@@ -1,6 +1,7 @@
 import { countriesData } from '@/lib/countriesData';
 
 const GUIDE_SLUGS = [
+  '25-pro-street-view-geoguessr-secrets',
   'best-free-geoguessr-alternatives',
   'how-to-guess-locations-from-street-view',
   'hardest-countries-to-guess',

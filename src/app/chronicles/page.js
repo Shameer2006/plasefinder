@@ -190,7 +190,8 @@ export default function ChroniclesCatalog() {
                 key={cont}
                 onClick={() => setSelectedContinent(cont)}
                 style={{
-                  padding: '10px 20px',
+                  padding: '10px 18px',
+                  minHeight: '44px',
                   background: selectedContinent === cont ? 'rgba(0, 242, 254, 0.15)' : 'transparent',
                   border: 'none',
                   color: selectedContinent === cont ? '#00f2fe' : '#9ca3af',
@@ -198,7 +199,9 @@ export default function ChroniclesCatalog() {
                   borderRadius: '10px',
                   cursor: 'pointer',
                   fontSize: '0.95rem',
-                  transition: 'all 0.2s'
+                  transition: 'all 0.2s',
+                  touchAction: 'manipulation',
+                  WebkitTapHighlightColor: 'transparent',
                 }}
               >
                 {cont}
@@ -275,8 +278,8 @@ export default function ChroniclesCatalog() {
         ) : (
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-            gap: isMobile ? '16px' : '26px',
+            gridTemplateColumns: isMobile ? 'repeat(auto-fill, minmax(130px, 1fr))' : 'repeat(auto-fill, minmax(180px, 1fr))',
+            gap: isMobile ? '12px' : '26px',
             maxWidth: '1400px',
             margin: '0 auto'
           }}>
