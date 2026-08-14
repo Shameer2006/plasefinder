@@ -124,39 +124,149 @@ export default function PartyLobby({ gameId }) {
   return (
     <div style={{
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       justifyContent: 'center',
       minHeight: '100vh',
-      padding: '1.5rem',
+      minHeight: '100svh',
+      padding: '1rem',
       background: 'radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 40%), #0b0f19',
       fontFamily: '"Outfit", system-ui, -apple-system, sans-serif',
-      color: '#e5e7eb'
+      color: '#e5e7eb',
+      boxSizing: 'border-box',
     }}>
-      <div style={{
-        width: '100%',
-        maxWidth: '960px',
-        background: 'rgba(18, 24, 38, 0.85)',
-        backdropFilter: 'blur(24px)',
-        WebkitBackdropFilter: 'blur(24px)',
-        border: '1px solid rgba(255, 255, 255, 0.12)',
-        borderRadius: '24px',
-        padding: '2rem',
-        boxShadow: '0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '2rem'
-      }}>
+      <style>{`
+        /* ── PartyLobby responsive styles ── */
+
+        .pl-shell {
+          width: 100%;
+          max-width: 960px;
+          background: rgba(18, 24, 38, 0.85);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          border: 1px solid rgba(255,255,255,0.12);
+          border-radius: 24px;
+          padding: 2rem;
+          box-shadow: 0 25px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+          box-sizing: border-box;
+          margin: auto 0;
+        }
+
+        /* Header row */
+        .pl-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 1rem;
+          padding-bottom: 1.5rem;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Code + copy buttons row */
+        .pl-code-row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+
+        .pl-copy-btn {
+          background: rgba(255,255,255,0.08);
+          border: 1px solid rgba(255,255,255,0.15);
+          color: white;
+          padding: 10px 14px;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 0.85rem;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Main two-column grid */
+        .pl-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 1.5rem;
+        }
+
+        /* Action buttons at the bottom of player list */
+        .pl-actions {
+          display: flex;
+          gap: 12px;
+        }
+
+        .pl-leave-btn {
+          background: rgba(239,68,68,0.15);
+          border: 1px solid rgba(239,68,68,0.3);
+          color: #fca5a5;
+          padding: 12px 20px;
+          border-radius: 14px;
+          font-weight: 800;
+          font-size: 0.95rem;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        .pl-start-btn {
+          flex: 1;
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+          border: none;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 14px;
+          font-weight: 900;
+          font-size: 1rem;
+          cursor: pointer;
+          box-shadow: 0 8px 20px rgba(16,185,129,0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          transition: all 0.2s ease;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        /* ── Tablet ≤ 768px ── */
+        @media (max-width: 768px) {
+          .pl-shell    { padding: 1.25rem; gap: 1.5rem; border-radius: 20px; }
+          .pl-grid     { grid-template-columns: 1fr; }
+          .pl-header   { flex-direction: column; align-items: flex-start; }
+          .pl-code-row { width: 100%; }
+        }
+
+        /* ── Mobile ≤ 480px ── */
+        @media (max-width: 480px) {
+          .pl-shell      { padding: 1rem; border-radius: 16px; gap: 1.25rem; }
+          .pl-copy-btn   { flex: 1; justify-content: center; font-size: 0.8rem; padding: 9px 10px; }
+          .pl-actions    { flex-direction: column; }
+          .pl-leave-btn  { justify-content: center; }
+          .pl-start-btn  { width: 100%; }
+        }
+
+        /* ── Very small phones ≤ 360px ── */
+        @media (max-width: 360px) {
+          .pl-shell    { padding: 0.75rem; }
+          .pl-copy-btn { font-size: 0.75rem; padding: 8px 8px; }
+        }
+      `}</style>
+
+      <div className="pl-shell">
         
         {/* Header Section */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '1rem',
-          paddingBottom: '1.5rem',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
-        }}>
+        <div className="pl-header">
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <div style={{
@@ -212,7 +322,7 @@ export default function PartyLobby({ gameId }) {
           </div>
 
           {/* Game Code Display & Copy Actions */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <div className="pl-code-row">
             <div style={{
               background: 'rgba(0, 0, 0, 0.4)',
               border: '1px solid rgba(255, 255, 255, 0.15)',
@@ -230,19 +340,11 @@ export default function PartyLobby({ gameId }) {
 
             <button
               onClick={copyCodeToClipboard}
+              className="pl-copy-btn"
               style={{
-                background: copiedCode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.08)',
+                background: copiedCode ? 'rgba(16, 185, 129, 0.2)' : undefined,
                 border: `1px solid ${copiedCode ? 'rgba(16, 185, 129, 0.5)' : 'rgba(255, 255, 255, 0.15)'}`,
                 color: copiedCode ? '#34d399' : 'white',
-                padding: '10px 14px',
-                borderRadius: '12px',
-                fontWeight: 700,
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                transition: 'all 0.2s ease'
               }}
               title="Copy Code"
             >
@@ -261,19 +363,11 @@ export default function PartyLobby({ gameId }) {
 
             <button
               onClick={copyLinkToClipboard}
+              className="pl-copy-btn"
               style={{
-                background: copiedLink ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255, 255, 255, 0.08)',
+                background: copiedLink ? 'rgba(59, 130, 246, 0.2)' : undefined,
                 border: `1px solid ${copiedLink ? 'rgba(59, 130, 246, 0.5)' : 'rgba(255, 255, 255, 0.15)'}`,
                 color: copiedLink ? '#60a5fa' : 'white',
-                padding: '10px 14px',
-                borderRadius: '12px',
-                fontWeight: 700,
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                transition: 'all 0.2s ease'
               }}
               title="Copy Invite Link"
             >
@@ -293,7 +387,7 @@ export default function PartyLobby({ gameId }) {
         </div>
 
         {/* Main Content Layout Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+        <div className="pl-grid">
           
           {/* Left Column: Players Roster */}
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1.5rem' }}>
@@ -411,23 +505,10 @@ export default function PartyLobby({ gameId }) {
             </div>
 
             {/* Action Buttons */}
-            <div style={{ display: 'flex', gap: '12px' }}>
+            <div className="pl-actions">
               <button
                 onClick={handleLeave}
-                style={{
-                  background: 'rgba(239, 68, 68, 0.15)',
-                  border: '1px solid rgba(239, 68, 68, 0.3)',
-                  color: '#fca5a5',
-                  padding: '12px 20px',
-                  borderRadius: '14px',
-                  fontWeight: 800,
-                  fontSize: '0.95rem',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  transition: 'all 0.2s ease'
-                }}
+                className="pl-leave-btn"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                 Leave
@@ -437,24 +518,8 @@ export default function PartyLobby({ gameId }) {
                 <button
                   onClick={handleStartGame}
                   disabled={isStarting}
-                  style={{
-                    flex: 1,
-                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                    border: 'none',
-                    color: 'white',
-                    padding: '12px 24px',
-                    borderRadius: '14px',
-                    fontWeight: 900,
-                    fontSize: '1rem',
-                    cursor: isStarting ? 'not-allowed' : 'pointer',
-                    boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                    transition: 'all 0.2s ease',
-                    opacity: isStarting ? 0.7 : 1
-                  }}
+                  className="pl-start-btn"
+                  style={{ cursor: isStarting ? 'not-allowed' : 'pointer', opacity: isStarting ? 0.7 : 1 }}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                   {isStarting ? 'Starting Game...' : 'Start Game'}
@@ -729,3 +794,4 @@ export default function PartyLobby({ gameId }) {
     </div>
   );
 }
+
