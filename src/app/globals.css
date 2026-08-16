@@ -1086,6 +1086,16 @@ button:focus-visible {
   position: relative;
 }
 
+/* Party lobby needs to scroll on mobile unlike the game canvas */
+.party-lobby-area {
+  width: 100vw;
+  min-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* ── Large desktops ≥1440px ── */
 @media (min-width: 1440px) {
   .container-padding {

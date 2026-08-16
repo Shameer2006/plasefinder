@@ -73,7 +73,40 @@ export default function Home() {
     }
   }, [gameState]);
 
-  // Social variable reward: Friend score toast
+  // Handle party invite links (?party=CODE or #party=CODE)
+  const handledPartyCodeRef = useRef(null);
+  useEffect(() => {
+    if (typeof window === 'undefined' || !userProfile || loading) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let partyCode = urlParams.get('party');
+    if (!partyCode && window.location.hash.startsWith('#party=')) {
+      partyCode = window.location.hash.replace('#party=', '');
+    }
+
+    if (partyCode && handledPartyCodeRef.current !== partyCode.toUpperCase()) {
+      handledPartyCodeRef.current = partyCode.toUpperCase();
+      
+      const joinFromInviteLink = async () => {
+        try {
+          toast.info(`Joining party ${partyCode.toUpperCase()}...`);
+          const { joinParty } = await import('@/lib/matchmaking');
+          const gameId = await joinParty(userProfile, partyCode.trim());
+          if (gameId) {
+            window.history.replaceState({}, '', window.location.pathname);
+            setGameState(`PARTY_LOBBY_${gameId}`);
+            toast.success("Joined Party Lobby!");
+          }
+        } catch (err) {
+          console.error("Invite join error:", err);
+          window.history.replaceState({}, '', window.location.pathname);
+          toast.error(err.message || "Failed to join party from link.");
+        }
+      };
+
+      joinFromInviteLink();
+    }
+  }, [userProfile, loading, setGameState, toast]);
   useEffect(() => {
     if (userProfile && gameState === 'MENU') {
       // Simulate checking recent opponent scores
@@ -177,7 +210,7 @@ export default function Home() {
 
   if (gameState.startsWith('PARTY_LOBBY_')) {
     const gameId = gameState.replace('PARTY_LOBBY_', '');
-    return <div className="game-area"><PartyLobby gameId={gameId} /></div>;
+    return <div className="party-lobby-area"><PartyLobby gameId={gameId} /></div>;
   }
 
   if (gameState === 'FLAG_GAME') {
@@ -203,9 +236,7 @@ export default function Home() {
   };
 
   const handleStoryMode = () => {
-    setGameMode('STORY');
-    setDifficulty('HARD');
-    setGameState('LOADING');
+    toast.info("📖 Story Mode is coming soon! Stay tuned.");
   };
 
   const startMatchmaking = async (type = 'unranked') => {
@@ -753,8 +784,8 @@ const OnboardingTooltip = ({ onDismiss }) => (
   </div>
 );
 
-const HeroMenuButton = ({ title, subtitle, iconClass, svgIcon, onClick, badge, extraRight, disabled }) => (
-  <button onClick={onClick} disabled={disabled} className={`hero-menu-btn ${iconClass}`} style={{ opacity: disabled ? 0.6 : 1, cursor: disabled ? 'not-allowed' : 'pointer' }}>
+const HeroMenuButton = ({ title, subtitle, iconClass, svgIcon, onClick, badge, badgeStyle, extraRight, disabled }) => (
+  <button onClick={onClick} disabled={disabled} className={`hero-menu-btn ${iconClass}`} style={{ opacity: disabled ? 0.65 : 1, cursor: disabled ? 'not-allowed' : 'pointer' }}>
     <div className="hero-menu-btn-content">
       <div className="hero-menu-icon-wrap">
         {svgIcon}
@@ -762,7 +793,20 @@ const HeroMenuButton = ({ title, subtitle, iconClass, svgIcon, onClick, badge, e
       <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <span style={{ fontSize: '0.95rem', fontWeight: '900', letterSpacing: '0.04em' }}>{title}</span>
-          {badge && <span style={{ background: '#ffffff', color: '#111827', fontSize: '0.6rem', padding: '1px 6px', borderRadius: '4px', fontWeight: '900', letterSpacing: '0.5px' }}>{badge}</span>}
+          {badge && (
+            <span style={{
+              background: '#ffffff',
+              color: '#111827',
+              fontSize: '0.6rem',
+              padding: '1px 6px',
+              borderRadius: '4px',
+              fontWeight: '900',
+              letterSpacing: '0.5px',
+              ...badgeStyle
+            }}>
+              {badge}
+            </span>
+          )}
         </div>
         {subtitle && <span style={{ fontSize: '0.75rem', opacity: 0.88, fontWeight: '500' }}>{subtitle}</span>}
       </div>
@@ -820,7 +864,16 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onEndlessMode, onStoryMode, onF
       subtitle="Follow stories & challenges"
       iconClass="icon-gold"
       onClick={onStoryMode}
-      badge="NEW"
+      badge="COMING SOON"
+      badgeStyle={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#111827', fontSize: '0.58rem', padding: '1.5px 6px', borderRadius: '4px', fontWeight: '900', letterSpacing: '0.5px', boxShadow: '0 2px 6px rgba(245, 158, 11, 0.3)' }}
+      extraRight={
+        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '26px', height: '26px', borderRadius: '8px', background: 'rgba(251, 191, 36, 0.15)', border: '1px solid rgba(251, 191, 36, 0.35)', color: '#fbbf24' }} title="Locked - Coming Soon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </span>
+      }
       svgIcon={
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>

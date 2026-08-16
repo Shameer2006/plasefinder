@@ -13,7 +13,7 @@ export default function SiteShell({ children }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <SiteHeader />
-      <main style={{ flex: 1 }}>{children}</main>
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>{children}</main>
       <SiteFooter />
     </div>
   );

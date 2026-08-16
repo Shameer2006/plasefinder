@@ -96,83 +96,67 @@ export default function ArticlePage() {
           <article style={{ fontSize: '1.125rem', color: '#374151' }}>
             
             <p style={{ fontSize: '1.25rem', color: '#4b5563', lineHeight: 1.7, marginBottom: '2.5rem' }}>
-              This is the most comprehensive reference guide to visual clues in Google Street View for geography guessing games like <strong>LostStreet</strong>. Bookmark this page and refer back to it as you build your knowledge.
+              When you're dropped onto a random dirt road in GeoGuessr, staring at a blurry horizon, the entire world is your multiple-choice answer. But the best players don't memorize ten million miles of roads—they use a logical process of elimination.
+            </p>
+            <p style={{ fontSize: '1.125rem', color: '#4b5563', lineHeight: 1.7, marginBottom: '2.5rem' }}>
+              Every Street View location is packed with standardized, repeatable clues. By learning what to look for, you can systematically filter down the globe until only one country is left standing. Here is the ultimate guide to reading Street View clues like a pro.
             </p>
 
             <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '3rem 0' }} />
 
-            <h2 style={headingStyle}>Bollards</h2>
-            <p>Bollards are the small posts on the side of roads. They are highly country-specific:</p>
+            <h2 style={headingStyle}>1. Cut the Map in Half: Driving Side</h2>
+            <p>The single most powerful clue in any Street View game is the driving side. Only about 76 countries and territories drive on the left, while roughly 163 drive on the right.</p>
             <ul style={listStyle}>
-              <li><strong>France:</strong> White with a red top band and a red reflector.</li>
-              <li><strong>Australia:</strong> White with a red reflector on the back, white on the front.</li>
-              <li><strong>New Zealand:</strong> Similar to Australia but with yellow reflectors.</li>
-              <li><strong>Brazil:</strong> Yellow and black striped bollards are common.</li>
-              <li><strong>Russia:</strong> White with a red or orange reflective band.</li>
-              <li><strong>Poland:</strong> White with a red stripe and a distinctive shape.</li>
-              <li><strong>South Africa:</strong> Yellow and black chevron bollards on highways.</li>
+              <li><strong>Left-side driving:</strong> Restricts your options heavily. If you see cars on the left, you're immediately looking at places like the UK, Ireland, Australia, New Zealand, Japan, South Africa, Indonesia, or India.</li>
+              <li><strong>How to check:</strong> Look at passing cars, parked cars (which usually face the flow of traffic), the orientation of road signs, or which side the Google car is traveling on.</li>
             </ul>
 
-            <h2 style={headingStyle}>Utility Poles and Power Lines</h2>
-            <p>The style of electricity poles and how power lines are strung varies significantly by country:</p>
+            <h2 style={headingStyle}>2. The "Meta" Clues: The Google Car and Camera</h2>
+            <p>Because Google used different equipment and vehicles to map different regions, the artifacts they left behind are dead giveaways.</p>
+            
+            <div style={{ margin: '2rem 0', borderRadius: '8px', overflow: 'hidden' }}>
+              <img src="/guides/google-car-v3.png" alt="Google Street View Car" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            </div>
+
             <ul style={listStyle}>
-              <li><strong>Japan:</strong> Extremely dense clusters of power lines and cables on wooden poles. One of the most distinctive clues in the game.</li>
-              <li><strong>USA:</strong> Tall wooden poles with multiple crossbars and transformers.</li>
-              <li><strong>Mongolia:</strong> Wooden poles with a distinctive cross-shaped top piece.</li>
-              <li><strong>Russia:</strong> Concrete poles with a specific angular shape.</li>
-              <li><strong>Western Europe:</strong> Underground cables are common, so fewer visible poles.</li>
+              <li><strong>The Snorkel:</strong> A black plastic tube (a snorkel) visible on the front right of the Google car is a classic sign you are in Kenya. A similar setup occasionally appears in Mongolia or Uganda.</li>
+              <li><strong>The Roof Rack:</strong> A visible roof rack with black tape or a distinctive black strip down the middle usually points to Guatemala, the Dominican Republic, or Ghana.</li>
+              <li><strong>Camera Generations:</strong> Early "Gen 1" and "Gen 2" cameras have a distinct halo effect or look highly blurred (often seen in early Eastern European or Australian coverage). "Gen 3" and "Gen 4" are crisp and high-definition.</li>
+              <li><strong>Camera Height:</strong> A noticeably low camera angle often indicates Japan or Switzerland.</li>
             </ul>
 
-            <h2 style={headingStyle}>Road Markings and Signs</h2>
-            <p>Road markings are standardised within countries but differ internationally:</p>
+            <h2 style={headingStyle}>3. Infrastructure: Bollards and Road Lines</h2>
+            <p>If you don't see the Google car, look at the infrastructure holding the road together. Standardized safety features rarely cross borders.</p>
+            
+            <div style={{ margin: '2rem 0', borderRadius: '8px', overflow: 'hidden', textAlign: 'center' }}>
+              <img src="/guides/bollard-v3.png" alt="Road Bollard" style={{ maxWidth: '100%', height: 'auto', display: 'inline-block', borderRadius: '8px' }} />
+            </div>
+
             <ul style={listStyle}>
-              <li><strong>Yellow centre lines:</strong> USA, Canada, Brazil, Japan, South Korea.</li>
-              <li><strong>White centre lines:</strong> Most of Europe, Australia, UK.</li>
-              <li><strong>Speed signs in km/h:</strong> Most of the world except USA, UK, Myanmar.</li>
-              <li><strong>Speed signs in mph:</strong> USA, UK, Liberia, Myanmar.</li>
-              <li><strong>Green highway signs:</strong> USA, Canada, Australia, Ireland.</li>
-              <li><strong>Blue highway signs:</strong> Most of Europe.</li>
+              <li><strong>Bollards:</strong> These roadside reflector posts are incredibly specific. For example, Austria uses white posts with a black cap and dark red reflector. France uses a white post with a red strip near the top. Denmark uses short white posts with a green reflector.</li>
+              <li><strong>Center Lines:</strong> Double yellow center lines are ubiquitous in the Americas. Europe mostly uses white center lines.</li>
+              <li><strong>Edge Lines:</strong> A solid yellow line on the right edge of the road is a strong indicator of Israel or South Africa. Wide white outer edge lines with a yellow inner line point toward Italy or the Balkans.</li>
             </ul>
 
-            <h2 style={headingStyle}>The Sun Position</h2>
-            <p>
-              The position of the sun in the sky tells you which hemisphere you are in. In the Northern Hemisphere, the sun travels across the southern part of the sky. In the Southern Hemisphere, it travels across the northern part of the sky. This means:
+            <h2 style={headingStyle}>4. The Privacy Blur Survivors: License Plates</h2>
+            <p>Google blurs license plate numbers, but the shape and color survive the algorithm—and that's all you need.</p>
+            <ul style={listStyle}>
+              <li><strong>Yellow Plates:</strong> Yellow plates on both the front and back of cars strongly indicate the Netherlands, Luxembourg, or Israel. A white front plate with a yellow rear plate is a classic UK signature.</li>
+              <li><strong>Blue Strips:</strong> The European Union standard features a vertical blue stripe on the left edge. However, Italy and Albania feature blue strips on both the left and right edges of the plate.</li>
+              <li><strong>Mercosur Design:</strong> In South America, a distinct blue horizontal band across the top of the plate is shared by Argentina, Brazil, Uruguay, and Paraguay.</li>
+            </ul>
+
+            <h2 style={headingStyle}>5. The Natural World and Architecture</h2>
+            <p>When the road is completely empty, you have to read the environment.</p>
+            <ul style={listStyle}>
+              <li><strong>Sun Direction:</strong> Look at your compass. If the sun is in the north, you are in the Southern Hemisphere (e.g., South America, Oceania, southern Africa). If the sun is in the south, you are in the Northern Hemisphere.</li>
+              <li><strong>Architecture:</strong> Red clay-tile roofs are dominant in Southern Europe, while wooden houses are more prevalent in Northern Europe. Utility poles also vary: concrete poles with triangle-shaped holes are a staple of Poland, while V-shaped braces are common in Thailand.</li>
+              <li><strong>Soil and Vegetation:</strong> Eucalyptus trees and red dirt heavily suggest Australia (though they exist elsewhere). Birch forests are a hallmark of Eastern Europe and Russia.</li>
+            </ul>
+            
+            <p style={{ fontSize: '1.25rem', color: '#4b5563', lineHeight: 1.7, marginTop: '2.5rem', fontWeight: 600 }}>
+              The secret to improving isn't studying maps endlessly; it's building a mental checklist. Start every round by checking the driving side, look at the camera/car, find a bollard or license plate, and check the sun.
             </p>
-            <ul style={listStyle}>
-              <li>Shadows pointing north = Southern Hemisphere (Australia, South America, Southern Africa).</li>
-              <li>Shadows pointing south = Northern Hemisphere (Europe, North America, Asia).</li>
-            </ul>
-            <p>This clue alone can eliminate half the world instantly.</p>
-
-            <h2 style={headingStyle}>Architecture Styles</h2>
-            <p>Building styles are powerful regional indicators:</p>
-            <ul style={listStyle}>
-              <li><strong>Soviet-era apartment blocks (Khrushchyovka):</strong> Russia, Ukraine, Belarus, Baltic states, Central Asia, and former Soviet satellite states in Eastern Europe.</li>
-              <li><strong>Colourful colonial buildings:</strong> Latin America, parts of West Africa, Southeast Asia.</li>
-              <li><strong>Corrugated iron roofs:</strong> Sub-Saharan Africa, Pacific Islands, parts of Southeast Asia.</li>
-              <li><strong>Stucco white walls with terracotta roofs:</strong> Mediterranean Europe (Spain, Portugal, Greece, Italy).</li>
-              <li><strong>Wooden houses with steep roofs:</strong> Scandinavia, Finland, Russia.</li>
-              <li><strong>Shophouse architecture (narrow buildings with covered walkways):</strong> Malaysia, Singapore, Vietnam, parts of Indonesia.</li>
-            </ul>
-
-            <h2 style={headingStyle}>The Google Car Itself</h2>
-            <p>The Google Street View car has country-specific modifications that are visible in the panorama:</p>
-            <ul style={listStyle}>
-              <li><strong>Ghana:</strong> Black tape on the roof rack — one of the most famous clues in the game.</li>
-              <li><strong>Kenya:</strong> A black snorkel visible on the front right of the vehicle.</li>
-              <li><strong>Guatemala:</strong> Visible side mirrors on the car.</li>
-              <li><strong>Mongolia:</strong> The car often has a distinctive antenna or equipment visible.</li>
-              <li><strong>Indonesia:</strong> The camera is sometimes mounted on a motorbike rather than a car.</li>
-            </ul>
-
-            <h2 style={headingStyle}>Soil and Road Colour</h2>
-            <p>The colour of unpaved roads and exposed soil is a strong regional indicator:</p>
-            <ul style={listStyle}>
-              <li><strong>Red/orange soil:</strong> West Africa, parts of East Africa, Queensland (Australia), parts of Brazil.</li>
-              <li><strong>White/grey chalky soil:</strong> Parts of the Middle East, North Africa.</li>
-              <li><strong>Dark brown soil:</strong> Eastern Europe, parts of Russia (chernozem).</li>
-              <li><strong>Sandy yellow:</strong> Sahara region, Arabian Peninsula, Central Australia.</li>
-            </ul>
 
             <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '4rem 0' }} />
 

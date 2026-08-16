@@ -13,6 +13,33 @@ export const getLeague = (elo) => {
   return LEAGUES.find(l => elo >= l.minElo && elo <= l.maxElo) || LEAGUES[0];
 };
 
+// Trigger background welcome email
+export const triggerWelcomeEmail = (user, displayName) => {
+  if (!user?.email || user.isAnonymous || typeof window === 'undefined') return;
+  fetch('/api/send-welcome-email', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      uid: user.uid,
+      email: user.email,
+      displayName: displayName || user.displayName || 'Explorer',
+    }),
+  })
+    .then(async (res) => {
+      const result = await res.json();
+      if (result?.success && db && user?.uid) {
+        const userRef = doc(db, 'users', user.uid);
+        await setDoc(userRef, {
+          welcomeEmailSent: true,
+          welcomeEmailSentAt: new Date().toISOString()
+        }, { merge: true });
+      }
+    })
+    .catch((err) => {
+      console.warn('Welcome email trigger non-critical error:', err);
+    });
+};
+
 export const getOrCreateUserProfile = async (user) => {
   if (!db || !user || user.isAnonymous) return null;
 
@@ -20,7 +47,12 @@ export const getOrCreateUserProfile = async (user) => {
   const docSnap = await getDoc(userRef);
 
   if (docSnap.exists()) {
-    return docSnap.data();
+    const data = docSnap.data();
+    // Send welcome email if user hasn't received one yet
+    if (data && !data.welcomeEmailSent && user.email) {
+      triggerWelcomeEmail(user, data.username || data.displayName);
+    }
+    return data;
   } else {
     const newProfile = {
       uid: user.uid,
@@ -39,9 +71,11 @@ export const getOrCreateUserProfile = async (user) => {
       dailyChallengeStreak: 0,
       lastDailyChallengeDate: null,
       onboardingComplete: false,
+      welcomeEmailSent: false,
       createdAt: new Date().toISOString()
     };
     await setDoc(userRef, newProfile);
+    triggerWelcomeEmail(user, newProfile.displayName);
     return newProfile;
   }
 };

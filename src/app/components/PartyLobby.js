@@ -114,11 +114,42 @@ export default function PartyLobby({ gameId }) {
     setTimeout(() => setCopiedCode(false), 2000);
   };
 
-  const copyLinkToClipboard = () => {
+  const handleShareLink = async () => {
     const url = `${window.location.origin}/?party=${matchData.code}`;
-    navigator.clipboard.writeText(url);
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2000);
+    const shareData = {
+      title: 'Join my LostStreet Party!',
+      text: `Join my LostStreet party room! Room code: ${matchData.code}`,
+      url: url,
+    };
+
+    if (typeof navigator !== 'undefined' && navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+      try {
+        await navigator.share(shareData);
+        setCopiedLink(true);
+        setTimeout(() => setCopiedLink(false), 2500);
+        return;
+      } catch (err) {
+        if (err.name === 'AbortError') return; // User closed share sheet
+      }
+    }
+
+    // Fallback to clipboard
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        const input = document.createElement('input');
+        input.value = url;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+      }
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2500);
+    } catch (e) {
+      console.warn("Failed to copy link:", e);
+    }
   };
 
   return (
@@ -126,13 +157,12 @@ export default function PartyLobby({ gameId }) {
       display: 'flex',
       alignItems: 'flex-start',
       justifyContent: 'center',
-      minHeight: '100vh',
-      minHeight: '100svh',
-      padding: '1rem',
+      padding: '1.5rem 1rem 3rem',
       background: 'radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 40%), #0b0f19',
       fontFamily: '"Outfit", system-ui, -apple-system, sans-serif',
       color: '#e5e7eb',
       boxSizing: 'border-box',
+      minHeight: '100%',
     }}>
       <style>{`
         /* ── PartyLobby responsive styles ── */
@@ -151,7 +181,6 @@ export default function PartyLobby({ gameId }) {
           flex-direction: column;
           gap: 2rem;
           box-sizing: border-box;
-          margin: auto 0;
         }
 
         /* Header row */
@@ -249,7 +278,7 @@ export default function PartyLobby({ gameId }) {
 
         /* ── Mobile ≤ 480px ── */
         @media (max-width: 480px) {
-          .pl-shell      { padding: 1rem; border-radius: 16px; gap: 1.25rem; }
+          .pl-shell      { padding: 1rem; border-radius: 16px; gap: 1.25rem; margin-bottom: 1rem; }
           .pl-copy-btn   { flex: 1; justify-content: center; font-size: 0.8rem; padding: 9px 10px; }
           .pl-actions    { flex-direction: column; }
           .pl-leave-btn  { justify-content: center; }
@@ -362,14 +391,14 @@ export default function PartyLobby({ gameId }) {
             </button>
 
             <button
-              onClick={copyLinkToClipboard}
+              onClick={handleShareLink}
               className="pl-copy-btn"
               style={{
                 background: copiedLink ? 'rgba(59, 130, 246, 0.2)' : undefined,
                 border: `1px solid ${copiedLink ? 'rgba(59, 130, 246, 0.5)' : 'rgba(255, 255, 255, 0.15)'}`,
                 color: copiedLink ? '#60a5fa' : 'white',
               }}
-              title="Copy Invite Link"
+              title="Share / Copy Invite Link"
             >
               {copiedLink ? (
                 <>

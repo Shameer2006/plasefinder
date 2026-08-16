@@ -42,8 +42,13 @@ export const AuthProvider = ({ children }) => {
         const localXp = parseInt(typeof window !== 'undefined' ? (localStorage.getItem('placefinder_total_xp') || '0') : '0', 10) || 0;
         const localUsername = (typeof window !== 'undefined' && localStorage.getItem('placefinder_username')) || 'Guest Explorer';
         const localCountry = (typeof window !== 'undefined' && localStorage.getItem('placefinder_country')) || 'IN';
+        let guestId = typeof window !== 'undefined' ? localStorage.getItem('placefinder_guest_id') : null;
+        if (!guestId && typeof window !== 'undefined') {
+          guestId = `guest_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 7)}`;
+          localStorage.setItem('placefinder_guest_id', guestId);
+        }
         setUserProfile({
-          uid: 'guest',
+          uid: guestId || 'guest',
           username: localUsername,
           displayName: localUsername,
           countryCode: localCountry,
