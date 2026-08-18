@@ -30,14 +30,20 @@ export const useGameStore = create(
       mapType: 'normal',
       emotesEnabled: true,
       gameHistory: [],
+      // Coin Economy & Daily Streak State
+      coins: 50, // 50 Starter Coins
+      loginStreak: 0,
+      lastClaimDate: null,
+      showDailyRewardOverlay: false,
+      fiftyFiftyUsed: false,
 
       setGameState: (state) => set({ gameState: state }),
       setGameMode: (mode) => set({ gameMode: mode }),
       setDifficulty: (diff) => set({ difficulty: diff }),
       addScore: (score) => set((state) => ({ score: state.score + score })),
-      nextRound: () => set((state) => ({ currentRound: state.currentRound + 1, usedHint: false, googleSearchUsed: false, circleSearchesUsed: 0, circleSearchActive: false, circleSearchHints: [], isRareRound: false, rareMultiplier: 1 })),
+      nextRound: () => set((state) => ({ currentRound: state.currentRound + 1, usedHint: false, fiftyFiftyUsed: false, googleSearchUsed: false, circleSearchesUsed: 0, circleSearchActive: false, circleSearchHints: [], isRareRound: false, rareMultiplier: 1 })),
       setMaxRounds: (rounds) => set({ maxRounds: rounds }),
-      resetGame: () => set({ gameState: 'MENU', gameMode: 'CLASSIC', score: 0, currentRound: 1, maxRounds: 5, userGuess: null, usedHint: false, googleSearchUsed: false, circleSearchesUsed: 0, circleSearchActive: false, circleSearchHints: [], isRareRound: false, rareMultiplier: 1, isDailyChallenge: false, currentEndlessStreak: 0, bestEndlessStreakThisSession: 0 }),
+      resetGame: () => set({ gameState: 'MENU', gameMode: 'CLASSIC', score: 0, currentRound: 1, maxRounds: 5, userGuess: null, usedHint: false, fiftyFiftyUsed: false, googleSearchUsed: false, circleSearchesUsed: 0, circleSearchActive: false, circleSearchHints: [], isRareRound: false, rareMultiplier: 1, isDailyChallenge: false, currentEndlessStreak: 0, bestEndlessStreakThisSession: 0 }),
       setRareRound: (isRare, multiplier = 1) => set({ isRareRound: isRare, rareMultiplier: multiplier }),
       setIsDailyChallenge: (val) => set({ isDailyChallenge: val }),
       setCurrentEndlessStreak: (val) => set((state) => {
@@ -48,10 +54,19 @@ export const useGameStore = create(
       setOptions: (options) => set({ options }),
       setUserGuess: (guess) => set({ userGuess: guess }),
       setUsedHint: (used) => set({ usedHint: used }),
+      setFiftyFiftyUsed: (used) => set({ fiftyFiftyUsed: used }),
       setGoogleSearchUsed: (used) => set({ googleSearchUsed: used }),
       setCircleSearchActive: (active) => set({ circleSearchActive: active }),
       incrementCircleSearch: () => set((s) => ({ circleSearchesUsed: s.circleSearchesUsed + 1 })),
       addCircleSearchHint: (hint) => set((s) => ({ circleSearchHints: [...s.circleSearchHints, hint] })),
+
+      // Coin & Streak Actions
+      setCoins: (coins) => set({ coins: Math.max(0, parseInt(coins, 10) || 0) }),
+      addCoins: (amount) => set((state) => ({ coins: Math.max(0, state.coins + (parseInt(amount, 10) || 0)) })),
+      deductCoins: (amount) => set((state) => ({ coins: Math.max(0, state.coins - (parseInt(amount, 10) || 0)) })),
+      setLoginStreak: (streak) => set({ loginStreak: Math.max(0, parseInt(streak, 10) || 0) }),
+      setLastClaimDate: (dateStr) => set({ lastClaimDate: dateStr }),
+      setShowDailyRewardOverlay: (show) => set({ showDailyRewardOverlay: !!show }),
 
       setSoundEnabled: (enabled) => {
         sounds.setEnabled(enabled);
@@ -85,7 +100,10 @@ export const useGameStore = create(
         units: state.units,
         mapType: state.mapType,
         emotesEnabled: state.emotesEnabled,
-        gameHistory: state.gameHistory
+        gameHistory: state.gameHistory,
+        coins: state.coins,
+        loginStreak: state.loginStreak,
+        lastClaimDate: state.lastClaimDate
       })
     }
   )

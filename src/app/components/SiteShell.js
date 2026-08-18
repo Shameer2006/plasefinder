@@ -3,23 +3,28 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/lib/AuthContext';
 import { useState, useEffect } from 'react';
+import CoinHUD from './CoinHUD';
+import DailyRewardOverlay from './DailyRewardOverlay';
 
 const GAME_PATHS = ['/'];
 
 export default function SiteShell({ children }) {
   const pathname = usePathname();
+  const [showDailyRewards, setShowDailyRewards] = useState(false);
+
   if (GAME_PATHS.includes(pathname)) return children;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <SiteHeader />
+      <SiteHeader onOpenDailyReward={() => setShowDailyRewards(true)} />
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>{children}</main>
       <SiteFooter />
+      <DailyRewardOverlay forceOpen={showDailyRewards} onClose={() => setShowDailyRewards(false)} />
     </div>
   );
 }
 
-function SiteHeader() {
+function SiteHeader({ onOpenDailyReward }) {
   const pathname = usePathname();
   const { user, loginWithGoogle } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -87,8 +92,10 @@ function SiteHeader() {
             })}
           </nav>
 
-          {/* Desktop sign-in + mobile hamburger */}
+          {/* Coin HUD, Desktop sign-in + mobile hamburger */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <CoinHUD onOpenDailyReward={onOpenDailyReward} />
+
             {/* Sign In (desktop) */}
             <div className="site-nav-desktop">
               {(!user || user.isAnonymous) ? (

@@ -751,6 +751,26 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                 </div>
 
                 <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(232, 200, 74, 0.15)', border: '1px solid rgba(232, 200, 74, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#e8c84a', fontSize: '1.2rem', flexShrink: 0 }}>
+                    🪙
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 800, textTransform: 'uppercase' }}>Coins</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 900, color: '#fef08a' }}>{(userProfile?.coins !== undefined ? userProfile.coins : 50).toLocaleString()}</div>
+                  </div>
+                </div>
+
+                <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ef4444', fontSize: '1.2rem', flexShrink: 0 }}>
+                    🔥
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 800, textTransform: 'uppercase' }}>Login Streak</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'white' }}>{userProfile?.loginStreak || 0} Days</div>
+                  </div>
+                </div>
+
+                <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(56, 189, 248, 0.15)', border: '1px solid rgba(56, 189, 248, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#38bdf8', flexShrink: 0 }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                   </div>

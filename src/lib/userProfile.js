@@ -52,7 +52,12 @@ export const getOrCreateUserProfile = async (user) => {
     if (data && !data.welcomeEmailSent && user.email) {
       triggerWelcomeEmail(user, data.username || data.displayName);
     }
-    return data;
+    return {
+      ...data,
+      coins: data.coins !== undefined ? data.coins : 50,
+      loginStreak: data.loginStreak || 0,
+      lastDailyRewardDate: data.lastDailyRewardDate || null,
+    };
   } else {
     const newProfile = {
       uid: user.uid,
@@ -62,6 +67,9 @@ export const getOrCreateUserProfile = async (user) => {
       email: user.email,
       elo: 1000,
       totalXp: 0,
+      coins: 50,
+      loginStreak: 0,
+      lastDailyRewardDate: null,
       gamesPlayed: 0,
       duels_wins: 0,
       duels_losses: 0,
@@ -385,6 +393,53 @@ export const updateEloAfterDuel = async (winnerUid, loserUid, isDraw = false) =>
   };
 };
 
+// Update user coins
+export const updateUserCoins = async (uid, newBalance) => {
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem('placefinder_coins', newBalance.toString());
+    } catch (e) {}
+  }
+  if (!db || !uid || uid.startsWith('guest_') || uid === 'guest') return true;
+  try {
+    const userRef = doc(db, 'users', uid);
+    await setDoc(userRef, { coins: newBalance }, { merge: true });
+    return true;
+  } catch (e) {
+    console.warn('Notice: Could not save Firestore coins:', e?.message || e);
+    return false;
+  }
+};
+
+// Update daily login streak & last claim date
+export const updateUserDailyReward = async (uid, newStreak, dateString, newCoins) => {
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem('placefinder_login_streak', newStreak.toString());
+      localStorage.setItem('placefinder_last_claim_date', dateString);
+      if (typeof newCoins === 'number') {
+        localStorage.setItem('placefinder_coins', newCoins.toString());
+      }
+    } catch (e) {}
+  }
+  if (!db || !uid || uid.startsWith('guest_') || uid === 'guest') return true;
+  try {
+    const userRef = doc(db, 'users', uid);
+    const updateData = {
+      loginStreak: newStreak,
+      lastDailyRewardDate: dateString,
+    };
+    if (typeof newCoins === 'number') {
+      updateData.coins = newCoins;
+    }
+    await setDoc(userRef, updateData, { merge: true });
+    return true;
+  } catch (e) {
+    console.warn('Notice: Could not update Firestore daily reward:', e?.message || e);
+    return false;
+  }
+};
+
 // Get global ELO rank
 export const getGlobalEloRank = async (elo) => {
   if (!db) return null;
@@ -398,3 +453,5 @@ export const getGlobalEloRank = async (elo) => {
     return null;
   }
 };
+
+

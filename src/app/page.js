@@ -14,6 +14,10 @@ import { sounds } from '@/lib/sounds';
 import ProfileModal from './components/ProfileModal';
 import OnboardingModal from './components/OnboardingModal';
 import HeroPanorama from './components/HeroPanorama';
+import CoinHUD from './components/CoinHUD';
+import DailyRewardOverlay from './components/DailyRewardOverlay';
+import NotificationsPanel from './components/NotificationsPanel';
+import { getUnreadCount } from '@/lib/notifications';
 
 const Game = dynamic(() => import('./components/Game'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
 const FlagGame = dynamic(() => import('./components/FlagGame'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
@@ -21,7 +25,11 @@ const MultiplayerGame = dynamic(() => import('./components/MultiplayerGame'), { 
 
 export default function Home() {
   const { user, userProfile, setUserProfile, loading, loginWithGoogle, logout } = useAuth();
-  const { gameState, setGameState, setDifficulty, setGameMode, setIsDailyChallenge, soundEnabled, setSoundEnabled, initSounds, units, setUnits, mapType, setMapType, emotesEnabled, setEmotesEnabled } = useGameStore();
+  const { 
+    gameState, setGameState, setDifficulty, setGameMode, setIsDailyChallenge, 
+    soundEnabled, setSoundEnabled, initSounds, units, setUnits, mapType, setMapType, 
+    emotesEnabled, setEmotesEnabled, showDailyRewardOverlay, setShowDailyRewardOverlay 
+  } = useGameStore();
   const [isQueuing, setIsQueuing] = useState(false);
   const [queueSub, setQueueSub] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
@@ -30,9 +38,15 @@ export default function Home() {
   const [showJoinModal, setShowJoinModal] = useState(false);
   const [showObjectives, setShowObjectives] = useState(false);
   const [showMatchmaking, setShowMatchmaking] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(true);
+  const [unreadNotifications, setUnreadNotifications] = useState(2);
   const [joinCode, setJoinCode] = useState('');
   const [joinError, setJoinError] = useState('');
   const [isJoining, setIsJoining] = useState(false);
+
+  useEffect(() => {
+    setUnreadNotifications(getUnreadCount());
+  }, [showNotifications]);
   const [streak, setStreak] = useState(0);
   const [playedToday, setPlayedToday] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -394,8 +408,52 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Right Status Pill, Settings Button, User Avatar & Mobile Menu Toggle */}
+        {/* Right Status Pill, Coin HUD, Notification Bell, Settings Button, User Avatar & Mobile Menu Toggle */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <CoinHUD onOpenDailyReward={() => setShowDailyRewardOverlay(true)} />
+
+          {/* Notification Bell with unread counter */}
+          <button
+            onClick={() => setShowNotifications(prev => !prev)}
+            aria-label="Toggle Notifications"
+            title="Notifications & Updates"
+            style={{
+              background: showNotifications ? 'rgba(239, 68, 68, 0.18)' : 'rgba(18, 24, 38, 0.85)',
+              border: showNotifications ? '1px solid rgba(239, 68, 68, 0.45)' : '1px solid rgba(255, 255, 255, 0.15)',
+              color: 'white',
+              padding: '6px 11px',
+              borderRadius: '12px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: '34px',
+              position: 'relative',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <span style={{ fontSize: '1.05rem' }}>🔔</span>
+            {unreadNotifications > 0 && (
+              <span style={{
+                position: 'absolute',
+                top: '-4px',
+                right: '-4px',
+                background: '#ef4444',
+                color: '#fff',
+                borderRadius: '10px',
+                fontSize: '0.65rem',
+                fontWeight: 900,
+                padding: '1px 5px',
+                border: '2px solid #0a0d1a',
+                boxShadow: '0 0 8px rgba(239, 68, 68, 0.7)',
+                fontFamily: '"Outfit", sans-serif',
+              }}>
+                {unreadNotifications}
+              </span>
+            )}
+          </button>
+
           <button
             onClick={() => setShowSettings(true)}
             style={{
@@ -538,67 +596,58 @@ export default function Home() {
             )}
           </div>
 
-          {/* Right Column: Mini Map Widget & Forest Green Highway Welcome Sign */}
+          {/* Right Column: Notifications & Updates Panel OR Mini Map Widget */}
           {!showSettings && !showProfile && !showDifficulty && !showMatchmaking && (
-            <aside style={{ maxWidth: '340px', width: '100%', display: 'flex', flexDirection: 'column', gap: '14px', zIndex: 5, pointerEvents: 'auto' }} className="desktop-only">
-              {/* Mini Map Preview Widget */}
-              <div style={{
-                width: '100%',
-                height: '95px',
-                borderRadius: '16px',
-                background: 'rgba(18, 24, 38, 0.85)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                border: '1px solid rgba(255,255,255,0.15)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
-                position: 'relative',
-                overflow: 'hidden'
-              }}>
-                <svg width="240" height="85" viewBox="0 0 200 100" fill="none" opacity="0.4">
-                  <path d="M30 40 Q40 20 60 30 T90 40 T120 20 T150 50 T180 40" stroke="white" strokeWidth="1.5" strokeDasharray="3,3" />
-                  <circle cx="120" cy="35" r="4" fill="#ef4444" />
-                  <circle cx="120" cy="35" r="8" fill="#ef4444" opacity="0.3" />
-                </svg>
-                <div style={{ position: 'absolute', bottom: '6px', fontSize: '0.65rem', color: '#9ca3af', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>World View</div>
-              </div>
+            <aside style={{ maxWidth: '680px', width: '100%', flex: 1, display: 'flex', flexDirection: 'column', gap: '14px', zIndex: 5, pointerEvents: 'auto' }} className="desktop-only">
+              {showNotifications ? (
+                <NotificationsPanel
+                  onClose={() => setShowNotifications(false)}
+                  onOpenDailyRewards={() => setShowDailyRewardOverlay(true)}
+                  onNavigate={(url) => window.location.href = url}
+                />
+              ) : (
+                <div style={{ maxWidth: '340px', width: '100%', display: 'flex', flexDirection: 'column', gap: '14px', marginLeft: 'auto' }}>
+                  {/* Mini Map Preview Widget */}
+                  <div style={{
+                    width: '100%',
+                    height: '95px',
+                    borderRadius: '16px',
+                    background: 'rgba(18, 24, 38, 0.85)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}>
+                    <svg width="240" height="85" viewBox="0 0 200 100" fill="none" opacity="0.4">
+                      <path d="M30 40 Q40 20 60 30 T90 40 T120 20 T150 50 T180 40" stroke="white" strokeWidth="1.5" strokeDasharray="3,3" />
+                      <circle cx="120" cy="35" r="4" fill="#ef4444" />
+                      <circle cx="120" cy="35" r="8" fill="#ef4444" opacity="0.3" />
+                    </svg>
+                    <div style={{ position: 'absolute', bottom: '6px', fontSize: '0.65rem', color: '#9ca3af', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>World View</div>
+                  </div>
 
-              {/* Forest Green Highway Signboard */}
-              <div className="highway-signboard">
-                <div className="highway-signboard-inner">
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', color: '#86efac' }}>WELCOME TO</span>
-                  <h1 style={{ fontSize: '2rem', fontWeight: 900, fontFamily: '"Outfit", sans-serif', color: '#fef08a', margin: 0, lineHeight: 1.1, textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>LOSTSTREET</h1>
-                  <div style={{ width: '60px', height: '2px', background: 'rgba(254, 240, 138, 0.4)', margin: '2px 0' }} />
-                  <p style={{ fontSize: '0.88rem', color: '#e5e7eb', lineHeight: 1.4, margin: 0 }}>
-                    Explore real streets from around the world. Follow the clues, pin your best guess and become a top explorer!
-                  </p>
-                  <button className="highway-quickplay-btn" onClick={() => handleStart('EASY')} aria-label="Quick Play - start a game instantly">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                    QUICK PLAY
-                  </button>
+                  {/* Forest Green Highway Signboard */}
+                  <div className="highway-signboard">
+                    <div className="highway-signboard-inner">
+                      <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', color: '#86efac' }}>WELCOME TO</span>
+                      <h1 style={{ fontSize: '2rem', fontWeight: 900, fontFamily: '"Outfit", sans-serif', color: '#fef08a', margin: 0, lineHeight: 1.1, textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>LOSTSTREET</h1>
+                      <div style={{ width: '60px', height: '2px', background: 'rgba(254, 240, 138, 0.4)', margin: '2px 0' }} />
+                      <p style={{ fontSize: '0.88rem', color: '#e5e7eb', lineHeight: 1.4, margin: 0 }}>
+                        Explore real streets from around the world. Follow the clues, pin your best guess and become a top explorer!
+                      </p>
+                      <button className="highway-quickplay-btn" onClick={() => handleStart('EASY')} aria-label="Quick Play - start a game instantly">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        QUICK PLAY
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              {/* 3 Feature Badges below Highway Sign */}
-              <div style={{ display: 'flex', gap: '8px' }}>
-                <div className="feature-badge-card">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'white' }}>Real Locations</span>
-                  <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>Explore real places</span>
-                </div>
-                <div className="feature-badge-card">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'white' }}>Smart Clues</span>
-                  <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>Find hidden hints</span>
-                </div>
-                <div className="feature-badge-card">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path></svg>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'white' }}>Compete</span>
-                  <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>Climb the ranks</span>
-                </div>
-              </div>
+              )}
             </aside>
           )}
         </div>
@@ -711,6 +760,36 @@ export default function Home() {
           }}
         />
       )}
+
+      {/* Daily Reward Modal Overlay */}
+      <DailyRewardOverlay
+        forceOpen={showDailyRewardOverlay}
+        onClose={() => setShowDailyRewardOverlay(false)}
+      />
+
+      {/* Mobile Notifications Modal Overlay */}
+      {showNotifications && (
+        <div className="mobile-only" style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 9990,
+          background: 'rgba(6, 9, 18, 0.85)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '16px',
+        }}>
+          <NotificationsPanel
+            onClose={() => setShowNotifications(false)}
+            onOpenDailyRewards={() => { setShowNotifications(false); setShowDailyRewardOverlay(true); }}
+            onNavigate={(url) => { setShowNotifications(false); window.location.href = url; }}
+          />
+        </div>
+      )}
+
+
 
     </main>
   );
