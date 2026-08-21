@@ -45,6 +45,8 @@ function getDailySeededIndex(seed, total) {
 
 export default function HeroPanorama() {
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [shouldLoadIframe, setShouldLoadIframe] = useState(false);
   const iframeRef = useRef(null);
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
@@ -63,9 +65,16 @@ export default function HeroPanorama() {
     return () => clearInterval(interval);
   }, []);
 
+  // Defer iframe creation slightly so first paint is instant
+  useEffect(() => {
+    if (!apiKey) return;
+    const timer = setTimeout(() => {
+      setShouldLoadIframe(true);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [apiKey]);
+
   const currentPano = STREET_VIEW_LOCATIONS[currentIdx] || STREET_VIEW_LOCATIONS[0];
-
-
 
   return (
     <div className="hero-panorama-container" style={{
@@ -77,11 +86,20 @@ export default function HeroPanorama() {
       zIndex: 0,
       backgroundColor: '#0a0d1a'
     }}>
-      {/* Google Street View Panorama Iframe Background */}
-      {apiKey ? (
+      {/* Background fallback gradient for instant 0ms visual */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'radial-gradient(ellipse at 50% 30%, #151e36 0%, #0a0d1a 70%, #060812 100%)',
+        zIndex: 0,
+      }} />
+
+      {/* Google Street View Panorama Iframe Background (Deferred) */}
+      {apiKey && shouldLoadIframe ? (
         <iframe
           ref={iframeRef}
           src={`https://www.google.com/maps/embed/v1/streetview?key=${apiKey}&location=${currentPano.lat},${currentPano.lng}&heading=${currentPano.heading}&pitch=${currentPano.pitch}&fov=100`}
+          onLoad={() => setIframeLoaded(true)}
           style={{
             position: 'absolute',
             top: 0,
@@ -92,18 +110,15 @@ export default function HeroPanorama() {
             border: 'none',
             pointerEvents: 'auto',
             zIndex: 1,
-            filter: 'brightness(0.9) contrast(1.05)'
+            filter: 'brightness(0.9) contrast(1.05)',
+            opacity: iframeLoaded ? 1 : 0,
+            transition: 'opacity 0.8s ease-in-out',
           }}
           allowFullScreen
+          loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
-      ) : (
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(135deg, #0a0d1a 0%, #10172a 100%)'
-        }} />
-      )}
+      ) : null}
 
       {/* Dark Vignette Overlay for UI Contrast */}
       <div style={{

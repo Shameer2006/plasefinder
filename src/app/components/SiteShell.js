@@ -3,8 +3,10 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/lib/AuthContext';
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import CoinHUD from './CoinHUD';
-import DailyRewardOverlay from './DailyRewardOverlay';
+
+const DailyRewardOverlay = dynamic(() => import('./DailyRewardOverlay'), { ssr: false });
 
 const GAME_PATHS = ['/'];
 

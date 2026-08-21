@@ -26,6 +26,39 @@ const jsonLd = {
   image: 'https://www.loststreet.online/og-image.png',
 };
 
+const headingStyle = {
+  fontSize: 'clamp(1.35rem, 3.5vw, 1.85rem)',
+  fontWeight: 800,
+  color: '#111827',
+  marginTop: 'clamp(2.2rem, 4.5vw, 3.5rem)',
+  marginBottom: 'clamp(0.75rem, 2vw, 1.2rem)',
+  fontFamily: '"Merriweather", "Georgia", serif',
+  lineHeight: 1.35,
+  wordBreak: 'break-word',
+};
+
+const subHeadingStyle = {
+  fontSize: 'clamp(1.1rem, 2.5vw, 1.35rem)',
+  fontWeight: 700,
+  color: '#1f2937',
+  marginTop: 'clamp(1.5rem, 3vw, 2.2rem)',
+  marginBottom: '0.65rem',
+  fontFamily: '"Inter", system-ui, sans-serif',
+  lineHeight: 1.35,
+  wordBreak: 'break-word',
+};
+
+const listStyle = {
+  listStyleType: 'disc',
+  paddingLeft: 'clamp(1.2rem, 3vw, 1.8rem)',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.65rem',
+  marginBottom: '1.8rem',
+  color: '#374151',
+  lineHeight: 1.75,
+};
+
 export default function ArticlePage() {
   return (
     <>
@@ -37,69 +70,72 @@ export default function ArticlePage() {
         fontFamily: '"Merriweather", "Georgia", serif',
         lineHeight: 1.8
       }}>
-        {/* ── TOP STICKY NAVBAR ────────────────────────────────────────── */}
-        <header style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 100,
+        {/* ── BREADCRUMB SUB-NAV BAR ─────────────────────────────────────── */}
+        <div style={{
           background: '#ffffff',
           borderBottom: '1px solid #e5e7eb',
-          padding: '1rem 2.5rem',
+          padding: '0.75rem clamp(1rem, 3vw, 2.5rem)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '0.75rem',
           fontFamily: '"Inter", system-ui, -apple-system, sans-serif'
         }}>
           <Link href="/guides" style={{
             color: '#4b5563',
             textDecoration: 'none',
             fontWeight: '600',
-            display: 'flex',
+            display: 'inline-flex',
             alignItems: 'center',
             gap: '8px',
-            fontSize: '0.9rem',
+            fontSize: '0.88rem',
+            padding: '4px 8px',
+            borderRadius: '6px',
+            transition: 'color 0.2s',
           }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             <span>Back to Guides</span>
           </Link>
 
-          <Link href="/" style={{ textDecoration: 'none', color: '#111827', fontSize: '1.2rem', fontWeight: 900, letterSpacing: '-0.02em' }}>
+          <div style={{ color: '#111827', fontSize: '1rem', fontWeight: 800, letterSpacing: '-0.02em' }}>
             LostStreet <span style={{ color: '#10b981' }}>Academy</span>
-          </Link>
-        </header>
+          </div>
+        </div>
 
         {/* ── ARTICLE CONTAINER ────────────────────────────────────────── */}
-        <main style={{ padding: '4rem 1.5rem', maxWidth: '720px', margin: '0 auto' }}>
+        <main style={{ padding: 'clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 3vw, 1.5rem)', maxWidth: '760px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
           
-          <header style={{ marginBottom: '3rem', textAlign: 'center', fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
-            <span style={{ color: '#10b981', fontWeight: 700, fontSize: '0.9rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+          <header className="article-header" style={{ marginBottom: 'clamp(1.5rem, 4vw, 2.75rem)', textAlign: 'center', fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
+            <span style={{ color: '#10b981', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.06em', textTransform: 'uppercase', display: 'inline-block' }}>
               Continent Guides
             </span>
             <h1 style={{
-              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              fontSize: 'clamp(1.65rem, 4.5vw, 2.75rem)',
               fontWeight: 900,
-              lineHeight: 1.2,
-              margin: '1rem 0',
+              lineHeight: 1.22,
+              margin: '0.85rem 0',
               color: '#111827',
-              fontFamily: '"Merriweather", "Georgia", serif'
+              fontFamily: '"Merriweather", "Georgia", serif',
+              wordBreak: 'break-word',
             }}>
               How to Identify Asian Countries in Street View
             </h1>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', color: '#6b7280', fontSize: '0.9rem', marginTop: '1.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', color: '#6b7280', fontSize: '0.88rem', marginTop: '1rem', flexWrap: 'wrap' }}>
               <span>Published: September 8, 2026</span>
               <span>•</span>
               <span>11 min read</span>
             </div>
           </header>
 
-          <article style={{ fontSize: '1.125rem', color: '#374151' }}>
+          <article style={{ fontSize: 'clamp(1rem, 1.8vw, 1.125rem)', color: '#374151', wordBreak: 'break-word', lineHeight: 1.8 }}>
             
-            <p style={{ fontSize: '1.25rem', color: '#4b5563', lineHeight: 1.7, marginBottom: '2.5rem' }}>
+            <p style={{ fontSize: 'clamp(1.05rem, 2vw, 1.22rem)', color: '#4b5563', lineHeight: 1.75, marginBottom: '2rem' }}>
               Asia is the largest and most populous continent, covering an enormous range of climates, cultures, and landscapes. From the frozen tundra of Siberia to the tropical beaches of Thailand, identifying Asian countries in <strong>LostStreet</strong> requires a solid understanding of each sub-region's unique visual signatures.
             </p>
 
-            <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '3rem 0' }} />
+            <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2.5rem 0' }} />
 
             <h2 style={headingStyle}>East Asia</h2>
             <h3 style={subHeadingStyle}>Japan</h3>
@@ -180,34 +216,36 @@ export default function ArticlePage() {
               <li><strong>Uzbekistan:</strong> More desert landscape, distinctive Islamic architecture (blue-tiled mosques and madrasas).</li>
             </ul>
 
-            <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '4rem 0' }} />
-
             {/* ── CTA CALLOUT ────────────────────────────────────────────── */}
             <div style={{
-              marginTop: '4rem',
-              padding: '3rem',
+              marginTop: 'clamp(2.5rem, 5vw, 4rem)',
+              padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)',
               background: '#f9fafb',
               border: '1px solid #e5e7eb',
-              borderRadius: '12px',
+              borderRadius: '16px',
               textAlign: 'center',
               fontFamily: '"Inter", system-ui, sans-serif'
             }}>
-              <h3 style={{ fontSize: '1.5rem', color: '#111827', margin: '0 0 16px 0', fontWeight: 800 }}>
+              <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.6rem)', color: '#111827', margin: '0 0 12px 0', fontWeight: 800 }}>
                 Test Your Asia Knowledge!
               </h3>
-              <p style={{ color: '#4b5563', marginBottom: '2rem', fontSize: '1.1rem' }}>
+              <p style={{ color: '#4b5563', marginBottom: '1.75rem', fontSize: 'clamp(0.95rem, 2vw, 1.08rem)', lineHeight: 1.6 }}>
                 Play LostStreet and practice identifying Asian countries from street view clues.
               </p>
               <Link href="/" style={{
                 background: '#10b981',
                 color: '#fff',
-                padding: '16px 32px',
-                borderRadius: '8px',
+                padding: '13px 28px',
+                borderRadius: '10px',
                 textDecoration: 'none',
                 fontWeight: 700,
-                fontSize: '1rem',
-                display: 'inline-block',
-                transition: 'background 0.2s ease'
+                fontSize: '0.98rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: '46px',
+                transition: 'background 0.2s ease',
+                touchAction: 'manipulation',
               }}>
                 Play LostStreet Free
               </Link>
@@ -218,33 +256,3 @@ export default function ArticlePage() {
     </>
   );
 }
-
-const headingStyle = {
-  fontSize: '2rem',
-  fontWeight: 800,
-  color: '#111827',
-  marginTop: '3.5rem',
-  marginBottom: '1.5rem',
-  fontFamily: '"Merriweather", "Georgia", serif',
-  lineHeight: 1.3
-};
-
-const subHeadingStyle = {
-  fontSize: '1.4rem',
-  fontWeight: 700,
-  color: '#1f2937',
-  marginTop: '2.5rem',
-  marginBottom: '1rem',
-  fontFamily: '"Inter", system-ui, sans-serif'
-};
-
-const listStyle = {
-  listStyleType: 'disc',
-  paddingLeft: '1.5rem',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.75rem',
-  marginBottom: '2rem',
-  color: '#374151'
-};
-

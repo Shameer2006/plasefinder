@@ -9,14 +9,46 @@ const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
+function getInitialGuestProfile() {
+  if (typeof window === 'undefined') {
+    return {
+      uid: 'guest',
+      username: 'Guest Explorer',
+      displayName: 'Guest Explorer',
+      countryCode: 'IN',
+      totalXp: 0,
+      createdAt: new Date().toISOString(),
+      onboardingComplete: true
+    };
+  }
+  const localXp = parseInt(localStorage.getItem('placefinder_total_xp') || '0', 10) || 0;
+  const localUsername = localStorage.getItem('placefinder_username') || 'Guest Explorer';
+  const localCountry = localStorage.getItem('placefinder_country') || 'IN';
+  let guestId = localStorage.getItem('placefinder_guest_id');
+  if (!guestId) {
+    guestId = `guest_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 7)}`;
+    try {
+      localStorage.setItem('placefinder_guest_id', guestId);
+    } catch (e) {}
+  }
+  return {
+    uid: guestId || 'guest',
+    username: localUsername,
+    displayName: localUsername,
+    countryCode: localCountry,
+    totalXp: localXp,
+    createdAt: new Date().toISOString(),
+    onboardingComplete: true
+  };
+}
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userProfile, setUserProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [userProfile, setUserProfile] = useState(getInitialGuestProfile);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!auth) {
-      setLoading(false);
       return;
     }
 
@@ -36,28 +68,15 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser && !currentUser.isAnonymous) {
-        const profile = await getOrCreateUserProfile(currentUser);
-        setUserProfile(profile);
-      } else {
-        const localXp = parseInt(typeof window !== 'undefined' ? (localStorage.getItem('placefinder_total_xp') || '0') : '0', 10) || 0;
-        const localUsername = (typeof window !== 'undefined' && localStorage.getItem('placefinder_username')) || 'Guest Explorer';
-        const localCountry = (typeof window !== 'undefined' && localStorage.getItem('placefinder_country')) || 'IN';
-        let guestId = typeof window !== 'undefined' ? localStorage.getItem('placefinder_guest_id') : null;
-        if (!guestId && typeof window !== 'undefined') {
-          guestId = `guest_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 7)}`;
-          localStorage.setItem('placefinder_guest_id', guestId);
+        try {
+          const profile = await getOrCreateUserProfile(currentUser);
+          setUserProfile(profile);
+        } catch (err) {
+          console.warn("Error fetching user profile:", err);
         }
-        setUserProfile({
-          uid: guestId || 'guest',
-          username: localUsername,
-          displayName: localUsername,
-          countryCode: localCountry,
-          totalXp: localXp,
-          createdAt: new Date().toISOString(),
-          onboardingComplete: true
-        });
+      } else {
+        setUserProfile(getInitialGuestProfile());
       }
-      setLoading(false);
     });
     return () => unsubscribe();
   }, []);

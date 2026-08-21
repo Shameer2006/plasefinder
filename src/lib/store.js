@@ -22,6 +22,8 @@ export const useGameStore = create(
       isRareRound: false,
       rareMultiplier: 1,
       isDailyChallenge: false,
+      currentStreak: 0,
+      bestStreak: 0,
       currentEndlessStreak: 0,
       bestEndlessStreakThisSession: 0,
       soundEnabled: true,
@@ -43,9 +45,13 @@ export const useGameStore = create(
       addScore: (score) => set((state) => ({ score: state.score + score })),
       nextRound: () => set((state) => ({ currentRound: state.currentRound + 1, usedHint: false, fiftyFiftyUsed: false, googleSearchUsed: false, circleSearchesUsed: 0, circleSearchActive: false, circleSearchHints: [], isRareRound: false, rareMultiplier: 1 })),
       setMaxRounds: (rounds) => set({ maxRounds: rounds }),
-      resetGame: () => set({ gameState: 'MENU', gameMode: 'CLASSIC', score: 0, currentRound: 1, maxRounds: 5, userGuess: null, usedHint: false, fiftyFiftyUsed: false, googleSearchUsed: false, circleSearchesUsed: 0, circleSearchActive: false, circleSearchHints: [], isRareRound: false, rareMultiplier: 1, isDailyChallenge: false, currentEndlessStreak: 0, bestEndlessStreakThisSession: 0 }),
+      resetGame: () => set({ gameState: 'MENU', gameMode: 'CLASSIC', score: 0, currentRound: 1, maxRounds: 5, userGuess: null, usedHint: false, fiftyFiftyUsed: false, googleSearchUsed: false, circleSearchesUsed: 0, circleSearchActive: false, circleSearchHints: [], isRareRound: false, rareMultiplier: 1, isDailyChallenge: false, currentStreak: 0, currentEndlessStreak: 0, bestEndlessStreakThisSession: 0 }),
       setRareRound: (isRare, multiplier = 1) => set({ isRareRound: isRare, rareMultiplier: multiplier }),
       setIsDailyChallenge: (val) => set({ isDailyChallenge: val }),
+      setCurrentStreak: (val) => set((state) => ({
+        currentStreak: val,
+        bestStreak: Math.max(state.bestStreak || 0, val)
+      })),
       setCurrentEndlessStreak: (val) => set((state) => {
         const newBest = Math.max(state.bestEndlessStreakThisSession, val);
         return { currentEndlessStreak: val, bestEndlessStreakThisSession: newBest };

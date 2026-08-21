@@ -10,6 +10,12 @@ import {
   LEAGUES,
   calculateLevel
 } from '@/lib/userProfile';
+import {
+  getFriendsList,
+  removeFriend,
+  searchUserByUsername,
+  addFriendConnection
+} from '@/lib/friends';
 
 // ── Country list for picker ──────────────────────────────────────────
 const COUNTRIES = [
@@ -82,6 +88,43 @@ const timeAgo = (dateStr) => {
   if (hours > 0) return `${hours}h ago`;
   if (minutes > 0) return `${minutes}m ago`;
   return 'Just now';
+};
+
+// ── SVG League Icons (No Emojis) ──────────────────────────────────────
+const LeagueIcon = ({ name, color = '#fff', size = 26 }) => {
+  switch (name?.toLowerCase()) {
+    case 'sovereign':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z" />
+          <circle cx="12" cy="19" r="2" fill={color} />
+        </svg>
+      );
+    case 'cartographer':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
+          <line x1="9" y1="3" x2="9" y2="18" />
+          <line x1="15" y1="6" x2="15" y2="21" />
+        </svg>
+      );
+    case 'navigator':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill={color} fillOpacity="0.2" />
+        </svg>
+      );
+    case 'drifter':
+    default:
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+          <path d="M2 12h20" />
+        </svg>
+      );
+  }
 };
 
 // ── SVG Line Chart Component ─────────────────────────────────────────
@@ -179,6 +222,16 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
   const [nameSaving, setNameSaving] = useState(false);
   const [flagSearch, setFlagSearch] = useState('');
   const [copiedLink, setCopiedLink] = useState(false);
+
+  // Friends State
+  const [friendsList, setFriendsList] = useState([]);
+  const [friendsLoading, setFriendsLoading] = useState(false);
+  const [friendSearchQuery, setFriendSearchQuery] = useState('');
+  const [friendSearchResults, setFriendSearchResults] = useState([]);
+  const [isSearchingFriends, setIsSearchingFriends] = useState(false);
+  const [addingFriendUid, setAddingFriendUid] = useState(null);
+  const [friendsMessage, setFriendsMessage] = useState(null);
+  const [challengeCopiedUid, setChallengeCopiedUid] = useState(null);
 
   // XP & ELO Data
   const [xpSnapshots, setXpSnapshots] = useState([]);
@@ -315,10 +368,119 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
     onProfileUpdate({ ...userProfile, countryCode: code });
   };
 
+  // ── Friends Handlers ──────────────────────────────────────────────────
+  const loadFriends = useCallback(async () => {
+    if (!userProfile?.uid) return;
+    setFriendsLoading(true);
+    try {
+      const list = await getFriendsList(userProfile.uid);
+      setFriendsList(list);
+    } catch (err) {
+      console.error('Failed to load friends:', err);
+    } finally {
+      setFriendsLoading(false);
+    }
+  }, [userProfile?.uid]);
+
+  useEffect(() => {
+    if (activeTab === 'friends') {
+      loadFriends();
+    }
+  }, [activeTab, loadFriends]);
+
+  const handleSearchFriends = async (e) => {
+    if (e) e.preventDefault();
+    const query = friendSearchQuery.trim();
+    if (!query || query.length < 2) return;
+    setIsSearchingFriends(true);
+    setFriendsMessage(null);
+    try {
+      const results = await searchUserByUsername(query);
+      const filtered = results.filter(r => r.uid !== userProfile?.uid);
+      setFriendSearchResults(filtered);
+      if (filtered.length === 0) {
+        setFriendsMessage({ type: 'info', text: 'No players found with that username.' });
+      }
+    } catch (err) {
+      console.error('Search error:', err);
+      setFriendsMessage({ type: 'error', text: 'Failed to search players.' });
+    } finally {
+      setIsSearchingFriends(false);
+    }
+  };
+
+  const handleAddFriend = async (targetUser) => {
+    if (!userProfile?.uid) {
+      setFriendsMessage({ type: 'error', text: 'Please sign in to add friends.' });
+      return;
+    }
+    setAddingFriendUid(targetUser.uid);
+    try {
+      const success = await addFriendConnection(userProfile, targetUser);
+      if (success) {
+        setFriendsMessage({ type: 'success', text: `Added ${targetUser.displayName || targetUser.username} to your friends!` });
+        setFriendSearchResults(prev => prev.filter(p => p.uid !== targetUser.uid));
+        loadFriends();
+      } else {
+        setFriendsMessage({ type: 'error', text: 'Could not connect friends.' });
+      }
+    } catch (err) {
+      console.error('Add friend error:', err);
+      setFriendsMessage({ type: 'error', text: 'Error adding friend.' });
+    } finally {
+      setAddingFriendUid(null);
+    }
+  };
+
+  const handleRemoveFriend = async (friendUid, friendName) => {
+    if (!userProfile?.uid) return;
+    if (typeof window !== 'undefined' && !window.confirm(`Remove ${friendName || 'this friend'} from your friends list?`)) return;
+    try {
+      const success = await removeFriend(userProfile.uid, friendUid);
+      if (success) {
+        setFriendsList(prev => prev.filter(f => (f.uid !== friendUid && f.id !== friendUid)));
+      }
+    } catch (err) {
+      console.error('Error removing friend:', err);
+    }
+  };
+
+  const getInviteUrl = () => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://www.loststreet.online';
+    return `${origin}/?friend=${userProfile?.uid || ''}`;
+  };
+
   const copyInviteLink = () => {
-    navigator.clipboard.writeText(window.location.origin);
+    const url = getInviteUrl();
+    navigator.clipboard.writeText(url);
     setCopiedLink(true);
     setTimeout(() => setCopiedLink(false), 2000);
+  };
+
+  const shareInviteLink = async () => {
+    const url = getInviteUrl();
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Join me on LostStreet!',
+          text: `Play LostStreet with me! Guess world locations and climb the leaderboards together.`,
+          url: url,
+        });
+      } catch (err) {
+        copyInviteLink();
+      }
+    } else {
+      copyInviteLink();
+    }
+  };
+
+  const handleChallengeFriend = (friend) => {
+    const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://www.loststreet.online';
+    const challengeUrl = `${origin}/?party=${code}`;
+    navigator.clipboard.writeText(challengeUrl);
+    setChallengeCopiedUid(friend.uid || friend.id);
+    setTimeout(() => setChallengeCopiedUid(null), 3000);
   };
 
   const TABS = [
@@ -476,75 +638,81 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                touchAction: 'manipulation',
-                WebkitTapHighlightColor: 'transparent',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
               }}
-              aria-label="Close Profile"
+              aria-label="Close profile"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
           </div>
 
-          {/* User Profile Information */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.25rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-              {/* Glowing Gradient Avatar Circle */}
+          {/* User Info Bar */}
+          <div style={{
+            display: 'flex',
+            alignItems: isMobile ? 'flex-start' : 'center',
+            justifyContent: 'space-between',
+            flexDirection: isMobile ? 'column' : 'row',
+            gap: '1.25rem',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              {/* Level / Avatar Badge */}
               <div style={{ position: 'relative' }}>
                 <div style={{
-                  width: '72px',
-                  height: '72px',
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #10b981 0%, #06b6d4 100%)',
+                  width: isMobile ? '64px' : '76px',
+                  height: isMobile ? '64px' : '76px',
+                  borderRadius: '22px',
+                  background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                  boxShadow: '0 8px 24px rgba(16, 185, 129, 0.4)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  fontSize: isMobile ? '1.8rem' : '2.2rem',
                   fontWeight: 900,
-                  fontSize: '2rem',
                   color: 'white',
-                  border: '3px solid rgba(255, 255, 255, 0.25)',
-                  boxShadow: '0 8px 24px rgba(16, 185, 129, 0.35)'
+                  border: '2px solid rgba(255, 255, 255, 0.3)'
                 }}>
-                  {user?.photoURL ? (
-                    <img src={user.photoURL} alt="" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
-                  ) : (
-                    displayName[0].toUpperCase()
-                  )}
+                  {(displayName || 'U')[0].toUpperCase()}
                 </div>
-                <span style={{
+                {/* Level badge pill */}
+                <div style={{
                   position: 'absolute',
-                  bottom: '-2px',
-                  right: '-4px',
-                  background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
-                  color: '#0f172a',
-                  fontSize: '0.68rem',
-                  fontWeight: 900,
-                  padding: '2px 8px',
+                  bottom: '-6px',
+                  right: '-6px',
+                  background: '#0f172a',
+                  border: '2px solid #10b981',
                   borderRadius: '10px',
-                  border: '2px solid #0f172a',
-                  boxShadow: '0 4px 10px rgba(0,0,0,0.5)'
+                  padding: '2px 8px',
+                  fontSize: '0.72rem',
+                  fontWeight: 900,
+                  color: '#34d399',
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.5)',
+                  letterSpacing: '0.04em'
                 }}>
                   LVL {userLevel}
-                </span>
+                </div>
               </div>
 
+              {/* Name & Country */}
               <div>
                 {!editingName ? (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <h1 style={{
-                      fontSize: isMobile ? '1.5rem' : '1.9rem',
-                      fontWeight: 900, color: 'white', margin: 0,
-                      letterSpacing: '-0.02em'
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <h2 style={{
+                      margin: 0,
+                      fontSize: isMobile ? '1.35rem' : '1.75rem',
+                      fontWeight: 900,
+                      color: 'white',
+                      letterSpacing: '-0.02em',
+                      lineHeight: 1.1
                     }}>
                       {displayName}
-                    </h1>
-
+                    </h2>
                     <button
                       onClick={() => {
                         setEditingName(true);
                         setNewName(userProfile?.username || displayName || '');
-                        setActiveTab('settings');
                       }}
-                      title="Edit Username"
+                      title="Edit username"
                       style={{
                         background: 'rgba(16, 185, 129, 0.15)',
                         border: '1px solid rgba(16, 185, 129, 0.3)',
@@ -559,7 +727,7 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                         transition: 'all 0.2s ease'
                       }}
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
                     </button>
 
                     {userProfile?.countryCode && (
@@ -587,16 +755,17 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                     />
                     <button
                       onClick={() => setNewName(generateRandomName())}
-                      style={{ padding: '6px 10px', background: 'rgba(255,255,255,0.1)', border: 'none', borderRadius: '8px', color: 'white', cursor: 'pointer', fontWeight: 800, fontSize: '0.8rem' }}
+                      title="Generate random name"
+                      style={{ padding: '6px 10px', background: 'rgba(255,255,255,0.1)', border: 'none', borderRadius: '8px', color: 'white', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                     >
-                      🎲
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
                     </button>
                     <button
                       onClick={handleSaveName}
                       disabled={nameSaving}
                       style={{ padding: '6px 12px', background: '#10b981', border: 'none', borderRadius: '8px', color: 'white', cursor: 'pointer', fontWeight: 800, fontSize: '0.8rem' }}
                     >
-                      {nameSaving ? '...' : 'Save'}
+                      {nameSaving ? 'Saving...' : 'Save'}
                     </button>
                     <button
                       onClick={() => { setEditingName(false); setNameError(''); }}
@@ -619,46 +788,25 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                     padding: '2px 8px',
                     borderRadius: '6px',
                     fontWeight: 800,
-                    fontSize: '0.75rem'
+                    fontSize: '0.75rem',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px'
                   }}>
+                    <LeagueIcon name={currentLeague.name} color="#38bdf8" size={12} />
                     {currentLeague.name} Rank
                   </span>
                   <span>Joined {timeAgo(userProfile?.createdAt)}</span>
                 </div>
               </div>
             </div>
-
-            <button
-              onClick={() => {
-                setEditingName(true);
-                setNewName(userProfile?.username || displayName || '');
-                setActiveTab('settings');
-              }}
-              style={{
-                background: 'rgba(16, 185, 129, 0.15)',
-                border: '1px solid rgba(16, 185, 129, 0.3)',
-                color: '#34d399',
-                padding: '10px 16px',
-                borderRadius: '12px',
-                fontSize: '0.85rem',
-                fontWeight: 800,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-              Edit Name
-            </button>
           </div>
 
           {/* XP Level Progress Bar */}
           <div style={{ marginTop: '1.25rem', background: 'rgba(0,0,0,0.35)', padding: '12px 16px', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.08)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', fontWeight: 800, color: '#9ca3af', marginBottom: '6px' }}>
               <span>LEVEL PROGRESSION</span>
-              <span style={{ color: '#34d399' }}>{totalXp} / {nextLevelMinXp} XP ({levelProgressPct}%)</span>
+              <span style={{ color: '#34d399' }}>{totalXp.toLocaleString()} / {nextLevelMinXp.toLocaleString()} XP ({levelProgressPct}%)</span>
             </div>
             <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.08)', borderRadius: '10px', overflow: 'hidden' }}>
               <div style={{ width: `${levelProgressPct}%`, height: '100%', background: 'linear-gradient(90deg, #10b981 0%, #38bdf8 100%)', borderRadius: '10px', transition: 'width 0.4s ease', boxShadow: '0 0 12px rgba(16, 185, 129, 0.4)' }} />
@@ -717,19 +865,21 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
           {/* ════════════ OVERVIEW TAB ════════════ */}
           {activeTab === 'overview' && (
             <div>
-              {/* 4 Stat Cards Grid */}
+              {/* 6 Stat Cards Grid */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', marginBottom: '1.25rem' }}>
                 
+                {/* Total XP */}
                 <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#10b981', flexShrink: 0 }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                   </div>
                   <div>
                     <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 800, textTransform: 'uppercase' }}>Total XP</div>
-                    <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'white' }}>{totalXp}</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'white' }}>{totalXp.toLocaleString()}</div>
                   </div>
                 </div>
 
+                {/* ELO Rating */}
                 <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(251, 191, 36, 0.15)', border: '1px solid rgba(251, 191, 36, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fbbf24', flexShrink: 0 }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
@@ -740,9 +890,10 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                   </div>
                 </div>
 
+                {/* Daily Streak */}
                 <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(249, 115, 22, 0.15)', border: '1px solid rgba(249, 115, 22, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f97316', flexShrink: 0 }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
                   </div>
                   <div>
                     <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 800, textTransform: 'uppercase' }}>Daily Streak</div>
@@ -750,9 +901,10 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                   </div>
                 </div>
 
+                {/* Coins */}
                 <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
-                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(232, 200, 74, 0.15)', border: '1px solid rgba(232, 200, 74, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#e8c84a', fontSize: '1.2rem', flexShrink: 0 }}>
-                    🪙
+                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(232, 200, 74, 0.15)', border: '1px solid rgba(232, 200, 74, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#e8c84a', flexShrink: 0 }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 6v12M9 9.5h6a1.5 1.5 0 0 0 0-3H9v6h6a1.5 1.5 0 0 1 0 3H9"></path></svg>
                   </div>
                   <div>
                     <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 800, textTransform: 'uppercase' }}>Coins</div>
@@ -760,9 +912,10 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                   </div>
                 </div>
 
+                {/* Login Streak */}
                 <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
-                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ef4444', fontSize: '1.2rem', flexShrink: 0 }}>
-                    🔥
+                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ef4444', flexShrink: 0 }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   </div>
                   <div>
                     <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 800, textTransform: 'uppercase' }}>Login Streak</div>
@@ -770,6 +923,7 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                   </div>
                 </div>
 
+                {/* Win Rate */}
                 <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(56, 189, 248, 0.15)', border: '1px solid rgba(56, 189, 248, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#38bdf8', flexShrink: 0 }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -791,11 +945,11 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                   <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', padding: '14px', borderRadius: '14px', textAlign: 'center' }}>
                     <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 700, textTransform: 'uppercase' }}>Longest Endless Streak</div>
-                    <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#f97316', marginTop: '2px' }}>{userProfile?.bestEndlessStreak || 0} 🔥</div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#f97316', marginTop: '2px' }}>{userProfile?.bestEndlessStreak || 0} Rounds</div>
                   </div>
                   <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', padding: '14px', borderRadius: '14px', textAlign: 'center' }}>
                     <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 700, textTransform: 'uppercase' }}>Highest Endless Score</div>
-                    <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fbbf24', marginTop: '2px' }}>{userProfile?.bestEndlessScore || 0} pts</div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fbbf24', marginTop: '2px' }}>{(userProfile?.bestEndlessScore || 0).toLocaleString()} pts</div>
                   </div>
                 </div>
               </div>
@@ -828,7 +982,7 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
               {historyLoading ? (
                 <div style={{ ...cardStyle, textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 600 }}>Loading history logs...</div>
               ) : gameHistory.length === 0 ? (
-                <div style={{ ...cardStyle, textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 600 }}>No match history recorded yet! Play a match to see your logs.</div>
+                <div style={{ ...cardStyle, textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 600 }}>No match history recorded yet. Play a match to see your logs.</div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {gameHistory.map((game, i) => {
@@ -845,7 +999,7 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                           </span>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                          <span style={{ color: 'white', fontWeight: 800, fontSize: '1rem' }}>{game.score != null ? `${game.score} pts` : '—'}</span>
+                          <span style={{ color: 'white', fontWeight: 800, fontSize: '1rem' }}>{game.score != null ? `${game.score.toLocaleString()} pts` : '—'}</span>
                           {game.result && (
                             <span style={{ padding: '4px 10px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 800, background: game.result === 'win' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)', color: game.result === 'win' ? '#34d399' : '#fca5a5' }}>
                               {game.result.toUpperCase()}
@@ -870,8 +1024,14 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                     const isCurrent = currentLeague.name === league.name;
                     return (
                       <div key={league.name} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-                        <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: `${league.color}22`, border: isCurrent ? `3px solid #fbbf24` : `2px solid ${league.color}44`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem', boxShadow: isCurrent ? '0 0 20px rgba(251, 191, 36, 0.4)' : 'none' }}>
-                          {league.emoji}
+                        <div style={{
+                          width: '56px', height: '56px', borderRadius: '50%',
+                          background: `${league.color}22`,
+                          border: isCurrent ? `3px solid #fbbf24` : `2px solid ${league.color}44`,
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          boxShadow: isCurrent ? '0 0 20px rgba(251, 191, 36, 0.4)' : 'none'
+                        }}>
+                          <LeagueIcon name={league.name} color={isCurrent ? '#fbbf24' : league.color} size={28} />
                         </div>
                         <span style={{ fontSize: '0.75rem', fontWeight: 800, color: isCurrent ? '#fbbf24' : league.color }}>{league.name}</span>
                         <span style={{ fontSize: '0.65rem', color: '#9ca3af', fontWeight: 600 }}>{league.minElo}–{league.maxElo === Infinity ? '∞' : league.maxElo}</span>
@@ -947,9 +1107,11 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
                         />
                         <button
                           onClick={() => setNewName(generateRandomName())}
-                          style={{ padding: '0 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: 'white', fontWeight: 800, fontSize: '0.85rem', cursor: 'pointer' }}
+                          title="Generate random name"
+                          style={{ padding: '0 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: 'white', fontWeight: 800, fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
                         >
-                          🎲 Random
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+                          Random
                         </button>
                       </div>
                       {nameError && <div style={{ color: '#f87171', fontSize: '0.8rem', fontWeight: 600 }}>{nameError}</div>}
@@ -1008,15 +1170,395 @@ export default function ProfileModal({ userProfile, user, onClose, onProfileUpda
 
           {/* ════════════ FRIENDS TAB ════════════ */}
           {activeTab === 'friends' && (
-            <div style={{ ...cardStyle, textAlign: 'center', padding: '3.5rem 1.5rem' }}>
-              <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(59, 130, 246, 0.15)', border: '1px solid rgba(59, 130, 246, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#60a5fa', margin: '0 auto 1rem auto' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', animation: 'profileFadeIn 0.3s ease' }}>
+              
+              {/* 1. Invite Friends Card */}
+              <div style={{
+                ...cardStyle,
+                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 78, 59, 0.25) 100%), rgba(18, 24, 38, 0.9)',
+                border: '1px solid rgba(16, 185, 129, 0.3)',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div style={{
+                      width: '42px', height: '42px', borderRadius: '12px',
+                      background: 'rgba(16, 185, 129, 0.2)', border: '1px solid rgba(16, 185, 129, 0.4)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#34d399'
+                    }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                    </div>
+                    <div>
+                      <h3 style={{ margin: 0, color: 'white', fontSize: '1.1rem', fontWeight: 900, letterSpacing: '0.02em' }}>INVITE FRIENDS TO PLAY</h3>
+                      <p style={{ margin: '2px 0 0 0', color: '#a7f3d0', fontSize: '0.8rem', fontWeight: 600 }}>Share your link — when opened, you connect instantly as friends!</p>
+                    </div>
+                  </div>
+                  <div style={{
+                    padding: '4px 10px', borderRadius: '8px',
+                    background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)',
+                    color: '#6ee7b7', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.05em'
+                  }}>
+                    CODE: LS-{userProfile?.uid ? userProfile.uid.slice(0, 6).toUpperCase() : 'GUEST'}
+                  </div>
+                </div>
+
+                {/* Link Box */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  background: 'rgba(0, 0, 0, 0.4)',
+                  padding: '8px 10px',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  flexDirection: isMobile ? 'column' : 'row'
+                }}>
+                  <div style={{
+                    flex: 1,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    color: '#93c5fd',
+                    fontFamily: 'monospace',
+                    fontSize: '0.82rem',
+                    padding: '6px 8px',
+                    width: isMobile ? '100%' : 'auto'
+                  }}>
+                    {getInviteUrl()}
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '8px', width: isMobile ? '100%' : 'auto' }}>
+                    <button
+                      onClick={copyInviteLink}
+                      style={{
+                        flex: isMobile ? 1 : 'none',
+                        background: copiedLink ? 'linear-gradient(135deg, #059669, #047857)' : 'linear-gradient(135deg, #10b981, #059669)',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '10px',
+                        padding: '9px 16px',
+                        fontWeight: 800,
+                        fontSize: '0.85rem',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px',
+                        boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      {copiedLink ? (
+                        <>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                          Copy Link
+                        </>
+                      )}
+                    </button>
+
+                    <button
+                      onClick={shareInviteLink}
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.08)',
+                        color: 'white',
+                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                        borderRadius: '10px',
+                        padding: '9px 14px',
+                        fontWeight: 700,
+                        fontSize: '0.85rem',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px'
+                      }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                      Share
+                    </button>
+                  </div>
+                </div>
               </div>
-              <h3 style={{ margin: '0 0 0.5rem 0', color: 'white', fontSize: '1.2rem', fontWeight: 900 }}>Invite & Play With Friends</h3>
-              <p style={{ color: '#9ca3af', margin: '0 0 1.5rem 0', fontSize: '0.9rem', fontWeight: 600 }}>Share your invite link to challenge your friends to party lobbies and duels.</p>
-              <button onClick={copyInviteLink} style={{ background: copiedLink ? 'rgba(16, 185, 129, 0.2)' : 'linear-gradient(135deg, #3b82f6, #2563eb)', border: copiedLink ? '1px solid rgba(16, 185, 129, 0.5)' : 'none', color: 'white', padding: '10px 20px', borderRadius: '12px', fontWeight: 800, fontSize: '0.9rem', cursor: 'pointer' }}>
-                {copiedLink ? '✓ Link Copied!' : 'Copy Game Link'}
-              </button>
+
+              {/* 2. Search & Add Friends */}
+              <div style={cardStyle}>
+                <h3 style={{ margin: '0 0 0.85rem 0', color: 'white', fontSize: '1rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  ADD FRIEND BY USERNAME
+                </h3>
+
+                <form onSubmit={handleSearchFriends} style={{ display: 'flex', gap: '8px', marginBottom: '0.85rem' }}>
+                  <input
+                    type="text"
+                    value={friendSearchQuery}
+                    onChange={(e) => setFriendSearchQuery(e.target.value)}
+                    placeholder="Enter player's exact username..."
+                    style={{
+                      flex: 1,
+                      padding: '10px 14px',
+                      background: 'rgba(0,0,0,0.35)',
+                      border: '1px solid rgba(255,255,255,0.12)',
+                      borderRadius: '10px',
+                      color: 'white',
+                      fontSize: '0.88rem',
+                      outline: 'none',
+                      fontWeight: 600
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    disabled={isSearchingFriends || !friendSearchQuery.trim()}
+                    style={{
+                      padding: '0 18px',
+                      borderRadius: '10px',
+                      background: 'rgba(56, 189, 248, 0.15)',
+                      border: '1px solid rgba(56, 189, 248, 0.4)',
+                      color: '#38bdf8',
+                      fontWeight: 800,
+                      fontSize: '0.85rem',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}
+                  >
+                    {isSearchingFriends ? 'Searching...' : 'Search'}
+                  </button>
+                </form>
+
+                {friendsMessage && (
+                  <div style={{
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    marginBottom: '0.85rem',
+                    background: friendsMessage.type === 'error' ? 'rgba(239, 68, 68, 0.15)' : friendsMessage.type === 'success' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(56, 189, 248, 0.15)',
+                    border: `1px solid ${friendsMessage.type === 'error' ? 'rgba(239, 68, 68, 0.3)' : friendsMessage.type === 'success' ? 'rgba(16, 185, 129, 0.3)' : 'rgba(56, 189, 248, 0.3)'}`,
+                    color: friendsMessage.type === 'error' ? '#f87171' : friendsMessage.type === 'success' ? '#34d399' : '#38bdf8'
+                  }}>
+                    {friendsMessage.text}
+                  </div>
+                )}
+
+                {/* Search Results */}
+                {friendSearchResults.length > 0 && (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {friendSearchResults.map(result => (
+                      <div key={result.uid} style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '10px 14px',
+                        borderRadius: '12px',
+                        background: 'rgba(255, 255, 255, 0.04)',
+                        border: '1px solid rgba(255, 255, 255, 0.08)'
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <div style={{
+                            width: '36px', height: '36px', borderRadius: '10px',
+                            background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+                            color: 'white', fontWeight: 900, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            fontSize: '1rem'
+                          }}>
+                            {(result.displayName || result.username || 'P')[0].toUpperCase()}
+                          </div>
+                          <div>
+                            <div style={{ fontWeight: 800, color: 'white', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              {result.displayName || result.username}
+                              {result.countryCode && (
+                                <img src={`https://flagcdn.com/w40/${result.countryCode.toLowerCase()}.png`} alt="" style={{ width: '18px', height: '12px', borderRadius: '2px', objectFit: 'cover' }} />
+                              )}
+                            </div>
+                            <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 600 }}>
+                              {result.elo || 1000} ELO • LVL {calculateLevel(result.totalXp || 0)}
+                            </div>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() => handleAddFriend(result)}
+                          disabled={addingFriendUid === result.uid}
+                          style={{
+                            background: 'linear-gradient(135deg, #10b981, #059669)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '8px',
+                            padding: '6px 14px',
+                            fontWeight: 800,
+                            fontSize: '0.8rem',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '4px'
+                          }}
+                        >
+                          {addingFriendUid === result.uid ? 'Adding...' : '+ Add Friend'}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* 3. Connected Friends List */}
+              <div style={cardStyle}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+                  <h3 style={{ margin: 0, color: 'white', fontSize: '1.05rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    CONNECTED FRIENDS ({friendsList.length})
+                  </h3>
+
+                  <button
+                    onClick={loadFriends}
+                    disabled={friendsLoading}
+                    title="Refresh friends list"
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.06)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: '8px',
+                      padding: '6px 10px',
+                      color: '#9ca3af',
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px'
+                    }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                    Refresh
+                  </button>
+                </div>
+
+                {friendsLoading ? (
+                  <div style={{ textAlign: 'center', padding: '2.5rem', color: '#6b7280', fontWeight: 600 }}>
+                    Loading friends...
+                  </div>
+                ) : friendsList.length > 0 ? (
+                  <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '10px' }}>
+                    {friendsList.map(friend => {
+                      const fLeague = getLeague(friend.elo || 1000);
+                      const fLevel = calculateLevel(friend.totalXp || 0);
+                      const fId = friend.uid || friend.id;
+                      const isChallengeCopied = challengeCopiedUid === fId;
+
+                      return (
+                        <div key={fId} style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          padding: '12px 14px',
+                          borderRadius: '14px',
+                          background: 'rgba(255, 255, 255, 0.04)',
+                          border: '1px solid rgba(255, 255, 255, 0.08)',
+                          transition: 'all 0.2s ease'
+                        }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+                            {/* Avatar */}
+                            <div style={{
+                              width: '40px', height: '40px', borderRadius: '12px',
+                              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                              color: 'white', fontWeight: 900, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                              fontSize: '1.1rem', flexShrink: 0,
+                              border: '1px solid rgba(255, 255, 255, 0.2)'
+                            }}>
+                              {(friend.displayName || friend.username || 'F')[0].toUpperCase()}
+                            </div>
+
+                            <div style={{ minWidth: 0 }}>
+                              <div style={{
+                                fontWeight: 800, color: 'white', fontSize: '0.92rem',
+                                display: 'flex', alignItems: 'center', gap: '6px',
+                                overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'
+                              }}>
+                                <span>{friend.displayName || friend.username || 'Explorer'}</span>
+                                {friend.countryCode && (
+                                  <img src={`https://flagcdn.com/w40/${friend.countryCode.toLowerCase()}.png`} alt="" style={{ width: '16px', height: '11px', borderRadius: '2px', objectFit: 'cover' }} />
+                                )}
+                              </div>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.75rem', color: '#9ca3af', fontWeight: 600, marginTop: '2px' }}>
+                                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', color: '#38bdf8' }}>
+                                  <LeagueIcon name={fLeague.name} size={11} color="#38bdf8" />
+                                  {friend.elo || 1000}
+                                </span>
+                                <span>•</span>
+                                <span style={{ color: '#34d399' }}>LVL {fLevel}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+                            <button
+                              onClick={() => handleChallengeFriend(friend)}
+                              title="Create challenge party link"
+                              style={{
+                                background: isChallengeCopied ? 'rgba(16, 185, 129, 0.2)' : 'rgba(56, 189, 248, 0.15)',
+                                color: isChallengeCopied ? '#34d399' : '#38bdf8',
+                                border: isChallengeCopied ? '1px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(56, 189, 248, 0.3)',
+                                borderRadius: '8px',
+                                padding: '6px 10px',
+                                fontWeight: 800,
+                                fontSize: '0.75rem',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                                transition: 'all 0.15s'
+                              }}
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                              {isChallengeCopied ? 'Code Copied!' : 'Challenge'}
+                            </button>
+
+                            <button
+                              onClick={() => handleRemoveFriend(fId, friend.displayName || friend.username)}
+                              title="Remove friend"
+                              style={{
+                                background: 'rgba(239, 68, 68, 0.1)',
+                                color: '#f87171',
+                                border: '1px solid rgba(239, 68, 68, 0.2)',
+                                borderRadius: '8px',
+                                padding: '6px 8px',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                              }}
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div style={{ textAlign: 'center', padding: '2.5rem 1rem' }}>
+                    <div style={{
+                      width: '48px', height: '48px', borderRadius: '50%',
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      color: '#9ca3af', margin: '0 auto 0.75rem auto'
+                    }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h4 style={{ margin: '0 0 0.25rem 0', color: 'white', fontSize: '1rem', fontWeight: 800 }}>No Friends Connected Yet</h4>
+                    <p style={{ margin: 0, color: '#6b7280', fontSize: '0.82rem', fontWeight: 600 }}>
+                      Copy your invite link above and send it to your friends to play and compete together!
+                    </p>
+                  </div>
+                )}
+              </div>
+
             </div>
           )}
 

@@ -405,7 +405,7 @@ export default function MultiplayerGame({ gameId }) {
               onClick={async () => {
                 const myScore = matchData.players[userProfile.uid].score;
                 const shareUrl = `https://www.loststreet.online/share/${myScore}`;
-                const shareText = `🌍 LostStreet Multiplayer Match\nI scored ${myScore.toLocaleString()} pts!\nPlay free → ${shareUrl}`;
+                const shareText = `LostStreet Multiplayer Match\nI scored ${myScore.toLocaleString()} pts!\nPlay free → ${shareUrl}`;
                 if (navigator.share) {
                   try {
                     await navigator.share({

@@ -24,6 +24,7 @@ export default function Game() {
     setCurrentLocation, setOptions, setUserGuess,
     circleSearchActive,
     isRareRound, setRareRound,
+    currentStreak,
     currentEndlessStreak, bestEndlessStreakThisSession
   } = useGameStore();
   const { userProfile } = useAuth();
@@ -33,6 +34,7 @@ export default function Game() {
   const staticImgRef = useRef(null);
 
   const isLoading = gameState === 'LOADING';
+  const activeStreak = gameMode === 'ENDLESS' ? currentEndlessStreak : (currentStreak || 0);
 
   useEffect(() => {
     if (!isLoading) return;
@@ -148,6 +150,7 @@ export default function Game() {
         </>
       )}
 
+      {/* Top-Left Main Gameplay HUD */}
       <div className="hud-container" style={{ zIndex: 10, display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
         {/* Round Panel */}
         <div className="glass-panel" style={{ padding: '0.5rem 1rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -157,22 +160,6 @@ export default function Game() {
           )}
         </div>
 
-        {/* Endless Streak Panel (Separate Div with Fire SVG) */}
-        {gameMode === 'ENDLESS' && (
-          <div className="glass-panel" style={{ padding: '0.5rem 1rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px', color: '#f97316', border: '1px solid rgba(249, 115, 22, 0.4)' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
-            Streak: {currentEndlessStreak}
-          </div>
-        )}
-
-        {/* Highest Streak Panel (Separate Div with Trophy SVG) */}
-        {gameMode === 'ENDLESS' && (
-          <div className="glass-panel" style={{ padding: '0.5rem 1rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px', color: '#fbbf24', border: '1px solid rgba(251, 191, 36, 0.4)' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path></svg>
-            Best: {Math.max(userProfile?.bestEndlessStreak || 0, bestEndlessStreakThisSession)}
-          </div>
-        )}
-
         {/* Score Panel */}
         <div className="glass-panel" style={{ padding: '0.5rem 1rem', fontWeight: 'bold' }}>
           Score: {score}
@@ -180,6 +167,58 @@ export default function Game() {
 
         {/* Quit Button */}
         <button className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', backgroundColor: '#ef4444', borderColor: '#ef4444', color: 'white' }} onClick={() => resetGame()}>Quit</button>
+      </div>
+
+      {/* Top-Right Streak Badge Widget (Zero Emojis, Pure SVG) */}
+      <div 
+        style={{
+          position: 'absolute',
+          top: '20px',
+          right: '20px',
+          zIndex: 10,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          padding: '0.45rem 0.9rem',
+          borderRadius: '50px',
+          background: activeStreak > 0 
+            ? 'linear-gradient(135deg, rgba(249, 115, 22, 0.25) 0%, rgba(234, 88, 12, 0.15) 100%), rgba(14, 20, 34, 0.88)'
+            : 'rgba(14, 20, 34, 0.82)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          border: activeStreak > 0 ? '1px solid rgba(249, 115, 22, 0.5)' : '1px solid rgba(255, 255, 255, 0.12)',
+          boxShadow: activeStreak > 0 ? '0 4px 16px rgba(249, 115, 22, 0.25)' : '0 4px 12px rgba(0, 0, 0, 0.3)',
+          transition: 'all 0.3s ease',
+          pointerEvents: 'auto'
+        }}
+      >
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="18" 
+          height="18" 
+          viewBox="0 0 24 24" 
+          fill={activeStreak > 0 ? '#f97316' : '#9ca3af'} 
+          stroke={activeStreak > 0 ? '#ea580c' : 'none'} 
+          strokeWidth="1" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"
+          style={{
+            filter: activeStreak > 0 ? 'drop-shadow(0 0 6px rgba(249, 115, 22, 0.8))' : 'none',
+            transition: 'transform 0.2s ease',
+            transform: activeStreak > 0 ? 'scale(1.1)' : 'scale(1)'
+          }}
+        >
+          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+        </svg>
+        <span style={{ 
+          fontSize: '0.9rem', 
+          fontWeight: 800, 
+          color: activeStreak > 0 ? '#fdba74' : '#d1d5db',
+          letterSpacing: '0.02em',
+          fontFamily: '"Outfit", sans-serif'
+        }}>
+          Streak: {activeStreak}
+        </span>
       </div>
 
       <PanoramaViewer onStaticImageReady={handleStaticImageReady} />

@@ -5,6 +5,21 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
 import SiteShell from "@/app/components/SiteShell";
+import { Outfit, Oswald } from "next/font/google";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-outfit",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
+  variable: "--font-oswald",
+});
 
 export const metadata = {
   title: "LostStreet — Free Street View Guesser Game & GeoGuessr Alternative",
@@ -199,7 +214,7 @@ const jsonLd = [
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${outfit.variable} ${oswald.variable}`} suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#0a0a0a" />
         <meta name="msvalidate.01" content="3B92B95C23615C35821E1600A4267ABE" />
@@ -217,13 +232,13 @@ export default function RootLayout({ children }) {
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
           />
         ))}
-        {/* AdSense — use next/script to avoid hydration mismatch */}
+        {/* AdSense — lazyOnload so it does not compete with main thread first paint */}
         <Script
           id="adsense"
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1006713173738488"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </head>
       <body suppressHydrationWarning={true}>
@@ -278,10 +293,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
 
-        {/* Microsoft Clarity */}
+        {/* Microsoft Clarity — lazyOnload to prioritize user interaction */}
         <Script
           id="microsoft-clarity"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               (function(c,l,a,r,i,t,y){

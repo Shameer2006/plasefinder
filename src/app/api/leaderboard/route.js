@@ -47,7 +47,14 @@ export async function GET(request) {
 
     const players = await fetchLeaderboard(sortBy);
 
-    return NextResponse.json({ players, sortBy, cachedAt: new Date().toISOString() });
+    return NextResponse.json(
+      { players, sortBy, cachedAt: new Date().toISOString() },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=120, stale-while-revalidate=300',
+        },
+      }
+    );
   } catch (error) {
     console.error('Leaderboard error:', error);
     return NextResponse.json(

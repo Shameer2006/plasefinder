@@ -11,17 +11,33 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
-// Initialize Firebase only if config is provided
 let app = null;
 if (!getApps().length) {
   if (firebaseConfig.apiKey) {
-    app = initializeApp(firebaseConfig);
+    try {
+      app = initializeApp(firebaseConfig);
+    } catch (e) {
+      console.warn("Firebase init error:", e);
+    }
   }
 } else {
   app = getApp();
 }
 
-const auth = app ? getAuth(app) : null;
-const db = app ? getFirestore(app) : null;
+let auth = null;
+let db = null;
+if (app) {
+  try {
+    auth = getAuth(app);
+  } catch (e) {
+    console.warn("Firebase Auth error:", e);
+  }
+  try {
+    db = getFirestore(app);
+  } catch (e) {
+    console.warn("Firestore error:", e);
+  }
+}
 
 export { app, auth, db };
+

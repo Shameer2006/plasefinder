@@ -7,21 +7,22 @@ import { updateDailyChallengeStreak } from '@/lib/userProfile';
 import { getCountFromServer, collection, doc, setDoc, deleteDoc, query, where } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import dynamic from 'next/dynamic';
-import PartyLobby from './components/PartyLobby';
 import Spinner from './components/Spinner';
 import { useToast } from './components/Toast';
 import { sounds } from '@/lib/sounds';
-import ProfileModal from './components/ProfileModal';
-import OnboardingModal from './components/OnboardingModal';
 import HeroPanorama from './components/HeroPanorama';
 import CoinHUD from './components/CoinHUD';
-import DailyRewardOverlay from './components/DailyRewardOverlay';
-import NotificationsPanel from './components/NotificationsPanel';
 import { getUnreadCount } from '@/lib/notifications';
+import { prefetchLocations } from '@/lib/locationManager';
 
 const Game = dynamic(() => import('./components/Game'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
 const FlagGame = dynamic(() => import('./components/FlagGame'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
 const MultiplayerGame = dynamic(() => import('./components/MultiplayerGame'), { ssr: false });
+const PartyLobby = dynamic(() => import('./components/PartyLobby'), { ssr: false });
+const ProfileModal = dynamic(() => import('./components/ProfileModal'), { ssr: false });
+const OnboardingModal = dynamic(() => import('./components/OnboardingModal'), { ssr: false });
+const DailyRewardOverlay = dynamic(() => import('./components/DailyRewardOverlay'), { ssr: false });
+const NotificationsPanel = dynamic(() => import('./components/NotificationsPanel'), { ssr: false });
 
 export default function Home() {
   const { user, userProfile, setUserProfile, loading, loginWithGoogle, logout } = useAuth();
@@ -38,8 +39,8 @@ export default function Home() {
   const [showJoinModal, setShowJoinModal] = useState(false);
   const [showObjectives, setShowObjectives] = useState(false);
   const [showMatchmaking, setShowMatchmaking] = useState(false);
-  const [showNotifications, setShowNotifications] = useState(true);
-  const [unreadNotifications, setUnreadNotifications] = useState(2);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [unreadNotifications, setUnreadNotifications] = useState(0);
   const [joinCode, setJoinCode] = useState('');
   const [joinError, setJoinError] = useState('');
   const [isJoining, setIsJoining] = useState(false);
@@ -76,6 +77,13 @@ export default function Home() {
       }
     };
     window.addEventListener('popstate', handlePopState);
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      window.requestIdleCallback(() => prefetchLocations());
+    } else {
+      setTimeout(() => prefetchLocations(), 500);
+    }
+
     return () => window.removeEventListener('popstate', handlePopState);
   }, [setGameState]);
 
@@ -121,12 +129,44 @@ export default function Home() {
       joinFromInviteLink();
     }
   }, [userProfile, loading, setGameState, toast]);
+
+  // Handle Friend invite links (?friend=UID or ?invite=UID)
+  const handledFriendInviteRef = useRef(null);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let friendUid = urlParams.get('friend') || urlParams.get('invite');
+    if (!friendUid && (window.location.hash.startsWith('#friend=') || window.location.hash.startsWith('#invite='))) {
+      friendUid = window.location.hash.split('=')[1];
+    }
+
+    if (!friendUid) return;
+
+    if (userProfile && userProfile.uid && userProfile.uid !== friendUid) {
+      if (handledFriendInviteRef.current !== friendUid) {
+        handledFriendInviteRef.current = friendUid;
+
+        const processFriendInvite = async () => {
+          try {
+            const { connectViaInviteUid } = await import('@/lib/friends');
+            const inviter = await connectViaInviteUid(userProfile, friendUid);
+            window.history.replaceState({}, '', window.location.pathname);
+            if (inviter) {
+              toast.success(`Connected with ${inviter.displayName || inviter.username || 'friend'} as in-game friends!`);
+            }
+          } catch (err) {
+            console.error("Friend connect error:", err);
+            window.history.replaceState({}, '', window.location.pathname);
+          }
+        };
+
+        processFriendInvite();
+      }
+    }
+  }, [userProfile, toast]);
   useEffect(() => {
     if (userProfile && gameState === 'MENU') {
-      // Simulate checking recent opponent scores
-      // In a real app, you'd fetch this from the database:
-      // "SELECT * FROM gameResults WHERE uid IN (recentOpponents) AND timestamp > NOW() - 24h ORDER BY score DESC LIMIT 1"
-      // We will show a mock toast occasionally to simulate this social hook
       const hasShownToast = sessionStorage.getItem('friendScoreToastShown');
       if (!hasShownToast && Math.random() < 0.4) {
         setTimeout(() => {
@@ -177,7 +217,7 @@ export default function Home() {
     }
   }, [userProfile]);
 
-  if (loading) return <Spinner text="Loading LostStreet..." />;
+  if (loading && !userProfile) return <Spinner text="Loading LostStreet..." />;
 
   if (matchFoundData) {
     return (
@@ -197,22 +237,22 @@ export default function Home() {
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
           }
         `}</style>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '3rem', margin: '0 auto', maxWidth: '800px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '3rem', margin: '0 auto', maxWidth: '800px', flexWrap: 'wrap', justifyContent: 'center' }} className="vs-match-screen">
           <div style={{ animation: 'clash-left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards', textAlign: 'center' }}>
-            <img src={user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName}`} style={{ width: '120px', height: '120px', borderRadius: '50%', border: '4px solid var(--primary-color)', boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' }} />
-            <h3 style={{ fontSize: '1.5rem', marginTop: '1rem', color: 'white' }}>{user.displayName}</h3>
+            <img src={user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName}`} className="vs-avatar" style={{ width: '120px', height: '120px', borderRadius: '50%', border: '4px solid var(--primary-color)', boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' }} />
+            <h3 style={{ fontSize: 'clamp(1rem, 3vw, 1.5rem)', marginTop: '1rem', color: 'white' }}>{user.displayName}</h3>
           </div>
-          <div style={{ animation: 'vs-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.3s', opacity: 0, fontSize: '4rem', fontWeight: '900', fontStyle: 'italic', background: 'linear-gradient(to bottom, #fbbf24, #f59e0b)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          <div style={{ animation: 'vs-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.3s', opacity: 0, fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: '900', fontStyle: 'italic', background: 'linear-gradient(to bottom, #fbbf24, #f59e0b)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
             VS
           </div>
           <div style={{ animation: 'clash-right 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards', textAlign: 'center' }}>
-            <div style={{ width: '120px', height: '120px', borderRadius: '50%', border: '4px solid #ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(239, 68, 68, 0.2)', boxShadow: '0 0 20px rgba(239, 68, 68, 0.5)' }}>
-              <span style={{ fontSize: '4rem' }}>?</span>
+            <div className="vs-avatar" style={{ width: '120px', height: '120px', borderRadius: '50%', border: '4px solid #ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(239, 68, 68, 0.2)', boxShadow: '0 0 20px rgba(239, 68, 68, 0.5)' }}>
+              <span style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>?</span>
             </div>
-            <h3 style={{ fontSize: '1.5rem', marginTop: '1rem', color: 'white' }}>Opponent</h3>
+            <h3 style={{ fontSize: 'clamp(1rem, 3vw, 1.5rem)', marginTop: '1rem', color: 'white' }}>Opponent</h3>
           </div>
         </div>
-        <h2 style={{ animation: 'fade-in 0.5s ease forwards 1s', opacity: 0, marginTop: '3rem', color: '#ccc', fontSize: '1.2rem', letterSpacing: '2px' }}>PREPARING MATCH...</h2>
+        <h2 style={{ animation: 'fade-in 0.5s ease forwards 1s', opacity: 0, marginTop: '3rem', color: '#ccc', fontSize: 'clamp(0.9rem, 2vw, 1.2rem)', letterSpacing: '2px' }}>PREPARING MATCH...</h2>
       </div>
     );
   }
@@ -373,7 +413,7 @@ export default function Home() {
       <HeroPanorama />
 
       {/* ── Homepage Header Bar ── */}
-      <header style={{
+      <header className="home-header" style={{
         position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '12px clamp(1rem, 3vw, 2rem)',
@@ -384,11 +424,11 @@ export default function Home() {
         pointerEvents: 'auto',
       }}>
         {/* Logo & Tagline */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'white' }}>
-          <img src="/logo.png" alt="LostStreet" style={{ width: '34px', height: '34px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.2)' }} />
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'white', flexShrink: 0 }}>
+          <img src="/logo.png" alt="LostStreet" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.2)', flexShrink: 0 }} />
           <div>
-            <div style={{ fontWeight: 800, fontSize: '1.25rem', fontFamily: '"Outfit", sans-serif', letterSpacing: '0.01em', lineHeight: 1.1 }}>LostStreet</div>
-            <div style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>Explore. Guess. Discover.</div>
+            <div style={{ fontWeight: 800, fontSize: '1.15rem', fontFamily: '"Outfit", sans-serif', letterSpacing: '0.01em', lineHeight: 1.1, whiteSpace: 'nowrap' }}>LostStreet</div>
+            <div className="home-header-tagline" style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600, whiteSpace: 'nowrap' }}>Explore. Guess. Discover.</div>
           </div>
         </Link>
 
@@ -409,7 +449,7 @@ export default function Home() {
         </div>
 
         {/* Right Status Pill, Coin HUD, Notification Bell, Settings Button, User Avatar & Mobile Menu Toggle */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <CoinHUD onOpenDailyReward={() => setShowDailyRewardOverlay(true)} />
 
           {/* Notification Bell with unread counter */}
@@ -421,8 +461,8 @@ export default function Home() {
               background: showNotifications ? 'rgba(239, 68, 68, 0.18)' : 'rgba(18, 24, 38, 0.85)',
               border: showNotifications ? '1px solid rgba(239, 68, 68, 0.45)' : '1px solid rgba(255, 255, 255, 0.15)',
               color: 'white',
-              padding: '6px 11px',
-              borderRadius: '12px',
+              padding: '6px 10px',
+              borderRadius: '10px',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -431,9 +471,10 @@ export default function Home() {
               position: 'relative',
               boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
               transition: 'all 0.2s ease',
+              flexShrink: 0,
             }}
           >
-            <span style={{ fontSize: '1.05rem' }}>🔔</span>
+            <span style={{ fontSize: '1rem' }}>🔔</span>
             {unreadNotifications > 0 && (
               <span style={{
                 position: 'absolute',
@@ -442,9 +483,9 @@ export default function Home() {
                 background: '#ef4444',
                 color: '#fff',
                 borderRadius: '10px',
-                fontSize: '0.65rem',
+                fontSize: '0.6rem',
                 fontWeight: 900,
-                padding: '1px 5px',
+                padding: '1px 4px',
                 border: '2px solid #0a0d1a',
                 boxShadow: '0 0 8px rgba(239, 68, 68, 0.7)',
                 fontFamily: '"Outfit", sans-serif',
@@ -454,14 +495,16 @@ export default function Home() {
             )}
           </button>
 
+          {/* Settings — icon-only on mobile, icon+text on desktop */}
           <button
             onClick={() => setShowSettings(true)}
+            className="home-header-settings-btn"
             style={{
               background: 'rgba(18, 24, 38, 0.85)',
               border: '1px solid rgba(255, 255, 255, 0.15)',
               color: 'white',
-              padding: '6px 12px',
-              borderRadius: '12px',
+              padding: '6px 10px',
+              borderRadius: '10px',
               fontSize: '0.85rem',
               fontWeight: 700,
               display: 'flex',
@@ -470,28 +513,33 @@ export default function Home() {
               cursor: 'pointer',
               fontFamily: '"Outfit", sans-serif',
               boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-              transition: 'all 0.2s ease'
+              transition: 'all 0.2s ease',
+              flexShrink: 0,
+              minHeight: '34px',
             }}
             aria-label="Settings"
             title="Open Settings"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-            Settings
+            <span className="home-header-settings-text">Settings</span>
           </button>
 
-          {(!user || user.isAnonymous) ? (
-            <button style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none', color: 'white', padding: '6px 14px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer', fontFamily: '"Outfit", sans-serif', boxShadow: '0 4px 12px rgba(16,185,129,0.3)' }} onClick={loginWithGoogle}>Login</button>
-          ) : (
-            <button onClick={() => setShowProfile(true)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }} aria-label="Open profile">
-              {user.photoURL ? (
-                <img src={user.photoURL} referrerPolicy="no-referrer" alt="Profile" style={{ width: '34px', height: '34px', borderRadius: '50%', objectFit: 'cover', display: 'block', border: '2px solid rgba(255,255,255,0.3)' }} />
-              ) : (
-                <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: '#e05a2b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.9rem', color: 'white', border: '2px solid rgba(255,255,255,0.3)' }}>
-                  {(userProfile?.username || user.displayName || 'U')[0].toUpperCase()}
-                </div>
-              )}
-            </button>
-          )}
+          {/* Login / Avatar — hidden on mobile, accessible via hamburger */}
+          <div className="home-header-auth">
+            {(!user || user.isAnonymous) ? (
+              <button style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none', color: 'white', padding: '6px 14px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer', fontFamily: '"Outfit", sans-serif', boxShadow: '0 4px 12px rgba(16,185,129,0.3)', whiteSpace: 'nowrap' }} onClick={loginWithGoogle}>Login</button>
+            ) : (
+              <button onClick={() => setShowProfile(true)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }} aria-label="Open profile">
+                {user.photoURL ? (
+                  <img src={user.photoURL} referrerPolicy="no-referrer" alt="Profile" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover', display: 'block', border: '2px solid rgba(255,255,255,0.3)' }} />
+                ) : (
+                  <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#e05a2b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.9rem', color: 'white', border: '2px solid rgba(255,255,255,0.3)' }}>
+                    {(userProfile?.username || user.displayName || 'U')[0].toUpperCase()}
+                  </div>
+                )}
+              </button>
+            )}
+          </div>
 
           {/* Mobile Hamburger Menu Toggle Button */}
           <button
@@ -500,16 +548,26 @@ export default function Home() {
             aria-label="Toggle Navigation Menu"
             title="Menu"
             style={{
-              minWidth: '44px',
-              minHeight: '44px',
+              width: '36px',
+              height: '36px',
+              borderRadius: '10px',
+              background: mobileMenuOpen ? 'rgba(99,102,241,0.25)' : 'rgba(18, 24, 38, 0.85)',
+              border: mobileMenuOpen ? '1px solid rgba(99,102,241,0.5)' : '1px solid rgba(255,255,255,0.15)',
+              color: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              flexShrink: 0,
               touchAction: 'manipulation',
               WebkitTapHighlightColor: 'transparent',
+              transition: 'all 0.2s ease',
             }}
           >
             {mobileMenuOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             )}
           </button>
         </div>
@@ -517,10 +575,27 @@ export default function Home() {
         {/* Mobile Dropdown Navigation Drawer */}
         {mobileMenuOpen && (
           <div className="mobile-dropdown-menu">
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingBottom: '10px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+            {/* Auth row at top */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '10px', borderBottom: '1px solid rgba(255,255,255,0.1)', gap: '10px' }}>
+              {(!user || user.isAnonymous) ? (
+                <button
+                  onClick={() => { setMobileMenuOpen(false); loginWithGoogle(); }}
+                  style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none', color: 'white', padding: '8px 16px', borderRadius: '8px', fontSize: '0.88rem', fontWeight: 700, cursor: 'pointer', fontFamily: '"Outfit", sans-serif', flex: 1 }}
+                >
+                  🚀 Sign in with Google
+                </button>
+              ) : (
+                <button onClick={() => { setMobileMenuOpen(false); setShowProfile(true); }} style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: 'white', padding: '6px 12px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', fontFamily: '"Outfit", sans-serif', display: 'flex', alignItems: 'center', gap: '8px', flex: 1 }}>
+                  {user.photoURL
+                    ? <img src={user.photoURL} referrerPolicy="no-referrer" alt="" style={{ width: '24px', height: '24px', borderRadius: '50%', objectFit: 'cover' }} />
+                    : <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: '#e05a2b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.75rem', color: 'white' }}>{(userProfile?.username || user.displayName || 'U')[0].toUpperCase()}</div>
+                  }
+                  {userProfile?.username || user.displayName || 'Profile'}
+                </button>
+              )}
               <button
                 onClick={() => { setMobileMenuOpen(false); setShowSettings(true); }}
-                style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)', color: 'white', padding: '6px 14px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer', fontFamily: '"Outfit", sans-serif', display: 'flex', alignItems: 'center', gap: '6px' }}
+                style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)', color: 'white', padding: '8px 12px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer', fontFamily: '"Outfit", sans-serif', display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                 Settings
@@ -551,7 +626,7 @@ export default function Home() {
       </header>
 
       {/* Main Content Area */}
-      <section className="container-padding home-content" style={{ position: 'relative', zIndex: 2, minHeight: 'calc(100dvh - 50px)', paddingTop: '74px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', pointerEvents: 'none' }}>
+      <section className="container-padding home-content" style={{ position: 'relative', zIndex: 2, minHeight: 'calc(100dvh - 56px)', paddingTop: '74px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', pointerEvents: 'none' }}>
 
         <div className="home-main-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '20px', flex: 1, pointerEvents: 'none' }}>
 
@@ -654,48 +729,6 @@ export default function Home() {
 
 
       </section>
-
-      {/* Persistent Bottom Statistics Bar */}
-      <footer className="bottom-stats-bar" style={{ zIndex: 10, pointerEvents: 'auto' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <button onClick={() => setShowSettings(true)} style={{ background: 'rgba(255,255,255,0.1)', border: 'none', width: '36px', height: '36px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'white' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-          </button>
-          <button onClick={() => window.location.href = '/privacy'} style={{ background: 'none', border: 'none', color: '#9ca3af', fontSize: '0.8rem', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}>Privacy</button>
-        </div>
-
-        <div className="stat-item-box">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-          <div>
-            <div className="stat-item-value">250K+</div>
-            <div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Players</div>
-          </div>
-        </div>
-
-        <div className="stat-item-box">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eab308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4m-2-2v4"></path><circle cx="17" cy="10" r="1" fill="currentColor"></circle><circle cx="15" cy="13" r="1" fill="currentColor"></circle></svg>
-          <div>
-            <div className="stat-item-value">10M+</div>
-            <div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Games Played</div>
-          </div>
-        </div>
-
-        <div className="stat-item-box">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-          <div>
-            <div className="stat-item-value">195+</div>
-            <div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Countries</div>
-          </div>
-        </div>
-
-        <div className="stat-item-box">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-7.95-12.356-8C.726 7.95.726 16 5.822 16c5.223 0 7.261-7.95 12.356-8z"></path></svg>
-          <div>
-            <div className="stat-item-value">Unlimited Fun</div>
-            <div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Always Free</div>
-          </div>
-        </div>
-      </footer>
 
       {showJoinModal && (
         <FocusTrapModal onClose={() => setShowJoinModal(false)}>
@@ -1087,21 +1120,21 @@ const SettingsMenu = ({ onBack, units, setUnits, mapType, setMapType, emotesEnab
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '1.1rem', fontWeight: 'bold' }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ width: '180px' }}>Units:</span>
+          <span className="settings-row-label" style={{ width: '180px', flexShrink: 0 }}>Units:</span>
           <select value={units} onChange={(e) => setUnits(e.target.value)} style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
             <option value="metric">Metric (km)</option>
             <option value="imperial">Imperial (mi)</option>
           </select>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ width: '180px' }}>Map Type:</span>
+          <span className="settings-row-label" style={{ width: '180px', flexShrink: 0 }}>Map Type:</span>
           <select value={mapType} onChange={(e) => setMapType(e.target.value)} style={{ padding: '4px', borderRadius: '4px', color: 'black', width: '150px' }}>
             <option value="normal">Normal</option>
             <option value="satellite">Satellite</option>
           </select>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ width: '180px' }}>Sound Effects:</span>
+          <span className="settings-row-label" style={{ width: '180px', flexShrink: 0 }}>Sound Effects:</span>
           <input
             type="checkbox"
             checked={soundEnabled}
@@ -1109,8 +1142,8 @@ const SettingsMenu = ({ onBack, units, setUnits, mapType, setMapType, emotesEnab
             style={{ transform: 'scale(1.2)' }}
           />
         </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ width: '300px' }}>Multiplayer emote reactions</span>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '4px' }}>
+          <span className="settings-row-label" style={{ width: '300px', flexShrink: 0 }}>Multiplayer emote reactions</span>
           <input type="checkbox" checked={emotesEnabled} onChange={(e) => setEmotesEnabled(e.target.checked)} style={{ transform: 'scale(1.2)' }} />
         </div>
       </div>

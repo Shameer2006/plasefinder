@@ -60,18 +60,23 @@ const faqJsonLd = {
   ]
 };
 
-const figStyle = { margin: "2rem 0", textAlign: "center" };
-const imgStyle = { width: "100%", maxHeight: "480px", objectFit: "cover", borderRadius: "12px", border: "1px solid #e5e7eb" };
-const captionStyle = { marginTop: "0.75rem", fontSize: "0.9rem", color: "#6b7280", fontFamily: '"Inter", system-ui, sans-serif' };
-const hrStyle = { border: "none", borderTop: "1px solid #e5e7eb", margin: "3rem 0" };
+const figStyle = { margin: "clamp(1.5rem, 3vw, 2.5rem) 0", textAlign: "center" };
+const imgStyle = { width: "100%", maxHeight: "480px", objectFit: "cover", borderRadius: "12px", border: "1px solid #e5e7eb", display: "block" };
+const captionStyle = { marginTop: "0.65rem", fontSize: "0.85rem", color: "#6b7280", fontFamily: '"Inter", system-ui, sans-serif' };
+const hrStyle = { border: "none", borderTop: "1px solid #e5e7eb", margin: "2.5rem 0" };
+
+const headingStyle = {
+  fontSize: "clamp(1.35rem, 3.5vw, 1.85rem)",
+  fontWeight: 800,
+  color: "#111827",
+  marginTop: "clamp(2.2rem, 4.5vw, 3.5rem)",
+  marginBottom: "clamp(0.75rem, 2vw, 1.2rem)",
+  fontFamily: '"Merriweather", "Georgia", serif',
+  lineHeight: 1.35,
+  wordBreak: "break-word",
+};
 
 export default function ArticlePage() {
-  const headingStyle = {
-    fontSize: "2rem", fontWeight: 800, color: "#111827",
-    marginTop: "3.5rem", marginBottom: "1.5rem",
-    fontFamily: '"Merriweather", "Georgia", serif', lineHeight: 1.3
-  };
-
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
@@ -79,29 +84,61 @@ export default function ArticlePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div style={{ minHeight: "100vh", background: "#fafafa", color: "#111827", fontFamily: '"Merriweather", "Georgia", serif', lineHeight: 1.8 }}>
 
-        <header style={{ position: "sticky", top: 0, zIndex: 100, background: "#ffffff", borderBottom: "1px solid #e5e7eb", padding: "1rem 2.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
-          <Link href="/guides" style={{ color: "#4b5563", textDecoration: "none", fontWeight: "600", display: "flex", alignItems: "center", gap: "8px", fontSize: "0.9rem" }}>
+        {/* ── BREADCRUMB SUB-NAV BAR ─────────────────────────────────────── */}
+        <div style={{
+          background: "#ffffff",
+          borderBottom: "1px solid #e5e7eb",
+          padding: "0.75rem clamp(1rem, 3vw, 2.5rem)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "0.75rem",
+          fontFamily: '"Inter", system-ui, -apple-system, sans-serif'
+        }}>
+          <Link href="/guides" style={{
+            color: "#4b5563",
+            textDecoration: "none",
+            fontWeight: "600",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            fontSize: "0.88rem",
+            padding: "4px 8px",
+            borderRadius: "6px",
+            transition: "color 0.2s",
+          }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             <span>Back to Guides</span>
           </Link>
-          <Link href="/" style={{ textDecoration: "none", color: "#111827", fontSize: "1.2rem", fontWeight: 900, letterSpacing: "-0.02em" }}>
+          <div style={{ color: "#111827", fontSize: "1rem", fontWeight: 800, letterSpacing: "-0.02em" }}>
             LostStreet <span style={{ color: "#10b981" }}>Academy</span>
-          </Link>
-        </header>
+          </div>
+        </div>
 
-        <main style={{ padding: "4rem 1.5rem", maxWidth: "720px", margin: "0 auto" }}>
-          <header style={{ marginBottom: "3rem", textAlign: "center", fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
-            <span style={{ color: "#10b981", fontWeight: 700, fontSize: "0.9rem", letterSpacing: "0.05em", textTransform: "uppercase" }}>Street View Meta</span>
-            <h1 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 900, lineHeight: 1.2, margin: "1rem 0", color: "#111827", fontFamily: '"Merriweather", "Georgia", serif' }}>
+        <main style={{ padding: "clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 3vw, 1.5rem)", maxWidth: "760px", margin: "0 auto", width: "100%", boxSizing: "border-box" }}>
+          <header className="article-header" style={{ marginBottom: "clamp(1.5rem, 4vw, 2.75rem)", textAlign: "center", fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
+            <span style={{ color: "#10b981", fontWeight: 800, fontSize: "0.85rem", letterSpacing: "0.06em", textTransform: "uppercase", display: "inline-block" }}>
+              Street View Meta
+            </span>
+            <h1 style={{
+              fontSize: "clamp(1.65rem, 4.5vw, 2.75rem)",
+              fontWeight: 900,
+              lineHeight: 1.22,
+              margin: "0.85rem 0",
+              color: "#111827",
+              fontFamily: '"Merriweather", "Georgia", serif',
+              wordBreak: "break-word",
+            }}>
               The 10 Hardest Countries to Guess in Street View
             </h1>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", color: "#6b7280", fontSize: "0.9rem", marginTop: "1.5rem" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", color: "#6b7280", fontSize: "0.88rem", marginTop: "1rem", flexWrap: "wrap" }}>
               <span>Updated: August 13, 2026</span><span>•</span><span>8 min read</span>
             </div>
           </header>
 
-          <article style={{ fontSize: "1.125rem", color: "#374151" }}>
-            <p style={{ fontSize: "1.25rem", color: "#4b5563", lineHeight: 1.7, marginBottom: "2.5rem" }}>
+          <article style={{ fontSize: "clamp(1rem, 1.8vw, 1.125rem)", color: "#374151", wordBreak: "break-word", lineHeight: 1.8 }}>
+            <p style={{ fontSize: "clamp(1.05rem, 2vw, 1.22rem)", color: "#4b5563", lineHeight: 1.75, marginBottom: "2rem" }}>
               Every player of world guessing games like GeoGuessr knows the feeling. You spawn on a flat, empty road with no signs, no people, and a horizon that could easily belong to three different continents. The panic sets in as the timer ticks down.
             </p>
             <p>While some locations offer immediate clues — like a Parisian café or a New York yellow cab — others are notoriously designed to make you lose points. According to top players, the hardest countries to guess aren&apos;t always the most obscure. Often, they are the massive, sprawling nations that share &quot;lookalike&quot; biomes with their neighbors.</p>
@@ -164,29 +201,47 @@ export default function ArticlePage() {
             <p>Argentina rounds out the list thanks to the Pampas — a vast, flat, and fenced grassland that is almost entirely featureless. Long stretches of rural Argentina look exactly like Uruguay or rural Chile. The lack of prominent landmarks leaves players leaning on incredibly small details, like a specific type of wooden fence post or the color of a license plate.</p>
 
             <hr style={hrStyle} />
-            <h2 style={headingStyle}>Test Your Skills</h2>
-            <p>Think you know your way around these impossible locations? Try your hand at this interactive meta-clue trainer to see if you can match the geographical trap to the correct country.</p>
-
-            <hr style={hrStyle} />
             <h2 style={headingStyle}>Conclusion</h2>
             <p>Improving your score in GeoGuessr or other Street View guessing games isn&apos;t about memorizing every flag in the world — it&apos;s about learning to separate the lookalike clusters. If you can learn the subtle differences that separate Russia from Canada, or Botswana from South Africa, your average score will skyrocket. The next time you spawn on an empty dirt road, don&apos;t panic. Just look a little closer at the dirt, the trees, and the poles.</p>
 
             <hr style={hrStyle} />
             <h2 style={headingStyle}>Frequently Asked Questions</h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
               {faqJsonLd.mainEntity.map((faq) => (
                 <details key={faq.name} style={{ background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: "12px", padding: "0" }}>
-                  <summary style={{ padding: "1rem 1.25rem", cursor: "pointer", fontWeight: 700, color: "#111827", fontFamily: '"Inter", system-ui, sans-serif' }}>{faq.name}</summary>
-                  <div style={{ padding: "0 1.25rem 1.25rem", color: "#4b5563" }}>{faq.acceptedAnswer.text}</div>
+                  <summary style={{ padding: "0.9rem 1.1rem", cursor: "pointer", fontWeight: 700, color: "#111827", fontFamily: '"Inter", system-ui, sans-serif', fontSize: "clamp(0.95rem, 2vw, 1.05rem)" }}>{faq.name}</summary>
+                  <div style={{ padding: "0 1.1rem 1rem", color: "#4b5563", fontSize: "0.95rem", lineHeight: 1.65 }}>{faq.acceptedAnswer.text}</div>
                 </details>
               ))}
             </div>
 
-            <hr style={{ border: "none", borderTop: "1px solid #e5e7eb", margin: "4rem 0" }} />
-            <div style={{ marginTop: "4rem", padding: "3rem", background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: "12px", textAlign: "center", fontFamily: '"Inter", system-ui, sans-serif' }}>
-              <h3 style={{ fontSize: "1.5rem", color: "#111827", margin: "0 0 16px 0", fontWeight: 800 }}>Test Yourself on These Tricky Locations</h3>
-              <p style={{ color: "#4b5563", marginBottom: "2rem", fontSize: "1.1rem" }}>Play LostStreet and see if you can identify these difficult countries — 100% free, no sign-up required.</p>
-              <Link href="/" style={{ background: "#10b981", color: "#fff", padding: "16px 32px", borderRadius: "8px", textDecoration: "none", fontWeight: 700, fontSize: "1rem", display: "inline-block" }}>
+            {/* ── CTA CALLOUT ────────────────────────────────────────────── */}
+            <div style={{
+              marginTop: "clamp(2.5rem, 5vw, 4rem)",
+              padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)",
+              background: "#f9fafb",
+              border: "1px solid #e5e7eb",
+              borderRadius: "16px",
+              textAlign: "center",
+              fontFamily: '"Inter", system-ui, sans-serif'
+            }}>
+              <h3 style={{ fontSize: "clamp(1.25rem, 3vw, 1.6rem)", color: "#111827", margin: "0 0 12px 0", fontWeight: 800 }}>Test Yourself on These Tricky Locations</h3>
+              <p style={{ color: "#4b5563", marginBottom: "1.75rem", fontSize: "clamp(0.95rem, 2vw, 1.08rem)", lineHeight: 1.6 }}>Play LostStreet and see if you can identify these difficult countries — 100% free, no sign-up required.</p>
+              <Link href="/" style={{
+                background: "#10b981",
+                color: "#fff",
+                padding: "13px 28px",
+                borderRadius: "10px",
+                textDecoration: "none",
+                fontWeight: 700,
+                fontSize: "0.98rem",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: "46px",
+                transition: "background 0.2s ease",
+                touchAction: "manipulation",
+              }}>
                 Play LostStreet Free
               </Link>
             </div>

@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 export const metadata = {
   title: "How to Get Better at Geography Guessing Games (2026) | LostStreet",
@@ -26,28 +26,53 @@ const jsonLd = {
   image: "https://www.loststreet.online/og-image.png",
 };
 
-const hrStyle = { border: "none", borderTop: "1px solid #e5e7eb", margin: "3rem 0" };
+const hrStyle = { border: "none", borderTop: "1px solid #e5e7eb", margin: "2.5rem 0" };
 
 const headingStyle = {
-  fontSize: "2rem", fontWeight: 800, color: "#111827",
-  marginTop: "3.5rem", marginBottom: "1.5rem",
-  fontFamily: '"Merriweather", "Georgia", serif', lineHeight: 1.3
+  fontSize: "clamp(1.35rem, 3.5vw, 1.85rem)",
+  fontWeight: 800,
+  color: "#111827",
+  marginTop: "clamp(2.2rem, 4.5vw, 3.5rem)",
+  marginBottom: "clamp(0.75rem, 2vw, 1.2rem)",
+  fontFamily: '"Merriweather", "Georgia", serif',
+  lineHeight: 1.35,
+  wordBreak: "break-word",
+};
+
+const subHeadingStyle = {
+  fontSize: "clamp(1.1rem, 2.5vw, 1.35rem)",
+  fontWeight: 700,
+  color: "#1f2937",
+  marginTop: "clamp(1.5rem, 3vw, 2.2rem)",
+  marginBottom: "0.65rem",
+  fontFamily: '"Inter", system-ui, sans-serif',
+  lineHeight: 1.35,
+  wordBreak: "break-word",
 };
 
 const listStyle = {
-  listStyleType: "disc", paddingLeft: "1.5rem",
-  display: "flex", flexDirection: "column",
-  gap: "0.75rem", marginBottom: "2rem", color: "#374151"
+  listStyleType: "disc",
+  paddingLeft: "clamp(1.2rem, 3vw, 1.8rem)",
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.65rem",
+  marginBottom: "1.8rem",
+  color: "#374151",
+  lineHeight: 1.75,
 };
 
 const tableStyle = {
-  width: "100%", borderCollapse: "collapse",
-  marginBottom: "2rem", fontSize: "1rem"
+  width: "100%",
+  minWidth: "480px",
+  borderCollapse: "collapse",
+  fontSize: "0.95rem"
 };
 
 const thStyle = {
-  background: "#f3f4f6", padding: "0.75rem 1rem",
-  textAlign: "left", fontWeight: 700,
+  background: "#f3f4f6",
+  padding: "0.75rem 1rem",
+  textAlign: "left",
+  fontWeight: 700,
   fontFamily: '"Inter", system-ui, sans-serif',
   border: "1px solid #e5e7eb"
 };
@@ -64,34 +89,66 @@ export default function ArticlePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div style={{ minHeight: "100vh", background: "#fafafa", color: "#111827", fontFamily: '"Merriweather", "Georgia", serif', lineHeight: 1.8 }}>
 
-        <header style={{ position: "sticky", top: 0, zIndex: 100, background: "#ffffff", borderBottom: "1px solid #e5e7eb", padding: "1rem 2.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
-          <Link href="/guides" style={{ color: "#4b5563", textDecoration: "none", fontWeight: "600", display: "flex", alignItems: "center", gap: "8px", fontSize: "0.9rem" }}>
+        {/* ── BREADCRUMB SUB-NAV BAR ─────────────────────────────────────── */}
+        <div style={{
+          background: "#ffffff",
+          borderBottom: "1px solid #e5e7eb",
+          padding: "0.75rem clamp(1rem, 3vw, 2.5rem)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "0.75rem",
+          fontFamily: '"Inter", system-ui, -apple-system, sans-serif'
+        }}>
+          <Link href="/guides" style={{
+            color: "#4b5563",
+            textDecoration: "none",
+            fontWeight: "600",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            fontSize: "0.88rem",
+            padding: "4px 8px",
+            borderRadius: "6px",
+            transition: "color 0.2s",
+          }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             <span>Back to Guides</span>
           </Link>
-          <Link href="/" style={{ textDecoration: "none", color: "#111827", fontSize: "1.2rem", fontWeight: 900, letterSpacing: "-0.02em" }}>
+          <div style={{ color: "#111827", fontSize: "1rem", fontWeight: 800, letterSpacing: "-0.02em" }}>
             LostStreet <span style={{ color: "#10b981" }}>Academy</span>
-          </Link>
-        </header>
+          </div>
+        </div>
 
-        <main style={{ padding: "4rem 1.5rem", maxWidth: "720px", margin: "0 auto" }}>
-          <header style={{ marginBottom: "3rem", textAlign: "center", fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
-            <span style={{ color: "#10b981", fontWeight: 700, fontSize: "0.9rem", letterSpacing: "0.05em", textTransform: "uppercase" }}>Strategy &amp; Improvement</span>
-            <h1 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 900, lineHeight: 1.2, margin: "1rem 0", color: "#111827", fontFamily: '"Merriweather", "Georgia", serif' }}>
+        <main style={{ padding: "clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 3vw, 1.5rem)", maxWidth: "760px", margin: "0 auto", width: "100%", boxSizing: "border-box" }}>
+          <header className="article-header" style={{ marginBottom: "clamp(1.5rem, 4vw, 2.75rem)", textAlign: "center", fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
+            <span style={{ color: "#10b981", fontWeight: 800, fontSize: "0.85rem", letterSpacing: "0.06em", textTransform: "uppercase", display: "inline-block" }}>
+              Strategy &amp; Improvement
+            </span>
+            <h1 style={{
+              fontSize: "clamp(1.65rem, 4.5vw, 2.75rem)",
+              fontWeight: 900,
+              lineHeight: 1.22,
+              margin: "0.85rem 0",
+              color: "#111827",
+              fontFamily: '"Merriweather", "Georgia", serif',
+              wordBreak: "break-word",
+            }}>
               How to Get Better at Geography Guessing Games
             </h1>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", color: "#6b7280", fontSize: "0.9rem", marginTop: "1.5rem" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", color: "#6b7280", fontSize: "0.88rem", marginTop: "1rem", flexWrap: "wrap" }}>
               <span>Updated: August 13, 2026</span><span>•</span><span>12 min read</span>
             </div>
           </header>
 
-          <article style={{ fontSize: "1.125rem", color: "#374151" }}>
+          <article style={{ fontSize: "clamp(1rem, 1.8vw, 1.125rem)", color: "#374151", wordBreak: "break-word", lineHeight: 1.8 }}>
 
-            <p style={{ fontSize: "1.25rem", color: "#4b5563", lineHeight: 1.7, marginBottom: "2.5rem" }}>
+            <p style={{ fontSize: "clamp(1.05rem, 2vw, 1.22rem)", color: "#4b5563", lineHeight: 1.75, marginBottom: "2rem" }}>
               Geography guessing games have exploded in popularity over the last few years. Whether you&apos;re identifying a location from a single street view image, recognizing landscapes, or finding clues from road signs, these games combine geography, observation, and logical thinking into a fun challenge.
             </p>
 
-            <p>Games like <strong>GeoGuessr</strong>, <strong>LostStreet.online</strong>, <strong>OpenGuessr</strong>, <strong>WorldGuessr</strong>, and <strong>City Guesser</strong> have created communities of players who spend hours improving their location-guessing skills. While beginners often rely on luck, experienced players use a systematic approach to identify countries and even exact regions within seconds.</p>
+            <p>Games like <strong>GeoGuessr</strong>, <strong>LostStreet</strong>, <strong>OpenGuessr</strong>, <strong>WorldGuessr</strong>, and <strong>City Guesser</strong> have created communities of players who spend hours improving their location-guessing skills. While beginners often rely on luck, experienced players use a systematic approach to identify countries and even exact regions within seconds.</p>
 
             <p>This guide will teach you the techniques used by top players to improve consistently.</p>
 
@@ -101,7 +158,7 @@ export default function ArticlePage() {
             <p>Some of the most popular geography guessing games include:</p>
             <ul style={listStyle}>
               <li><strong>GeoGuessr</strong> – The most famous Street View guessing game.</li>
-              <li><strong>LostStreet.online</strong> – A free browser-based geography guessing game where players identify countries from real-world locations.</li>
+              <li><strong>LostStreet</strong> – A free browser-based geography guessing game where players identify countries from real-world locations.</li>
               <li><strong>OpenGuessr</strong> – An open-source alternative to GeoGuessr.</li>
               <li><strong>City Guesser</strong> – Uses walking videos instead of Street View.</li>
               <li><strong>WorldGuessr</strong> – Focuses on identifying countries around the world.</li>
@@ -125,33 +182,36 @@ export default function ArticlePage() {
 
             <h2 style={headingStyle}>1. Learn to Recognize Languages</h2>
             <p>Language is usually the fastest clue. Even recognizing a writing system can immediately eliminate dozens of countries.</p>
-            <table style={tableStyle}>
-              <thead>
-                <tr>
-                  <th style={thStyle}>Language</th>
-                  <th style={thStyle}>Possible Countries</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ["English", "USA, UK, Canada, Australia, New Zealand"],
-                  ["French", "France, Belgium, Switzerland, Canada"],
-                  ["Spanish", "Spain, Mexico, Argentina, Chile"],
-                  ["Portuguese", "Portugal, Brazil"],
-                  ["German", "Germany, Austria"],
-                  ["Japanese", "Japan"],
-                  ["Korean", "South Korea"],
-                  ["Thai", "Thailand"],
-                  ["Arabic", "Saudi Arabia, UAE, Egypt"],
-                  ["Cyrillic", "Russia, Serbia, Bulgaria, Mongolia"],
-                ].map(([lang, countries]) => (
-                  <tr key={lang}>
-                    <td style={tdStyle}><strong>{lang}</strong></td>
-                    <td style={tdStyle}>{countries}</td>
+            
+            <div style={{ width: "100%", overflowX: "auto", WebkitOverflowScrolling: "touch", margin: "1.5rem 0", borderRadius: "12px", border: "1px solid #e5e7eb" }}>
+              <table style={tableStyle}>
+                <thead>
+                  <tr>
+                    <th style={thStyle}>Language</th>
+                    <th style={thStyle}>Possible Countries</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {[
+                    ["English", "USA, UK, Canada, Australia, New Zealand"],
+                    ["French", "France, Belgium, Switzerland, Canada"],
+                    ["Spanish", "Spain, Mexico, Argentina, Chile"],
+                    ["Portuguese", "Portugal, Brazil"],
+                    ["German", "Germany, Austria"],
+                    ["Japanese", "Japan"],
+                    ["Korean", "South Korea"],
+                    ["Thai", "Thailand"],
+                    ["Arabic", "Saudi Arabia, UAE, Egypt"],
+                    ["Cyrillic", "Russia, Serbia, Bulgaria, Mongolia"],
+                  ].map(([lang, countries]) => (
+                    <tr key={lang}>
+                      <td style={tdStyle}><strong>{lang}</strong></td>
+                      <td style={tdStyle}>{countries}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
             <hr style={hrStyle} />
 
@@ -276,16 +336,37 @@ export default function ArticlePage() {
 
             <h2 style={headingStyle}>Conclusion</h2>
             <p>Geography guessing games are more than just entertainment — they sharpen observation, critical thinking, and global awareness. By learning to recognize languages, road signs, infrastructure, climate, architecture, and other subtle clues, you can dramatically improve your accuracy and confidence.</p>
-            <p>Whether you&apos;re playing <strong>GeoGuessr</strong>, <strong>LostStreet.online</strong>, <strong>OpenGuessr</strong>, <strong>WorldGuessr</strong>, or <strong>City Guesser</strong>, the key is consistent practice and careful analysis of every round. Over time, you&apos;ll begin to recognize patterns instinctively and make faster, more accurate guesses.</p>
+            <p>Whether you&apos;re playing <strong>GeoGuessr</strong>, <strong>LostStreet</strong>, <strong>OpenGuessr</strong>, <strong>WorldGuessr</strong>, or <strong>City Guesser</strong>, the key is consistent practice and careful analysis of every round. Over time, you&apos;ll begin to recognize patterns instinctively and make faster, more accurate guesses.</p>
 
-            <hr style={{ border: "none", borderTop: "1px solid #e5e7eb", margin: "4rem 0" }} />
-
-            <div style={{ marginTop: "4rem", padding: "3rem", background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: "12px", textAlign: "center", fontFamily: '"Inter", system-ui, sans-serif' }}>
-              <h3 style={{ fontSize: "1.5rem", color: "#111827", margin: "0 0 16px 0", fontWeight: 800 }}>Start Improving Today</h3>
-              <p style={{ color: "#4b5563", marginBottom: "2rem", fontSize: "1.1rem" }}>
+            {/* ── CTA CALLOUT ────────────────────────────────────────────── */}
+            <div style={{
+              marginTop: "clamp(2.5rem, 5vw, 4rem)",
+              padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)",
+              background: "#f9fafb",
+              border: "1px solid #e5e7eb",
+              borderRadius: "16px",
+              textAlign: "center",
+              fontFamily: '"Inter", system-ui, sans-serif'
+            }}>
+              <h3 style={{ fontSize: "clamp(1.25rem, 3vw, 1.6rem)", color: "#111827", margin: "0 0 12px 0", fontWeight: 800 }}>Start Improving Today</h3>
+              <p style={{ color: "#4b5563", marginBottom: "1.75rem", fontSize: "clamp(0.95rem, 2vw, 1.08rem)", lineHeight: 1.6 }}>
                 Play LostStreet free — no sign-up required. Practice daily and track your progress on the leaderboard.
               </p>
-              <Link href="/" style={{ background: "#10b981", color: "#fff", padding: "16px 32px", borderRadius: "8px", textDecoration: "none", fontWeight: 700, fontSize: "1rem", display: "inline-block" }}>
+              <Link href="/" style={{
+                background: "#10b981",
+                color: "#fff",
+                padding: "13px 28px",
+                borderRadius: "10px",
+                textDecoration: "none",
+                fontWeight: 700,
+                fontSize: "0.98rem",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: "46px",
+                transition: "background 0.2s ease",
+                touchAction: "manipulation",
+              }}>
                 Play LostStreet Free
               </Link>
             </div>

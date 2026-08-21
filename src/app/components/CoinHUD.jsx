@@ -99,7 +99,7 @@ export default function CoinHUD({ onOpenDailyReward }) {
 
         {/* Streak Flame Badge */}
         {streak > 0 && (
-          <div style={{
+          <div className="coin-hud-streak" style={{
             display: 'flex',
             alignItems: 'center',
             gap: '2px',
