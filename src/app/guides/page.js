@@ -9,9 +9,9 @@ export default function GuidesPage() {
 
   const guides = [
     {
-      title: "25 Pro Street View & GeoGuessr Secrets Most Players Don't Know",
+      title: "25 Pro Street Detective Secrets to Guess Any Road on Earth",
       slug: "25-pro-street-view-geoguessr-secrets",
-      desc: "Master 25 advanced meta secrets used by top-ranked geography guessing players — bollards, camera generations, sun position tricks & more.",
+      desc: "Discover 25 clever clues used by expert players — from road posts and camera hints to sun direction tricks.",
       date: "August 9, 2026",
       readTime: "12 min read",
       category: "Street View Meta",
@@ -28,9 +28,9 @@ export default function GuidesPage() {
       icon: "🔍"
     },
     {
-      title: "The Best Free GeoGuessr Alternatives in 2026",
+      title: "Top Free World Exploration & Geography Games in 2026",
       slug: "best-free-geoguessr-alternatives",
-      desc: "Looking to play map guessing games without paying a subscription? Here are the best free, unlimited options available today.",
+      desc: "Love exploring mystery streets? Here is our guide to the best free, unlimited map guessing games you can play right in your browser.",
       date: "August 15, 2026",
       readTime: "5 min read",
       category: "Strategy & Reviews",

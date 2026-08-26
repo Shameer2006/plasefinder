@@ -713,7 +713,7 @@ export default function Home() {
                       <h1 style={{ fontSize: '2rem', fontWeight: 900, fontFamily: '"Outfit", sans-serif', color: '#fef08a', margin: 0, lineHeight: 1.1, textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>LOSTSTREET</h1>
                       <div style={{ width: '60px', height: '2px', background: 'rgba(254, 240, 138, 0.4)', margin: '2px 0' }} />
                       <p style={{ fontSize: '0.88rem', color: '#e5e7eb', lineHeight: 1.4, margin: 0 }}>
-                        Explore real streets from around the world. Follow the clues, pin your best guess and become a top explorer!
+                        Travel the world from your couch! Spot funny clues, pin your best guess, and see how well you know the planet.
                       </p>
                       <button className="highway-quickplay-btn" onClick={() => handleStart('EASY')} aria-label="Quick Play - start a game instantly">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>

@@ -22,23 +22,23 @@ const oswald = Oswald({
 });
 
 export const metadata = {
-  title: "LostStreet — Free Street View Guesser Game & GeoGuessr Alternative",
-  description: "Play LostStreet free — the top street view guesser game online. Guess locations from 780,000+ Google Street View panoramas, compete in 1v1 multiplayer duels, and take the daily challenge without a subscription.",
+  title: "LostStreet — The Fun Free World Detective & Geography Game",
+  description: "Get dropped onto random streets around the world! Look for silly clues, guess where you are, duel your friends in 1v1 battles, and explore 780,000+ locations for free.",
   metadataBase: new URL("https://www.loststreet.online"),
   alternates: {
     canonical: "/",
   },
   keywords: [
     "loststreet", "street view guesser", "lost street", "loststreet game", "loststreet online", "play loststreet", "free street view guesser", "street view guesser game", "street view geography guesser", "google street view guesser",
-    "geoguessr alternative", "free geography guessing game", "street view guessing game", "guess the location game", "guess the country game online", "panorama guessing game", "world geography game online", "guess where game", "random street view game", "location guessing game free",
+    "world detective game", "free geography guessing game", "street view guessing game", "guess the location game", "guess the country game online", "panorama guessing game", "world geography game online", "guess where game", "random street view game", "location guessing game free",
     "play geography game online free", "play street view game", "online map guessing game", "play world map game", "geography quiz game online", "free online geography game", "multiplayer geography game", "geography game no download",
     "game where you guess your location", "game to guess country from street view", "spawn random location guess game", "AI hint geography game", "blur mode guessing game", "guess the city from photo game", "street view geography quiz", "explore random places online game", "virtual travel guessing game", "daily geography guessing game", "geography challenge game online",
     "geography learning game online", "fun way to learn world map", "educational geography game free", "geography practice game", "learn countries game online", "map skills game online", "geography trivia game free",
     "geography game for mobile", "browser based geography game", "no download geography game", "free to play map game", "lightweight geography web game", "bollard recognition game", "license plate geography quiz", "360 panorama location guesser"
   ],
   openGraph: {
-    title: "LostStreet — Free Street View Guesser Game",
-    description: "Guess locations from 360° street view panoramas, compete in 1v1 multiplayer duels, and climb the global leaderboard. 100% free with no sign-up required.",
+    title: "LostStreet — Fun Free World Detective Game",
+    description: "Drop onto random streets around the world! Spot funny clues, guess the country, and duel friends in 1v1 matches. 100% free with no sign-up required.",
     url: "https://www.loststreet.online",
     siteName: "LostStreet",
     type: "website",
@@ -46,8 +46,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "LostStreet — Free Street View Guesser & GeoGuessr Alternative",
-    description: "Guess locations from street views. Play 1v1 duels or solo. 100% free with 780,000+ locations.",
+    title: "LostStreet — Fun Free World Detective Game",
+    description: "Travel the whole planet from your couch! Guess random streets, challenge friends in 1v1 duels, and explore 780,000+ real locations for free.",
     images: ["/og-image.png"],
   },
   icons: {
@@ -81,20 +81,20 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "LostStreet",
-    "alternateName": ["Lost Street", "LostStreet Game", "LostStreet Street View Guesser", "Street View Guesser Game"],
+    "alternateName": ["Lost Street", "LostStreet Game", "LostStreet World Detective", "Street View Guesser Game"],
     "url": "https://www.loststreet.online",
-    "description": "Free street view guesser game with 780,000+ Google Street View locations. Pinpoint locations from 360-degree panoramas, compete in real-time 1v1 ELO multiplayer duels, and take daily challenges. A free GeoGuessr alternative — no subscription needed.",
+    "description": "A fun and free world detective game with 780,000+ real street view locations. Travel the planet from home, spot funny clues, guess where you are, and duel friends in real-time 1v1 battles.",
     "applicationCategory": "GameApplication",
     "applicationSubCategory": "Geography Game",
     "operatingSystem": "Web",
     "browserRequirements": "Requires a modern web browser",
     "featureList": [
-      "780,000+ hand-picked Google Street View locations",
+      "780,000+ hand-picked street view locations across 195+ countries",
       "Real-time 1v1 ELO multiplayer duels",
-      "Private party room codes for up to 20 players",
-      "Daily geography challenge with streak tracking",
-      "World Flag identification quiz mode",
-      "Three difficulty levels (Easy multiple choice to Hard pin drop)"
+      "Private party room codes to play together with friends",
+      "Daily login streak rewards and 3D Gold Coins",
+      "World Flag quiz mode",
+      "Helpful power-ups including 50/50 and smart clues"
     ],
     "aggregateRating": {
       "@type": "AggregateRating",
@@ -112,7 +112,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "LostStreet",
-    "alternateName": "LostStreet Street View Guesser",
+    "alternateName": "LostStreet World Detective Game",
     "url": "https://www.loststreet.online",
     "potentialAction": {
       "@type": "SearchAction",
@@ -127,22 +127,22 @@ const jsonLd = [
       {
         "@type": "Question",
         "name": "What is LostStreet?",
-        "acceptedAnswer": { "@type": "Answer", "text": "LostStreet (also known as Lost Street) is a 100% free street view guesser game. Players are dropped into random 360-degree Google Street View panoramas and must guess their location on a world map." }
+        "acceptedAnswer": { "@type": "Answer", "text": "LostStreet is a fun, free online world detective game. You are dropped onto a random street anywhere in the world and use visual clues to guess where you are on the map." }
       },
       {
         "@type": "Question",
-        "name": "Is LostStreet a free street view guesser?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes, LostStreet is a completely free street view guesser game and GeoGuessr alternative with no subscriptions, no daily game limits, and no account requirements for singleplayer play." }
+        "name": "Is LostStreet free to play?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes! LostStreet is 100% free with no subscriptions, no daily limits, and no credit card required. You can play right away in your browser." }
       },
       {
         "@type": "Question",
-        "name": "How do you guess locations in the LostStreet street view game?",
-        "acceptedAnswer": { "@type": "Answer", "text": "You inspect panoramic visual clues such as road bollards, license plates, utility pole designs, architecture, driving side traffic, and vegetation, then drop a pin on the interactive world map." }
+        "name": "How do you guess the location in LostStreet?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Look around in 360 degrees for clues like road signs, language on buildings, which side of the road cars drive on, license plates, and nature. Then click on the map to make your guess!" }
       },
       {
         "@type": "Question",
-        "name": "Can I play LostStreet multiplayer with friends?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. LostStreet offers real-time 1v1 ELO-ranked duels and private party rooms with a 6-digit room code for groups of up to 20 players." }
+        "name": "Can I play LostStreet with friends?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes! You can play real-time 1v1 duels against players worldwide or create private party rooms to play with up to 20 friends." }
       },
       {
         "@type": "Question",

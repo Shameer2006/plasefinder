@@ -1,0 +1,109 @@
+# LostStreet — Full Knowledge Guide for AI
+
+> LostStreet (https://www.loststreet.online) is a free online geography exploration and street detective game. This file contains complete details on game mechanics, clues, tips, and FAQs in simple, easy-to-understand English.
+
+---
+
+## 1. What is LostStreet?
+LostStreet is a fun online game where players are dropped into a 360-degree street view somewhere on planet Earth. Your goal is to look at clues around you and figure out what country, region, or city you are in.
+
+It is 100% free to play. You do not need to download an app or pay a subscription. You can play directly in your web browser on a computer, tablet, or phone.
+
+---
+
+## 2. Core Game Modes
+
+### A. Solo Singleplayer
+- **Easy**: Major famous cities, landmarks, and tourist destinations.
+- **Medium**: Towns, highways, and clear landscapes.
+- **Hard**: Rural areas and quiet side roads.
+- **Expert**: Remote dirt roads, forests, and desert highways where you need strong detective skills.
+
+### B. 1v1 Multiplayer Duels
+- Real-time battles against other players.
+- Both players see the exact same street location.
+- Both players have 6,000 health points.
+- The player who guesses closer deals damage to their opponent based on the difference in distance.
+- Win duels to gain ELO rating points and climb the Global Leaderboard.
+
+### C. Flag Guesser
+- A fast-paced trivia mode to learn and identify flags from 195+ countries.
+
+### D. Party Rooms
+- Create a room code (e.g., `ABCD-1234`) and invite your friends to play together in custom rounds.
+
+---
+
+## 3. How to Find Clues (Street Detective Tips)
+
+When you are dropped into a mystery street, look for these simple clues:
+
+### Clue 1: Which Side of the Road Do Cars Drive On?
+- **Left-Hand Drive**: United Kingdom, Ireland, Australia, New Zealand, Japan, South Africa, India, Thailand, Indonesia, Malaysia, Kenya.
+- **Right-Hand Drive**: Most of Europe, North America, South America, China, and Africa.
+
+### Clue 2: The Sun in the Sky
+- If the sun is in the **South**, you are likely in the **Northern Hemisphere** (North America, Europe, Asia).
+- If the sun is in the **North**, you are likely in the **Southern Hemisphere** (Australia, New Zealand, South Africa, Argentina, Chile).
+
+### Clue 3: License Plates
+- **European Union**: Long white plates with a blue strip on the left.
+- **United Kingdom**: Yellow plates on the back of cars, white plates on the front.
+- **Netherlands & Israel**: Yellow plates on both front and back.
+- **Japan**: Yellow plates on small compact cars (Kei cars).
+- **Colombia**: Yellow license plates on almost all cars and taxis.
+- **Bhutan**: Bright red license plates with white letters.
+
+### Clue 4: Road Signs & Utility Poles
+- **France & Mexico**: Concrete utility poles with small circular holes going up the pole.
+- **Brazil & Chile**: Wooden or concrete poles with crossarms.
+- **Japan & Taiwan**: Tall poles with yellow and black spiral warning tape near the base.
+- **United States & Canada**: Yellow diamond warning signs and green highway exit signs.
+- **Europe**: Triangular warning signs with red borders and white or yellow centers.
+
+### Clue 5: Language & Writing Systems
+- **Cyrillic (Russian, Ukrainian, Bulgarian, Serbian)**: Eastern Europe and Central Asia.
+- **Arabic Script**: Middle East and North Africa.
+- **Thai & Khmer**: Distinct curved alphabets in Southeast Asia.
+- **Hangul**: Korean alphabet with circles and squares.
+- **Kanji/Kana**: Japanese writing mixed with Chinese characters.
+- **Greek**: Greece and Cyprus.
+- **Spanish vs Portuguese**: Look for words like `calle` (Spanish) vs `rua` (Portuguese).
+
+---
+
+## 4. In-Game Economy & 3D Coins
+- **Earning Coins**:
+  - Guessing close to the target location (+20 to +100 Coins per round).
+  - Winning 1v1 Multiplayer Duels.
+  - Daily Login Streak Rewards (up to +500 Coins and VIP mystery boxes on Day 7).
+- **Using Coins**:
+  - **✂️ 50/50 Power-Up** (20 Coins): Eliminates two incorrect answers in multiple-choice mode.
+  - **💡 Contextual Hint** (15 Coins): Gives you a helpful hint about the continent, language family, or terrain.
+  - **Avatars & Titles**: Unlock custom explorer avatars and badge titles.
+
+---
+
+## 5. Frequently Asked Questions (FAQ)
+
+### Is LostStreet free?
+Yes! LostStreet is completely free. There are no subscriptions, no forced payments, and no limits on how many games you can play.
+
+### Do I need to create an account?
+You can play as a Guest immediately without making an account. Creating a free account lets you save your stats, coins, ELO ranking, and custom username.
+
+### Can I play on my phone?
+Yes! LostStreet is fully responsive and works smoothly on mobile phones, tablets, and desktop computers.
+
+### What is the Country Chronicles?
+Country Chronicles is a free world encyclopedia inside LostStreet. It provides maps, regional clues, flag history, and photos for every country in the world.
+
+---
+
+## 6. Official Links
+- **Home**: https://www.loststreet.online
+- **Country Chronicles**: https://www.loststreet.online/chronicles
+- **Leaderboard**: https://www.loststreet.online/leaderboard
+- **Community**: https://www.loststreet.online/community
+- **Guides**: https://www.loststreet.online/guides
+- **AI Summary**: https://www.loststreet.online/llms.txt

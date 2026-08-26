@@ -267,7 +267,7 @@ function SiteFooter() {
               <span style={{ fontWeight: 800, fontSize: '1.1rem', fontFamily: '"Outfit", sans-serif' }}>LostStreet</span>
             </Link>
             <p style={{ fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
-              Free geography guessing game with 780,000+ street view locations. No subscription needed.
+              A fun, free world detective game with 780,000+ streets. Play solo or duel friends, and explore the planet!
             </p>
           </div>
 
