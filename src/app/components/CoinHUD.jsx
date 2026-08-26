@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useGameStore } from '@/lib/store';
 import { useAuth } from '@/lib/AuthContext';
+import CoinIcon from './CoinIcon';
 
 export default function CoinHUD({ onOpenDailyReward }) {
   const { coins, loginStreak, setShowDailyRewardOverlay } = useGameStore();
@@ -67,23 +68,7 @@ export default function CoinHUD({ onOpenDailyReward }) {
         }}
       >
         {/* Animated Gold Coin Icon */}
-        <div style={{
-          width: '24px',
-          height: '24px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle at 35% 35%, #ffe680, #e8c84a 55%, #996f00)',
-          boxShadow: '0 2px 6px rgba(232, 200, 74, 0.4), inset 0 1px 1px rgba(255,255,255,0.7)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '12px',
-          fontWeight: 900,
-          color: '#3d2600',
-          border: '1px solid #ffe885',
-          flexShrink: 0,
-        }}>
-          🪙
-        </div>
+        <CoinIcon size={24} animate={animate} />
 
         {/* Coin Amount */}
         <span style={{

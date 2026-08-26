@@ -5,6 +5,7 @@ import { useGameStore } from '@/lib/store';
 import { REWARD_CONFIG, getStreakStatus, getRewardForDay, formatDateUTC } from '@/lib/dailyReward';
 import { updateUserDailyReward } from '@/lib/userProfile';
 import { sounds } from '@/lib/sounds';
+import CoinIcon from './CoinIcon';
 
 export default function DailyRewardOverlay({ forceOpen = false, onClose }) {
   const { userProfile, setUserProfile } = useAuth();
@@ -479,9 +480,9 @@ export default function DailyRewardOverlay({ forceOpen = false, onClose }) {
                   {isClaimed ? (
                     <span style={{ color: '#34d399', fontSize: '1.1rem', fontWeight: 900 }}>✓</span>
                   ) : isCurrent ? (
-                    <span>🪙</span>
+                    <CoinIcon size={24} animate={true} />
                   ) : (
-                    <span style={{ opacity: 0.4, filter: 'grayscale(0.6)' }}>🪙</span>
+                    <span style={{ opacity: 0.45, filter: 'grayscale(0.6)' }}><CoinIcon size={22} /></span>
                   )}
                 </div>
 
@@ -590,8 +591,9 @@ export default function DailyRewardOverlay({ forceOpen = false, onClose }) {
                 animation: 'popIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards',
               }}>
                 <div style={{ fontSize: '2.5rem', marginBottom: '4px' }}>🎉</div>
-                <div style={{ fontWeight: 800, fontSize: '1.3rem', color: '#fef08a' }}>
-                  +{claimedReward.coins} Coins Claimed!
+                <div style={{ fontWeight: 800, fontSize: '1.3rem', color: '#fef08a', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                  <CoinIcon size={28} animate={true} />
+                  <span>+{claimedReward.coins} Coins Claimed!</span>
                 </div>
                 {claimedReward.bonusItem && (
                   <div style={{ fontSize: '0.9rem', color: '#6ee7b7', marginTop: '4px', fontWeight: 700 }}>

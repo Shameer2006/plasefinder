@@ -52,12 +52,14 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: '/icon.png' },
-      { url: '/icon.png', sizes: '48x48', type: 'image/png' },
-      { url: '/icon.png', sizes: '96x96', type: 'image/png' },
-      { url: '/icon.png', sizes: '144x144', type: 'image/png' }
+      { url: '/logo-3d-square.png?v=3' },
+      { url: '/icon.png?v=3', sizes: '48x48', type: 'image/png' },
+      { url: '/icon.png?v=3', sizes: '96x96', type: 'image/png' },
+      { url: '/icon.png?v=3', sizes: '192x192', type: 'image/png' },
+      { url: '/icon.png?v=3', sizes: '512x512', type: 'image/png' },
     ],
-    apple: '/icon.png'
+    shortcut: '/logo-3d-square.png?v=3',
+    apple: '/apple-touch-icon.png?v=3'
   },
   verification: {
     google: "google28b6dbf4d718a7b0",

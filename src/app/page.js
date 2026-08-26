@@ -424,8 +424,8 @@ export default function Home() {
         pointerEvents: 'auto',
       }}>
         {/* Logo & Tagline */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'white', flexShrink: 0 }}>
-          <img src="/logo.png" alt="LostStreet" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.2)', flexShrink: 0 }} />
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'white', flexShrink: 0 }}>
+          <img src="/logo-3d-square.png" alt="LostStreet" style={{ width: '34px', height: '34px', objectFit: 'contain', flexShrink: 0, filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.4))' }} />
           <div>
             <div style={{ fontWeight: 800, fontSize: '1.15rem', fontFamily: '"Outfit", sans-serif', letterSpacing: '0.01em', lineHeight: 1.1, whiteSpace: 'nowrap' }}>LostStreet</div>
             <div className="home-header-tagline" style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600, whiteSpace: 'nowrap' }}>Explore. Guess. Discover.</div>

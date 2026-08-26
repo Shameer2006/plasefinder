@@ -85,7 +85,7 @@ export default function ChroniclesCatalog() {
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             <span>Back to Menu</span>
           </Link>
-          <img src="/logo.png" alt="LostStreet Logo" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,255,255,0.1)' }} />
+          <img src="/logo-3d-square.png" alt="LostStreet Logo" style={{ width: '48px', height: '48px', objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }} />
           <div>
             <h1 style={{
               fontSize: isMobile ? '1.8rem' : '2.6rem',

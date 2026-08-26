@@ -65,7 +65,7 @@ function SiteHeader({ onOpenDailyReward }) {
         }}>
           {/* Logo */}
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: '#fff', flexShrink: 0 }}>
-            <img src="/logo.png" alt="LostStreet" style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover' }} />
+            <img src="/logo-3d-square.png" alt="LostStreet" style={{ width: '30px', height: '30px', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.35))' }} />
             <span style={{ fontWeight: 800, fontSize: '1.1rem', fontFamily: '"Outfit", sans-serif' }}>LostStreet</span>
           </Link>
 
@@ -263,7 +263,7 @@ function SiteFooter() {
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '2rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', maxWidth: '260px' }}>
             <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: '#fff' }}>
-              <img src="/logo.png" alt="LostStreet" style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover' }} />
+              <img src="/logo-3d-square.png" alt="LostStreet" style={{ width: '30px', height: '30px', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.35))' }} />
               <span style={{ fontWeight: 800, fontSize: '1.1rem', fontFamily: '"Outfit", sans-serif' }}>LostStreet</span>
             </Link>
             <p style={{ fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>

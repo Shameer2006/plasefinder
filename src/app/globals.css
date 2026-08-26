@@ -215,12 +215,82 @@ body {
   padding-top: 0.2rem;
 }
 
-.hud-container {
+/* Unified Game Top HUD */
+.game-top-hud {
   position: absolute;
   top: 20px;
   left: 20px;
+  right: 20px;
+  z-index: 100;
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.game-top-hud-left,
+.game-top-hud-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.game-hud-badge {
+  padding: 0.45rem 0.9rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.game-streak-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.45rem 0.85rem;
+  border-radius: 50px;
+  background: rgba(14, 20, 34, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #d1d5db;
+  font-family: var(--font-outfit, 'Outfit', sans-serif);
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.game-streak-badge.active {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.25) 0%, rgba(234, 88, 12, 0.15) 100%), rgba(14, 20, 34, 0.88);
+  border-color: rgba(249, 115, 22, 0.5);
+  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.25);
+  color: #fdba74;
+}
+
+.btn-game-quit {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  background-color: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: white !important;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.35);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.btn-game-quit:hover {
+  background-color: #dc2626 !important;
+  border-color: #dc2626 !important;
+  transform: translateY(-1px);
 }
 
 .hud-center {
@@ -406,12 +476,33 @@ body {
     gap: 1rem;
   }
 
-  .hud-container {
+  .game-top-hud {
     top: 10px;
     left: 10px;
     right: 10px;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 6px;
+  }
+
+  .game-top-hud-left,
+  .game-top-hud-right {
+    gap: 6px;
+  }
+
+  .game-hud-badge {
+    padding: 0.32rem 0.6rem;
+    font-size: 0.8rem;
+    border-radius: 10px;
+  }
+
+  .game-streak-badge {
+    padding: 0.32rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .btn-game-quit {
+    padding: 0.32rem 0.65rem;
+    font-size: 0.8rem;
+    border-radius: 10px;
   }
 
   .hud-center {
@@ -1187,12 +1278,11 @@ button:focus-visible {
   }
 
   /* HUD */
-  .hud-container {
+  .game-top-hud {
     top: 8px;
     left: 8px;
     right: 8px;
-    gap: 6px;
-    flex-wrap: wrap;
+    gap: 5px;
   }
   .hud-center {
     width: 98vw;
@@ -1246,10 +1336,21 @@ button:focus-visible {
   .map-container.expanded {
     height: 60vh !important;
   }
-  .hud-container {
+  .game-top-hud {
     top: 6px;
     left: 6px;
     right: 6px;
+    gap: 4px;
+  }
+  .game-top-hud-left,
+  .game-top-hud-right {
+    gap: 4px;
+  }
+  .game-hud-badge,
+  .game-streak-badge,
+  .btn-game-quit {
+    padding: 0.26rem 0.46rem;
+    font-size: 0.74rem;
   }
   /* Signpost: tighter on small phones */
   .signpost-btn,
@@ -1309,14 +1410,10 @@ button:focus-visible {
 
 /* ── Ensure HUD glass-panel badges scale on all screens ── */
 @media (max-width: 767px) {
-  .hud-container .glass-panel {
-    padding: 0.3rem 0.7rem;
-    font-size: 0.82rem;
+  .game-hud-badge {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
     border-radius: 10px;
-  }
-  .hud-container .btn {
-    padding: 0.3rem 0.7rem;
-    font-size: 0.82rem;
   }
 }
 
@@ -1924,5 +2021,19 @@ button, input, select, textarea, a, [role="button"] {
   }
 }
 
+/* ── Coin Icon Animations ── */
+@keyframes coinBounceGain {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.35) rotate(-15deg); }
+  50% { transform: scale(1.2) rotate(15deg); }
+  75% { transform: scale(1.25) rotate(-8deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
 
+.coin-icon-bounce {
+  animation: coinBounceGain 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
+.coin-icon-wrapper:hover {
+  transform: scale(1.1);
+}

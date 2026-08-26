@@ -5,6 +5,7 @@ import { useAuth } from '@/lib/AuthContext';
 import { sounds } from '@/lib/sounds';
 import { generateContextualHint } from '@/lib/hintUtils';
 import { spendCoins, canAfford } from '@/lib/coins';
+import CoinIcon from './CoinIcon';
 
 export default function MultipleChoicePanel() {
   const { 
@@ -111,12 +112,14 @@ export default function MultipleChoicePanel() {
             {!fiftyFiftyUsed && options.length > 2 ? (
               <button 
                 className="btn btn-secondary" 
-                style={{ padding: '0.4rem 0.9rem', fontSize: '0.85rem', color: '#a78bfa', borderColor: '#a78bfa', display: 'flex', alignItems: 'center', gap: '4px' }} 
+                style={{ padding: '0.4rem 0.9rem', fontSize: '0.85rem', color: '#a78bfa', borderColor: '#a78bfa', display: 'flex', alignItems: 'center', gap: '6px' }} 
                 onClick={handleUse5050}
                 title="Eliminates 2 wrong answers for 20 coins"
               >
                 <span>✂️ 50/50</span>
-                <span style={{ fontSize: '0.75rem', background: 'rgba(167, 139, 250, 0.2)', padding: '1px 5px', borderRadius: '8px' }}>20🪙</span>
+                <span style={{ fontSize: '0.78rem', background: 'rgba(167, 139, 250, 0.2)', padding: '2px 6px', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', gap: '3px', fontWeight: 800 }}>
+                  20 <CoinIcon size={14} />
+                </span>
               </button>
             ) : <div style={{ width: '80px' }} />}
 
@@ -126,12 +129,14 @@ export default function MultipleChoicePanel() {
             {!usedHint ? (
               <button 
                 className="btn btn-secondary" 
-                style={{ padding: '0.4rem 0.9rem', fontSize: '0.85rem', color: '#fbbf24', borderColor: '#fbbf24', display: 'flex', alignItems: 'center', gap: '4px' }} 
+                style={{ padding: '0.4rem 0.9rem', fontSize: '0.85rem', color: '#fbbf24', borderColor: '#fbbf24', display: 'flex', alignItems: 'center', gap: '6px' }} 
                 onClick={handleUseHint}
                 title="Reveals contextual clue for 15 coins"
               >
                 <span>💡 Hint</span>
-                <span style={{ fontSize: '0.75rem', background: 'rgba(251, 191, 36, 0.2)', padding: '1px 5px', borderRadius: '8px' }}>15🪙</span>
+                <span style={{ fontSize: '0.78rem', background: 'rgba(251, 191, 36, 0.2)', padding: '2px 6px', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', gap: '3px', fontWeight: 800 }}>
+                  15 <CoinIcon size={14} />
+                </span>
               </button>
             ) : <div style={{ width: '80px' }} />}
           </div>
@@ -229,7 +234,7 @@ export default function MultipleChoicePanel() {
           onTouchStart={(e) => e.stopPropagation()}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="glass-panel" style={{ padding: '1.5rem', background: 'rgba(20,20,20,0.95)', width: '90%', maxWidth: '500px', borderRadius: '24px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div className="glass-panel" style={{ padding: 'clamp(1rem, 4vw, 1.5rem)', background: 'rgba(20,20,20,0.95)', width: '92%', maxWidth: '500px', maxHeight: '90dvh', overflowY: 'auto', WebkitOverflowScrolling: 'touch', borderRadius: '24px', display: 'flex', flexDirection: 'column', gap: '1rem', border: '1px solid rgba(255,255,255,0.15)' }}>
             
             {/* Hint Banner (Mobile) */}
             {usedHint && (
@@ -239,52 +244,101 @@ export default function MultipleChoicePanel() {
               </div>
             )}
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+            {/* Modal Header: Title + Close Button */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: '10px' }}>
+              <div>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0, color: '#f3f4f6', fontFamily: '"Outfit", sans-serif' }}>
+                  Where are we?
+                </h3>
+                <p style={{ margin: '2px 0 0', fontSize: '0.78rem', color: '#9ca3af' }}>Select the correct country</p>
+              </div>
+              
+              <button
+                type="button"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  borderRadius: '50%',
+                  width: '34px',
+                  height: '34px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#e5e7eb',
+                  fontSize: '1rem',
+                  cursor: 'pointer',
+                  touchAction: 'manipulation',
+                  flexShrink: 0,
+                  transition: 'all 0.2s ease',
+                }}
+                onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); setIsExpanded(false); }}
+                onClick={() => setIsExpanded(false)}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Power-ups Row (if available) */}
+            {((!fiftyFiftyUsed && options.length > 2) || !usedHint) && (
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center', width: '100%' }}>
                 {!fiftyFiftyUsed && options.length > 2 && (
                   <button 
-                    className="btn btn-secondary" 
-                    style={{ padding: '0.35rem 0.55rem', fontSize: '0.8rem', color: '#a78bfa', borderColor: '#a78bfa' }} 
+                    className="btn" 
+                    style={{
+                      flex: 1,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '6px',
+                      padding: '8px 10px',
+                      fontSize: '0.82rem',
+                      fontWeight: 700,
+                      color: '#c4b5fd',
+                      background: 'rgba(167, 139, 250, 0.12)',
+                      border: '1px solid rgba(167, 139, 250, 0.35)',
+                      borderRadius: '12px',
+                      whiteSpace: 'nowrap',
+                      touchAction: 'manipulation',
+                    }} 
                     onClick={handleUse5050}
                   >
-                    ✂️ 20🪙
+                    <span>✂️ 50/50</span>
+                    <span style={{ background: 'rgba(167, 139, 250, 0.25)', padding: '2px 6px', borderRadius: '6px', fontSize: '0.75rem', color: '#e9d5ff', fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+                      20 <CoinIcon size={13} />
+                    </span>
                   </button>
                 )}
 
                 {!usedHint && (
                   <button 
-                    className="btn btn-secondary" 
-                    style={{ padding: '0.35rem 0.55rem', fontSize: '0.8rem', color: '#fbbf24', borderColor: '#fbbf24' }} 
+                    className="btn" 
+                    style={{
+                      flex: 1,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '6px',
+                      padding: '8px 10px',
+                      fontSize: '0.82rem',
+                      fontWeight: 700,
+                      color: '#fde047',
+                      background: 'rgba(251, 191, 36, 0.12)',
+                      border: '1px solid rgba(251, 191, 36, 0.35)',
+                      borderRadius: '12px',
+                      whiteSpace: 'nowrap',
+                      touchAction: 'manipulation',
+                    }} 
                     onClick={handleUseHint}
                   >
-                    💡 15🪙
+                    <span>💡 Hint</span>
+                    <span style={{ background: 'rgba(251, 191, 36, 0.25)', padding: '2px 6px', borderRadius: '6px', fontSize: '0.75rem', color: '#fef08a', fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+                      15 <CoinIcon size={13} />
+                    </span>
                   </button>
                 )}
               </div>
-
-              <div style={{ textAlign: 'center' }}>
-                <h3 style={{ fontSize: '1.1rem', margin: 0, whiteSpace: 'nowrap' }}>Where are we?</h3>
-              </div>
-              
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <button
-                  type="button"
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    color: 'white',
-                    fontSize: '1.5rem',
-                    padding: '0 8px',
-                    touchAction: 'manipulation'
-                  }}
-                  onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); setIsExpanded(false); }}
-                  onClick={() => setIsExpanded(false)}
-                  aria-label="Close"
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
+            )}
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
               {options.map((option, idx) => {

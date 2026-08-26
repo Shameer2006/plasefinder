@@ -223,7 +223,7 @@ export default async function CountryChroniclePage({ params }) {
         </Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <img src="/logo.png" alt="LostStreet Logo" style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.1)' }} />
+          <img src="/logo-3d-square.png" alt="LostStreet Logo" style={{ width: '28px', height: '28px', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.4))' }} />
           <span style={{ fontSize: '0.85rem', color: '#6b7280', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
             LostStreet Encyclopedia
           </span>

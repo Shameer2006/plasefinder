@@ -2,6 +2,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { getNotifications, markAllAsRead, markAsRead } from '@/lib/notifications';
 import { useToast } from './Toast';
+import CoinIcon from './CoinIcon';
 
 export default function NotificationsPanel({ onClose, onOpenDailyRewards, onNavigate }) {
   const [notifications, setNotifications] = useState([]);
@@ -576,13 +577,11 @@ function NotificationVisual({ type }) {
         ...containerStyle,
         background: 'radial-gradient(circle at center, rgba(6, 78, 59, 0.7), rgba(4, 30, 25, 0.95))',
         border: '1px solid rgba(16, 185, 129, 0.3)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}>
-        <div style={{
-          fontSize: '2rem',
-          filter: 'drop-shadow(0 0 10px rgba(250, 204, 21, 0.8))',
-        }}>
-          🪙
-        </div>
+        <CoinIcon size={32} />
       </div>
     );
   }
