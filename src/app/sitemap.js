@@ -28,6 +28,7 @@ export default function sitemap() {
     { url: 'https://www.loststreet.online/privacy', lastModified: now, changeFrequency: 'yearly', priority: 0.5 },
     { url: 'https://www.loststreet.online/terms', lastModified: now, changeFrequency: 'yearly', priority: 0.5 },
     { url: 'https://www.loststreet.online/cookies', lastModified: now, changeFrequency: 'yearly', priority: 0.5 },
+    { url: 'https://www.loststreet.online/guides', lastModified: new Date('2026-08-06'), changeFrequency: 'weekly', priority: 0.9 },
     { url: 'https://www.loststreet.online/disclaimer', lastModified: now, changeFrequency: 'yearly', priority: 0.5 },
   ];
 
