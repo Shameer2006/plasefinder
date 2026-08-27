@@ -434,13 +434,13 @@ export default function Home() {
 
         {/* Center Nav Links (Desktop Only) */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }} className="home-header-nav">
-          <button onClick={() => window.location.href = '/chronicles'} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
-            Maps
-          </button>
           <button onClick={() => window.location.href = '/guides'} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
             Guides
+          </button>
+          <button onClick={() => window.location.href = '/flag-guesser'} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+            Flag Guesser
           </button>
           <button onClick={() => window.location.href = '/community'} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -601,13 +601,13 @@ export default function Home() {
                 Settings
               </button>
             </div>
-            <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/chronicles'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
-              Maps & Locations
-            </button>
             <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/guides'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-              Guides & Tips
+              Guides & Strategy
+            </button>
+            <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/flag-guesser'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+              Flag Guesser
             </button>
             <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/community'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -1095,12 +1095,18 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onEndlessMode, onStoryMode, onF
 
     <div style={{ marginTop: '8px', padding: '0 4px' }}>
       <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#9ca3af', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-        Featured Country Guides
+        Masterclass Guides &amp; Tips
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-        {[['in', 'India'], ['bn', 'Brunei'], ['de', 'Germany'], ['ng', 'Nigeria']].map(([code, name]) => (
-          <Link key={code} href={`/chronicles/${code}`} style={{ padding: '4px 10px', background: 'rgba(18, 24, 38, 0.85)', borderRadius: '10px', fontSize: '0.78rem', color: '#e5e7eb', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.12)', fontWeight: '600' }}>
-            {name}
+        {[
+          ['/guides/25-pro-street-view-geoguessr-secrets', '25 Pro Secrets'],
+          ['/guides/street-view-camera-generations-guide', 'Camera Gens'],
+          ['/guides/latin-america-street-view-guide', 'Latin America'],
+          ['/flag-guesser', 'Flag Guesser'],
+          ['/guides', 'All Guides →']
+        ].map(([href, label]) => (
+          <Link key={href} href={href} style={{ padding: '4px 10px', background: 'rgba(18, 24, 38, 0.85)', borderRadius: '10px', fontSize: '0.78rem', color: '#e5e7eb', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.12)', fontWeight: '600' }}>
+            {label}
           </Link>
         ))}
       </div>

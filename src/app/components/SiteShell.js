@@ -42,10 +42,9 @@ function SiteHeader({ onOpenDailyReward }) {
 
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/guides', label: 'How to Play' },
-    { href: '/leaderboard', label: 'Leaderboard' },
-    { href: '/chronicles', label: 'Map' },
+    { href: '/guides', label: 'Guides & Strategy' },
     { href: '/flag-guesser', label: 'Flag Guesser' },
+    { href: '/leaderboard', label: 'Leaderboard' },
     { href: '/community', label: 'Community' },
     { href: '/about', label: 'About' },
   ];
@@ -72,7 +71,7 @@ function SiteHeader({ onOpenDailyReward }) {
           {/* Desktop nav */}
           <nav className="site-nav-desktop" aria-label="Main Navigation" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(1rem, 2vw, 1.8rem)' }}>
             {links.map(({ href, label }) => {
-              const active = pathname === href;
+              const active = pathname === href || (href !== '/' && pathname.startsWith(href));
               return (
                 <Link key={href} href={href} style={{
                   color: active ? '#fff' : '#aaa',
@@ -179,7 +178,7 @@ function SiteHeader({ onOpenDailyReward }) {
             animation: 'slideDown 0.22s ease forwards',
           }}>
             {links.map(({ href, label }) => {
-              const active = pathname === href;
+              const active = pathname === href || (href !== '/' && pathname.startsWith(href));
               return (
                 <Link
                   key={href}
@@ -244,13 +243,16 @@ function SiteHeader({ onOpenDailyReward }) {
 function SiteFooter() {
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/guides', label: 'Guides' },
-    { href: '/leaderboard', label: 'Leaderboard' },
-    { href: '/chronicles', label: 'Chronicles' },
+    { href: '/guides', label: 'Guides & Strategy' },
     { href: '/flag-guesser', label: 'Flag Guesser' },
+    { href: '/leaderboard', label: 'Leaderboard' },
     { href: '/community', label: 'Community' },
-    { href: '/about', label: 'About' },
-    { href: '/privacy', label: 'Privacy' },
+    { href: '/about', label: 'About Us' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/privacy', label: 'Privacy Policy' },
+    { href: '/terms', label: 'Terms of Service' },
+    { href: '/cookies', label: 'Cookie Policy' },
+    { href: '/disclaimer', label: 'Disclaimer' },
   ];
 
   return (
@@ -261,25 +263,25 @@ function SiteFooter() {
         display: 'flex', flexDirection: 'column', gap: '2rem',
       }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '2rem' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', maxWidth: '260px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', maxWidth: '280px' }}>
             <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: '#fff' }}>
               <img src="/logo-3d-square.png" alt="LostStreet" style={{ width: '30px', height: '30px', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.35))' }} />
               <span style={{ fontWeight: 800, fontSize: '1.1rem', fontFamily: '"Outfit", sans-serif' }}>LostStreet</span>
             </Link>
-            <p style={{ fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
-              A fun, free world detective game with 780,000+ streets. Play solo or duel friends, and explore the planet!
+            <p style={{ fontSize: '0.85rem', lineHeight: 1.6, margin: 0, color: '#9ca3af' }}>
+              A fun, free world geography guessing and street detective game. Learn geography, explore 780,000+ streets, and master world clues!
             </p>
           </div>
 
-          <nav aria-label="Footer Navigation" style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(0.8rem, 2vw, 1.5rem)' }}>
+          <nav aria-label="Footer Navigation" style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(0.6rem, 1.8vw, 1.2rem)', maxWidth: '650px' }}>
             {links.map(({ href, label }) => (
               <Link key={href} href={href} style={{
-                color: '#888', textDecoration: 'none', fontSize: '0.875rem',
-                padding: '6px 4px', minHeight: '36px', display: 'inline-flex', alignItems: 'center',
+                color: '#9ca3af', textDecoration: 'none', fontSize: '0.85rem',
+                padding: '4px 6px', minHeight: '32px', display: 'inline-flex', alignItems: 'center',
                 transition: 'color 0.2s',
               }}
                 onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-                onMouseLeave={e => e.currentTarget.style.color = '#888'}
+                onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
               >
                 {label}
               </Link>
@@ -292,9 +294,10 @@ function SiteFooter() {
           paddingTop: '1.2rem',
           display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem',
           fontSize: '0.8rem',
+          color: '#6b7280'
         }}>
           <span>© {new Date().getFullYear()} LostStreet. All rights reserved.</span>
-          <span>Not affiliated with Google or GeoGuessr.</span>
+          <span>Educational geography game. Not affiliated with Google LLC or GeoGuessr.</span>
         </div>
       </div>
     </footer>
