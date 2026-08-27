@@ -1,50 +1,93 @@
 {
   "code": "ZA",
   "name": "South Africa",
-  "capital": "Pretoria",
+  "capital": "Pretoria (Executive), Cape Town (Legislative), Bloemfontein (Judicial)",
   "continent": "Africa",
-  "population": "60.6 Million",
+  "population": "60.4 Million",
   "currency": "South African Rand (ZAR)",
   "languages": [
-    "Zulu",
-    "Xhosa",
+    "isiZulu",
+    "isiXhosa",
     "Afrikaans",
-    "English"
+    "English",
+    "Sepedi",
+    "Setswana"
   ],
-  "seoTitle": "Detailed History of South Africa: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of South Africa. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of South Africa is a key element of its national identity in Africa. Characterized by its southern African plateau and coasts, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of South Africa came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of South Africa is a powerful symbol of the country's sovereignty and cultural heritage. The design features a Y-shaped horizontal band of six colors. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for South Africa involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from Britain in 1910 and democracy in 1994. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of South Africa, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, South Africa faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to power shortages and unemployment, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of South Africa continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of South Africa: Rainbow Nation, Six-Colored Flag, and Nelson Mandela",
+  "metaDescription": "Explore the detailed history of South Africa. Discover the 1994 end of Apartheid, Nelson Mandela's presidency, and the iconic six-color flag.",
+  "mapFormation": "Occupying the southernmost tip of the African continent across 1.22 million square kilometers, the Republic of South Africa is flanked by the South Atlantic and Indian Oceans, meeting at Cape Agulhas. Indigenous San hunter-gatherers and Khoekhoe pastoralists inhabited the region for over 100,000 years, followed by Bantu-speaking agricultural migrations from Central Africa.<br><br>European colonization began with the Dutch East India Company establishing a replenishment station at Table Bay (Cape Town) under Jan van Riebeeck in 1652. British forces seized the Cape Colony in 1806, prompting thousands of Boer (Afrikaner) settlers to embark on the Great Trek into the interior, establishing the independent South African Republic (Transvaal) and the Orange Free State.<br><br>Following the Anglo-Boer Wars (1899–1902), the British Parliament passed the South Africa Act 1909, creating the unified <strong>Union of South Africa on May 31, 1910</strong>. The modern democratic borders, encompassing nine provinces and completely surrounding the enclave kingdom of Lesotho, were codified in the 1994 post-apartheid democratic transition.",
+  "flagHistory": "The national flag of South Africa—universally celebrated as the <strong>Rainbow Flag</strong>—is one of the most vibrant and unified vexillological designs in world history, designed by State Herald Frederick Brownell and officially adopted on <strong>April 27, 1994</strong>.<br><br>The design features a central horizontal green 'Y' (pall) shape originating at the hoist and extending to the outer fly edge. The 'Y' symbol represents the convergence of diverse cultures, languages, and histories into a unified forward path for the 'Rainbow Nation'.<br><br>The flag incorporates six harmonious colors: <strong>Black, Gold, and Green</strong> (representing the historic liberation movements and the African National Congress); alongside <strong>Red, White, and Blue</strong> (representing the European and colonial heritage of the Boer republics and British Union Jack).",
+  "freedomStory": "South Africa's journey to sovereign freedom represents one of humanity's greatest moral triumphs against institutionalized racial tyranny.<br><br>Following decades of state-enforced segregation under the Apartheid regime instituted in 1948, the African National Congress (ANC), Pan Africanist Congress, and civic resistance leaders fought for universal human dignity. Leaders such as <strong>Nelson Mandela</strong>, Oliver Tambo, Walter Sisulu, and Archbishop Desmond Tutu mobilized domestic strikes and international sanctions.<br><br>Mandela's release from Victor Verster Prison on February 11, 1990, led to historic multi-party negotiations. On <strong>April 27, 1994</strong>, South Africa held its first non-racial democratic elections (celebrated annually as Freedom Day). Nelson Mandela was inaugurated as the nation's first Black President, establishing a constitutional democracy with one of the most progressive Bills of Rights in the world.",
+  "challenges": "In the 21st century, South Africa is the industrial powerhouse of Africa while addressing critical socioeconomic hurdles. Foremost challenges include reducing structural youth unemployment, expanding electric grid capacity through the Just Energy Transition Partnership, and upgrading water infrastructure across drought-prone coastal municipalities.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Table Mountain in Cape Town, South Africa",
+      "caption": "Table Mountain overlooking Table Bay in Cape Town, one of the New 7 Wonders of Nature and ancient sandstone landmark of South Africa."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Union Buildings in Pretoria, South Africa",
+      "caption": "The Union Buildings in Pretoria, the seat of the executive government where Nelson Mandela was inaugurated as President in 1994."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+      "alt": "South African road with yellow outer lines and left-hand driving",
+      "caption": "South African road meta: driving on the left, continuous yellow outer shoulder lines, and white center dividing lines."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Left",
+    "licensePlates": "White rectangular plates with province-specific emblems (e.g., Gauteng features blue lettering, Western Cape features an anchor logo).",
+    "utilityPoles": "Wooden utility poles with metal cross-arms; circular concrete posts in newer suburban developments.",
+    "roadMarkings": "Continuous bright yellow outer shoulder lines (unique in Southern Africa); white dashed centerlines.",
+    "delineators": "Guideposts with red reflectors on the left and white on the right.",
+    "cameraGen": "Early Gen 2 coverage with purple sun halo artifacts alongside extensive Gen 3 and Gen 4 coverage."
+  },
   "aiSummary": {
-    "geo": "Located in Africa; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring Y-shaped horizontal band of six colors representing national sovereignty.",
-    "freedom": "Gained sovereignty from Britain in 1910 and democracy in 1994 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to power shortages and unemployment."
+    "geo": "Southernmost African nation; borders unified in 1910 and reorganized into nine provinces in 1994.",
+    "flag": "The Rainbow Flag: six colors with a central green 'Y' shape symbolizing convergence and unity.",
+    "freedom": "1994 non-racial democratic election ended Apartheid; Nelson Mandela inaugurated president.",
+    "challenge": "Youth employment creation, power grid load-shedding transitions, and water security."
   },
   "faqs": [
     {
-      "question": "When did South Africa gain independence?",
-      "answer": "South Africa attained its full sovereignty and recognized independence from Britain in 1910 and democracy in 1994."
+      "question": "Why does South Africa have three capital cities?",
+      "answer": "South Africa divides power across three capitals: Pretoria is the Executive capital, Cape Town is the Legislative capital (Parliament), and Bloemfontein is the Judicial capital (Supreme Court of Appeal)."
     },
     {
-      "question": "What are the main geographical characteristics of South Africa?",
-      "answer": "South Africa is located in Africa and features a geographical layout characterized by southern African plateau and coasts."
+      "question": "What is the historical significance of April 27 in South Africa?",
+      "answer": "April 27 is Freedom Day, commemorating the first democratic, non-racial elections held in 1994, which elected Nelson Mandela as President."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1652",
+      "event": "Jan van Riebeeck establishes a Dutch settlement at Table Bay (Cape Town)."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1910",
+      "event": "The Union of South Africa is formed on May 31, uniting British colonies and Boer republics."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of South Africa."
+      "year": "1948",
+      "event": "The National Party enacts the formal legal framework of Apartheid."
+    },
+    {
+      "year": "1990",
+      "event": "Nelson Mandela is released from prison after 27 years of incarceration on February 11."
+    },
+    {
+      "year": "1994",
+      "event": "South Africa holds its first democratic elections; Nelson Mandela is inaugurated as President on May 10."
+    },
+    {
+      "year": "1996",
+      "event": "President Mandela signs the new democratic Constitution of the Republic of South Africa."
+    },
+    {
+      "year": "2010",
+      "event": "South Africa hosts the FIFA World Cup, the first on the African continent."
     }
   ]
 }

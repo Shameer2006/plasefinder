@@ -8,40 +8,77 @@
   "languages": [
     "Arabic"
   ],
-  "seoTitle": "Detailed History of Saudi Arabia: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Saudi Arabia. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Saudi Arabia is a key element of its national identity in Asia. Characterized by its arid Arabian Peninsula desert plateaus, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Saudi Arabia came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Saudi Arabia is a powerful symbol of the country's sovereignty and cultural heritage. The design features a green field with white Shahada and horizontal sword. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Saudi Arabia involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from unification of kingdoms in 1932. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Saudi Arabia, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Saudi Arabia faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to transitioning economy from oil revenues, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Saudi Arabia continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Saudi Arabia: Arabian Peninsula, Shahada Green Flag, and Vision 2030",
+  "metaDescription": "Explore the comprehensive history of Saudi Arabia. Discover the unification of King Abdulaziz, the Shahada sword flag, Mecca and Medina, and Vision 2030.",
+  "mapFormation": "Covering 2.15 million square kilometers across 80% of the Arabian Peninsula in Western Asia, the Kingdom of Saudi Arabia (<em>Al-Mamlaka Al-Arabiya As-Saudiya</em>) is bounded by the Red Sea to the west and the Arabian Gulf to the east, home to the vast Rub' al Khali (Empty Quarter) desert.<br><br>The Arabian Peninsula is the sacred cradle of Islam, where the Prophet Muhammad established the first Islamic community in <strong>Mecca and Medina</strong> (the Two Holy Mosques) in the 7th century CE. The modern Saudi state is the culmination of three historical Saudi states, beginning with the 1744 alliance between Imam Muhammad bin Saud and Sheikh Muhammad ibn Abd al-Wahhab in Diriyah.<br><br>On <strong>September 23, 1932</strong>, following a thirty-year campaign that began with the daring recapture of Riyadh in 1902, <strong>King Abdulaziz Al Saud (Ibn Saud)</strong> issued a Royal Decree unifying the Kingdoms of Nejd and Hejaz into the modern Kingdom of Saudi Arabia (celebrated annually as Saudi National Day).",
+  "flagHistory": "The national flag of Saudi Arabia is a revered green banner featuring the white Arabic <strong>Shahada</strong> (the Islamic declaration of faith) positioned above a horizontal white sword.<br><br>The inscription in elegant Arabic Thuluth script reads: <em>'Lā ʾilāha ʾillā-llāh, Muḥammadur-rasūlu-llāh'</em> ('There is no god but Allah; Muhammad is the Messenger of Allah'). Beneath the inscription is a straight white sword pointing to the hoist, symbolizing justice, strength, and the defense of truth. Because the flag contains the sacred word of God, it is never lowered to half-mast under any circumstances and is printed identically on both the obverse and reverse sides so the script reads correctly from right to left.",
+  "freedomStory": "Saudi Arabia's modern sovereign identity was forged through the visionary leadership and unifying campaigns of King Abdulaziz Al Saud.<br><br>In January 1902, with just 40 men, young Abdulaziz recaptured Masmak Fortress in Riyadh, re-establishing the House of Saud. Through strategic tribal alliances and military campaigns, he incorporated the Eastern Province (Al-Hasa) in 1913, Asir in 1920, and the Hejaz in 1925, unifying the disparate tribes of the peninsula under one sovereign monarchy on September 23, 1932.<br><br>The discovery of commercial petroleum at Dammam Well No. 7 ('Prosperity Well') in 1938 transformed the kingdom into a global energy superpower, founding the modern infrastructure network connecting the Red Sea to the Arabian Gulf.",
+  "challenges": "Under the transformative <strong>Vision 2030</strong> economic blueprint led by Crown Prince Mohammed bin Salman, Saudi Arabia is executing the largest economic diversification program in the Middle East. Priorities include constructing the futuristic renewable mega-region of <strong>NEOM</strong>, developing world-class cultural heritage tourism at AlUla and Diriyah, expanding women's workforce participation, and installing 50 gigawatts of solar and green hydrogen capacity.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Hegra ancient Nabataean tombs in AlUla, Saudi Arabia",
+      "caption": "The monumental rock-cut Nabataean tombs of Hegra (Mada'in Salih) in AlUla, Saudi Arabia's first UNESCO World Heritage Site."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Kingdom Centre skyscraper in Riyadh, Saudi Arabia",
+      "caption": "The Kingdom Centre tower illuminating the modern skyline of Riyadh, the capital and financial heart of Saudi Arabia."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Saudi Arabian modern highway with Arabic and English signs",
+      "caption": "Saudi street view signatures: multi-lane illuminated desert expressways, Arabic/English bilingual green signs, and white license plates."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates divided into two sections: Arabic letters and digits on the right, English/Latin characters on the left, with the Saudi crest in the center.",
+    "utilityPoles": "Tall galvanized steel light poles along desert highways; concrete posts in residential districts.",
+    "roadMarkings": "Continuous or dashed yellow and white lane dividers; reflective raised pavement markers (Cat's eyes).",
+    "delineators": "Guideposts with yellow reflectors along desert shoulders.",
+    "cameraGen": "Pristine Gen 4 coverage across Riyadh, Jeddah, Dammam, Mecca, Medina, and the AlUla region."
+  },
   "aiSummary": {
-    "geo": "Located in Asia; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring green field with white Shahada and horizontal sword representing national sovereignty.",
-    "freedom": "Gained sovereignty from unification of kingdoms in 1932 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to transitioning economy from oil revenues."
+    "geo": "Arabian Peninsula kingdom; unified by King Abdulaziz on September 23, 1932.",
+    "flag": "Green banner with the white Arabic Shahada inscription above a straight sword representing justice.",
+    "freedom": "Sovereign unification of Nejd and Hejaz in 1932; modern Vision 2030 economic transformation.",
+    "challenge": "Vision 2030 post-oil diversification, green hydrogen energy scaling, and water desalination management."
   },
   "faqs": [
     {
-      "question": "When did Saudi Arabia gain independence?",
-      "answer": "Saudi Arabia attained its full sovereignty and recognized independence from unification of kingdoms in 1932."
+      "question": "When was the Kingdom of Saudi Arabia unified?",
+      "answer": "Saudi Arabia was unified on September 23, 1932, by King Abdulaziz Al Saud (Ibn Saud), celebrated annually as Saudi National Day."
     },
     {
-      "question": "What are the main geographical characteristics of Saudi Arabia?",
-      "answer": "Saudi Arabia is located in Asia and features a geographical layout characterized by arid Arabian Peninsula desert plateaus."
+      "question": "Why is the Saudi Arabian flag never flown at half-mast?",
+      "answer": "The flag is never lowered to half-mast because it bears the sacred Islamic declaration of faith (the Shahada), and lowering it is considered sacrilegious."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1744",
+      "event": "Imam Muhammad bin Saud establishes the First Saudi State in Diriyah."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1902",
+      "event": "Abdulaziz Al Saud recaptures Riyadh and Masmak Fortress, founding the modern Third Saudi State."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Saudi Arabia."
+      "year": "1932",
+      "event": "Royal Decree officially unifies the Kingdom of Saudi Arabia on September 23."
+    },
+    {
+      "year": "1938",
+      "event": "Commercial petroleum is discovered at Dammam Well No. 7 (Prosperity Well)."
+    },
+    {
+      "year": "2016",
+      "event": "Saudi Arabia launches the transformative Vision 2030 economic blueprint."
+    },
+    {
+      "year": "2023",
+      "event": "Riyadh is selected to host the World Expo 2030, highlighting global cultural leadership."
     }
   ]
 }

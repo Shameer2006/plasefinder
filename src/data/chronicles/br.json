@@ -3,53 +3,98 @@
   "name": "Brazil",
   "capital": "Brasília",
   "continent": "South America",
-  "population": "215.3 Million",
+  "population": "216.4 Million",
   "currency": "Brazilian Real (BRL)",
   "languages": [
     "Portuguese"
   ],
   "seoTitle": "History of Brazil: Treaty of Tordesillas, Starry Globe Flag, and Pedro I Independence",
-  "metaDescription": "Discover the detailed history of Brazil, from the Treaty of Tordesillas and Portuguese empire to its starry globe flag and republic transition.",
-  "mapFormation": "Brazil is the largest country in South America, occupying nearly half of the continent. Its borders were initiated by the Treaty of Tordesillas in 1494, which divided South America between Spain and Portugal. During the colonial era, Portuguese explorers, known as Bandeirantes, pushed deep into the interior beyond the treaty line, claiming the vast Amazon basin and central plateaus. These borders were solidified through subsequent treaties, particularly the Treaty of Madrid in 1750, which recognized Portuguese sovereignty over the expanded territories. Brazil's international boundaries were finalized in the late 19th and early 20th centuries through peaceful diplomatic negotiations led by the Baron of Rio Branco, establishing a continental landmass bordering ten South American states, including <a href=\"/chronicles/ar\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Argentina</a> and <a href=\"/chronicles/bo\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Bolivia</a>.",
-  "flagHistory": "The flag of Brazil features a green field with a yellow rhombus in the center. Inside the rhombus is a blue celestial globe depicting a starry sky, crossed by a white curved band with the national motto 'Ordem e Progresso' (Order and Progress). Green represents the royal House of Braganza (of Brazil's first emperor) and the vast Amazon forests; yellow represents the House of Habsburg (of Empress Leopoldina) and the country's rich gold resources. The starry globe depicts the night sky over Rio de Janeiro on November 15, 1889—the day the republic was proclaimed—with 27 stars representing the federal states and district, officially adopted in 1889.",
-  "freedomStory": "Brazil's path to freedom differed from neighboring Spanish colonies. In 1808, fleeing the Napoleonic invasion of Portugal, the Portuguese royal family transferred the capital of the empire to Rio de Janeiro. When King John VI returned to Lisbon in 1821, he left his son, Prince Pedro, as regent. Facing demands from Lisbon to reduce Brazil to colonial status, Prince Pedro declared independence on September 7, 1822 (the Grito de Ipiranga), establishing the independent Empire of Brazil and crowning himself Emperor Dom Pedro I. The monarchy lasted until November 15, 1889, when a military coup deposed Emperor Dom Pedro II and declared the country a republic.",
-  "challenges": "Brazil struggles with socio-economic disparities and environmental issues. The country faces severe income inequality, resulting in widespread urban slums, known as favelas, and high crime rates. The political arena is marked by polarization and corruption scandals that have impacted public trust in democratic institutions. Globally, Brazil faces intense pressure to address the deforestation and destruction of the Amazon Rainforest, which is critical for global climate regulation, alongside the need to improve education and healthcare infrastructure in remote rural areas.",
+  "metaDescription": "Discover the detailed history of Brazil, from the Treaty of Tordesillas and Portuguese empire to its starry globe flag, Amazon basin, and republic transition.",
+  "mapFormation": "Occupying 8.51 million square kilometers across nearly half the South American continent, the Federative Republic of Brazil (<em>República Federativa do Brasil</em>) encompasses the immense Amazon river basin, the central Cerrado savanna plateau, and 7,491 kilometers of Atlantic coastline.<br><br>The nation's geographical borders trace their origins to the <strong>Treaty of Tordesillas (1494)</strong>, in which Pope Alexander VI divided the non-European world between the Crowns of Spain and Portugal along a meridian 370 leagues west of Cape Verde. Following the 1500 landing of Portuguese explorer Pedro Álvares Cabral in Bahia, Portuguese frontiersmen known as <em>Bandeirantes</em> pushed thousands of kilometers westward beyond the Tordesillas line, exploring the interior gold-rich regions of Minas Gerais and the vast Amazon waterways.<br><br>These territorial conquests were legally recognized in the <strong>Treaty of Madrid (1750)</strong> under the principle of <em>uti possidetis</em> ('as you possess, so may you continue to possess'). Brazil's modern sovereign land frontiers—bordering ten neighboring South American states—were peacefully finalized in the late 19th and early 20th centuries through the masterful diplomatic treaties negotiated by José Maria da Silva Paranhos Júnior, the legendary <strong>Baron of Rio Branco</strong>.",
+  "flagHistory": "The national flag of Brazil—known affectionately as the <strong>Auriverde</strong> (Gold and Green)—is one of the most distinctive celestial vexillological designs in world history, officially adopted on <strong>November 19, 1889</strong>, four days after the proclamation of the Republic.<br><br>The flag features a rich green field representing the Royal House of Braganza (of Brazil's first emperor, Dom Pedro I) and the boundless biodiversity of the Amazon rainforest. In the center sits a large bright yellow rhombus (diamond), representing the imperial House of Habsburg-Lorraine (of Empress Maria Leopoldina of Austria) and the nation's immense mineral wealth.<br><br>At the core of the yellow rhombus is a dark blue celestial globe crossed by a white curved band bearing the national positivist motto <em>'Ordem e Progresso'</em> ('Order and Progress', inspired by philosopher Auguste Comte). The globe precisely depicts the <strong>celestial constellations visible in the night sky over Rio de Janeiro on November 15, 1889</strong> (including the Southern Cross, Scorpio, and Canis Major). The flag features 27 white five-pointed stars, dynamically representing Brazil's 26 federal states and the Federal District of Brasília.",
+  "freedomStory": "Brazil's path to sovereign independence was uniquely peaceful compared to the bloody wars of independence in Spanish America.<br><br>In 1807, fleeing the Napoleonic invasion of Portugal, King John VI and the entire Portuguese royal court relocated to Rio de Janeiro, elevating Brazil from a colony to a co-equal kingdom within the United Kingdom of Portugal, Brazil, and the Algarves. When King John returned to Lisbon in 1821, his charismatic 23-year-old son, <strong>Crown Prince Pedro</strong>, remained as Prince Regent.<br><br>When the Portuguese Cortes attempted to revoke Brazil's autonomy and reduce it once again to subordinate colonial status, Prince Pedro famously defied Lisbon. On <strong>September 7, 1822</strong>, on the banks of the Ipiranga River near São Paulo, Pedro unsheathed his sword and proclaimed the immortal battle cry: <em>'Independência ou Morte!'</em> ('Independence or Death!' / the <em>Grito do Ipiranga</em>).<br><br>Pedro was crowned Emperor <strong>Dom Pedro I</strong>, establishing the sovereign <strong>Empire of Brazil</strong>. The constitutional monarchy lasted for 67 years under his son, Emperor Dom Pedro II. On <strong>May 13, 1888</strong>, Princess Regent Isabel signed the historic <em>Lei Áurea</em> (Golden Law), abolishing slavery throughout the empire. The following year, on <strong>November 15, 1889</strong>, Field Marshal Deodoro da Fonseca led a peaceful republican military coup, deposing the emperor and establishing the Federal Republic of the United States of Brazil.",
+  "challenges": "As the largest economy in South America and a critical anchor of the global biosphere, Brazil balances industrial agribusiness leadership with ecological preservation. A foremost priority is halting illegal deforestation throughout the <strong>Amazon Rainforest</strong> to preserve planetary climate stability and safeguard indigenous ancestral territories. Domestically, the nation addresses severe socioeconomic inequality, urban infrastructure disparities across metropolitan favelas, and administrative fiscal reforms while expanding solar, hydro, and biofuel energy matrices.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Amazon rainforest and river basin in Brazil",
+      "caption": "The Amazon Rainforest and river basin in northern Brazil, home to 10% of the world's known biological species."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Christ the Redeemer overlooking Rio de Janeiro, Brazil",
+      "caption": "Christ the Redeemer (Cristo Redentor) atop Corcovado Mountain overlooking Guanabara Bay in Rio de Janeiro."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509803874385-db7c23652552?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Brazilian road landscape with red soil and black sign backs",
+      "caption": "Brazilian street view signatures: black-painted backs on highway signs, double continuous white centerlines, and rust-red soil (Terra Roxa)."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White Mercosur plates with a blue top strip and black lettering; older legacy plates are gray with three letters and four numbers.",
+    "utilityPoles": "Reinforced concrete utility poles with curved or crossbar metal tops; wooden poles common in rural interior cattle corridors.",
+    "roadMarkings": "Continuous double white centerlines or single yellow lines; Portuguese road markings (e.g., 'PARE', 'DEVAGAR').",
+    "delineators": "Black-painted backs of road signs (unique in South America); roadside guideposts with red and white reflectors.",
+    "cameraGen": "Massive nationwide Gen 3 and Gen 4 coverage spanning from Manaus in the Amazon to Rio Grande do Sul."
+  },
   "aiSummary": {
-    "geo": "Continental South American territory; boundaries expanded beyond the 1494 Tordesillas line by Portuguese explorers.",
-    "flag": "Green field and yellow rhombus with a central starry globe portraying Rio's sky in 1889 and the motto 'Order and Progress'.",
-    "freedom": "Declared by Prince Pedro I in 1822 as an Empire; transitioned to a federal republic after a coup in 1889.",
-    "challenge": "Severe income inequality in urban favelas, political corruption, and deforestation in the Amazon basin."
+    "geo": "Largest South American country; borders expanded beyond the 1494 Tordesillas line by Bandeirantes and finalized by the Baron of Rio Branco.",
+    "flag": "The Auriverde: green field, yellow rhombus, and a starry celestial globe depicting Rio's night sky on Nov 15, 1889, with 'Ordem e Progresso'.",
+    "freedom": "Declared by Dom Pedro I on Sept 7, 1822 (Grito do Ipiranga); abolished slavery in 1888 and became a republic in 1889.",
+    "challenge": "Amazon deforestation containment, socioeconomic urban inequality, and agricultural infrastructure logistics."
   },
   "faqs": [
     {
-      "question": "What is the meaning of the stars on the Brazilian flag?",
-      "answer": "The 27 stars represent the 26 states and the Federal District, arranged in constellations visible from Rio de Janeiro on November 15, 1889."
+      "question": "What was the 'Grito do Ipiranga' on September 7, 1822?",
+      "answer": "The Grito do Ipiranga ('Cry of Ipiranga') was the declaration of Brazilian independence from Portugal by Prince Regent Dom Pedro I on the banks of the Ipiranga River, celebrated annually as Brazil's Independence Day."
     },
     {
-      "question": "Who signed the law that ended slavery in Brazil?",
-      "answer": "Princess Isabel signed the Golden Law (Lei Aurea) on May 13, 1888, making Brazil the last nation in the Western Hemisphere to abolish slavery."
+      "question": "What is the meaning of the starry sky on the Brazilian flag?",
+      "answer": "The 27 stars on the flag depict the exact astronomical constellations (including the Southern Cross) visible over Rio de Janeiro on November 15, 1889, the day the Republic of Brazil was proclaimed."
+    },
+    {
+      "question": "What was the 'Lei Áurea' (Golden Law)?",
+      "answer": "Signed on May 13, 1888, by Princess Regent Isabel, the Lei Áurea completely abolished slavery in Brazil without compensation to slaveowners, making Brazil the last sovereign state in the Americas to end slavery."
+    },
+    {
+      "question": "Why did the Portuguese royal family move to Brazil in 1808?",
+      "answer": "King John VI and the Portuguese royal court fled to Rio de Janeiro in 1808 to escape the invasion of Portugal by Napoleon Bonaparte's French forces, transforming Rio into the capital of the Portuguese Empire."
     }
   ],
   "timeline": [
     {
+      "year": "1494",
+      "event": "The Treaty of Tordesillas divides the New World between Spain and Portugal."
+    },
+    {
       "year": "1500",
-      "event": "Portuguese explorer Pedro Álvares Cabral arrives on the coast of Bahia, claiming the land for Portugal."
+      "event": "Portuguese explorer Pedro Álvares Cabral lands in Bahia, claiming Brazil for King Manuel I."
     },
     {
       "year": "1808",
-      "event": "The Portuguese royal family transfers the imperial court to Rio de Janeiro, escaping Napoleonic wars."
+      "event": "The Portuguese Royal Court relocates to Rio de Janeiro, escaping Napoleonic forces in Europe."
     },
     {
       "year": "1822",
-      "event": "Prince Dom Pedro I declares Brazilian independence from Portugal, establishing the Empire of Brazil."
+      "event": "Prince Dom Pedro I declares independence with the Grito do Ipiranga on September 7, founding the Empire of Brazil."
     },
     {
       "year": "1888",
-      "event": "Princess Isabel signs the Golden Law (Lei Áurea), officially abolishing slavery in Brazil."
+      "event": "Princess Isabel signs the Lei Áurea (Golden Law), abolishing slavery throughout Brazil."
     },
     {
       "year": "1889",
-      "event": "A military coup deposes Emperor Dom Pedro II and establishes the Republic of the United States of Brazil."
+      "event": "A peaceful military coup deposes Emperor Dom Pedro II and proclaims the Republic of Brazil on November 15."
+    },
+    {
+      "year": "1960",
+      "event": "President Juscelino Kubitschek inaugurates the newly built modernist capital of Brasília in the interior."
+    },
+    {
+      "year": "1988",
+      "event": "Promulgation of the democratic 'Citizen Constitution', restoring full civil liberties following military rule."
     }
   ]
 }

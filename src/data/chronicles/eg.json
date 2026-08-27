@@ -3,45 +3,82 @@
   "name": "Egypt",
   "capital": "Cairo",
   "continent": "Africa",
-  "population": "110.9 Million",
+  "population": "112.7 Million",
   "currency": "Egyptian Pound (EGP)",
   "languages": [
     "Arabic"
   ],
-  "seoTitle": "Detailed History of Egypt: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Egypt. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Egypt is a key element of its national identity in Africa. Characterized by its Nile River valley and surrounding Sahara, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Egypt came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Egypt is a powerful symbol of the country's sovereignty and cultural heritage. The design features a horizontal bands of red, white, and black with central gold eagle. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Egypt involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the United Kingdom in 1922. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Egypt, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Egypt faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to inflation and threats to Nile water access, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Egypt continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Egypt: Gift of the Nile, Eagle of Saladin Flag, and 1952 Republic",
+  "metaDescription": "Explore the detailed history of Egypt. Discover the Pharaohs and Pyramids, Alexandria, the 1952 Free Officers Revolution, the Suez Canal, and the Saladin Eagle flag.",
+  "mapFormation": "Spanning 1.01 million square kilometers at the transcontinental crossroads of Northeast Africa and Southwest Asia (the Sinai Peninsula), the Arab Republic of Egypt (<em>Miṣr</em>) controls the vital <strong>Suez Canal</strong>, which links the Mediterranean Sea directly to the Red Sea and Indian Ocean.<br><br>As the Greek historian Herodotus famously observed: <em>'Egypt is the gift of the Nile.'</em> Over 95% of the population resides within the fertile strip and delta of the Nile River, surrounded by the Sahara and Eastern Deserts.<br><br>Egypt is home to one of humanity's earliest monumental civilizations, unified around <strong>3100 BCE</strong> under King Menes (Narmer), which constructed the Great Pyramids of Giza, the Sphinx, and the temples of Luxor and Karnak. Following Hellenistic rule under the Ptolemaic Dynasty founded by Alexander the Great and integration into the Roman, Byzantine, and Islamic Caliphates, Egypt was modernized under <strong>Muhammad Ali Pasha</strong> in the 19th century, with sovereign borders recognized upon independence from Great Britain in 1922 and the 1979 Egypt-Israel Peace Treaty returning the Sinai Peninsula.",
+  "flagHistory": "The national flag of Egypt—the <strong>Arab Liberation Flag</strong>—is a horizontal tricolor of Red, White, and Black, bearing at the center the golden <strong>Eagle of Saladin</strong>, officially adopted on <strong>October 4, 1984</strong>.<br><br>The design was created during the Egyptian Revolution of 1952. In revolutionary symbolism: <strong>Red</strong> symbolizes the sacrifices and blood shed by Egyptian patriots in the struggle for independence; <strong>White</strong> represents the purity of the nation's conscience and a bright future; and <strong>Black</strong> represents the dark era of colonial oppression and foreign occupation that was overcome.<br><br>At the center sits the national coat of arms: a golden eagle looking to the right, bearing on its breast a shield with the vertical colors of the flag, and clutching in its talons a scroll inscribed in Arabic: <em>'Jumhūriyyat Miṣr al-ʿArabiyyah'</em> ('Arab Republic of Egypt'). The eagle commemorates Sultan Saladin (Salah ad-Din), who defended Egypt and founded the Ayyubid dynasty in the 12th century.",
+  "freedomStory": "Egypt's modern sovereignty was established through the decisive <strong>Egyptian Revolution of 1952</strong>.<br><br>On <strong>July 23, 1952</strong>, the Free Officers Movement led by <strong>Gamal Abdel Nasser</strong> and Mohamed Naguib overthrew King Farouk I, abolishing the constitutional monarchy and proclaiming the Arab Republic of Egypt on June 18, 1953 (celebrated annually as Revolution Day).<br><br>In 1956, President Nasser famously <strong>nationalized the Suez Canal Company</strong>, asserting full sovereign Egyptian control over the international waterway and withstanding the tripartite aggression during the Suez Crisis. Egypt completed the monumental <strong>Aswan High Dam in 1970</strong>, ending destructive seasonal flooding and generating electricity for industrial modernization.",
+  "challenges": "As the most populous nation in the Arab world, Egypt is executing transformative national infrastructure megaprojects. Foremost among them is constructing the <strong>New Administrative Capital (NAC)</strong> east of Cairo to alleviate metropolitan congestion, expanding renewable solar parks at Benban, and managing water security quotas along the Nile Basin in coordination with upstream African states.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Nile River felucca sailing at sunset in Egypt",
+      "caption": "A traditional felucca sailboat gliding along the Nile River near Aswan, the lifeblood of Egyptian civilization for over 5,000 years."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Great Pyramids of Giza and Sphinx, Egypt",
+      "caption": "The Great Pyramid of Giza (Khufu) and the Sphinx, the oldest and only surviving Wonder of the Ancient World."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Egyptian desert highway with Arabic signage and blue/white plates",
+      "caption": "Egyptian road view: bilingual Arabic/English blue highway markers, Cairo ring road overpasses, and desert palm landscapes."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates with a colored top band (blue for private vehicles, orange for taxis) containing 'Egypt' in Arabic and English, and Arabic digits and letters below.",
+    "utilityPoles": "Tall concrete or metal lattice light posts along highways; wooden poles in agricultural Nile delta villages.",
+    "roadMarkings": "Continuous white lane dividers; blue-and-green highway directional signs with Arabic and Latin script.",
+    "delineators": "Black-and-white painted concrete curb barriers along highway dividers.",
+    "cameraGen": "Comprehensive museum, pyramid, and heritage site trekker coverage alongside urban Cairo coverage."
+  },
   "aiSummary": {
-    "geo": "Located in Africa; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring horizontal bands of red, white, and black with central gold eagle representing national sovereignty.",
-    "freedom": "Gained sovereignty from the United Kingdom in 1922 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to inflation and threats to Nile water access."
+    "geo": "Transcontinental nation connecting Africa and Asia; controls the Suez Canal; 95% of people live along the Nile.",
+    "flag": "Red, white, and black horizontal tricolor with the golden Eagle of Saladin in the center.",
+    "freedom": "1952 Free Officers Revolution abolished the monarchy; 1956 nationalization of the Suez Canal.",
+    "challenge": "New Administrative Capital construction, Nile water basin security, and solar energy scaling."
   },
   "faqs": [
     {
-      "question": "When did Egypt gain independence?",
-      "answer": "Egypt attained its full sovereignty and recognized independence from the United Kingdom in 1922."
+      "question": "What is the strategic importance of the Suez Canal?",
+      "answer": "Opened in 1869, the Suez Canal is a 193-km artificial waterway connecting the Mediterranean to the Red Sea, enabling direct maritime trade between Europe and Asia without circumnavigating Africa."
     },
     {
-      "question": "What are the main geographical characteristics of Egypt?",
-      "answer": "Egypt is located in Africa and features a geographical layout characterized by Nile River valley and surrounding Sahara."
+      "question": "What does the Eagle of Saladin on the Egyptian flag represent?",
+      "answer": "The Eagle of Saladin honors the 12th-century Sultan Saladin, symbolizing strength, courage, and Arab unity."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "3100 BCE",
+      "event": "King Menes unifies Upper and Lower Egypt, founding the First Dynasty."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "2560 BCE",
+      "event": "Construction of the Great Pyramid of Giza under Pharaoh Khufu."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Egypt."
+      "year": "1869",
+      "event": "Inauguration of the Suez Canal, transforming international maritime trade."
+    },
+    {
+      "year": "1922",
+      "event": "Great Britain formally recognizes Egyptian independence; King Fuad I ascends the throne."
+    },
+    {
+      "year": "1952",
+      "event": "The July 23 Revolution by the Free Officers abolishes the monarchy, establishing the Republic."
+    },
+    {
+      "year": "1979",
+      "event": "The Egypt-Israel Peace Treaty is signed, returning the Sinai Peninsula to Egypt."
     }
   ]
 }

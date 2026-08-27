@@ -3,45 +3,98 @@
   "name": "United Kingdom",
   "capital": "London",
   "continent": "Europe",
-  "population": "67.0 Million",
+  "population": "67.7 Million",
   "currency": "Pound Sterling (GBP)",
   "languages": [
     "English"
   ],
-  "seoTitle": "Detailed History of United Kingdom: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of United Kingdom. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of United Kingdom is a key element of its national identity in Europe. Characterized by its archipelago in northwestern Europe, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of United Kingdom came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of United Kingdom is a powerful symbol of the country's sovereignty and cultural heritage. The design features a Union Jack combining saint crosses. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for United Kingdom involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from union of crowns and parliaments. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of United Kingdom, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, United Kingdom faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to post-Brexit economic adjustments, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of United Kingdom continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of the United Kingdom: Acts of Union, Union Jack Heraldry, and Parliamentary Democracy",
+  "metaDescription": "Discover the detailed history of the United Kingdom. Learn how the 1707 and 1800 Acts of Union, Magna Carta, and the Union Flag shaped British sovereignty.",
+  "mapFormation": "The United Kingdom of Great Britain and Northern Ireland occupies an archipelago off the northwestern coast of continental Europe, encompassing the island of Great Britain (comprising England, Scotland, and Wales), the northeastern portion of the island of Ireland, and numerous surrounding islands such as the Hebrides, Orkney, and Shetland.<br><br>The modern territorial boundaries of the United Kingdom were assembled through a sequence of historic constitutional unions and statutory treaties. Following the <strong>Norman Conquest of 1066</strong>, English administration integrated the Principality of Wales through the <strong>Laws in Wales Acts of 1535 and 1542</strong>. In 1603, King James VI of Scotland inherited the English throne, uniting the two sovereign crowns in personal union. A century later, the Scottish and English Parliaments ratified the landmark <strong>Acts of Union 1707</strong>, dissolving their separate legislatures to forge the unified <strong>Kingdom of Great Britain</strong>.<br><br>In 1800, the Irish and British Parliaments passed the <strong>Act of Union 1800</strong>, creating the United Kingdom of Great Britain and Ireland on January 1, 1801. Following the Irish War of Independence and the <strong>Anglo-Irish Treaty of 1921</strong>, the southern twenty-six counties seceded to form the Irish Free State, while six northeastern counties remained within the Union, establishing the modern sovereign borders of the United Kingdom of Great Britain and Northern Ireland in 1927.",
+  "flagHistory": "The national banner of the United Kingdom, internationally renowned as the <strong>Union Flag</strong> or <em>'Union Jack'</em>, is a masterpiece of composite heraldic design symbolizing the union of three historic kingdoms under a single crown. The flag combines three distinct patronal crosses into a single balanced banner:<br><br>1. <strong>The Cross of St. George (England):</strong> A bold red cross on a field of white, representing the patron saint of England since the Crusades of the 13th century.<br>2. <strong>The Saltire of St. Andrew (Scotland):</strong> A white diagonal cross on a field of azure blue, representing the patron saint of Scotland.<br>3. <strong>The Saltire of St. Patrick (Ireland):</strong> A red diagonal cross on a field of white, added on January 1, 1801, following the Act of Union with Ireland.<br><br>To ensure heraldic balance, the Scottish and Irish saltires are deliberately <em>counterchanged</em> (offset side by side) so that the Scottish white cross is not subjugated beneath the Irish red cross. Wales is not represented on the Union Flag because Wales had already been incorporated into the Kingdom of England prior to the creation of the first Union flag in 1606. The ratio of the flag is 1:2 on land and 3:5 at sea.",
+  "freedomStory": "Unlike nations whose sovereignty was forged through sudden revolutionary separation, the United Kingdom's constitutional liberty developed through a continuous eight-century evolution of common law, parliamentary limits on monarchical power, and statutory democracy.<br><br>The foundation of British constitutional liberty was laid at Runnymede in <strong>June 1215</strong>, when rebellious barons forced King John to seal the <strong>Magna Carta (Great Charter)</strong>, establishing for the first time that the Sovereign was subject to the rule of law and safeguarding individual protection against arbitrary imprisonment (Habeas Corpus). In the 17th century, conflicts over royal absolutism led to the English Civil War (1642–1651) and the execution of King Charles I.<br><br>The climax of this constitutional struggle occurred in the <strong>Glorious Revolution of 1688</strong>. The subsequent <strong>Bill of Rights 1689</strong> firmly established Parliamentary Sovereignty over the Crown, guaranteeing regular free elections, freedom of speech in Parliament, and the prohibition of taxation without parliamentary consent. This Westminster model of parliamentary democracy went on to serve as the foundational architecture for democratic legislatures worldwide.",
+  "challenges": "In the contemporary era, the United Kingdom navigates significant geopolitical, constitutional, and economic transitions. Following its formal withdrawal from the European Union (Brexit) in 2020, the nation continues to renegotiate international trade agreements and manage the regulatory mechanics of the Windsor Framework regarding Northern Ireland. Domestically, the UK manages regional devolution settlements across Holyrood (Scotland), the Senedd (Wales), and Stormont (Northern Ireland), addressing distinct aspirations for self-governance. Economically, the nation focuses on transitioning North Sea energy systems toward offshore wind and green hydrogen while addressing regional productivity disparities across post-industrial regions.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "White Cliffs of Dover, United Kingdom",
+      "caption": "The iconic White Cliffs of Dover along the English Channel, representing Britain's natural maritime fortress for millennia."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Palace of Westminster and Elizabeth Tower in London",
+      "caption": "The Palace of Westminster and Big Ben (Elizabeth Tower) along the River Thames, the historic cradle of parliamentary democracy."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "British road infrastructure with yellow rear plates and left-hand driving",
+      "caption": "Distinctive UK road meta: driving on the left, yellow reflective rear license plates, white front plates, and red post boxes."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Left",
+    "licensePlates": "White rectangular plates at the front, bright yellow reflective plates at the rear with standard Charles Wright font.",
+    "utilityPoles": "Dark creosote-treated wooden utility poles, often marked with small yellow inspection tags or striped guide markers.",
+    "roadMarkings": "Dashed white centerlines; solid double white lines where overtaking is prohibited; distinctive zigzag white lines near pedestrian crossings (Belisha beacons).",
+    "delineators": "Black and white striped post markers with red reflectors on left and white on right.",
+    "cameraGen": "Predominantly Gen 3 and Gen 4 with excellent road coverage across England, Scotland, Wales, and Northern Ireland."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring Union Jack combining saint crosses representing national sovereignty.",
-    "freedom": "Gained sovereignty from union of crowns and parliaments through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to post-Brexit economic adjustments."
+    "geo": "Archipelago nation comprising England, Scotland, Wales, and Northern Ireland; boundaries shaped by the 1707 and 1800 Acts of Union and 1921 Anglo-Irish Treaty.",
+    "flag": "The Union Jack: combines the crosses of St. George (England), St. Andrew (Scotland), and St. Patrick (Ireland).",
+    "freedom": "Evolution of parliamentary democracy anchored in Magna Carta (1215), the Glorious Revolution (1688), and the Bill of Rights (1689).",
+    "challenge": "Post-Brexit trade optimization, Scottish and Northern Irish constitutional devolution, and green energy transitions."
   },
   "faqs": [
     {
-      "question": "When did United Kingdom gain independence?",
-      "answer": "United Kingdom attained its full sovereignty and recognized independence from union of crowns and parliaments."
+      "question": "What is the difference between Great Britain and the United Kingdom?",
+      "answer": "Great Britain is a geographical island encompassing England, Scotland, and Wales. The United Kingdom is a sovereign political state consisting of Great Britain plus Northern Ireland."
     },
     {
-      "question": "What are the main geographical characteristics of United Kingdom?",
-      "answer": "United Kingdom is located in Europe and features a geographical layout characterized by archipelago in northwestern Europe."
+      "question": "Why is the Welsh Dragon not represented on the Union Jack?",
+      "answer": "When the first Union Flag was created in 1606 under King James I, Wales had already been legally incorporated into the Kingdom of England via the Laws in Wales Acts (1535–1542), so it was represented by the Cross of St. George."
+    },
+    {
+      "question": "When was the United Kingdom officially formed?",
+      "answer": "The Kingdom of Great Britain was formed by the Acts of Union in 1707 (uniting England and Scotland). The United Kingdom of Great Britain and Ireland was established in 1801, and renamed to include Northern Ireland in 1927 following the creation of the Irish Free State."
+    },
+    {
+      "question": "What is the constitutional significance of the Magna Carta?",
+      "answer": "Sealed in 1215, Magna Carta established the foundational legal principle that everyone, including the monarch, is subject to the rule of law, and guaranteed the right to a fair trial."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1066",
+      "event": "William the Conqueror leads the Norman Conquest, winning the Battle of Hastings and establishing the Anglo-Norman monarchy."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1215",
+      "event": "King John seals the Magna Carta at Runnymede, laying the foundation for constitutional law and civil liberties."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of United Kingdom."
+      "year": "1603",
+      "event": "The Union of the Crowns unites England and Scotland under King James VI and I."
+    },
+    {
+      "year": "1689",
+      "event": "The Bill of Rights establishes Parliamentary Sovereignty following the Glorious Revolution."
+    },
+    {
+      "year": "1707",
+      "event": "The Acts of Union unite the Parliaments of England and Scotland, forming the Kingdom of Great Britain."
+    },
+    {
+      "year": "1801",
+      "event": "The Act of Union 1800 comes into effect, creating the United Kingdom of Great Britain and Ireland."
+    },
+    {
+      "year": "1921–1927",
+      "event": "The Anglo-Irish Treaty leads to Irish partition, establishing the United Kingdom of Great Britain and Northern Ireland."
+    },
+    {
+      "year": "2020",
+      "event": "The United Kingdom formally departs the European Union (Brexit), initiating a new chapter in sovereign global trade."
     }
   ]
 }

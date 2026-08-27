@@ -727,6 +727,43 @@ export default function Home() {
           )}
         </div>
 
+        {/* Home Bottom Footer Links (Accessible for users, reviewers, and crawlers) */}
+        <footer style={{
+          marginTop: 'auto',
+          padding: '8px 16px',
+          background: 'rgba(10, 10, 18, 0.85)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '12px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '8px',
+          zIndex: 10,
+          pointerEvents: 'auto',
+          fontSize: '0.8rem',
+          color: '#9ca3af',
+          margin: '12px 0 6px 0',
+          boxShadow: '0 -2px 10px rgba(0,0,0,0.3)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontWeight: 700, color: '#f3f4f6' }}>LostStreet</span>
+            <span>•</span>
+            <span>Educational Geography Exploration</span>
+          </div>
+          <nav aria-label="Quick Links" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
+            <Link href="/guides" style={{ color: '#d1d5db', textDecoration: 'none', transition: 'color 0.2s' }}>Guides</Link>
+            <Link href="/flag-guesser" style={{ color: '#d1d5db', textDecoration: 'none', transition: 'color 0.2s' }}>Flag Quiz</Link>
+            <Link href="/about" style={{ color: '#d1d5db', textDecoration: 'none', transition: 'color 0.2s' }}>About</Link>
+            <Link href="/contact" style={{ color: '#d1d5db', textDecoration: 'none', transition: 'color 0.2s' }}>Contact</Link>
+            <Link href="/privacy" style={{ color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s' }}>Privacy</Link>
+            <Link href="/terms" style={{ color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s' }}>Terms</Link>
+            <Link href="/cookies" style={{ color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s' }}>Cookies</Link>
+            <Link href="/disclaimer" style={{ color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s' }}>Disclaimer</Link>
+          </nav>
+        </footer>
 
       </section>
 

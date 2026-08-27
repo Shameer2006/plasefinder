@@ -6,52 +6,77 @@
   "population": "11.7 Million",
   "currency": "Euro (EUR)",
   "languages": [
-    "Dutch",
+    "Dutch (Flemish)",
     "French",
     "German"
   ],
-  "seoTitle": "History of Belgium: Lowland Battlefields, Brabant Lion Flag, and Linguistic Divisions",
-  "metaDescription": "Explore the history of Belgium, from the 1830 Belgian Revolution and treaty neutrality to its black, yellow, and red flag and Flemish-Walloon divisions.",
-  "mapFormation": "Belgium lies in Western Europe, occupying a low-lying basin along the North Sea that has historically served as a strategic battlefield for European empires. The country's borders were established following the Belgian Revolution of 1830. Catholic southern provinces rebelled against the Protestant-led United Kingdom of the Netherlands, creating a new state. The borders were designed to include the Dutch-speaking Flanders region in the north, French-speaking Wallonia in the south, and the strategic port of Antwerp, stabilized as a neutral buffer state, sharing historical contexts with other European states like <a href=\"/chronicles/at\" style=\"color: #00f2fe; text-decoration: underline; font-weight: 600;\">Austria</a>.",
-  "flagHistory": "The national flag of Belgium is a vertical tricolor of black, yellow, and red. The colors are taken from the coat of arms of the historic Duchy of Brabant, which depicted a golden lion with red claws and tongue on a black field. The flag was first raised during the Brabant Revolution of 1789 against Austrian Habsburg rule and was officially adopted in its vertical format on January 23, 1831, shortly after the country won independence from the Netherlands, symbolizing national heritage and resistance.",
-  "freedomStory": "Belgium's revolution was ignited in August 1830 during a performance of a patriotic opera in Brussels, which sparked riots that quickly spread across the southern provinces. A provisional government declared independence on October 4, 1830, and the Belgian National Congress drafted a progressive constitution. The independence and perpetual neutrality of the Kingdom of Belgium were guaranteed by the major European powers in the Treaty of London in 1839, with Leopold I inaugurated as the first King of the Belgians.",
-  "challenges": "Belgium's primary contemporary challenges stem from its internal linguistic and cultural divisions. The country is split into Dutch-speaking Flanders in the north and French-speaking Wallonia in the south, with Brussels serving as a bilingual region. This division has led to a highly decentralized federal structure and frequent political deadlocks; in 2010-2011, Belgium set a record by going 541 days without an elected government. Managing these linguistic tensions while maintaining economic competitiveness presents a constant challenge.",
+  "seoTitle": "History of Belgium: Heart of Europe, Black-Yellow-Red Tricolor, and 1830 Independence",
+  "metaDescription": "Discover the detailed history of Belgium. Explore the 1830 Belgian Revolution, Brabant flag colors, the 1831 Constitution, and Brussels as EU capital.",
+  "mapFormation": "Covering 30,688 square kilometers in Western Europe, the Kingdom of Belgium (<em>België / Belgique / Belgien</em>) is bounded by the North Sea, France, the Netherlands, Germany, and Luxembourg. The country is geographically divided into three regions: flat coastal Flanders in the north, the rolling plateau of Wallonia in the south, and the bilingual capital region of <strong>Brussels</strong>.<br><br>In antiquity, Julius Caesar noted the bravery of the Celtic Belgae tribes (<em>'Horum omnium fortissimi sunt Belgae'</em>). During the Middle Ages, Flemish textile cities (Bruges, Ghent, Ypres) and the Duchy of Brabant became the richest trading hubs in Europe. After successive periods under Burgundian, Spanish Habsburg, Austrian, French, and Dutch rule, Belgium achieved sovereign statehood through the <strong>Belgian Revolution of August 1830</strong>.<br><br>The <strong>Treaty of London (1839)</strong> internationally recognized Belgian independence and guaranteed its perpetual neutrality.",
+  "flagHistory": "The national flag of Belgium—the <em>Driekleur</em>—features three equal vertical bands of black, yellow, and red, officially codified in <strong>Article 193 of the Belgian Constitution</strong> in 1831.<br><br>The colors were derived directly from the historic <strong>Coat of Arms of the Duchy of Brabant</strong>: a golden-yellow lion (<em>Lion of Brabant</em>) with red tongue and claws on a black shield, carried during the Brabant Revolution of 1789 against Austrian rule. Unique in world vexillology, the flag is defined with an unusual ratio of <strong>13:15</strong>.",
+  "freedomStory": "Belgium's sovereign independence was sparked on the night of <strong>August 25, 1830</strong>, at the Théâtre Royal de la Monnaie in Brussels during a performance of Daniel Auber's romantic opera <em>La Muette de Portici</em>.<br><br>The patriotic duet <em>'Amour sacré de la patrie'</em> ignited popular uprisings against Dutch administration under King William I. A provisional government convened the National Congress, promulgating the progressive <strong>Belgian Constitution of 1831</strong>, which established a parliamentary constitutional monarchy with comprehensive guarantees of freedom of the press, assembly, and religion. On <strong>July 21, 1831</strong>, Prince Leopold of Saxe-Coburg and Gotha took the constitutional oath as the first King of the Belgians (celebrated annually as Belgian National Day).",
+  "challenges": "As the de facto capital of the European Union and headquarters of NATO, Belgium is a diplomatic and logistical crossroads. Domestically, the nation manages its complex federal governance structure across Flemish, Walloon, and Brussels-Capital regions, expanding offshore wind power in the North Sea and modernizing nuclear power extensions.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Ardennes forest and Meuse River valley in Belgium",
+      "caption": "The rolling forested hills and limestone river valleys of the Ardennes region in Wallonia, southern Belgium."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1512813195386-6cf811ad3542?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Grand Place and Town Hall in Brussels, Belgium",
+      "caption": "The Grand-Place (Grote Markt) in Brussels, a UNESCO World Heritage square surrounded by opulent 17th-century guildhalls and the Gothic Town Hall."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Belgian highway with red font license plates and lighted motorways",
+      "caption": "Belgian street view indicators: white license plates with ruby-red characters and borders, bilingual Flemish/French signage, and illuminated motorways."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates with distinct ruby-red characters and border (unique in Europe alongside a blue 'B' EU strip on the left); format 1-ABC-123.",
+    "utilityPoles": "Reinforced concrete poles with curved metal lamp arms; famous fully illuminated motorway highway network at night.",
+    "roadMarkings": "Continuous or dashed white centerlines; solid white edge lines; yellow parking curb markings.",
+    "delineators": "White posts with red reflectors on right and white on left.",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across Flanders, Wallonia, and Brussels."
+  },
   "aiSummary": {
-    "geo": "Lowland maritime borders defined in 1830 to carve a buffer state between France, Germany, and the Netherlands.",
-    "flag": "Vertical black, yellow, and red bands derived from the lion shield of the medieval Duchy of Brabant.",
-    "freedom": "Won from the Netherlands in 1830, with neutrality guaranteed by the 1839 Treaty of London.",
-    "challenge": "Deep domestic language polarization (Flemish vs Walloon) leading to complex federal government deadlocks."
+    "geo": "Crossroads of Western Europe; home to the European Union and NATO headquarters.",
+    "flag": "Black, yellow, and red vertical tricolor derived from the 1789 Duchy of Brabant lion banner.",
+    "freedom": "1830 Belgian Revolution sparked at the opera; King Leopold I took oath July 21, 1831.",
+    "challenge": "Federal language community cohesion, North Sea green energy, and EU diplomatic logistics."
   },
   "faqs": [
     {
-      "question": "What triggered the Belgian Revolution of 1830?",
-      "answer": "Patriotic riots erupted in Brussels in August 1830 after the performance of the opera 'La Muette de Portici', which romanticized rebellion."
+      "question": "Why is July 21 celebrated as Belgian National Day?",
+      "answer": "July 21 commemorates July 21, 1831, when Prince Leopold of Saxe-Coburg and Gotha took the constitutional oath as Leopold I, the first King of the Belgians."
     },
     {
-      "question": "How many official languages does Belgium have?",
-      "answer": "Belgium has three official languages: Dutch (spoken in Flanders), French (spoken in Wallonia), and German (spoken in eastern border communities)."
+      "question": "What is unique about Belgian license plates in Street View?",
+      "answer": "Belgian license plates feature distinct ruby-red lettering and a red border on a white background, combined with a blue EU strip on the left."
     }
   ],
   "timeline": [
     {
-      "year": "1789",
-      "event": "The Brabant Revolution leads to a temporary declaration of independence from Austrian Habsburg rule."
+      "year": "1830",
+      "event": "The Belgian Revolution breaks out on August 25 following an opera performance in Brussels."
     },
     {
-      "year": "1830",
-      "event": "The Belgian Revolution erupts in Brussels, leading to a declaration of independence on October 4."
+      "year": "1831",
+      "event": "King Leopold I takes the constitutional oath on July 21; promulgation of the 1831 Constitution."
     },
     {
       "year": "1839",
-      "event": "The Treaty of London recognizes Belgian independence and guarantees its perpetual neutrality."
+      "event": "The Treaty of London recognizes Belgian sovereign independence and guarantees neutrality."
     },
     {
-      "year": "1914",
-      "event": "Germany invades neutral Belgium, drawing Great Britain into World War I."
+      "year": "1957",
+      "event": "Belgium co-founds the European Economic Community as an original signatory of the Treaty of Rome."
     },
     {
-      "year": "1993",
-      "event": "Constitutional reforms formally transition Belgium into a federal state divided by language regions."
+      "year": "1967",
+      "event": "NATO officially establishes its political and military headquarters in Brussels."
     }
   ]
 }

@@ -3,46 +3,84 @@
   "name": "New Zealand",
   "capital": "Wellington",
   "continent": "Oceania",
-  "population": "5.1 Million",
+  "population": "5.2 Million",
   "currency": "New Zealand Dollar (NZD)",
   "languages": [
     "English",
-    "Māori"
+    "Māori (Te Reo Māori)",
+    "NZ Sign Language"
   ],
-  "seoTitle": "Detailed History of New Zealand: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of New Zealand. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of New Zealand is a key element of its national identity in Oceania. Characterized by its southwestern Pacific islands, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of New Zealand came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of New Zealand is a powerful symbol of the country's sovereignty and cultural heritage. The design features a blue field with Union Jack and four red stars. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for New Zealand involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the United Kingdom in 1907. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of New Zealand, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, New Zealand faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to housing affordability and carbon emissions, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of New Zealand continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of New Zealand: Land of the Long White Cloud, Treaty of Waitangi, and Southern Cross Flag",
+  "metaDescription": "Explore the detailed history of New Zealand. Discover Māori voyagers, the 1840 Treaty of Waitangi, 1893 women's suffrage, and the Southern Cross flag.",
+  "mapFormation": "Located in the southwestern Pacific Ocean across 268,021 square kilometers, New Zealand (<em>Aotearoa</em> - 'Land of the Long White Cloud') consists of two main landmasses—the <strong>North Island (Te Ika-a-Māui)</strong> and the mountainous <strong>South Island (Te Waipounamu)</strong>, divided by Cook Strait.<br><br>Polynesian navigators discovered and settled Aotearoa in the late 13th century (c. 1280–1350 CE) aboard ocean-going waka canoes, developing the vibrant indigenous <strong>Māori</strong> tribal culture and <em>iwi</em> social structure. Dutch explorer Abel Tasman sighted the islands in 1642, followed by British navigator Captain James Cook in 1769.<br><br>On <strong>February 6, 1840</strong>, over 500 Māori rangatira (chiefs) and representatives of the British Crown signed the foundational <strong>Treaty of Waitangi (Te Tiriti o Waitangi)</strong> in the Bay of Islands, establishing British governance while guaranteeing Māori rights to their lands and treasures (<em>taonga</em>). New Zealand became a self-governing Dominion in 1907 and achieved full legislative autonomy under the Statute of Westminster in 1947.",
+  "flagHistory": "The national flag of New Zealand features a royal blue field with the British <strong>Union Jack</strong> in the upper hoist canton, and four red five-pointed stars with white borders representing the <strong>Southern Cross</strong> (<em>Crux</em>) on the fly half, officially adopted under the New Zealand Ensign Act on <strong>June 12, 1902</strong>.<br><br>The design was created in 1869 by First Lieutenant Albert Hastings Markham of the Royal Navy. Unlike the Australian flag (which features five white stars with 7 points), the New Zealand flag features <strong>Four Red Stars with White Fimbriations</strong> (Alpha, Beta, Gamma, and Delta Crucis), representing the Southern Cross constellation that guided Māori voyagers and navigators across the Pacific Ocean for centuries.",
+  "freedomStory": "New Zealand has been a world-leading pioneer in universal human rights, social equity, and nuclear-free diplomacy.<br><br>On <strong>September 19, 1893</strong>, following a nationwide campaign led by suffragist <strong>Kate Sheppard</strong>, Governor Lord Glasgow signed the Electoral Act 1893, making New Zealand the <strong>first self-governing country in world history to grant women the right to vote in parliamentary elections</strong>.<br><br>In 1975, the government established the <strong>Waitangi Tribunal</strong> to investigate and settle historical breaches of the Treaty of Waitangi, restoring ancestral lands and cultural rights to Māori iwi. In 1987, New Zealand enacted the landmark New Zealand Nuclear Free Zone legislation, establishing its independent, principled foreign policy.",
+  "challenges": "As an advanced agricultural and green tourism economy generating over 80% of its electricity from renewable hydro, geothermal, and wind power, New Zealand addresses seismic resilience along the Alpine Fault (Pacific Ring of Fire), housing affordability in Auckland, and transitioning agricultural livestock emissions sustainably.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Milford Sound fjord in Fiordland, New Zealand",
+      "caption": "Milford Sound (Piopiotahi) in Fiordland National Park, South Island, New Zealand, described by Rudyard Kipling as the 'Eighth Wonder of the World'."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1512813195386-6cf811ad3542?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Waitangi Treaty Grounds in Bay of Islands, New Zealand",
+      "caption": "The Waitangi Treaty Grounds in the Bay of Islands, North Island, where the foundational Treaty of Waitangi was signed on February 6, 1840."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+      "alt": "New Zealand road with left-hand driving and white dashed centerlines",
+      "caption": "New Zealand street view clues: driving on the left, white license plates with black font (no blue strip), white guideposts with red reflectors, and rolling green sheep pastures."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Left",
+    "licensePlates": "White rectangular plates with black embossed letters and numbers (format: ABC123), with no state slogans or colored strips.",
+    "utilityPoles": "Dark creosote-treated wooden utility poles or concrete poles with white insulators; distinctive wooden bridge railings.",
+    "roadMarkings": "Continuous or dashed white centerlines; solid white edge lines; yellow dashed lines where passing is prohibited.",
+    "delineators": "White posts with red rectangular reflectors on the left and white on the right.",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across both North and South Islands."
+  },
   "aiSummary": {
-    "geo": "Located in Oceania; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring blue field with Union Jack and four red stars representing national sovereignty.",
-    "freedom": "Gained sovereignty from the United Kingdom in 1907 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to housing affordability and carbon emissions."
+    "geo": "South Pacific nation comprising North and South Islands; home to Māori culture and alpine fjords.",
+    "flag": "Blue field with Union Jack and 4 red stars with white borders representing the Southern Cross.",
+    "freedom": "1840 Treaty of Waitangi; 1893 world-first female voting rights; 1987 nuclear-free legislation.",
+    "challenge": "Seismic fault line risk management, agricultural methane reduction, and housing affordability."
   },
   "faqs": [
     {
-      "question": "When did New Zealand gain independence?",
-      "answer": "New Zealand attained its full sovereignty and recognized independence from the United Kingdom in 1907."
+      "question": "When did women get the right to vote in New Zealand?",
+      "answer": "On September 19, 1893, New Zealand became the first self-governing country in the world to grant all women the right to vote in parliamentary elections, led by Kate Sheppard."
     },
     {
-      "question": "What are the main geographical characteristics of New Zealand?",
-      "answer": "New Zealand is located in Oceania and features a geographical layout characterized by southwestern Pacific islands."
+      "question": "What is the Treaty of Waitangi?",
+      "answer": "Signed on February 6, 1840, the Treaty of Waitangi is the founding constitutional document of New Zealand, establishing an agreement between the British Crown and Māori chiefs."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1280–1350",
+      "event": "Polynesian voyagers discover and settle Aotearoa (New Zealand), developing Māori culture."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1840",
+      "event": "The Treaty of Waitangi is signed on February 6, founding modern New Zealand."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of New Zealand."
+      "year": "1893",
+      "event": "New Zealand becomes the first country in the world to grant women the right to vote."
+    },
+    {
+      "year": "1947",
+      "event": "New Zealand formally adopts the Statute of Westminster, achieving full legal autonomy."
+    },
+    {
+      "year": "1975",
+      "event": "Establishment of the Waitangi Tribunal to settle historic treaty grievances."
+    },
+    {
+      "year": "1987",
+      "event": "New Zealand Parliament passes legislation declaring the nation nuclear-free."
     }
   ]
 }

@@ -3,17 +3,42 @@
   "name": "Australia",
   "capital": "Canberra",
   "continent": "Oceania",
-  "population": "26.2 Million",
+  "population": "26.8 Million",
   "currency": "Australian Dollar (AUD)",
   "languages": [
     "English"
   ],
   "seoTitle": "History of Australia: Colonization Borders, Southern Cross Flag, and Sovereignty",
   "metaDescription": "Discover the detailed history of Australia, from Indigenous heritage and British penal colonization to federation and the Southern Cross flag.",
-  "mapFormation": "Australia is the only nation that occupies an entire continent, surrounded by the Indian and Pacific Oceans. Indigenous Australians have inhabited the continent for over 65,000 years, maintaining deep spiritual connections to the land. The modern borders of the nation began to form with the arrival of the British First Fleet in 1788, which established the colony of New South Wales as a penal settlement. Over the next century, British authorities established five additional colonies: Tasmania, Western Australia, South Australia, Victoria, and Queensland. These colonies were separated by straight longitudinal and latitudinal lines drawn across the vast, arid interior (the Outback) to divide resources and administrative control. In 1901, these six separate colonies agreed to unite and form a single federal commonwealth, establishing the continental borders of modern Australia.",
-  "flagHistory": "The national flag of Australia was chosen through a worldwide public competition in 1901 following federation. It features a dark blue field divided into three key elements. In the upper hoist canton is the British Union Jack, representing the country's historic colonial links to the United Kingdom. Below the Union Jack is a large seven-pointed white star known as the Commonwealth Star; six of the points represent the original six federating colonies, while the seventh point represents the territories. On the fly half of the flag is the Southern Cross constellation, composed of five white stars of varying points, which is visible in the night sky across the Southern Hemisphere and has served as a navigation guide for centuries.",
-  "freedomStory": "Australia's transition from a collection of British colonies to an independent nation was a peaceful, gradual process. On January 1, 1901, the six colonies federated to form the Commonwealth of Australia, adopting a federal constitution. While Australia gained control over its domestic affairs, Britain retained influence over its foreign policy and defense. Australia's independence was formalized internationally when it signed the Treaty of Versailles in 1919 and joined the League of Nations. The British Parliament passed the Statute of Westminster in 1931, which granted full legislative independence to dominions, and Australia formally adopted it in 1942. The final legal ties were severed by the Australia Act 1986, which ended all remaining avenues of appeal from Australian courts to the British Privy Council, establishing absolute judicial sovereignty.",
-  "challenges": "Australia faces critical environmental and social difficulties. The continent is one of the most arid inhabited lands on Earth, making it highly vulnerable to the impacts of climate change. This includes rising temperatures, prolonged droughts, catastrophic bushfires (such as the 'Black Summer' of 2019-2020), and extensive bleaching of the Great Barrier Reef. Socially, Australia struggles with addressing the severe socio-economic inequalities, health disparities, and historical injustices faced by its Indigenous Aboriginal and Torres Strait Islander populations. Additionally, the nation faces geopolitical challenges in balancing its historic security alliance with the United States against its heavy economic dependence on trade with China.",
+  "mapFormation": "Australia is the only sovereign nation on Earth that occupies an entire continent, spanning 7.69 million square kilometers surrounded by the Indian, Pacific, and Southern Oceans. Aboriginal and Torres Strait Islander peoples have inhabited the Australian continent for over 65,000 years, maintaining the oldest continuous living cultures on the planet.<br><br>The modern geopolitical boundaries of the nation began to form with the arrival of the British First Fleet under Captain Arthur Phillip in 1788, establishing the colony of New South Wales as a penal settlement at Sydney Cove. Over the next century, British authorities carved out five additional colonies: Tasmania (1825), Western Australia (1829), South Australia (1836), Victoria (1851), and Queensland (1859). These colonial borders were constructed along straight longitudinal and latitudinal survey lines across the vast arid interior (the Outback).<br><br>On <strong>January 1, 1901</strong>, these six separate colonies federated into the <strong>Commonwealth of Australia</strong>, establishing the continental borders recognized today, alongside the external territories of Norfolk Island, Christmas Island, the Cocos (Keeling) Islands, and the Australian Antarctic Territory.",
+  "flagHistory": "The national flag of Australia was selected through a worldwide public design competition in 1901 following Federation, which attracted over 32,800 entries.<br><br>The design features a deep royal blue field divided into three primary elements: In the upper hoist canton sits the British <strong>Union Jack</strong>, honoring historical and constitutional links to the British Crown. Directly beneath the Union Jack is the large seven-pointed <strong>Commonwealth Star</strong> (Star of Federation); six points represent the six founding Australian states, while the seventh point (added in 1908) represents the Commonwealth territories.<br><br>The fly half of the flag features the <strong>Southern Cross</strong> (<em>Crux</em>) constellation, comprising five white stars: Alpha, Beta, Gamma, and Delta Crucis (each with seven points), and the smaller Epsilon Crucis (with five points). The Southern Cross has guided Indigenous travelers and maritime navigators across the Southern Hemisphere for millennia, symbolizing the continent's distinct geographic place in the world.",
+  "freedomStory": "Australia's evolution toward sovereign independence was a peaceful, democratic process achieved through constitutional referendums and parliamentary statutes.<br><br>In the 1890s, the Australasian Federal Conventions drafted the Constitution of Australia, which was approved by voters in historic democratic plebiscites. The British Parliament passed the Commonwealth of Australia Constitution Act, taking effect on <strong>January 1, 1901</strong>, with the inaugural parliament opened in Melbourne by the future King George V.<br><br>Australia's international identity was forged through the heroism of the ANZACs (Australian and New Zealand Army Corps) at Gallipoli and the Western Front in World War I, leading to independent Australian signatures on the Treaty of Versailles in 1919. Full legislative autonomy was recognized under the <strong>Statute of Westminster 1931</strong> (ratified in 1942). Sovereign judicial independence was finalized on <strong>March 3, 1986</strong>, when the British and Australian Parliaments enacted the <strong>Australia Act 1986</strong>, terminating all remaining constitutional links and appeals to the British Privy Council.",
+  "challenges": "As a major Indo-Pacific democracy, Australia balances immense mineral export wealth with ecological stewardship across one of the most climate-vulnerable landmasses on Earth. Foremost priorities include mitigating catastrophic bushfire cycles, safeguarding the biodiversity of the Great Barrier Reef against ocean warming, and advancing constitutional recognition and economic parity for First Nations communities. Globally, Australia anchors the Quad security partnership and leads regional renewable energy export corridors via green hydrogen and undersea solar transmission.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Uluru sandstone monolith in the Australian Outback",
+      "caption": "Uluru (Ayers Rock) rising from the red desert plains of the Northern Territory, a sacred ancestral sanctuary for the Anangu people."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Sydney Opera House and Harbour Bridge in Australia",
+      "caption": "The Sydney Opera House on Bennelong Point, an architectural masterpiece of modern performing arts and symbol of Australia."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Australian Outback highway with red dirt and white guide posts",
+      "caption": "Australian road clues: driving on the left, white guideposts with red reflectors, yellow diamond kangaroo warning signs, and red dirt."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Left",
+    "licensePlates": "White or yellow plates with state slogans (e.g., 'The Education State' in Victoria, 'First State' in NSW, 'Sunshine State' in Queensland).",
+    "utilityPoles": "Wooden Stobie poles (concrete with steel channel edges in South Australia) or natural timber poles with white porcelain insulators.",
+    "roadMarkings": "Dividing white centerlines (dashed or double solid); distinctive yellow warning signs featuring kangaroos, wombats, and koalas.",
+    "delineators": "White wooden or plastic guideposts with red rectangular reflectors on the left and white on the right.",
+    "cameraGen": "Widespread Gen 2, Gen 3, and Gen 4 coverage across major urban highways and remote Outback dirt tracks."
+  },
   "aiSummary": {
     "geo": "Continental island; borders constructed by internal colonial longitudinal partitions uniting in 1901.",
     "flag": "Blue field with the British Union Jack, the 7-pointed Commonwealth Star, and the Southern Cross constellation.",
@@ -28,6 +53,14 @@
     {
       "question": "When did Australia achieve full independence from Britain?",
       "answer": "While federation occurred in 1901, full constitutional independence was only finalized with the passage of the Australia Act in 1986."
+    },
+    {
+      "question": "What is a Stobie pole in Australian Street View?",
+      "answer": "A Stobie pole is a utility pole made of two steel joists with concrete poured between them, used exclusively across South Australia due to timber shortages and termite risks."
+    },
+    {
+      "question": "What are the six states of Australia?",
+      "answer": "The six states of Australia are New South Wales, Victoria, Queensland, Western Australia, South Australia, and Tasmania."
     }
   ],
   "timeline": [

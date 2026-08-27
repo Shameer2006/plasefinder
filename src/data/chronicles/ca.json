@@ -3,46 +3,99 @@
   "name": "Canada",
   "capital": "Ottawa",
   "continent": "North America",
-  "population": "38.9 Million",
+  "population": "40.1 Million",
   "currency": "Canadian Dollar (CAD)",
   "languages": [
     "English",
     "French"
   ],
-  "seoTitle": "Detailed History of Canada: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Canada. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Canada is a key element of its national identity in North America. Characterized by its vast northern forests, lakes, and tundra, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Canada came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Canada is a powerful symbol of the country's sovereignty and cultural heritage. The design features a red vertical bands with central white square and maple leaf. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Canada involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the United Kingdom confederation in 1867. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Canada, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Canada faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to indigenous reconciliation and environmental policy, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Canada continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Canada: Confederation, Maple Leaf Flag Vexillology, and Charter of Rights",
+  "metaDescription": "Explore the detailed history of Canada. Learn about the 1867 British North America Act, the 1965 Maple Leaf flag, Arctic sovereignty, and the Charter of Rights.",
+  "mapFormation": "Spanning six time zones across 9.98 million square kilometers from the Atlantic to the Pacific and northward to the Arctic Ocean, Canada is the second-largest nation on Earth by total geographic area. First Nations, Inuit, and Métis peoples inhabited the diverse biomes of the Canadian Shield, Western Cordillera, and Arctic tundra for millennia prior to European contact.<br><br>The modern confederation evolved through successive colonial consolidations and constitutional acts. Following French exploration along the Saint Lawrence River led by Samuel de Champlain, who founded Quebec City in 1608, the <strong>Treaty of Paris (1763)</strong> transferred New France to the British Crown. The British Parliament passed the <strong>Quebec Act of 1774</strong>, preserving French civil law and religious freedom, followed by the Constitutional Act of 1791 dividing the colony into Upper (Ontario) and Lower (Quebec) Canada.<br><br>On <strong>July 1, 1867</strong>, the British North America Act established the <strong>Dominion of Canada</strong>, uniting Ontario, Quebec, Nova Scotia, and New Brunswick under the leadership of Sir John A. Macdonald. Over the next century, the nation expanded from 'Sea to Sea' (<em>A Mari Usque Ad Mare</em>): purchasing Rupert's Land from the Hudson's Bay Company in 1870, admitting British Columbia in 1871 following the promise of a transcontinental railway, Prince Edward Island in 1873, Alberta and Saskatchewan in 1905, Newfoundland in 1949, and establishing the self-governing Inuit territory of <strong>Nunavut in 1999</strong>.",
+  "flagHistory": "The national flag of Canada, universally known as the <strong>Maple Leaf</strong> (<em>l'Unifolié</em>), is an elegant masterwork of modern vexillography, officially inaugurated by Royal Proclamation on <strong>February 15, 1965</strong>, on Parliament Hill in Ottawa.<br><br>Prior to 1965, Canada flew the Canadian Red Ensign bearing the British Union Jack in the canton and the Canadian shield in the fly. Following the impassioned 'Great Flag Debate' spearheaded by Prime Minister Lester B. Pearson, a parliamentary committee selected the iconic design created by Dr. George Stanley and John Matheson, inspired by the banner of the Royal Military College of Canada.<br><br>The flag features an exact 1:2 ratio with a distinctive <strong>Canadian pale</strong>—a central white vertical section occupying precisely half the flag's width (1:2:1 ratio), flanked by two red bars. At the center sits a stylized eleven-pointed red maple leaf, a symbol associated with Canadian identity since early 19th-century French-Canadian societies. <strong>Red and White</strong> were officially proclaimed Canada's national colors by King George V in the 1921 Royal Arms of Canada, representing valor and purity.",
+  "freedomStory": "Canada's path to sovereign independence represents a gradual, constitutional evolution toward self-governance through consensus and parliamentary statute, without the trauma of revolutionary war.<br><br>Following responsible government reforms in the 1840s, the Fathers of Confederation convened at the Charlottetown and Quebec Conferences in 1864, formulating a federal constitutional framework. The British Parliament ratified the <strong>British North America Act</strong>, creating the Dominion on July 1, 1867 (celebrated annually as Canada Day).<br><br>Canada's international stature grew rapidly following its pivotal military contributions in World War I, particularly at Vimy Ridge in 1917. Full legislative autonomy was recognized under the <strong>Statute of Westminster 1931</strong>. The final constitutional tie was severed on <strong>April 17, 1982</strong>, when Queen Elizabeth II and Prime Minister Pierre Trudeau signed the <strong>Constitution Act 1982</strong> on Parliament Hill, 'patriating' the constitution and enshrining the <strong>Canadian Charter of Rights and Freedoms</strong>, guaranteeing fundamental freedoms, democratic rights, official bilingualism, and multicultural protections.",
+  "challenges": "In the 21st century, Canada balances its immense natural resource endowment with climate leadership and social cohesion. Central priorities include advancing the recommendations of the Truth and Reconciliation Commission to honor Indigenous self-determination and resolve historic treaty injustices. Domestically, the nation manages rapid immigration-driven population growth, requiring substantial investments in affordable housing and healthcare infrastructure. Environmentally, accelerating Arctic ice loss requires enhanced northern defense, community infrastructure, and maritime navigation monitoring across the Northwest Passage.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Banff National Park and Rocky Mountains, Canada",
+      "caption": "Lake Louise and the Canadian Rocky Mountains in Banff National Park, Alberta, showcasing Canada's glacial mountain wilderness."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1519832979-6fa011b87665?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Parliament Hill in Ottawa, Canada",
+      "caption": "The Peace Tower and Centre Block on Parliament Hill in Ottawa, Ontario, the seat of Canadian federal parliamentary democracy."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Canadian highway infrastructure with yellow centerlines and pine forest",
+      "caption": "Canadian highway characteristics: Trans-Canada Highway green shields, yellow centerlines, checkerboard hazard signs, and boreal forests."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "Long rectangular plates (12x6 inches); distinct provincial themes (e.g., blue-on-white 'Yours to Discover' in Ontario, 'Je me souviens' in Quebec, red 'Wild Rose Country' in Alberta).",
+    "utilityPoles": "Heavy wooden telephone poles, often with green or blue identification plates; concrete poles in urban Montreal and Toronto.",
+    "roadMarkings": "Yellow centerlines separating traffic directions (single dashed or double solid); white shoulder edge lines; bilingual English/French signage in Quebec, New Brunswick, and federal parks.",
+    "delineators": "White posts with green, yellow, or red reflectors; distinctive black-and-yellow checkerboard signs at sharp curves and T-intersections.",
+    "cameraGen": "Comprehensive Gen 3 and Gen 4 coverage across all 10 provinces and the Yukon, Northwest Territories, and Nunavut highways."
+  },
   "aiSummary": {
-    "geo": "Located in North America; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring red vertical bands with central white square and maple leaf representing national sovereignty.",
-    "freedom": "Gained sovereignty from the United Kingdom confederation in 1867 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to indigenous reconciliation and environmental policy."
+    "geo": "Second-largest nation on Earth; expanded from the 1867 Confederation of four provinces to ten provinces and three northern territories.",
+    "flag": "The Maple Leaf (l'Unifolié): stylized 11-pointed red leaf on a white Canadian pale, inaugurated in 1965.",
+    "freedom": "Evolution from the 1867 British North America Act to legislative autonomy in 1931 and the 1982 Charter of Rights and Freedoms.",
+    "challenge": "Advancing Indigenous reconciliation, managing urban housing capacity, and asserting Arctic sovereignty."
   },
   "faqs": [
     {
-      "question": "When did Canada gain independence?",
-      "answer": "Canada attained its full sovereignty and recognized independence from the United Kingdom confederation in 1867."
+      "question": "When did Canada become an independent nation?",
+      "answer": "Canada formed a self-governing Dominion on July 1, 1867, achieved legislative independence through the Statute of Westminster in 1931, and fully patriated its Constitution with the Charter of Rights and Freedoms on April 17, 1982."
     },
     {
-      "question": "What are the main geographical characteristics of Canada?",
-      "answer": "Canada is located in North America and features a geographical layout characterized by vast northern forests, lakes, and tundra."
+      "question": "What is the Canadian pale on the national flag?",
+      "answer": "The Canadian pale is the central white square on the flag that occupies precisely one-half of the flag's total length (a 1:2:1 proportion), providing a wide canvas for the 11-pointed maple leaf."
+    },
+    {
+      "question": "What is Canada's national motto and where does it come from?",
+      "answer": "The national motto is 'A Mari Usque Ad Mare' ('From Sea to Sea'), derived from Psalm 72:8, officially placed on the coat of arms in 1921 to celebrate Canada's continental expanse."
+    },
+    {
+      "question": "What was the Great Flag Debate of 1964?",
+      "answer": "The Great Flag Debate was a fierce national and parliamentary debate led by Prime Minister Lester B. Pearson to replace the British Red Ensign with a distinctive national banner, culminating in the adoption of the Maple Leaf flag in 1965."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1608",
+      "event": "Samuel de Champlain establishes Quebec City, founding New France along the Saint Lawrence River."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1763",
+      "event": "The Treaty of Paris transfers New France from the French Crown to Great Britain."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Canada."
+      "year": "1774",
+      "event": "The Quebec Act guarantees French civil law, freedom of the Catholic faith, and territorial borders."
+    },
+    {
+      "year": "1867",
+      "event": "The British North America Act unites Ontario, Quebec, Nova Scotia, and New Brunswick as the Dominion of Canada on July 1."
+    },
+    {
+      "year": "1931",
+      "event": "The Statute of Westminster formally establishes Canadian legislative autonomy from the British Parliament."
+    },
+    {
+      "year": "1965",
+      "event": "The new National Flag of Canada (the Maple Leaf) is officially hoisted on Parliament Hill on February 15."
+    },
+    {
+      "year": "1982",
+      "event": "Queen Elizabeth II signs the Constitution Act 1982, patriating the Constitution and enacting the Charter of Rights and Freedoms."
+    },
+    {
+      "year": "1999",
+      "event": "The territory of Nunavut is created, establishing self-governing homeland administration for the Inuit people."
     }
   ]
 }

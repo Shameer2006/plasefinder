@@ -3,45 +3,98 @@
   "name": "Spain",
   "capital": "Madrid",
   "continent": "Europe",
-  "population": "47.5 Million",
+  "population": "48.6 Million",
   "currency": "Euro (EUR)",
   "languages": [
     "Spanish"
   ],
-  "seoTitle": "Detailed History of Spain: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Spain. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Spain is a key element of its national identity in Europe. Characterized by its Iberian plateaus and mountain ranges, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Spain came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Spain is a powerful symbol of the country's sovereignty and cultural heritage. The design features a horizontal bands of red, gold, and red with national coat of arms. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Spain involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from unification of Castile and Aragon in 1492. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Spain, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Spain faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to high youth unemployment and regional separatism, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Spain continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Spain: Reconquista, La Rojigualda Flag Vexillology, and 1978 Democratic Constitution",
+  "metaDescription": "Explore the detailed history of Spain. Discover the dynastic union of Castile and Aragon in 1492, the 1785 Rojigualda flag, and the 1978 democratic transition.",
+  "mapFormation": "Occupying roughly 85% of the Iberian Peninsula in southwestern Europe across 505,990 square kilometers, the Kingdom of Spain is bounded by the Atlantic Ocean, the Bay of Biscay, the Mediterranean Sea, and the Pyrenees mountain barrier dividing it from France and Andorra. The sovereign realm includes the <strong>Balearic Islands</strong> in the Mediterranean, the volcanic <strong>Canary Islands</strong> off northwestern Africa, and the autonomous North African enclaves of <strong>Ceuta and Melilla</strong>.<br><br>The modern territorial state emerged from centuries of geopolitical conflict and dynastic convergence. Following Roman administration as Hispania and the subsequent Visigothic Kingdom of Toledo, the peninsula came under Islamic rule as Al-Andalus after 711 CE. Over seven centuries, Christian kingdoms in the north expanded southward in the <strong>Reconquista</strong>.<br><br>In 1469, the dynastic marriage of the Catholic Monarchs—<strong>Isabella I of Castile and Ferdinand II of Aragon</strong>—united the two most powerful realms. In <strong>1492</strong>, the conquest of Granada completed the territorial reunification of the peninsula, followed by the incorporation of the Kingdom of Navarre in 1512. The external boundary with France was codified in the <strong>Treaty of the Pyrenees (1659)</strong>, establishing the oldest continuous international frontier in Europe.",
+  "flagHistory": "The national banner of Spain, popularly known as <strong>La Rojigualda</strong> (The Red and Golden-Yellow), is a striking vexillological emblem commissioned by Royal Decree on <strong>May 28, 1785</strong>, by King Charles III.<br><br>Prior to 1785, Spanish naval vessels flew the royal white standard bearing the red Burgundy cross, which was frequently mistaken at sea for the white naval ensigns of other Bourbon dynasties in France and Naples. King Charles III held a design contest, selecting the vibrant red-and-yellow horizontal triband for its unmatched visual contrast and legibility at long nautical distances.<br><br>The flag features a distinctive <strong>Spanish fess</strong> proportion where the central yellow band is twice the height of each outer red band (1:2:1 ratio). Positioned toward the hoist is the official <strong>Coat of Arms of Spain</strong>, which encapsulates the five historic kingdoms that formed the nation: the castle of <strong>Castile</strong>, the lion of <strong>León</strong>, the red-and-yellow pallets of <strong>Aragon</strong>, the chains of <strong>Navarre</strong>, and the pomegranate of <strong>Granada</strong> at the base point, crowned by the Royal Crown of Spain and supported by the <strong>Pillars of Hercules</strong> bearing the Latin motto <em>'Plus Ultra'</em> ('Further Beyond').",
+  "freedomStory": "Spain's modern constitutional liberty developed through a turbulent two-century struggle between absolutist autocracy and liberal democracy, culminating in one of the most successful peaceful transitions in world history.<br><br>The foundational seeds of Spanish liberalism were planted during the Peninsular War against Napoleonic occupation, when patriots convened in Andalusia to promulgate the progressive <strong>Constitution of Cádiz (La Pepa) in 1812</strong>, which established popular sovereignty and separation of powers.<br><br>Following decades of instability, the Second Spanish Republic, and the devastating Spanish Civil War (1936–1939), Spain endured nearly four decades of authoritarian dictatorship under Francisco Franco. Following Franco's death in November 1975, King Juan Carlos I and Prime Minister Adolfo Suárez spearheaded the peaceful <strong>Spanish Transition to Democracy (La Transición)</strong>.<br><br>On <strong>December 6, 1978</strong>, the Spanish people overwhelmingly ratified the <strong>Spanish Constitution of 1978</strong> in a nationwide referendum. The Constitution established Spain as a democratic parliamentary monarchy based on liberty, justice, equality, and political pluralism, creating the <em>'Estado de las Autonomías'</em>—a decentralized regional model recognizing the historic nationalities of Catalonia, the Basque Country, Galicia, and Andalusia.",
+  "challenges": "In the contemporary era, Spain is Europe's fourth-largest economy, a global powerhouse in renewable wind and solar energy, and the world's second most-visited tourist destination. Domestically, Spain manages the delicate constitutional balance of regional decentralization, addressing autonomous regional tensions while promoting national cohesion. Environmentally, the nation leads continental efforts to combat desertification and drought across the arid southern Meseta and manage agricultural water quotas across the Tagus and Ebro river basins. Economically, Spain focuses on reducing structural youth unemployment and accelerating green industrialization.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1543783207-ec64e4d95325?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Plaza de España in Seville, Spain",
+      "caption": "Plaza de España in Seville, Andalusia, celebrating Spanish regional architecture and the historical convergence of Iberian kingdoms."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1562883676-8c7feb83f09b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Alhambra Palace in Granada, Spain",
+      "caption": "The Alhambra of Granada, a monumental Moorish palace and fortress reflecting centuries of Islamic cultural heritage in Spain."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509840841025-9088ba78a826?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Spanish highway infrastructure and yellow diamond warning signs",
+      "caption": "Spanish street view characteristics: yellow warning road signs, autovía blue shields, and wide arid landscapes with olive groves."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White standard Euro plates with blue EU strip on left ('E'); plates feature four numbers followed by three consonants.",
+    "utilityPoles": "Wooden poles with metal diagonal struts or concrete lattice poles; often with yellow bird-deterrent spiral wraps.",
+    "roadMarkings": "Continuous or dashed white centerlines; yellow road markings for bus lanes and temporary construction zones.",
+    "delineators": "White cylindrical posts with black top hats and yellow rectangular reflectors on the right (white on left).",
+    "cameraGen": "Comprehensive Gen 3 and Gen 4 coverage across the Iberian mainland and the Canary/Balearic Islands."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring horizontal bands of red, gold, and red with national coat of arms representing national sovereignty.",
-    "freedom": "Gained sovereignty from unification of Castile and Aragon in 1492 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to high youth unemployment and regional separatism."
+    "geo": "Iberian Peninsula nation; borders unified under the Catholic Monarchs in 1492 and codified by the 1659 Treaty of the Pyrenees.",
+    "flag": "La Rojigualda: red-yellow-red horizontal triband with the national coat of arms and Pillars of Hercules.",
+    "freedom": "Evolved from the 1812 Constitution of Cádiz to the peaceful 1978 democratic transition and constitutional monarchy.",
+    "challenge": "Regional territorial decentralization, climate desertification in southern basins, and youth employment."
   },
   "faqs": [
     {
-      "question": "When did Spain gain independence?",
-      "answer": "Spain attained its full sovereignty and recognized independence from unification of Castile and Aragon in 1492."
+      "question": "When was Spain unified as a single sovereign nation?",
+      "answer": "Spain was dynastically unified through the 1469 marriage of Isabella I of Castile and Ferdinand II of Aragon, completing the Reconquista with the incorporation of Granada in 1492 and Navarre in 1512."
     },
     {
-      "question": "What are the main geographical characteristics of Spain?",
-      "answer": "Spain is located in Europe and features a geographical layout characterized by Iberian plateaus and mountain ranges."
+      "question": "What is the origin of the Spanish flag's name 'La Rojigualda'?",
+      "answer": "The name comes from 'rojo' (red) and 'gualda' (a bright yellow hue derived from the weld plant), created in 1785 by King Charles III for naval visibility."
+    },
+    {
+      "question": "What does the Latin motto 'Plus Ultra' on the Spanish coat of arms mean?",
+      "answer": "'Plus Ultra' means 'Further Beyond', reversing the ancient Roman motto 'Non Plus Ultra' ('Nothing Further Beyond') following the Spanish exploration and discovery of the Americas in 1492."
+    },
+    {
+      "question": "What was the Spanish Transition to Democracy (La Transición)?",
+      "answer": "La Transición was the historic, peaceful transformation of Spain from the Francoist dictatorship into a modern democratic constitutional monarchy between 1975 and the ratification of the 1978 Constitution."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1469",
+      "event": "The dynastic marriage of Isabella of Castile and Ferdinand of Aragon initiates the unification of Spain."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1492",
+      "event": "The conquest of Granada completes the Reconquista; Christopher Columbus reaches the Americas."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Spain."
+      "year": "1512",
+      "event": "The Kingdom of Navarre is incorporated into unified Spain under King Ferdinand."
+    },
+    {
+      "year": "1659",
+      "event": "The Treaty of the Pyrenees with France codifies Spain's northern continental border."
+    },
+    {
+      "year": "1785",
+      "event": "King Charles III officially adopts the red-and-yellow Rojigualda flag by Royal Decree."
+    },
+    {
+      "year": "1812",
+      "event": "The liberal Constitution of Cádiz (La Pepa) is promulgated during the Peninsular War."
+    },
+    {
+      "year": "1978",
+      "event": "A national referendum overwhelmingly ratifies the democratic Spanish Constitution on December 6."
+    },
+    {
+      "year": "1986",
+      "event": "Spain officially accedes to the European Economic Community (European Union)."
     }
   ]
 }

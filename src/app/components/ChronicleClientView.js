@@ -9,7 +9,7 @@ export default function ChronicleClientView({ countryData, countriesList }) {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 640);
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -20,7 +20,6 @@ export default function ChronicleClientView({ countryData, countriesList }) {
         const parsed = JSON.parse(saved);
         setExploredCountries(parsed);
         
-        // Auto mark as explored when the user visits the page
         const lowerCode = countryData.code.toLowerCase();
         if (!parsed.includes(lowerCode)) {
           const updated = [...parsed, lowerCode];
@@ -31,7 +30,6 @@ export default function ChronicleClientView({ countryData, countriesList }) {
         console.error("Failed to parse explored countries", e);
       }
     } else {
-      // Auto mark first explored country
       const lowerCode = countryData.code.toLowerCase();
       setExploredCountries([lowerCode]);
       localStorage.setItem('explored_countries', JSON.stringify([lowerCode]));
@@ -62,531 +60,714 @@ export default function ChronicleClientView({ countryData, countriesList }) {
   const prevCountry = countriesList[prevIndex];
   const nextCountry = countriesList[nextIndex];
 
+  const headingStyle = {
+    fontSize: 'clamp(1.25rem, 4vw, 1.75rem)',
+    fontWeight: 800,
+    color: '#111827',
+    marginTop: 'clamp(2rem, 5vw, 3.25rem)',
+    marginBottom: 'clamp(0.65rem, 2vw, 1rem)',
+    fontFamily: '"Merriweather", "Georgia", serif',
+    lineHeight: 1.35,
+    wordBreak: 'break-word',
+  };
+
   return (
-    <article style={{
-      maxWidth: '900px',
-      width: '100%',
-      margin: '0 auto',
-      padding: isMobile ? '1rem' : '2.5rem 2rem',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '2rem'
+    <div style={{
+      minHeight: '100vh',
+      background: '#fafafa',
+      color: '#111827',
+      fontFamily: '"Merriweather", "Georgia", serif',
+      lineHeight: 1.8
     }}>
-      
-
-
-      {/* SWIPE NAVIGATION TOP */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        background: 'rgba(255, 255, 255, 0.03)',
-        padding: '10px 16px',
-        borderRadius: '12px',
-        border: '1px solid rgba(255, 255, 255, 0.06)'
+      {/* ── BREADCRUMB & NAVIGATION SUB-NAV BAR (RESPONSIVE) ─────────── */}
+      <nav aria-label="Chronicle Navigation" style={{
+        background: '#ffffff',
+        borderBottom: '1px solid #e5e7eb',
+        padding: isMobile ? '0.65rem 1rem' : '0.75rem clamp(1rem, 3vw, 2.5rem)',
+        fontFamily: '"Inter", system-ui, -apple-system, sans-serif'
       }}>
-        <Link 
-          href={`/chronicles/${prevCountry.code.toLowerCase()}`}
-          style={{
-            color: '#9ca3af',
-            textDecoration: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            fontWeight: '600',
-            fontSize: '0.9rem'
-          }}
-          className="btn-hover-swipe"
-        >
-          ← {prevCountry.name}
-        </Link>
-
-        <button
-          onClick={toggleExplored}
-          style={{
-            background: isExplored ? 'rgba(16, 185, 129, 0.15)' : 'rgba(255,255,255,0.05)',
-            border: `1px solid ${isExplored ? 'rgba(16, 185, 129, 0.4)' : 'rgba(255,255,255,0.1)'}`,
-            color: isExplored ? '#10b981' : '#d1d5db',
-            padding: '8px 16px',
-            borderRadius: '20px',
-            fontSize: '0.85rem',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            transition: 'all 0.2s'
-          }}
-        >
-          <div style={{
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            background: isExplored ? '#10b981' : '#9ca3af'
-          }}></div>
-          {isExplored ? 'Explored & Read' : 'Mark as Explored'}
-        </button>
-
-        <Link 
-          href={`/chronicles/${nextCountry.code.toLowerCase()}`}
-          style={{
-            color: '#9ca3af',
-            textDecoration: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            fontWeight: '600',
-            fontSize: '0.9rem'
-          }}
-          className="btn-hover-swipe"
-        >
-          {nextCountry.name} →
-        </Link>
-      </div>
-
-      {/* HERO SECTION (Flag & Quick Stats) */}
-      <div style={{
-        display: 'flex',
-        flexDirection: isMobile ? 'column' : 'row',
-        gap: '2.5rem',
-        alignItems: 'center',
-        background: 'rgba(255, 255, 255, 0.02)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
-        borderRadius: '24px',
-        padding: isMobile ? '1.5rem' : '2.5rem',
-        position: 'relative',
-        overflow: 'hidden'
-      }} className="glass-panel">
-        
-        {/* Giant Flag */}
         <div style={{
-          maxWidth: isMobile ? '100%' : '340px',
-          width: '100%',
-          aspectRatio: '3/2',
-          borderRadius: '16px',
-          overflow: 'hidden',
-          boxShadow: '0 12px 45px rgba(0,0,0,0.6)',
-          border: '4px solid rgba(255,255,255,0.06)',
-          background: '#111827'
+          maxWidth: '780px',
+          margin: '0 auto',
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          alignItems: isMobile ? 'stretch' : 'center',
+          justifyContent: 'space-between',
+          gap: isMobile ? '0.65rem' : '1rem'
         }}>
-          <img 
-            src={`https://flagcdn.com/w640/${countryData.code.toLowerCase()}.png`} 
-            alt={`${countryData.name} Flag`} 
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        </div>
+          {/* Top Line: Breadcrumb + Explored Status */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '8px'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
+              <Link href="/chronicles" style={{
+                color: '#4b5563',
+                textDecoration: 'none',
+                fontWeight: '600',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontSize: '0.84rem',
+                whiteSpace: 'nowrap',
+                flexShrink: 0
+              }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span>Chronicles</span>
+              </Link>
+              <span style={{ color: '#d1d5db' }}>/</span>
+              <span style={{
+                color: '#111827',
+                fontWeight: '700',
+                fontSize: '0.84rem',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
+              }}>
+                {countryData.name}
+              </span>
+            </div>
 
-        {/* Stats Dashboard */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1.2rem', width: '100%' }}>
-          <div>
-            <span style={{
-              background: 'rgba(0, 242, 254, 0.12)',
-              color: '#00f2fe',
-              padding: '5px 14px',
-              borderRadius: '12px',
-              fontSize: '0.8rem',
-              fontWeight: '800',
-              textTransform: 'uppercase',
-              letterSpacing: '1.2px',
-              display: 'inline-block'
-            }}>
-              {countryData.continent}
-            </span>
-            <h1 style={{
-              fontSize: isMobile ? '2.2rem' : '3.2rem',
-              fontWeight: '900',
-              marginTop: '10px',
-              marginBottom: '0',
-              lineHeight: 1.1,
-              background: 'linear-gradient(135deg, #ffffff, #e5e7eb)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              textShadow: '0 4px 12px rgba(0,0,0,0.5)'
-            }}>
-              {countryData.name}
-            </h1>
+            {/* Explored Pill */}
+            <button
+              onClick={toggleExplored}
+              aria-label={isExplored ? "Marked as explored" : "Mark country as explored"}
+              style={{
+                background: isExplored ? '#ecfdf5' : '#f3f4f6',
+                border: `1px solid ${isExplored ? '#10b981' : '#d1d5db'}`,
+                color: isExplored ? '#065f46' : '#4b5563',
+                padding: '4px 10px',
+                borderRadius: '16px',
+                fontSize: '0.75rem',
+                fontWeight: '700',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                flexShrink: 0,
+                transition: 'all 0.2s'
+              }}
+            >
+              <span style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                background: isExplored ? '#10b981' : '#9ca3af'
+              }}></span>
+              {isExplored ? 'Explored' : 'Mark as Explored'}
+            </button>
           </div>
 
+          {/* Bottom Line on Mobile / Right Side on Desktop: Prev & Next Buttons */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
-            gap: '14px',
-            background: 'rgba(0, 0, 0, 0.25)',
-            padding: '16px',
-            borderRadius: '16px',
-            border: '1px solid rgba(255,255,255,0.05)'
+            gap: '8px',
+            width: isMobile ? '100%' : 'auto'
           }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-              <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 'bold', textTransform: 'uppercase' }}>Capital</span>
-              <strong style={{ fontSize: '1.1rem', color: '#e5e7eb' }}>{countryData.capital}</strong>
+            <Link 
+              href={`/chronicles/${prevCountry.code.toLowerCase()}`}
+              style={{
+                color: '#4b5563',
+                textDecoration: 'none',
+                fontSize: '0.8rem',
+                fontWeight: '600',
+                padding: '6px 10px',
+                borderRadius: '6px',
+                border: '1px solid #e5e7eb',
+                background: '#ffffff',
+                textAlign: 'center',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: 'block'
+              }}
+              title={`Previous: ${prevCountry.name}`}
+            >
+              ← {prevCountry.name}
+            </Link>
+
+            <Link 
+              href={`/chronicles/${nextCountry.code.toLowerCase()}`}
+              style={{
+                color: '#4b5563',
+                textDecoration: 'none',
+                fontSize: '0.8rem',
+                fontWeight: '600',
+                padding: '6px 10px',
+                borderRadius: '6px',
+                border: '1px solid #e5e7eb',
+                background: '#ffffff',
+                textAlign: 'center',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: 'block'
+              }}
+              title={`Next: ${nextCountry.name}`}
+            >
+              {nextCountry.name} →
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* ── MAIN ARTICLE CONTAINER ───────────────────────────────────── */}
+      <main style={{
+        padding: isMobile ? '1.5rem 1rem 3rem 1rem' : 'clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 3vw, 1.5rem)',
+        maxWidth: '780px',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box'
+      }}>
+        
+        {/* ARTICLE HEADER */}
+        <header style={{ marginBottom: '1.75rem', fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.65rem', flexWrap: 'wrap' }}>
+            <span style={{
+              background: '#f0fdf4',
+              color: '#166534',
+              border: '1px solid #bbf7d0',
+              padding: '3px 8px',
+              borderRadius: '10px',
+              fontSize: '0.72rem',
+              fontWeight: '800',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em'
+            }}>
+              {countryData.continent}
+            </span>
+            <span style={{ color: '#d1d5db', fontSize: '0.8rem' }}>•</span>
+            <span style={{ color: '#6b7280', fontSize: '0.8rem', fontWeight: '600' }}>
+              World Geography Encyclopedia
+            </span>
+          </div>
+
+          <h1 style={{
+            fontSize: 'clamp(1.5rem, 5vw, 2.65rem)',
+            fontWeight: 900,
+            lineHeight: 1.25,
+            margin: '0.4rem 0 0.85rem 0',
+            color: '#111827',
+            fontFamily: '"Merriweather", "Georgia", serif',
+            wordBreak: 'break-word',
+          }}>
+            {countryData.seoTitle ? countryData.seoTitle.replace(/ \| LostStreet$/, '') : `History & Geography of ${countryData.name}`}
+          </h1>
+
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px 12px',
+            color: '#6b7280',
+            fontSize: '0.82rem',
+            paddingBottom: '1rem',
+            borderBottom: '1px solid #e5e7eb',
+            flexWrap: 'wrap'
+          }}>
+            <span>By <strong>LostStreet Editorial Team</strong></span>
+            <span>•</span>
+            <span>August 2026</span>
+            <span>•</span>
+            <span>12 min read</span>
+            <span>•</span>
+            <span style={{ color: '#059669', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Fact-Checked
+            </span>
+          </div>
+        </header>
+
+        {/* HERO COUNTRY PROFILE CARD (RESPONSIVE) */}
+        <section style={{
+          background: '#ffffff',
+          border: '1px solid #e5e7eb',
+          borderRadius: '14px',
+          padding: isMobile ? '1.1rem' : '1.5rem',
+          marginBottom: '2rem',
+          boxShadow: '0 2px 12px rgba(0,0,0,0.03)',
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : '220px 1fr',
+          gap: isMobile ? '1rem' : '1.5rem',
+          alignItems: 'center',
+          fontFamily: '"Inter", system-ui, sans-serif'
+        }}>
+          {/* Flag Preview */}
+          <div style={{
+            aspectRatio: '3/2',
+            maxWidth: isMobile ? '100%' : '220px',
+            borderRadius: '8px',
+            overflow: 'hidden',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            border: '1px solid #e5e7eb',
+            background: '#f3f4f6',
+            margin: '0 auto',
+            width: '100%'
+          }}>
+            <img 
+              src={`https://flagcdn.com/w640/${countryData.code.toLowerCase()}.png`} 
+              alt={`Flag of ${countryData.name}`} 
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </div>
+
+          {/* Quick Facts Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: isMobile ? '0.75rem' : '1rem'
+          }}>
+            <div>
+              <span style={{ fontSize: '0.68rem', color: '#6b7280', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'block' }}>Capital City</span>
+              <strong style={{ fontSize: '0.98rem', color: '#111827', fontWeight: 800 }}>{countryData.capital}</strong>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-              <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 'bold', textTransform: 'uppercase' }}>Population</span>
-              <strong style={{ fontSize: '1.1rem', color: '#e5e7eb' }}>{countryData.population}</strong>
+            <div>
+              <span style={{ fontSize: '0.68rem', color: '#6b7280', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'block' }}>Population</span>
+              <strong style={{ fontSize: '0.98rem', color: '#111827', fontWeight: 800 }}>{countryData.population}</strong>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-              <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 'bold', textTransform: 'uppercase' }}>Currency</span>
-              <strong style={{ fontSize: '1.1rem', color: '#e5e7eb' }}>{countryData.currency}</strong>
+            <div>
+              <span style={{ fontSize: '0.68rem', color: '#6b7280', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'block' }}>Currency</span>
+              <strong style={{ fontSize: '0.92rem', color: '#111827', fontWeight: 700 }}>{countryData.currency}</strong>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-              <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 'bold', textTransform: 'uppercase' }}>Languages</span>
-              <strong style={{ fontSize: '1rem', color: '#e5e7eb', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} title={countryData.languages.join(', ')}>
+            <div>
+              <span style={{ fontSize: '0.68rem', color: '#6b7280', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'block' }}>Languages</span>
+              <strong style={{ fontSize: '0.92rem', color: '#111827', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'block' }} title={countryData.languages.join(', ')}>
                 {countryData.languages.join(', ')}
               </strong>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* AI SUMMARY CARD (TL;DR) */}
-      {countryData.aiSummary && (
-        <section 
-          aria-label="AI Summary" 
-          style={{
-            position: 'absolute',
-            width: '1px',
-            height: '1px',
-            padding: 0,
-            margin: '-1px',
-            overflow: 'hidden',
-            clip: 'rect(0, 0, 0, 0)',
-            whiteSpace: 'nowrap',
-            border: 0,
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '1.2rem' }}>🤖</span>
-            <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#60a5fa', fontWeight: 'bold' }}>
-              Quick Summary (Generative AI & Reader Guide)
-            </h3>
-          </div>
-          <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#9ca3af', display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.92rem', lineHeight: '1.5' }}>
-            <li><strong>Geography:</strong> {countryData.aiSummary.geo}</li>
-            <li><strong>Flag Design:</strong> {countryData.aiSummary.flag}</li>
-            <li><strong>Independence:</strong> {countryData.aiSummary.freedom}</li>
-            <li><strong>Challenges:</strong> {countryData.aiSummary.challenge}</li>
-          </ul>
         </section>
-      )}
 
-      {/* DETAILED ARTICLE CONTENT */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-        
-        {/* Section 1: Geography & Borders */}
-        <article className="chronicle-article-section" style={{
-          background: 'rgba(255, 255, 255, 0.01)',
-          border: '1px solid rgba(255, 255, 255, 0.04)',
-          borderRadius: '20px',
-          padding: isMobile ? '1.5rem' : '2.2rem'
-        }}>
-          <h2 style={{
-            fontSize: '1.5rem',
-            fontWeight: '800',
-            color: '#00f2fe',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            marginBottom: '1.2rem',
-            borderBottom: '1px solid rgba(255,255,255,0.08)',
-            paddingBottom: '0.6rem'
+        {/* AI SUMMARY CALLOUT (TL;DR) */}
+        {countryData.aiSummary && (
+          <aside style={{
+            background: '#f8fafc',
+            borderLeft: '4px solid #3b82f6',
+            padding: isMobile ? '1rem' : '1.25rem 1.5rem',
+            borderRadius: '0 10px 10px 0',
+            marginBottom: '2rem',
+            fontFamily: '"Inter", system-ui, sans-serif'
           }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
-            1. Geographical & Map Formation
-          </h2>
-          <p 
-            style={{ fontSize: '1.1rem', lineHeight: '1.75', color: '#d1d5db', margin: 0 }}
-            dangerouslySetInnerHTML={{ __html: countryData.mapFormation }}
-          />
-        </article>
-
-
-
-        {/* Section 2: Flag */}
-        <article className="chronicle-article-section" style={{
-          background: 'rgba(255, 255, 255, 0.01)',
-          border: '1px solid rgba(255, 255, 255, 0.04)',
-          borderRadius: '20px',
-          padding: isMobile ? '1.5rem' : '2.2rem'
-        }}>
-          <h2 style={{
-            fontSize: '1.5rem',
-            fontWeight: '800',
-            color: '#38bdf8',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            marginBottom: '1.2rem',
-            borderBottom: '1px solid rgba(255,255,255,0.08)',
-            paddingBottom: '0.6rem'
-          }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
-            2. Heraldry & Flag Symbolism
-          </h2>
-          <p 
-            style={{ fontSize: '1.1rem', lineHeight: '1.75', color: '#d1d5db', margin: 0 }}
-            dangerouslySetInnerHTML={{ __html: countryData.flagHistory }}
-          />
-        </article>
-
-        {/* Section 3: Independence */}
-        <article className="chronicle-article-section" style={{
-          background: 'rgba(255, 255, 255, 0.01)',
-          border: '1px solid rgba(255, 255, 255, 0.04)',
-          borderRadius: '20px',
-          padding: isMobile ? '1.5rem' : '2.2rem'
-        }}>
-          <h2 style={{
-            fontSize: '1.5rem',
-            fontWeight: '800',
-            color: '#34d399',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            marginBottom: '1.2rem',
-            borderBottom: '1px solid rgba(255,255,255,0.08)',
-            paddingBottom: '0.6rem'
-          }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            3. Path to Freedom & Sovereignty
-          </h2>
-          <p 
-            style={{ fontSize: '1.1rem', lineHeight: '1.75', color: '#d1d5db', margin: 0 }}
-            dangerouslySetInnerHTML={{ __html: countryData.freedomStory }}
-          />
-        </article>
-
-        {/* TIMELINE */}
-        <div style={{
-          background: 'rgba(0, 0, 0, 0.2)',
-          border: '1px solid rgba(255, 255, 255, 0.06)',
-          borderRadius: '24px',
-          padding: isMobile ? '1.5rem' : '2.5rem'
-        }}>
-          <h2 style={{
-            fontSize: '1.5rem',
-            fontWeight: '800',
-            color: '#fbbf24',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            marginBottom: '1.5rem',
-            borderBottom: '1px solid rgba(255,255,255,0.08)',
-            paddingBottom: '0.6rem'
-          }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Key Historical Milestones
-          </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', position: 'relative', paddingLeft: '20px', borderLeft: '2px solid rgba(251, 191, 36, 0.3)' }}>
-            {countryData.timeline.map((item, idx) => (
-              <div key={idx} style={{ position: 'relative' }}>
-                {/* Timeline dot */}
-                <div style={{
-                  position: 'absolute',
-                  left: '-31px',
-                  top: '4px',
-                  width: '20px',
-                  height: '20px',
-                  borderRadius: '50%',
-                  background: '#fbbf24',
-                  border: '4px solid #050816',
-                  boxShadow: '0 0 10px rgba(251, 191, 36, 0.5)'
-                }}></div>
-                <span style={{
-                  color: '#fbbf24',
-                  fontWeight: '800',
-                  fontSize: '1.1rem',
-                  display: 'block'
-                }}>
-                  {item.year}
-                </span>
-                <p style={{
-                  margin: '4px 0 0',
-                  color: '#d1d5db',
-                  lineHeight: '1.5',
-                  fontSize: '0.98rem'
-                }}>
-                  {item.event}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Section 4: Challenges */}
-        <article className="chronicle-article-section" style={{
-          background: 'rgba(255, 255, 255, 0.01)',
-          border: '1px solid rgba(255, 255, 255, 0.04)',
-          borderRadius: '20px',
-          padding: isMobile ? '1.5rem' : '2.2rem'
-        }}>
-          <h2 style={{
-            fontSize: '1.5rem',
-            fontWeight: '800',
-            color: '#f87171',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            marginBottom: '1.2rem',
-            borderBottom: '1px solid rgba(255,255,255,0.08)',
-            paddingBottom: '0.6rem'
-          }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            4. Modern Geopolitical Challenges
-          </h2>
-          <p 
-            style={{ fontSize: '1.1rem', lineHeight: '1.75', color: '#d1d5db', margin: 0 }}
-            dangerouslySetInnerHTML={{ __html: countryData.challenges }}
-          />
-        </article>
-
-        {/* FAQs SECTION (Search Engine & AI Snippets) */}
-        {countryData.faqs && countryData.faqs.length > 0 && (
-          <article className="chronicle-article-section" style={{
-            background: 'rgba(255, 255, 255, 0.01)',
-            border: '1px solid rgba(255, 255, 255, 0.04)',
-            borderRadius: '20px',
-            padding: isMobile ? '1.5rem' : '2.2rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem'
-          }}>
-            <h2 style={{
-              fontSize: '1.5rem',
-              fontWeight: '800',
-              color: '#a78bfa',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              marginBottom: '0.5rem',
-              borderBottom: '1px solid rgba(255,255,255,0.08)',
-              paddingBottom: '0.6rem'
-            }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-              Frequently Asked Questions
-            </h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {countryData.faqs.map((faq, idx) => (
-                <details 
-                  key={idx} 
-                  style={{
-                    background: 'rgba(255,255,255,0.02)',
-                    border: '1px solid rgba(255,255,255,0.05)',
-                    borderRadius: '12px',
-                    padding: '14px 16px',
-                    cursor: 'pointer'
-                  }}
-                  className="faq-disclosure"
-                >
-                  <summary style={{ fontWeight: '700', color: '#f3f4f6', outline: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span>{faq.question}</span>
-                  </summary>
-                  <p style={{ margin: '10px 0 0 0', color: '#9ca3af', fontSize: '0.96rem', lineHeight: '1.6' }}>
-                    {faq.answer}
-                  </p>
-                </details>
-              ))}
-            </div>
-          </article>
+            <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '0.88rem', fontWeight: 800, color: '#1e40af', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Executive Summary &amp; Key Highlights
+            </h3>
+            <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#475569', fontSize: '0.88rem', lineHeight: '1.6', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <li><strong>Territory:</strong> {countryData.aiSummary.geo}</li>
+              <li><strong>Flag:</strong> {countryData.aiSummary.flag}</li>
+              <li><strong>Sovereignty:</strong> {countryData.aiSummary.freedom}</li>
+              <li><strong>Contemporary Challenges:</strong> {countryData.aiSummary.challenge}</li>
+            </ul>
+          </aside>
         )}
 
-        {/* IN-BLOG GAME CTA WIDGET */}
-        <div style={{
-          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1))',
-          border: '1px solid rgba(16, 185, 129, 0.2)',
-          borderRadius: '20px',
-          padding: '1.75rem',
-          textAlign: 'center',
-          marginTop: '1rem',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
-        }}>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: 'white', marginBottom: '6px' }}>
-            Think You Can Pin {countryData.name} on the Map?
-          </h3>
-          <p style={{ color: '#9ca3af', fontSize: '0.92rem', marginBottom: '14px', lineHeight: '1.5' }}>
-            Use the landscape and flag clues you just learned to spot this country in our free Street View guessing game.
-          </p>
-          <Link href="/" style={{
-            background: 'linear-gradient(135deg, #10b981, #3b82f6)',
+        {/* ARTICLE BODY */}
+        <article style={{ fontSize: 'clamp(0.98rem, 1.8vw, 1.125rem)', color: '#374151', wordBreak: 'break-word', lineHeight: 1.8 }}>
+
+          {/* Section 1: Geography & Borders */}
+          <section>
+            <h2 style={headingStyle}>
+              1. Geographical Foundations &amp; Territorial Formation
+            </h2>
+            <div 
+              style={{ lineHeight: '1.85', color: '#374151' }}
+              dangerouslySetInnerHTML={{ __html: countryData.mapFormation }}
+            />
+
+            {/* INLINE FIGURE 1: Landscape / Geography Photo */}
+            {countryData.images?.landscape && (
+              <figure style={{ margin: isMobile ? '1.5rem 0' : '2rem 0', textAlign: 'center' }}>
+                <div style={{
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                  boxShadow: '0 3px 14px rgba(0,0,0,0.06)',
+                  border: '1px solid #e5e7eb',
+                  background: '#f3f4f6'
+                }}>
+                  <img 
+                    src={countryData.images.landscape.url} 
+                    alt={countryData.images.landscape.alt || `${countryData.name} Landscape`} 
+                    style={{ width: '100%', maxHeight: isMobile ? '280px' : '420px', objectFit: 'cover', display: 'block' }}
+                    loading="lazy"
+                  />
+                </div>
+                {countryData.images.landscape.caption && (
+                  <figcaption style={{
+                    marginTop: '0.5rem',
+                    fontSize: '0.82rem',
+                    color: '#6b7280',
+                    fontFamily: '"Inter", system-ui, sans-serif',
+                    lineHeight: 1.4,
+                    padding: '0 0.5rem'
+                  }}>
+                    {countryData.images.landscape.caption}
+                  </figcaption>
+                )}
+              </figure>
+            )}
+          </section>
+
+          <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2rem 0' }} />
+
+          {/* Section 2: Flag Heraldry */}
+          <section>
+            <h2 style={headingStyle}>
+              2. Heraldry, Vexillology &amp; National Flag Symbolism
+            </h2>
+            <div 
+              style={{ lineHeight: '1.85', color: '#374151' }}
+              dangerouslySetInnerHTML={{ __html: countryData.flagHistory }}
+            />
+
+            {/* INLINE FIGURE 2: Heraldry / Seal / Flag Historical Photo */}
+            {countryData.images?.heraldry && (
+              <figure style={{ margin: isMobile ? '1.5rem 0' : '2rem 0', textAlign: 'center' }}>
+                <div style={{
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                  boxShadow: '0 3px 14px rgba(0,0,0,0.06)',
+                  border: '1px solid #e5e7eb',
+                  background: '#f3f4f6'
+                }}>
+                  <img 
+                    src={countryData.images.heraldry.url} 
+                    alt={countryData.images.heraldry.alt || `${countryData.name} Heraldry`} 
+                    style={{ width: '100%', maxHeight: isMobile ? '280px' : '420px', objectFit: 'cover', display: 'block' }}
+                    loading="lazy"
+                  />
+                </div>
+                {countryData.images.heraldry.caption && (
+                  <figcaption style={{
+                    marginTop: '0.5rem',
+                    fontSize: '0.82rem',
+                    color: '#6b7280',
+                    fontFamily: '"Inter", system-ui, sans-serif',
+                    lineHeight: 1.4,
+                    padding: '0 0.5rem'
+                  }}>
+                    {countryData.images.heraldry.caption}
+                  </figcaption>
+                )}
+              </figure>
+            )}
+          </section>
+
+          <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2rem 0' }} />
+
+          {/* Section 3: Path to Freedom */}
+          <section>
+            <h2 style={headingStyle}>
+              3. Path to Freedom &amp; Sovereign Independence
+            </h2>
+            <div 
+              style={{ lineHeight: '1.85', color: '#374151' }}
+              dangerouslySetInnerHTML={{ __html: countryData.freedomStory }}
+            />
+
+            {/* INLINE FIGURE 3: Landmark / Monument / Independence Photo */}
+            {countryData.images?.landmark && (
+              <figure style={{ margin: isMobile ? '1.5rem 0' : '2rem 0', textAlign: 'center' }}>
+                <div style={{
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                  boxShadow: '0 3px 14px rgba(0,0,0,0.06)',
+                  border: '1px solid #e5e7eb',
+                  background: '#f3f4f6'
+                }}>
+                  <img 
+                    src={countryData.images.landmark.url} 
+                    alt={countryData.images.landmark.alt || `${countryData.name} Landmark`} 
+                    style={{ width: '100%', maxHeight: isMobile ? '280px' : '420px', objectFit: 'cover', display: 'block' }}
+                    loading="lazy"
+                  />
+                </div>
+                {countryData.images.landmark.caption && (
+                  <figcaption style={{
+                    marginTop: '0.5rem',
+                    fontSize: '0.82rem',
+                    color: '#6b7280',
+                    fontFamily: '"Inter", system-ui, sans-serif',
+                    lineHeight: 1.4,
+                    padding: '0 0.5rem'
+                  }}>
+                    {countryData.images.landmark.caption}
+                  </figcaption>
+                )}
+              </figure>
+            )}
+          </section>
+
+          <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2rem 0' }} />
+
+          {/* Section 4: Chronological Milestones Timeline */}
+          {countryData.timeline && countryData.timeline.length > 0 && (
+            <section style={{ margin: '2rem 0' }}>
+              <h2 style={headingStyle}>
+                4. Key Historical Milestones Timeline
+              </h2>
+              <div style={{
+                position: 'relative',
+                paddingLeft: isMobile ? '18px' : '24px',
+                borderLeft: '3px solid #e5e7eb',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.25rem',
+                margin: '1.25rem 0',
+                fontFamily: '"Inter", system-ui, sans-serif'
+              }}>
+                {countryData.timeline.map((item, idx) => (
+                  <div key={idx} style={{ position: 'relative' }}>
+                    {/* Dot */}
+                    <div style={{
+                      position: 'absolute',
+                      left: isMobile ? '-26px' : '-32px',
+                      top: '6px',
+                      width: '12px',
+                      height: '12px',
+                      borderRadius: '50%',
+                      background: '#10b981',
+                      border: '2px solid #ffffff',
+                      boxShadow: '0 0 0 1px #d1d5db'
+                    }} />
+                    <span style={{
+                      color: '#10b981',
+                      fontWeight: '800',
+                      fontSize: '0.98rem',
+                      display: 'block'
+                    }}>
+                      {item.year}
+                    </span>
+                    <p style={{
+                      margin: '2px 0 0 0',
+                      color: '#4b5563',
+                      fontSize: '0.92rem',
+                      lineHeight: '1.55'
+                    }}>
+                      {item.event}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2rem 0' }} />
+
+          {/* Section 5: Modern Challenges */}
+          <section>
+            <h2 style={headingStyle}>
+              5. Modern Geopolitical &amp; Socioeconomic Dynamics
+            </h2>
+            <div 
+              style={{ lineHeight: '1.85', color: '#374151' }}
+              dangerouslySetInnerHTML={{ __html: countryData.challenges }}
+            />
+          </section>
+
+          {/* Section 6: Street View Meta & Visual Geography Clues */}
+          {countryData.streetViewMeta && (
+            <>
+              <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2rem 0' }} />
+              <section style={{ margin: '2rem 0', fontFamily: '"Inter", system-ui, sans-serif' }}>
+                <h2 style={headingStyle}>
+                  6. Street View Meta &amp; Visual Clues Guide
+                </h2>
+                <p style={{ color: '#4b5563', fontSize: '0.95rem', lineHeight: '1.65', marginBottom: '1.25rem' }}>
+                  If you are exploring {countryData.name} in a geography guessing game, look for these distinctive road infrastructure tells, utility markers, and vehicle camera clues:
+                </p>
+
+                <div style={{
+                  background: '#f9fafb',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '12px',
+                  padding: isMobile ? '1rem' : '1.25rem',
+                  display: 'grid',
+                  gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                  gap: '1rem',
+                  marginBottom: '1.25rem'
+                }}>
+                  {countryData.streetViewMeta.drivingSide && (
+                    <div>
+                      <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#6b7280', textTransform: 'uppercase' }}>Driving Side</span>
+                      <p style={{ margin: '2px 0 0 0', fontWeight: 700, color: '#111827', fontSize: '0.95rem' }}>
+                        {countryData.streetViewMeta.drivingSide} Side of Road
+                      </p>
+                    </div>
+                  )}
+
+                  {countryData.streetViewMeta.licensePlates && (
+                    <div>
+                      <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#6b7280', textTransform: 'uppercase' }}>License Plates</span>
+                      <p style={{ margin: '2px 0 0 0', color: '#374151', fontSize: '0.9rem' }}>
+                        {countryData.streetViewMeta.licensePlates}
+                      </p>
+                    </div>
+                  )}
+
+                  {countryData.streetViewMeta.utilityPoles && (
+                    <div>
+                      <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#6b7280', textTransform: 'uppercase' }}>Utility Poles</span>
+                      <p style={{ margin: '2px 0 0 0', color: '#374151', fontSize: '0.9rem' }}>
+                        {countryData.streetViewMeta.utilityPoles}
+                      </p>
+                    </div>
+                  )}
+
+                  {countryData.streetViewMeta.roadMarkings && (
+                    <div>
+                      <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#6b7280', textTransform: 'uppercase' }}>Road Lines</span>
+                      <p style={{ margin: '2px 0 0 0', color: '#374151', fontSize: '0.9rem' }}>
+                        {countryData.streetViewMeta.roadMarkings}
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {countryData.streetViewMeta.delineators && (
+                  <div style={{
+                    background: '#ffffff',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '8px',
+                    padding: '10px 14px',
+                    marginBottom: '1rem'
+                  }}>
+                    <strong style={{ color: '#111827', fontSize: '0.9rem' }}>Delineator Bollards: </strong>
+                    <span style={{ color: '#4b5563', fontSize: '0.88rem' }}>{countryData.streetViewMeta.delineators}</span>
+                  </div>
+                )}
+
+                {/* INLINE FIGURE 4: Street View Infrastructure / Road Photo */}
+                {countryData.images?.streetview && (
+                  <figure style={{ margin: isMobile ? '1.5rem 0' : '2rem 0', textAlign: 'center' }}>
+                    <div style={{
+                      borderRadius: '10px',
+                      overflow: 'hidden',
+                      boxShadow: '0 3px 14px rgba(0,0,0,0.06)',
+                      border: '1px solid #e5e7eb',
+                      background: '#f3f4f6'
+                    }}>
+                      <img 
+                        src={countryData.images.streetview.url} 
+                        alt={countryData.images.streetview.alt || `${countryData.name} Street View Clues`} 
+                        style={{ width: '100%', maxHeight: isMobile ? '280px' : '420px', objectFit: 'cover', display: 'block' }}
+                        loading="lazy"
+                      />
+                    </div>
+                    {countryData.images.streetview.caption && (
+                      <figcaption style={{
+                        marginTop: '0.5rem',
+                        fontSize: '0.82rem',
+                        color: '#6b7280',
+                        fontFamily: '"Inter", system-ui, sans-serif',
+                        lineHeight: 1.4,
+                        padding: '0 0.5rem'
+                      }}>
+                        {countryData.images.streetview.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+              </section>
+            </>
+          )}
+
+          {/* Section 7: FAQs */}
+          {countryData.faqs && countryData.faqs.length > 0 && (
+            <>
+              <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2rem 0' }} />
+              <section style={{ margin: '2rem 0', fontFamily: '"Inter", system-ui, sans-serif' }}>
+                <h2 style={headingStyle}>
+                  Frequently Asked Questions
+                </h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', marginTop: '1rem' }}>
+                  {countryData.faqs.map((faq, idx) => (
+                    <details 
+                      key={idx} 
+                      style={{
+                        background: '#ffffff',
+                        border: '1px solid #e5e7eb',
+                        borderRadius: '10px',
+                        padding: '12px 16px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <summary style={{ fontWeight: '700', color: '#111827', outline: 'none', fontSize: '0.95rem' }}>
+                        {faq.question}
+                      </summary>
+                      <p style={{ margin: '8px 0 0 0', color: '#4b5563', fontSize: '0.9rem', lineHeight: '1.6' }}>
+                        {faq.answer}
+                      </p>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            </>
+          )}
+
+          {/* Author Bio Box */}
+          <div style={{
+            marginTop: '2.5rem',
+            padding: '1.25rem',
+            background: '#f9fafb',
+            border: '1px solid #e5e7eb',
+            borderRadius: '12px',
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            gap: '0.85rem',
+            alignItems: isMobile ? 'flex-start' : 'center',
+            fontFamily: '"Inter", system-ui, sans-serif'
+          }}>
+            <div style={{
+              width: '46px', height: '46px', borderRadius: '50%',
+              background: 'linear-gradient(135deg, #10b981, #3b82f6)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: 'white', fontWeight: 900, fontSize: '1.1rem', flexShrink: 0
+            }}>
+              LS
+            </div>
+            <div>
+              <h3 style={{ margin: '0 0 0.2rem 0', fontSize: '0.92rem', fontWeight: 700, color: '#111827' }}>
+                LostStreet Geography Editorial Team
+              </h3>
+              <p style={{ margin: 0, fontSize: '0.82rem', color: '#6b7280', lineHeight: 1.5 }}>
+                Researched and fact-checked by our cartographic and geopolitical history team. Every article is synthesized from verified historical treaties, official census bureaus, and vexillological registries.
+              </p>
+            </div>
+          </div>
+
+          {/* Interactive Game Callout Card */}
+          <div style={{
+            marginTop: '2rem',
+            padding: isMobile ? '1.5rem 1rem' : '2rem',
+            background: '#111827',
             color: 'white',
-            padding: '8px 20px',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            fontWeight: 'bold',
-            fontSize: '0.9rem',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.2)'
-          }} className="btn-hover">
-            Play LostStreet Guessing Game
-          </Link>
-        </div>
-
-      </section>
-
-      {/* RELATED GUIDES — Internal Link Equity & Retention */}
-      <section style={{
-        padding: isMobile ? '1.5rem 1rem' : '1.5rem 2rem',
-        maxWidth: '900px',
-        margin: '0 auto'
-      }}>
-        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#e5e7eb', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          Improve Your Geography Skills
-        </h3>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
-          gap: '0.75rem'
-        }}>
-          {[
-            { title: '25 Pro Street View Secrets', slug: '/guides/25-pro-street-view-geoguessr-secrets', icon: '🏆', color: '#fbbf24' },
-            { title: 'Ultimate Street View Clues Guide', slug: '/guides/geography-clues-guide', icon: '🛑', color: '#ef4444' },
-            { title: 'How to Guess Locations from Street View', slug: '/guides/how-to-guess-locations-from-street-view', icon: '🔍', color: '#3b82f6' },
-            { title: 'Hardest Countries to Guess', slug: '/guides/hardest-countries-to-guess', icon: '⛰️', color: '#8b5cf6' },
-          ].map(g => (
-            <Link key={g.slug} href={g.slug} style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderRadius: '12px',
-              padding: '0.9rem 1rem',
+            borderRadius: '14px',
+            textAlign: 'center',
+            fontFamily: '"Inter", system-ui, sans-serif'
+          }}>
+            <h3 style={{ fontSize: '1.25rem', color: 'white', margin: '0 0 0.4rem 0', fontWeight: 800 }}>
+              Explore {countryData.name} in 360° Street View
+            </h3>
+            <p style={{ color: '#9ca3af', marginBottom: '1.25rem', fontSize: '0.88rem', maxWidth: '480px', margin: '0 auto 1.25rem auto' }}>
+              Put your geography knowledge to the test. Spawn into mystery streets across {countryData.name} and guess your location!
+            </p>
+            <Link href="/" style={{
+              background: '#10b981',
+              color: 'white',
+              padding: '10px 22px',
+              borderRadius: '8px',
               textDecoration: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              transition: 'all 0.2s ease',
-              touchAction: 'manipulation'
-            }} className="btn-hover">
-              <span style={{ fontSize: '1.3rem' }}>{g.icon}</span>
-              <span style={{ color: '#d1d5db', fontSize: '0.88rem', fontWeight: 700 }}>{g.title}</span>
+              fontWeight: 700,
+              fontSize: '0.9rem',
+              display: 'inline-block'
+            }}>
+              Play Free on LostStreet →
             </Link>
-          ))}
-        </div>
-      </section>
+          </div>
 
-      {/* BOTTOM ACTION BUTTON */}
-      <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0 4rem' }}>
-        <Link href="/chronicles" style={{
-          background: 'linear-gradient(135deg, #00f2fe, #4facfe)',
-          border: 'none',
-          color: 'white',
-          padding: '14px 36px',
-          borderRadius: '12px',
-          textDecoration: 'none',
-          fontWeight: 'bold',
-          fontSize: '1.1rem',
-          boxShadow: '0 4px 15px rgba(0, 242, 254, 0.4)',
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '10px'
-        }} className="btn-hover">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-          Back to Flag Catalog
-        </Link>
-      </div>
-
-    </article>
+        </article>
+      </main>
+    </div>
   );
 }
-
-

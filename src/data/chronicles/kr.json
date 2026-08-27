@@ -8,40 +8,81 @@
   "languages": [
     "Korean"
   ],
-  "seoTitle": "Detailed History of South Korea: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of South Korea. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of South Korea is a key element of its national identity in Asia. Characterized by its southern half of the Korean peninsula, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of South Korea came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of South Korea is a powerful symbol of the country's sovereignty and cultural heritage. The design features a white field with central red-blue taegeuk and four trigrams. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for South Korea involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from Japan on August 15, 1945. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of South Korea, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, South Korea faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to world's lowest fertility rate and house prices, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of South Korea continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of South Korea: Miracle on the Han River, Taegeukgi Flag, and Democracy",
+  "metaDescription": "Discover the detailed history of South Korea. Explore the Three Kingdoms, the 1948 Republic, the Taegeukgi Yin-Yang flag, and high-tech democracy.",
+  "mapFormation": "Occupying the southern half of the mountainous Korean Peninsula in East Asia across 100,363 square kilometers, the Republic of Korea (<em>Daehan Minguk</em>) is bounded by the Yellow Sea to the west, the Korea Strait to the south, and the Sea of Japan (East Sea) to the east.<br><br>Korean civilization traces its legendary foundation to Dangun Wanggeom in 2333 BCE (Gojoseon), followed by the <strong>Three Kingdoms period</strong> (Goguryeo, Baekje, and Silla) unified under Silla in 676 CE. In 1392, General Yi Seong-gye founded the <strong>Joseon Dynasty</strong>, which governed for over five centuries from its capital in Hanyang (modern Seoul) and oversaw the invention of the Korean Hangul alphabet by King Sejong the Great in 1443.<br><br>Following Japanese colonial rule (1910–1945) and the division of the peninsula along the 38th parallel at the end of World War II, the Republic of Korea was officially proclaimed on <strong>August 15, 1948</strong>. The modern de facto border with North Korea is the 250-kilometer-long Demilitarized Zone (DMZ), established by the 1953 Korean Armistice Agreement.",
+  "flagHistory": "The national flag of South Korea—the <strong>Taegeukgi</strong>—is a profound philosophical masterpiece of Taoist and Neo-Confucian cosmology, first used in 1882 by Joseon diplomats and officially adopted on <strong>October 15, 1949</strong>.<br><br>The flag features a pristine white field symbolizing peace, purity, and the traditional white clothing of the Korean people (the 'white-clad folk'). In the center sits the <strong>Taegeuk</strong> circle, divided horizontally into red (Yang - cosmic light, warmth, and masculine energy) at the top and blue (Yin - cosmic shadow, coolness, and feminine energy) at the bottom, representing universal harmony.<br><br>In the four corners are four black trigrams (<em>Gwae</em>) from the I Ching (Book of Changes): <strong>Geon</strong> (top-left: three solid lines = Heaven, Spring, Justice), <strong>Ri</strong> (bottom-left: Fire, Autumn, Wisdom), <strong>Gam</strong> (top-right: Water, Winter, Sincerity), and <strong>Gon</strong> (bottom-right: three broken lines = Earth, Summer, Vitality).",
+  "freedomStory": "South Korea's modern liberty represents an inspiring victory against foreign occupation and authoritarianism.<br><br>On <strong>March 1, 1919</strong>, millions of Koreans held peaceful mass demonstrations against Japanese colonial rule (the March 1st Movement), leading to the establishment of the Provisional Government of the Republic of Korea in Shanghai.<br><br>Following the devastation of the Korean War (1950–1953), the nation achieved the phenomenal <strong>'Miracle on the Han River'</strong>, transforming from an impoverished agrarian war ruin into a high-tech industrial superpower. In <strong>June 1987</strong>, massive civic protests across Seoul forced the adoption of direct presidential elections and full constitutional democracy, creating a vibrant, high-tech society leading the world in semiconductors, shipbuilding, and global cultural arts (K-pop/K-dramas).",
+  "challenges": "South Korea confronts profound demographic and geopolitical transformations. Foremost among them is the world's lowest total fertility rate, requiring innovative family welfare programs and eldercare automation. Technologically, Korea leads global AI memory chips while managing peninsula defense and clean nuclear and renewable transitions.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1538485399081-7191377e8241?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Bukhansan National Park overlooking Seoul, South Korea",
+      "caption": "Bukhansan National Park overlooking the Seoul metropolitan area, where granite mountain peaks meet high-tech urban architecture."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1548115184-bc6544d06a58?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Gyeongbokgung Palace in Seoul, South Korea",
+      "caption": "Gyeongbokgung Palace in Seoul, the principal royal palace of the Joseon Dynasty built in 1395 under King Taejo."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "South Korean highway with blue signs and Hangul script",
+      "caption": "Korean street view tells: modern blue highway signs with Hangul and English, white license plates, and immaculate asphalt."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates with black Hangul characters and numerals; older commercial plates are yellow.",
+    "utilityPoles": "Concrete utility poles with distinctive yellow-and-black striped hazard stickers near the base.",
+    "roadMarkings": "Yellow double centerlines; blue bus-only lanes on urban arterial roads; prominent Hangul road markings.",
+    "delineators": "White posts with circular orange reflectors; green chevron hazard markers on highway curves.",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across the entire mainland and Jeju Island."
+  },
   "aiSummary": {
-    "geo": "Located in Asia; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring white field with central red-blue taegeuk and four trigrams representing national sovereignty.",
-    "freedom": "Gained sovereignty from Japan on August 15, 1945 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to world's lowest fertility rate and house prices."
+    "geo": "Mountainous East Asian peninsula nation; borders divided along the 1953 DMZ.",
+    "flag": "The Taegeukgi: white field with red/blue Yin-Yang circle and four black trigrams representing cosmic harmony.",
+    "freedom": "1919 March 1st Movement, 1948 Republic, and 1987 June Democratic Struggle establishing direct democracy.",
+    "challenge": "Ultra-low fertility rate, semiconductor supply chain security, and green energy transitions."
   },
   "faqs": [
     {
-      "question": "When did South Korea gain independence?",
-      "answer": "South Korea attained its full sovereignty and recognized independence from Japan on August 15, 1945."
+      "question": "What is the meaning of the symbols on the South Korean flag (Taegeukgi)?",
+      "answer": "The red and blue circle (Taegeuk) represents cosmic Yin-Yang harmony, while the four black trigrams in the corners represent Heaven, Earth, Water, and Fire."
     },
     {
-      "question": "What are the main geographical characteristics of South Korea?",
-      "answer": "South Korea is located in Asia and features a geographical layout characterized by southern half of the Korean peninsula."
+      "question": "What was the 'Miracle on the Han River'?",
+      "answer": "The 'Miracle on the Han River' refers to the rapid post-war economic development and industrialization of South Korea between the 1960s and 1990s."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "2333 BCE",
+      "event": "Legendary founding of Gojoseon by Dangun Wanggeom."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1443",
+      "event": "King Sejong the Great creates the scientific Hangul alphabet."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of South Korea."
+      "year": "1919",
+      "event": "The March 1st Movement rallies nationwide for independence from Japanese colonial rule."
+    },
+    {
+      "year": "1948",
+      "event": "The Republic of Korea is officially established on August 15."
+    },
+    {
+      "year": "1953",
+      "event": "The Korean Armistice Agreement establishes the Demilitarized Zone (DMZ)."
+    },
+    {
+      "year": "1987",
+      "event": "The June Democratic Struggle forces constitutional reforms for direct presidential elections."
+    },
+    {
+      "year": "1988",
+      "event": "Seoul hosts the Summer Olympic Games, demonstrating global economic emergence."
     }
   ]
 }

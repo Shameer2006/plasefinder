@@ -1,47 +1,84 @@
 {
   "code": "CO",
   "name": "Colombia",
-  "capital": "Bogota",
+  "capital": "Bogotá",
   "continent": "South America",
-  "population": "51.8 Million",
+  "population": "52.2 Million",
   "currency": "Colombian Peso (COP)",
   "languages": [
     "Spanish"
   ],
-  "seoTitle": "Detailed History of Colombia: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Colombia. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Colombia is a key element of its national identity in South America. Characterized by its Andes mountains, Amazon basin, and dual coastlines, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Colombia came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Colombia is a powerful symbol of the country's sovereignty and cultural heritage. The design features a horizontal bands of yellow, blue, and red. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Colombia involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from Spain in 1810. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Colombia, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Colombia faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to coca eradication and drug cartel violence, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Colombia continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Colombia: Crossroads of Two Oceans, Miranda Tricolor, and Bolívar Independence",
+  "metaDescription": "Explore the detailed history of Colombia. Discover Gran Colombia, Simón Bolívar, the yellow-blue-red flag, and Andean biodiversity.",
+  "mapFormation": "Occupying 1.14 million square kilometers in the northwestern gateway of South America, the Republic of Colombia is the only country in South America with coastlines on both the <strong>Pacific Ocean and the Caribbean Sea</strong>. The terrain is dominated by the majestic three-pronged cordillera of the <strong>Andes</strong> (Western, Central, and Eastern Cordilleras), the eastern Llanos plains, and the southern Amazonian rainforest.<br><br>The territory was home to advanced indigenous civilizations—including the Muisca, Tayrona, and Quimbaya, famous for gold metallurgy that inspired the legend of <em>El Dorado</em>. In the 16th century, Spanish conquistadors established the <strong>Viceroyalty of New Granada</strong> with its capital in Santa Fe de Bogotá.<br><br>Following the War of Independence led by <em>El Libertador</em> <strong>Simón Bolívar</strong>, the Congress of Angostura created the sovereign republic of <strong>Gran Colombia in 1819</strong>, uniting modern Colombia, Venezuela, Ecuador, and Panama. Following the dissolution of Gran Colombia in 1830 and the secession of Panama in 1903, the modern sovereign borders of the Republic of Colombia were established.",
+  "flagHistory": "The national flag of Colombia—the <em>Tricolor Nacional</em>—features three horizontal bands of yellow, blue, and red with an unequal 2:1:1 proportion (the yellow band occupies the entire upper half of the flag).<br><br>The banner was created by precursor revolutionary leader <strong>Francisco de Miranda</strong> and adopted by Simón Bolívar for Gran Colombia in 1819. In classic heraldic and patriotic symbolism: <strong>Yellow</strong> (occupying half the flag) represents the boundless gold and mineral wealth of Colombian soil, the radiant sun, and justice; <strong>Blue</strong> represents the two oceans that embrace the nation and the open sky; and <strong>Red</strong> honors the sacred blood spilled by patriots and freedom fighters to secure sovereign liberty.",
+  "freedomStory": "Colombia's path to sovereign freedom was forged through the brilliant military genius of Simón Bolívar and General Francisco de Paula Santander.<br><br>On <strong>July 20, 1810</strong>, the citizens of Bogotá formed the first Supreme Government Junta following the incident of Llorente's Flowerpot (celebrated as Colombian Independence Day). On <strong>August 7, 1819</strong>, Bolívar's liberating army achieved a decisive victory at the <strong>Battle of Boyacá</strong>, liberating Bogotá and ending Spanish colonial rule in New Granada.<br><br>In 1991, the nation enacted the progressive <strong>Constitution of 1991</strong>, establishing Colombia as a pluralistic constitutional state recognizing indigenous rights and human dignity. In 2016, the Colombian government signed the historic Final Peace Accord with the FARC in Cartagena, ending over five decades of internal armed conflict.",
+  "challenges": "As the world's second most biodiverse nation and a top exporter of Arabica coffee and emeralds, Colombia balances economic growth with ecological stewardship. Foremost priorities include implementing sustainable agroforestry in the Amazon, executing territorial peace pacts in rural Pacific provinces, and expanding solar and geothermal grids.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Cocora Valley wax palms in Quindío, Colombia",
+      "caption": "The towering Quindío wax palms—the national tree of Colombia—in the lush green mountains of the Cocora Valley, Salento."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1512813195386-6cf811ad3542?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Santuario de Las Lajas in Nariño, Colombia",
+      "caption": "Santuario de Las Lajas in Ipiales, Nariño, a magnificent neo-Gothic basilica built inside the canyon of the Guáitara River."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Colombian street view with yellow taxi and cross-backed road signs",
+      "caption": "Legendary Colombian Street View tell: road signs featuring an 'X' cross-brace on the back, bright yellow license plates on passenger cars, and yellow taxis."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "Bright yellow rectangular plates for private passenger cars (three letters, three numbers) with the municipality name printed at the bottom; white plates for commercial transport.",
+    "utilityPoles": "Wooden or concrete poles with crossbars; famous Colombian road signs featuring a prominent metal 'X' cross-brace on the back.",
+    "roadMarkings": "Continuous or dashed yellow centerlines; solid white edge lines; national route shields with the word 'COLOMBIA' across the top.",
+    "delineators": "White posts with red reflectors on the right and white on the left.",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across Bogotá, Medellín, Cali, the Coffee Axis, and Caribbean coast."
+  },
   "aiSummary": {
-    "geo": "Located in South America; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring horizontal bands of yellow, blue, and red representing national sovereignty.",
-    "freedom": "Gained sovereignty from Spain in 1810 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to coca eradication and drug cartel violence."
+    "geo": "Northwestern South American nation with Pacific and Caribbean coasts; Andes mountains and Amazon basin.",
+    "flag": "Yellow, blue, and red horizontal tricolor (2:1:1 proportion) created by Francisco de Miranda and Bolívar.",
+    "freedom": "1810 July 20 declaration and 1819 Battle of Boyacá; 1991 democratic Constitution and 2016 Peace Accord.",
+    "challenge": "Territorial rural peace consolidation, Amazon conservation, and renewable energy expansion."
   },
   "faqs": [
     {
-      "question": "When did Colombia gain independence?",
-      "answer": "Colombia attained its full sovereignty and recognized independence from Spain in 1810."
+      "question": "What is the most famous Street View clue for Colombia?",
+      "answer": "The back of Colombian road signs has a distinctive metal 'X' cross-brace support structure, and nearly all private passenger vehicles have bright yellow license plates with municipality names at the bottom."
     },
     {
-      "question": "What are the main geographical characteristics of Colombia?",
-      "answer": "Colombia is located in South America and features a geographical layout characterized by Andes mountains, Amazon basin, and dual coastlines."
+      "question": "When did Colombia achieve independence?",
+      "answer": "Independence was first declared in Bogotá on July 20, 1810, and secured militarily on August 7, 1819, at the Battle of Boyacá by Simón Bolívar."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1538",
+      "event": "Gonzalo Jiménez de Quesada founds Santa Fe de Bogotá in the Muisca highlands."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1810",
+      "event": "The Cry of Independence in Bogotá on July 20 establishes the first sovereign junta."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Colombia."
+      "year": "1819",
+      "event": "Simón Bolívar wins the Battle of Boyacá and proclaims the Republic of Gran Colombia."
+    },
+    {
+      "year": "1886",
+      "event": "Promulgation of the centralized Constitution of the Republic of Colombia."
+    },
+    {
+      "year": "1991",
+      "event": "A nationwide constituent assembly promulgates the progressive 1991 Constitution."
+    },
+    {
+      "year": "2016",
+      "event": "Signing of the historic Final Peace Agreement ending decades of internal conflict."
     }
   ]
 }

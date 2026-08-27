@@ -1,47 +1,84 @@
 {
   "code": "NL",
   "name": "Netherlands",
-  "capital": "Amsterdam",
+  "capital": "Amsterdam (Seat of Government: The Hague)",
   "continent": "Europe",
-  "population": "17.8 Million",
+  "population": "17.9 Million",
   "currency": "Euro (EUR)",
   "languages": [
     "Dutch"
   ],
-  "seoTitle": "Detailed History of Netherlands: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Netherlands. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Netherlands is a key element of its national identity in Europe. Characterized by its low-lying delta plain, much below sea level, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Netherlands came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Netherlands is a powerful symbol of the country's sovereignty and cultural heritage. The design features a red, white, and blue horizontal tricolor. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Netherlands involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from Spanish Empire in 1581. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Netherlands, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Netherlands faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to sea-level rise and environmental farming limits, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Netherlands continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of the Netherlands: Land Reclaimed from the Sea, Prince's Flag, and Republic",
+  "metaDescription": "Explore the detailed history of the Netherlands. Discover the Dutch Golden Age, William the Silent, the Union of Utrecht (1579), and modern waterworks.",
+  "mapFormation": "Occupying the fertile deltas of the Rhine, Meuse, and Scheldt rivers in Western Europe across 41,850 square kilometers, the Kingdom of the Netherlands (<em>Nederland</em>) is famous for its low-lying topography, with over 26% of its land area situated below sea level and 50% less than one meter above sea level.<br><br>The territory was shaped over centuries through the Dutch saying: <em>'God created the Earth, but the Dutch created the Netherlands.'</em> Through advanced hydraulic engineering, windmills, dikes, and drainage canals, generations of Dutch engineers reclaimed hundreds of thousands of hectares of arable land (polders) from the Zuiderzee and the North Sea.<br><br>Following the <strong>Eighty Years' War (1568–1648)</strong> against the Spanish Habsburg Crown led by William of Orange (William the Silent), the <strong>Peace of Münster (1648)</strong>—part of the Peace of Westphalia—formally recognized the sovereign independence of the <strong>Dutch Republic</strong> (Republic of the Seven United Netherlands), establishing the modern European territorial core alongside constituent Caribbean islands (Aruba, Curaçao, Sint Maarten).",
+  "flagHistory": "The national flag of the Netherlands—the <em>Rood-Wit-Blauw</em> horizontal tricolor—is the oldest tricolor flag in continuous sovereign use in world history, originating during the Dutch revolt in the 16th century.<br><br>The original banner, known as the <strong>Prince's Flag</strong> (<em>Prinsenvlag</em>), featured orange, white, and blue in honor of Prince William I of Orange-Nassau. Because orange dye was unstable at sea and tended to fade into yellowish-red, the orange stripe was gradually replaced by bright crimson-red around 1630. The modern red, white, and blue tricolor was officially confirmed by Royal Decree by Queen Wilhelmina on <strong>February 19, 1937</strong>.<br><br>In Dutch heraldry: <strong>Red</strong> symbolizes valor and strength; <strong>White</strong> represents peace and freedom; and <strong>Blue</strong> represents vigilance and loyalty. The royal color <strong>Orange</strong> remains the national color of Dutch unity, celebrated worldwide on King's Day (<em>Koningsdag</em>).",
+  "freedomStory": "The Netherlands was one of the earliest pioneers of constitutional republicanism, freedom of conscience, and international law.<br><br>In <strong>1579</strong>, the northern provinces signed the <strong>Union of Utrecht</strong>, pledging mutual defense and guaranteeing freedom of religious conscience—a revolutionary principle that transformed Amsterdam into the intellectual and publishing capital of the 17th-century European Enlightenment, welcoming philosophers such as Baruch Spinoza and René Descartes.<br><br>In 1581, the States-General promulgated the <strong>Act of Abjuration</strong> (<em>Plakkaat van Verlatinghe</em>), declaring that a ruler who oppresses his subjects may be lawfully deposed—a document that directly influenced the American Declaration of Independence two centuries later. During the <strong>Dutch Golden Age</strong>, Dutch merchants, navigators, and artists (Rembrandt, Vermeer) led global trade through the Dutch East India Company (VOC). In 1848, statesman Johan Rudolf Thorbecke drafted the liberal Dutch Constitution, transforming the nation into a modern parliamentary constitutional monarchy.",
+  "challenges": "As a global trading titan with the Port of Rotterdam (Europe's largest port) and home to semiconductor lithography leader ASML, the Netherlands manages complex environmental and agricultural transitions. Foremost priorities include executing the <strong>Delta Programme</strong> to fortify storm surge barriers against rising North Sea levels, reducing agricultural nitrogen emissions while sustaining high-yield agri-tech food exports, and expanding offshore wind farms across the North Sea.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Windmills of Kinderdijk along Dutch polder canals",
+      "caption": "The historic 18th-century windmills of Kinderdijk in South Holland, a UNESCO World Heritage site showcasing Dutch hydraulic drainage engineering."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1512813195386-6cf811ad3542?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Rijksmuseum and canals in Amsterdam, Netherlands",
+      "caption": "The Rijksmuseum overlooking the iconic 17th-century canal ring of Amsterdam, the constitutional capital of the Netherlands."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Dutch street view with bright yellow license plates and red cycle paths",
+      "caption": "Iconic Dutch street view indicators: bright yellow front and rear license plates, reddish-brown dedicated cycle paths (Fietspad), and flat canal landscapes."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "Distinctive bright yellow front and rear plates with black lettering and blue EU strip on the left (unique in Western Europe alongside Luxembourg).",
+    "utilityPoles": "Underground utilities; poles are virtually non-existent on roads; reddish-brown asphalt dedicated bike paths (Fietspad).",
+    "roadMarkings": "White dashed centerlines; distinctive green-painted center divider strips on 100 km/h regional highways (Autoweg).",
+    "delineators": "Black plastic posts with red reflectors on the right and white on the left, often with small green directional caps.",
+    "cameraGen": "Complete Gen 3 and Gen 4 coverage across all 12 provinces."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring red, white, and blue horizontal tricolor representing national sovereignty.",
-    "freedom": "Gained sovereignty from Spanish Empire in 1581 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to sea-level rise and environmental farming limits."
+    "geo": "Low-lying delta nation in Western Europe; half of land below sea level reclaimed via dikes and polders.",
+    "flag": "Rood-Wit-Blauw: oldest tricolor flag in continuous sovereign use, originating from the 16th-century Prince's Flag.",
+    "freedom": "1581 Act of Abjuration pioneered deposing tyrants; 1848 Thorbecke Constitution established parliamentary democracy.",
+    "challenge": "Delta Programme sea-level rise resilience, agricultural nitrogen transition, and ASML high-tech supply chains."
   },
   "faqs": [
     {
-      "question": "When did Netherlands gain independence?",
-      "answer": "Netherlands attained its full sovereignty and recognized independence from Spanish Empire in 1581."
+      "question": "Why is the color orange associated with the Netherlands?",
+      "answer": "Orange is the national color of the Netherlands honoring the royal House of Orange-Nassau and founding father Prince William I of Orange."
     },
     {
-      "question": "What are the main geographical characteristics of Netherlands?",
-      "answer": "Netherlands is located in Europe and features a geographical layout characterized by low-lying delta plain, much below sea level."
+      "question": "What is the difference between Holland and the Netherlands?",
+      "answer": "The Netherlands is the sovereign country of 12 provinces. Holland refers specifically to two western provinces: North Holland (Noord-Holland) and South Holland (Zuid-Holland)."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1568",
+      "event": "William the Silent leads the Dutch Revolt against Spanish Habsburg rule, starting the Eighty Years' War."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1581",
+      "event": "The States-General signs the Act of Abjuration, declaring independence from King Philip II."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Netherlands."
+      "year": "1648",
+      "event": "The Peace of Münster permanently recognizes the sovereign Dutch Republic."
+    },
+    {
+      "year": "1848",
+      "event": "Johan Rudolf Thorbecke drafts the liberal Constitution, creating parliamentary democracy."
+    },
+    {
+      "year": "1953",
+      "event": "The North Sea Flood kills 1,836 people, prompting the construction of the monumental Delta Works."
+    },
+    {
+      "year": "1992",
+      "event": "The Maastricht Treaty is signed in the Netherlands, founding the European Union."
     }
   ]
 }

@@ -3,56 +3,85 @@
   "name": "Nigeria",
   "capital": "Abuja",
   "continent": "Africa",
-  "population": "218.5 Million",
-  "currency": "Naira (NGN)",
+  "population": "223.8 Million",
+  "currency": "Nigerian Naira (NGN)",
   "languages": [
     "English",
     "Hausa",
     "Yoruba",
     "Igbo"
   ],
-  "seoTitle": "History of Nigeria: How Long Has It Been a Country?",
-  "metaDescription": "Explore the history of Nigeria, including how long it has been a country, its colonial formation in 1914, its independence in 1960, and its diverse cultural heritage.",
-  "mapFormation": "The area that is now Nigeria has been home to numerous ancient and indigenous kingdoms and states over millennia, including the Kingdom of Nri, the Benin Empire, and the Oyo Empire. The modern boundaries of Nigeria were established during British colonial rule. In 1914, the British formally amalgamated the Southern Nigeria Protectorate and the Northern Nigeria Protectorate to form the single colony of Nigeria. This geopolitical map formation merged over 250 ethnic groups into a single administrative entity. Following independence, the map underwent internal changes as the initial three regions were eventually divided into the 36 states and one Federal Capital Territory (Abuja) that make up modern Nigeria.",
-  "flagHistory": "The national flag of Nigeria was designed by Michael Taiwo Akinkunmi in 1959 and officially hoisted on Independence Day, October 1, 1960. The flag features three equal vertical bands of green, white, and green. The two green stripes represent Nigeria's natural wealth, agricultural abundance, and lush vegetation. The central white stripe symbolizes peace and unity, serving as a vital message for a nation with immense ethnic and religious diversity.",
-  "freedomStory": "Nigeria's path to freedom involved decades of political advocacy and nationalism against British colonial rule, led by figures like Nnamdi Azikiwe, Obafemi Awolowo, and Ahmadu Bello. Nigeria officially became an independent nation on October 1, 1960. Three years later, in 1963, it became a federal republic. The post-independence era was challenging, marked by a devastating civil war (the Biafran War, 1967-1970) and several periods of military rule. However, in 1999, Nigeria successfully transitioned back to civilian democratic governance, establishing the Fourth Republic, which continues today.",
-  "challenges": "As Africa's most populous country and largest economy, Nigeria faces significant opportunities and challenges. The economy relies heavily on oil exports, making it vulnerable to global price shocks, though there is a growing push to diversify into technology, agriculture, and services (notably the booming Nollywood film industry). Security challenges, including insurgency in the northeast and regional conflicts, remain a priority for the government. Furthermore, addressing infrastructural deficits and providing adequate education and employment for its rapidly growing youth population are critical for Nigeria's future stability and growth.",
+  "seoTitle": "History of Nigeria: Giant of Africa, Green-White-Green Flag, and 1960 Independence",
+  "metaDescription": "Discover the detailed history of Nigeria. Explore ancient kingdoms of Benin and Oyo, 1960 independence, the Green-White-Green flag, and modern energy.",
+  "mapFormation": "Spanning 923,768 square kilometers along the Gulf of Guinea in West Africa, the Federal Republic of Nigeria is the most populous nation on the African continent. The territory is naturally drained by the confluence of the Niger and Benue Rivers meeting at Lokoja.<br><br>The territory has been home to advanced civilizations for over two millennia, including the Nok culture (c. 1500 BCE), the Kingdom of Nri, the Kingdom of Benin famous for its bronze metallurgy, the Yoruba Kingdom of Oyo, and the northern Hausa-Fulani kingdoms that united under Usman dan Fodio in the 1804 Sokoto Caliphate.<br><br>In 1914, British colonial governor Lord Frederick Lugard amalgamated the Northern and Southern Nigeria Protectorates into a single entity. Nigeria attained sovereign independence on <strong>October 1, 1960</strong>. In 1991, the federal capital was officially moved from coastal Lagos to purpose-built <strong>Abuja</strong> in the geographic center of the country.",
+  "flagHistory": "The national flag of Nigeria—the iconic <strong>Green-White-Green</strong> vertical triband—was designed in 1959 by Taiwo Akinkunmi, a 23-year-old electrical engineering student, and formally hoisted at independence on <strong>October 1, 1960</strong>.<br><br>The design features two equal outer vertical bands of lush emerald green flanking a central white band. In vexillological symbolism, the two <strong>Green</strong> bands represent Nigeria's rich natural agricultural wealth and lush tropical forests, while the central <strong>White</strong> band represents peace, unity, and integrity.",
+  "freedomStory": "Nigeria's journey to sovereign freedom was championed by brilliant anti-colonial intellectuals and regional statesmen through constitutional conferences in London and Lagos.<br><br>Visionary nationalists including <strong>Dr. Nnamdi Azikiwe</strong> (Zik), Chief Obafemi Awolowo, and Sir Ahmadu Bello led the legislative movement for self-determination. The British Parliament passed the Nigeria Independence Act, and on <strong>October 1, 1960</strong>, Nigeria became a fully independent nation, later proclaiming the Federal Republic on October 1, 1963, with Dr. Azikiwe as its first President.<br><br>Following civil war and periods of military rule, Nigeria established uninterrupted democratic governance in 1999 with the enactment of the 1999 Constitution.",
+  "challenges": "As Africa's largest demographic powerhouse and a top petroleum exporter, Nigeria is executing economic diversification programs. Foremost priorities include expanding electricity grid transmission, supporting the booming tech and creative Nollywood industries in Lagos, and managing agricultural irrigation across the Sahelian north.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Zuma Rock monolith in Niger State, Nigeria",
+      "caption": "Zuma Rock, a massive natural granitic monolith rising 725 meters above the surrounding savanna near the capital Abuja."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1512813195386-6cf811ad3542?q=80&w=1200&auto=format&fit=crop",
+      "alt": "National Arts Theatre in Lagos, Nigeria",
+      "caption": "The National Arts Theatre in Iganmu, Lagos, an iconic cultural landmark celebrating African arts, music, and performance."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Nigerian street view with police escort car meta",
+      "caption": "Unique Nigerian Street View clue: a Toyota Hilux police escort vehicle with flashing beacon lights visible in camera footage."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates with green lettering and the map outline of Nigeria in the center.",
+    "utilityPoles": "Wooden poles with horizontal cross-bars; concrete circular poles along dual carriageways.",
+    "roadMarkings": "White dashed centerlines; solid yellow lines on dual carriageways.",
+    "delineators": "Concrete curbstones painted with alternating black and white stripes near toll plazas and intersections.",
+    "cameraGen": "Gen 3 coverage; famous for the 'Police Escort Car' following the Google vehicle in Lagos, Abuja, and Benin City."
+  },
   "aiSummary": {
-    "geo": "Located in West Africa; modern borders formed by the 1914 British amalgamation of Northern and Southern protectorates.",
-    "flag": "Green and white vertical tricolor representing agricultural wealth and national peace.",
-    "freedom": "Gained independence from Britain in 1960 and transitioned to a stable democracy in 1999 after periods of military rule.",
-    "challenge": "Diversifying an oil-dependent economy and addressing security and infrastructure for a massive youth population."
+    "geo": "Most populous African nation; borders shaped by the 1914 amalgamation and 1991 capital transfer to Abuja.",
+    "flag": "Green-White-Green vertical triband designed by Taiwo Akinkunmi in 1959.",
+    "freedom": "Independence achieved on October 1, 1960, led by Dr. Nnamdi Azikiwe and Ahmadu Bello.",
+    "challenge": "Economic diversification away from oil, power grid modernization, and creative tech hub scaling."
   },
   "faqs": [
     {
-      "question": "How long has Nigeria been a country?",
-      "answer": "Nigeria has been an independent country since October 1, 1960. However, the modern borders were created in 1914 when the British amalgamated the Northern and Southern protectorates."
+      "question": "When did Nigeria gain independence?",
+      "answer": "Nigeria attained independence from British colonial rule on October 1, 1960, becoming a Federal Republic in 1963."
     },
     {
-      "question": "What do the green and white colors on the Nigerian flag mean?",
-      "answer": "The green stripes represent Nigeria's natural wealth and agriculture, while the white stripe symbolizes peace and unity."
+      "question": "Why is Nigeria called the 'Giant of Africa'?",
+      "answer": "Nigeria is called the 'Giant of Africa' because of its massive population (over 220 million people, largest in Africa) and its dominant cultural and economic influence."
     }
   ],
   "timeline": [
     {
+      "year": "1500 BCE",
+      "event": "The ancient Nok culture develops advanced terracotta sculptures and iron smelting."
+    },
+    {
       "year": "1914",
-      "event": "The British amalgamate the Northern and Southern protectorates to form the Colony and Protectorate of Nigeria."
+      "event": "Lord Lugard amalgamates the Northern and Southern Nigeria Protectorates."
     },
     {
       "year": "1960",
-      "event": "Nigeria gains independence from the United Kingdom on October 1."
+      "event": "Nigeria achieves sovereign independence from Great Britain on October 1."
     },
     {
       "year": "1963",
-      "event": "Nigeria officially becomes a Federal Republic."
+      "event": "Nigeria becomes a Federal Republic with Dr. Nnamdi Azikiwe as its first President."
     },
     {
-      "year": "1967",
-      "event": "The Nigerian Civil War (Biafran War) begins, lasting until 1970."
+      "year": "1991",
+      "event": "The federal capital is officially moved from Lagos to purpose-built Abuja."
     },
     {
       "year": "1999",
-      "event": "Nigeria transitions to a civilian democracy, beginning the Fourth Republic."
+      "event": "Democratic civilian governance is restored with the adoption of the 1999 Constitution."
     }
   ]
 }

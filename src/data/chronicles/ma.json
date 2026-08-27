@@ -3,46 +3,84 @@
   "name": "Morocco",
   "capital": "Rabat",
   "continent": "Africa",
-  "population": "37.5 Million",
+  "population": "37.8 Million",
   "currency": "Moroccan Dirham (MAD)",
   "languages": [
     "Arabic",
-    "Tamazight"
+    "Berber (Tamazight)",
+    "French"
   ],
-  "seoTitle": "Detailed History of Morocco: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Morocco. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Morocco is a key element of its national identity in Africa. Characterized by its mountainous northwest African coast, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Morocco came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Morocco is a powerful symbol of the country's sovereignty and cultural heritage. The design features a red field with a central green pentagram star. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Morocco involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from France and Spain in 1956. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Morocco, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Morocco faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to unresolved Western Sahara conflict and droughts, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Morocco continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Morocco: Kingdom of the Maghreb, Green Pentagram Flag, and 1956 Independence",
+  "metaDescription": "Explore the detailed history of Morocco. Discover the Alaouite Dynasty, Atlas Mountains, King Mohammed V, the green star flag, and solar energy.",
+  "mapFormation": "Spanning 446,550 square kilometers in Northwest Africa at the gateway between the Atlantic Ocean and the Mediterranean Sea across the Strait of Gibraltar, the Kingdom of Morocco (<em>Al-Mamlaka al-Maghribiyya</em> - 'The Western Kingdom') is framed by the snow-crested spine of the <strong>Atlas Mountains</strong> (Mount Toubkal, 4,167 meters) and the vast sands of the Sahara Desert.<br><br>Indigenous Amazigh (Berber) kingdoms traded across the Mediterranean during antiquity. In <strong>789 CE</strong>, Idris I founded the <strong>Idrisid Dynasty</strong> and established the imperial city of Fes, the oldest continuous royal capital in Morocco. Successive Amazigh dynasties—the Almoravids and Almohads (11th–13th century)—ruled vast empires spanning North Africa and Muslim Andalusia (southern Spain).<br><br>Since 1666, Morocco has been governed by the <strong>Alaouite Dynasty</strong>. Following the Treaty of Fes (1912) establishing French and Spanish protectorates, King Mohammed V led the national liberation movement, securing sovereign independence on <strong>March 2, 1956</strong>.",
+  "flagHistory": "The national flag of Morocco—the <em>Liwaa al-Maghrib</em>—features a vivid crimson-red field bearing at the exact center a bold green five-pointed interlaced pentagram, officially codified by Royal Dahir of Sultan Moulay Youssef on <strong>November 17, 1915</strong>.<br><br>The historic red field has represented the Alaouite Dynasty and sovereign authority since the 17th century. The central <strong>Green Pentagram</strong> (Seal of Solomon / <em>Khātim Sulaymān</em>) was added to distinguish Moroccan maritime vessels from other red flags at sea. In Islamic and national symbolism: <strong>Red</strong> honors the courage, hardiness, and bravery of the Moroccan people; <strong>Green</strong> is the sacred color of Islam representing prosperity and peace; and the <strong>Five Points</strong> of the star symbolize the Five Pillars of Islam (Faith, Prayer, Charity, Fasting, and Pilgrimage).",
+  "freedomStory": "Morocco's struggle for independence was a courageous national mobilization spearheaded by the historic alliance between the Royal Monarchy and the nationalist resistance.<br><br>On <strong>January 11, 1944</strong>, nationalist leaders presented the historic <strong>Manifesto of Independence</strong> (<em>Wathīqat al-Istiqlāl</em>) demanding full sovereignty. In August 1953, French colonial authorities exiled <strong>Sultan Mohammed V</strong> to Corsica and Madagascar, igniting mass armed resistance (the Revolution of the King and the People / <em>Thawrat al-Malik wa ash-Sha'b</em>).<br><br>Sultan Mohammed V returned in triumph to Rabat on November 16, 1955, declaring the dawn of freedom. Independence was officially proclaimed on <strong>March 2, 1956</strong>. In November 1975, King Hassan II led the peaceful <strong>Green March</strong> of 350,000 unarmed citizens into the Sahara.",
+  "challenges": "As a premier industrial and renewable energy hub in Africa hosting the world's largest concentrated solar farm (<strong>Noor Ouarzazate</strong>) and the high-speed Al Boraq bullet train, Morocco balances rapid modernization with climate adaptation. Foremost priorities include constructing major coastal seawater desalination plants to combat persistent drought, upgrading automotive and aerospace manufacturing, and hosting the 2030 FIFA World Cup.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Sahara desert sand dunes of Erg Chebbi in Merzouga, Morocco",
+      "caption": "The towering orange sand dunes of Erg Chebbi near Merzouga in the Moroccan Sahara Desert."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Hassan II Mosque in Casablanca, Morocco",
+      "caption": "The Hassan II Mosque in Casablanca, featuring the world's second-tallest minaret at 210 meters, perched directly over the Atlantic Ocean."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Moroccan street view with Arabic signs and red/white curbstones",
+      "caption": "Moroccan street view indicators: Arabic and French bilingual road signs, red-and-white painted curb stones, and terracotta earth buildings."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates with Arabic numbers separated by a vertical line and a regional Arabic letter code denoting the province.",
+    "utilityPoles": "Reinforced concrete poles with square profiles or wooden poles; red-and-white painted concrete curbs in urban centers.",
+    "roadMarkings": "Continuous or dashed white centerlines; solid white edge lines; blue highway signs with Arabic and French script.",
+    "delineators": "White posts with red reflectors along national routes.",
+    "cameraGen": "Coverage in major historic medinas, tourist monuments, and urban transit corridors."
+  },
   "aiSummary": {
-    "geo": "Located in Africa; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring red field with a central green pentagram star representing national sovereignty.",
-    "freedom": "Gained sovereignty from France and Spain in 1956 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to unresolved Western Sahara conflict and droughts."
+    "geo": "Northwest African kingdom connecting Mediterranean and Atlantic; Atlas Mountains and Sahara Desert.",
+    "flag": "Red field with a central green 5-pointed interlaced pentagram (Seal of Solomon) representing Islam's pillars.",
+    "freedom": "1944 Independence Manifesto; 1953 Revolution of the King and the People; independence on March 2, 1956.",
+    "challenge": "Mega-scale seawater desalination, Noor solar scaling, and 2030 World Cup infrastructure."
   },
   "faqs": [
     {
-      "question": "When did Morocco gain independence?",
-      "answer": "Morocco attained its full sovereignty and recognized independence from France and Spain in 1956."
+      "question": "What is the green star on the Moroccan flag?",
+      "answer": "The green five-pointed star is the Seal of Solomon (Khātim Sulaymān), symbolizing health, wisdom, and the Five Pillars of Islam on the traditional red Alaouite field."
     },
     {
-      "question": "What are the main geographical characteristics of Morocco?",
-      "answer": "Morocco is located in Africa and features a geographical layout characterized by mountainous northwest African coast."
+      "question": "What was the Green March of 1975?",
+      "answer": "The Green March was a peaceful mass demonstration in November 1975 organized by King Hassan II, in which 350,000 unarmed Moroccan citizens marched into the Western Sahara."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "789 CE",
+      "event": "Idris I establishes the Idrisid Dynasty and founds the imperial city of Fes."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1666",
+      "event": "The Alaouite Dynasty assumes rule over Morocco, continuing to the present day."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Morocco."
+      "year": "1912",
+      "event": "The Treaty of Fes establishes French and Spanish protectorates over Morocco."
+    },
+    {
+      "year": "1956",
+      "event": "Morocco regains sovereign independence on March 2 under King Mohammed V."
+    },
+    {
+      "year": "1975",
+      "event": "King Hassan II leads the historic Green March of 350,000 citizens into the Sahara."
+    },
+    {
+      "year": "2018",
+      "event": "Inauguration of Al Boraq, the first high-speed rail line on the African continent."
     }
   ]
 }

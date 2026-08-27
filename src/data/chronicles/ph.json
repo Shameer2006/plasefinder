@@ -6,43 +6,80 @@
   "population": "115.6 Million",
   "currency": "Philippine Peso (PHP)",
   "languages": [
-    "Filipino",
+    "Filipino (Tagalog)",
     "English"
   ],
-  "seoTitle": "Detailed History of Philippines: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Philippines. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Philippines is a key element of its national identity in Asia. Characterized by its volcanic archipelago in the western Pacific, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Philippines came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Philippines is a powerful symbol of the country's sovereignty and cultural heritage. The design features a blue and red bands with golden sun and three stars. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Philippines involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from Spain in 1898 and United States in 1946. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Philippines, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Philippines faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to typhoons and South China Sea maritime disputes, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Philippines continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of the Philippines: Pearl of the Orient Seas, Sun & Stars Flag, and 1898 Republic",
+  "metaDescription": "Explore the detailed history of the Philippines. Discover José Rizal, the 1898 Malolos Republic, the Sun and Three Stars flag, and the 1986 EDSA Revolution.",
+  "mapFormation": "Comprising an archipelago of 7,641 volcanic and tropical islands spanning 300,000 square kilometers in the western Pacific Ocean, the Republic of the Philippines (<em>Republika ng Pilipinas</em>) is divided into three primary island groups: <strong>Luzon, Visayas, and Mindanao</strong>.<br><br>Austronesian navigators settled the islands around 2200 BCE. Coastal barangays and maritime thalassocracies (the Kingdom of Tondo, Rajahnate of Cebu, Sultanate of Sulu) traded with China, India, and the Malay world. In 1521, Portuguese explorer Ferdinand Magellan arrived in Samar on a Spanish expedition, and in 1565, Miguel López de Legazpi established the Spanish East Indies, naming the islands <em>Las Islas Filipinas</em> after King Philip II of Spain. The Manila-Acapulco Galleon Trade connected Asia and the Americas for 250 years.<br><br>Following the <strong>Philippine Revolution of 1896</strong> led by Andrés Bonifacio (Katipunan) and General Emilio Aguinaldo, the Philippines declared independence on <strong>June 12, 1898</strong>. Following the Spanish-American War, the Treaty of Paris transferred the islands to the United States. Full sovereign recognition was attained on <strong>July 4, 1946</strong>, with the Treaty of Manila following World War II.",
+  "flagHistory": "The national flag of the Philippines—the <em>Pambansang Watawat ng Pilipinas</em>—features a horizontal bicolor of royal blue (top) and crimson red (bottom), with a white equilateral triangle at the hoist containing a golden <strong>Eight-Rayed Sun</strong> and three golden <strong>Five-Pointed Stars</strong>, officially hoisted on <strong>June 12, 1898</strong>, in Kawit, Cavite.<br><br>The design was created by General Emilio Aguinaldo and sewn in Hong Kong by Marcela Agoncillo. In patriotic symbolism: <strong>Royal Blue</strong> represents peace, truth, and justice; <strong>Crimson Red</strong> symbolizes patriotism and valor; and <strong>White</strong> represents equality and fraternity. The <strong>Golden Sun</strong> represents the giant strides made by the nation toward progress, with its <strong>Eight Rays</strong> symbolizing the first eight provinces placed under martial law during the 1896 Revolution (Manila, Cavite, Bulacan, Pampanga, Nueva Ecija, Tarlac, Laguna, and Batangas). The <strong>Three Stars</strong> represent the three principal geographical island groups: Luzon, Visayas (Panay), and Mindanao.<br><br>Unique in world vexillology, the flag is flown with the <strong>Red band on top in times of declared war</strong>, and Blue on top in times of peace.",
+  "freedomStory": "The Philippine struggle for independence was ignited by the intellectual brilliance of national hero <strong>Dr. José Rizal</strong>, whose novels <em>Noli Me Tángere</em> and <em>El Filibusterismo</em> exposed colonial injustices.<br><br>On <strong>June 12, 1898</strong>, General Emilio Aguinaldo proclaimed independence from the balcony of his home in Kawit, Cavite, where the national anthem and flag were first presented, convening the revolutionary Malolos Congress to establish the <strong>First Philippine Republic (1899)</strong>—the first constitutional democracy in Asia.<br><br>In February 1986, the Filipino people inspired the world through the peaceful <strong>People Power Revolution (EDSA Revolution)</strong>, when millions of unarmed citizens and Catholic nuns carrying rosaries confronted military tanks on Epifanio de los Santos Avenue in Manila, ending authoritarian rule and inaugurating <strong>Corazon Aquino</strong> as President under the democratic 1987 Constitution.",
+  "challenges": "As a dynamic economy in Southeast Asia and a global leader in business process outsourcing (BPO) and seafaring, the Philippines balances rapid growth with natural disaster resilience. Situated on the Pacific Typhoon Belt and Ring of Fire, top priorities include reinforcing coastal sea walls against super typhoons, expanding renewable solar and geothermal power, and asserting maritime sovereign rights in the West Philippine Sea.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Banaue Rice Terraces carved into mountain slopes, Philippines",
+      "caption": "The 2,000-year-old Banaue Rice Terraces carved into the Cordillera mountains of Ifugao, Luzon, a UNESCO World Heritage cultural landscape."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Rizal Monument in Luneta Park, Manila, Philippines",
+      "caption": "The Rizal Monument in Luneta (Rizal Park), Manila, guarding the memorial and resting place of national hero Dr. José Rizal."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Philippine street view with colorful Jeepneys and English signage",
+      "caption": "Philippine street view indicators: colorful iconic passenger Jeepneys, English road signs, white rectangular license plates with green characters, and tropical foliage."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right (switched from left on March 10, 1945)",
+    "licensePlates": "White rectangular plates with green or black characters (format: ABC 1234) with 'PILIPINAS' or 'MATATAG NA REPUBLIKA' inscribed along the bottom.",
+    "utilityPoles": "Reinforced concrete poles or wooden poles with heavy bundles of overhead telecommunication cables (spaghetti wires).",
+    "roadMarkings": "Continuous or dashed white centerlines; solid yellow lines on mountain highway curves; English road signage ('STOP', 'ONE WAY', 'BARANGAY').",
+    "delineators": "White concrete boundary stones with distance markers along national highways (Manila kilometer zero).",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across Metro Manila, Cebu, Davao, Luzon, and the Visayas."
+  },
   "aiSummary": {
-    "geo": "Located in Asia; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring blue and red bands with golden sun and three stars representing national sovereignty.",
-    "freedom": "Gained sovereignty from Spain in 1898 and United States in 1946 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to typhoons and South China Sea maritime disputes."
+    "geo": "Archipelago of 7,641 islands in the western Pacific; organized into Luzon, Visayas, and Mindanao.",
+    "flag": "Blue and red horizontal bicolor with white triangle, 8-rayed sun and 3 stars; red flown on top during war.",
+    "freedom": "1898 independence declaration; Asia's first constitutional republic; 1986 peaceful People Power Revolution.",
+    "challenge": "Super typhoon and disaster resilience, West Philippine Sea maritime defense, and digital BPO scaling."
   },
   "faqs": [
     {
-      "question": "When did Philippines gain independence?",
-      "answer": "Philippines attained its full sovereignty and recognized independence from Spain in 1898 and United States in 1946."
+      "question": "Why does the Philippine flag change during war?",
+      "answer": "The Philippine flag is unique in world vexillology: the Blue stripe is on top during times of peace, but the flag is inverted with the Red stripe on top during times of war."
     },
     {
-      "question": "What are the main geographical characteristics of Philippines?",
-      "answer": "Philippines is located in Asia and features a geographical layout characterized by volcanic archipelago in the western Pacific."
+      "question": "What is the 1986 EDSA People Power Revolution?",
+      "answer": "The People Power Revolution was a series of peaceful mass demonstrations in Manila in February 1986 that ended 20 years of authoritarian rule without bloodshed."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1521",
+      "event": "Ferdinand Magellan arrives in Samar; First Mass celebrated in the Philippines."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1896",
+      "event": "The Philippine Revolution breaks out against Spanish rule led by Andrés Bonifacio's Katipunan."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Philippines."
+      "year": "1898",
+      "event": "General Emilio Aguinaldo proclaims Philippine independence in Kawit, Cavite on June 12."
+    },
+    {
+      "year": "1946",
+      "event": "The United States formally recognizes Philippine independence on July 4 under the Treaty of Manila."
+    },
+    {
+      "year": "1986",
+      "event": "The peaceful EDSA People Power Revolution restores democratic constitutional government on February 25."
+    },
+    {
+      "year": "1987",
+      "event": "Ratification of the 1987 Constitution of the Republic of the Philippines."
     }
   ]
 }

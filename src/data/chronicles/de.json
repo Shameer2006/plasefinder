@@ -3,53 +3,98 @@
   "name": "Germany",
   "capital": "Berlin",
   "continent": "Europe",
-  "population": "84.3 Million",
+  "population": "84.4 Million",
   "currency": "Euro (EUR)",
   "languages": [
     "German"
   ],
-  "seoTitle": "Detailed History of Germany: Map Formation, Flag Origin, and Reunification",
-  "metaDescription": "Discover the rich history of Germany. Learn about its background, geographical border formation, the origins of the black, red, and gold flag, and its path to reunification.",
-  "mapFormation": "Germany's geographical formation has been one of the most fluid in European history. Originating from a loose collection of Germanic tribes and later the sprawling Holy Roman Empire, the modern borders began to take shape after the Congress of Vienna in 1815. The German Empire was unified in 1871 under Otto von Bismarck. Following World War I and World War II, its borders were drastically redrawn, losing significant eastern territories to Poland and the Soviet Union. During the Cold War, the nation was divided into East Germany (GDR) and West Germany (FRG). The modern map of Germany was finalized upon the reunification of East and West Germany on October 3, 1990, establishing its current borders in Central Europe.",
-  "flagHistory": "The national flag of Germany consists of three equal horizontal bands displaying the national colors: black, red, and gold. The origins of these colors trace back to the Lützow Free Corps, a volunteer force that fought against Napoleon in the early 19th century, whose uniforms were black with red facings and gold buttons. These colors became a symbol of the liberal, democratic, and republican movement during the 1848 revolutions. Adopted officially by the Weimar Republic in 1919, and readopted by West Germany in 1949, the flag today stands as a symbol of unity, justice, and freedom.",
-  "freedomStory": "Germany's modern 'freedom story' is defined by its recovery from World War II and the subsequent reunification of the country. After the fall of the Nazi regime in 1945, Germany was divided into four occupation zones. The ideological divide of the Cold War split the nation into two distinct states. The fall of the Berlin Wall on November 9, 1989, marked a peaceful revolution by East German citizens demanding freedom and democratic rights. This monumental event led to the formal reunification of Germany on October 3, 1990, which is now celebrated annually as German Unity Day (Tag der Deutschen Einheit).",
-  "challenges": "Today, Germany is Europe's largest economy, but it faces significant contemporary challenges. Chief among them is the 'Energiewende' (energy transition), transitioning from fossil fuels and nuclear power to renewable energy sources while maintaining industrial competitiveness. Additionally, Germany faces an aging population and a shortage of skilled labor, requiring comprehensive immigration and integration policies. As a key leader in the European Union, Germany also navigates complex geopolitical shifts and the need to modernize its digital infrastructure and military forces.",
+  "seoTitle": "History of Germany: Border Evolution, Black-Red-Gold Vexillology, and Federal Reunification",
+  "metaDescription": "Explore the detailed history of Germany. Discover the Peace of Westphalia, 1871 unification, the fall of the Berlin Wall in 1989, and German democratic heritage.",
+  "mapFormation": "Positioned at the geographical heart of the European continent, the territory of the Federal Republic of Germany encompasses 357,022 square kilometers stretching from the North and Baltic Seas to the snow-crested peaks of the Bavarian Alps. Throughout antiquity, the territory north of the Danube and east of the Rhine was inhabited by Germanic tribes who halted Roman expansion at the Battle of the Teutoburg Forest in 9 CE.<br><br>The geopolitical mapping of modern Germany evolved through centuries of fragmentation and consolidation. For nearly a millennium, Central Europe was organized as the <strong>Holy Roman Empire of the German Nation</strong>, a decentralized confederation of hundreds of duchies, prince-bishoprics, and free imperial cities. The catastrophic Thirty Years' War led to the <strong>Peace of Westphalia (1648)</strong>, which recognized the territorial sovereignty of member states and established the principle of national sovereignty in international law.<br><br>Following the dissolution of the Holy Roman Empire in 1806 and the Congress of Vienna in 1815, the German Confederation was established. Under the strategic statesmanship of Minister President Otto von Bismarck, the Kingdom of Prussia orchestrated the <strong>Unification of Germany in 1871</strong> following victories over Denmark, Austria, and France, proclaiming the German Empire at Versailles.<br><br>Following the devastation of World War II, Germany's borders were redrawn along the Oder-Neisse line in the east, and the nation was partitioned into the Federal Republic of Germany (West) and the German Democratic Republic (East). The modern external frontiers were permanently codified on <strong>October 3, 1990</strong>, through the historic <strong>Two Plus Four Agreement</strong> (Treaty on the Final Settlement with Respect to Germany), which accompanied German Reunification.",
+  "flagHistory": "The national flag of Germany—the <em>Schwarz-Rot-Gold</em> (Black, Red, and Gold) horizontal tricolor—is an enduring emblem of republican liberty, constitutional democracy, and national unity. Unlike heraldic banners derived from monarchical crests, the German tricolor emerged directly from civic democratic revolutions.<br><br>The historical roots of the color palette trace back to the Napoleonic Wars and the volunteer soldiers of the <strong>Lützow Free Corps (1813)</strong>, whose uniforms consisted of black coats with red facings and brass gold buttons. In May 1832, over 30,000 citizens hoisted the black, red, and gold banner at the <strong>Hambach Festival</strong>, demanding freedom of the press, democratic representation, and a unified German republic.<br><br>During the Revolutions of 1848, the Frankfurt Parliament officially adopted the tricolor. While the German Empire later used a black, white, and red banner (combining Prussia and the Hanseatic League), the democratic Weimar Republic reinstated Black-Red-Gold in 1919. The Parliamentary Council formally re-enshrined the tricolor in <strong>Article 22 of the Basic Law (Grundgesetz)</strong> in 1949. Today, the banner represents the sovereign democratic ethos: <em>'Einigkeit und Recht und Freiheit'</em> (Unity and Justice and Freedom).",
+  "freedomStory": "Germany's constitutional path to freedom and self-determination represents a profound historical journey from royal absolutism and authoritarian dictatorship to one of the most robust constitutional democracies in the modern world.<br><br>The legal bedrock of modern German freedom is the <strong>Basic Law (Grundgesetz)</strong>, promulgated in Bonn on May 23, 1949. Crafted under the shadow of totalitarian atrocities, its opening declaration in Article 1 establishes the inviolable core of the republic: <em>'Human dignity shall be inviolable. To respect and protect it shall be the duty of all state authority.'</em><br><br>Four decades later, the desire for democratic self-determination culminated in the <strong>Peaceful Revolution of 1989</strong> in East Germany. Courageous citizens carrying candles held Monday Demonstrations in Leipzig and East Berlin, chanting <em>'Wir sind das Volk'</em> (We are the people). On the night of <strong>November 9, 1989</strong>, the Berlin Wall fell without a single shot fired, opening the border. On <strong>October 3, 1990</strong>, the five re-established eastern states formally acceded to the Federal Republic, achieving national unity in peace and freedom.",
+  "challenges": "As the largest economy in Europe and the world's third-largest exporter, Germany confronts strategic economic, environmental, and demographic transformations. The nation is executing the <strong>Energiewende</strong>—a complete structural transition to 100% renewable electricity by 2035 while phasing out coal and nuclear generation. Domestically, a rapidly aging demographic profile necessitates active workforce recruitment, digital administration modernization, and infrastructure upgrades across freight rail and energy transmission corridors. As a core anchor of the European Union, Germany actively balances industrial manufacturing leadership with continental energy security and collective NATO defense commitments.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Bavarian Alps and Neuschwanstein, Germany",
+      "caption": "The dramatic alpine topography of Bavaria in southern Germany, representing the natural alpine frontier with Austria."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1560969184-10fe8719e047?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Brandenburg Gate in Berlin, Germany",
+      "caption": "The Brandenburg Gate in Berlin, a monumental neoclassical symbol of European peace, division, and ultimate German reunification."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "German Autobahn and roadway infrastructure",
+      "caption": "German road infrastructure: classic black-and-white Leitpfosten delineators, blue autobahn signs, and white Euro plates with city regional codes."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White standard Euro plates with blue EU strip on the left; the first 1-3 letters represent the registration city/district (e.g., B for Berlin, M for Munich).",
+    "utilityPoles": "Utilities are almost entirely buried underground; overhead wooden or concrete poles are extremely rare outside isolated agricultural parcels.",
+    "roadMarkings": "Solid or dashed white centerlines; yellow road markings exclusively indicate temporary construction detours (Baustelle).",
+    "delineators": "Iconic Leitpfosten: white plastic rectangular posts with a vertical black band and a long vertical white reflector on the right (two round reflectors on the left).",
+    "cameraGen": "Historic Gen 2 footage with blurred houses due to early privacy laws, alongside pristine modern Gen 4 coverage added in 2023."
+  },
   "aiSummary": {
-    "geo": "Central European nation with borders significantly shaped by WWII and the 1990 reunification.",
-    "flag": "Black, red, and gold horizontal tricolor originating from the 19th-century democratic movement.",
-    "freedom": "Modern sovereignty achieved through the peaceful revolution of 1989 and formal reunification on October 3, 1990.",
-    "challenge": "Navigating the 'Energiewende' (green energy transition), an aging workforce, and digital modernization."
+    "geo": "Central European powerhouse; borders shaped by the 1648 Peace of Westphalia, 1871 unification, and the 1990 Two Plus Four Agreement.",
+    "flag": "The Schwarz-Rot-Gold tricolor, symbolizing democratic unity, justice, and freedom since the 1832 Hambach Festival.",
+    "freedom": "Anchored in the 1949 Basic Law (Grundgesetz) and the peaceful fall of the Berlin Wall on November 9, 1989.",
+    "challenge": "Executing the Energiewende green transition, managing demographic shifts, and modernizing digital infrastructure."
   },
   "faqs": [
     {
-      "question": "What is the background of the division and reunification of Germany?",
-      "answer": "Following World War II, Germany was divided into East and West by the Allied powers. It remained divided during the Cold War until the fall of the Berlin Wall in 1989, leading to official reunification in 1990."
+      "question": "What is the historical significance of the Peace of Westphalia (1648)?",
+      "answer": "Signed in Münster and Osnabrück in 1648, the Peace of Westphalia ended the Thirty Years' War, recognized territorial sovereignty within the Holy Roman Empire, and established the foundation for modern international statehood."
     },
     {
-      "question": "What do the colors of the German flag mean?",
-      "answer": "The black, red, and gold colors originated from the uniforms of 19th-century volunteer soldiers fighting Napoleon and represent unity, justice, and freedom."
+      "question": "When was Germany officially unified as a single nation?",
+      "answer": "Germany was first unified as a modern nation-state on January 18, 1871, under Chancellor Otto von Bismarck and Kaiser Wilhelm I. Following the Cold War division, it was reunified on October 3, 1990."
+    },
+    {
+      "question": "What is the meaning of the German national motto?",
+      "answer": "The motto 'Einigkeit und Recht und Freiheit' translates to 'Unity and Justice and Freedom', originating from August Heinrich Hoffmann von Fallersleben's 1841 Lied der Deutschen."
+    },
+    {
+      "question": "Why is the German Basic Law called 'Grundgesetz' rather than a constitution?",
+      "answer": "In 1949, the framers in West Germany deliberately used the term 'Grundgesetz' (Basic Law) rather than 'Verfassung' to emphasize its provisional character until the entire German nation could freely achieve reunification."
     }
   ],
   "timeline": [
     {
-      "year": "1871",
-      "event": "Unification of Germany and creation of the German Empire under Otto von Bismarck."
+      "year": "9 CE",
+      "event": "Arminius leads Germanic tribes to victory over Roman legions at the Battle of the Teutoburg Forest."
     },
     {
-      "year": "1945",
-      "event": "End of World War II; Germany is divided into four occupation zones."
+      "year": "1648",
+      "event": "The Peace of Westphalia concludes the Thirty Years' War, establishing the principle of sovereign territorial states."
+    },
+    {
+      "year": "1848",
+      "event": "The Frankfurt Parliament convenes at St. Paul's Church, drafting the first democratic constitution for a united Germany."
+    },
+    {
+      "year": "1871",
+      "event": "The German Empire is proclaimed at the Palace of Versailles following the unification campaigns of Otto von Bismarck."
+    },
+    {
+      "year": "1919",
+      "event": "The Weimar Republic is established with a progressive democratic constitution and adopts the Black-Red-Gold flag."
     },
     {
       "year": "1949",
-      "event": "Formation of West Germany (FRG) and East Germany (GDR)."
+      "event": "The Basic Law (Grundgesetz) is promulgated in Bonn, establishing the Federal Republic of Germany."
     },
     {
       "year": "1989",
-      "event": "Fall of the Berlin Wall on November 9."
+      "event": "The Berlin Wall falls on November 9 following months of peaceful mass demonstrations in Leipzig and Berlin."
     },
     {
       "year": "1990",
-      "event": "Official reunification of Germany on October 3."
+      "event": "Official reunification of East and West Germany takes place on October 3 under the Two Plus Four Agreement."
     }
   ]
 }

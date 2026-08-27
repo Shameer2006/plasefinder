@@ -4,44 +4,81 @@
   "capital": "Copenhagen",
   "continent": "Europe",
   "population": "5.9 Million",
-  "currency": "Euro (EUR)",
+  "currency": "Danish Krone (DKK)",
   "languages": [
     "Danish"
   ],
-  "seoTitle": "Detailed History of Denmark: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Denmark. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Denmark is a key element of its national identity in Europe. Characterized by its Jutland peninsula and low islands, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Denmark came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Denmark is a powerful symbol of the country's sovereignty and cultural heritage. The design features a red field with white Nordic cross (Dannebrog). Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Denmark involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from ancient unified sovereignty. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Denmark, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Denmark faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to climate defense against sea flooding, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Denmark continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Denmark: Kingdom of the Dannebrog, Jutland Peninsula, and Democracy",
+  "metaDescription": "Discover the detailed history of Denmark. Explore King Gorm the Old, the world's oldest flag Dannebrog (1219), the 1849 Constitution, and green wind power.",
+  "mapFormation": "Occupying the Jutland Peninsula and an archipelago of 443 named islands (including Zealand, Funen, and Bornholm) across 42,933 square kilometers, the Kingdom of Denmark (<em>Danmark</em>) guards the strategic straits connecting the North Sea to the Baltic Sea. The sovereign Danish Realm (<em>Rigsfællesskabet</em>) also includes the autonomous self-governing territories of the <strong>Faroe Islands</strong> in the North Atlantic and <strong>Greenland</strong>, the world's largest island.<br><br>The historic Danish state coalesced during the Viking Age under King Gorm the Old and his son <strong>Harald Bluetooth</strong> around <strong>965 CE</strong>, who united Denmark and converted the Danes to Christianity, commemorated on the famous <strong>Jelling Stones</strong> ('Denmark's birth certificate'). In the 14th century, Queen Margaret I established the Kalmar Union, uniting Scandinavia under Danish hegemony.<br><br>Following losses in the Napoleonic Wars and the 1864 Second Schleswig War against Prussia and Austria, Danish borders stabilized in 1920 when a democratic plebiscite returned Northern Schleswig (Sønderjylland) to Denmark.",
+  "flagHistory": "The national flag of Denmark—the <strong>Dannebrog</strong> (Cloth of the Danes)—holds the Guinness World Record as the oldest continuously used national flag in world history, featuring a white Nordic Cross on a field of crimson red.<br><br>According to legendary historical chronicles in the 13th-century <em>Gesta Danorum</em> by Saxo Grammaticus, the flag miraculously fell from the heavens on <strong>June 15, 1219</strong>, during the Battle of Lindanise (modern Tallinn, Estonia) to King Valdemar II the Victorious, rallying Danish forces to victory. The Dannebrog became the structural design template for all Nordic flags across Scandinavia, Finland, and Iceland.",
+  "freedomStory": "Denmark's transition from royal absolutism to modern constitutional democracy occurred through peaceful consensus.<br><br>On <strong>June 5, 1849</strong>, King Frederick VII signed the <strong>Constitutional Act of Denmark (Danmarks Riges Grundlov)</strong>, peacefully ending over two centuries of royal absolutism and establishing a constitutional monarchy with a bicameral parliament and basic civil liberties (celebrated annually as Constitution Day / <em>Grundlovsdag</em>).<br><br>During World War II, the Danish people staged heroic resistance against Nazi occupation, successfully evacuating over 95% of the Danish Jewish population across the Øresund to safety in neutral Sweden in October 1943. In the post-war era, Denmark co-founded NATO in 1949 and pioneered the world's leading wind turbine manufacturing industry through Vestas and Ørsted.",
+  "challenges": "As a global leader in green transition aiming for a 70% greenhouse gas reduction, Denmark is pioneering artificial energy islands in the North Sea. Domestically, priorities include digital public administration, healthcare workforce expansion, and managing constitutional defense partnerships with Greenland and the Faroe Islands.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Møns Klint white chalk cliffs in Denmark",
+      "caption": "The dramatic white chalk cliffs of Møns Klint along the Baltic Sea coast on the island of Møn, Denmark."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1512813195386-6cf811ad3542?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Nyhavn colorful waterfront in Copenhagen, Denmark",
+      "caption": "The 17th-century colorful canal townhouses of Nyhavn in Copenhagen, where fairy-tale author Hans Christian Andersen lived."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Danish road landscape with red border license plates and cycle tracks",
+      "caption": "Danish street view clues: white license plates with a thin red rectangular border, yellow warning signs with red borders, and extensive cycle paths."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates with a thin red outer border line (unique in Europe); commercial van plates are yellow with a red border.",
+    "utilityPoles": "Underground power lines; wooden poles rare; prominent roadside speed limit signs with red circular borders.",
+    "roadMarkings": "Continuous or dashed white centerlines; solid white edge lines; wide curbside bicycle paths.",
+    "delineators": "Yellow-and-white plastic posts with a red diagonal reflector on top.",
+    "cameraGen": "Complete Gen 3 and Gen 4 coverage across Jutland and all major islands."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring red field with white Nordic cross (Dannebrog) representing national sovereignty.",
-    "freedom": "Gained sovereignty from ancient unified sovereignty through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to climate defense against sea flooding."
+    "geo": "Jutland Peninsula and island archipelago; Danish Realm includes Greenland and the Faroe Islands.",
+    "flag": "The Dannebrog: world's oldest national flag (1219), white cross on crimson red.",
+    "freedom": "1849 Grundlov Constitution established democracy; 1943 heroic rescue of Danish Jews.",
+    "challenge": "North Sea energy island construction, green transition, and Arctic Greenland defense coordination."
   },
   "faqs": [
     {
-      "question": "When did Denmark gain independence?",
-      "answer": "Denmark attained its full sovereignty and recognized independence from ancient unified sovereignty."
+      "question": "What is the oldest continuously used national flag in the world?",
+      "answer": "The Dannebrog of Denmark holds the world record, first recorded in 1219 during the Battle of Lindanise."
     },
     {
-      "question": "What are the main geographical characteristics of Denmark?",
-      "answer": "Denmark is located in Europe and features a geographical layout characterized by Jutland peninsula and low islands."
+      "question": "What is the Danish Realm (Rigsfællesskabet)?",
+      "answer": "The Danish Realm is the constitutional union consisting of metropolitan Denmark in Europe, along with the autonomous self-governing territories of Greenland and the Faroe Islands."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "965 CE",
+      "event": "Harald Bluetooth unifies Denmark and erects the Jelling Stone."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1219",
+      "event": "The Dannebrog flag falls from the sky at the Battle of Lindanise in Estonia."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Denmark."
+      "year": "1849",
+      "event": "King Frederick VII signs the Constitution (Grundlov), ending royal absolutism."
+    },
+    {
+      "year": "1920",
+      "event": "Northern Schleswig is reunited with Denmark following a democratic plebiscite."
+    },
+    {
+      "year": "1943",
+      "event": "The Danish Resistance evacuates over 7,000 Danish Jews to safety in Sweden."
+    },
+    {
+      "year": "2000",
+      "event": "Inauguration of the Øresund Bridge connecting Copenhagen directly to Malmö, Sweden."
     }
   ]
 }

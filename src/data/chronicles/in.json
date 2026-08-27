@@ -3,55 +3,103 @@
   "name": "India",
   "capital": "New Delhi",
   "continent": "Asia",
-  "population": "1.4 Billion",
+  "population": "1.43 Billion",
   "currency": "Indian Rupee (INR)",
   "languages": [
-    "Tamil",
+    "Hindi",
     "English",
-    "Hindi"
+    "Tamil",
+    "Bengali",
+    "Telugu",
+    "Marathi"
   ],
-  "seoTitle": "History of India: Independence, Map Formation, and Tricolor Flag",
-  "metaDescription": "Explore the rich history of India, from ancient civilizations to British colonial rule. Learn about the independence movement, the Tiranga flag, and its vibrant culture.",
-  "mapFormation": "The Indian subcontinent has a history spanning thousands of years, home to the Indus Valley Civilization and ancient empires like the Maurya and Gupta. The geographical boundaries of modern India were significantly shaped during the British Raj. The map as we know it today was finalized upon independence in 1947, which also resulted in the Partition of India—creating the separate nations of India and Pakistan (and later Bangladesh). Following independence, over 500 princely states were integrated into the Indian Union under the leadership of Sardar Vallabhbhai Patel. The internal map continued to evolve, with states eventually reorganized along linguistic lines in 1956.",
-  "flagHistory": "The National Flag of India, colloquially known as the Tiranga (Tricolor), was adopted on July 22, 1947. It features three horizontal bands: deep saffron (Kesari) at the top representing courage and sacrifice, white in the middle representing peace and truth, and dark green at the bottom representing faith and chivalry. In the center of the white band is a navy blue wheel with 24 spokes, the Ashoka Chakra, which represents the eternal wheel of law and dynamics of peaceful change. The flag was based on a design by Pingali Venkayya and is a profound symbol of the nation's freedom struggle and democratic values.",
-  "freedomStory": "India's struggle for independence was a massive, multi-generational movement against nearly 200 years of British colonial rule. Led by the Indian National Congress and prominent figures like Mahatma Gandhi, Jawaharlal Nehru, and Subhas Chandra Bose, the movement utilized both non-violent civil disobedience and armed struggle. Gandhi's principles of Ahimsa (non-violence) and Satyagraha (truth force) mobilized millions across the subcontinent. The long and arduous journey culminated in the Indian Independence Act, and India officially became a free and independent nation on August 15, 1947, later adopting its constitution and becoming a Republic on January 26, 1950.",
-  "challenges": "As the world's most populous democracy and a rapidly growing major economy, India faces complex challenges. While it boasts a thriving IT sector, a space program, and a massive demographic dividend, it continues to grapple with income inequality, poverty, and infrastructure deficits in rural areas. Environmental concerns, such as air pollution and water scarcity, are increasingly pressing. Additionally, navigating regional geopolitics and ensuring equitable economic growth for its diverse and massive population remain top priorities for the government.",
+  "seoTitle": "History of India: Ancient Civilizations, Tiranga Flag Heraldry, and Sovereign Republic",
+  "metaDescription": "Explore the detailed history of India. Discover the Indus Valley, Maurya Empire, 1947 Independence movement, Constitution of 1950, and Tiranga flag.",
+  "mapFormation": "Occupying the vast Indian subcontinent in South Asia across 3.28 million square kilometers, the Republic of India (<em>Bhārat</em>) is defined by majestic natural boundaries: the formidable snow-capped wall of the <strong>Himalayas and Karakoram</strong> to the north, flanked by the Arabian Sea to the west, the Bay of Bengal to the east, and the Indian Ocean to the south.<br><br>The subcontinent is home to one of humanity's earliest cradles of urban civilization—the <strong>Indus Valley Civilization</strong> (Harappa and Mohenjo-daro, c. 2500 BCE)—followed by the Vedic era, the golden age of the <strong>Maurya Empire</strong> under Emperor Ashoka the Great in the 3rd century BCE, and the classic cultural zenith of the Gupta Empire.<br><br>Modern political borders took shape through centuries of dynastic rule and British colonial consolidation under the East India Company and the British Raj (1858–1947). The territorial map of modern India was finalized upon independence on <strong>August 15, 1947</strong>, which coincided with the tragic Partition creating independent Pakistan. Under the decisive statesmanship of Deputy Prime Minister <strong>Sardar Vallabhbhai Patel</strong> and V.P. Menon, over 565 autonomous princely states were peacefully integrated into the Indian Union. Internal state boundaries were subsequently reorganized along linguistic lines via the landmark <strong>States Reorganisation Act of 1956</strong>, followed by the liberation of Goa from Portuguese rule in 1961 and the accession of Sikkim in 1975.",
+  "flagHistory": "The national flag of India—revered nationwide as the <strong>Tiranga</strong> (The Tricolor)—is a sacred vexillological emblem of courage, truth, secular democracy, and righteous action, formally adopted by the Constituent Assembly on <strong>July 22, 1947</strong>.<br><br>The design was created by freedom fighter and scholar <strong>Pingali Venkayya</strong> and features three equal horizontal bands of equal proportions: <strong>India Saffron (Kesari)</strong> at the top, <strong>White</strong> in the middle, and <strong>India Green</strong> at the bottom. At the exact mathematical center of the white band sits the navy blue <strong>Ashoka Chakra</strong>—a 24-spoke wheel modeled after the Lion Capital of Ashoka at Sarnath (c. 250 BCE).<br><br>As eloquently articulated by philosopher and India's second President, Dr. Sarvepalli Radhakrishnan: Saffron signifies <em>renunciation, courage, and selflessness</em>; White represents <em>the path of truth and purity of conduct</em>; Green symbolizes <em>fertility, agriculture, and prosperity</em>; while the Ashoka Chakra represents <strong>Dharma</strong> (righteous duty) and the dynamic perpetual motion of peaceful constitutional progress.",
+  "freedomStory": "India's struggle for sovereign independence was the largest mass freedom movement in human history, pioneering the universal philosophy of non-violent civil resistance against nearly two centuries of British imperial rule.<br><br>The spark of modern resistance was struck during the <strong>Indian Rebellion of 1857</strong>. In the 20th century, the movement transformed under the leadership of <strong>Mahatma Gandhi</strong>, who mobilized hundreds of millions of citizens through the revolutionary doctrines of <em>Satyagraha</em> (truth-force) and <em>Ahimsa</em> (non-violence)—epitomized by the historic 1930 Salt March (Dandi Satyagraha) and the 1942 Quit India Movement. Alongside Gandhi, visionary leaders like Jawaharlal Nehru, Netaji Subhas Chandra Bose, and Sardar Patel galvanized every corner of the nation.<br><br>India achieved full independence on <strong>August 15, 1947</strong>. On <strong>January 26, 1950</strong>, the Constituent Assembly enacted the <strong>Constitution of India</strong>, masterfully drafted under the chairmanship of <strong>Dr. B.R. Ambedkar</strong>. As the longest written constitution of any sovereign state in world history, it established India as a Sovereign, Socialist, Secular, Democratic Republic guaranteeing fundamental rights and universal adult suffrage.",
+  "challenges": "As the world's most populous democracy and the fifth-largest global economy, India is executing rapid industrial, digital, and infrastructural transformations. Core priorities include managing sustainable urban growth, transitioning agricultural power systems, expanding the unified digital public infrastructure (UPI / India Stack), and generating high-skill manufacturing jobs under the 'Make in India' initiative. Environmentally, the nation accelerates massive solar parks in Rajasthan and Gujarat to meet ambitious renewable targets while managing seasonal monsoon water management across the Indo-Gangetic river basin.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Himalayan mountain range in northern India",
+      "caption": "The majestic Himalayan mountain barrier in northern India, the source of the holy Ganges, Indus, and Brahmaputra river systems."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Taj Mahal in Agra, India",
+      "caption": "The Taj Mahal in Agra, a UNESCO World Heritage masterpiece of white marble architecture built during the Mughal Empire."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Indian highway landscape with auto-rickshaws and bilingual signage",
+      "caption": "Indian street view indicators: driving on the left, yellow milestone posts, auto-rickshaws, and multi-script English and regional language signage."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Left",
+    "licensePlates": "White rectangular plates with black lettering for private passenger cars; bright yellow plates for commercial taxis and transport vehicles; green plates for electric vehicles.",
+    "utilityPoles": "Reinforced concrete poles with multiple metal crossbars; tubular steel poles common along national highway corridors.",
+    "roadMarkings": "White dashed centerlines; yellow continuous centerlines on mountain ghat roads; white outer shoulder rumble strips.",
+    "delineators": "Yellow-and-white or green-and-white rounded highway milestone stones indicating distance and national highway numbers (NH).",
+    "cameraGen": "Massive Gen 4 nationwide rollout launched in 2022 covering hundreds of cities and thousands of kilometers of national highways."
+  },
   "aiSummary": {
-    "geo": "South Asian subcontinent; modern borders defined by the 1947 Partition and subsequent integration of princely states.",
-    "flag": "The Tiranga: saffron, white, and green horizontal bands with the navy blue Ashoka Chakra in the center.",
-    "freedom": "Achieved independence from British rule on August 15, 1947, largely through non-violent civil disobedience led by Mahatma Gandhi.",
-    "challenge": "Balancing rapid economic growth and technological advancement with poverty reduction and environmental sustainability."
+    "geo": "South Asian subcontinent; modern sovereign borders shaped by the 1947 Partition, princely state integration, and the 1956 States Reorganisation Act.",
+    "flag": "The Tiranga: saffron, white, and green horizontal tricolor with the 24-spoke navy blue Ashoka Chakra.",
+    "freedom": "Mass non-violent freedom movement led by Mahatma Gandhi and Sardar Patel; democratic Constitution enacted January 26, 1950.",
+    "challenge": "Renewable solar transitions, urban infrastructure modernization, and demographic manufacturing job creation."
   },
   "faqs": [
     {
-      "question": "When did India gain independence?",
-      "answer": "India gained independence from British rule on August 15, 1947. It later became a Republic when its constitution came into effect on January 26, 1950."
+      "question": "When did India gain independence and when did it become a Republic?",
+      "answer": "India gained independence from British colonial rule on August 15, 1947. It officially became a Republic on January 26, 1950, when the Constitution of India came into effect."
     },
     {
-      "question": "What does the Ashoka Chakra on the Indian flag signify?",
-      "answer": "The 24-spoke navy blue Ashoka Chakra represents the eternal wheel of law (Dharma) and the dynamic nature of peaceful change and progress."
+      "question": "What is the meaning of the 24 spokes in the Ashoka Chakra on the Indian flag?",
+      "answer": "The 24 spokes of the Ashoka Chakra represent the 24 virtues in Buddhist and Vedic philosophy, symbolizing continuous moral righteousness, duty (Dharma), and dynamic progress throughout the 24 hours of the day."
+    },
+    {
+      "question": "Who was the chief architect of the Constitution of India?",
+      "answer": "Dr. B.R. Ambedkar served as the Chairman of the Drafting Committee of the Constituent Assembly and is recognized as the Father and Chief Architect of the Constitution of India."
+    },
+    {
+      "question": "How were over 500 princely states integrated into the Indian Union?",
+      "answer": "Following independence in 1947, Deputy Prime Minister Sardar Vallabhbhai Patel and Secretary V.P. Menon successfully negotiated the accession of over 565 princely states into the unified Indian Union."
     }
   ],
   "timeline": [
     {
+      "year": "2500 BCE",
+      "event": "The Indus Valley Civilization develops advanced urban planning at Harappa and Mohenjo-daro."
+    },
+    {
+      "year": "261 BCE",
+      "event": "Emperor Ashoka embraces Buddhism following the Kalinga War, establishing moral edicts and the Ashoka Chakra."
+    },
+    {
       "year": "1857",
-      "event": "The Indian Rebellion of 1857 (Sepoy Mutiny) marks the first major uprising against British East India Company rule."
+      "event": "The Indian Rebellion of 1857 marks the first major united uprising against British East India Company rule."
     },
     {
       "year": "1947",
-      "event": "India achieves independence on August 15, accompanied by the Partition into India and Pakistan."
+      "event": "India achieves independence on August 15, accompanied by the Partition and integration of 565 princely states."
     },
     {
       "year": "1950",
       "event": "The Constitution of India comes into effect on January 26, establishing the Republic of India."
     },
     {
+      "year": "1956",
+      "event": "The States Reorganisation Act reorganizes internal state borders along linguistic boundaries."
+    },
+    {
       "year": "1991",
-      "event": "India initiates major economic liberalization reforms, opening its economy to global trade."
+      "event": "India initiates comprehensive economic liberalization reforms, integrating into global trade networks."
     },
     {
       "year": "2023",
-      "event": "India successfully lands the Chandrayaan-3 mission on the Moon's south pole."
+      "event": "India's Chandrayaan-3 mission successfully lands on the Moon's south pole, showcasing space technology leadership."
     }
   ]
 }

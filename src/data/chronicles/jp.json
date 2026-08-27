@@ -3,45 +3,98 @@
   "name": "Japan",
   "capital": "Tokyo",
   "continent": "Asia",
-  "population": "125.1 Million",
+  "population": "124.5 Million",
   "currency": "Japanese Yen (JPY)",
   "languages": [
     "Japanese"
   ],
-  "seoTitle": "Detailed History of Japan: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Japan. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Japan is a key element of its national identity in Asia. Characterized by its mountainous volcanic island arc in East Asia, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Japan came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Japan is a powerful symbol of the country's sovereignty and cultural heritage. The design features a white field with central red sun disc (Hinomaru). Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Japan involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from ancient imperial dynasty consolidation. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Japan, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Japan faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to extreme demographic decline and labor shortages, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Japan continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Japan: Archipelago Formation, Hinomaru Sun Flag Heraldry, and Modern Democracy",
+  "metaDescription": "Discover the detailed history of Japan. Explore the Taika Reforms, Tokugawa Shogunate, Meiji Restoration, the 1947 Peace Constitution, and Hinomaru vexillology.",
+  "mapFormation": "Forming an elegant volcanic crescent along the Pacific Rim of Fire in East Asia, the sovereign territory of Japan encompasses 377,975 square kilometers across an archipelago of 14,125 islands, dominated by four primary landmasses: <strong>Honshu, Hokkaido, Kyushu, and Shikoku</strong>. Over 70% of the landmass is mountainous and densely forested, concentrating major metropolitan populations along fertile coastal plains such as the Kanto and Kansai basins.<br><br>The consolidation of the Japanese state began during the Asuka and Nara periods with the <strong>Taika Reforms of 645 CE</strong>, which centralized land administration under the Imperial Court based in Kyoto. In the late 12th century, political authority shifted toward feudal military regimes (shogunates) under the Minamoto, Ashikaga, and Tokugawa clans. During the <strong>Edo Period (1603–1867)</strong>, the Tokugawa Shogunate instituted <em>Sakoku</em> (closed country policy), preserving peace and internal borders across more than 250 feudal domains (<em>han</em>).<br><br>Following the arrival of Commodore Matthew Perry's Black Ships, the <strong>Meiji Restoration of 1868</strong> dismantled the feudal system, abolishing the domains in 1871 (<em>Haihan-chiken</em>) to establish modern prefectures. The realm formally incorporated the northern wilderness of Hokkaido in 1869 and the Ryukyu Kingdom as Okinawa Prefecture in 1879. Japan's modern peaceful borders were codified under the <strong>Treaty of San Francisco (1951)</strong> following World War II.",
+  "flagHistory": "The national banner of Japan, officially designated as the <strong>Nisshōki</strong> (Sun-mark flag) and popularly revered as the <strong>Hinomaru</strong> (Circle of the Sun), is an iconic minimalist masterpiece deeply rooted in ancient Shinto cosmology and the cultural identity of Japan as <em>Nihon</em>—'the land of the rising sun'.<br><br>According to classical mythology in the <em>Kojiki</em> and <em>Nihon Shoki</em>, the Imperial House traces its divine ancestry to the sun goddess <strong>Amaterasu Ōmikami</strong>. Historical records show sun-disc banners carried by samurai commanders as early as the 12th-century Genpei War between the Minamoto and Taira clans. In 1854, the Tokugawa Shogunate decreed that Japanese merchant vessels hoist the Hinomaru to distinguish themselves from foreign Western ships entering open ports.<br><br>The design was formally standardized by the Grand Council of State in 1870 and re-codified under the <strong>Law Regarding the National Flag and National Anthem (1999)</strong>. The flag features a ratio of 2:3, comprising a deep crimson-red circular disc (representing the blazing sun, vitality, and sincerity) positioned at the mathematical center of a pure white field (symbolizing purity, honesty, and integrity).",
+  "freedomStory": "Japan's modern constitutional liberty developed through a monumental transition from feudal samurai rule and imperial expansionism to one of the world's most peaceful, prosperous, and stable constitutional democracies.<br><br>Following the Meiji Restoration, Japan enacted the Meiji Constitution in 1889, establishing the Imperial Diet as Asia's first parliamentary assembly. Following the catastrophic devastation of World War II, the nation undertook a sweeping democratic transformation, enacting the <strong>Constitution of Japan on May 3, 1947</strong>.<br><br>The 1947 Constitution established three fundamental pillars: <strong>popular sovereignty</strong>, the preservation of fundamental human rights, and the famous <strong>Article 9 (Renunciation of War)</strong>, in which the Japanese people forever renounced war as a sovereign right of the nation. In the post-war era, Japan achieved the 'Economic Miracle', pioneering high-speed transportation with the 1964 Tokaido Shinkansen and becoming a global superpower in automotive engineering, robotics, and creative arts while maintaining an exceptionally safe and democratic civic society.",
+  "challenges": "In the 21st century, Japan confronts profound demographic, environmental, and geopolitical challenges. The nation has the world's oldest population, with over 29% of citizens aged 65 or older, creating intense pressures on pension systems, healthcare capacity, and labor markets. In response, Japan is pioneering robotic automation, eldercare technology, and measured foreign worker programs. Environmentally, the country continuously enhances seismic defenses against potential megaquake scenarios along the Nankai Trough while rebalancing clean energy generation between offshore wind and restarted nuclear safety fleets.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Mount Fuji and Chureito Pagoda in Japan",
+      "caption": "The snow-capped summit of Mount Fuji (Fujisan), Japan's sacred volcano and highest peak at 3,776 meters."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Senso-ji Temple in Asakusa, Tokyo, Japan",
+      "caption": "Senso-ji in Tokyo, founded in 645 CE, Japan's oldest Buddhist temple honoring the Bodhisattva Kannon."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Japanese urban street with left-hand driving and yellow license plates",
+      "caption": "Distinctive Japanese street view clues: driving on the left, low-height camera angle, yellow kei-car license plates, and immaculate asphalt."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Left",
+    "licensePlates": "White rectangular plates with green kanji for regular passenger cars; bright yellow plates with black text for compact kei cars.",
+    "utilityPoles": "Tall grey concrete utility poles with extensive step rungs, black spiral cable wraps, and yellow/black striped hazard wraps at pedestrian level.",
+    "roadMarkings": "White dashed or solid centerlines; solid yellow/orange centerlines where crossing into oncoming lane is strictly prohibited.",
+    "delineators": "Poles with orange circular glass reflectors, often accompanied by arrow signs pointing downward to road boundaries in snowy northern Hokkaido.",
+    "cameraGen": "Unique 'Low Camera' height mounted lower than normal cars in older coverage; widespread Gen 3 and ultra-crisp Gen 4."
+  },
   "aiSummary": {
-    "geo": "Located in Asia; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring white field with central red sun disc (Hinomaru) representing national sovereignty.",
-    "freedom": "Gained sovereignty from ancient imperial dynasty consolidation through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to extreme demographic decline and labor shortages."
+    "geo": "East Asian volcanic island arc of 14,125 islands; borders consolidated during the 1868 Meiji Restoration and 1951 San Francisco Treaty.",
+    "flag": "The Hinomaru: crimson sun disc on a pure white field, representing the land of the rising sun and Shinto purity.",
+    "freedom": "Transformed under the 1947 Peace Constitution; anchored in popular sovereignty, human rights, and Article 9 pacifism.",
+    "challenge": "Super-aging demographic decline, seismic risk resilience along the Nankai Trough, and clean energy transitions."
   },
   "faqs": [
     {
-      "question": "When did Japan gain independence?",
-      "answer": "Japan attained its full sovereignty and recognized independence from ancient imperial dynasty consolidation."
+      "question": "What is the historical meaning of the name 'Japan' (Nihon/Nippon)?",
+      "answer": "The Japanese name 'Nihon' or 'Nippon' literally translates to 'origin of the sun' (Land of the Rising Sun), originating from early 7th-century correspondence sent by Prince Shōtoku to the Sui Dynasty of China."
     },
     {
-      "question": "What are the main geographical characteristics of Japan?",
-      "answer": "Japan is located in Asia and features a geographical layout characterized by mountainous volcanic island arc in East Asia."
+      "question": "What was the Meiji Restoration of 1868?",
+      "answer": "The Meiji Restoration was a political revolution that restored practical imperial rule under Emperor Meiji, abolished the Tokugawa Shogunate and feudal samurai class, and accelerated Japan's rapid modernization and industrialization."
+    },
+    {
+      "question": "What does Article 9 of the Japanese Constitution state?",
+      "answer": "Enacted in 1947, Article 9 renounces war as a sovereign right of the nation and the threat or use of force as a means of settling international disputes, serving as the cornerstone of Japan's post-war pacifist identity."
+    },
+    {
+      "question": "What are the four main islands of the Japanese archipelago?",
+      "answer": "The four main islands of Japan from north to south are Hokkaido, Honshu (the largest and most populous), Shikoku, and Kyushu."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "645 CE",
+      "event": "The Taika Reforms centralize government administration under the Imperial Court in Asuka."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1192",
+      "event": "Minamoto no Yoritomo is appointed Shogun, establishing the Kamakura Shogunate and samurai military governance."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Japan."
+      "year": "1603",
+      "event": "Tokugawa Ieyasu unifies Japan and establishes the Edo Shogunate, initiating 250 years of domestic peace and Sakoku isolation."
+    },
+    {
+      "year": "1868",
+      "event": "The Meiji Restoration begins, transforming Japan into a modern industrial constitutional state."
+    },
+    {
+      "year": "1889",
+      "event": "Promulgation of the Meiji Constitution, establishing Asia's first parliamentary Diet."
+    },
+    {
+      "year": "1947",
+      "event": "The post-war Constitution of Japan takes effect, enshrining popular sovereignty and the Article 9 peace clause."
+    },
+    {
+      "year": "1964",
+      "event": "Tokyo hosts the Summer Olympic Games, coinciding with the launch of the Tokaido Shinkansen bullet train."
+    },
+    {
+      "year": "2019",
+      "event": "Emperor Naruhito ascends the Chrysanthemum Throne, initiating the Reiwa imperial era."
     }
   ]
 }

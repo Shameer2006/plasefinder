@@ -1,47 +1,83 @@
 {
   "code": "MY",
   "name": "Malaysia",
-  "capital": "Kuala Lumpur",
+  "capital": "Kuala Lumpur (Administrative: Putrajaya)",
   "continent": "Asia",
-  "population": "33.9 Million",
+  "population": "34.3 Million",
   "currency": "Malaysian Ringgit (MYR)",
   "languages": [
-    "Malay"
+    "Malay (Bahasa Melayu)",
+    "English",
+    "Mandarin",
+    "Tamil"
   ],
-  "seoTitle": "Detailed History of Malaysia: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Malaysia. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Malaysia is a key element of its national identity in Asia. Characterized by its Malay peninsula and northern Borneo hills, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Malaysia came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Malaysia is a powerful symbol of the country's sovereignty and cultural heritage. The design features a 14 stripes with crescent and 14-point star. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Malaysia involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the United Kingdom in 1957. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Malaysia, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Malaysia faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to political polarization and ethnic factionalism, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Malaysia continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Malaysia: Malacca Sultanate, Jalur Gemilang Flag, and 1957 Merdeka",
+  "metaDescription": "Discover the detailed history of Malaysia. Explore the Malacca maritime sultanate, Tunku Abdul Rahman's 1957 Merdeka, the Petronas Towers, and left-hand driving.",
+  "mapFormation": "Spanning 330,803 square kilometers across two distinct landmasses separated by the South China Sea, the Federation of Malaysia comprises <strong>Peninsular Malaysia</strong> (West Malaysia) bordering Thailand, and <strong>East Malaysia</strong> (Sabah and Sarawak on the island of Borneo) bordering Indonesia and Brunei.<br><br>In 1400, Parameswara founded the <strong>Malacca Sultanate</strong> along the strategic Malacca Strait, creating a wealthy cosmopolitan trading hub linking China, India, and the Arab world. Following Portuguese capture in 1511, Dutch rule in 1641, and British colonial administration via the Straits Settlements, the British united the nine royal Malay states and two settlements into the Federation of Malaya.<br><br>Under founding Prime Minister <strong>Tunku Abdul Rahman</strong>, the Federation of Malaya achieved sovereign independence on <strong>August 31, 1957</strong>. On <strong>September 16, 1963</strong>, the sovereign federation of <strong>Malaysia</strong> was formed through the union of Malaya, Singapore (which separated in 1965), Sarawak, and North Borneo (Sabah).",
+  "flagHistory": "The national flag of Malaysia—the <strong>Jalur Gemilang</strong> (Stripes of Glory)—features 14 alternating horizontal stripes of red and white, with a dark blue canton bearing a yellow crescent and a 14-pointed star (the <em>Bintang Persekutuan</em> or Federal Star), officially adopted on <strong>September 16, 1963</strong>.<br><br>The design was created by architect Mohamed Hamzah. In vexillological symbolism: The <strong>14 Stripes and 14 Points</strong> on the star represent the equal status of the 13 member states and the federal government. The <strong>Yellow</strong> of the crescent and star is the royal color of the Malay Rulers (Yang di-Pertuan Agong); the <strong>Crescent</strong> symbolizes Islam as the official religion; the <strong>Blue Canton</strong> represents the unity and harmony of the multicultural Malaysian people; <strong>Red</strong> symbolizes heroic bravery; and <strong>White</strong> represents spiritual purity.",
+  "freedomStory": "Malaysia's sovereign independence was achieved through peaceful, multi-ethnic constitutional consensus.<br><br>On the stroke of midnight on <strong>August 30, 1957</strong>, the British Union Jack was lowered at the Royal Selangor Club Padang in Kuala Lumpur. The following morning at Merdeka Stadium, Tunku Abdul Rahman raised his right hand and led thousands of citizens in chanting the immortal call: <strong>'MERDEKA!'</strong> (Freedom!) seven times.<br><br>Under the leadership of Prime Minister Mahathir Mohamad in the 1990s, Malaysia executed 'Vision 2020', constructing the futuristic administrative capital of Putrajaya and the iconic 452-meter <strong>Petronas Twin Towers</strong>, transforming the country into a global electronics manufacturing and Islamic finance hub.",
+  "challenges": "As a key semiconductor assembly and testing hub producing over 13% of global chip packaging, Malaysia modernizes its digital economy through the New Industrial Master Plan (NIMP 2030). Priorities include expanding renewable solar grids, conserving Borneo's ancient rainforests, and maintaining harmonious multi-ethnic social cohesion.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Mount Kinabalu in Sabah, Malaysian Borneo",
+      "caption": "Mount Kinabalu (4,095 meters) in Kinabalu National Park, Sabah, the highest peak in Malaysia and UNESCO World Heritage sanctuary."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Petronas Twin Towers in Kuala Lumpur, Malaysia",
+      "caption": "The 88-story Petronas Twin Towers in Kuala Lumpur, the tallest twin towers in the world designed by architect César Pelli."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Malaysian highway with left-hand driving and black license plates",
+      "caption": "Malaysian street view tells: driving on the left, black license plates with white silver characters, blue expressway signs with yellow route shields (E1)."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Left",
+    "licensePlates": "Black rectangular plates with white or silver lettering formatted with a 1-3 letter state prefix (e.g., W/V for Kuala Lumpur, J for Johor) followed by numbers.",
+    "utilityPoles": "Round concrete poles or wooden poles with black brackets; blue expressway signs with yellow route markers (e.g., E1).",
+    "roadMarkings": "Continuous or dashed white centerlines; solid white edge lines; prominent Bahasa Melayu road markings ('BERHENTI', 'AWAS').",
+    "delineators": "Black-and-white striped guardrails and bridge pillars with red/white reflectors.",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across Peninsular Malaysia, Sabah, and Sarawak."
+  },
   "aiSummary": {
-    "geo": "Located in Asia; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring 14 stripes with crescent and 14-point star representing national sovereignty.",
-    "freedom": "Gained sovereignty from the United Kingdom in 1957 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to political polarization and ethnic factionalism."
+    "geo": "Southeast Asian federation spanning Peninsular Malaysia and Borneo; capital in Kuala Lumpur and Putrajaya.",
+    "flag": "Jalur Gemilang: 14 red/white stripes, blue canton, yellow crescent and 14-pointed Federal Star.",
+    "freedom": "1957 Merdeka declaration led by Tunku Abdul Rahman; 1963 formation of the Malaysian federation.",
+    "challenge": "Global semiconductor supply chain leadership, Borneo conservation, and multi-ethnic harmony."
   },
   "faqs": [
     {
-      "question": "When did Malaysia gain independence?",
-      "answer": "Malaysia attained its full sovereignty and recognized independence from the United Kingdom in 1957."
+      "question": "What is the difference between Merdeka Day and Malaysia Day?",
+      "answer": "Merdeka Day (August 31, 1957) celebrates the independence of the Federation of Malaya from Great Britain. Malaysia Day (September 16, 1963) celebrates the union of Malaya, Sabah, Sarawak, and Singapore to form Malaysia."
     },
     {
-      "question": "What are the main geographical characteristics of Malaysia?",
-      "answer": "Malaysia is located in Asia and features a geographical layout characterized by Malay peninsula and northern Borneo hills."
+      "question": "What is the meaning of the 14-pointed star on the Malaysian flag?",
+      "answer": "The 14-pointed star (Bintang Persekutuan) represents the equal unity between the 13 member states of Malaysia and the Federal Government."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1400",
+      "event": "Parameswara founds the Malacca Sultanate, establishing a global maritime trading empire."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1957",
+      "event": "Tunku Abdul Rahman declares Merdeka (Independence) on August 31 at Merdeka Stadium."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Malaysia."
+      "year": "1963",
+      "event": "The Federation of Malaysia is established on September 16, uniting Malaya, Sabah, and Sarawak."
+    },
+    {
+      "year": "1965",
+      "event": "Singapore peacefully separates from Malaysia to become an independent republic."
+    },
+    {
+      "year": "1998",
+      "event": "Official opening of the iconic 452-meter Petronas Twin Towers in Kuala Lumpur."
     }
   ]
 }

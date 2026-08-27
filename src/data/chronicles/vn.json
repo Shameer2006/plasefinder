@@ -3,45 +3,86 @@
   "name": "Vietnam",
   "capital": "Hanoi",
   "continent": "Asia",
-  "population": "98.2 Million",
-  "currency": "Vietnamese Dong (VND)",
+  "population": "98.8 Million",
+  "currency": "Vietnamese Đồng (VND)",
   "languages": [
     "Vietnamese"
   ],
-  "seoTitle": "Detailed History of Vietnam: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Vietnam. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Vietnam is a key element of its national identity in Asia. Characterized by its S-shaped eastern Indochina coast, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Vietnam came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Vietnam is a powerful symbol of the country's sovereignty and cultural heritage. The design features a red field with central five-pointed yellow star. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Vietnam involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from France in 1945 and reunification in 1975. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Vietnam, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Vietnam faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to environmental pollution, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Vietnam continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Vietnam: Ascending Dragon, Golden Star Red Flag, and 1945 Independence",
+  "metaDescription": "Discover the detailed history of Vietnam. Explore the Red River Delta, imperial Hue, the 1945 Declaration of Independence, and the golden star flag.",
+  "mapFormation": "Spanning 331,212 square kilometers in an elongated S-shaped coastal curve along the South China Sea (East Sea) in Southeast Asia, the Socialist Republic of Vietnam (<em>Việt Nam</em>) is anchored by two fertile agricultural delta systems: the <strong>Red River Delta</strong> in the north and the vast <strong>Mekong River Delta</strong> in the south, divided by the Truong Son (Annamite) mountain spine.<br><br>Vietnamese civilization originated over 4,000 years ago during the legendary Hùng Kings era (Văn Lang) and Đông Sơn bronze culture in the Red River Valley. Following a millennium of northern domination, General <strong>Ngô Quyền</strong> defeated Southern Han forces at the Battle of Bạch Đằng River in <strong>938 CE</strong>, establishing sovereign independence. Successive imperial dynasties—the Lý, Trần, and Lê—expanded frontiers southward (<em>Nam tiến</em>) and resisted Mongol invasions under General Trần Hưng Đạo.<br><br>In 1802, Emperor Gia Long unified the nation and established the capital at <strong>Huế</strong> under the Nguyễn Dynasty. Following French colonial rule (French Indochina), Vietnam declared sovereign independence on <strong>September 2, 1945</strong>, in Hanoi under Ho Chi Minh.",
+  "flagHistory": "The national flag of Vietnam—the <em>Cờ đỏ sao vàng</em> (Red Flag with Golden Star)—features a bright golden five-pointed star centered on a vivid crimson-red field, officially adopted by the National Assembly on <strong>September 5, 1945</strong>.<br><br>The design was created in 1940 by revolutionary patriot Nguyễn Hữu Tiến during the Southern Uprising (<em>Khởi nghĩa Nam Kỳ</em>). In patriotic symbolism: The <strong>Red Field</strong> represents revolutionary struggle, passion, and the blood shed by martyrs for national liberation. The <strong>Golden Star</strong> represents the radiant light of the Vietnamese nation and the yellow skin of its people. The <strong>Five Points</strong> of the star symbolize the solidarity of the five core social classes united in national construction: <strong>Workers, Peasants, Soldiers, Intellectuals, and Traders</strong>.",
+  "freedomStory": "Vietnam's modern path to sovereign independence is a story of heroic tenacity against colonial and imperial powers.<br><br>On <strong>September 2, 1945</strong>, before hundreds of thousands of citizens in Ba Dinh Square, Hanoi, <strong>President Ho Chi Minh</strong> read the <strong>Declaration of Independence of the Democratic Republic of Vietnam</strong>, drawing from both the American Declaration of Independence and the French Declaration of the Rights of Man: <em>'All men are created equal. They are endowed by their Creator with certain inalienable rights; among these are Life, Liberty, and the pursuit of Happiness.'</em><br><br>Following the 1954 victory at the Battle of Điện Biên Phủ and the conclusion of the Vietnam War on April 30, 1975, the country was officially reunified on July 2, 1976. In 1986, Vietnam initiated <strong>Đổi Mới</strong> (Renovation) economic reforms, transitioning toward a dynamic socialist-oriented market economy integrated into global trade.",
+  "challenges": "As a premier high-tech manufacturing and electronics powerhouse (Samsung, Apple suppliers) in ASEAN, Vietnam balances rapid industrialization with environmental preservation. Foremost priorities include mitigating climate saltwater intrusion and river sediment loss across the Mekong Delta, expanding offshore wind and solar power, and upgrading deep-sea container ports.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Ha Long Bay emerald waters and limestone karst islands, Vietnam",
+      "caption": "Ha Long Bay in the Gulf of Tonkin, northeastern Vietnam, a UNESCO World Heritage wonderland of over 1,600 limestone karst islands."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Imperial City of Hue and Citadel gates, Vietnam",
+      "caption": "The Imperial City of Huế, the historic seat of the Nguyễn Dynasty emperors built along the Perfume River in central Vietnam."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Vietnamese street view with motorbikes and blue highway markers",
+      "caption": "Vietnamese street view indicators: dense flow of motorbikes, white plates with red dot dividers, and blue highway signs with Vietnamese diacritics."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates with black characters formatted with two-digit province code (e.g., 29-33 for Hanoi, 50-59 for Ho Chi Minh City), letter series, and five digits with a dot.",
+    "utilityPoles": "Reinforced concrete poles with numerous overhead fiber and power lines; metal light poles along national expressways.",
+    "roadMarkings": "Continuous or dashed yellow centerlines; solid white edge lines; prominent Vietnamese diacritics on road signage (e.g., 'CẨM', 'ĐI CHẬM').",
+    "delineators": "White posts with red reflective caps along national highways (Quốc lộ).",
+    "cameraGen": "Trekker and street coverage in Hanoi, Ho Chi Minh City, Da Nang, Hue, and Ha Long."
+  },
   "aiSummary": {
-    "geo": "Located in Asia; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring red field with central five-pointed yellow star representing national sovereignty.",
-    "freedom": "Gained sovereignty from France in 1945 and reunification in 1975 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to environmental pollution."
+    "geo": "S-shaped Southeast Asian coastal nation; Red River and Mekong Deltas; capital in thousand-year-old Hanoi.",
+    "flag": "Cờ đỏ sao vàng: red field with central five-pointed golden star representing five united social classes.",
+    "freedom": "1945 Declaration of Independence read by Ho Chi Minh; 1976 national reunification; 1986 Đổi Mới reforms.",
+    "challenge": "Mekong Delta saltwater intrusion climate resilience, semiconductor manufacturing scaling, and port logistics."
   },
   "faqs": [
     {
-      "question": "When did Vietnam gain independence?",
-      "answer": "Vietnam attained its full sovereignty and recognized independence from France in 1945 and reunification in 1975."
+      "question": "What is the meaning of the five-pointed star on the Vietnamese flag?",
+      "answer": "The five points of the golden star represent the solidarity of the five core classes building the nation: workers, peasants, soldiers, intellectuals, and traders."
     },
     {
-      "question": "What are the main geographical characteristics of Vietnam?",
-      "answer": "Vietnam is located in Asia and features a geographical layout characterized by S-shaped eastern Indochina coast."
+      "question": "What were the 'Đổi Mới' reforms in Vietnam?",
+      "answer": "Launched in 1986, Đổi Mới ('Renovation') was a comprehensive economic reform program that transitioned Vietnam from a centrally planned economy to a globally integrated market economy."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "938 CE",
+      "event": "General Ngô Quyền defeats the Southern Han at the Battle of Bạch Đằng River, ending Chinese rule."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1010",
+      "event": "Emperor Lý Thái Tổ establishes the capital at Thăng Long (modern Hanoi)."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Vietnam."
+      "year": "1802",
+      "event": "Emperor Gia Long unifies Vietnam, founding the Nguyễn Dynasty in Huế."
+    },
+    {
+      "year": "1945",
+      "event": "Ho Chi Minh reads the Declaration of Independence in Hanoi on September 2."
+    },
+    {
+      "year": "1954",
+      "event": "Victory at the Battle of Điện Biên Phủ concludes the First Indochina War."
+    },
+    {
+      "year": "1976",
+      "event": "Official reunification of the Socialist Republic of Vietnam on July 2."
+    },
+    {
+      "year": "1986",
+      "event": "The Communist Party of Vietnam initiates the historic Đổi Mới economic reforms."
     }
   ]
 }

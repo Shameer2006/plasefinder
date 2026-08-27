@@ -3,46 +3,83 @@
   "name": "Ireland",
   "capital": "Dublin",
   "continent": "Europe",
-  "population": "5.1 Million",
+  "population": "5.2 Million",
   "currency": "Euro (EUR)",
   "languages": [
-    "English",
-    "Irish"
+    "Irish (Gaeilge)",
+    "English"
   ],
-  "seoTitle": "Detailed History of Ireland: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Ireland. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Ireland is a key element of its national identity in Europe. Characterized by its green coastal lowlands and cliffs, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Ireland came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Ireland is a powerful symbol of the country's sovereignty and cultural heritage. The design features a vertical bands of green, white, and orange. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Ireland involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the United Kingdom in 1922. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Ireland, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Ireland faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to acute housing shortages and corporate tax disputes, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Ireland continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Ireland: The Emerald Isle, Green-White-Orange Tricolor, and 1916 Easter Rising",
+  "metaDescription": "Discover the detailed history of Ireland. Explore Celtic heritage, the 1916 Easter Rising, Michael Collins, the 1921 Anglo-Irish Treaty, and the Tricolor flag.",
+  "mapFormation": "Occupying roughly five-sixths of the island of Ireland in the North Atlantic across 70,273 square kilometers, the Republic of Ireland (<em>Éire</em>) is celebrated as the 'Emerald Isle' due to its lush rolling green pastures nourished by mild Atlantic Gulf Stream rains.<br><br>Gaelic Celtic culture, law (Brehon Law), and Ogham script flourished for over a millennium prior to the arrival of Saint Patrick in the 5th century CE, who established Christian monastic centers that preserved classical European literature through the Dark Ages ('Isle of Saints and Scholars').<br><br>Following the Anglo-Norman invasion of 1169 and centuries of English and British rule, the partition of the island was codified under the <strong>Government of Ireland Act 1920</strong> and the <strong>Anglo-Irish Treaty of 1921</strong>, creating the self-governing Irish Free State (26 southern counties) while Northern Ireland (6 counties) remained in the UK. Full sovereign republican status was formally enacted with the <strong>Republic of Ireland Act 1948</strong>.",
+  "flagHistory": "The national flag of Ireland—the <em>Bratach na hÉireann</em> (The Irish Tricolor)—features three equal vertical bands of green, white, and orange, first flown on <strong>March 7, 1848</strong>, by revolutionary nationalist Thomas Francis Meagher in Waterford.<br><br>The tricolor is a sublime vexillological symbol of peace and reconciliation between traditions: <strong>Green</strong> represents the Roman Catholic and Gaelic majority; <strong>Orange</strong> represents the Protestant minority (honoring King William III of Orange); and the central <strong>White</strong> band symbolizes a lasting truce and fraternal unity between the two traditions.",
+  "freedomStory": "Ireland's struggle for independence culminated in the heroic events of the early 20th century.<br><br>On Easter Monday, <strong>April 24, 1916</strong>, Patrick Pearse, James Connolly, and the Irish Volunteers seized the General Post Office (GPO) in Dublin, reading the <strong>Proclamation of the Irish Republic</strong> (the Easter Rising). Although military victory was suppressed, the execution of the leaders ignited mass national support.<br><br>In the 1918 election, Sinn Féin MPs convened the first revolutionary parliament (<strong>Dáil Éireann</strong>) at the Mansion House in Dublin on January 21, 1919. Following the Irish War of Independence led by <strong>Michael Collins</strong>, the 1921 Anglo-Irish Treaty established the Irish Free State. In 1937, the people ratified <strong>Bunreacht na hÉireann</strong> (the Constitution of Ireland). Today, Ireland is a prosperous European tech and pharmaceutical hub (the 'Celtic Tiger').",
+  "challenges": "As a member of the European Union, Ireland navigates post-Brexit arrangements preserving the 1998 Good Friday Peace Agreement and an open, frictionless border with Northern Ireland. Domestically, major priorities include resolving urban housing supply shortages across Dublin and Cork, expanding offshore Atlantic wind energy, and preserving the Irish language (Gaeilge).",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Cliffs of Moher along the Atlantic coast, Ireland",
+      "caption": "The dramatic Cliffs of Moher soaring 214 meters above the Atlantic Ocean in County Clare, Ireland."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "General Post Office (GPO) on O'Connell Street in Dublin, Ireland",
+      "caption": "The General Post Office (GPO) in Dublin, the headquarters of the 1916 Easter Rising and monumental cradle of modern Irish independence."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Irish road with left-hand driving and bilingual signs",
+      "caption": "Irish street view tells: driving on the left, white front and rear plates with county names in Irish, yellow dashed shoulder lines, and bilingual signs."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Left",
+    "licensePlates": "White rectangular plates at front and rear with blue EU strip on left ('IRL'); format includes year (e.g., 231 for 2023 first half), county code, and county name in Irish in italic script across the top.",
+    "utilityPoles": "Wooden utility poles with round metal cross-arms; distinctive yellow diamond warning signs with metric speed limits.",
+    "roadMarkings": "Dashed white centerlines; continuous dashed yellow shoulder lines (unique in Europe alongside left-hand driving); bilingual English/Irish italic road signage.",
+    "delineators": "White posts with red reflectors on left and white on right.",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across all 26 counties."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring vertical bands of green, white, and orange representing national sovereignty.",
-    "freedom": "Gained sovereignty from the United Kingdom in 1922 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to acute housing shortages and corporate tax disputes."
+    "geo": "Atlantic island nation of 26 counties; borders defined by the 1921 Anglo-Irish Treaty.",
+    "flag": "Green, white, and orange tricolor created in 1848, symbolizing peace between Catholic and Protestant traditions.",
+    "freedom": "1916 Easter Rising and 1919-1921 War of Independence led by Michael Collins; 1937 Constitution.",
+    "challenge": "Urban housing supply, post-Brexit Good Friday Agreement stability, and offshore wind power scaling."
   },
   "faqs": [
     {
-      "question": "When did Ireland gain independence?",
-      "answer": "Ireland attained its full sovereignty and recognized independence from the United Kingdom in 1922."
+      "question": "What is the meaning of the colors on the Irish flag?",
+      "answer": "Green represents the Catholic and Gaelic tradition, Orange represents the Protestant tradition (King William of Orange), and White represents lasting peace between them."
     },
     {
-      "question": "What are the main geographical characteristics of Ireland?",
-      "answer": "Ireland is located in Europe and features a geographical layout characterized by green coastal lowlands and cliffs."
+      "question": "How do you distinguish Ireland from the UK in Google Street View?",
+      "answer": "In Ireland, both front and rear plates are white (in the UK, rear plates are yellow), speed limits are in km/h on yellow diamond signs, road edges have dashed yellow lines, and all directional signs are bilingual in Irish (Gaeilge) and English."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "432 CE",
+      "event": "Saint Patrick arrives in Ireland, spreading Christianity and monastic learning."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1169",
+      "event": "The Anglo-Norman invasion initiates centuries of English administration."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Ireland."
+      "year": "1845–1852",
+      "event": "The Great Famine (An Gorta Mór) devastates the population, prompting mass global emigration."
+    },
+    {
+      "year": "1916",
+      "event": "The Easter Rising in Dublin proclaims the Irish Republic on April 24."
+    },
+    {
+      "year": "1921",
+      "event": "The Anglo-Irish Treaty establishes the self-governing Irish Free State."
+    },
+    {
+      "year": "1998",
+      "event": "The Good Friday Agreement establishes a historic peace settlement for Northern Ireland."
     }
   ]
 }

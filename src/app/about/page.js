@@ -372,62 +372,74 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
-      {/* Popular Searches */}
+      {/* Editorial Standards, Mission & E-E-A-T Transparency */}
       <section style={{
         padding: '3rem 2rem',
         maxWidth: '900px',
         margin: '0 auto',
-        borderTop: '1px solid rgba(255,255,255,0.06)'
+        borderTop: '1px solid rgba(255,255,255,0.08)'
       }}>
-        <h2 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '1rem', color: '#9ca3af' }}>
-          Popular Searches
+        <h2 style={{ fontSize: 'clamp(1.4rem, 3.5vw, 1.85rem)', fontWeight: 800, marginBottom: '1.25rem', color: '#f3f4f6' }}>
+          Our Mission &amp; Editorial Standards
         </h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-          {[
-            "geoguessr alternative", "free geography guessing game", "street view guessing game", "guess the location game", 
-            "guess the country game online", "panorama guessing game", "world geography game online", "guess where game", 
-            "random street view game", "location guessing game free", "play geography game online free", "play street view game", 
-            "online map guessing game", "play world map game", "geography quiz game online", "free online geography game", 
-            "multiplayer geography game", "geography game no download", "game where you guess your location", 
-            "game to guess country from street view", "spawn random location guess game", "AI hint geography game", 
-            "blur mode guessing game", "guess the city from photo game", "street view geography quiz", 
-            "explore random places online game", "virtual travel guessing game", "panoramic view country guesser", 
-            "daily geography guessing game", "geography challenge game online", "geography learning game online", 
-            "fun way to learn world map", "educational geography game free", "geography practice game", 
-            "learn countries game online", "map skills game online", "geography trivia game free", 
-            "geography game for mobile", "browser based geography game", "no download geography game", 
-            "free to play map game", "lightweight geography web game", "loststreet game", "loststreet online"
-          ].map(tag => (
-            <span key={tag} style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              padding: '0.25rem 0.75rem',
-              borderRadius: '50px',
-              fontSize: '0.75rem',
-              color: '#6b7280'
-            }}>
-              {tag}
-            </span>
-          ))}
+        <div style={{
+          background: 'rgba(255, 255, 255, 0.03)',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '16px',
+          padding: 'clamp(1.25rem, 3vw, 2rem)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.25rem',
+          color: '#cbd5e1',
+          lineHeight: 1.7,
+          fontSize: '0.96rem',
+        }}>
+          <p>
+            <strong>LostStreet</strong> was founded with a singular purpose: to make world geography engaging, accessible, and 100% free for everyone. Whether you are an educator introducing students to global topography or an enthusiastic map sleuth honing your street-view deduction skills, our platform pairs real-world interactive exploration with structured educational masterclasses.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem', marginTop: '0.5rem' }}>
+            <div style={{ background: 'rgba(16, 185, 129, 0.06)', border: '1px solid rgba(16, 185, 129, 0.2)', padding: '1.25rem', borderRadius: '12px' }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#10b981', margin: '0 0 0.5rem 0' }}>✓ Verified Research</h3>
+              <p style={{ margin: 0, fontSize: '0.9rem', color: '#9ca3af' }}>
+                Every guide, country profile, and clue breakdown is thoroughly researched and verified against official transportation standards, national highway administrations, and geopolitical databases.
+              </p>
+            </div>
+            <div style={{ background: 'rgba(59, 130, 246, 0.06)', border: '1px solid rgba(59, 130, 246, 0.2)', padding: '1.25rem', borderRadius: '12px' }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#60a5fa', margin: '0 0 0.5rem 0' }}>✓ Continuous Updates</h3>
+              <p style={{ margin: 0, fontSize: '0.9rem', color: '#9ca3af' }}>
+                Street view coverage, camera generations, and regional road signage evolve constantly. Our editorial team regularly reviews and updates our guides to reflect the latest global coverage.
+              </p>
+            </div>
+          </div>
+          <p style={{ margin: 0 }}>
+            Have questions, feedback, or a regional clue correction? We welcome community contributions and peer review. Reach out directly through our <Link href="/contact" style={{ color: '#10b981', fontWeight: 600, textDecoration: 'none' }}>Contact Page</Link>.
+          </p>
         </div>
       </section>
 
       {/* Footer */}
       <footer style={{
-        padding: '2rem',
+        padding: '2.5rem 1.5rem',
         textAlign: 'center',
-        color: '#6b7280',
+        color: '#9ca3af',
         fontSize: '0.85rem',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+        background: 'rgba(10, 10, 10, 0.95)'
       }}>
-        <p>© {new Date().getFullYear()} LostStreet. A free geography guessing game and GeoGuessr alternative.</p>
-        <div style={{ marginTop: '0.5rem', display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/" style={{ color: '#6b7280', textDecoration: 'none' }}>Home</Link>
-          <Link href="/guides" style={{ color: '#6b7280', textDecoration: 'none' }}>Guides</Link>
-          <Link href="/chronicles" style={{ color: '#6b7280', textDecoration: 'none' }}>Chronicles</Link>
-          <Link href="/flag-guesser" style={{ color: '#6b7280', textDecoration: 'none' }}>Flag Guesser</Link>
-          <Link href="/leaderboard" style={{ color: '#6b7280', textDecoration: 'none' }}>Leaderboard</Link>
-          <Link href="/community" style={{ color: '#6b7280', textDecoration: 'none' }}>Community</Link>
+        <p style={{ margin: '0 0 1rem 0' }}>© {new Date().getFullYear()} LostStreet. An independent educational geography game and world exploration platform.</p>
+        <div style={{ display: 'flex', gap: '1.25rem', justifyContent: 'center', flexWrap: 'wrap', fontSize: '0.85rem' }}>
+          <Link href="/" style={{ color: '#9ca3af', textDecoration: 'none' }}>Home</Link>
+          <Link href="/guides" style={{ color: '#9ca3af', textDecoration: 'none' }}>Guides</Link>
+          <Link href="/chronicles" style={{ color: '#9ca3af', textDecoration: 'none' }}>Chronicles</Link>
+          <Link href="/flag-guesser" style={{ color: '#9ca3af', textDecoration: 'none' }}>Flag Guesser</Link>
+          <Link href="/leaderboard" style={{ color: '#9ca3af', textDecoration: 'none' }}>Leaderboard</Link>
+          <Link href="/community" style={{ color: '#9ca3af', textDecoration: 'none' }}>Community</Link>
+          <Link href="/about" style={{ color: '#10b981', textDecoration: 'none', fontWeight: 600 }}>About</Link>
+          <Link href="/contact" style={{ color: '#9ca3af', textDecoration: 'none' }}>Contact</Link>
+          <Link href="/privacy" style={{ color: '#9ca3af', textDecoration: 'none' }}>Privacy Policy</Link>
+          <Link href="/terms" style={{ color: '#9ca3af', textDecoration: 'none' }}>Terms of Service</Link>
+          <Link href="/cookies" style={{ color: '#9ca3af', textDecoration: 'none' }}>Cookie Policy</Link>
+          <Link href="/disclaimer" style={{ color: '#9ca3af', textDecoration: 'none' }}>Disclaimer</Link>
         </div>
       </footer>
     </div>

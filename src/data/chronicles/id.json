@@ -1,47 +1,88 @@
 {
   "code": "ID",
   "name": "Indonesia",
-  "capital": "Jakarta",
+  "capital": "Jakarta (moving to Nusantara)",
   "continent": "Asia",
-  "population": "275.5 Million",
+  "population": "277.5 Million",
   "currency": "Indonesian Rupiah (IDR)",
   "languages": [
-    "Indonesian"
+    "Indonesian (Bahasa Indonesia)"
   ],
-  "seoTitle": "Detailed History of Indonesia: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Indonesia. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Indonesia is a key element of its national identity in Asia. Characterized by its vast volcanic tropical archipelago, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Indonesia came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Indonesia is a powerful symbol of the country's sovereignty and cultural heritage. The design features a horizontal bands of red and white. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Indonesia involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the Netherlands in 1945. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Indonesia, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Indonesia faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to seismic activity and transitioning the capital city, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Indonesia continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Indonesia: Emerald Equator, Sang Saka Merah Putih Flag, and 1945 Independence",
+  "metaDescription": "Explore the detailed history of Indonesia. Discover the Srivijaya and Majapahit empires, the 1945 Proclamation of Independence, and the Red-White flag.",
+  "mapFormation": "Straddling the equator across Southeast Asia and Oceania across 1.9 million square kilometers, the Republic of Indonesia is the world's largest archipelagic state, comprising over 17,500 islands stretching from Sumatra to Papua. Ancient maritime empires—including the Buddhist <strong>Srivijaya Empire</strong> in Sumatra (7th–11th century) and the Hindu-Buddhist <strong>Majapahit Empire</strong> in Java (13th–16th century) under Prime Minister Gajah Mada—established extensive spice trading routes across the Malacca Strait.<br><br>In the 17th century, the Dutch East India Company (VOC) colonized the archipelago as the Dutch East Indies. Following Japanese occupation in World War II, Indonesian leaders <strong>Sukarno and Mohammad Hatta</strong> proclaimed independence on <strong>August 17, 1945</strong>. Following the Indonesian National Revolution, the Netherlands officially recognized Indonesian sovereignty in the 1949 Dutch-Indonesian Round Table Conference, finalizing the modern archipelagic borders from Sabang to Merauke.",
+  "flagHistory": "The national flag of Indonesia—known as <strong>Sang Saka Merah Putih</strong> (The Sacred Red and White)—features two equal horizontal bands of red (top) and white (bottom), officially introduced on <strong>August 17, 1945</strong>.<br><br>The red and white color scheme traces its ancient royal heritage back over 700 years to the 9-striped naval banner of the <strong>Majapahit Empire</strong> in 1293. In traditional Indonesian philosophy: <strong>Red</strong> symbolizes human physical courage and blood; <strong>White</strong> represents spiritual purity and the soul. Together, they represent the complete human being and the eternal spirit of the archipelago.",
+  "freedomStory": "Indonesia's path to sovereign freedom was forged through a historic combination of mass revolutionary mobilization and international diplomacy.<br><br>On the morning of <strong>August 17, 1945</strong>, at Pegangsaan Timur 56 in Jakarta, Sukarno read the concise <strong>Proclamation of Indonesian Independence</strong> (<em>Teks Proklamasi</em>). When Dutch forces attempted to re-establish colonial rule, millions of young freedom fighters (<em>Pemuda</em>) waged a four-year military and diplomatic war of independence, epitomized by the Battle of Surabaya on November 10, 1945 (celebrated as Heroes' Day / <em>Hari Pahlawan</em>).<br><br>The nation established the unifying state philosophy of <strong>Pancasila</strong> (Five Principles) and the national motto <em>'Bhinneka Tunggal Ika'</em> ('Unity in Diversity'), uniting over 300 distinct ethnic groups under one democratic republic.",
+  "challenges": "As Southeast Asia's largest economy and a leading G20 member, Indonesia balances massive mineral resource downstreaming (nickel/EV supply chains) with environmental conservation across Borneo and Sumatra. Foremost priorities include constructing the new sustainable rainforest capital of <strong>Nusantara</strong> in East Kalimantan to alleviate ground subsidence in Jakarta, expanding geothermal energy, and managing inter-island maritime logistics.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Mount Bromo volcano in East Java, Indonesia",
+      "caption": "Mount Bromo in the Bromo Tengger Semeru National Park, an active volcano rising from the Sea of Sand in East Java."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1548115184-bc6544d06a58?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Borobudur Buddhist Temple in Central Java, Indonesia",
+      "caption": "Borobudur Temple in Central Java, built in the 8th and 9th centuries during the Sailendra Dynasty, the world's largest Buddhist monument."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Indonesian street view with black license plates and left-hand driving",
+      "caption": "Indonesian road clues: driving on the left, black license plates with triple date stamps, and lush tropical roadside palm vegetation."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Left",
+    "licensePlates": "Black rectangular plates with white lettering formatted as 1-2 area letters, 1-4 numbers, and month/year expiration stamp.",
+    "utilityPoles": "Reinforced concrete poles with multiple transformer cylinders; wooden poles along rural Sumatran tracks.",
+    "roadMarkings": "Continuous or dashed white centerlines; solid yellow lines on major national corridors.",
+    "delineators": "Black-and-white striped curbstones at intersections and bridges.",
+    "cameraGen": "Extensive Gen 3 and Gen 4 coverage across Java, Sumatra, Bali, Kalimantan, Sulawesi, and Nusa Tenggara."
+  },
   "aiSummary": {
-    "geo": "Located in Asia; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring horizontal bands of red and white representing national sovereignty.",
-    "freedom": "Gained sovereignty from the Netherlands in 1945 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to seismic activity and transitioning the capital city."
+    "geo": "World's largest archipelagic state spanning 17,500+ islands; borders shaped by the Majapahit Empire and 1949 independence.",
+    "flag": "Sang Saka Merah Putih: red and white horizontal bicolor originating from the 1293 Majapahit banner.",
+    "freedom": "1945 Proclamation of Independence read by Sukarno; unified under the Pancasila philosophy.",
+    "challenge": "Capital relocation to Nusantara in Kalimantan, rainforest conservation, and inter-island connectivity."
   },
   "faqs": [
     {
-      "question": "When did Indonesia gain independence?",
-      "answer": "Indonesia attained its full sovereignty and recognized independence from the Netherlands in 1945."
+      "question": "When did Indonesia declare its independence?",
+      "answer": "Indonesia declared independence on August 17, 1945, when Sukarno and Mohammad Hatta read the Proclamation of Independence in Jakarta."
     },
     {
-      "question": "What are the main geographical characteristics of Indonesia?",
-      "answer": "Indonesia is located in Asia and features a geographical layout characterized by vast volcanic tropical archipelago."
+      "question": "What is the meaning of the national motto 'Bhinneka Tunggal Ika'?",
+      "answer": "Originating from an ancient 14th-century Javanese poem by Mpu Tantular, it translates to 'Unity in Diversity', celebrating harmonious coexistence among hundreds of cultures."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1293",
+      "event": "The Majapahit Empire is established in East Java, unifying the Indonesian archipelago."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1602",
+      "event": "The Dutch East India Company (VOC) begins colonial monopolization of the spice trade."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Indonesia."
+      "year": "1945",
+      "event": "Sukarno and Mohammad Hatta proclaim Indonesian independence on August 17."
+    },
+    {
+      "year": "1949",
+      "event": "The Netherlands officially transfers sovereignty at the Round Table Conference."
+    },
+    {
+      "year": "1955",
+      "event": "Bandung hosts the historic Asian-African Conference, founding the Non-Aligned Movement."
+    },
+    {
+      "year": "1998",
+      "event": "The Reformasi movement initiates the modern democratic era of the Republic of Indonesia."
+    },
+    {
+      "year": "2024",
+      "event": "Indonesia begins phased government operations in the new green capital city of Nusantara."
     }
   ]
 }

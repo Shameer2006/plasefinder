@@ -4,44 +4,89 @@
   "capital": "Warsaw",
   "continent": "Europe",
   "population": "37.7 Million",
-  "currency": "Polish Zloty (PLN)",
+  "currency": "Polish Złoty (PLN)",
   "languages": [
     "Polish"
   ],
-  "seoTitle": "Detailed History of Poland: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Poland. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Poland is a key element of its national identity in Europe. Characterized by its flat plains and Baltic coastlines of Eastern Europe, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Poland came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Poland is a powerful symbol of the country's sovereignty and cultural heritage. The design features a horizontal bands of white and red. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Poland involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from restored in 1918 after partitions. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Poland, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Poland faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to rule of law disputes and security posture, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Poland continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Poland: Crown of the Kingdom, White Eagle Flag, and Solidarity Movement",
+  "metaDescription": "Explore the detailed history of Poland. Discover the Piast Dynasty, Polish-Lithuanian Commonwealth, 1791 Constitution, and the Solidarity movement.",
+  "mapFormation": "Spanning 312,696 square kilometers across the North European Plain from the Baltic Sea coast to the peaks of the Carpathian and Tatra Mountains, the Republic of Poland (<em>Rzeczpospolita Polska</em>) occupies a pivotal crossroads in Central Europe.<br><br>The historic Polish state was founded in <strong>966 CE</strong> when Duke Mieszko I of the Piast Dynasty embraced Christianity (the 'Baptism of Poland'), unifying the Slavic tribes of the Vistula and Oder basins. In 1386, the Union of Krewo united Poland with the Grand Duchy of Lithuania, culminating in the <strong>Polish-Lithuanian Commonwealth (1569)</strong> via the Union of Lublin—the largest and most tolerant multicultural federation in early modern Europe, spanning from the Baltic to the Black Sea.<br><br>In the late 18th century, aggressive neighboring imperial autocracies subjected Poland to three successive Partitions (1772, 1793, 1795) by Russia, Prussia, and Austria, erasing Poland from European maps for 123 years. The sovereign Polish state was resurrected in 1918 (the Second Polish Republic) following World War I. Modern borders were established along the Oder-Neisse Line in 1945 following the Potsdam Conference.",
+  "flagHistory": "The national flag of Poland—the <em>Biało-Czerwona</em> (White and Red horizontal bicolor)—is an ancient heraldic banner derived directly from the medieval <strong>Coat of Arms of Poland</strong>: the crowned White Eagle on a crimson-red shield.<br><br>The national colors were officially standardized by the Sejm on <strong>February 7, 1831</strong>, during the November Uprising against imperial Russian rule. In accordance with heraldic rules, <strong>White</strong> (derived from the White Eagle and the Grand Duchy of Lithuania's Pahonia knight) sits in the upper band representing purity, honesty, and spiritual integrity, while <strong>Red</strong> (derived from the field of the shield) occupies the lower band, symbolizing courage, valor, and the blood shed by Polish patriots defending sovereign liberty.",
+  "freedomStory": "Poland's path to freedom represents an extraordinary saga of civic resilience and moral triumph against foreign partitions and totalitarian tyranny.<br><br>On <strong>May 3, 1791</strong>, the Great Sejm passed the <strong>Constitution of May 3, 1791</strong>—the first modern codified constitution in Europe and the second in world history (after the United States). Despite subsequent partition, Polish national consciousness was preserved through culture, music (Frédéric Chopin), and armed uprisings.<br><br>After surviving the catastrophic devastation of World War II and decades of Soviet domination, Polish workers at the Lenin Shipyard in Gdańsk led by <strong>Lech Wałęsa</strong> founded the <strong>Solidarity (Solidarność)</strong> trade union in August 1980. Supported morally by Polish-born Pope John Paul II, Solidarity mobilized 10 million citizens in peaceful resistance. In June 1989, Poland held semi-free parliamentary elections, triggering the historic fall of communism across Central and Eastern Europe.",
+  "challenges": "As the sixth-largest economy in the European Union and NATO's eastern pillar, Poland balances rapid technological industrialization with continental security commitments. Foremost priorities include accelerating its green energy transition—constructing its first commercial nuclear power stations to phase out coal generation—modernizing high-speed rail via the Central Communication Port (CPK), and sustaining strategic logistical corridors supporting Ukraine.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Tatra Mountains and alpine lake in southern Poland",
+      "caption": "Morskie Oko lake in the High Tatra Mountains, southern Poland, along the alpine frontier with Slovakia."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Wawel Royal Castle in Krakow, Poland",
+      "caption": "Wawel Royal Castle and Cathedral in Kraków, the historic coronation sanctuary and seat of Polish kings for over 500 years."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Polish highway with red and white delineator posts",
+      "caption": "Polish road clues: red-and-white striped delineator posts with round red reflectors, and green national highway signboards."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White standard Euro plates with blue EU strip on left ('PL'); plates feature 2-3 letters denoting the county/city (e.g., WI for Warsaw).",
+    "utilityPoles": "Reinforced concrete poles with multiple small circular holes (A-frame concrete lattice) or wooden poles in rural Podlasie.",
+    "roadMarkings": "White dashed centerlines; solid white edge lines; red-and-white pedestrian crossing warning posts.",
+    "delineators": "Iconic Polish delineators: white posts with a bold red diagonal band and a rectangular red reflector on the right (white on left).",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across all 16 voivodeships."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring horizontal bands of white and red representing national sovereignty.",
-    "freedom": "Gained sovereignty from restored in 1918 after partitions through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to rule of law disputes and security posture."
+    "geo": "Central European nation on the Baltic Sea; borders re-established along the Oder-Neisse line in 1945.",
+    "flag": "Biało-Czerwona: white and red horizontal bicolor derived from the medieval White Eagle crest.",
+    "freedom": "Enacted the 1791 Constitution of May 3; peaceful 1989 Solidarity movement ended communism in Eastern Europe.",
+    "challenge": "Nuclear clean energy transition away from coal, CPK transport mega-hub, and NATO eastern flank defense."
   },
   "faqs": [
     {
-      "question": "When did Poland gain independence?",
-      "answer": "Poland attained its full sovereignty and recognized independence from restored in 1918 after partitions."
+      "question": "What was the significance of the Polish Constitution of May 3, 1791?",
+      "answer": "The Constitution of May 3, 1791 was the first modern written constitution in Europe and the second in the world, establishing constitutional monarchy and separation of powers."
     },
     {
-      "question": "What are the main geographical characteristics of Poland?",
-      "answer": "Poland is located in Europe and features a geographical layout characterized by flat plains and Baltic coastlines of Eastern Europe."
+      "question": "What role did the Solidarity movement play in ending the Cold War?",
+      "answer": "Founded in 1980 by Lech Wałęsa, Solidarity was the first independent trade union in the Soviet bloc. Its peaceful resistance led to the 1989 elections, sparking the collapse of communism across Europe."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "966 CE",
+      "event": "Duke Mieszko I adopts Christianity, marking the Baptism and foundation of the Polish state."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1569",
+      "event": "The Union of Lublin creates the Polish-Lithuanian Commonwealth."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Poland."
+      "year": "1791",
+      "event": "The Great Sejm passes the landmark Constitution of May 3."
+    },
+    {
+      "year": "1795",
+      "event": "The Third Partition erases Poland from European maps for 123 years."
+    },
+    {
+      "year": "1918",
+      "event": "Poland regains sovereign independence on November 11 following World War I."
+    },
+    {
+      "year": "1939",
+      "event": "Invasion of Poland by Nazi Germany and the Soviet Union sparks World War II."
+    },
+    {
+      "year": "1989",
+      "event": "Solidarity wins historic democratic elections, initiating the fall of communism in Europe."
+    },
+    {
+      "year": "2004",
+      "event": "Poland accedes to the European Union, accelerating rapid economic modernization."
     }
   ]
 }

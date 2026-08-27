@@ -3,45 +3,98 @@
   "name": "United States",
   "capital": "Washington, D.C.",
   "continent": "North America",
-  "population": "333.2 Million",
+  "population": "335.8 Million",
   "currency": "US Dollar (USD)",
   "languages": [
     "English"
   ],
-  "seoTitle": "Detailed History of United States: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of United States. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of United States is a key element of its national identity in North America. Characterized by its vast North American continent, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of United States came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of United States is a powerful symbol of the country's sovereignty and cultural heritage. The design features a stars and stripes with 50 stars and 13 stripes. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for United States involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from Great Britain on July 4, 1776. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of United States, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, United States faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to political polarization and fiscal debt, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of United States continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of United States: Continental Border Expansion, Stars & Stripes Heraldry, and Constitutional Democracy",
+  "metaDescription": "Explore the comprehensive history of the United States. Discover how continental border treaties, the 1776 Revolution, and the 50-star flag shaped the modern nation.",
+  "mapFormation": "The sovereign territory of the United States spans across 9.83 million square kilometers from the Atlantic seaboard to the Pacific Ocean, making it the third-largest nation on Earth by total land area. Indigenous nations inhabited the North American continent for over 15,000 years prior to European exploration, establishing complex trade networks and agricultural settlements across the Mississippi basin, the Great Plains, and the Eastern Woodlands.<br><br>The modern continental footprint of the United States was assembled through a sequence of historic geopolitical treaties and westward expansions. Following the Revolutionary War, the <strong>Treaty of Paris (1783)</strong> established the original thirteen colonies' western border at the Mississippi River. In 1803, President Thomas Jefferson orchestrated the <strong>Louisiana Purchase</strong> from Napoleonic France, doubling the national land area overnight for $15 million and opening the vast Missouri and Mississippi river corridors. Subsequent treaties stabilized external frontiers: the <strong>Adams-Onís Treaty of 1819</strong> with Spain ceded Florida and defined the boundary with New Spain; the <strong>Oregon Treaty of 1846</strong> with Great Britain established the 49th parallel border with Canada; and the <strong>Treaty of Guadalupe Hidalgo (1848)</strong> concluded the Mexican-American War, transferring California, Nevada, Utah, Arizona, and New Mexico to the federal union. The purchase of Alaska from the Russian Empire in 1867 and the 1898 annexation of Hawaii finalized the modern fifty-state union.",
+  "flagHistory": "The national banner of the United States, popularly revered as the <em>'Stars and Stripes'</em> or <em>'Old Glory'</em>, is one of the most recognized vexillological designs in world history. The flag consists of thirteen alternating horizontal stripes—seven red and six white—representing the original Thirteen British Colonies that declared independence. In the upper hoist canton sits a deep blue field bearing fifty five-pointed white stars arranged in an offset grid of nine rows, symbolizing the fifty sovereign states of the Union.<br><br>The Second Continental Congress formally passed the first Flag Resolution on <strong>June 14, 1777</strong>, decreeing that the flag contain thirteen stripes and thirteen white stars in a blue field representing a <em>'new constellation'</em>. While early versions featured circle constellations attributed to Betsy Ross and Continental Congressman Francis Hopkinson, the design dynamically evolved as new states entered the union. The modern 50-star layout was designed in 1958 by 17-year-old high school student Robert G. Heft as a school history project prior to the admissions of Alaska and Hawaii in 1959. According to traditional heraldic symbolism outlined by Charles Thomson, Secretary of the Continental Congress, <strong>Red</strong> signifies hardiness and valor, <strong>White</strong> represents purity and innocence, and <strong>Blue</strong> signifies vigilance, perseverance, and justice.",
+  "freedomStory": "The birth of the United States as an independent sovereign republic arose from ideological, fiscal, and constitutional disputes between the Thirteen American Colonies and the British Crown following the Seven Years' War (French and Indian War). Impositions such as the Stamp Act of 1765 and the Tea Act of 1773 catalyzed colonial resistance under the rallying cry of <em>'No taxation without representation'</em>.<br><br>Tensions erupted into military conflict in April 1775 at the Battles of Lexington and Concord. Convening in Philadelphia, the Second Continental Congress appointed General George Washington as Commander-in-Chief of the Continental Army. On <strong>July 4, 1776</strong>, the Congress adopted the <strong>Declaration of Independence</strong>, masterfully drafted by Thomas Jefferson, which articulated the revolutionary philosophical premise that all human beings are endowed with inalienable rights to <em>'Life, Liberty, and the pursuit of Happiness'</em>.<br><br>With critical naval and military alliances from France and Spain, General Washington forced the surrender of British General Cornwallis at Yorktown in 1781. Sovereign recognition was formalized in the 1783 Treaty of Paris. To ensure domestic stability, delegates drafted the United States Constitution in 1787, establishing a tripartite federal system with checks and balances, ratified alongside the Bill of Rights in 1791.",
+  "challenges": "In the 21st century, the United States navigates complex economic, environmental, and geopolitical transitions. Domestically, the nation faces escalating federal debt obligations, structural political polarization, and the necessity to overhaul aging transportation and electrical grid infrastructure. Environmentally, severe climate variability impacts the western states, where historic droughts throughout the Colorado River Basin threaten agricultural water rights and hydroelectric capacity. Globally, the nation manages strategic trade negotiations, semiconductor manufacturing resilience, and cybersecurity defenses while adapting to automated artificial intelligence labor transformations.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Grand Canyon in Arizona, United States",
+      "caption": "The dramatic geological terrain of the Grand Canyon in Arizona, carved over millions of years by the Colorado River across the American Southwest."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1501466044931-62695aada8e9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "United States Capitol Building in Washington D.C.",
+      "caption": "The United States Capitol in Washington, D.C., the seat of the legislative branch of the federal government and symbol of constitutional democracy."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?q=80&w=1200&auto=format&fit=crop",
+      "alt": "American highway landscape with yellow centerlines",
+      "caption": "Classic American highway infrastructure: double continuous yellow centerlines, wide asphalt shoulders, and wooden utility poles."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "Long rectangular plates (12x6 inches) with distinctive state-specific top banners and color graphics; front plates optional in 19 states.",
+    "utilityPoles": "Tall wooden telephone poles with metal crossbars and cylinder transformers; distinctive yellow reflective wrap near the base in urban corridors.",
+    "roadMarkings": "Continuous or dashed yellow centerlines separating opposite directions of traffic; solid white outer edge lines.",
+    "delineators": "White flexible fiberglass posts with rectangular yellow or white reflectors.",
+    "cameraGen": "Gen 1 (historical legacy), Gen 2 (purple sun halos), Gen 3 (HD with antenna), and Gen 4 (ultra HDR deep blue skies)."
+  },
   "aiSummary": {
-    "geo": "Located in North America; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring stars and stripes with 50 stars and 13 stripes representing national sovereignty.",
-    "freedom": "Gained sovereignty from Great Britain on July 4, 1776 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to political polarization and fiscal debt."
+    "geo": "Vast continental territory spanning 50 states; borders shaped by the 1783 Treaty of Paris, 1803 Louisiana Purchase, and 1848 Treaty of Guadalupe Hidalgo.",
+    "flag": "The Stars and Stripes: 13 red-and-white stripes for founding colonies, 50 white stars on a blue canton representing modern states.",
+    "freedom": "Declared sovereignty on July 4, 1776 from Great Britain; constitutional democratic republic established in 1787.",
+    "challenge": "Western water basin security, political polarization, clean energy grid transitions, and sovereign debt management."
   },
   "faqs": [
     {
-      "question": "When did United States gain independence?",
-      "answer": "United States attained its full sovereignty and recognized independence from Great Britain on July 4, 1776."
+      "question": "What treaties established the land borders of the United States?",
+      "answer": "The continental borders were primarily established by the Treaty of Paris (1783), the Louisiana Purchase (1803), the Adams-Onís Treaty (1819), the Oregon Treaty (1846), and the Treaty of Guadalupe Hidalgo (1848)."
     },
     {
-      "question": "What are the main geographical characteristics of United States?",
-      "answer": "United States is located in North America and features a geographical layout characterized by vast North American continent."
+      "question": "What is the symbolic meaning of the colors on the American flag?",
+      "answer": "According to the Continental Congress, Red represents hardiness and valor, White signifies purity and innocence, and Blue represents vigilance, perseverance, and justice."
+    },
+    {
+      "question": "Who designed the modern 50-star American flag?",
+      "answer": "The 50-star arrangement was designed in 1958 by Robert G. Heft as a 17-year-old high school history project in Ohio, before Alaska and Hawaii officially achieved statehood in 1959."
+    },
+    {
+      "question": "When was the United States Constitution ratified?",
+      "answer": "The United States Constitution was drafted at the Constitutional Convention in Philadelphia in September 1787, officially ratified by the required nine states in June 1788, and took effect in March 1789."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1607",
+      "event": "Establishment of Jamestown, Virginia, the first permanent English settlement in North America."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1776",
+      "event": "The Continental Congress adopts the Declaration of Independence in Philadelphia on July 4."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of United States."
+      "year": "1783",
+      "event": "The Treaty of Paris concludes the Revolutionary War, recognizing American sovereignty from Great Britain."
+    },
+    {
+      "year": "1787",
+      "event": "The Constitutional Convention in Philadelphia drafts the Supreme Law of the Land, followed by the Bill of Rights in 1791."
+    },
+    {
+      "year": "1803",
+      "event": "The Louisiana Purchase from France doubles the geographic area of the United States for $15 million."
+    },
+    {
+      "year": "1861–1865",
+      "event": "The American Civil War preserves the federal Union and leads to the 13th Amendment abolishing slavery."
+    },
+    {
+      "year": "1945",
+      "event": "The United States emerges from World War II as a founding leader of the United Nations and global economic institutions."
+    },
+    {
+      "year": "1969",
+      "event": "NASA's Apollo 11 mission lands the first human beings on the Moon, demonstrating technological leadership."
     }
   ]
 }

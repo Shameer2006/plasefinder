@@ -3,45 +3,82 @@
   "name": "Norway",
   "capital": "Oslo",
   "continent": "Europe",
-  "population": "5.4 Million",
+  "population": "5.5 Million",
   "currency": "Norwegian Krone (NOK)",
   "languages": [
-    "Norwegian"
+    "Norwegian (Bokmål & Nynorsk)"
   ],
-  "seoTitle": "Detailed History of Norway: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Norway. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Norway is a key element of its national identity in Europe. Characterized by its mountainous coastlines with deep glacial fjords, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Norway came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Norway is a powerful symbol of the country's sovereignty and cultural heritage. The design features a red field with blue-white Nordic cross. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Norway involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from dissolution of union with Sweden in 1905. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Norway, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Norway faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to transitioning away from oil economic dependence, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Norway continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Norway: Glacial Fjords, Tricolor Nordic Cross, and Sovereign Wealth",
+  "metaDescription": "Explore the detailed history of Norway. Discover the Viking Age, the 1814 Eidsvoll Constitution, 1905 independence, and sovereign wealth energy.",
+  "mapFormation": "Carving a dramatic 25,000-kilometer coastline of jagged glacial fjords, towering mountains, and Arctic archipelagos across 385,207 square kilometers, the Kingdom of Norway (<em>Norge / Noreg</em>) forms the western and northern edge of the Scandinavian Peninsula.<br><br>The realm was first unified under King Harald Fairhair around <strong>872 CE</strong> following the naval Battle of Hafrsfjord. Norwegian Viking seafarers navigated the Atlantic to settle Iceland, Greenland, and reach North America (Vinland) under Leif Erikson around 1000 CE.<br><br>Following the devastation of the Black Death, Norway entered the Kalmar Union in 1397, remaining under Danish rule for over four centuries. Following the Napoleonic Wars in 1814, the <strong>Treaty of Kiel</strong> ceded Norway to the King of Sweden, sparking Norwegian resistance and the drafting of the <strong>Constitution of 1814</strong>. Full sovereign independence was peacefully achieved on <strong>June 7, 1905</strong>, when the Norwegian Storting dissolved the union with Sweden.",
+  "flagHistory": "The national flag of Norway—the <em>Norges flagg</em>—was designed in 1821 by parliamentarian <strong>Fredrik Meltzer</strong> in Bergen and officially adopted by the Storting on <strong>July 13, 1821</strong>.<br><br>Meltzer created a brilliant tricolor Nordic Cross flag by inserting an indigo blue cross inside the white cross of the Danish Dannebrog flag. In heraldic and political symbolism: <strong>Red and White</strong> honored historical ties to Denmark; <strong>Blue</strong> honored the union with Sweden and the North Atlantic maritime horizon; while the combination of <strong>Red, White, and Blue</strong> consciously echoed the colors of the French Tricolore and American Stars and Stripes, celebrating sovereign democratic liberty.",
+  "freedomStory": "Norway's sovereign freedom is rooted in one of Europe's most revered constitutional documents: the <strong>Constitution of Norway (Grunnloven)</strong>, adopted at Eidsvoll on <strong>May 17, 1814</strong> (celebrated nationwide with children's parades as <em>Syttende Mai</em>).<br><br>Inspired by the French and American Revolutions, the Eidsvoll Constitution established popular sovereignty, freedom of speech, and a unicameral parliament (Storting). When Norway achieved full separation from Sweden in 1905, citizens voted overwhelmingly in a referendum to establish a constitutional monarchy, inviting Danish Prince Carl to become King Haakon VII.<br><br>Following heroic national resistance during World War II, the discovery of massive petroleum reserves in the North Sea at the <strong>Ekofisk field in 1969</strong> transformed the economy. Norway established the <strong>Government Pension Fund Global (Sovereign Wealth Fund)</strong>, investing oil revenues for future generations to build the world's highest standard of living and top human development index rating.",
+  "challenges": "As a global pioneer in green electrification with over 80% of new car sales being fully electric and 98% of domestic power generated by hydropower, Norway navigates the transition away from fossil fuel extraction. Foremost priorities include managing Arctic security and research in Svalbard, expanding offshore floating wind farms, and stewarding its $1.7 trillion Sovereign Wealth Fund sustainably.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Geirangerfjord and cascading waterfalls in Norway",
+      "caption": "The UNESCO-listed Geirangerfjord in western Norway, showcasing dramatic sheer cliffs and glacial waterfalls."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1512813195386-6cf811ad3542?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Royal Palace in Oslo, Norway",
+      "caption": "The Royal Palace at the end of Karl Johans gate in Oslo, the official residence of the Norwegian monarch built in the 1840s."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Norwegian fjord road with yellow centerlines and dashed edge lines",
+      "caption": "Norwegian street view indicators: continuous yellow centerlines (unique in the Nordics), dashed white outer shoulder lines, and green license plates on commercial vans."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White standard plates with blue strip on left ('N'); green plates with black lettering indicate 2-seater commercial transport vehicles.",
+    "utilityPoles": "Wooden utility poles with round metal cross-arms; distinctive wooden barriers and rock fences along fjord slopes.",
+    "roadMarkings": "Continuous or dashed yellow centerlines (Norway is the ONLY Nordic country that uses yellow centerlines); dashed white outer edge lines with long intervals.",
+    "delineators": "White posts with rectangular white reflectors on both sides; wooden snow poles along mountain passes.",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across all 15 counties from Kristiansand to Nordkapp."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring red field with blue-white Nordic cross representing national sovereignty.",
-    "freedom": "Gained sovereignty from dissolution of union with Sweden in 1905 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to transitioning away from oil economic dependence."
+    "geo": "Fjord-lined Scandinavian kingdom; unified in 872 CE by Harald Fairhair; borders finalized in 1905.",
+    "flag": "Tricolor Nordic Cross: indigo blue cross bordered with white on a red field, created in 1821.",
+    "freedom": "Enacted the Eidsvoll Constitution on May 17, 1814; peaceful dissolution of Swedish union in 1905.",
+    "challenge": "North Sea energy decarbonization, Arctic security around Svalbard, and sovereign wealth stewardship."
   },
   "faqs": [
     {
-      "question": "When did Norway gain independence?",
-      "answer": "Norway attained its full sovereignty and recognized independence from dissolution of union with Sweden in 1905."
+      "question": "Why does Norway celebrate May 17 as its National Day (Syttende Mai)?",
+      "answer": "May 17 commemorates the signing of the Constitution of Norway at Eidsvoll in 1814, celebrated with joyful children's parades and traditional bunad costumes."
     },
     {
-      "question": "What are the main geographical characteristics of Norway?",
-      "answer": "Norway is located in Europe and features a geographical layout characterized by mountainous coastlines with deep glacial fjords."
+      "question": "How do you identify Norway on Google Street View instantly?",
+      "answer": "Norway is the only Nordic country with yellow centerlines on its roads, combined with dashed white edge lines and dramatic mountainous fjord landscapes."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "872 CE",
+      "event": "Harald Fairhair wins the Battle of Hafrsfjord, unifying Norway into a single kingdom."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1030",
+      "event": "King Olav Haraldsson falls at the Battle of Stiklestad, cementing Christianity in Norway."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Norway."
+      "year": "1814",
+      "event": "The Norwegian Constitution is signed at Eidsvoll on May 17."
+    },
+    {
+      "year": "1905",
+      "event": "The Storting dissolves the union with Sweden; Prince Carl of Denmark becomes King Haakon VII."
+    },
+    {
+      "year": "1969",
+      "event": "Discovery of oil at the Ekofisk field initiates Norway's modern energy era."
+    },
+    {
+      "year": "1990",
+      "event": "Establishment of the Government Pension Fund Global to manage petroleum wealth."
     }
   ]
 }

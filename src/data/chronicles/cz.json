@@ -1,47 +1,84 @@
 {
   "code": "CZ",
-  "name": "Czechia",
+  "name": "Czech Republic",
   "capital": "Prague",
   "continent": "Europe",
-  "population": "10.5 Million",
-  "currency": "Euro (EUR)",
+  "population": "10.8 Million",
+  "currency": "Czech Koruna (CZK)",
   "languages": [
     "Czech"
   ],
-  "seoTitle": "Detailed History of Czechia: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Czechia. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Czechia is a key element of its national identity in Europe. Characterized by its landlocked Bohemian and Moravian basins, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Czechia came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Czechia is a powerful symbol of the country's sovereignty and cultural heritage. The design features a horizontal bands of white and red with blue hoist wedge. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Czechia involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the Velvet Divorce split of Czechoslovakia in 1993. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Czechia, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Czechia faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to economic inflation and energy transition, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Czechia continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of the Czech Republic: Crown of Bohemia, Blue Wedge Flag, and Velvet Revolution",
+  "metaDescription": "Explore the detailed history of Czechia. Discover the Kingdom of Bohemia, Charles IV, the 1920 tricolor flag, the 1989 Velvet Revolution, and Václav Havel.",
+  "mapFormation": "Occupying 78,871 square kilometers in the geographic heart of Central Europe, the Czech Republic (<em>Česká republika / Česko</em>) is naturally enclosed by mountain ridges (the Krkonoše, Šumava, Ore Mountains, and Sudetes), comprising the three historic lands of the Bohemian Crown: <strong>Bohemia, Moravia, and Czech Silesia</strong>.<br><br>The historic Duchy of Bohemia was established in the late 9th century under the Přemyslid dynasty. In 1198, it was elevated to the hereditary <strong>Kingdom of Bohemia</strong> within the Holy Roman Empire. Under King and Holy Roman Emperor <strong>Charles IV (1346–1378)</strong>, Prague became the golden imperial capital of Europe, founding Central Europe's first university (Charles University in 1348) and the Charles Bridge.<br><br>Following centuries under the Habsburg Monarchy, the sovereign democratic state of <strong>Czechoslovakia</strong> was founded on <strong>October 28, 1918</strong>, led by philosopher-statesman Tomáš Garrigue Masaryk. Following the peaceful <strong>Velvet Divorce</strong>, the independent Czech Republic was established on <strong>January 1, 1993</strong>.",
+  "flagHistory": "The national flag of the Czech Republic—the <em>Státní vlajka České republiky</em>—features two horizontal bands of white (top) and red (bottom), with a blue equilateral triangle (wedge) extending from the hoist to the midpoint of the flag, officially adopted on <strong>March 30, 1920</strong>.<br><br>The design was created by heraldist Jaroslav Kursa. In historical symbolism: <strong>White and Red</strong> are the ancient heraldic colors of the Kingdom of Bohemia (the crowned double-tailed Silver Lion on a red shield). In 1920, the <strong>Blue Wedge</strong> was added to distinguish the flag from neighboring Poland and to incorporate the blue color of Moravia and Slovakia into the Czechoslovak federation. When Czechoslovakia peacefully split in 1993, the Czech Republic retained the beloved banner.",
+  "freedomStory": "Czech history is a testament to the power of intellectual truth, human dignity, and non-violent civic resistance.<br><br>In the early 15th century, religious reformer <strong>Jan Hus</strong> championed truth and conscience at Charles University. In 1968, the <strong>Prague Spring</strong> under Alexander Dubček sought to build 'socialism with a human face' before being crushed by Warsaw Pact tanks.<br><br>In 1977, dissident playwright <strong>Václav Havel</strong> co-founded <strong>Charter 77</strong>, an underground civic movement demanding human rights. Following the student protests of November 17, 1989, the peaceful <strong>Velvet Revolution (Sametová revoluce)</strong> toppled communist rule without a single death. Václav Havel was elected President, guiding the country to NATO accession in 1999 and the European Union in 2004.",
+  "challenges": "As an advanced industrial manufacturing hub (Škoda Auto) with one of the lowest unemployment rates in the European Union, the Czech Republic focuses on modernizing automotive supply chains toward electric vehicles, expanding nuclear energy at Dukovany and Temelín, and investing in high-speed passenger rail.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Bohemian Switzerland sandstone rock formations, Czech Republic",
+      "caption": "The Pravčická brána sandstone arch in Bohemian Switzerland National Park, the largest natural sandstone arch in Europe."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1541845157-a6d2d100c931?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Charles Bridge and Prague Castle across the Vltava River, Czech Republic",
+      "caption": "The medieval Charles Bridge crossing the Vltava River toward Prague Castle, the largest ancient castle complex in the world."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Czech highway with blue signage and red/white delineators",
+      "caption": "Czech street view indicators: white Euro plates with blue 'CZ' strip, red-and-white striped bridge markers, and blue town signs with white borders."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right (switched from left on March 15, 1939)",
+    "licensePlates": "White standard Euro plates with blue EU strip on left ('CZ'); the first letter after the first digit indicates the region (e.g., 'A' for Prague, 'B' for South Moravia/Brno).",
+    "utilityPoles": "Reinforced concrete poles with metal climbing rungs or wooden poles in rural Moravia.",
+    "roadMarkings": "Continuous or dashed white centerlines; solid white edge lines; blue-background highway exit signs.",
+    "delineators": "White posts with red reflectors on the right and white on the left, with small orange reflectors on bridge abutments.",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across all 14 regions from Bohemia to Moravia."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring horizontal bands of white and red with blue hoist wedge representing national sovereignty.",
-    "freedom": "Gained sovereignty from the Velvet Divorce split of Czechoslovakia in 1993 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to economic inflation and energy transition."
+    "geo": "Central European nation comprising Bohemia, Moravia, and Silesia; capital in Prague on the Vltava.",
+    "flag": "White and red horizontal bicolor with a blue hoist wedge, created in 1920 by Jaroslav Kursa.",
+    "freedom": "1918 Czechoslovak democracy; 1989 peaceful Velvet Revolution led by Václav Havel; 1993 independent Republic.",
+    "challenge": "Automotive EV transformation, nuclear power expansion at Dukovany, and high-speed rail construction."
   },
   "faqs": [
     {
-      "question": "When did Czechia gain independence?",
-      "answer": "Czechia attained its full sovereignty and recognized independence from the Velvet Divorce split of Czechoslovakia in 1993."
+      "question": "What was the Velvet Revolution of 1989?",
+      "answer": "The Velvet Revolution was a peaceful, non-violent mass demonstration in November-December 1989 that toppled the communist regime in Czechoslovakia, electing dissident writer Václav Havel as President."
     },
     {
-      "question": "What are the main geographical characteristics of Czechia?",
-      "answer": "Czechia is located in Europe and features a geographical layout characterized by landlocked Bohemian and Moravian basins."
+      "question": "What is the meaning of the blue triangle on the Czech flag?",
+      "answer": "The blue wedge was added in 1920 to the traditional red-and-white Bohemian colors to distinguish the flag from Poland and incorporate the blue emblem of Moravia and Slovakia."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1348",
+      "event": "King Charles IV founds Charles University in Prague and Charles Bridge."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1918",
+      "event": "Tomáš Garrigue Masaryk establishes independent democratic Czechoslovakia on October 28."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Czechia."
+      "year": "1968",
+      "event": "The Prague Spring reform movement is halted by Warsaw Pact military intervention."
+    },
+    {
+      "year": "1989",
+      "event": "The Velvet Revolution peacefully restores democracy; Václav Havel is elected President."
+    },
+    {
+      "year": "1993",
+      "event": "The peaceful Velvet Divorce creates the sovereign Czech Republic on January 1."
+    },
+    {
+      "year": "2004",
+      "event": "The Czech Republic officially joins the European Union."
     }
   ]
 }

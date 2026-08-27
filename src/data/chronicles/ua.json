@@ -8,40 +8,73 @@
   "languages": [
     "Ukrainian"
   ],
-  "seoTitle": "Detailed History of Ukraine: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Ukraine. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Ukraine is a key element of its national identity in Europe. Characterized by its fertile black soil plains and agricultural steppes, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Ukraine came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Ukraine is a powerful symbol of the country's sovereignty and cultural heritage. The design features a horizontal bands of blue and yellow. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Ukraine involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the Soviet Union in 1991. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Ukraine, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Ukraine faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to ongoing large-scale military invasion and occupation, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Ukraine continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Ukraine: Breadbasket of Europe, Blue & Yellow Flag, and 1991 Independence",
+  "metaDescription": "Explore the detailed history of Ukraine. Discover Kievan Rus, the Cossack Hetmanate, the 1991 Independence referendum, and the blue-and-yellow flag.",
+  "mapFormation": "Spanning 603,628 square kilometers across Eastern Europe from the Carpathian Mountains to the Black Sea and Sea of Azov, Ukraine (<em>Ukrayina</em>) is the second-largest country by land area located entirely within Europe, drained by the mighty Dnieper (Dnipro) River.<br><br>The historic state originated in the 9th century with <strong>Kievan Rus</strong> centered on Kyiv, which adopted Christianity in 988 CE under Prince Volodymyr the Great. In the 16th and 17th centuries, the <strong>Zaporozhian Cossacks</strong> established the democratic <strong>Cossack Hetmanate</strong> under Hetman Bohdan Khmelnytsky, defending self-governing frontiers.<br><br>Following the collapse of the Soviet Union, 92.3% of Ukrainian citizens voted overwhelmingly for sovereign independence in the historic nationwide referendum of <strong>December 1, 1991</strong>, codifying Ukraine's modern sovereign frontiers.",
+  "flagHistory": "The national flag of Ukraine—the <em>Syno-Zhovtyi Prapor</em>—is an elegant horizontal bicolor of azure blue (top) and golden yellow (bottom), officially restored by the Verkhovna Rada on <strong>January 28, 1992</strong>.<br><br>The design was first hoisted during the 1848 Spring of Nations in Lviv. In poetic and national interpretation, <strong>Azure Blue</strong> represents the vast peaceful open skies, rivers, and mountains of Ukraine, while <strong>Golden Yellow</strong> represents the boundless golden wheat fields that make Ukraine the historic 'Breadbasket of Europe'. At the center of the national coat of arms sits the <strong>Tryzub</strong> (Trident), the ancient princely crest of Volodymyr the Great from the 10th century.",
+  "freedomStory": "Ukraine's path to modern sovereignty was forged through decades of cultural preservation and democratic revolutions.<br><br>Following the tragic artificial famine of the <strong>Holodomor (1932–1933)</strong> under totalitarian rule, Ukraine declared state sovereignty on July 16, 1990. On <strong>August 24, 1991</strong>, the Parliament passed the <strong>Act of Declaration of Independence of Ukraine</strong> (celebrated as Independence Day).<br><br>In the 21st century, Ukrainian citizens defended democratic self-determination in the 2004 Orange Revolution and the 2014 <strong>Revolution of Dignity (Euromaidan)</strong> on Kyiv's Independence Square (Maidan Nezalezhnosti), choosing a European democratic future.",
+  "challenges": "Ukraine defends its sovereign territorial integrity and democratic freedom, supported by international democratic allies. Priorities include wartime defense resilience, rapid post-war reconstruction, rebuilding electrical infrastructure, and integrating into the European Union and NATO.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Carpathian mountain pastures and forests in western Ukraine",
+      "caption": "The forested peaks and emerald alpine pastures of the Ukrainian Carpathians in Ivano-Frankivsk Oblast, western Ukraine."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Saint Sophia Cathedral in Kyiv, Ukraine",
+      "caption": "Saint Sophia's Cathedral in Kyiv, commissioned in 1037 by Prince Yaroslav the Wise, a UNESCO World Heritage architectural treasure."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Ukrainian road with Cyrillic signs and red/white delineators",
+      "caption": "Ukrainian street view indicators: Cyrillic highway signage with distinctive Ukrainian letters (і, ї, є, ґ), white license plates with yellow/blue flag, and wide plains."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates with blue-and-yellow national flag on left ('UA'); two letters denote region, four digits, and two suffix letters.",
+    "utilityPoles": "Reinforced concrete poles with square or round profiles, often painted with whitewash on the bottom 1.5 meters.",
+    "roadMarkings": "Continuous or dashed white centerlines; blue-and-green highway directional signs with Cyrillic and Latin transliteration.",
+    "delineators": "White posts with red reflectors on right and white on left.",
+    "cameraGen": "Coverage in major cities including Kyiv, Lviv, Odesa, and Kharkiv prior to 2022."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring horizontal bands of blue and yellow representing national sovereignty.",
-    "freedom": "Gained sovereignty from the Soviet Union in 1991 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to ongoing large-scale military invasion and occupation."
+    "geo": "Second-largest European country by land area; breadbasket of Europe; capital in ancient Kyiv.",
+    "flag": "Blue and yellow horizontal bicolor representing blue skies over golden wheat fields.",
+    "freedom": "1991 Independence Declaration and nationwide referendum; 2014 Revolution of Dignity.",
+    "challenge": "Territorial defense, energy infrastructure rebuilding, and European Union accession."
   },
   "faqs": [
     {
-      "question": "When did Ukraine gain independence?",
-      "answer": "Ukraine attained its full sovereignty and recognized independence from the Soviet Union in 1991."
+      "question": "What is the Tryzub on Ukraine's coat of arms?",
+      "answer": "The Tryzub (Trident) is the ancient coat of arms of Ukraine, originating as the 10th-century seal of Grand Prince Volodymyr the Great of Kievan Rus."
     },
     {
-      "question": "What are the main geographical characteristics of Ukraine?",
-      "answer": "Ukraine is located in Europe and features a geographical layout characterized by fertile black soil plains and agricultural steppes."
+      "question": "When did Ukraine declare independence?",
+      "answer": "Ukraine declared independence from the Soviet Union on August 24, 1991, ratified by 92.3% of voters in a nationwide referendum on December 1, 1991."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "988 CE",
+      "event": "Prince Volodymyr the Great Christianizes Kievan Rus, establishing European integration."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1648",
+      "event": "Bohdan Khmelnytsky leads the Cossack uprising, founding the Cossack Hetmanate."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Ukraine."
+      "year": "1918",
+      "event": "The Ukrainian People's Republic declares independence following WWI."
+    },
+    {
+      "year": "1991",
+      "event": "Ukraine declares independence on August 24, confirmed by 92% of voters in referendum."
+    },
+    {
+      "year": "2014",
+      "event": "The Revolution of Dignity (Euromaidan) in Kyiv reaffirms European democratic trajectory."
     }
   ]
 }

@@ -3,45 +3,98 @@
   "name": "France",
   "capital": "Paris",
   "continent": "Europe",
-  "population": "68.0 Million",
+  "population": "68.4 Million",
   "currency": "Euro (EUR)",
   "languages": [
     "French"
   ],
-  "seoTitle": "Detailed History of France: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of France. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of France is a key element of its national identity in Europe. Characterized by its fertile plains, hills, and Alpine slopes, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of France came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of France is a powerful symbol of the country's sovereignty and cultural heritage. The design features a vertical bands of blue, white, and red. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for France involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from ancient consolidation and 1789 Revolution. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of France, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, France faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to social integration, protests, and economic reformas, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of France continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of France: The Hexagon Borders, Tricolore Flag Vexillology, and Republican Liberty",
+  "metaDescription": "Explore the comprehensive history of France. Discover how the Treaty of Verdun, the 1789 French Revolution, and the Fifth Republic shaped the modern sovereign nation.",
+  "mapFormation": "Occupying a strategic crossroads between Northern and Mediterranean Europe, metropolitan France encompasses 543,940 square kilometers popularly termed <em>'L'Hexagone'</em> (The Hexagon) due to its distinctive six-sided geographical perimeter bounded by natural frontiers: the English Channel to the north, the Atlantic Ocean to the west, the Pyrenees and Mediterranean Sea to the south, and the Alps and Rhine River to the east.<br><br>The modern territorial state traces its historical origins to the partition of Charlemagne's Carolingian Empire in the <strong>Treaty of Verdun (843 CE)</strong>, which created West Francia under Charles the Bald. Over the following centuries, the Capetian monarchs systematically consolidated the realm from their royal domain in the Île-de-France, annexing the Duchy of Normandy (1204), Languedoc (1229), Dauphiné (1349), and recovering Aquitaine from English rule at the conclusion of the Hundred Years' War in 1453.<br><br>Under the Bourbon monarchy, Cardinal Richelieu and King Louis XIV pursued the doctrine of natural frontiers, incorporating Alsace via the <strong>Peace of Westphalia (1648)</strong>, Roussillon via the <strong>Treaty of the Pyrenees (1659)</strong>, and Franche-Comté via the <strong>Treaty of Nijmegen (1678)</strong>. In 1860, the Treaty of Turin finalized the incorporation of Nice and Savoy from the Kingdom of Sardinia, establishing the modern continental borders recognized today alongside overseas regions in the Caribbean, Indian Ocean, and Pacific.",
+  "flagHistory": "The national flag of France—the world-renowned <strong>Tricolore</strong> (Blue, White, Red vertical tricolor)—is one of the most influential vexillological symbols in modern civilization, inspiring the democratic banners of dozens of sovereign nations across Europe, the Americas, and Africa.<br><br>The flag was born in the fervor of the French Revolution in July 1789. Following the Storming of the Bastille, the Marquis de Lafayette—Commander of the National Guard—created a revolutionary cockade by combining the traditional cockade of the City of Paris (Blue and Red) with the ancient royal White of the French monarchy, presenting it to King Louis XVI as a symbol of national reconciliation between the people and the state.<br><br>On <strong>February 15, 1794 (27 Pluviôse, Year II)</strong>, the National Convention formally adopted the blue, white, and red vertical tricolor as the national ensign, designed under the aesthetic direction of neoclassical painter Jacques-Louis David. In heraldic symbolism, <strong>Blue</strong> evokes the cloak of Saint Martin of Tours and civic vigilance; <strong>White</strong> represents historic sovereign unity; and <strong>Red</strong> honors the flame of Saint Denis and the blood of citizens who gave their lives for universal human rights.",
+  "freedomStory": "France's sovereign path to freedom is synonymous with the dawn of modern universal human rights and the eradication of feudal absolutism.<br><br>On <strong>July 14, 1789</strong>, the citizens of Paris stormed the medieval fortress of the Bastille, an armory and symbol of royal tyranny. Six weeks later, on August 26, 1789, the National Constituent Assembly promulgated the <strong>Declaration of the Rights of Man and of the Citizen</strong> (<em>Déclaration des droits de l'homme et du citoyen</em>). Drafted by Lafayette with assistance from Thomas Jefferson, it proclaimed the immortal democratic truth: <em>'Men are born and remain free and equal in rights.'</em><br><br>Through successive republican constitutions, France institutionalized the tripartite national motto: <em>'Liberté, Égalité, Fraternité'</em> (Liberty, Equality, Fraternity). Following the devastation of World War II and the heroic resistance of the Free French Forces led by General Charles de Gaulle, the nation ratified the Constitution of the <strong>Fifth Republic in 1958</strong>, establishing a stable semi-presidential democracy with strong constitutional guarantees of secularism (<em>Laïcité</em>) and civil liberties.",
+  "challenges": "In the modern era, France balances its role as a nuclear-armed permanent member of the UN Security Council and founding architect of the European Union with domestic socioeconomic reforms. Key priorities include modernizing public pension systems, investing in next-generation nuclear reactor fleets (EPR) to sustain continental clean energy leadership, and fostering social cohesion across diverse metropolitan and peri-urban communities. Globally, France advocates for European strategic autonomy, high-speed rail decarbonization, and advanced aerospace partnerships through Airbus and the European Space Agency.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Mont Saint-Michel in Normandy, France",
+      "caption": "The tidal island abbey of Mont Saint-Michel in Normandy, an iconic historic sanctuary and UNESCO World Heritage monument in northern France."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Eiffel Tower and Paris cityscape, France",
+      "caption": "The Eiffel Tower overlooking Paris, constructed for the 1889 Universal Exposition to commemorate the centenary of the French Revolution."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1508050919630-b135583b3ae8?q=80&w=1200&auto=format&fit=crop",
+      "alt": "French countryside road and holey concrete poles",
+      "caption": "French rural road landscape: distinctive concrete utility poles with rectangular holes, white dashed centerlines, and town entry signboards."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "Standard European plates with blue EU strip on the left and department regional logo/number on the right band.",
+    "utilityPoles": "Famous 'French holey pole'—rectangular reinforced concrete poles featuring rows of round or rectangular holes running up the shaft.",
+    "roadMarkings": "Dashed white centerlines with long stroke lengths (T1 line pattern); solid white outer edge lines.",
+    "delineators": "Cylindrical white posts with a red reflective band on top and black plastic base (Balise J1).",
+    "cameraGen": "Comprehensive Gen 3 and Gen 4 coverage across both metropolitan France and overseas departments like Réunion and Martinique."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring vertical bands of blue, white, and red representing national sovereignty.",
-    "freedom": "Gained sovereignty from ancient consolidation and 1789 Revolution through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to social integration, protests, and economic reformas."
+    "geo": "Hexagonal territory in Western Europe; borders consolidated from the 843 Treaty of Verdun through the 1860 Treaty of Turin.",
+    "flag": "The Tricolore: vertical blue, white, and red bands created in 1789, symbolizing liberty, equality, and fraternity.",
+    "freedom": "Transformed through the 1789 French Revolution and the Declaration of the Rights of Man; modern Fifth Republic founded in 1958.",
+    "challenge": "Nuclear energy fleet modernization, European strategic defense autonomy, and socioeconomic labor reforms."
   },
   "faqs": [
     {
-      "question": "When did France gain independence?",
-      "answer": "France attained its full sovereignty and recognized independence from ancient consolidation and 1789 Revolution."
+      "question": "What is the historical significance of the Storming of the Bastille?",
+      "answer": "Occurring on July 14, 1789, the Storming of the Bastille marked the popular uprising against feudal absolutism, initiating the French Revolution. It is celebrated annually as France's National Day (La Fête Nationale / Bastille Day)."
     },
     {
-      "question": "What are the main geographical characteristics of France?",
-      "answer": "France is located in Europe and features a geographical layout characterized by fertile plains, hills, and Alpine slopes."
+      "question": "Who created the French Tricolore flag?",
+      "answer": "The Tricolore was created in July 1789 by the Marquis de Lafayette, combining the blue and red colors of Paris with royal white. It was formalized by the National Convention in 1794 with design input from painter Jacques-Louis David."
+    },
+    {
+      "question": "Why is France geographically referred to as 'The Hexagon'?",
+      "answer": "Metropolitan France is called 'L'Hexagone' because its physical continental borders form a distinct six-sided shape bounded by three coastlines (English Channel, Atlantic, Mediterranean) and three land frontiers (Pyrenees, Alps, Rhine)."
+    },
+    {
+      "question": "When was the modern Fifth Republic of France established?",
+      "answer": "The Fifth Republic was established on October 4, 1958, through a constitutional referendum championed by General Charles de Gaulle to provide executive political stability."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "843 CE",
+      "event": "The Treaty of Verdun partitions Charlemagne's empire, establishing West Francia under Charles the Bald."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1429",
+      "event": "Joan of Arc leads French forces to victory at the Siege of Orléans during the Hundred Years' War."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of France."
+      "year": "1648",
+      "event": "The Peace of Westphalia incorporates Alsace into the French realm under King Louis XIV."
+    },
+    {
+      "year": "1789",
+      "event": "The Storming of the Bastille on July 14 sparks the French Revolution, followed by the Declaration of the Rights of Man."
+    },
+    {
+      "year": "1804",
+      "event": "Napoleon Bonaparte establishes the Civil Code (Napoleonic Code), laying the foundation of modern continental legal systems."
+    },
+    {
+      "year": "1860",
+      "event": "The Treaty of Turin cedes Nice and Savoy from the Kingdom of Sardinia to France."
+    },
+    {
+      "year": "1944",
+      "event": "The Liberation of Paris by Allied and Free French forces restores republican sovereignty."
+    },
+    {
+      "year": "1958",
+      "event": "General Charles de Gaulle promulgates the Constitution of the Fifth Republic."
     }
   ]
 }

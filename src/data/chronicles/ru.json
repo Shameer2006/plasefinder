@@ -3,45 +3,86 @@
   "name": "Russia",
   "capital": "Moscow",
   "continent": "Europe",
-  "population": "144.4 Million",
+  "population": "144.2 Million",
   "currency": "Russian Ruble (RUB)",
   "languages": [
     "Russian"
   ],
-  "seoTitle": "Detailed History of Russia: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Russia. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Russia is a key element of its national identity in Europe. Characterized by its vast Eurasian plains and forests spanning 11 time zones, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Russia came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Russia is a powerful symbol of the country's sovereignty and cultural heritage. The design features a horizontal bands of white, blue, and red. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Russia involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the Soviet Union in 1991. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Russia, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Russia faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to international sanctions and geopolitical conflicts, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Russia continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Russia: Eurasian Continental Borders, White-Blue-Red Flag, and Sovereignty",
+  "metaDescription": "Explore the detailed history of Russia. Discover Kievan Rus, Peter the Great's empire, the 1991 Russian Federation, and the historic tricolor flag.",
+  "mapFormation": "Spanning 17.1 million square kilometers across Eastern Europe and Northern Asia, the Russian Federation is the largest sovereign nation on Earth by land area, covering eleven time zones from the Baltic Sea to the Bering Strait.<br><br>The historic state originated with the East Slavic confederation of <strong>Kievan Rus</strong> in the 9th century, followed by the rise of the Grand Duchy of Moscow in the 14th century. Under Tsar Ivan IV (the Terrible), Russia expanded eastward across the Ural Mountains into the vast boreal forests of Siberia.<br><br>Tsar <strong>Peter the Great (1682–1725)</strong> transformed the Tsardom into the Russian Empire, founding Saint Petersburg as a 'Window to Europe' and expanding south to the Black Sea and east to the Pacific Ocean. Following the 1917 Russian Revolution, the territory formed the core of the Soviet Union (USSR). On <strong>December 25, 1991</strong>, following the dissolution of the Soviet Union, the modern Russian Federation emerged as the sovereign successor state.",
+  "flagHistory": "The national flag of Russia—a horizontal tricolor of <strong>White, Blue, and Red</strong>—was created in 1696 by Tsar Peter the Great as the civil merchant ensign of the Russian Empire, inspired by the Dutch tricolor.<br><br>In traditional Russian heraldic symbolism, <strong>White</strong> represents nobility, peace, and the snows of the North; <strong>Blue</strong> represents faithfulness, honesty, and the skies; and <strong>Red</strong> symbolizes courage, generosity, and love. The flag was officially reinstated by the Supreme Soviet of the Russian SFSR on <strong>August 22, 1991</strong>, replacing the Soviet hammer-and-sickle banner.",
+  "freedomStory": "Russia's modern sovereignty was established through the dramatic democratic transition of 1991.<br><br>Following decades of Soviet totalitarian administration and the reform programs of <em>Glasnost</em> (openness) and <em>Perestroika</em> (restructuring) initiated by Mikhail Gorbachev, the Russian Parliament adopted the <strong>Declaration of State Sovereignty on June 12, 1990</strong> (celebrated annually as Russia Day).<br><br>On <strong>December 12, 1993</strong>, citizens approved the Constitution of the Russian Federation in a nationwide referendum, establishing a federal democratic state with separation of powers, judicial guarantees, and private property rights.",
+  "challenges": "Contemporary Russia confronts extensive economic and geopolitical restructuring. Core internal priorities include modernizing vast trans-Siberian transportation corridors, investing in Arctic icebreaker shipping routes along the Northern Sea Route, and managing demographic population stabilization across vast rural provinces.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Lake Baikal in Siberia, Russia",
+      "caption": "Lake Baikal in Siberia, the world's deepest and oldest freshwater lake containing 20% of Earth's unfrozen surface freshwater."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1513326738677-b964603b136d?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Saint Basil's Cathedral in Moscow, Russia",
+      "caption": "Saint Basil's Cathedral in Red Square, Moscow, commissioned by Ivan IV in 1555 and an icon of Russian architecture."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Russian highway with Cyrillic signs and blue road markers",
+      "caption": "Russian street view cues: white rectangular plates with region number codes, Cyrillic highway signs, and wide birch forests."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates with black Cyrillic letters and a distinct separated box on the right containing the Russian flag and 2-3 digit regional code (e.g., 77 for Moscow).",
+    "utilityPoles": "Concrete poles with rounded or square cross-sections; black/white painted bases in urban centers.",
+    "roadMarkings": "White dashed centerlines; solid white edge lines; blue-background highway signs with Cyrillic script.",
+    "delineators": "White posts with a slanted black band and red rectangular reflector.",
+    "cameraGen": "Massive Gen 3 and Gen 4 coverage across major federal highways from Saint Petersburg to Vladivostok."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring horizontal bands of white, blue, and red representing national sovereignty.",
-    "freedom": "Gained sovereignty from the Soviet Union in 1991 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to international sanctions and geopolitical conflicts."
+    "geo": "Largest country in the world spanning 17.1M sq km; borders consolidated across Siberia and the Pacific coast.",
+    "flag": "White, blue, and red horizontal tricolor designed by Peter the Great in 1696.",
+    "freedom": "1990 Declaration of State Sovereignty and 1993 Constitution following Soviet dissolution.",
+    "challenge": "Arctic northern sea route development, demographic aging, and transport infrastructure."
   },
   "faqs": [
     {
-      "question": "When did Russia gain independence?",
-      "answer": "Russia attained its full sovereignty and recognized independence from the Soviet Union in 1991."
+      "question": "What is the largest country in the world by land area?",
+      "answer": "Russia is the largest country in the world, covering over 17.1 million square kilometers across Europe and Asia."
     },
     {
-      "question": "What are the main geographical characteristics of Russia?",
-      "answer": "Russia is located in Europe and features a geographical layout characterized by vast Eurasian plains and forests spanning 11 time zones."
+      "question": "When was the modern Russian Federation established?",
+      "answer": "The modern Russian Federation emerged on December 25, 1991, following the dissolution of the Soviet Union."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "882 CE",
+      "event": "Oleg of Novgorod unifies East Slavic lands, establishing Kievan Rus."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1703",
+      "event": "Peter the Great founds Saint Petersburg, establishing the Russian Empire."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Russia."
+      "year": "1812",
+      "event": "Russian forces defeat Napoleon's Grande Armée during the Patriotic War of 1812."
+    },
+    {
+      "year": "1917",
+      "event": "The Russian Revolution ends Tsarist rule, establishing the Soviet state."
+    },
+    {
+      "year": "1945",
+      "event": "Victory in World War II cements Soviet global superpower status."
+    },
+    {
+      "year": "1961",
+      "event": "Yuri Gagarin becomes the first human in space aboard Vostok 1."
+    },
+    {
+      "year": "1991",
+      "event": "The Soviet Union dissolves on December 25; the Russian Federation is established."
     }
   ]
 }

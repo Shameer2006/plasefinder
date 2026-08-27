@@ -8,40 +8,77 @@
   "languages": [
     "Greek"
   ],
-  "seoTitle": "Detailed History of Greece: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Greece. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Greece is a key element of its national identity in Europe. Characterized by its mountainous Aegean peninsula and island networks, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Greece came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Greece is a powerful symbol of the country's sovereignty and cultural heritage. The design features a nine blue and white stripes with blue canton cross. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Greece involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the Ottoman Empire in 1830. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Greece, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Greece faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to sovereign debt recovery and aging populations, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Greece continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Greece: Cradle of Democracy, Sky-Blue & White Flag, and 1821 Revolution",
+  "metaDescription": "Explore the detailed history of Greece. Discover ancient Athens, the 1821 Greek War of Independence, the Byzantine legacy, and the blue-and-white flag.",
+  "mapFormation": "Positioned at the strategic juncture of Europe, Asia, and Africa in Southeastern Europe across 131,957 square kilometers, the Hellenic Republic (<em>Elláda / Hellas</em>) encompasses the southern tip of the Balkan Peninsula and an archipelago of over 2,000 islands across the Aegean and Ionian Seas, anchored by <strong>Crete, Rhodes, and the Cyclades</strong>.<br><br>Greece is the historic <strong>Cradle of Western Civilization</strong>, birthplace of democracy in 5th-century BCE Classical Athens, philosophy (Socrates, Plato, Aristotle), theater, the Olympic Games, and Western science. Following Alexander the Great's Hellenistic empire and integration into the Roman and Byzantine Empires (330–1453 CE), the Greek lands came under Ottoman rule following the Fall of Constantinople in 1453.<br><br>The modern Greek state was forged in the <strong>Greek War of Independence (1821–1829)</strong>. Sovereign independence was recognized under the <strong>London Protocol of 1830</strong>. Through successive treaties—the Treaty of Berlin (1881), the Balkan Wars (1912–1913), and the Treaty of Lausanne (1923)—Greece incorporated Thessaly, Macedonia, Epirus, Crete, and the Aegean islands, finalizing modern borders with the 1947 integration of the Dodecanese islands from Italy.",
+  "flagHistory": "The national flag of Greece—the <em>Galanólefki</em> (The Sky-Blue and White)—features nine alternating horizontal stripes of blue and white, with a blue square canton containing a white cross in the upper hoist.<br><br>The design was formally adopted by the First National Assembly at Epidaurus on <strong>January 15, 1822</strong>, during the War of Independence. The <strong>White Cross</strong> in the canton represents Eastern Orthodox Christianity and the blessing of the Church in the revolution. The <strong>Nine Stripes</strong> correspond to the nine syllables of the immortal revolutionary battle cry of 1821: <em>'E-lef-the-rí-a í Thá-na-tos'</em> (<strong>'Freedom or Death'</strong>). In poetic lore, <strong>Blue</strong> represents the Aegean Sea and Mediterranean sky, while <strong>White</strong> represents the pure foaming waves of the sea and the purity of the struggle for freedom.",
+  "freedomStory": "The resurrection of sovereign Greek statehood was ignited on <strong>March 25, 1821</strong> (celebrated as Greek Independence Day / <em>25th of March</em>), when Bishop Germanos of Old Patras raised the revolutionary banner at the Monastery of Agia Lavra.<br><br>Aided by passionate philhellenes across Europe (including poet Lord Byron), Greek naval captains (Laskarina Bouboulina, Andreas Miaoulis) and guerrilla commanders (Theodoros Kolokotronis) fought fiercely against imperial Ottoman forces. Following the decisive Allied naval victory at the Battle of Navarino in 1827, sovereign independence was formally established.<br><br>Following the restoration of democracy in 1974 (<em>Metapolitefsi</em>) after the fall of the military junta, Greece established a stable democratic parliamentary republic, acceding to the European Economic Community (EU) in 1981.",
+  "challenges": "As a top Mediterranean maritime powerhouse with the world's largest commercial merchant shipping fleet and a premier global tourism destination, Greece balances economic growth with climate resilience. Foremost priorities include mitigating summer wildfire and flood risks, expanding solar and wind infrastructure to green island grids, and managing Aegean maritime territorial stability.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Santorini caldera and Aegean Sea, Greece",
+      "caption": "The whitewashed cliffside villages of Oia overlooking the volcanic caldera of Santorini in the Aegean Sea, Greece."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Acropolis and Parthenon in Athens, Greece",
+      "caption": "The Parthenon atop the sacred rock of the Acropolis in Athens, completed in 438 BCE as the monumental symbol of ancient Athenian democracy."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Greek highway with Greek alphabet signage and small blue license strip",
+      "caption": "Greek street view indicators: Greek alphabet signage (with Latin subtitles), white plates with blue 'GR' strip, and rocky Mediterranean olive groves."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates with blue strip on left ('GR') and three letters followed by four numbers formatted in Greek characters that exist in both Greek and Latin alphabets.",
+    "utilityPoles": "Wooden poles with metal crossbars and white porcelain insulators; concrete poles in urban Athens and Thessaloniki.",
+    "roadMarkings": "Continuous or dashed white centerlines; solid white edge lines; blue-background regional highway signs with Greek and Latin transliterations.",
+    "delineators": "White posts with red reflectors on the right and white on the left.",
+    "cameraGen": "Comprehensive Gen 3 and Gen 4 coverage across the mainland and all major island groups."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring nine blue and white stripes with blue canton cross representing national sovereignty.",
-    "freedom": "Gained sovereignty from the Ottoman Empire in 1830 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to sovereign debt recovery and aging populations."
+    "geo": "Southeastern European cradle of Western civilization; archipelago of 2,000+ islands.",
+    "flag": "Galanólefki: 9 blue-and-white stripes symbolizing 'Freedom or Death' with a white cross.",
+    "freedom": "1821 Revolution initiated on March 25; London Protocol 1830 recognized sovereign state.",
+    "challenge": "Wildfire climate defense, green island grid transitions, and Aegean maritime coordination."
   },
   "faqs": [
     {
-      "question": "When did Greece gain independence?",
-      "answer": "Greece attained its full sovereignty and recognized independence from the Ottoman Empire in 1830."
+      "question": "What is the historical meaning of March 25 in Greece?",
+      "answer": "March 25 is Greek Independence Day, commemorating the outbreak of the 1821 Greek War of Independence against Ottoman rule, coinciding with the Feast of the Annunciation."
     },
     {
-      "question": "What are the main geographical characteristics of Greece?",
-      "answer": "Greece is located in Europe and features a geographical layout characterized by mountainous Aegean peninsula and island networks."
+      "question": "What is the meaning of the nine stripes on the Greek flag?",
+      "answer": "The nine stripes represent the nine syllables of the Greek revolutionary motto 'Eleftheria i Thanatos' ('Freedom or Death')."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "508 BCE",
+      "event": "Cleisthenes institutes democratic reforms in Athens, creating the world's first democracy."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1821",
+      "event": "Bishop Germanos raises the revolutionary banner on March 25, sparking the War of Independence."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Greece."
+      "year": "1830",
+      "event": "The London Protocol formally recognizes the sovereign independence of the Kingdom of Greece."
+    },
+    {
+      "year": "1913",
+      "event": "The Treaty of Bucharest concludes the Balkan Wars, incorporating Macedonia, Epirus, and Crete."
+    },
+    {
+      "year": "1974",
+      "event": "The fall of the military junta leads to the restoration of democracy (Metapolitefsi)."
+    },
+    {
+      "year": "1981",
+      "event": "Greece accedes to the European Economic Community (European Union)."
     }
   ]
 }

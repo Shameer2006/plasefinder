@@ -3,45 +3,90 @@
   "name": "China",
   "capital": "Beijing",
   "continent": "Asia",
-  "population": "1.4 Billion",
-  "currency": "Chinese Yuan (CNY)",
+  "population": "1.41 Billion",
+  "currency": "Renminbi Yuan (CNY)",
   "languages": [
-    "Mandarin"
+    "Mandarin Chinese"
   ],
-  "seoTitle": "Detailed History of China: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of China. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of China is a key element of its national identity in Asia. Characterized by its vast East Asian river basins, mountains, and deserts, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of China came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of China is a powerful symbol of the country's sovereignty and cultural heritage. The design features a red field with five golden stars in canton. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for China involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from civil war victory in 1949. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of China, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, China faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to economic transition and aging workforce, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of China continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of China: Dynastic Unification, Five-Starred Red Flag, and Modern Power",
+  "metaDescription": "Explore the comprehensive history of China. Discover the Qin unification, Great Wall, 1911 Revolution, Five-Starred Red Flag, and economic rise.",
+  "mapFormation": "Spanning 9.6 million square kilometers across East Asia from the Pamir Mountains to the Pacific Ocean, the People's Republic of China is the world's third-largest country by land area, cradled by two great river arteries: the Yellow River (Huang He) and the Yangtze (Chang Jiang).<br><br>The territorial foundations of a unified Chinese state were forged in <strong>221 BCE</strong> when Qin Shi Huang conquered the Warring States, establishing the Qin Dynasty, standardizing script and currency, and connecting frontier fortifications into the <strong>Great Wall of China</strong>. Successive imperial dynasties—the Han, Tang, Song, Ming, and Qing—expanded frontiers across the Silk Road corridors of Central Asia and the Tibetan plateau.<br><br>Following the collapse of the Qing Dynasty in the <strong>Xinhai Revolution of 1911</strong> and the conclusion of the Chinese Civil War in 1949, Chairman Mao Zedong proclaimed the People's Republic of China on October 1, 1949, establishing the modern sovereign state with subsequent peaceful reintegrations of Hong Kong (1997) and Macau (1999).",
+  "flagHistory": "The national flag of China—the <strong>Five-Starred Red Flag</strong> (<em>Wǔxīng Hóngqí</em>)—was designed by Zeng Liansong and officially hoisted over Tiananmen Square on <strong>October 1, 1949</strong>.<br><br>The flag features a brilliant red field symbolizing the blood of revolutionary martyrs and the communist revolution. In the upper hoist canton are five golden-yellow five-pointed stars: one large central star surrounded by an arc of four smaller stars, each with one point aimed directly toward the center of the primary star. In official symbolism, the large star represents the unified leadership of the Communist Party of China, while the four smaller stars symbolize the four social classes united in national construction (the working class, the peasantry, the urban petty bourgeoisie, and the national bourgeoisie).",
+  "freedomStory": "China's modern path to sovereign independence arose from resistance against the 'Century of Humiliation' (1839–1949) initiated by the Opium Wars and unequal treaties with colonial powers.<br><br>In October 1911, Dr. Sun Yat-sen led the <strong>Xinhai Revolution</strong>, overthrowing over two millennia of imperial dynastic rule and founding the Republic of China based on the 'Three Principles of the People' (Nationalism, Democracy, and People's Livelihood). Following heroic national resistance during World War II, the People's Republic of China established sovereign self-determination in 1949.<br><br>Under the leadership of Deng Xiaoping beginning in 1978, China initiated historic <strong>'Reform and Opening-up'</strong> policies, establishing Special Economic Zones in Shenzhen and Shanghai that lifted over 800 million citizens out of poverty and built the world's second-largest economy.",
+  "challenges": "China navigates profound demographic, environmental, and technological transitions. Chief among these is managing a shrinking working-age population resulting from historic demographic trends, accelerating investments in domestic semiconductor manufacturing, and decarbonizing the world's largest industrial manufacturing base through massive solar, wind, and ultra-high-voltage transmission networks.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Great Wall of China winding across mountain ridges",
+      "caption": "The Great Wall of China winding across the rugged mountain ridges of northern China, built over two millennia to defend imperial frontiers."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Forbidden City in Beijing, China",
+      "caption": "The Forbidden City in Beijing, the imperial palace complex of the Ming and Qing dynasties and masterpiece of classical Chinese architecture."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1513415755852-c07a58667a42?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Chinese highway and skyline infrastructure",
+      "caption": "Chinese transportation infrastructure: green express highway shields, blue license plates, and multi-lane modern overpasses."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "Blue rectangular plates with white Chinese characters and numbers for regular passenger vehicles; green-and-white gradient plates for electric vehicles.",
+    "utilityPoles": "Tall concrete poles with metal climbing steps and transformer platforms.",
+    "roadMarkings": "White or yellow dashed centerlines; solid yellow lines on mountainous divided highways.",
+    "delineators": "Red and white striped guideposts with square glass reflectors.",
+    "cameraGen": "Official Street View is limited; comprehensive panoramic museum and university campus trekker coverage."
+  },
   "aiSummary": {
-    "geo": "Located in Asia; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring red field with five golden stars in canton representing national sovereignty.",
-    "freedom": "Gained sovereignty from civil war victory in 1949 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to economic transition and aging workforce."
+    "geo": "East Asian nation spanning 9.6M sq km; unified in 221 BCE by Qin Shi Huang and modernized in 1949.",
+    "flag": "Five-Starred Red Flag: large golden star representing state leadership flanked by four smaller stars.",
+    "freedom": "1911 Xinhai Revolution ended dynastic rule; 1949 independence and 1978 economic modernization.",
+    "challenge": "Demographic super-aging, renewable energy grid transition, and high-tech supply chain resilience."
   },
   "faqs": [
     {
-      "question": "When did China gain independence?",
-      "answer": "China attained its full sovereignty and recognized independence from civil war victory in 1949."
+      "question": "When was China first unified as a single empire?",
+      "answer": "China was first unified in 221 BCE by Qin Shi Huang, the first Emperor of the Qin Dynasty, who connected the Great Wall and standardized laws."
     },
     {
-      "question": "What are the main geographical characteristics of China?",
-      "answer": "China is located in Asia and features a geographical layout characterized by vast East Asian river basins, mountains, and deserts."
+      "question": "What do the five stars on the Chinese flag represent?",
+      "answer": "The large star represents the leadership of the Communist Party, and the four smaller stars symbolize the four social classes united in national progress."
+    },
+    {
+      "question": "What was the Xinhai Revolution of 1911?",
+      "answer": "The Xinhai Revolution overthrew the Qing Dynasty, ending more than 2,000 years of imperial monarchy and establishing the Republic of China."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "221 BCE",
+      "event": "Qin Shi Huang unifies the Warring States, founding the first imperial Chinese dynasty."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1368",
+      "event": "The Ming Dynasty is established, constructing the Forbidden City and modern Great Wall."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of China."
+      "year": "1911",
+      "event": "The Xinhai Revolution overthrows the Qing Dynasty, ending imperial monarchy."
+    },
+    {
+      "year": "1949",
+      "event": "Mao Zedong proclaims the People's Republic of China on October 1 in Beijing."
+    },
+    {
+      "year": "1978",
+      "event": "Deng Xiaoping launches Reform and Opening-up, initiating rapid economic modernization."
+    },
+    {
+      "year": "1997",
+      "event": "Hong Kong returns to Chinese sovereignty under the One Country, Two Systems framework."
+    },
+    {
+      "year": "2008",
+      "event": "Beijing hosts the Summer Olympic Games, showcasing world-class infrastructure."
     }
   ]
 }

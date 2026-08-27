@@ -19,6 +19,24 @@ export default function GuidesPage() {
       featured: true
     },
     {
+      title: "Google Street View Camera Generations Guide (Gen 1 to Gen 4)",
+      slug: "street-view-camera-generations-guide",
+      desc: "Learn to recognize Gen 1 blur, Gen 2 purple sun halos, Gen 3 clarity, and Gen 4 ultra-HDR to date and locate Street View coverage instantly.",
+      date: "August 25, 2026",
+      readTime: "10 min read",
+      category: "Street View Meta",
+      icon: "📷"
+    },
+    {
+      title: "How to Identify Latin American Countries in Street View",
+      slug: "latin-america-street-view-guide",
+      desc: "Master Colombian cross-back signs, Brazilian black sign backs, Mexican holey poles, and Chilean white centerlines.",
+      date: "August 26, 2026",
+      readTime: "9 min read",
+      category: "Continent Guides",
+      icon: "🌄"
+    },
+    {
       title: "How to Guess Locations from Google Street View",
       slug: "how-to-guess-locations-from-street-view",
       desc: "Master the art of geography guessing games with these pro tips on identifying bollards, license plates, architecture, and sun position.",

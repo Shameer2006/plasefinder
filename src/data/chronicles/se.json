@@ -4,44 +4,85 @@
   "capital": "Stockholm",
   "continent": "Europe",
   "population": "10.5 Million",
-  "currency": "Euro (EUR)",
+  "currency": "Swedish Krona (SEK)",
   "languages": [
     "Swedish"
   ],
-  "seoTitle": "Detailed History of Sweden: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Sweden. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Sweden is a key element of its national identity in Europe. Characterized by its boreal forests and coastal archipelagos, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Sweden came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Sweden is a powerful symbol of the country's sovereignty and cultural heritage. The design features a blue field with yellow Nordic cross. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Sweden involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from ancient kingdom consolidation. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Sweden, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Sweden faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to integration of immigrants and energy shifts, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Sweden continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Sweden: Scandinavian Kingdom, Yellow Cross Flag, and Social Democracy",
+  "metaDescription": "Discover the detailed history of Sweden. Explore the Kalmar Union, Gustav Vasa's 1523 independence, the Nordic Cross flag, and modern neutrality.",
+  "mapFormation": "Stretching 1,572 kilometers along the eastern spine of the Scandinavian Peninsula across 450,295 square kilometers, the Kingdom of Sweden (<em>Sverige</em>) is the largest country in Northern Europe, characterized by over 95,700 lakes, vast boreal pine forests, and thousands of coastal islands in the Stockholm and Bohuslän archipelagos.<br><br>In antiquity, Norse tribes—the Svear and Geats—navigated Baltic and Russian riverways during the Viking Age. In 1397, Queen Margaret I unified Denmark, Norway, and Sweden under the <strong>Kalmar Union</strong>.<br><br>Swedish sovereign independence was permanently established on <strong>June 6, 1523</strong>, when nobleman <strong>Gustav Vasa</strong> was elected King of Sweden following his successful rebellion against Danish monarch Christian II. During the 17th-century reigns of King Gustavus Adolphus and Charles X, the Swedish Empire (<em>Stormaktstiden</em>) controlled the entire Baltic rim as a <em>dominium maris baltici</em>, before borders stabilized following the 1721 Treaty of Nystad and the peaceful 1905 dissolution of the union with Norway.",
+  "flagHistory": "The national flag of Sweden—the <em>Sveriges flagga</em>—is an iconic Nordic Cross design featuring a vibrant golden-yellow cross on a field of azure blue, formally codified on <strong>June 22, 1906</strong>.<br><br>The design was inspired by the older Danish Dannebrog and traces its royal roots to King Gustav Vasa's 1523 banner and the historic Swedish Coat of Arms, which features three golden crowns (<em>Tre Kronor</em>) on a blue field. In heraldic lore, King Eric the Holy saw a golden cross appear in the blue sky upon landing in Finland during the First Swedish Crusade in 1157. The cross represents Sweden's Christian heritage, with the vertical cross bar shifted toward the hoist in traditional Nordic maritime style.",
+  "freedomStory": "Sweden's path to freedom represents one of the world's most stable democratic progressions, transitioning from an imperial military powerhouse to over two centuries of peace and progressive welfare democracy.<br><br>Sweden commemorates <strong>June 6</strong> as its National Day, celebrating both the election of King Gustav Vasa in 1523 and the adoption of the progressive <strong>Instrument of Government in 1809</strong>, which introduced constitutional separation of powers and the world's first formal institution of the <strong>Ombudsman</strong> to protect citizen rights against state bureaucracy.<br><br>In the 20th century, Sweden developed the <em>'Folkhemmet'</em> ('The People's Home') social democratic welfare model, pioneered by Prime Minister Per Albin Hansson, guaranteeing universal healthcare, free higher education, and gender equality while fostering world-leading engineering companies like Volvo, Ericsson, and Spotify.",
+  "challenges": "In the modern era, Sweden has adapted its historic 200-year policy of military non-alignment by officially joining <strong>NATO in 2024</strong> to reinforce Baltic regional defense. Domestically, the nation leads European green industrialization through 'fossil-free steel' projects in northern Norrland, expands battery gigafactories, and strengthens social integration across metropolitan communities.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Swedish Lapland landscape with northern lakes and pine forests",
+      "caption": "The pristine boreal forests and glacial lakes of Swedish Lapland in northern Sweden, home to the indigenous Sámi people."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Stockholm Old Town (Gamla Stan) and Royal Palace, Sweden",
+      "caption": "The colorful medieval merchant houses of Gamla Stan (Old Town) on the waterfront of Stockholm, the capital of Sweden."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Swedish road with yellow dashed side lines and pine trees",
+      "caption": "Swedish street view signatures: dashed white side lines on road shoulders, yellow warning signs, and birch/pine forests."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right (switched from left on Dagen H, Sept 3, 1967)",
+    "licensePlates": "White standard Euro plates with blue EU strip on left ('S'); format of three letters, two numbers, and one alphanumeric character.",
+    "utilityPoles": "Wooden creosote poles with metal triangular top mounts; distinctive blue snow-depth marker poles along northern highways.",
+    "roadMarkings": "Dashed white outer side lines along road edges (unique to Sweden and Norway; Sweden uses shorter, more frequent dashes).",
+    "delineators": "White posts with rectangular white reflectors on the right and two round white reflectors on the left.",
+    "cameraGen": "Complete Gen 3 and Gen 4 coverage across all 21 counties from Skåne to Norrbotten."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring blue field with yellow Nordic cross representing national sovereignty.",
-    "freedom": "Gained sovereignty from ancient kingdom consolidation through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to integration of immigrants and energy shifts."
+    "geo": "Largest Scandinavian country spanning 450k sq km; borders unified under King Gustav Vasa in 1523.",
+    "flag": "Nordic Cross flag: golden-yellow cross on an azure blue field derived from the Tre Kronor emblem.",
+    "freedom": "1523 Gustav Vasa independence; created the Ombudsman in 1809; built the Folkhemmet social welfare model.",
+    "challenge": "NATO accession integration, northern fossil-free green steel manufacturing, and social cohesion."
   },
   "faqs": [
     {
-      "question": "When did Sweden gain independence?",
-      "answer": "Sweden attained its full sovereignty and recognized independence from ancient kingdom consolidation."
+      "question": "What happened on 'Dagen H' in Sweden?",
+      "answer": "On September 3, 1967 (Dagen H / 'H Högertrafik'), Sweden successfully switched traffic from driving on the left to driving on the right side of the road."
     },
     {
-      "question": "What are the main geographical characteristics of Sweden?",
-      "answer": "Sweden is located in Europe and features a geographical layout characterized by boreal forests and coastal archipelagos."
+      "question": "Why is June 6 celebrated as Sweden's National Day?",
+      "answer": "June 6 marks both the election of King Gustav Vasa in 1523 (founding of modern Sweden) and the adoption of the democratic Instrument of Government in 1809."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1397",
+      "event": "Queen Margaret I unifies Denmark, Norway, and Sweden in the Kalmar Union."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1523",
+      "event": "Gustav Vasa is elected King of Sweden on June 6, establishing sovereign independence."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Sweden."
+      "year": "1632",
+      "event": "King Gustavus Adolphus falls at the Battle of Lützen during the Thirty Years' War."
+    },
+    {
+      "year": "1809",
+      "event": "Adoption of the Instrument of Government establishes constitutional separation of powers and the Ombudsman."
+    },
+    {
+      "year": "1905",
+      "event": "Peaceful dissolution of the personal union between Sweden and Norway."
+    },
+    {
+      "year": "1967",
+      "event": "Sweden switches to right-hand traffic on Dagen H (September 3)."
+    },
+    {
+      "year": "2024",
+      "event": "Sweden officially joins NATO, ending two centuries of formal military non-alignment."
     }
   ]
 }

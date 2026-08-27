@@ -3,45 +3,82 @@
   "name": "Thailand",
   "capital": "Bangkok",
   "continent": "Asia",
-  "population": "71.7 Million",
+  "population": "71.8 Million",
   "currency": "Thai Baht (THB)",
   "languages": [
     "Thai"
   ],
-  "seoTitle": "Detailed History of Thailand: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Thailand. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Thailand is a key element of its national identity in Asia. Characterized by its central plains and mountainous northern highlands, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Thailand came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Thailand is a powerful symbol of the country's sovereignty and cultural heritage. The design features a horizontal bands of red, white, blue, white, red. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Thailand involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from never colonized (independent buffer state). This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Thailand, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Thailand faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to frequent military coups and political division, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Thailand continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Thailand: Land of the Free, Trairanga Flag, and Modern Constitutional Monarchy",
+  "metaDescription": "Explore the detailed history of Thailand. Discover Sukhothai, Ayutthaya, King Chulalongkorn's modernization, the Trairanga flag, and left-hand driving.",
+  "mapFormation": "Occupying 513,120 square kilometers in the heart of Mainland Southeast Asia, the Kingdom of Thailand (<em>Prathet Thai</em> - 'Land of the Free') is naturally framed by the Andaman Sea to the west and the Gulf of Thailand to the east, centered on the fertile Chao Phraya River basin.<br><br>The kingdom traces its historical lineage through four successive golden eras: the <strong>Sukhothai Kingdom (1238–1438)</strong> where King Ram Khamhaeng created the Thai alphabet; the magnificent <strong>Ayutthaya Kingdom (1351–1767)</strong>, a legendary cosmopolitan trading metropolis; the brief Thonburi period under King Taksin; and the <strong>Rattanakosin Kingdom</strong> founded in 1782 by King Rama I of the Chakri Dynasty, who established Bangkok as the capital.<br><br>Through the brilliant diplomatic statesmanship of <strong>King Mongkut (Rama IV) and King Chulalongkorn the Great (Rama V)</strong>, Thailand was the <strong>only nation in Southeast Asia to preserve its sovereign independence</strong> and never fall under European colonial rule, modernizing institutions and codifying modern borders.",
+  "flagHistory": "The national flag of Thailand—the <strong>Trairanga</strong> (The Tricolor Flag)—features five horizontal stripes in red, white, blue, white, and red, with the central blue stripe occupying one-third of the flag's height (a 1:1:2:1:1 proportion), officially adopted by King Rama VI on <strong>September 28, 1917</strong>.<br><br>The design harmoniously unites the three foundational pillars of the Thai nation: <strong>Red</strong> symbolizes the nation and the lifeblood of the Thai people; <strong>White</strong> represents the purity of the Buddhist religion and spiritual dharma; and the central <strong>Blue</strong> band represents the revered Royal Monarchy. Blue was chosen by King Rama VI to honor Thailand's World War I allies (Great Britain, France, and the United States), who all featured red, white, and blue banners.",
+  "freedomStory": "Thailand's proud sovereign identity is anchored in its unique history of never having been colonized by foreign European powers.<br><br>During the 19th century, King Chulalongkorn (Rama V) enacted sweeping modernization reforms: abolishing slavery without civil unrest, constructing national railway lines, modernizing the legal system, and establishing modern ministries.<br><br>On <strong>June 24, 1932</strong>, the Siamese Revolution of 1932 led by the <em>Khana Ratsadon</em> (People's Party) peacefully transformed the country from an absolute monarchy into a constitutional democracy, promulgating the nation's first constitution. In the modern era, Thailand became a founding member of ASEAN in 1967 and a regional hub in automotive assembly, electronics, and global culinary tourism.",
+  "challenges": "As Southeast Asia's second-largest economy, Thailand is modernizing its manufacturing base toward electric vehicles and digital services through the <strong>Eastern Economic Corridor (EEC)</strong>. Domestically, priorities include managing demographic aging, expanding high-speed rail corridors connecting Bangkok to regional borders, and implementing sustainable water management in the Chao Phraya delta.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Phang Nga Bay limestone karst islands in southern Thailand",
+      "caption": "The dramatic limestone karst towers rising from the emerald waters of Phang Nga Bay in southern Thailand."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1528181304800-259b08848526?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Wat Arun (Temple of Dawn) along the Chao Phraya River in Bangkok, Thailand",
+      "caption": "Wat Arun (Temple of Dawn) rising 70 meters above the Chao Phraya River in Bangkok, encrusted with colorful porcelain."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Thai road with left-hand driving and Thai script signage",
+      "caption": "Thai street view clues: driving on the left, distinctive rounded Thai script on blue and green highway signboards, and white license plates."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Left",
+    "licensePlates": "White rectangular plates with black Thai script and numbers; province name printed at the bottom in Thai; yellow plates for commercial taxis.",
+    "utilityPoles": "Square cross-section reinforced concrete utility poles (unique in Southeast Asia) with multiple horizontal crossbars.",
+    "roadMarkings": "Continuous or dashed white centerlines; yellow lines for turn bays; distinctive blue overhead directional signs with Thai and English subtitles.",
+    "delineators": "Black-and-white striped concrete guideposts with circular reflectors.",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across all 77 provinces from Chiang Mai to Phuket."
+  },
   "aiSummary": {
-    "geo": "Located in Asia; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring horizontal bands of red, white, blue, white, red representing national sovereignty.",
-    "freedom": "Gained sovereignty from never colonized (independent buffer state) through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to frequent military coups and political division."
+    "geo": "Mainland Southeast Asian nation; only country in the region never colonized by European empires.",
+    "flag": "The Trairanga: red, white, blue, white, red horizontal stripes representing Nation, Religion, and King.",
+    "freedom": "Modernized by King Chulalongkorn (Rama V); 1932 peaceful revolution established constitutional democracy.",
+    "challenge": "Eastern Economic Corridor EV transition, aging demographics, and Chao Phraya delta flood defense."
   },
   "faqs": [
     {
-      "question": "When did Thailand gain independence?",
-      "answer": "Thailand attained its full sovereignty and recognized independence from never colonized (independent buffer state)."
+      "question": "Why is Thailand called the 'Land of the Free'?",
+      "answer": "The word 'Thai' literally means 'free' in the Thai language. Thailand is named the 'Land of the Free' because it was the only Southeast Asian nation that successfully preserved its independence from European colonial rule."
     },
     {
-      "question": "What are the main geographical characteristics of Thailand?",
-      "answer": "Thailand is located in Asia and features a geographical layout characterized by central plains and mountainous northern highlands."
+      "question": "What is the most unique Street View clue for Thailand?",
+      "answer": "In Thailand, traffic drives on the left, utility poles have a distinct square cross-section (rather than round), and road signs feature the distinctive Thai alphabet."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1238",
+      "event": "Founding of the Sukhothai Kingdom, creating the Thai alphabet and classical culture."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1351",
+      "event": "Establishment of the Ayutthaya Kingdom, which became a global trade crossroads."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Thailand."
+      "year": "1782",
+      "event": "King Rama I founds the Chakri Dynasty and establishes Bangkok as the capital."
+    },
+    {
+      "year": "1868–1910",
+      "event": "Reign of King Chulalongkorn (Rama V), who modernizes Siam and preserves sovereign independence."
+    },
+    {
+      "year": "1917",
+      "event": "King Rama VI introduces the modern Trairanga tricolor flag."
+    },
+    {
+      "year": "1932",
+      "event": "The Siamese Revolution transforms the absolute monarchy into a constitutional democracy."
     }
   ]
 }

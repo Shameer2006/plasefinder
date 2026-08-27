@@ -3,46 +3,83 @@
   "name": "Finland",
   "capital": "Helsinki",
   "continent": "Europe",
-  "population": "5.5 Million",
+  "population": "5.6 Million",
   "currency": "Euro (EUR)",
   "languages": [
     "Finnish",
     "Swedish"
   ],
-  "seoTitle": "Detailed History of Finland: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Finland. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Finland is a key element of its national identity in Europe. Characterized by its thousands of lakes and dense boreal forests, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Finland came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Finland is a powerful symbol of the country's sovereignty and cultural heritage. The design features a blue Nordic cross on white field. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Finland involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the Russian Empire in 1917. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Finland, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Finland faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to demographic aging and geopolitical security, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Finland continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Finland: Land of a Thousand Lakes, Blue Cross Flag, and 1917 Independence",
+  "metaDescription": "Explore the detailed history of Finland. Discover the 1917 Independence, Winter War heroism, the Siniristilippu flag, and Nordic education.",
+  "mapFormation": "Covering 338,472 square kilometers in Northern Europe between the Gulf of Bothnia and the Gulf of Finland, the Republic of Finland (<em>Suomi</em>) is celebrated as the 'Land of a Thousand Lakes', encompassing over 187,888 lakes and 178,947 islands, with over 75% of the land area blanketed by pristine boreal taiga forests.<br><br>From the 13th century until 1809, Finland was an integral part of the Kingdom of Sweden. Following the Finnish War (1808–1809), Sweden ceded the territory to Tsar Alexander I of the Russian Empire, who established the autonomous <strong>Grand Duchy of Finland</strong>, preserving Swedish civil law and constitutional institutions.<br><br>Following the collapse of the Russian Tsardom in 1917, the Finnish Parliament (Eduskunta) proclaimed sovereign independence on <strong>December 6, 1917</strong> (celebrated as Independence Day / <em>Itsenäisyyspäivä</em>). Finnish borders were preserved through the heroic resistance of the Winter War (1939–1940) and Continuation War, codified in the 1947 Paris Peace Treaties.",
+  "flagHistory": "The national flag of Finland—the <strong>Siniristilippu</strong> (The Blue Cross Flag)—was designed by poet Eero Snellman and artist Bruno Fabritius, officially adopted on <strong>May 29, 1918</strong>.<br><br>The design features a sea-blue Nordic cross on a pure white field. In the immortal words of Finnish poet Zachris Topelius: <strong>Blue</strong> represents the thousands of blue lakes and clear skies of Finland; while <strong>White</strong> represents the pure white snow that covers the land in winter.",
+  "freedomStory": "Finland's struggle for independence was anchored in exceptional civic solidarity, early democratic suffrage, and unmatched military resilience (<em>Sisu</em>).<br><br>In 1906, through the Parliament Act, Finland became the <strong>first country in Europe to grant women full voting rights and the first in the world to allow women to stand for parliamentary election</strong>. When independence was declared on December 6, 1917, statesman Pehr Evind Svinhufvud and General Carl Gustaf Emil Mannerheim secured sovereign recognition.<br><br>In November 1939, when the Soviet Union invaded in the <strong>Winter War</strong>, Finnish soldiers on skis in white camouflage defended their independence against overwhelming odds. In the post-war era, Finland built a world-renowned education system and high-tech economy (Nokia, Linux, gaming), ranking consistently as the world's happiest country.",
+  "challenges": "In 2023, Finland officially ended decades of military non-alignment by joining <strong>NATO</strong>, reinforcing its 1,340-kilometer eastern frontier. Domestically, the nation advances 100% carbon-neutral energy goals through the Olkiluoto 3 nuclear reactor and vast wind farms, while managing demographic aging in rural municipalities.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Finnish lake and pine taiga forest landscape",
+      "caption": "The Saimaa lake labyrinth and boreal forest in southeastern Finland, home to the endangered Saimaa ringed seal."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1512813195386-6cf811ad3542?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Helsinki Cathedral on Senate Square, Finland",
+      "caption": "The neoclassical Helsinki Cathedral overlooking Senate Square in Helsinki, completed in 1852 by Carl Ludvig Engel."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Finnish highway with yellow warning signs and birch forests",
+      "caption": "Finnish street view tells: solid white edge lines, yellow warning signs with red borders, wooden poles with metal brackets, and dense birch trees."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White standard Euro plates with blue EU strip on left ('FIN'); format of three letters, a hyphen, and three digits.",
+    "utilityPoles": "Wooden poles with metal bracket tops; blue-and-white road junction signs with distances in kilometers.",
+    "roadMarkings": "Continuous white centerlines (white road markings throughout; no yellow lines); solid white outer edge lines.",
+    "delineators": "White posts with red reflectors on both sides, with yellow chevron markers at sharp turns.",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across all 19 regions from Uusimaa to Lapland."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring blue Nordic cross on white field representing national sovereignty.",
-    "freedom": "Gained sovereignty from the Russian Empire in 1917 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to demographic aging and geopolitical security."
+    "geo": "Land of 188,000 lakes; transitioned from Swedish realm to Russian Grand Duchy, declaring independence in 1917.",
+    "flag": "Siniristilippu: blue Nordic cross on a pure white field, representing lakes and winter snow.",
+    "freedom": "1906 universal female suffrage pioneer; 1917 independence; defended sovereignty in the 1939 Winter War.",
+    "challenge": "NATO eastern border integration, carbon neutrality, and rural demographic aging."
   },
   "faqs": [
     {
-      "question": "When did Finland gain independence?",
-      "answer": "Finland attained its full sovereignty and recognized independence from the Russian Empire in 1917."
+      "question": "What is Finnish 'Sisu'?",
+      "answer": "'Sisu' is a unique Finnish cultural concept signifying extraordinary courage, stoic determination, and perseverance in the face of adversity."
     },
     {
-      "question": "What are the main geographical characteristics of Finland?",
-      "answer": "Finland is located in Europe and features a geographical layout characterized by thousands of lakes and dense boreal forests."
+      "question": "When did Finnish women gain voting rights?",
+      "answer": "In 1906, Finland became the first country in Europe to grant women the right to vote and the first in the world to allow women to run for parliament."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1809",
+      "event": "Sweden cedes Finland to Russia; Tsar Alexander I establishes the Grand Duchy of Finland."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1906",
+      "event": "Finland grants universal suffrage and the right to stand for election to women."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Finland."
+      "year": "1917",
+      "event": "The Finnish Parliament adopts the Declaration of Independence on December 6."
+    },
+    {
+      "year": "1939–1940",
+      "event": "The Winter War against the Soviet Union preserves Finnish independence."
+    },
+    {
+      "year": "1995",
+      "event": "Finland joins the European Union alongside Sweden and Austria."
+    },
+    {
+      "year": "2023",
+      "event": "Finland officially becomes the 31st member state of NATO."
     }
   ]
 }

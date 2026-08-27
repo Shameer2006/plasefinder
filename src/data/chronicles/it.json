@@ -3,45 +3,98 @@
   "name": "Italy",
   "capital": "Rome",
   "continent": "Europe",
-  "population": "58.9 Million",
+  "population": "58.8 Million",
   "currency": "Euro (EUR)",
   "languages": [
     "Italian"
   ],
-  "seoTitle": "Detailed History of Italy: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Italy. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Italy is a key element of its national identity in Europe. Characterized by its boot-shaped Mediterranean peninsula, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Italy came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Italy is a powerful symbol of the country's sovereignty and cultural heritage. The design features a vertical bands of green, white, and red. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Italy involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from unification of kingdoms in 1861. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Italy, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Italy faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to economic stagnation, public debt, and low birth rates, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Italy continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Italy: The Risorgimento Unification, Il Tricolore Vexillology, and Republican Constitution",
+  "metaDescription": "Discover the detailed history of Italy. Explore the Roman Empire, the Risorgimento of Garibaldi and Cavour, the 1797 Tricolore flag, and the 1946 Republic.",
+  "mapFormation": "Projecting deeply into the central Mediterranean Sea, the sovereign territory of the Italian Republic encompasses 301,340 square kilometers popularly known as <em>'Lo Stivale'</em> (The Boot), flanked by the Tyrrhenian, Adriatic, and Ionian Seas alongside the major Mediterranean islands of <strong>Sicily and Sardinia</strong>. The northern continental frontier is framed by the massive alpine barrier of the Alps, bordering France, Switzerland, Austria, and Slovenia.<br><br>Following the collapse of the Western Roman Empire in 476 CE, the Italian peninsula was fragmented for over a millennium into rival maritime republics (Venice, Genoa, Pisa, Amalfi), independent duchies, the Papal States, and foreign-controlled kingdoms (the Austrian Habsburgs in the north and the Spanish Bourbons in the Kingdom of the Two Sicilies).<br><br>The modern unified state was forged through the 19th-century political and military movement known as the <strong>Risorgimento</strong> (Resurgence). Under the diplomatic leadership of Prime Minister Camillo Benso, Count of Cavour, and the revolutionary campaigns of General Giuseppe Garibaldi—whose <strong>Expedition of the Thousand (1860)</strong> liberated southern Italy—the <strong>Kingdom of Italy</strong> was officially proclaimed on <strong>March 17, 1861</strong>, under King Victor Emmanuel II of the House of Savoy. Italy annexed Venice following the Third Italian War of Independence in 1866, and completed national unification with the <strong>Capture of Rome on September 20, 1870</strong> (<em>Breccia di Porta Pia</em>), establishing Rome as the eternal capital. Sovereign territorial enclaves were finalized in 1929 via the <strong>Lateran Treaty</strong>, establishing the independent State of Vatican City and the Republic of San Marino.",
+  "flagHistory": "The national flag of Italy—universally celebrated as <strong>Il Tricolore</strong> (The Italian Tricolor)—features three equal vertical bands of green, white, and red, representing a sacred heritage of republican liberty, regional unity, and civic struggle.<br><br>The flag was first officially adopted on <strong>January 7, 1797</strong>, in Reggio Emilia by the Parliament of the Cispadane Republic, inspired by the French revolutionary tricolor but substituting Milanese civic green for blue (derived from the green uniforms of the Milanese Civic Militia).<br><br>During the 19th-century Risorgimento, the Tricolor became the universal symbol of national liberation carried by patriot volunteers against foreign imperial rule. In classical poetic and heraldic interpretation, <strong>Green</strong> represents the fertile plains of Lombardy and the enduring hope of the Italian people; <strong>White</strong> represents the snow-covered peaks of the Alps and Apennines alongside purity of purpose; and <strong>Red</strong> represents the sacred blood spilled by patriots and soldiers during the wars of Italian independence. The flag was formally codified in <strong>Article 12 of the Italian Constitution</strong> in 1947 with an official 2:3 aspect ratio.",
+  "freedomStory": "Italy's journey to sovereign freedom represents a triumph of romantic nationalism, constitutional philosophy, and democratic republicanism.<br><br>The intellectual soul of Italian liberty was ignited by Giuseppe Mazzini, who founded the revolutionary movement <em>La Giovine Italia</em> (Young Italy) in 1831, advocating for a free, united, and democratic republic. Alongside Mazzini's moral vision, Cavour's parliamentary statesmanship in the Kingdom of Sardinia-Piedmont and Garibaldi's military heroics unified the peninsula into a constitutional monarchy in 1861.<br><br>Following the catastrophic experience of fascist dictatorship and the brutal crucible of the Italian Resistance during World War II, the Italian people exercised sovereign self-determination. On <strong>June 2, 1946</strong>, in a historic nationwide institutional referendum (the first in which Italian women had the right to vote), citizens voted to abolish the monarchy and establish the <strong>Italian Democratic Republic</strong> (celebrated annually as <em>Festa della Repubblica</em>). The Constitution of the Italian Republic took effect on January 1, 1948, anchoring Italy as a democratic republic founded on labor and fundamental human rights.",
+  "challenges": "In the contemporary era, Italy leverages its position as a founding member of the European Union, G7 economy, and global leader in high-precision manufacturing, fashion, and culinary exports while addressing complex domestic structural challenges. Central among these is navigating the high public debt-to-GDP ratio, addressing the historic socioeconomic disparity between the industrialized North and the developing South (the <em>Mezzogiorno</em>), and mitigating demographic decline through youth employment and family incentives. Environmentally, Italy invests heavily in seismic and hydrogeological risk defense across the Apennine fault systems and accelerates Mediterranean solar and offshore wind energy infrastructure.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Amalfi Coast and Mediterranean Sea in Italy",
+      "caption": "The dramatic cliffs and pastel villages of the Amalfi Coast along the Tyrrhenian Sea in southern Italy."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Colosseum in Rome, Italy",
+      "caption": "The Roman Colosseum (Flavian Amphitheatre) in Rome, completed in 80 CE and the monumental symbol of ancient Roman engineering."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Italian street view with small front plates and olive trees",
+      "caption": "Italian street view tells: compact front license plates with blue strips on both sides, white dashed centerlines, and Mediterranean cypress trees."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "Distinctive short rectangular front plates; rear plates have two blue strips (EU flag on left, year/province circle on right).",
+    "utilityPoles": "Wooden or concrete poles with white insulators; distinctive brown wooden power poles with multiple horizontal crossbars.",
+    "roadMarkings": "Continuous or dashed white centerlines; solid white edge lines; blue parking bay markings (indicating paid parking).",
+    "delineators": "White cylindrical posts with black tops and red rectangular reflectors on the right (white on the left).",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across the entire peninsula, Sicily, and Sardinia."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring vertical bands of green, white, and red representing national sovereignty.",
-    "freedom": "Gained sovereignty from unification of kingdoms in 1861 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to economic stagnation, public debt, and low birth rates."
+    "geo": "Boot-shaped peninsula in Southern Europe; unified through the 1861 Risorgimento with Rome declared capital in 1870.",
+    "flag": "Il Tricolore: vertical green, white, and red bands adopted in Reggio Emilia in 1797.",
+    "freedom": "Evolution from the Risorgimento campaigns of Garibaldi and Cavour to the democratic constitutional republic enacted on June 2, 1946.",
+    "challenge": "Sovereign debt management, Mezzogiorno regional development, and demographic super-aging."
   },
   "faqs": [
     {
-      "question": "When did Italy gain independence?",
-      "answer": "Italy attained its full sovereignty and recognized independence from unification of kingdoms in 1861."
+      "question": "When was the Kingdom of Italy officially proclaimed?",
+      "answer": "The unified Kingdom of Italy was proclaimed on March 17, 1861, in Turin under King Victor Emmanuel II, uniting the majority of the Italian peninsula."
     },
     {
-      "question": "What are the main geographical characteristics of Italy?",
-      "answer": "Italy is located in Europe and features a geographical layout characterized by boot-shaped Mediterranean peninsula."
+      "question": "Where and when was the Italian Tricolore flag first adopted?",
+      "answer": "The Italian Tricolore was first officially adopted on January 7, 1797, by the Cispadane Republic in the city of Reggio Emilia."
+    },
+    {
+      "question": "What is the historical significance of the Festa della Repubblica on June 2?",
+      "answer": "Celebrated on June 2, the Festa della Repubblica commemorates the 1946 constitutional referendum in which the Italian people voted to abolish the monarchy and establish the Italian Democratic Republic."
+    },
+    {
+      "question": "Why do Italian cars have two blue strips on their license plates?",
+      "answer": "Italian license plates have a blue strip on the left with the EU flag ('I') and a blue strip on the right with the registration year circle and optional provincial abbreviation."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "753 BCE",
+      "event": "Traditional founding of Rome, which grew to become the capital of the Roman Republic and Empire."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1797",
+      "event": "The Cispadane Republic adopts the green, white, and red Tricolor flag in Reggio Emilia."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Italy."
+      "year": "1860",
+      "event": "Giuseppe Garibaldi leads the Expedition of the Thousand, conquering the Kingdom of the Two Sicilies."
+    },
+    {
+      "year": "1861",
+      "event": "The Kingdom of Italy is officially proclaimed in Turin on March 17 under Victor Emmanuel II."
+    },
+    {
+      "year": "1870",
+      "event": "Italian troops enter Rome through the Breccia di Porta Pia, concluding unification and making Rome the capital."
+    },
+    {
+      "year": "1929",
+      "event": "The Lateran Treaty establishes the sovereign independence of Vatican City within Rome."
+    },
+    {
+      "year": "1946",
+      "event": "A national referendum on June 2 establishes the Italian Republic, abolishing the monarchy."
+    },
+    {
+      "year": "1957",
+      "event": "The Treaty of Rome is signed on Capitoline Hill, founding the European Economic Community."
     }
   ]
 }

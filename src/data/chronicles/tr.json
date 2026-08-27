@@ -2,46 +2,83 @@
   "code": "TR",
   "name": "Turkey",
   "capital": "Ankara",
-  "continent": "Asia",
+  "continent": "Europe/Asia",
   "population": "85.3 Million",
   "currency": "Turkish Lira (TRY)",
   "languages": [
     "Turkish"
   ],
-  "seoTitle": "Detailed History of Turkey: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Turkey. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Turkey is a key element of its national identity in Asia. Characterized by its Anatolian peninsula bridge between Europe and Asia, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Turkey came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Turkey is a powerful symbol of the country's sovereignty and cultural heritage. The design features a red field with white crescent and star. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Turkey involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from republic formed from Ottoman collapse in 1923. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Turkey, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Turkey faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to extreme currency inflation and refugee integration, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Turkey continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Turkey: Anatolian Bridge, Crescent & Star Flag, and Atatürk Republic",
+  "metaDescription": "Explore the detailed history of Turkey. Discover the Ottoman Empire, Mustafa Kemal Atatürk's 1923 Republic, the Bosphorus, and the Turkish flag.",
+  "mapFormation": "Straddling the continents of Europe and Asia across 783,562 square kilometers, the Republic of Turkey (<em>Türkiye Cumhuriyeti</em>) occupies the Anatolian peninsula bounded by the Black Sea, Aegean Sea, and Mediterranean Sea, controlling the strategic <strong>Bosphorus and Dardanelles Straits</strong> (the Turkish Straits) linking the Black Sea to the Mediterranean.<br><br>Anatolia has cradled major civilizations for millennia, including the Hittites, Greeks, Romans, and Byzantines with their imperial capital in Constantinople. In 1071, Seljuk Turks won the Battle of Manzikert, opening Anatolia to Turkish settlement. In 1299, Osman I founded the <strong>Ottoman Empire</strong>, which captured Constantinople in 1453 under Sultan Mehmed II, governing an empire spanning Southeast Europe, Western Asia, and North Africa for over six centuries.<br><br>Following the collapse of the Ottoman Empire in World War I, the modern sovereign borders were defended in the Turkish War of Independence led by <strong>Mustafa Kemal Atatürk</strong> and internationally codified in the <strong>Treaty of Lausanne on July 24, 1923</strong>. The Republic was officially proclaimed on <strong>October 29, 1923</strong>, establishing the capital in central <strong>Ankara</strong>.",
+  "flagHistory": "The national flag of Turkey—the <strong>Al Bayrak</strong> (The Red Flag) or <em>Ay Yıldız</em> (Crescent and Star)—features a white crescent moon and five-pointed star positioned slightly off-center on a vivid crimson-red field.<br><br>The design directly inherits the state standard of the Ottoman Empire, codified in 1844 by Sultan Abdülmejid I and standardized under the Turkish Flag Law in 1936. In Turkish poetic lore, the design reflects the celestial reflection of the crescent moon and evening star shining in a pool of blood spilled by Turkish patriots defending their homeland. The <strong>Crescent</strong> represents progress and renewal, while the <strong>Star</strong> represents light, victory, and the unity of the Turkish nation.",
+  "freedomStory": "Turkey's sovereign freedom was forged through the heroic crucible of the <strong>Turkish War of Independence (1919–1923)</strong>.<br><br>Following the post-WWI partition of Ottoman territories under the Treaty of Sèvres, Field Marshal <strong>Mustafa Kemal Atatürk</strong> landed at Samsun on May 19, 1919, rallying national resistance. The Grand National Assembly convened in Ankara in April 1920 under the rallying cry: <em>'Egemenlik, kayıtsız şartsız Milletindir'</em> ('Sovereignty unconditionally belongs to the Nation').<br><br>Following decisive military victories, the Treaty of Lausanne recognized Turkish sovereignty. On <strong>October 29, 1923</strong>, the Grand National Assembly proclaimed the Republic of Turkey, electing Atatürk as its first President. Atatürk executed revolutionary modernization reforms: establishing a secular civil code, replacing Arabic script with the Latin Turkish alphabet, granting full equal political rights and suffrage to women in 1934, and founding a modern industrial state.",
+  "challenges": "Positioned at the geopolitical pivot between Europe, the Middle East, and the Caucasus, Turkey manages vital transit corridors, gas pipelines, and NATO defense responsibilities. Domestically, the nation addresses inflation and currency stabilization, advances renewable solar and wind power, and executes comprehensive earthquake retrofitting programs across active North and East Anatolian fault lines.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1543783207-ec64e4d95325?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Cappadocia hot air balloons and fairy chimneys, Turkey",
+      "caption": "Hot air balloons over the volcanic rock fairy chimneys of Cappadocia in central Anatolia, Turkey."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Hagia Sophia Grand Mosque in Istanbul, Turkey",
+      "caption": "Hagia Sophia in Istanbul, constructed in 537 CE as a Byzantine cathedral, later an imperial Ottoman mosque and UNESCO monument."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Turkish highway with red-bordered signs and blue license plate strip",
+      "caption": "Turkish street view characteristics: white plates with blue left-hand 'TR' strip, red-bordered speed limit circles, and Turkish town signs (Nüfus)."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates with blue strip on the left containing 'TR'; the first two digits represent the province (e.g., 34 for Istanbul, 06 for Ankara).",
+    "utilityPoles": "Metal lattice towers or wooden poles with horizontal struts; concrete poles in urban centers.",
+    "roadMarkings": "Continuous or dashed white centerlines; solid white edge lines; blue-background city entry signs listing population (Nüfus) and altitude (Rakım).",
+    "delineators": "White posts with red reflectors on the right and white on the left.",
+    "cameraGen": "Extensive Gen 3 and Gen 4 coverage across all 81 provinces."
+  },
   "aiSummary": {
-    "geo": "Located in Asia; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring red field with white crescent and star representing national sovereignty.",
-    "freedom": "Gained sovereignty from republic formed from Ottoman collapse in 1923 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to extreme currency inflation and refugee integration."
+    "geo": "Transcontinental bridge between Europe and Asia; borders codified in the 1923 Treaty of Lausanne.",
+    "flag": "Ay Yıldız: crimson red field with white crescent moon and five-pointed star.",
+    "freedom": "1919-1923 War of Independence led by Atatürk; secular democratic Republic proclaimed Oct 29, 1923.",
+    "challenge": "Seismic fault line infrastructure resilience, economic inflation stabilization, and regional trade corridor balancing."
   },
   "faqs": [
     {
-      "question": "When did Turkey gain independence?",
-      "answer": "Turkey attained its full sovereignty and recognized independence from republic formed from Ottoman collapse in 1923."
+      "question": "When was the Republic of Turkey founded?",
+      "answer": "The Republic of Turkey was officially proclaimed on October 29, 1923, by Mustafa Kemal Atatürk, who became its founding President."
     },
     {
-      "question": "What are the main geographical characteristics of Turkey?",
-      "answer": "Turkey is located in Asia and features a geographical layout characterized by Anatolian peninsula bridge between Europe and Asia."
+      "question": "What is the strategic significance of the Turkish Straits?",
+      "answer": "The Bosphorus and Dardanelles Straits connect the Black Sea to the Mediterranean, regulated under the 1936 Montreux Convention as a vital maritime trade artery."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1071",
+      "event": "Seljuk Sultan Alp Arslan defeats Byzantine forces at the Battle of Manzikert, opening Anatolia."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1453",
+      "event": "Sultan Mehmed II captures Constantinople, establishing it as the imperial Ottoman capital."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Turkey."
+      "year": "1919",
+      "event": "Mustafa Kemal Atatürk lands in Samsun on May 19, initiating the Turkish War of Independence."
+    },
+    {
+      "year": "1923",
+      "event": "The Treaty of Lausanne is signed; the Republic of Turkey is proclaimed on October 29 with Ankara as capital."
+    },
+    {
+      "year": "1934",
+      "event": "Turkish women are granted full voting and parliamentary candidacy rights."
+    },
+    {
+      "year": "1952",
+      "event": "Turkey joins NATO, anchoring the alliance's strategic southern flank."
     }
   ]
 }

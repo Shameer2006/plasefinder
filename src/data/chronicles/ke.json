@@ -3,46 +3,83 @@
   "name": "Kenya",
   "capital": "Nairobi",
   "continent": "Africa",
-  "population": "54.0 Million",
+  "population": "55.1 Million",
   "currency": "Kenyan Shilling (KES)",
   "languages": [
-    "Swahili",
+    "Swahili (Kiswahili)",
     "English"
   ],
-  "seoTitle": "Detailed History of Kenya: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Kenya. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Kenya is a key element of its national identity in Africa. Characterized by its East African Rift Valley lakes and highlands, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Kenya came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Kenya is a powerful symbol of the country's sovereignty and cultural heritage. The design features a black, red, green bands with Maasai shield and spears. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Kenya involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the United Kingdom on December 12, 1963. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Kenya, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Kenya faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to corruption, public debt, and climate droughts, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Kenya continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Kenya: Cradle of Humankind, Maasai Shield Flag, and 1963 Independence",
+  "metaDescription": "Discover the detailed history of Kenya. Explore the Great Rift Valley, Jomo Kenyatta, the Maasai shield flag, wildlife conservation, and left-hand driving.",
+  "mapFormation": "Straddling the equator in East Africa across 580,367 square kilometers from Lake Victoria to the Indian Ocean, the Republic of Kenya is bisected by the dramatic <strong>Great Rift Valley</strong>, home to Mount Kenya (5,199 meters) and the world-famous wildlife savannas of the <strong>Maasai Mara and Amboseli</strong>.<br><br>Kenya is recognized as the <strong>'Cradle of Humankind'</strong>, where paleontologists Louis and Mary Leakey discovered early hominid fossils in the Turkana Basin dating back millions of years. Along the coast, Swahili maritime trading city-states (Mombasa, Lamu, Malindi) flourished from the 8th century, trading spices, silk, and porcelain across the Indian Ocean.<br><br>In 1895, the British Empire established the East Africa Protectorate, constructing the Uganda Railway ('Lunatic Express') from Mombasa to Lake Victoria, founding the capital city of <strong>Nairobi in 1899</strong> as a rail depot. Kenya achieved sovereign independence on <strong>December 12, 1963</strong>.",
+  "flagHistory": "The national flag of Kenya—the <em>Bendera ya Kenya</em>—is a magnificent heraldic banner featuring three equal horizontal bands of black, red, and green, separated by two thin white fimbriations, with a traditional <strong>Maasai Warrior Shield and Two Crossed Spears</strong> at the center, officially hoisted at independence on <strong>December 12, 1963</strong>.<br><br>The design was based on the banner of the Kenya African National Union (KANU). In profound patriotic symbolism: <strong>Black</strong> represents the indigenous African people; <strong>Red</strong> honors the blood shed in the fight for freedom; <strong>Green</strong> represents Kenya's rich fertile land and agriculture; and <strong>White</strong> symbolizes peace, unity, and honesty. The central <strong>Maasai Shield and Spears</strong> represent the readiness of the Kenyan people to defend their sovereign liberty.",
+  "freedomStory": "Kenya's struggle for independence was spearheaded by the anti-colonial <strong>Mau Mau Uprising (1952–1960)</strong>, led by the Kenya Land and Freedom Army.<br><br>Imprisoned nationalist leader <strong>Jomo Kenyatta</strong> became the political symbol of the liberation movement. Released in 1961, Kenyatta led constitutional negotiations in London. On <strong>December 12, 1963</strong>, Kenya attained sovereign independence, becoming a Republic exactly one year later with Kenyatta as founding President (celebrated annually as Jamhuri Day).<br><br>In August 2010, the Kenyan people ratified the landmark <strong>2010 Constitution of Kenya</strong>, establishing a decentralized devolved system with 47 county governments, judicial independence, and a progressive Bill of Rights. Kenya pioneered mobile money (M-Pesa) and established Nairobi as the 'Silicon Savannah' tech capital of Africa.",
+  "challenges": "As the economic and logistical hub of East Africa generating over 90% of its electricity from renewable geothermal, hydro, and wind energy, Kenya balances industrial modernization with climate resilience. Foremost priorities include managing drought cycles in arid northern counties, expanding the Standard Gauge Railway (SGR), and youth tech employment.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Maasai Mara wildlife savanna and acacia trees, Kenya",
+      "caption": "The sweeping golden grasslands and flat-topped acacia trees of the Maasai Mara National Reserve in southwestern Kenya."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Kenyatta International Convention Centre (KICC) in Nairobi, Kenya",
+      "caption": "The Kenyatta International Convention Centre (KICC) dominating the skyline of downtown Nairobi, the 'Silicon Savannah' of East Africa."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Kenyan highway with yellow rear license plates and left-hand driving",
+      "caption": "Kenyan street view clues: driving on the left, yellow rear plates (white front plates), Google camera snorkel meta, and red earth roadside banks."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Left",
+    "licensePlates": "White rectangular plates at the front, bright yellow reflective plates at the rear (similar to the UK format, formatted as KAA 123A).",
+    "utilityPoles": "Wooden poles with metal crossbars; distinctive black camera snorkel pole visible on the front corner of the Google camera vehicle in Kenya.",
+    "roadMarkings": "Continuous or dashed white centerlines; solid yellow lines on highway shoulders; yellow-and-black striped kerbstones in urban Nairobi.",
+    "delineators": "White posts with red reflectors on left and white on right.",
+    "cameraGen": "Extensive Gen 3 and Gen 4 coverage across Nairobi, Mombasa, Kisumu, Nakuru, and national parks."
+  },
   "aiSummary": {
-    "geo": "Located in Africa; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring black, red, green bands with Maasai shield and spears representing national sovereignty.",
-    "freedom": "Gained sovereignty from the United Kingdom on December 12, 1963 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to corruption, public debt, and climate droughts."
+    "geo": "East African equatorial nation; Great Rift Valley and Mount Kenya; capital in Nairobi founded in 1899.",
+    "flag": "Black, red, and green horizontal triband with white stripes and a central Maasai warrior shield and spears.",
+    "freedom": "1952 Mau Mau rebellion; independence on Dec 12, 1963 led by Jomo Kenyatta; 2010 devolved Constitution.",
+    "challenge": "Drought resilience in northern rangelands, Silicon Savannah tech scaling, and geothermal expansion."
   },
   "faqs": [
     {
-      "question": "When did Kenya gain independence?",
-      "answer": "Kenya attained its full sovereignty and recognized independence from the United Kingdom on December 12, 1963."
+      "question": "What is unique about the Google Street View car in Kenya?",
+      "answer": "In Kenya, the Google Street View car has a visible black air snorkel mounted on the right front corner of the vehicle hood."
     },
     {
-      "question": "What are the main geographical characteristics of Kenya?",
-      "answer": "Kenya is located in Africa and features a geographical layout characterized by East African Rift Valley lakes and highlands."
+      "question": "When is Kenya's Independence Day (Jamhuri Day)?",
+      "answer": "Jamhuri Day is celebrated on December 12, marking both the attainment of independence in 1963 and the establishment of the Republic in 1964."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "1895",
+      "event": "The British Empire establishes the East Africa Protectorate."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1899",
+      "event": "Nairobi is founded as a rail depot during construction of the Uganda Railway."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Kenya."
+      "year": "1952",
+      "event": "The Mau Mau Uprising breaks out against colonial land policies."
+    },
+    {
+      "year": "1963",
+      "event": "Kenya attains sovereign independence on December 12 with Jomo Kenyatta as Prime Minister."
+    },
+    {
+      "year": "2007",
+      "event": "Safaricom launches M-Pesa in Kenya, revolutionizing global mobile financial services."
+    },
+    {
+      "year": "2010",
+      "event": "Promulgation of the democratic 2010 Constitution of Kenya creating 47 devolved counties."
     }
   ]
 }

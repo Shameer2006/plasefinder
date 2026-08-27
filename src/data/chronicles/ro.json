@@ -8,40 +8,77 @@
   "languages": [
     "Romanian"
   ],
-  "seoTitle": "Detailed History of Romania: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Romania. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Romania is a key element of its national identity in Europe. Characterized by its Carpathian Mountains and Danube basin, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Romania came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Romania is a powerful symbol of the country's sovereignty and cultural heritage. The design features a vertical bands of blue, yellow, and red. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Romania involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from the Ottoman Empire in 1878. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Romania, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Romania faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to infrastructure deficits and corruption, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Romania continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Romania: Carpathian Fortress, Blue-Yellow-Red Tricolor, and 1918 Great Union",
+  "metaDescription": "Discover the detailed history of Romania. Explore the Dacian kingdom, Vlad the Impaler, the 1918 Great Union, the Carpathian Mountains, and the Romanian tricolor.",
+  "mapFormation": "Spanning 238,397 square kilometers in Southeastern Europe centered on the arc of the <strong>Carpathian Mountains</strong> and the lower Danube River delta along the Black Sea, Romania (<em>România</em>) is the twelfth-largest country in the European Union.<br><br>The territory was inhabited in antiquity by the Dacians under King Decebalus before being conquered by Roman Emperor Trajan in 106 CE, leading to the Daco-Roman ethnogenesis and Latin Romance language of modern Romanians. In the Middle Ages, three principalities emerged: <strong>Wallachia, Moldavia, and Transylvania</strong>.<br><br>In 1859, the personal union of Wallachia and Moldavia under Prince Alexandru Ioan Cuza created the United Principalities. Full sovereign independence from the Ottoman Empire was achieved during the 1877–1878 War of Independence. Following World War I, the <strong>Great Union of December 1, 1918</strong> (<em>Marea Unire</em>) united Transylvania, Bessarabia, and Bukovina with the Kingdom of Romania in Alba Iulia, establishing modern frontiers.",
+  "flagHistory": "The national flag of Romania—the <em>Tricolorul</em>—features three equal vertical bands of cobalt blue (hoist), chrome yellow (middle), and vermilion red (fly), formally adopted by the Provisional Government on <strong>June 26, 1848</strong>, during the Wallachian Revolution.<br><br>The three colors combine the traditional heraldic banners of the Romanian principalities: <strong>Blue</strong> for Wallachia (symbolizing liberty and the blue skies), <strong>Yellow</strong> for Moldavia (symbolizing justice and golden wheat fields), and <strong>Red</strong> for Transylvania (symbolizing fraternity and patriotic blood shed in defense of the realm). Following the 1989 Revolution, the communist coat of arms was removed from the center, restoring the pure historic tricolor.",
+  "freedomStory": "Romania's sovereign freedom is rooted in the 1848 Wallachian Revolution and the heroic events of the 1989 Romanian Revolution.<br><br>On <strong>December 1, 1918</strong>, over 100,000 delegates gathered at the National Assembly in Alba Iulia to proclaim the unification of Transylvania with Romania (celebrated annually as Great Union Day / <em>Ziua Marii Uniri</em>).<br><br>In December 1989, popular protests against the totalitarian regime of Nicolae Ceaușescu erupted in Timișoara and Bucharest. Courageous citizens cut the communist crest out of the center of Romanian flags, creating the famous 'flag with a hole'. On <strong>December 22, 1989</strong>, the dictatorship was overthrown, establishing constitutional democracy under the 1991 Constitution. Romania joined NATO in 2004 and the European Union in 2007.",
+  "challenges": "As a major industrial and agricultural economy and NATO's Black Sea strategic anchor, Romania is accelerating national infrastructure projects. Foremost priorities include completing the A7 and A8 Moldavia highway corridors, expanding nuclear power units at Cernavodă, and developing offshore natural gas reserves in the Black Sea (Neptun Deep).",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Transfăgărășan highway winding through the Carpathian Mountains, Romania",
+      "caption": "The Transfăgărășan highway winding through the Făgăraș Mountains of the Southern Carpathians in central Romania."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1512813195386-6cf811ad3542?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Bran Castle (Dracula's Castle) in Transylvania, Romania",
+      "caption": "Bran Castle perched on a cliff in Transylvania near Brașov, built in 1377 by Teutonic Knights and Saxons of Kronstadt."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Romanian street view with blue/yellow/red markers and concrete poles",
+      "caption": "Romanian street view tells: white Euro plates with blue 'RO' strip, concrete poles with holes or metal climbing rungs, and rural wooden fences."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White standard Euro plates with blue EU strip on left ('RO'); two letters denote the county (e.g., 'B' for Bucharest, 'CJ' for Cluj) followed by two or three digits and three letters.",
+    "utilityPoles": "Reinforced concrete poles with rectangular ladder holes (similar to Polish poles) or circular concrete posts; wooden fences in Transylvanian villages.",
+    "roadMarkings": "Continuous or dashed white centerlines; solid white edge lines; blue highway signs with Romanian diacritics (ă, â, î, ș, ț).",
+    "delineators": "White posts with red reflectors on right and white on left.",
+    "cameraGen": "Dense Gen 3 and Gen 4 coverage across all 41 counties and Bucharest."
+  },
   "aiSummary": {
-    "geo": "Located in Europe; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring vertical bands of blue, yellow, and red representing national sovereignty.",
-    "freedom": "Gained sovereignty from the Ottoman Empire in 1878 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to infrastructure deficits and corruption."
+    "geo": "Southeastern European country around the Carpathian Mountains and Danube Delta; capital in Bucharest.",
+    "flag": "Tricolorul: vertical blue, yellow, and red bands combining Wallachia, Moldavia, and Transylvania.",
+    "freedom": "1918 Great Union of Alba Iulia; 1989 Romanian Revolution restored democracy.",
+    "challenge": "Highway infrastructure modernization (A7/A8), Black Sea energy development, and tech hub expansion."
   },
   "faqs": [
     {
-      "question": "When did Romania gain independence?",
-      "answer": "Romania attained its full sovereignty and recognized independence from the Ottoman Empire in 1878."
+      "question": "What is celebrated on December 1 in Romania?",
+      "answer": "December 1 is Great Union Day (Ziua Marii Uniri), Romania's National Day, commemorating the 1918 assembly in Alba Iulia that unified Transylvania, Bessarabia, and Bukovina with the Kingdom of Romania."
     },
     {
-      "question": "What are the main geographical characteristics of Romania?",
-      "answer": "Romania is located in Europe and features a geographical layout characterized by Carpathian Mountains and Danube basin."
+      "question": "Why is the Romanian language unique in Eastern Europe?",
+      "answer": "Romanian is the only Eastern Romance language, descending from Vulgar Latin spoken in the Roman province of Dacia, making it closely related to Italian, Spanish, French, and Portuguese."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "106 CE",
+      "event": "Emperor Trajan conquers Dacia, initiating Romanization and the Romanian language."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1859",
+      "event": "Alexandru Ioan Cuza unifies Wallachia and Moldavia into the United Principalities."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Romania."
+      "year": "1877",
+      "event": "Romania proclaims sovereign independence from the Ottoman Empire on May 9."
+    },
+    {
+      "year": "1918",
+      "event": "The Great Union of Alba Iulia on December 1 unites all historic Romanian lands."
+    },
+    {
+      "year": "1989",
+      "event": "The December Revolution topples the communist regime, restoring democracy."
+    },
+    {
+      "year": "2007",
+      "event": "Romania officially joins the European Union."
     }
   ]
 }

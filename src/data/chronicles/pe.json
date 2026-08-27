@@ -3,46 +3,84 @@
   "name": "Peru",
   "capital": "Lima",
   "continent": "South America",
-  "population": "34.0 Million",
+  "population": "34.3 Million",
   "currency": "Peruvian Sol (PEN)",
   "languages": [
     "Spanish",
-    "Quechua"
+    "Quechua",
+    "Aymara"
   ],
-  "seoTitle": "Detailed History of Peru: Map Formation, Flag Origin, and Independence",
-  "metaDescription": "Discover the rich history of Peru. Learn about its geographical border formation, flag symbolism, path to independence, and modern challenges.",
-  "mapFormation": "The geographical formation of Peru is a key element of its national identity in South America. Characterized by its Andean peaks and Amazonian rainforest basins, the nation's borders have been shaped over centuries by historical events, geopolitical negotiations, and local physical geography. These physical and political boundaries define how the sovereign map of Peru came to exist. The surrounding borders and geographical layout were negotiated in response to regional administrative changes, colonization policies, or territorial divisions, resulting in the modern map of the country we recognize today. This distinct geographical footprint plays a critical role in its local economy and regional relationships.",
-  "flagHistory": "The national flag of Peru is a powerful symbol of the country's sovereignty and cultural heritage. The design features a vertical bands of red, white, and red. Every color and emblem on the flag has been carefully chosen to represent the history and core values of the nation. The banner serves as a unifying symbol for the citizens, reflecting their ancestral struggles, local resources, and dreams for a prosperous future. The historical adoption of the flag is celebrated nationwide, reminding the people of their identity and the values that unite them as a sovereign community.",
-  "freedomStory": "The path to freedom and sovereignty for Peru involved a historic journey toward self-determination. The nation established its independent administration after gaining full sovereignty from Spain in 1821. This transition was the result of coordinated national movements, diplomatic discussions, and the courage of key figures who fought to govern their own land. The declaration of independence is a landmark moment in the history of Peru, representing the triumph of the local population over foreign influence or colonial rule. The country now celebrates its national day to honor those who paved the way for self-governance and democratic representation.",
-  "challenges": "Today, Peru faces several contemporary challenges that impact its development and stability. The nation is actively addressing issues related to chronic political instability and protests, which require strategic reforms and domestic investments. These difficulties range from economic transitions and infrastructure development to environmental conservation and social integration. The government and citizens of Peru continue to collaborate with international partners and local communities to overcome these hurdles, striving toward sustainable growth, economic diversity, and improved living standards for all citizens.",
+  "seoTitle": "History of Peru: Cradle of the Inca Empire, Red-White-Red Flag, and 1821 Independence",
+  "metaDescription": "Discover the detailed history of Peru. Explore the Inca Empire of Cusco, Machu Picchu, José de San Martín's 1821 Independence, and the Peruvian flag.",
+  "mapFormation": "Spanning 1.28 million square kilometers along the central Pacific coast of South America, the Republic of Peru (<em>Perú</em>) encompasses three distinct geographic zones: the arid coastal desert (<em>Costa</em>), the towering Andean cordillera (<em>Sierra</em>) with peaks exceeding 6,700 meters, and the immense Amazonian rainforest basin (<em>Selva</em>) covering 60% of national territory.<br><br>Peru is the ancient home of <strong>Caral-Supe</strong> (c. 3000 BCE)—the oldest known civilization in the Americas—followed by the Chavín, Nazca, Moche, and Wari cultures. In the 15th century, the <strong>Inca Empire (Tawantinsuyu)</strong> expanded from its capital in Cusco under Pachacuti, constructing monumental stone citadels like <strong>Machu Picchu</strong> and a 40,000-kilometer paved road network (Qhapaq Ñan).<br><br>Following the Spanish conquest led by Francisco Pizarro in 1532, Lima was founded in 1535 as the capital of the <strong>Viceroyalty of Peru</strong>, the supreme administrative and mining center of the Spanish Empire in South America for nearly three centuries. Sovereign independence was proclaimed on <strong>July 28, 1821</strong>, by General José de San Martín, and finalized at the Battle of Ayacucho in 1824.",
+  "flagHistory": "The national flag of Peru—the <em>Bandera Nacional</em>—is a striking vertical triband of red, white, and red, designed by liberating general <strong>José de San Martín</strong> in 1820 and standardized by Congress on <strong>February 25, 1825</strong>.<br><br>According to historical tradition, while resting near the bay of Paracas, San Martín was inspired by a flock of <strong>parihuanas</strong> (flamingos with vivid red wings and white chests) soaring into the sky. In patriotic symbolism: <strong>Red</strong> honors the blood spilled by Inca warriors and patriot heroes defending the homeland; while <strong>White</strong> represents peace, justice, and social purity.<br><br>The state ensign (<em>Pabellón Nacional</em>) bears the <strong>National Shield</strong> in the white stripe, divided into three fields showcasing Peru's natural wealth: the <strong>Vicuña</strong> (animal kingdom), the <strong>Cinchona Tree</strong> (plant kingdom / source of quinine), and the <strong>Cornucopia</strong> spilling golden coins (mineral kingdom).",
+  "freedomStory": "Peru was the central stronghold of Spanish royalist power in South America, making its liberation a momentous continental campaign.<br><br>Following his legendary crossing of the Andes and liberation of Chile, General <strong>José de San Martín</strong> landed his liberating expedition at Paracas in 1820. On <strong>July 28, 1821</strong>, San Martín stepped onto the balcony of the Plaza Mayor in Lima and proclaimed the immortal words: <em>'From this moment on, Peru is free and independent by the general will of the peoples and by the justice of its cause that God defends. Long live the Homeland! Long live Freedom!'</em><br><br>Sovereign liberation across the continent was sealed on <strong>December 9, 1824</strong>, on the high Andean plateau at the <strong>Battle of Ayacucho</strong>, where Marshal Antonio José de Sucre decisively defeated the Spanish Viceroy, permanently ending three centuries of Spanish imperial rule in South America.",
+  "challenges": "As a top global producer of copper, zinc, silver, and gold, Peru balances mining resource export growth with social development and environmental protection. Foremost priorities include strengthening democratic institutional stability, modernizing Andean irrigation and transport corridors, and protecting the Amazon biosphere against illegal gold mining.",
+  "images": {
+    "landscape": {
+      "url": "https://images.unsplash.com/photo-1526392060635-9d6019884377?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Machu Picchu Inca citadel in the Andes mountains, Peru",
+      "caption": "The 15th-century Inca citadel of Machu Picchu perched on an Andean mountain ridge above the Urubamba River valley in Cusco, Peru."
+    },
+    "landmark": {
+      "url": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Plaza Mayor and Cathedral of Lima, Peru",
+      "caption": "The Cathedral of Lima on the Plaza Mayor, where General José de San Martín officially proclaimed Peruvian independence in 1821."
+    },
+    "streetview": {
+      "url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Peruvian Andean highway with black-and-white striped signs",
+      "caption": "Peruvian street view indicators: national highway shields with PE codes, black-and-white striped signposts, and rugged Andean desert terrain."
+    }
+  },
+  "streetViewMeta": {
+    "drivingSide": "Right",
+    "licensePlates": "White rectangular plates with a colored top band containing the Peruvian flag and 'PERU'; commercial public transport plates have full yellow backgrounds.",
+    "utilityPoles": "Wooden poles with metal crossbars or concrete poles in coastal cities; black-and-white striped sign support posts.",
+    "roadMarkings": "Continuous or dashed yellow centerlines; solid white outer edge lines; national route marker shields labeled 'PE'.",
+    "delineators": "White posts with red reflectors on the right; stone retaining walls along mountain switchbacks.",
+    "cameraGen": "Comprehensive Gen 3 and Gen 4 coverage across the Pan-American Highway, Lima, Cusco, Arequipa, and Lake Titicaca."
+  },
   "aiSummary": {
-    "geo": "Located in South America; borders shaped by regional administrative history and physical terrain.",
-    "flag": "A distinct banner featuring vertical bands of red, white, and red representing national sovereignty.",
-    "freedom": "Gained sovereignty from Spain in 1821 through historical national movements.",
-    "challenge": "Currently facing developmental tasks related to chronic political instability and protests."
+    "geo": "Pacific coastal nation with Andean highlands and Amazon basin; center of the ancient Inca Empire.",
+    "flag": "Red, white, and red vertical triband inspired by flamingos seen by General San Martín in 1820.",
+    "freedom": "1821 proclamation by San Martín; finalized at the decisive Battle of Ayacucho on Dec 9, 1824.",
+    "challenge": "Democratic institutional stability, Andean mining logistics, and Amazon rainforest protection."
   },
   "faqs": [
     {
-      "question": "When did Peru gain independence?",
-      "answer": "Peru attained its full sovereignty and recognized independence from Spain in 1821."
+      "question": "When did Peru declare independence?",
+      "answer": "Independence was proclaimed on July 28, 1821, by General José de San Martín in Lima, celebrated as Peru's National Day (Fiestas Patrias)."
     },
     {
-      "question": "What are the main geographical characteristics of Peru?",
-      "answer": "Peru is located in South America and features a geographical layout characterized by Andean peaks and Amazonian rainforest basins."
+      "question": "What is the historical significance of the Battle of Ayacucho (1824)?",
+      "answer": "Fought on December 9, 1824, the Battle of Ayacucho was the final major military engagement of the Spanish American wars of independence, ending Spanish colonial rule in South America."
     }
   ],
   "timeline": [
     {
-      "year": "1800s",
-      "event": "Significant border negotiations and administrative shifts occur under regional influences."
+      "year": "3000 BCE",
+      "event": "The Sacred City of Caral-Supe develops as the oldest known civilization in the Americas."
     },
     {
-      "year": "1900s",
-      "event": "National movements gain traction, leading to constitutional shifts and self-governance debates."
+      "year": "1438",
+      "event": "Pachacuti expands the Inca Empire from Cusco, constructing Machu Picchu."
     },
     {
-      "year": "Sovereignty",
-      "event": "Official declaration of independence and international recognition of Peru."
+      "year": "1535",
+      "event": "Francisco Pizarro founds the City of Kings (Lima) as the capital of the Viceroyalty."
+    },
+    {
+      "year": "1821",
+      "event": "General José de San Martín proclaims Peruvian independence in Lima on July 28."
+    },
+    {
+      "year": "1824",
+      "event": "The Battle of Ayacucho seals sovereign independence for Peru and South America."
+    },
+    {
+      "year": "1911",
+      "event": "Hiram Bingham brings international academic attention to the Inca citadel of Machu Picchu."
     }
   ]
 }

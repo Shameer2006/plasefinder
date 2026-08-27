@@ -242,7 +242,7 @@ function SiteHeader({ onOpenDailyReward }) {
 }
 
 function SiteFooter() {
-  const links = [
+  const mainLinks = [
     { href: '/', label: 'Home' },
     { href: '/guides', label: 'Guides' },
     { href: '/leaderboard', label: 'Leaderboard' },
@@ -250,51 +250,78 @@ function SiteFooter() {
     { href: '/flag-guesser', label: 'Flag Guesser' },
     { href: '/community', label: 'Community' },
     { href: '/about', label: 'About' },
-    { href: '/privacy', label: 'Privacy' },
+    { href: '/contact', label: 'Contact Us' },
+  ];
+
+  const legalLinks = [
+    { href: '/privacy', label: 'Privacy Policy' },
+    { href: '/terms', label: 'Terms of Service' },
+    { href: '/cookies', label: 'Cookie Policy' },
+    { href: '/disclaimer', label: 'Disclaimer' },
   ];
 
   return (
-    <footer style={{ background: '#0d0d0d', borderTop: '1px solid rgba(255,255,255,0.08)', color: '#888' }}>
+    <footer style={{ background: '#0a0a0a', borderTop: '1px solid rgba(255,255,255,0.08)', color: '#888' }}>
       <div style={{
         maxWidth: '1100px', margin: '0 auto',
         padding: 'clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)',
         display: 'flex', flexDirection: 'column', gap: '2rem',
       }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '2rem' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', maxWidth: '260px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', maxWidth: '280px' }}>
             <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: '#fff' }}>
               <img src="/logo-3d-square.png" alt="LostStreet" style={{ width: '30px', height: '30px', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.35))' }} />
               <span style={{ fontWeight: 800, fontSize: '1.1rem', fontFamily: '"Outfit", sans-serif' }}>LostStreet</span>
             </Link>
-            <p style={{ fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
-              A fun, free world detective game with 780,000+ streets. Play solo or duel friends, and explore the planet!
+            <p style={{ fontSize: '0.85rem', lineHeight: 1.6, margin: 0, color: '#9ca3af' }}>
+              An independent educational world exploration game with 780,000+ streets. Discover global clues, duel friends, and learn geography for free.
             </p>
           </div>
 
-          <nav aria-label="Footer Navigation" style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(0.8rem, 2vw, 1.5rem)' }}>
-            {links.map(({ href, label }) => (
-              <Link key={href} href={href} style={{
-                color: '#888', textDecoration: 'none', fontSize: '0.875rem',
-                padding: '6px 4px', minHeight: '36px', display: 'inline-flex', alignItems: 'center',
-                transition: 'color 0.2s',
-              }}
-                onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-                onMouseLeave={e => e.currentTarget.style.color = '#888'}
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: '#cbd5e1' }}>Navigation</span>
+            <nav aria-label="Footer Navigation" style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(0.6rem, 1.5vw, 1.2rem)', maxWidth: '500px' }}>
+              {mainLinks.map(({ href, label }) => (
+                <Link key={href} href={href} style={{
+                  color: '#9ca3af', textDecoration: 'none', fontSize: '0.875rem',
+                  padding: '4px 2px', minHeight: '32px', display: 'inline-flex', alignItems: 'center',
+                  transition: 'color 0.2s',
+                }}
+                  onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+                  onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          </div>
         </div>
 
         <div style={{
           borderTop: '1px solid rgba(255,255,255,0.07)',
           paddingTop: '1.2rem',
-          display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem',
-          fontSize: '0.8rem',
+          display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1rem',
+          fontSize: '0.8rem', color: '#6b7280'
         }}>
-          <span>© {new Date().getFullYear()} LostStreet. All rights reserved.</span>
-          <span>Not affiliated with Google or GeoGuessr.</span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+            <span>© {new Date().getFullYear()} LostStreet. All rights reserved.</span>
+            <span>•</span>
+            <span style={{ color: '#64748b' }}>Independent educational platform. Not affiliated with Google or GeoGuessr.</span>
+          </div>
+
+          <nav aria-label="Legal Navigation" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+            {legalLinks.map(({ href, label }) => (
+              <Link key={href} href={href} style={{
+                color: '#6b7280', textDecoration: 'none', fontSize: '0.8rem',
+                transition: 'color 0.2s',
+              }}
+                onMouseEnter={e => e.currentTarget.style.color = '#10b981'}
+                onMouseLeave={e => e.currentTarget.style.color = '#6b7280'}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>

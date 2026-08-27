@@ -177,25 +177,24 @@ const jsonLd = [
       {
         "@type": "SiteNavigationElement",
         "position": 2,
-        "name": "How to Play & Guides",
-        "description": "Learn how to guess locations from street view, country clues, and geography tips.",
+        "name": "How to Play & Geography Guides",
+        "description": "Learn how to guess locations from street view, country clues, camera generations, and geography tips.",
         "url": "https://www.loststreet.online/guides"
       },
       {
         "@type": "SiteNavigationElement",
         "position": 3,
-        "name": "How to Play & Guides",
-        "description": "Learn how to guess locations from street view, country clues, and geography tips.",
-        "url": "https://www.loststreet.online/guides"
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "position": 4,
         "name": "World Map & Chronicles",
         "description": "Explore location guides and street view panoramas by country.",
         "url": "https://www.loststreet.online/chronicles"
       },
-
+      {
+        "@type": "SiteNavigationElement",
+        "position": 4,
+        "name": "Leaderboard",
+        "description": "Check top players and competitive ELO rankings.",
+        "url": "https://www.loststreet.online/leaderboard"
+      },
       {
         "@type": "SiteNavigationElement",
         "position": 5,
@@ -207,8 +206,15 @@ const jsonLd = [
         "@type": "SiteNavigationElement",
         "position": 6,
         "name": "About LostStreet",
-        "description": "Learn about LostStreet, the free street view guesser game.",
+        "description": "Learn about LostStreet, the free street view guesser game and educational platform.",
         "url": "https://www.loststreet.online/about"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 7,
+        "name": "Contact Us",
+        "description": "Contact the LostStreet editorial and support team.",
+        "url": "https://www.loststreet.online/contact"
       }
     ]
   }
