@@ -200,13 +200,20 @@ export default function MultiplayerGame({ gameId }) {
       setTimeLeft(null);
       return;
     }
+
+    const timeLimit = matchData.options?.timeLimit;
+    // Explicit 0 or null means "No Time Limit"
+    if (timeLimit === 0 || timeLimit === null) {
+      setTimeLeft(null);
+      return;
+    }
     
+    const limit = timeLimit ?? 60;
     const myData = matchData.players?.[userProfile.uid];
     
-    const timeLimit = matchData.options?.timeLimit || 60;
     const interval = setInterval(() => {
       const elapsed = (Date.now() - matchData.roundStartTime) / 1000;
-      const remaining = Math.max(0, Math.ceil(timeLimit - elapsed));
+      const remaining = Math.max(0, Math.ceil(limit - elapsed));
       setTimeLeft(remaining);
       
       if (remaining <= 0) {
@@ -238,7 +245,7 @@ export default function MultiplayerGame({ gameId }) {
     }, 1000);
     
     return () => clearInterval(interval);
-  }, [matchData?.status, matchData?.round, matchData?.roundStartTime, isRoundOver, matchData?.players, gameId, userProfile?.uid]);
+  }, [matchData?.status, matchData?.round, matchData?.roundStartTime, matchData?.options?.timeLimit, isRoundOver, matchData?.players, gameId, userProfile?.uid]);
 
   if (!matchData || !userProfile) {
     return <Spinner text="Loading Match..." />;

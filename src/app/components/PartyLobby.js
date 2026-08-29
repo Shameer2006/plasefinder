@@ -645,20 +645,29 @@ export default function PartyLobby({ gameId }) {
                   Time Limit Per Round
                 </label>
                 <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#38bdf8' }}>
-                  {options.timeLimit}s ({Math.floor(options.timeLimit / 60)}m {options.timeLimit % 60 ? `${options.timeLimit % 60}s` : ''})
+                  {options.timeLimit === 0
+                    ? 'No Limit (∞)'
+                    : `${options.timeLimit}s (${Math.floor(options.timeLimit / 60)}m ${options.timeLimit % 60 ? `${options.timeLimit % 60}s` : ''})`}
                 </span>
               </div>
               <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                {[30, 60, 120, 180, 300].map(sec => {
-                  const active = options.timeLimit === sec;
+                {[
+                  { sec: 0, label: '∞ None' },
+                  { sec: 30, label: '30s' },
+                  { sec: 60, label: '60s' },
+                  { sec: 120, label: '2m' },
+                  { sec: 180, label: '3m' },
+                  { sec: 300, label: '5m' }
+                ].map(item => {
+                  const active = options.timeLimit === item.sec;
                   return (
                     <button
-                      key={sec}
+                      key={item.sec}
                       disabled={!isHost}
-                      onClick={() => updateOption('timeLimit', sec)}
+                      onClick={() => updateOption('timeLimit', item.sec)}
                       style={{
                         flex: 1,
-                        minWidth: '50px',
+                        minWidth: '46px',
                         padding: '8px 4px',
                         borderRadius: '8px',
                         background: active ? 'rgba(56, 189, 248, 0.2)' : 'rgba(255, 255, 255, 0.04)',
@@ -670,7 +679,7 @@ export default function PartyLobby({ gameId }) {
                         transition: 'all 0.2s ease'
                       }}
                     >
-                      {sec}s
+                      {item.label}
                     </button>
                   );
                 })}

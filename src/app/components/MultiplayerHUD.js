@@ -15,15 +15,30 @@ export default function MultiplayerHUD({ matchData, timeLeft, isMobile, sortedPl
     }}>
       <div style={{ display: 'flex', gap: '15px', alignItems: 'center', width: '100%', justifyContent: 'space-between', marginBottom: '8px' }}>
         <div style={{ fontSize: isMobile ? '1.1rem' : '1.5rem', fontWeight: '800', opacity: 0.5 }}>R{matchData.round}/{matchData.options?.rounds || 5}</div>
-        {timeLeft !== null && (
+        {matchData.options?.timeLimit === 0 ? (
           <div style={{ 
-            fontSize: isMobile ? '1.1rem' : '1.5rem', 
+            fontSize: isMobile ? '1.1rem' : '1.4rem', 
             fontWeight: '900', 
-            color: timeLeft <= 10 ? '#ef4444' : '#fbbf24',
-            textShadow: '0 0 10px rgba(0,0,0,0.5)'
+            color: '#38bdf8',
+            textShadow: '0 0 10px rgba(56, 189, 248, 0.4)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px'
           }}>
-            {timeLeft}s
+            <span style={{ fontSize: isMobile ? '0.7rem' : '0.8rem', fontWeight: '700', textTransform: 'uppercase', opacity: 0.8, color: '#9ca3af' }}>No Limit</span>
+            <span>∞</span>
           </div>
+        ) : (
+          timeLeft !== null && (
+            <div style={{ 
+              fontSize: isMobile ? '1.1rem' : '1.5rem', 
+              fontWeight: '900', 
+              color: timeLeft <= 10 ? '#ef4444' : '#fbbf24',
+              textShadow: '0 0 10px rgba(0,0,0,0.5)'
+            }}>
+              {timeLeft}s
+            </div>
+          )
         )}
       </div>
       <div style={{ display: 'flex', gap: isMobile ? '0.8rem' : '1.5rem', overflowX: 'auto', maxWidth: isMobile ? '55vw' : '60vw' }}>
