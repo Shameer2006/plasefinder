@@ -44,6 +44,7 @@ export default function Home() {
   const [joinCode, setJoinCode] = useState('');
   const [joinError, setJoinError] = useState('');
   const [isJoining, setIsJoining] = useState(false);
+  const [partyStartedModal, setPartyStartedModal] = useState(null);
 
   useEffect(() => {
     setUnreadNotifications(getUnreadCount());
@@ -106,23 +107,36 @@ export default function Home() {
       partyCode = window.location.hash.replace('#party=', '');
     }
 
-    if (partyCode && handledPartyCodeRef.current !== partyCode.toUpperCase()) {
-      handledPartyCodeRef.current = partyCode.toUpperCase();
+    if (partyCode && handledPartyCodeRef.current !== partyCode.trim().toUpperCase()) {
+      const cleanCode = partyCode.trim().toUpperCase();
+      handledPartyCodeRef.current = cleanCode;
       
       const joinFromInviteLink = async () => {
         try {
-          toast.info(`Joining party ${partyCode.toUpperCase()}...`);
+          toast.info(`Joining party ${cleanCode}...`);
           const { joinParty } = await import('@/lib/matchmaking');
-          const gameId = await joinParty(userProfile, partyCode.trim());
+          const result = await joinParty(userProfile, cleanCode);
+          const gameId = typeof result === 'object' ? result.gameId : result;
+          const status = typeof result === 'object' ? result.status : 'waiting_for_players';
+          
           if (gameId) {
             window.history.replaceState({}, '', window.location.pathname);
-            setGameState(`PARTY_LOBBY_${gameId}`);
-            toast.success("Joined Party Lobby!");
+            if (status === 'playing') {
+              setGameState(`MULTIPLAYER_${gameId}`);
+              toast.success("Rejoined Active Match!");
+            } else {
+              setGameState(`PARTY_LOBBY_${gameId}`);
+              toast.success("Joined Party Lobby!");
+            }
           }
         } catch (err) {
           console.error("Invite join error:", err);
           window.history.replaceState({}, '', window.location.pathname);
-          toast.error(err.message || "Failed to join party from link.");
+          if (err.code === 'PARTY_ALREADY_STARTED') {
+            setPartyStartedModal(err.partyDetails || { code: cleanCode, round: 1, totalRounds: 5 });
+          } else {
+            toast.error(err.message || "Failed to join party from link.");
+          }
         }
       };
 
@@ -357,7 +371,8 @@ export default function Home() {
       toast.error("Please login first to join a party!");
       return;
     }
-    if (joinCode.length !== 6) {
+    const cleanCode = joinCode.trim().toUpperCase();
+    if (cleanCode.length !== 6) {
       setJoinError('Code must be 6 characters');
       return;
     }
@@ -366,14 +381,27 @@ export default function Home() {
     setJoinError('');
     const { joinParty } = await import('@/lib/matchmaking');
     try {
-      const gameId = await joinParty(userProfile, joinCode);
+      const result = await joinParty(userProfile, cleanCode);
+      const gameId = typeof result === 'object' ? result.gameId : result;
+      const status = typeof result === 'object' ? result.status : 'waiting_for_players';
       if (gameId) {
         setShowJoinModal(false);
-        setGameState(`PARTY_LOBBY_${gameId}`);
+        if (status === 'playing') {
+          setGameState(`MULTIPLAYER_${gameId}`);
+          toast.success("Rejoined Active Match!");
+        } else {
+          setGameState(`PARTY_LOBBY_${gameId}`);
+          toast.success("Joined Party Lobby!");
+        }
       }
     } catch (e) {
       console.error(e);
-      setJoinError(e.message || 'Failed to join party.');
+      if (e.code === 'PARTY_ALREADY_STARTED') {
+        setShowJoinModal(false);
+        setPartyStartedModal(e.partyDetails || { code: cleanCode, round: 1, totalRounds: 5 });
+      } else {
+        setJoinError(e.message || 'Failed to join party.');
+      }
     } finally {
       setIsJoining(false);
     }
@@ -729,6 +757,152 @@ export default function Home() {
 
 
       </section>
+
+      {partyStartedModal && (
+        <FocusTrapModal onClose={() => setPartyStartedModal(null)}>
+          <div
+            className="glass-panel modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Party Already Started"
+            style={{
+              maxWidth: '520px',
+              width: '92%',
+              padding: '2rem',
+              textAlign: 'center',
+              borderRadius: '24px',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.8), 0 0 40px rgba(245, 158, 11, 0.15)',
+              border: '1px solid rgba(245, 158, 11, 0.35)',
+              background: 'linear-gradient(180deg, rgba(26, 31, 46, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)'
+            }}
+          >
+            {/* Animated Icon Badge */}
+            <div style={{
+              width: '64px',
+              height: '64px',
+              margin: '0 auto 1.25rem',
+              borderRadius: '20px',
+              background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(239, 68, 68, 0.2))',
+              border: '1px solid rgba(245, 158, 11, 0.5)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#fbbf24',
+              boxShadow: '0 8px 24px rgba(245, 158, 11, 0.25)'
+            }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: 'rgba(245, 158, 11, 0.15)',
+              border: '1px solid rgba(245, 158, 11, 0.3)',
+              color: '#fbbf24',
+              padding: '4px 12px',
+              borderRadius: '20px',
+              fontSize: '0.75rem',
+              fontWeight: 800,
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              marginBottom: '0.75rem'
+            }}>
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#fbbf24', boxShadow: '0 0 8px #fbbf24' }} />
+              Match In Progress
+            </div>
+
+            <h2 style={{
+              fontSize: '1.6rem',
+              fontWeight: 900,
+              margin: '0 0 0.5rem 0',
+              letterSpacing: '-0.02em',
+              color: '#ffffff'
+            }}>
+              Party Has Started!
+            </h2>
+
+            <p style={{
+              fontSize: '0.9rem',
+              color: '#9ca3af',
+              margin: '0 0 1.5rem 0',
+              lineHeight: 1.5
+            }}>
+              The host has already launched this match. New players cannot join mid-game, but you can wait for the next room or ask the host to invite you when finished!
+            </p>
+
+            {/* Room summary stats card */}
+            <div style={{
+              background: 'rgba(0, 0, 0, 0.35)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: '16px',
+              padding: '1rem',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '8px',
+              marginBottom: '1.5rem'
+            }}>
+              <div style={{ padding: '4px' }}>
+                <div style={{ fontSize: '0.7rem', color: '#9ca3af', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.5px' }}>Room Code</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fef08a', fontFamily: 'monospace', marginTop: '2px' }}>{partyStartedModal.code || '------'}</div>
+              </div>
+              <div style={{ padding: '4px', borderLeft: '1px solid rgba(255,255,255,0.08)', borderRight: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ fontSize: '0.7rem', color: '#9ca3af', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.5px' }}>Progress</div>
+                <div style={{ fontSize: '1rem', fontWeight: 900, color: '#38bdf8', marginTop: '2px' }}>Round {partyStartedModal.round || 1}/{partyStartedModal.totalRounds || 5}</div>
+              </div>
+              <div style={{ padding: '4px' }}>
+                <div style={{ fontSize: '0.7rem', color: '#9ca3af', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.5px' }}>Host</div>
+                <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#ffffff', marginTop: '2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{partyStartedModal.hostName || 'Host'}</div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button
+                type="button"
+                className="btn"
+                style={{
+                  flex: 1,
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  color: '#e5e7eb',
+                  fontWeight: 700,
+                  borderRadius: '12px',
+                  padding: '12px'
+                }}
+                onClick={() => setPartyStartedModal(null)}
+              >
+                Return to Menu
+              </button>
+              <button
+                type="button"
+                className="btn"
+                style={{
+                  flex: 1,
+                  background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                  color: 'white',
+                  fontWeight: 800,
+                  borderRadius: '12px',
+                  padding: '12px',
+                  boxShadow: '0 4px 15px rgba(245, 158, 11, 0.35)'
+                }}
+                onClick={() => {
+                  if (partyStartedModal?.code) {
+                    setJoinCode(partyStartedModal.code);
+                    setPartyStartedModal(null);
+                    setShowJoinModal(true);
+                  } else {
+                    setPartyStartedModal(null);
+                  }
+                }}
+              >
+                Check Again
+              </button>
+            </div>
+          </div>
+        </FocusTrapModal>
+      )}
 
       {showJoinModal && (
         <FocusTrapModal onClose={() => setShowJoinModal(false)}>

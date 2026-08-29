@@ -382,31 +382,94 @@ export const createParty = async (userProfile) => {
 export const joinParty = async (userProfile, code) => {
   if (!db || !userProfile || !code) return null;
   
+  const cleanCode = code.trim().toUpperCase();
   const matchesRef = collection(db, 'matches');
-  const q = query(matchesRef, where('code', '==', code.toUpperCase()), where('status', '==', 'waiting_for_players'), limit(1));
+  const q = query(matchesRef, where('code', '==', cleanCode), limit(1));
   const querySnapshot = await getDocs(q);
   
   if (querySnapshot.empty) {
-    throw new Error('Party not found or already started.');
+    const err = new Error('Party room not found. Please check that the room code is correct.');
+    err.code = 'NOT_FOUND';
+    throw err;
   }
 
   const matchDoc = querySnapshot.docs[0];
   const gameId = matchDoc.id;
-  
+  const matchData = matchDoc.data();
+
+  // Find host display name if available
+  const hostPlayer = Object.values(matchData.players || {}).find(p => p.host);
+  const hostName = hostPlayer?.displayName || 'Host';
+  const isExistingPlayer = !!matchData.players?.[userProfile.uid];
+
+  // If match has already started
+  if (matchData.status === 'playing') {
+    if (isExistingPlayer) {
+      return { gameId, status: 'playing', isRejoin: true };
+    }
+    const err = new Error(`The party has already started! (Round ${matchData.round || 1} in progress)`);
+    err.code = 'PARTY_ALREADY_STARTED';
+    err.partyDetails = {
+      code: cleanCode,
+      gameId,
+      hostName,
+      round: matchData.round || 1,
+      totalRounds: matchData.options?.rounds || 5,
+      playerCount: Object.keys(matchData.players || {}).length,
+      mode: matchData.options?.mode || 'Street View'
+    };
+    throw err;
+  }
+
+  if (matchData.status === 'finished') {
+    const err = new Error('This party match has already ended. Please ask the host for a new room code.');
+    err.code = 'PARTY_FINISHED';
+    throw err;
+  }
+
+  if (matchData.status !== 'waiting_for_players') {
+    const err = new Error('Party is no longer available.');
+    err.code = 'NOT_AVAILABLE';
+    throw err;
+  }
+
+  if (isExistingPlayer) {
+    return { gameId, status: 'waiting_for_players', isRejoin: true };
+  }
+
   await runTransaction(db, async (transaction) => {
     const sfDoc = await transaction.get(matchDoc.ref);
-    if (!sfDoc.exists() || sfDoc.data().status !== 'waiting_for_players') {
-      throw new Error('Party is no longer available.');
+    if (!sfDoc.exists()) {
+      const err = new Error('Party is no longer available.');
+      err.code = 'NOT_AVAILABLE';
+      throw err;
     }
     
-    if (Object.keys(sfDoc.data().players).length >= 20) {
-      throw new Error('Party is full.');
+    const currentData = sfDoc.data();
+    if (currentData.status !== 'waiting_for_players') {
+      const err = new Error(`The party has already started! (Round ${currentData.round || 1} in progress)`);
+      err.code = 'PARTY_ALREADY_STARTED';
+      err.partyDetails = {
+        code: cleanCode,
+        gameId,
+        hostName,
+        round: currentData.round || 1,
+        totalRounds: currentData.options?.rounds || 5,
+        playerCount: Object.keys(currentData.players || {}).length
+      };
+      throw err;
+    }
+    
+    if (Object.keys(currentData.players || {}).length >= 20) {
+      const err = new Error('Party lobby is full (maximum 20 players).');
+      err.code = 'PARTY_FULL';
+      throw err;
     }
 
     transaction.update(matchDoc.ref, {
       [`players.${userProfile.uid}`]: { 
-        displayName: userProfile.username || userProfile.displayName, 
-        elo: userProfile.elo, 
+        displayName: userProfile.username || userProfile.displayName || 'Player', 
+        elo: userProfile.elo || 1000, 
         countryCode: userProfile.countryCode || '',
         score: 0, 
         ready: false,
@@ -415,5 +478,5 @@ export const joinParty = async (userProfile, code) => {
     });
   });
 
-  return gameId;
+  return { gameId, status: 'waiting_for_players', isRejoin: false };
 };

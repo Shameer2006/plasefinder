@@ -2,9 +2,17 @@
 const recentlyUsed = new Set();
 const MAX_HISTORY = 50;
 
-// Pre-fetched location pool to make starting and round transitions instant (0ms)
-const locationPool = [];
-let isFetchingPool = false;
+// Pre-fetched location pools keyed by country code (e.g., 'WORLDWIDE', 'IN', 'US')
+// to make starting and round transitions instant (0ms) without mixing different countries.
+const locationPools = new Map();
+const fetchingPools = new Set();
+
+function getPoolKey(gameOptions = {}) {
+  if (gameOptions.country && gameOptions.country !== 'WORLDWIDE') {
+    return gameOptions.country.toUpperCase();
+  }
+  return 'WORLDWIDE';
+}
 
 function locationKey(loc) {
   return `${loc.lat},${loc.lng}`;
@@ -68,16 +76,19 @@ function formatLocationResult(locations) {
 }
 
 /**
- * Pre-warms the location pool in the background (called on menu mount).
+ * Pre-warms the location pool in the background for a specific country or worldwide.
  */
 export const prefetchLocations = async (gameOptions = {}) => {
-  if (isFetchingPool || locationPool.length >= 3) return;
-  isFetchingPool = true;
+  const poolKey = getPoolKey(gameOptions);
+  const currentPool = locationPools.get(poolKey) || [];
+
+  if (fetchingPools.has(poolKey) || currentPool.length >= 3) return;
+  fetchingPools.add(poolKey);
 
   try {
     let url = '/api/locations?count=5';
-    if (gameOptions.country && gameOptions.country !== 'WORLDWIDE') {
-      url += `&country=${gameOptions.country}`;
+    if (poolKey !== 'WORLDWIDE') {
+      url += `&country=${poolKey}`;
     } else {
       url += '&minContinents=3';
     }
@@ -86,32 +97,38 @@ export const prefetchLocations = async (gameOptions = {}) => {
     if (res.ok) {
       const data = await res.json();
       if (data?.locations?.length) {
-        locationPool.push(data.locations);
+        const pool = locationPools.get(poolKey) || [];
+        pool.push(data.locations);
+        locationPools.set(poolKey, pool);
       }
     }
   } catch (err) {
     // Non-critical background prefetch
   } finally {
-    isFetchingPool = false;
+    fetchingPools.delete(poolKey);
   }
 };
 
 /**
- * Fetch a batch of diverse random locations from the server API or pool.
+ * Fetch a batch of random locations from the server API or matching country pool.
  * Returns { location, options } for the current round.
  */
 export const fetchRandomLocation = async (gameOptions = {}) => {
-  // If we have pre-fetched locations available, use them instantly!
-  if (locationPool.length > 0) {
-    const cachedLocations = locationPool.shift();
-    // Refill pool in background
+  const poolKey = getPoolKey(gameOptions);
+  const currentPool = locationPools.get(poolKey) || [];
+
+  // If we have pre-fetched locations available for THIS specific country/mode, use them instantly!
+  if (currentPool.length > 0) {
+    const cachedLocations = currentPool.shift();
+    locationPools.set(poolKey, currentPool);
+    // Refill pool in background for this specific country
     setTimeout(() => prefetchLocations(gameOptions), 100);
     return formatLocationResult(cachedLocations);
   }
 
   let url = '/api/locations?count=5';
-  if (gameOptions.country && gameOptions.country !== 'WORLDWIDE') {
-    url += `&country=${gameOptions.country}`;
+  if (poolKey !== 'WORLDWIDE') {
+    url += `&country=${poolKey}`;
   } else {
     url += '&minContinents=3';
   }
@@ -127,6 +144,9 @@ export const fetchRandomLocation = async (gameOptions = {}) => {
     }
 
     const { locations } = await response.json();
+    if (!locations || locations.length === 0) {
+      throw new Error(`No locations found for ${poolKey}`);
+    }
     // Pre-fetch next batch in background for seamless next round
     setTimeout(() => prefetchLocations(gameOptions), 200);
     return formatLocationResult(locations);
