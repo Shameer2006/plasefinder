@@ -94,7 +94,7 @@ export default function ArticlePage() {
 
         {/* ── ARTICLE CONTAINER ────────────────────────────────────────── */}
         <main style={{ padding: 'clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 3vw, 1.5rem)', maxWidth: '760px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
-          
+
           <header className="article-header" style={{ marginBottom: 'clamp(1.5rem, 4vw, 2.75rem)', textAlign: 'center', fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
             <span style={{ color: '#10b981', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.06em', textTransform: 'uppercase', display: 'inline-block' }}>
               Street View Meta
@@ -119,7 +119,7 @@ export default function ArticlePage() {
           </header>
 
           <article style={{ fontSize: 'clamp(1rem, 1.8vw, 1.125rem)', color: '#374151', wordBreak: 'break-word', lineHeight: 1.8 }}>
-            
+
             <p style={{ fontSize: 'clamp(1.05rem, 2vw, 1.22rem)', color: '#4b5563', lineHeight: 1.75, marginBottom: '2rem' }}>
               When you're dropped onto a random dirt road in GeoGuessr, staring at a blurry horizon, the entire world is your multiple-choice answer. But the best players don't memorize ten million miles of roads—they use a logical process of elimination.
             </p>
@@ -138,7 +138,7 @@ export default function ArticlePage() {
 
             <h2 style={headingStyle}>2. The &quot;Meta&quot; Clues: The Google Car and Camera</h2>
             <p>Because Google used different equipment and vehicles to map different regions, the artifacts they left behind are dead giveaways.</p>
-            
+
             <div style={{ margin: 'clamp(1.5rem, 3vw, 2.5rem) 0', borderRadius: '12px', overflow: 'hidden' }}>
               <img src="/guides/google-car-v3.png" alt="Google Street View Car" style={{ width: '100%', height: 'auto', maxHeight: '480px', objectFit: 'cover', display: 'block', borderRadius: '12px', border: '1px solid #e5e7eb' }} />
             </div>
@@ -152,7 +152,7 @@ export default function ArticlePage() {
 
             <h2 style={headingStyle}>3. Infrastructure: Bollards and Road Lines</h2>
             <p>If you don't see the Google car, look at the infrastructure holding the road together. Standardized safety features rarely cross borders.</p>
-            
+
             <div style={{ margin: 'clamp(1.5rem, 3vw, 2.5rem) 0', borderRadius: '12px', overflow: 'hidden', textAlign: 'center' }}>
               <img src="/guides/bollard-v3.png" alt="Road Bollard" style={{ width: '100%', height: 'auto', maxHeight: '480px', objectFit: 'cover', display: 'block', borderRadius: '12px', border: '1px solid #e5e7eb' }} />
             </div>
@@ -178,7 +178,7 @@ export default function ArticlePage() {
               <li><strong>Architecture:</strong> Red clay-tile roofs are dominant in Southern Europe, while wooden houses are more prevalent in Northern Europe. Utility poles also vary: concrete poles with triangle-shaped holes are a staple of Poland, while V-shaped braces are common in Thailand.</li>
               <li><strong>Soil and Vegetation:</strong> Eucalyptus trees and red dirt heavily suggest Australia. Birch forests are a hallmark of Eastern Europe and Russia.</li>
             </ul>
-            
+
             <p style={{ fontSize: 'clamp(1.05rem, 2vw, 1.22rem)', color: '#4b5563', lineHeight: 1.75, marginTop: '2rem', fontWeight: 600 }}>
               The secret to improving isn't studying maps endlessly; it's building a mental checklist. Start every round by checking the driving side, look at the camera/car, find a bollard or license plate, and check the sun.
             </p>

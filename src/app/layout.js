@@ -86,6 +86,9 @@ const jsonLd = [
     "description": "A fun and free world detective game with 780,000+ real street view locations. Travel the planet from home, spot funny clues, guess where you are, and duel friends in real-time 1v1 battles.",
     "applicationCategory": "GameApplication",
     "applicationSubCategory": "Geography Game",
+    "genre": ["Geography Game", "Trivia Game", "Educational Game", "Strategy Game"],
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
     "operatingSystem": "Web",
     "browserRequirements": "Requires a modern web browser",
     "featureList": [

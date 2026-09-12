@@ -46,6 +46,11 @@ const faqJsonLd = {
     },
     {
       '@type': 'Question',
+      name: 'What difficulty modes are available in Flag Guesser?',
+      acceptedAnswer: { '@type': 'Answer', text: 'LostStreet Flag Guesser features three difficulty modes: Easy (simple 4 multiple-choice options), Medium (mixed gameplay alternating between 4 choices and pinning the country location on a world map), and Hard (pure map pinning where you see only the flag and must drop your pin on the map).' }
+    },
+    {
+      '@type': 'Question',
       name: 'How can I learn to identify country flags?',
       acceptedAnswer: { '@type': 'Answer', text: 'The best way to learn flags is through repetition and pattern recognition. Group flags by visual features: tricolours (France, Italy, Ireland), crescents (Turkey, Pakistan, Tunisia), crosses (Scandinavia), and stars (USA, China, Brazil). Our Flag Identification Guide breaks down every pattern.' }
     }
@@ -124,7 +129,7 @@ export default function FlagGuesserPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
             {[
               { icon: '🏳️', title: 'See a Flag', desc: 'A random country flag is displayed. Study the colors, symbols, and patterns carefully.' },
-              { icon: '🤔', title: 'Make Your Guess', desc: 'Choose the correct country from multiple choice options. The faster you answer, the more points you earn.' },
+              { icon: '🤔', title: 'Make Your Guess', desc: 'Choose from 4 multiple-choice options in Easy mode, alternate with map pinning in Medium mode, or pinpoint countries on a world map in Hard mode.' },
               { icon: '📊', title: 'Track Your Score', desc: 'See your results and learn from mistakes. Repeat to build pattern recognition across all 196 flags.' },
             ].map((step) => (
               <div key={step.title} style={{

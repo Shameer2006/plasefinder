@@ -106,7 +106,7 @@ export default function ArticlePage() {
 
         {/* ── ARTICLE CONTAINER ────────────────────────────────────────── */}
         <main style={{ padding: 'clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 3vw, 1.5rem)', maxWidth: '760px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
-          
+
           <header className="article-header" style={{ marginBottom: 'clamp(1.5rem, 4vw, 2.75rem)', textAlign: 'center', fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
             <span style={{ color: '#10b981', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.06em', textTransform: 'uppercase', display: 'inline-block' }}>
               Geography Masterclass
@@ -131,7 +131,7 @@ export default function ArticlePage() {
           </header>
 
           <article style={{ fontSize: 'clamp(1rem, 1.8vw, 1.125rem)', color: '#374151', wordBreak: 'break-word', lineHeight: 1.8 }}>
-            
+
             <p style={{ fontSize: 'clamp(1.05rem, 2vw, 1.22rem)', color: '#4b5563', lineHeight: 1.75, marginBottom: '2rem' }}>
               Drop into a random street anywhere on Earth. Could you figure out exactly where you are in under a minute? For GeoGuessr players and geography enthusiasts, this isn't magic—it's a science of observation. While landscapes and architecture provide a general vibe, the quickest way to identify a country is often by looking at the things most people ignore: the back of a road sign, the shape of a bollard, or the specific letters on a street name.
             </p>
@@ -143,7 +143,7 @@ export default function ArticlePage() {
             <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2.5rem 0' }} />
 
             <h2 style={headingStyle}>1. Reading the Road Hardware</h2>
-            
+
             <p>
               Every country has its own safety standards and manufacturing quirks for road infrastructure. Recognizing these physical &quot;tells&quot; can immediately narrow down your location.
             </p>
@@ -154,9 +154,9 @@ export default function ArticlePage() {
             </p>
 
             <figure style={{ margin: 'clamp(1.5rem, 3vw, 2.5rem) 0', textAlign: 'center' }}>
-              <img 
-                src="/austrian-delineator-bollard.jpg" 
-                alt="Austrian delineator bollard" 
+              <img
+                src="/austrian-delineator-bollard.jpg"
+                alt="Austrian delineator bollard"
                 style={{
                   width: '100%',
                   height: 'auto',
@@ -165,7 +165,7 @@ export default function ArticlePage() {
                   borderRadius: '12px',
                   border: '1px solid #e5e7eb',
                   display: 'block'
-                }} 
+                }}
               />
               <figcaption style={{ textAlign: 'center', color: '#6b7280', fontSize: '0.85rem', marginTop: '0.65rem', fontFamily: '"Inter", system-ui, sans-serif' }}>
                 Austrian delineator bollard. Source: David Crespo / Getty Images
@@ -183,9 +183,9 @@ export default function ArticlePage() {
             </p>
 
             <figure style={{ margin: 'clamp(1.5rem, 3vw, 2.5rem) 0', textAlign: 'center' }}>
-              <img 
-                src="/colombian-road-sign.jpg" 
-                alt="Colombian road sign cross back" 
+              <img
+                src="/colombian-road-sign.jpg"
+                alt="Colombian road sign cross back"
                 style={{
                   width: '100%',
                   height: 'auto',
@@ -194,7 +194,7 @@ export default function ArticlePage() {
                   borderRadius: '12px',
                   border: '1px solid #e5e7eb',
                   display: 'block'
-                }} 
+                }}
               />
               <figcaption style={{ textAlign: 'center', color: '#6b7280', fontSize: '0.85rem', marginTop: '0.65rem', fontFamily: '"Inter", system-ui, sans-serif' }}>
                 Colombian road sign cross back. Source: EGT / Getty Images
@@ -215,9 +215,9 @@ export default function ArticlePage() {
             </p>
 
             <figure style={{ margin: 'clamp(1.5rem, 3vw, 2.5rem) 0', textAlign: 'center' }}>
-              <img 
-                src="/polish-town-entry-sign.jpg" 
-                alt="Polish town entry sign" 
+              <img
+                src="/polish-town-entry-sign.jpg"
+                alt="Polish town entry sign"
                 style={{
                   width: '100%',
                   height: 'auto',
@@ -226,7 +226,7 @@ export default function ArticlePage() {
                   borderRadius: '12px',
                   border: '1px solid #e5e7eb',
                   display: 'block'
-                }} 
+                }}
               />
               <figcaption style={{ textAlign: 'center', color: '#6b7280', fontSize: '0.85rem', marginTop: '0.65rem', fontFamily: '"Inter", system-ui, sans-serif' }}>
                 Polish town entry sign. Source: RobsonPL / Getty Images
@@ -244,9 +244,9 @@ export default function ArticlePage() {
             </p>
 
             <figure style={{ margin: 'clamp(1.5rem, 3vw, 2.5rem) 0', textAlign: 'center' }}>
-              <img 
-                src="/serbian-dual-script-road-sign.jpg" 
-                alt="Serbian dual-script road sign" 
+              <img
+                src="/serbian-dual-script-road-sign.jpg"
+                alt="Serbian dual-script road sign"
                 style={{
                   width: '100%',
                   height: 'auto',
@@ -255,7 +255,7 @@ export default function ArticlePage() {
                   borderRadius: '12px',
                   border: '1px solid #e5e7eb',
                   display: 'block'
-                }} 
+                }}
               />
               <figcaption style={{ textAlign: 'center', color: '#6b7280', fontSize: '0.85rem', marginTop: '0.65rem', fontFamily: '"Inter", system-ui, sans-serif' }}>
                 Serbian dual-script road sign. Source: Emily_M_Wilson / Getty Images

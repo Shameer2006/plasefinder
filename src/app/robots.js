@@ -4,44 +4,70 @@ export default function robots() {
       {
         userAgent: '*',
         allow: '/',
-        disallow: '/api/',
+        disallow: ['/api/'],
+      },
+      {
+        userAgent: 'Googlebot',
+        allow: '/',
+        disallow: ['/api/'],
+      },
+      {
+        userAgent: 'Bingbot',
+        allow: '/',
+        disallow: ['/api/'],
+      },
+      {
+        userAgent: 'Applebot',
+        allow: '/',
+        disallow: ['/api/'],
+      },
+      {
+        userAgent: 'DuckDuckBot',
+        allow: '/',
+        disallow: ['/api/'],
+      },
+      {
+        userAgent: 'YandexBot',
+        allow: '/',
+        disallow: ['/api/'],
       },
       {
         userAgent: 'GPTBot',
         allow: '/',
-        disallow: '/api/',
+        disallow: ['/api/'],
       },
       {
         userAgent: 'ChatGPT-User',
         allow: '/',
-        disallow: '/api/',
+        disallow: ['/api/'],
       },
       {
         userAgent: 'Google-Extended',
         allow: '/',
-        disallow: '/api/',
+        disallow: ['/api/'],
       },
       {
         userAgent: 'ClaudeBot',
         allow: '/',
-        disallow: '/api/',
+        disallow: ['/api/'],
       },
       {
         userAgent: 'PerplexityBot',
         allow: '/',
-        disallow: '/api/',
+        disallow: ['/api/'],
       },
       {
         userAgent: 'Applebot-Extended',
         allow: '/',
-        disallow: '/api/',
+        disallow: ['/api/'],
       },
       {
         userAgent: 'Bytespider',
         allow: '/',
-        disallow: '/api/',
-      }
+        disallow: ['/api/'],
+      },
     ],
     sitemap: 'https://www.loststreet.online/sitemap.xml',
-  }
+    host: 'https://www.loststreet.online',
+  };
 }

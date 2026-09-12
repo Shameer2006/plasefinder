@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seo:analyze": "python ../seo-ai-agent/main.py analyze",
+    "seo:optimize": "python ../seo-ai-agent/main.py optimize",
+    "seo:apply": "python ../seo-ai-agent/main.py optimize --apply",
+    "seo:sync-llms": "python ../seo-ai-agent/main.py sync-llms",
+    "seo:report": "python ../seo-ai-agent/main.py report",
+    "seo:agent": "python ../seo-ai-agent/agent.py"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^2.1.1",

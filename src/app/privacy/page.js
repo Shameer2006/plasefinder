@@ -51,7 +51,7 @@ export default function PrivacyPolicy() {
         <p style={{ color: '#9ca3af', fontSize: '0.92rem', marginBottom: '2rem' }}>
           <em>Last Updated: August 27, 2026</em>
         </p>
-        
+
         <div style={{ lineHeight: '1.8', fontSize: '1rem', color: '#d1d5db', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <p>
             Welcome to <strong>LostStreet</strong> (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We are committed to protecting your personal privacy and ensuring transparency regarding how data is handled across our website (<a href="https://www.loststreet.online" style={{ color: '#10b981', textDecoration: 'underline' }}>https://www.loststreet.online</a>) and our free geography guessing platform.

@@ -1,38 +1,28 @@
 # LostStreet
 
-> LostStreet is a free, fun world detective and geography guessing game. Players get dropped onto a random 360-degree street view anywhere in the world and use visual clues to guess where they are.
+> LostStreet is a 100% free world detective and street view geography guessing game.
+> Players explore 360-degree panoramas across 195+ nations and use meta clues (camera generations, bollards, utility poles, road markings, sun direction) to deduce their exact location.
 
-## Overview
-LostStreet turns the whole Earth into a fun detective game. You don't need a passport or plane tickets—just look around, find clues, and make your guess!
+## Core URLs
+- [Homepage & Free Play](https://www.loststreet.online): Play unlimited geography guessing rounds with no sign-up or paid subscription.
+- [Flag Guesser](https://www.loststreet.online/flag-guesser): Identify country flags in Easy (4 choices), Medium (alternating map pinning), and Hard (pure map pinning) modes.
+- [Global Leaderboard](https://www.loststreet.online/leaderboard): Real-time ELO rankings and player performance stats.
+- [Guides & Strategy](https://www.loststreet.online/guides): Complete masterclass library for street view and world detective meta clues.
 
-- **Website**: https://www.loststreet.online
-- **Cost**: 100% Free (No subscription, no paywalls, no login required to play)
-- **Coverage**: Over 780,000 hand-picked, high-quality street view locations across 195+ countries
-- **Key Experience**: Fun, relaxing, educational, and competitive world exploration
+## Masterclass Guides & Meta Clues
+- [25 Pro Street View & GeoGuessr Secrets Most Players Don](https://www.loststreet.online/guides/25-pro-street-view-geoguessr-secrets): Discover 25 pro secrets and meta clues used by top GeoGuessr players: Kenya Snorkel, Ghana Tape, Sky Rifts, French Holey Poles & more.
+- [How to Identify African Countries in Street View (2026)](https://www.loststreet.online/guides/africa-street-view-guide): Master African countries in street view games. Region-by-region breakdown of visual clues for West, East, Southern & North Africa — road signs, vegetation, languages & more.
+- [How to Identify Asian Countries in Street View (2026)](https://www.loststreet.online/guides/asia-street-view-guide): Identify Asian countries from street view clues. Covers East Asia, Southeast Asia, South Asia & Central Asia — scripts, bollards, architecture & driving side tips.
+- [Best Free GeoGuessr Alternatives & Street View Guessers (2026)](https://www.loststreet.online/guides/best-free-geoguessr-alternatives): Discover the top free GeoGuessr alternatives and free street view guesser games in 2026. Explore LostStreet for unlimited 360° panoramas, 1v1 duels, and zero subscriptions.
+- [How to Identify European Countries in Street View (2026)](https://www.loststreet.online/guides/europe-street-view-guide): Tell European countries apart in geography games. Country-specific road signs, bollards, license plates & architecture for Western, Eastern, Nordic & Southern Europe.
+- [World Flag Identification Guide (2026)](https://www.loststreet.online/guides/flag-identification-guide): Learn to identify every country flag by color, pattern & region. Tricolours, crescents, crosses, stars — plus the most commonly confused flag pairs in quiz games.
+- [Ultimate Street View Clues Cheat Sheet (2026)](https://www.loststreet.online/guides/geography-clues-guide): The complete reference to every visual clue in Google Street View. Bollards, road markings, utility poles, sun position, driving side & vegetation — master them all.
+- [The 10 Hardest Countries to Guess in Street View (2026)](https://www.loststreet.online/guides/hardest-countries-to-guess): From Russia
+- [The Map Sleuth](https://www.loststreet.online/guides/how-to-guess-locations-from-street-view): Drop into any random street view location and guess the country in under a minute using road sign hardware, bollards, utility poles, and language toponymy clues.
+- [How to Get Better at Geography Guessing Games (2026)](https://www.loststreet.online/guides/how-to-improve-at-geography-games): Practical strategies to improve your geography game scores. Learn languages, road signs, infrastructure, climate and more — used by top GeoGuessr & LostStreet players.
+- [How to Identify Latin American Countries in Street View (2026 Guide)](https://www.loststreet.online/guides/latin-america-street-view-guide): Master Latin American geography clues in Street View. Discover road sign cross backings, yellow license plates, utility pole styles, and vegetation hints.
+- [Multiplayer Geography Game Tips & 1v1 Duel Strategy (2026)](https://www.loststreet.online/guides/multiplayer-geography-tips): Win more 1v1 duels & multiplayer geography matches. Time management, risk strategy, reading opponent guesses & clutch tips for GeoGuessr & LostStreet.
+- [Google Street View Camera Generations (Gen 1–Gen 4) Complete Guide](https://www.loststreet.online/guides/street-view-camera-generations-guide): Master Street View camera generations. Learn to identify Gen 1 blur, Gen 2 purple halos, Gen 3 clarity, and Gen 4 wide-angle lenses to pinpoint countries instantly.
 
-## Game Modes
-- **Singleplayer**: Play solo at your own speed across Easy, Medium, Hard, and Expert difficulties.
-- **1v1 Multiplayer Duels**: Challenge friends or random players in real-time battles. Guess faster and closer to deal damage and win ELO rating points.
-- **Flag Guesser**: Test your knowledge of world flags in quick, fast-paced rounds.
-- **Party Rooms**: Create a private room code and play together with a group of friends or classmates.
-- **Country Chronicles**: A complete world encyclopedia with maps, photos, and fun facts for every country.
-- **Daily Rewards & Streaks**: Log in every day to claim 3D Gold Coins, level up your streak, and unlock bonus items.
-
-## How to Play
-1. **Look Around**: Move your camera 360 degrees to check the road, buildings, nature, and sky.
-2. **Find Clues**: Look for road signs, language on shop signs, driving side (left or right), sun direction, and unique cars.
-3. **Make Your Guess**: Click on the world map or pick from multiple-choice options.
-4. **Score Points**: The closer your guess is to the real spot, the more points and coins you earn!
-
-## In-Game Power-Ups
-- **✂️ 50/50**: Removes 2 wrong answers in Multiple Choice mode (costs 20 Coins).
-- **💡 Hint**: Gives you a helpful clue about the local language, continent, or climate (costs 15 Coins).
-- **🔍 Circle Search**: Searches a narrowed radius around the target.
-
-## Key Links & Guides
-- [Play LostStreet Free](https://www.loststreet.online)
-- [How to Guess Locations from Street View](https://www.loststreet.online/guides/how-to-guess-locations-from-street-view)
-- [Geography Clues & Road Marks Guide](https://www.loststreet.online/guides/geography-clues-guide)
-- [World Country Chronicles Encyclopedia](https://www.loststreet.online/chronicles)
-- [Global Player Leaderboard](https://www.loststreet.online/leaderboard)
-- [Full LLM Knowledge File](https://www.loststreet.online/llms-full.txt)
+## Optional / Full Knowledge
+- [llms-full.txt](https://www.loststreet.online/llms-full.txt): Complete in-depth text documentation of all gameplay rules, scoring algorithms, and country guides.

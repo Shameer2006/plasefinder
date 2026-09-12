@@ -105,7 +105,7 @@ export default function ArticlePage() {
 
         {/* ── ARTICLE CONTAINER ────────────────────────────────────────── */}
         <main style={{ padding: 'clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 3vw, 1.5rem)', maxWidth: '760px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
-          
+
           <header className="article-header" style={{ marginBottom: 'clamp(1.5rem, 4vw, 2.75rem)', textAlign: 'center', fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
             <span style={{ color: '#10b981', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.06em', textTransform: 'uppercase', display: 'inline-block' }}>
               Continent Guides
@@ -130,7 +130,7 @@ export default function ArticlePage() {
           </header>
 
           <article style={{ fontSize: 'clamp(1rem, 1.8vw, 1.125rem)', color: '#374151', wordBreak: 'break-word', lineHeight: 1.8 }}>
-            
+
             <p style={{ fontSize: 'clamp(1.05rem, 2vw, 1.22rem)', color: '#4b5563', lineHeight: 1.75, marginBottom: '2rem' }}>
               Europe is one of the most challenging continents in geography guessing games because many countries share similar landscapes, architecture, and even languages. This guide breaks Europe into sub-regions and gives you the specific clues to distinguish between countries that look almost identical.
             </p>

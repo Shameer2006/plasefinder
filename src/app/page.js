@@ -55,6 +55,7 @@ export default function Home() {
   const [matchFoundData, setMatchFoundData] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [pendingMode, setPendingMode] = useState('CLASSIC');
+  const [flagDifficulty, setFlagDifficulty] = useState('EASY');
   const toast = useToast();
 
   // Always reset to MENU on fresh page load/launch, and handle popstate history
@@ -282,7 +283,7 @@ export default function Home() {
   }
 
   if (gameState === 'FLAG_GAME') {
-    return <div className="game-area"><FlagGame onReturnToMenu={() => setGameState('MENU')} /></div>;
+    return <div className="game-area"><FlagGame initialDifficulty={flagDifficulty} onReturnToMenu={() => setGameState('MENU')} /></div>;
   }
 
   if (gameState !== 'MENU') {
@@ -430,9 +431,9 @@ export default function Home() {
 
   return (
     <main id="main-content" className="home-page" style={{
-      minHeight: '100dvh',
+      height: '100dvh',
       width: '100vw',
-      overflowX: 'hidden',
+      overflow: 'hidden',
       position: 'relative',
       color: 'white',
       backgroundColor: '#0a0d1a'
@@ -667,6 +668,9 @@ export default function Home() {
                 setShowDifficulty(false);
                 if (pendingMode === 'ENDLESS') {
                   handleEndlessMode(diff);
+                } else if (pendingMode === 'FLAG_GAME') {
+                  setFlagDifficulty(diff);
+                  setGameState('FLAG_GAME');
                 } else {
                   handleStart(diff);
                 }
@@ -693,7 +697,7 @@ export default function Home() {
                   onJoinParty={() => setShowJoinModal(true)}
                   onLeaderboard={() => window.location.href = '/leaderboard'}
                   onAbout={() => window.location.href = '/about'}
-                  onFlagGuesser={() => setGameState('FLAG_GAME')}
+                  onFlagGuesser={() => { setPendingMode('FLAG_GAME'); setShowDifficulty(true); }}
                 />
               </>
             )}
