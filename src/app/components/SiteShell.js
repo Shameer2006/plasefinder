@@ -240,7 +240,7 @@ function SiteHeader({ onOpenDailyReward }) {
   );
 }
 
-function SiteFooter() {
+export function SiteFooter() {
   const links = [
     { href: '/', label: 'Home' },
     { href: '/guides', label: 'Guides & Strategy' },

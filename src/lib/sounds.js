@@ -77,6 +77,10 @@ class SoundEngine {
     this.playTone(800, 'square', 0.05, 0.1, 400);
   }
 
+  playClick() {
+    this.playTick();
+  }
+
   playLevelUp() {
     // Triumphant fanfare
     const notes = [

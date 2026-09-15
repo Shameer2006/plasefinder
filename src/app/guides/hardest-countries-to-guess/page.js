@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "The 10 Hardest Countries to Guess in Street View (2026) | LostStreet",
-  description: "From Russia's endless birch forests to Argentina's featureless Pampas — discover the 10 countries that stump even expert GeoGuessr players. Free visual clues & pro tips inside.",
+  title: "The 10 Hardest Countries to Guess in Street View (2026 Clues) | LostStreet",
+  description: "Struggling with Russia, Lesotho, or Argentina? Master the exact visual clues, road markings, and car meta to identify the 10 hardest countries instantly.",
   alternates: { canonical: "https://www.loststreet.online/guides/hardest-countries-to-guess" },
   keywords: [
     "hardest countries to guess", "hardest country to guess", "hard countries to guess",

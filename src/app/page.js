@@ -14,6 +14,8 @@ import HeroPanorama from './components/HeroPanorama';
 import CoinHUD from './components/CoinHUD';
 import { getUnreadCount } from '@/lib/notifications';
 import { prefetchLocations } from '@/lib/locationManager';
+import HomeEducationalSection from './components/HomeEducationalSection';
+import { SiteFooter } from './components/SiteShell';
 
 const Game = dynamic(() => import('./components/Game'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
 const FlagGame = dynamic(() => import('./components/FlagGame'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
@@ -58,12 +60,18 @@ export default function Home() {
   const [flagDifficulty, setFlagDifficulty] = useState('EASY');
   const toast = useToast();
 
-  // Always reset to MENU on fresh page load/launch, and handle popstate history
+  // Always reset to MENU on fresh page load/launch, or launch FLAG_GAME if requested
   useEffect(() => {
-    // Reset to MENU on initial mount so reopening website never freezes on old game state
-    setGameState('MENU');
-    if (typeof window !== 'undefined' && window.location.hash) {
-      window.history.replaceState(null, '', window.location.pathname);
+    const params = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+    const initialHash = typeof window !== 'undefined' ? window.location.hash.replace('#', '') : '';
+
+    if (initialHash === 'FLAG_GAME' || params?.get('play') === 'flag' || params?.get('mode') === 'flag') {
+      setGameState('FLAG_GAME');
+    } else {
+      setGameState('MENU');
+      if (typeof window !== 'undefined' && window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
     }
 
     const handlePopState = () => {
@@ -304,8 +312,11 @@ export default function Home() {
     setGameState('LOADING');
   };
 
-  const handleStoryMode = () => {
-    toast.info("📖 Story Mode is coming soon! Stay tuned.");
+  const handleGuides = () => {
+    try {
+      if (typeof sounds?.playClick === 'function') sounds.playClick();
+    } catch {}
+    window.location.href = '/guides';
   };
 
   const startMatchmaking = async (type = 'unranked') => {
@@ -431,9 +442,10 @@ export default function Home() {
 
   return (
     <main id="main-content" className="home-page" style={{
-      height: '100dvh',
+      minHeight: '100dvh',
       width: '100vw',
-      overflow: 'hidden',
+      overflowX: 'hidden',
+      overflowY: 'auto',
       position: 'relative',
       color: 'white',
       backgroundColor: '#0a0d1a'
@@ -686,7 +698,7 @@ export default function Home() {
                   onQuickPlay={() => handleStart('EASY')}
                   onSingleplayer={() => { setPendingMode('CLASSIC'); setShowDifficulty(true); }}
                   onEndlessMode={() => { setPendingMode('ENDLESS'); setShowDifficulty(true); }}
-                  onStoryMode={handleStoryMode}
+                  onGuides={handleGuides}
                   onFindMatchClick={() => setShowMatchmaking(true)}
                   isQueuing={isQueuing}
                   cancelMatchmaking={cancelMatchmaking}
@@ -759,8 +771,13 @@ export default function Home() {
           )}
         </div>
 
-
       </section>
+
+      {/* Crawlable Educational Geography Hub & Masterclasses for AdSense & SEO */}
+      <HomeEducationalSection />
+
+      {/* Global Site Footer with Essential Legal, Trust & Navigation Links for AdSense Compliance */}
+      <SiteFooter />
 
       {partyStartedModal && (
         <FocusTrapModal onClose={() => setPartyStartedModal(null)}>
@@ -1107,7 +1124,7 @@ const HeroMenuButton = ({ title, subtitle, iconClass, svgIcon, onClick, badge, b
   </button>
 );
 
-const MainMenu = ({ onQuickPlay, onSingleplayer, onEndlessMode, onStoryMode, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => (
+const MainMenu = ({ onQuickPlay, onSingleplayer, onEndlessMode, onGuides, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxWidth: '340px', width: '100%' }}>
     <HeroMenuButton
       title="SINGLEPLAYER"
@@ -1150,20 +1167,12 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onEndlessMode, onStoryMode, onF
     />
 
     <HeroMenuButton
-      title="STORY MODE"
-      subtitle="Follow stories & challenges"
+      title="GUIDES & STRATEGY"
+      subtitle="13 Pro Masterclasses & Meta"
       iconClass="icon-gold"
-      onClick={onStoryMode}
-      badge="COMING SOON"
-      badgeStyle={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#111827', fontSize: '0.58rem', padding: '1.5px 6px', borderRadius: '4px', fontWeight: '900', letterSpacing: '0.5px', boxShadow: '0 2px 6px rgba(245, 158, 11, 0.3)' }}
-      extraRight={
-        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '26px', height: '26px', borderRadius: '8px', background: 'rgba(251, 191, 36, 0.15)', border: '1px solid rgba(251, 191, 36, 0.35)', color: '#fbbf24' }} title="Locked - Coming Soon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-          </svg>
-        </span>
-      }
+      onClick={onGuides}
+      badge="13 GUIDES"
+      badgeStyle={{ background: 'linear-gradient(135deg, #10b981, #059669)', color: '#ffffff', fontSize: '0.58rem', padding: '1.5px 6px', borderRadius: '4px', fontWeight: '900', letterSpacing: '0.5px', boxShadow: '0 2px 6px rgba(16, 185, 129, 0.35)' }}
       svgIcon={
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>

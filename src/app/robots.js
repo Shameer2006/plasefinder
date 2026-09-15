@@ -12,6 +12,11 @@ export default function robots() {
         disallow: ['/api/'],
       },
       {
+        userAgent: 'Mediapartners-Google',
+        allow: '/',
+        disallow: ['/api/'],
+      },
+      {
         userAgent: 'Bingbot',
         allow: '/',
         disallow: ['/api/'],

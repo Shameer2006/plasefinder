@@ -64,6 +64,9 @@ export const metadata = {
   verification: {
     google: "google28b6dbf4d718a7b0",
   },
+  other: {
+    "google-adsense-account": "ca-pub-1006713173738488",
+  },
   manifest: "/manifest.json",
 };
 
@@ -310,6 +313,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               })(window, document, "clarity", "script", "xzld5hwny4");
             `,
           }}
+        />
+
+        {/* Google AdSense Verification & Auto Ads */}
+        <Script
+          id="google-adsense"
+          strategy="afterInteractive"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1006713173738488"
+          crossOrigin="anonymous"
         />
       </body>
     </html>

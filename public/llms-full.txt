@@ -46,9 +46,9 @@ Summary: Learn to identify every country flag by color, pattern & region. Tricol
 URL: https://www.loststreet.online/guides/geography-clues-guide
 Summary: The complete reference to every visual clue in Google Street View. Bollards, road markings, utility poles, sun position, driving side & vegetation — master them all.
 
-### The 10 Hardest Countries to Guess in Street View (2026)
+### The 10 Hardest Countries to Guess in Street View (2026 Clues)
 URL: https://www.loststreet.online/guides/hardest-countries-to-guess
-Summary: From Russia
+Summary: Struggling with Russia, Lesotho, or Argentina? Master the exact visual clues, road markings, and car meta to identify the 10 hardest countries instantly.
 
 ### The Map Sleuth
 URL: https://www.loststreet.online/guides/how-to-guess-locations-from-street-view

@@ -4,7 +4,7 @@ export const metadata = {
   title: "Cookie Policy — LostStreet Free World Geography Game",
   description: "Learn how LostStreet and our advertising partners use cookies and tracking technologies to deliver our free educational geography platform.",
   alternates: { canonical: "https://www.loststreet.online/cookies" },
-  keywords: ["loststreet cookie policy", "google adsense cookies", "tracking technologies loststreet"],
+  keywords: ["loststreet cookie policy", "google adsense cookies", "tracking technologies loststreet", "dart cookie geoguessr"],
   openGraph: {
     title: "Cookie Policy — LostStreet",
     description: "Cookie Policy and Advertising Tracking Disclosures for LostStreet.",
@@ -16,135 +16,290 @@ export default function CookiePolicyPage() {
   return (
     <div style={{
       minHeight: '100vh',
-      padding: 'clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem)',
-      background: '#0a0a0a',
-      color: '#e5e5e5',
-      fontFamily: "'Outfit', system-ui, sans-serif"
+      width: '100%',
+      background: '#fafafa',
+      color: '#111827',
+      display: 'flex',
+      flexDirection: 'column',
+      fontFamily: '"Outfit", system-ui, -apple-system, sans-serif',
+      overflowX: 'hidden'
     }}>
+
+      {/* ── BREADCRUMB / SUB-NAV BAR ─────────────────────────────────────── */}
       <div style={{
-        maxWidth: '860px',
-        margin: '0 auto',
-        background: 'rgba(26, 26, 46, 0.75)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
-        padding: 'clamp(1.5rem, 4vw, 3rem)',
-        borderRadius: '20px',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.5)'
+        background: '#ffffff',
+        borderBottom: '1px solid #e5e7eb',
+        padding: '0.85rem clamp(1rem, 3vw, 2.5rem)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '0.75rem'
       }}>
-        {/* Breadcrumb */}
-        <nav style={{ marginBottom: '1.5rem', fontSize: '0.85rem', color: '#9ca3af' }} aria-label="Breadcrumb">
-          <Link href="/" style={{ color: '#9ca3af', textDecoration: 'none' }}>Home</Link>
-          <span style={{ margin: '0 0.5rem' }}>/</span>
-          <span style={{ color: '#10b981' }}>Cookie Policy</span>
-        </nav>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <Link href="/" style={{
+            background: '#f3f4f6',
+            border: '1px solid #e5e7eb',
+            color: '#1f2937',
+            padding: '7px 14px',
+            borderRadius: '10px',
+            textDecoration: 'none',
+            fontWeight: '700',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '0.85rem',
+            transition: 'all 0.2s ease',
+            touchAction: 'manipulation'
+          }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Back to Game</span>
+          </Link>
 
-        <h1 style={{
-          fontSize: 'clamp(1.8rem, 5vw, 2.6rem)',
-          fontWeight: 900,
-          marginBottom: '0.5rem',
-          background: 'linear-gradient(135deg, #10b981, #3b82f6)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          lineHeight: 1.2
+          <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', color: '#6b7280' }}>
+            <Link href="/" style={{ color: '#6b7280', textDecoration: 'none', fontWeight: 500 }}>Home</Link>
+            <span>/</span>
+            <span style={{ color: '#059669', fontWeight: 700 }}>Cookie Policy</span>
+          </nav>
+        </div>
+
+        <div style={{
+          background: '#ecfdf5',
+          border: '1px solid #a7f3d0',
+          color: '#059669',
+          padding: '5px 14px',
+          borderRadius: '20px',
+          fontSize: '0.82rem',
+          fontWeight: 800,
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '6px'
         }}>
-          Cookie Policy &amp; Tracking Disclosures
-        </h1>
-        <p style={{ color: '#9ca3af', fontSize: '0.92rem', marginBottom: '2rem' }}>
-          <em>Last Updated: August 27, 2026</em>
-        </p>
-
-        <div style={{ lineHeight: '1.8', fontSize: '1rem', color: '#d1d5db', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          <p>
-            This Cookie Policy explains how <strong>LostStreet</strong> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) uses cookies, local browser storage, and similar technologies on <a href="https://www.loststreet.online" style={{ color: '#10b981', textDecoration: 'underline' }}>https://www.loststreet.online</a>.
-          </p>
-
-          <h2 style={{ color: '#f3f4f6', fontSize: '1.35rem', fontWeight: 800, marginTop: '1rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.4rem' }}>
-            1. What Are Cookies?
-          </h2>
-          <p>
-            Cookies are small text files placed on your computer, tablet, or mobile phone by websites you visit. They are widely used to make web applications function efficiently, preserve user preferences across sessions, and provide anonymous analytical and advertising data to website publishers.
-          </p>
-
-          <h2 style={{ color: '#f3f4f6', fontSize: '1.35rem', fontWeight: 800, marginTop: '1rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.4rem' }}>
-            2. Categories of Cookies We Use
-          </h2>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', padding: '1.25rem', borderRadius: '12px' }}>
-              <h3 style={{ color: '#10b981', fontSize: '1.1rem', fontWeight: 700, margin: '0 0 0.4rem 0' }}>A. Strictly Necessary &amp; Essential Cookies</h3>
-              <p style={{ margin: 0, fontSize: '0.92rem', color: '#cbd5e1' }}>
-                These cookies and LocalStorage items are essential for core platform features. They enable you to log in via Firebase Authentication, save your audio/unit preferences (metric vs imperial), and keep your in-game daily streak intact. Without these, core game functions cannot be provided.
-              </p>
-            </div>
-
-            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', padding: '1.25rem', borderRadius: '12px' }}>
-              <h3 style={{ color: '#60a5fa', fontSize: '1.1rem', fontWeight: 700, margin: '0 0 0.4rem 0' }}>B. Performance &amp; Analytics Cookies</h3>
-              <p style={{ margin: 0, fontSize: '0.92rem', color: '#cbd5e1' }}>
-                We utilize Vercel Analytics and Google Analytics (GA4) to anonymously monitor page load speeds, Core Web Vitals, and aggregate traffic patterns. This telemetry helps our engineering team optimize Street View asset rendering and diagnose technical glitches.
-              </p>
-            </div>
-
-            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', padding: '1.25rem', borderRadius: '12px' }}>
-              <h3 style={{ color: '#fbbf24', fontSize: '1.1rem', fontWeight: 700, margin: '0 0 0.4rem 0' }}>C. Advertising &amp; Google AdSense Cookies</h3>
-              <p style={{ margin: 0, fontSize: '0.92rem', color: '#cbd5e1' }}>
-                LostStreet serves advertisements through Google AdSense to fund our cloud server hosting and keep the game 100% free with unlimited rounds. Google and its certified vendor partners use cookies (such as the DoubleClick DART cookie) to serve relevant advertisements based on a user's prior visits to our site or other websites across the Internet.
-              </p>
-            </div>
-          </div>
-
-          <h2 style={{ color: '#f3f4f6', fontSize: '1.35rem', fontWeight: 800, marginTop: '1rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.4rem' }}>
-            3. How to Opt-Out &amp; Manage Your Cookie Preferences
-          </h2>
-          <p>
-            You have full control over cookie usage and personalized advertising tracking:
-          </p>
-          <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            <li>
-              <strong>Google Ads Personalization:</strong> You can opt out of personalized advertising by visiting <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#10b981', textDecoration: 'underline' }}>Google My Ad Center</a>.
-            </li>
-            <li>
-              <strong>Industry Opt-Out Platforms:</strong> You can opt out of third-party behavioral advertising cookies through the <a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer" style={{ color: '#10b981', textDecoration: 'underline' }}>Digital Advertising Alliance (DAA)</a> or the <a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#10b981', textDecoration: 'underline' }}>European Interactive Digital Advertising Alliance (EDAA)</a>.
-            </li>
-            <li>
-              <strong>Browser Controls:</strong> Most web browsers (Chrome, Firefox, Safari, Edge) allow you to refuse cookies or alert you when cookies are being sent. Note that disabling essential cookies may impact multiplayer or login functionality.
-            </li>
-          </ul>
-
-          <h2 style={{ color: '#f3f4f6', fontSize: '1.35rem', fontWeight: 800, marginTop: '1rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.4rem' }}>
-            4. Contact Us Regarding Cookies
-          </h2>
-          <p>
-            If you have questions about our cookie disclosures or third-party advertising partners, please visit our <Link href="/contact" style={{ color: '#10b981', textDecoration: 'underline' }}>Contact Page</Link> or email:
-          </p>
-          <div style={{ background: 'rgba(255,255,255,0.04)', padding: '1rem 1.5rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <p style={{ margin: 0, fontWeight: 700, color: '#10b981' }}>privacy@loststreet.online</p>
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/" style={{
-              background: 'linear-gradient(135deg, #10b981, #3b82f6)',
-              color: 'white',
-              padding: '10px 24px',
-              borderRadius: '8px',
-              textDecoration: 'none',
-              fontWeight: 700,
-              fontSize: '0.95rem'
-            }}>
-              Return to Game
-            </Link>
-            <Link href="/privacy" style={{
-              background: 'rgba(255,255,255,0.08)',
-              color: 'white',
-              padding: '10px 24px',
-              borderRadius: '8px',
-              textDecoration: 'none',
-              fontWeight: 600,
-              fontSize: '0.95rem'
-            }}>
-              Read Privacy Policy
-            </Link>
-          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 8v4"></path>
+            <path d="M12 16h.01"></path>
+          </svg>
+          <span>Tracking &amp; Cookie Disclosures</span>
         </div>
       </div>
+
+      {/* ── EDITORIAL CONTENT CARD ───────────────────────────────────────── */}
+      <main style={{
+        maxWidth: '880px',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
+        padding: 'clamp(2rem, 5vw, 3.5rem) clamp(1rem, 3vw, 2rem) 4rem',
+      }}>
+        <article style={{
+          background: '#ffffff',
+          border: '1px solid #e5e7eb',
+          borderRadius: '24px',
+          padding: 'clamp(1.75rem, 4vw, 3rem)',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.03)'
+        }}>
+          <div style={{ marginBottom: '2rem' }}>
+            <span style={{
+              display: 'inline-block',
+              padding: '4px 12px',
+              borderRadius: '20px',
+              background: '#ecfdf5',
+              border: '1px solid #a7f3d0',
+              color: '#059669',
+              fontSize: '0.8rem',
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              marginBottom: '0.75rem'
+            }}>
+              Consent &amp; Privacy Choices
+            </span>
+            <h1 style={{
+              fontSize: 'clamp(2rem, 5vw, 2.75rem)',
+              fontWeight: 900,
+              lineHeight: 1.2,
+              color: '#111827',
+              letterSpacing: '-0.02em',
+              margin: '0 0 0.5rem 0'
+            }}>
+              Cookie Policy &amp; Tracking Disclosures
+            </h1>
+            <p style={{ color: '#6b7280', fontSize: '0.92rem', margin: 0, fontStyle: 'italic' }}>
+              Last Updated: August 27, 2026 &bull; Effective Date: August 27, 2026
+            </p>
+          </div>
+
+          <div style={{ lineHeight: '1.8', fontSize: '0.98rem', color: '#374151', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <p>
+              This Cookie Policy explains how <strong>LostStreet</strong> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) uses cookies, local browser storage, and related web telemetry on <a href="https://www.loststreet.online" style={{ color: '#059669', fontWeight: 600, textDecoration: 'underline' }}>https://www.loststreet.online</a>.
+            </p>
+
+            <h2 style={{ color: '#111827', fontSize: '1.28rem', fontWeight: 800, marginTop: '1rem', borderBottom: '1px solid #f3f4f6', paddingBottom: '0.5rem' }}>
+              1. What Are Cookies?
+            </h2>
+            <p>
+              Cookies are small text strings saved to your computer, tablet, or smartphone by websites you visit. They are standard web mechanisms used to allow secure authentication, remember in-game user settings across sessions, and provide anonymous analytical and advertising insights to website operators.
+            </p>
+
+            <h2 style={{ color: '#111827', fontSize: '1.28rem', fontWeight: 800, marginTop: '1rem', borderBottom: '1px solid #f3f4f6', paddingBottom: '0.5rem' }}>
+              2. Categories of Cookies We Use
+            </h2>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', padding: '1.5rem', borderRadius: '16px' }}>
+                <h3 style={{ color: '#059669', fontSize: '1.1rem', fontWeight: 800, margin: '0 0 0.4rem 0' }}>
+                  A. Strictly Necessary &amp; Operational Storage
+                </h3>
+                <p style={{ margin: 0, fontSize: '0.92rem', color: '#4b5563', lineHeight: 1.6 }}>
+                  These cookies and HTML5 LocalStorage entries are essential for core platform features. They enable Google Firebase authentication, maintain sound and measurement unit preferences (metric vs imperial), and preserve your daily streak progress. Without these, core game functions cannot operate properly.
+                </p>
+              </div>
+
+              <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', padding: '1.5rem', borderRadius: '16px' }}>
+                <h3 style={{ color: '#2563eb', fontSize: '1.1rem', fontWeight: 800, margin: '0 0 0.4rem 0' }}>
+                  B. Performance &amp; Analytics Cookies
+                </h3>
+                <p style={{ margin: 0, fontSize: '0.92rem', color: '#4b5563', lineHeight: 1.6 }}>
+                  We utilize Vercel Analytics and Google Analytics (GA4) to anonymously evaluate page rendering speeds, Core Web Vitals, and aggregate traffic trends. This telemetry helps our engineering team optimize Street View panorama loading and resolve platform bugs.
+                </p>
+              </div>
+
+              <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', padding: '1.5rem', borderRadius: '16px' }}>
+                <h3 style={{ color: '#b45309', fontSize: '1.1rem', fontWeight: 800, margin: '0 0 0.4rem 0' }}>
+                  C. Advertising &amp; Google AdSense Cookies
+                </h3>
+                <p style={{ margin: 0, fontSize: '0.92rem', color: '#4b5563', lineHeight: 1.6 }}>
+                  LostStreet displays advertisements via Google AdSense to fund our cloud server hosting and keep the game 100% free with unlimited rounds. Google and its certified advertising partners use cookies (such as the DoubleClick DART cookie) to serve ads based on your visits to our site and other websites across the web.
+                </p>
+              </div>
+            </div>
+
+            <h2 style={{ color: '#111827', fontSize: '1.28rem', fontWeight: 800, marginTop: '1rem', borderBottom: '1px solid #f3f4f6', paddingBottom: '0.5rem' }}>
+              3. Managing Your Cookie &amp; Advertising Preferences
+            </h2>
+            <p>
+              You maintain complete control over how cookies and behavioral advertising tracking are applied:
+            </p>
+            <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              <li>
+                <strong>Google Ads Personalization:</strong> You can manage or disable personalized advertising at any time by visiting <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#059669', fontWeight: 600, textDecoration: 'underline' }}>Google My Ad Center</a>.
+              </li>
+              <li>
+                <strong>Consumer Opt-Out Platforms:</strong> You can opt out of interest-based advertising from multiple networks via the <a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer" style={{ color: '#059669', fontWeight: 600, textDecoration: 'underline' }}>Digital Advertising Alliance (DAA)</a> or the <a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#059669', fontWeight: 600, textDecoration: 'underline' }}>European Interactive Digital Advertising Alliance (EDAA)</a>.
+              </li>
+              <li>
+                <strong>Web Browser Controls:</strong> Major browsers (Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge) provide settings to block cookies or notify you when cookies are set. Note that disabling necessary cookies may alter your game progress or session settings.
+              </li>
+            </ul>
+
+            <h2 style={{ color: '#111827', fontSize: '1.28rem', fontWeight: 800, marginTop: '1rem', borderBottom: '1px solid #f3f4f6', paddingBottom: '0.5rem' }}>
+              4. Contact Us Regarding Cookies
+            </h2>
+            <p>
+              If you have any questions regarding our cookie practices, advertising partners, or data protection, please reach out through our <Link href="/contact" style={{ color: '#059669', fontWeight: 600, textDecoration: 'underline' }}>Contact Form</Link> or email:
+            </p>
+            <div style={{
+              background: '#f8fafc',
+              padding: '1.5rem',
+              borderRadius: '16px',
+              border: '1px solid #e2e8f0',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '14px'
+            }}>
+              <div style={{
+                width: '42px',
+                height: '42px',
+                borderRadius: '10px',
+                background: '#ecfdf5',
+                color: '#059669',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0
+              }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
+              </div>
+              <div>
+                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Privacy &amp; Compliance Team
+                </div>
+                <a href="mailto:privacy@loststreet.online" style={{ fontWeight: 800, color: '#059669', textDecoration: 'none', fontSize: '1.02rem' }}>
+                  privacy@loststreet.online
+                </a>
+              </div>
+            </div>
+
+            {/* Navigation Actions */}
+            <div style={{
+              textAlign: 'center',
+              marginTop: '2rem',
+              paddingTop: '2rem',
+              borderTop: '1px solid #f3f4f6',
+              display: 'flex',
+              gap: '1rem',
+              justifyContent: 'center',
+              flexWrap: 'wrap'
+            }}>
+              <Link href="/" style={{
+                background: 'linear-gradient(135deg, #059669, #10b981)',
+                color: '#ffffff',
+                padding: '12px 24px',
+                borderRadius: '50px',
+                textDecoration: 'none',
+                fontWeight: 800,
+                fontSize: '0.95rem',
+                boxShadow: '0 4px 14px rgba(5,150,105,0.25)'
+              }}>
+                Return to Game
+              </Link>
+              <Link href="/privacy" style={{
+                background: '#ffffff',
+                border: '1px solid #d1d5db',
+                color: '#374151',
+                padding: '12px 24px',
+                borderRadius: '50px',
+                textDecoration: 'none',
+                fontWeight: 700,
+                fontSize: '0.95rem'
+              }}>
+                Privacy Policy
+              </Link>
+              <Link href="/terms" style={{
+                background: '#ffffff',
+                border: '1px solid #d1d5db',
+                color: '#374151',
+                padding: '12px 24px',
+                borderRadius: '50px',
+                textDecoration: 'none',
+                fontWeight: 700,
+                fontSize: '0.95rem'
+              }}>
+                Terms of Service
+              </Link>
+              <Link href="/disclaimer" style={{
+                background: '#ffffff',
+                border: '1px solid #d1d5db',
+                color: '#374151',
+                padding: '12px 24px',
+                borderRadius: '50px',
+                textDecoration: 'none',
+                fontWeight: 700,
+                fontSize: '0.95rem'
+              }}>
+                Disclaimer
+              </Link>
+            </div>
+          </div>
+        </article>
+      </main>
     </div>
   );
 }
