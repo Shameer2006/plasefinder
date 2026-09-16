@@ -474,20 +474,32 @@ export default function Home() {
         </Link>
 
         {/* Center Nav Links (Desktop Only) */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }} className="home-header-nav">
-          <button onClick={() => window.location.href = '/guides'} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-            Guides
-          </button>
-          <button onClick={() => window.location.href = '/flag-guesser'} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+        <nav aria-label="Main Navigation" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px, 1.4vw, 18px)' }} className="home-header-nav">
+          <Link href="/flag-guesser" style={{ color: '#e5e7eb', fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Outfit", sans-serif', transition: 'color 0.2s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
             Flag Guesser
-          </button>
-          <button onClick={() => window.location.href = '/community'} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </Link>
+          <Link href="/guides" style={{ color: '#e5e7eb', fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Outfit", sans-serif', transition: 'color 0.2s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            Guides
+          </Link>
+          <Link href="/leaderboard" style={{ color: '#e5e7eb', fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Outfit", sans-serif', transition: 'color 0.2s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path></svg>
+            Leaderboard
+          </Link>
+          <Link href="/about" style={{ color: '#e5e7eb', fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Outfit", sans-serif', transition: 'color 0.2s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            About
+          </Link>
+          <Link href="/community" style={{ color: '#e5e7eb', fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Outfit", sans-serif', transition: 'color 0.2s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
             Community
-          </button>
-        </div>
+          </Link>
+          <Link href="/contact" style={{ color: '#e5e7eb', fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Outfit", sans-serif', transition: 'color 0.2s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            Contact
+          </Link>
+        </nav>
 
         {/* Right Status Pill, Coin HUD, Notification Bell, Settings Button, User Avatar & Mobile Menu Toggle */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -615,7 +627,7 @@ export default function Home() {
 
         {/* Mobile Dropdown Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="mobile-dropdown-menu">
+          <nav aria-label="Mobile Navigation" className="mobile-dropdown-menu">
             {/* Auth row at top */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '10px', borderBottom: '1px solid rgba(255,255,255,0.1)', gap: '10px' }}>
               {(!user || user.isAnonymous) ? (
@@ -642,27 +654,31 @@ export default function Home() {
                 Settings
               </button>
             </div>
-            <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/guides'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-              Guides & Strategy
-            </button>
-            <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/flag-guesser'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
+            <Link href="/flag-guesser" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', fontFamily: '"Outfit", sans-serif' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
               Flag Guesser
-            </button>
-            <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/community'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              Community
-            </button>
-            <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/leaderboard'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
+            </Link>
+            <Link href="/guides" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', fontFamily: '"Outfit", sans-serif' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              Guides & Strategy
+            </Link>
+            <Link href="/leaderboard" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', fontFamily: '"Outfit", sans-serif' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path></svg>
               Leaderboard
-            </button>
-            <button onClick={() => { setMobileMenuOpen(false); window.location.href = '/about'; }} style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', textAlign: 'left' }}>
+            </Link>
+            <Link href="/about" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', fontFamily: '"Outfit", sans-serif' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
               About LostStreet
-            </button>
-          </div>
+            </Link>
+            <Link href="/community" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', fontFamily: '"Outfit", sans-serif' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              Community
+            </Link>
+            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', color: '#e5e7eb', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 0', fontFamily: '"Outfit", sans-serif' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              Contact Us
+            </Link>
+          </nav>
         )}
       </header>
 

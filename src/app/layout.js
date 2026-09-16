@@ -118,7 +118,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "LostStreet",
-    "alternateName": "LostStreet World Detective Game",
+    "alternateName": ["Lost Street", "LostStreet Game", "LostStreet Online", "LostStreet World Detective Game"],
     "url": "https://www.loststreet.online",
     "potentialAction": {
       "@type": "SearchAction",
@@ -176,43 +176,43 @@ const jsonLd = [
       {
         "@type": "SiteNavigationElement",
         "position": 1,
-        "name": "Flag Guesser Quiz",
-        "description": "Test your knowledge of world flags in our free flag identifier game.",
+        "name": "Flag Guesser",
+        "description": "Test your knowledge of world flags in LostStreet's free flag quiz with 196 national flags.",
         "url": "https://www.loststreet.online/flag-guesser"
       },
       {
         "@type": "SiteNavigationElement",
         "position": 2,
-        "name": "How to Play & Geography Guides",
-        "description": "Learn how to guess locations from street view, country clues, camera generations, and geography tips.",
+        "name": "Guides & Strategy",
+        "description": "Master street view meta clues, camera generations, road markings, and bollards with pro geography guides.",
         "url": "https://www.loststreet.online/guides"
       },
       {
         "@type": "SiteNavigationElement",
         "position": 3,
         "name": "Leaderboard",
-        "description": "Check top players and competitive ELO rankings.",
+        "description": "View top-ranked street view guesser players on the official LostStreet leaderboard and track competitive ELO.",
         "url": "https://www.loststreet.online/leaderboard"
       },
       {
         "@type": "SiteNavigationElement",
         "position": 4,
-        "name": "Community",
-        "description": "Join the LostStreet geography community and updates.",
-        "url": "https://www.loststreet.online/community"
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "position": 5,
-        "name": "About LostStreet",
-        "description": "Learn about LostStreet, the free street view guesser game and educational platform.",
+        "name": "About Us",
+        "description": "Learn about LostStreet — the premier free street view guesser game featuring 780,000+ locations.",
         "url": "https://www.loststreet.online/about"
       },
       {
         "@type": "SiteNavigationElement",
-        "position": 7,
+        "position": 5,
+        "name": "Community",
+        "description": "Connect with the global LostStreet geography community on Reddit and Instagram to share tips and duel.",
+        "url": "https://www.loststreet.online/community"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 6,
         "name": "Contact Us",
-        "description": "Contact the LostStreet editorial and support team.",
+        "description": "Contact the LostStreet team for player support, feature suggestions, and partnership inquiries.",
         "url": "https://www.loststreet.online/contact"
       }
     ]

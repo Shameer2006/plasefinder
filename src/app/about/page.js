@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "About LostStreet — The #1 Free Street View Guesser Game",
-  description: "Learn about LostStreet, the premier free street view guesser game and GeoGuessr alternative. Discover how 780k+ Street View locations, 1v1 duels, and geography meta clues power the game.",
+  title: "About LostStreet — Free Street View Guesser Game",
+  description: "Learn about LostStreet — the premier free street view guesser game featuring 780,000+ locations, real-time 1v1 duels, and daily challenges.",
   alternates: { canonical: "https://www.loststreet.online/about" },
   keywords: [
     "loststreet", "street view guesser", "about loststreet", "free street view guesser", "street view guesser game", "lost street online",
@@ -10,9 +10,34 @@ export const metadata = {
   ],
   openGraph: {
     title: "About LostStreet — Free Street View Guesser Game",
-    description: "LostStreet is a free 360° street view guesser game with 1v1 duels, daily challenges, party mode, and 780,000+ locations.",
+    description: "Learn about LostStreet — the premier free street view guesser game featuring 780,000+ locations, real-time 1v1 duels, and daily challenges.",
     url: "https://www.loststreet.online/about",
+    type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "About LostStreet — Free Street View Guesser Game",
+    description: "Learn about LostStreet — the premier free street view guesser game featuring 780,000+ locations, real-time 1v1 duels, and daily challenges.",
+    images: ["/og-image.png"],
+  },
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.loststreet.online' },
+    { '@type': 'ListItem', position: 2, name: 'About Us', item: 'https://www.loststreet.online/about' }
+  ]
+};
+
+const aboutPageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About LostStreet',
+  description: 'Learn about LostStreet, the free street view guesser game, mission, and educational geography platform.',
+  url: 'https://www.loststreet.online/about'
 };
 
 const faqItems = [
@@ -59,6 +84,14 @@ export default function AboutPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}

@@ -42,11 +42,12 @@ function SiteHeader({ onOpenDailyReward }) {
 
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/guides', label: 'Guides & Strategy' },
     { href: '/flag-guesser', label: 'Flag Guesser' },
+    { href: '/guides', label: 'Guides & Strategy' },
     { href: '/leaderboard', label: 'Leaderboard' },
+    { href: '/about', label: 'About Us' },
     { href: '/community', label: 'Community' },
-    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact Us' },
   ];
 
   return (
@@ -243,12 +244,12 @@ function SiteHeader({ onOpenDailyReward }) {
 export function SiteFooter() {
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/guides', label: 'Guides & Strategy' },
     { href: '/flag-guesser', label: 'Flag Guesser' },
+    { href: '/guides', label: 'Guides & Strategy' },
     { href: '/leaderboard', label: 'Leaderboard' },
-    { href: '/community', label: 'Community' },
     { href: '/about', label: 'About Us' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/community', label: 'Community' },
+    { href: '/contact', label: 'Contact Us' },
     { href: '/privacy', label: 'Privacy Policy' },
     { href: '/terms', label: 'Terms of Service' },
     { href: '/cookies', label: 'Cookie Policy' },

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Free Country Flag Identifier & World Quiz Game (2026) — LostStreet',
-  description: 'Test your vexillology knowledge with LostStreet\'s free flag identifier quiz. Master all 196 country flags across Easy multiple choice, Medium hybrid, and Hard world map pinning modes. 100% free with no sign-up.',
+  title: 'Flag Guesser — Free World Flag Quiz Game | LostStreet',
+  description: "Test your knowledge of world flags in LostStreet's free flag quiz. Identify 196 national flags across multiple choice and world map modes with zero sign-up.",
   alternates: { canonical: 'https://www.loststreet.online/flag-guesser' },
   keywords: [
     'flag identifier', 'country flag identifier', 'identify flag', 'flag guesser',
@@ -11,16 +11,16 @@ export const metadata = {
     'flag identification', 'flag guessing game free', 'geography quiz online'
   ],
   openGraph: {
-    title: 'Free Country Flag Identifier & World Quiz Game — LostStreet',
-    description: 'Test your world flag knowledge across 196 countries. 3 difficulty modes: multiple choice, hybrid, and interactive world map pinning. 100% free.',
+    title: 'Flag Guesser — Free World Flag Quiz Game | LostStreet',
+    description: "Test your knowledge of world flags in LostStreet's free flag quiz. Identify 196 national flags across multiple choice and world map modes with zero sign-up.",
     url: 'https://www.loststreet.online/flag-guesser',
     type: 'website',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Country Flag Identifier & Quiz Game | LostStreet',
-    description: 'How many of the world\'s 196 country flags can you recognize? Play free with zero sign-up.',
+    title: 'Flag Guesser — Free World Flag Quiz Game | LostStreet',
+    description: "Test your knowledge of world flags in LostStreet's free flag quiz. Identify 196 national flags across multiple choice and world map modes with zero sign-up.",
     images: ['/og-image.png'],
   },
 };
