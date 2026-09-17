@@ -4,6 +4,7 @@ import { useAuth } from '@/lib/AuthContext';
 import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useGameStore } from '@/lib/store';
+import { leaveParty } from '@/lib/matchmaking';
 
 export default function PartyLobby({ gameId }) {
   const { userProfile } = useAuth();
@@ -17,6 +18,8 @@ export default function PartyLobby({ gameId }) {
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const [isStarting, setIsStarting] = useState(false);
+  const [showLeaveConfirm, setShowLeaveConfirm] = useState(false);
+  const [isLeaving, setIsLeaving] = useState(false);
 
   useEffect(() => {
     fetch('/countries.json')
@@ -42,6 +45,8 @@ export default function PartyLobby({ gameId }) {
 
         if (data.status === 'playing') {
           setGameState(`MULTIPLAYER_${gameId}`);
+        } else if (data.status === 'abandoned' || (userProfile?.uid && data.players && !data.players[userProfile.uid])) {
+          setGameState('MENU');
         }
       } else {
         setGameState('MENU');
@@ -49,7 +54,7 @@ export default function PartyLobby({ gameId }) {
     });
 
     return () => unsub();
-  }, [gameId, setGameState]);
+  }, [gameId, setGameState, userProfile?.uid]);
 
   if (!matchData || !userProfile) {
     return (
@@ -105,6 +110,19 @@ export default function PartyLobby({ gameId }) {
   };
 
   const handleLeave = () => {
+    setShowLeaveConfirm(true);
+  };
+
+  const confirmLeave = async () => {
+    if (isLeaving) return;
+    setIsLeaving(true);
+    try {
+      if (userProfile?.uid) {
+        await leaveParty(gameId, userProfile.uid);
+      }
+    } catch (e) {
+      console.error('Failed to leave party:', e);
+    }
     setGameState('MENU');
   };
 
@@ -829,7 +847,98 @@ export default function PartyLobby({ gameId }) {
         </div>
 
       </div>
+
+      {/* Leave Party Confirmation Modal */}
+      {showLeaveConfirm && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 99999,
+          background: 'rgba(0,0,0,0.75)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1rem'
+        }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+            border: '1px solid rgba(239, 68, 68, 0.35)',
+            borderRadius: '20px',
+            padding: '1.8rem',
+            maxWidth: '420px',
+            width: '100%',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.7)',
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem'
+          }}>
+            <div style={{
+              width: '54px',
+              height: '54px',
+              borderRadius: '50%',
+              background: 'rgba(239, 68, 68, 0.15)',
+              border: '1px solid rgba(239, 68, 68, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto'
+            }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            </div>
+            <h3 style={{ margin: 0, fontSize: '1.3rem', fontWeight: 800, color: 'white' }}>Leave Party Room?</h3>
+            <p style={{ margin: 0, color: '#9ca3af', fontSize: '0.95rem', lineHeight: 1.5 }}>
+              {isHost && playersList.length > 1 
+                ? 'As host, leaving will transfer room leadership to another player in the lobby.' 
+                : 'Are you sure you want to leave this party lobby and return to the main menu?'}
+            </p>
+            <div style={{ display: 'flex', gap: '10px', marginTop: '0.5rem' }}>
+              <button
+                type="button"
+                onClick={() => setShowLeaveConfirm(false)}
+                disabled={isLeaving}
+                style={{
+                  flex: 1,
+                  padding: '12px',
+                  borderRadius: '12px',
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  color: 'white',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  fontSize: '0.95rem'
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={confirmLeave}
+                disabled={isLeaving}
+                style={{
+                  flex: 1,
+                  padding: '12px',
+                  borderRadius: '12px',
+                  background: '#ef4444',
+                  border: 'none',
+                  color: 'white',
+                  fontWeight: 800,
+                  cursor: isLeaving ? 'not-allowed' : 'pointer',
+                  fontSize: '0.95rem',
+                  boxShadow: '0 4px 14px rgba(239,68,68,0.4)',
+                  opacity: isLeaving ? 0.7 : 1
+                }}
+              >
+                {isLeaving ? 'Leaving...' : 'Yes, Leave'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
 

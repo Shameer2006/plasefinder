@@ -1,4 +1,4 @@
-import { collection, doc, setDoc, getDocs, query, where, orderBy, limit, runTransaction, onSnapshot, deleteDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, doc, setDoc, getDocs, query, where, orderBy, limit, runTransaction, onSnapshot, deleteDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { db } from './firebase';
 
 // --- Ranked Duel Queue ---
@@ -480,3 +480,128 @@ export const joinParty = async (userProfile, code) => {
 
   return { gameId, status: 'waiting_for_players', isRejoin: false };
 };
+
+export const leaveParty = async (gameId, uid) => {
+  if (!db || !gameId || !uid) return;
+
+  const matchRef = doc(db, 'matches', gameId);
+  try {
+    await runTransaction(db, async (transaction) => {
+      const snap = await transaction.get(matchRef);
+      if (!snap.exists()) return;
+
+      const data = snap.data();
+      const players = { ...(data.players || {}) };
+
+      if (!players[uid]) return;
+
+      const wasHost = !!players[uid]?.host;
+      delete players[uid];
+
+      const remainingPlayerIds = Object.keys(players);
+      if (remainingPlayerIds.length === 0) {
+        transaction.update(matchRef, {
+          status: 'abandoned',
+          players: {}
+        });
+      } else {
+        if (wasHost) {
+          const newHostId = remainingPlayerIds[0];
+          players[newHostId] = {
+            ...players[newHostId],
+            host: true
+          };
+        }
+        transaction.update(matchRef, { players });
+      }
+    });
+  } catch (err) {
+    console.error('Error leaving party lobby:', err);
+  }
+};
+
+export const quitMultiplayerMatch = async (gameId, userProfile, matchData) => {
+  if (!db || !gameId || !userProfile || !matchData) return;
+
+  const uid = userProfile.uid;
+  const matchRef = doc(db, 'matches', gameId);
+  const playerIds = Object.keys(matchData.players || {});
+  const isParty = matchData.gameType === 'party' || !!matchData.code;
+  const isRanked = matchData.gameType === 'ranked_duel';
+
+  try {
+    if (isRanked) {
+      // 1v1 Ranked Duel Forfeit
+      const opponentId = playerIds.find(id => id !== uid);
+      const opponentData = opponentId ? matchData.players[opponentId] : null;
+
+      // Quitter loses 25 ELO (minimum 0)
+      const currentElo = userProfile.elo ?? matchData.players[uid]?.elo ?? 1000;
+      const myNewElo = Math.max(0, currentElo - 25);
+      await updateDoc(doc(db, 'users', uid), { elo: myNewElo });
+
+      // Opponent gains 25 ELO (if not a bot)
+      if (opponentId && opponentData && !opponentData.isBot) {
+        const opElo = opponentData.elo ?? 1000;
+        await updateDoc(doc(db, 'users', opponentId), { elo: opElo + 25 });
+      }
+
+      await updateDoc(matchRef, {
+        status: 'finished',
+        forfeitedBy: uid,
+        winner: opponentId || 'opponent',
+        [`health.${uid}`]: 0
+      });
+    } else if (isParty) {
+      // Party Room match during gameplay
+      await runTransaction(db, async (transaction) => {
+        const snap = await transaction.get(matchRef);
+        if (!snap.exists()) return;
+
+        const data = snap.data();
+        const players = { ...(data.players || {}) };
+        const wasHost = !!players[uid]?.host;
+
+        // Mark player as left and set ready: true so round is not blocked
+        if (players[uid]) {
+          players[uid] = {
+            ...players[uid],
+            left: true,
+            ready: true,
+            score: players[uid].score || 0
+          };
+        }
+
+        const activePlayerIds = Object.keys(players).filter(id => !players[id].left);
+
+        if (activePlayerIds.length === 0) {
+          transaction.update(matchRef, {
+            status: 'finished',
+            endedReason: 'all_players_left',
+            players
+          });
+        } else {
+          if (wasHost) {
+            const nextHostId = activePlayerIds[0];
+            players[nextHostId] = {
+              ...players[nextHostId],
+              host: true
+            };
+          }
+          transaction.update(matchRef, { players });
+        }
+      });
+    } else {
+      // Unranked 1v1 multiplayer forfeit
+      const opponentId = playerIds.find(id => id !== uid);
+      await updateDoc(matchRef, {
+        status: 'finished',
+        forfeitedBy: uid,
+        winner: opponentId || 'opponent'
+      });
+    }
+  } catch (err) {
+    console.error('Error quitting multiplayer match:', err);
+  }
+};
+

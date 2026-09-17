@@ -4,6 +4,7 @@ import { useAuth } from '@/lib/AuthContext';
 import { useGameStore } from '@/lib/store';
 import { doc, onSnapshot, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { quitMultiplayerMatch } from '@/lib/matchmaking';
 import PanoramaViewer from './PanoramaViewer';
 import dynamic from 'next/dynamic';
 
@@ -39,6 +40,8 @@ export default function MultiplayerGame({ gameId }) {
   const [timeLeft, setTimeLeft] = useState(null);
   const [nextRoundDelay, setNextRoundDelay] = useState(5);
   const [canAdvanceRound, setCanAdvanceRound] = useState(true);
+  const [showQuitConfirm, setShowQuitConfirm] = useState(false);
+  const [isQuitting, setIsQuitting] = useState(false);
   const isAdvancingRef = useRef(false);
 
   useEffect(() => {
@@ -52,7 +55,22 @@ export default function MultiplayerGame({ gameId }) {
 
   const difficulty = matchData?.options?.difficulty || 'Medium';
   const isMultipleChoice = difficulty === 'Easy' || (difficulty === 'Medium' && matchData?.round % 2 === 1);
-  const isRoundOver = matchData?.players ? Object.values(matchData.players).every(p => p.ready) : false;
+  const isRoundOver = matchData?.players 
+    ? Object.values(matchData.players).filter(p => !p.left).every(p => p.ready) 
+    : false;
+
+  const handleConfirmQuit = async () => {
+    if (isQuitting) return;
+    setIsQuitting(true);
+    try {
+      if (userProfile && matchData) {
+        await quitMultiplayerMatch(gameId, userProfile, matchData);
+      }
+    } catch (err) {
+      console.error('Failed to quit multiplayer match:', err);
+    }
+    setGameState('MENU');
+  };
 
   useEffect(() => {
     if (isRoundOver) {
@@ -91,15 +109,22 @@ export default function MultiplayerGame({ gameId }) {
         const data = docSnap.data();
         setMatchData(data);
         
+        if (data.status === 'abandoned' || (userProfile?.uid && data.players?.[userProfile.uid]?.left)) {
+          setGameState('MENU');
+          return;
+        }
+
         // If a new location is set for the round, sync it to our store
         if (data.location && data.status === 'playing') {
           setCurrentLocation(data.location);
         }
+      } else {
+        setGameState('MENU');
       }
     });
 
     return () => unsub();
-  }, [gameId, setCurrentLocation]);
+  }, [gameId, setCurrentLocation, setGameState, userProfile?.uid]);
 
   // Host (Player 1) logic: generate location if needed
   useEffect(() => {
@@ -251,12 +276,13 @@ export default function MultiplayerGame({ gameId }) {
     return <Spinner text="Loading Match..." />;
   }
 
-  const myData = matchData.players[userProfile.uid];
-  const playerIds = Object.keys(matchData.players);
-  const isHost = matchData.players[userProfile.uid]?.host || playerIds[0] === userProfile.uid;
+  const myData = matchData.players?.[userProfile.uid] || {};
+  const playerIds = Object.keys(matchData.players || {});
+  const isHost = matchData.players?.[userProfile.uid]?.host || playerIds[0] === userProfile.uid;
   
-  // Sort players by score for leaderboards
-  const sortedPlayers = Object.entries(matchData.players)
+  // Sort active players by score for leaderboards
+  const sortedPlayers = Object.entries(matchData.players || {})
+    .filter(([_, data]) => !data.left)
     .map(([uid, data]) => ({ uid, ...data }))
     .sort((a, b) => b.score - a.score);
 
@@ -380,11 +406,147 @@ export default function MultiplayerGame({ gameId }) {
     }
   };
 
+  const renderQuitModal = () => {
+    if (!showQuitConfirm) return null;
+
+    const isRanked = matchData?.gameType === 'ranked_duel';
+    const isParty = matchData?.gameType === 'party' || !!matchData?.code;
+
+    let title = 'Quit Match?';
+    let message = 'Are you sure you want to quit this match? Your current game progress will be lost.';
+    let confirmBtnText = 'Yes, Quit';
+
+    if (isRanked) {
+      title = 'Forfeit Ranked Match?';
+      message = 'Leaving a ranked duel counts as an immediate defeat and will deduct 25 ELO from your rating.';
+      confirmBtnText = 'Yes, Forfeit';
+    } else if (isParty) {
+      title = 'Leave Room Match?';
+      message = isHost
+        ? 'As the room host, leaving will pass leadership to another player so the room can continue.'
+        : 'Are you sure you want to leave this room match? You will be returned to the main menu.';
+      confirmBtnText = 'Yes, Leave';
+    }
+
+    return (
+      <div style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 99999,
+        background: 'rgba(0,0,0,0.8)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem'
+      }}>
+        <div style={{
+          background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+          border: '1px solid rgba(239, 68, 68, 0.35)',
+          borderRadius: '20px',
+          padding: '2rem',
+          maxWidth: '440px',
+          width: '100%',
+          boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+          textAlign: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.2rem',
+          boxSizing: 'border-box'
+        }}>
+          <div style={{
+            width: '56px',
+            height: '56px',
+            borderRadius: '50%',
+            background: 'rgba(239, 68, 68, 0.15)',
+            border: '1px solid rgba(239, 68, 68, 0.3)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto'
+          }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          </div>
+          
+          <h3 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 800, color: 'white' }}>
+            {title}
+          </h3>
+
+          <p style={{ margin: 0, color: '#9ca3af', fontSize: '0.95rem', lineHeight: 1.5 }}>
+            {message}
+          </p>
+
+          <div style={{ display: 'flex', gap: '12px', marginTop: '0.5rem' }}>
+            <button
+              type="button"
+              onClick={() => setShowQuitConfirm(false)}
+              disabled={isQuitting}
+              style={{
+                flex: 1,
+                padding: '12px',
+                borderRadius: '12px',
+                background: 'rgba(255,255,255,0.08)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                color: 'white',
+                fontWeight: 700,
+                cursor: 'pointer',
+                fontSize: '0.95rem'
+              }}
+            >
+              Keep Playing
+            </button>
+            <button
+              type="button"
+              onClick={handleConfirmQuit}
+              disabled={isQuitting}
+              style={{
+                flex: 1,
+                padding: '12px',
+                borderRadius: '12px',
+                background: '#ef4444',
+                border: 'none',
+                color: 'white',
+                fontWeight: 800,
+                cursor: isQuitting ? 'not-allowed' : 'pointer',
+                fontSize: '0.95rem',
+                boxShadow: '0 4px 14px rgba(239,68,68,0.4)',
+                opacity: isQuitting ? 0.7 : 1
+              }}
+            >
+              {isQuitting ? 'Leaving...' : confirmBtnText}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   if (matchData.status === 'finished') {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem' }}>
         <div className="glass-panel modal-content" style={{ textAlign: 'center' }}>
           <h2 className="gradient-text glow-text responsive-title" style={{ marginBottom: '1.5rem' }}>Match Finished!</h2>
+
+          {matchData.forfeitedBy && (
+            <div style={{
+              margin: '0 auto 1.5rem',
+              padding: '12px 20px',
+              borderRadius: '12px',
+              maxWidth: '450px',
+              background: matchData.forfeitedBy === userProfile.uid ? 'rgba(239, 68, 68, 0.15)' : 'rgba(16, 185, 129, 0.15)',
+              border: `1px solid ${matchData.forfeitedBy === userProfile.uid ? 'rgba(239, 68, 68, 0.3)' : 'rgba(16, 185, 129, 0.3)'}`,
+              color: matchData.forfeitedBy === userProfile.uid ? '#fca5a5' : '#6ee7b7',
+              fontWeight: 700,
+              fontSize: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px'
+            }}>
+              <span>{matchData.forfeitedBy === userProfile.uid ? '⚠️ You surrendered this match.' : '🏆 Opponent surrendered! You won by forfeit!'}</span>
+            </div>
+          )}
           
           {matchData.gameType === 'ranked_duel' && (
             <div style={{ marginBottom: '1rem', padding: '1rem' }}>
@@ -415,7 +577,7 @@ export default function MultiplayerGame({ gameId }) {
                 gap: '8px'
               }} 
               onClick={async () => {
-                const myScore = matchData.players[userProfile.uid].score;
+                const myScore = matchData.players?.[userProfile.uid]?.score || 0;
                 const shareUrl = `https://www.loststreet.online/share/${myScore}`;
                 const shareText = `LostStreet Multiplayer Match\nI scored ${myScore.toLocaleString()} pts!\nPlay free → ${shareUrl}`;
                 if (navigator.share) {
@@ -557,8 +719,31 @@ export default function MultiplayerGame({ gameId }) {
                 {nextRoundDelay > 0 ? `Next round begins in ${nextRoundDelay}s...` : 'Starting next round...'}
               </div>
             )}
+
+            <button
+              type="button"
+              className="btn btn-game-quit"
+              onClick={() => setShowQuitConfirm(true)}
+              style={{
+                marginTop: '0.8rem',
+                width: '100%',
+                cursor: 'pointer',
+                fontWeight: 700,
+                fontSize: '0.95rem',
+                padding: '10px 18px',
+                borderRadius: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px'
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              <span>{matchData.gameType === 'party' || matchData.code ? 'Leave Room' : 'Quit Match'}</span>
+            </button>
           </div>
           <PartyChat gameId={gameId} matchData={matchData} />
+          {renderQuitModal()}
         </div>
       </div>
     );
@@ -582,6 +767,7 @@ export default function MultiplayerGame({ gameId }) {
         isMobile={isMobile} 
         sortedPlayers={sortedPlayers} 
         userProfile={userProfile} 
+        onQuit={() => setShowQuitConfirm(true)}
       />
 
       {isMultipleChoice ? (
@@ -679,6 +865,7 @@ export default function MultiplayerGame({ gameId }) {
       )}
       
       <PartyChat gameId={gameId} matchData={matchData} />
+      {renderQuitModal()}
     </div>
   );
 }

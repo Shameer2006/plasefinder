@@ -84,13 +84,13 @@ export default function HeroPanorama() {
       height: '100%',
       overflow: 'hidden',
       zIndex: 0,
-      backgroundColor: '#0a0d1a'
+      backgroundColor: '#0f172a'
     }}>
       {/* Background fallback gradient for instant 0ms visual */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'radial-gradient(ellipse at 50% 30%, #151e36 0%, #0a0d1a 70%, #060812 100%)',
+        background: 'radial-gradient(ellipse at 50% 30%, #1e293b 0%, #0f172a 70%, #0b1120 100%)',
         zIndex: 0,
       }} />
 
@@ -110,7 +110,7 @@ export default function HeroPanorama() {
             border: 'none',
             pointerEvents: 'auto',
             zIndex: 1,
-            filter: 'brightness(0.9) contrast(1.05)',
+            filter: 'brightness(1.18) contrast(1.03) saturate(1.12)',
             opacity: iframeLoaded ? 1 : 0,
             transition: 'opacity 0.8s ease-in-out',
           }}
@@ -120,12 +120,12 @@ export default function HeroPanorama() {
         />
       ) : null}
 
-      {/* Dark Vignette Overlay for UI Contrast */}
+      {/* Lighter Vignette & Contrast Gradient for Clear, Bright Panorama View */}
       <div style={{
         position: 'absolute',
         inset: 0,
         zIndex: 2,
-        background: 'radial-gradient(circle at center, rgba(10,13,26,0.2) 0%, rgba(10,13,26,0.75) 75%, rgba(10,13,26,0.95) 100%), linear-gradient(to bottom, rgba(10,13,26,0.85) 0%, rgba(10,13,26,0.2) 25%, rgba(10,13,26,0.4) 75%, rgba(10,13,26,0.92) 100%)',
+        background: 'radial-gradient(circle at 55% 45%, rgba(10,13,26,0.02) 0%, rgba(10,13,26,0.18) 60%, rgba(10,13,26,0.48) 100%), linear-gradient(to bottom, rgba(10,13,26,0.42) 0%, rgba(10,13,26,0.04) 20%, rgba(10,13,26,0.06) 72%, rgba(10,13,26,0.5) 100%)',
         pointerEvents: 'none'
       }} />
 
