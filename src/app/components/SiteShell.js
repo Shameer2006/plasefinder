@@ -241,6 +241,91 @@ function SiteHeader({ onOpenDailyReward }) {
   );
 }
 
+// ─── Shared page shell used by all inner (non-game) pages ──────────────────
+// Matches the /privacy page reference design exactly.
+const BADGE_PRESETS = {
+  green: { bg: '#ecfdf5', border: '#a7f3d0', color: '#059669' },
+  amber: { bg: '#fef3c7', border: '#fde68a', color: '#b45309' },
+  blue:  { bg: '#eff6ff', border: '#dbeafe', color: '#1d4ed8' },
+  gray:  { bg: '#f3f4f6', border: '#e5e7eb', color: '#6b7280' },
+};
+
+export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', children }) {
+  const badge = BADGE_PRESETS[badgeColor] || BADGE_PRESETS.green;
+  return (
+    <div style={{
+      width: '100%',
+      background: '#fafafa',
+      color: '#111827',
+      display: 'flex',
+      flexDirection: 'column',
+      fontFamily: '"Outfit", system-ui, -apple-system, sans-serif',
+      overflowX: 'hidden',
+    }}>
+      {/* Sub-nav breadcrumb bar */}
+      <div style={{
+        background: '#ffffff',
+        borderBottom: '1px solid #e5e7eb',
+        padding: '0.85rem clamp(1rem, 3vw, 2.5rem)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '0.75rem',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <Link href="/" style={{
+            background: '#f3f4f6',
+            border: '1px solid #e5e7eb',
+            color: '#1f2937',
+            padding: '7px 14px',
+            borderRadius: '10px',
+            textDecoration: 'none',
+            fontWeight: '700',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '0.85rem',
+            transition: 'all 0.2s ease',
+            touchAction: 'manipulation',
+          }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
+            <span>Back to Game</span>
+          </Link>
+
+          <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', color: '#6b7280' }}>
+            <Link href="/" style={{ color: '#6b7280', textDecoration: 'none', fontWeight: 500 }}>Home</Link>
+            <span>/</span>
+            <span style={{ color: '#059669', fontWeight: 700 }}>{breadcrumb}</span>
+          </nav>
+        </div>
+
+        {badgeText && (
+          <div style={{
+            background: badge.bg,
+            border: `1px solid ${badge.border}`,
+            color: badge.color,
+            padding: '5px 14px',
+            borderRadius: '20px',
+            fontSize: '0.82rem',
+            fontWeight: 800,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+          }}>
+            <span>{badgeText}</span>
+          </div>
+        )}
+      </div>
+
+      {children}
+    </div>
+  );
+}
+
 export function SiteFooter() {
   const links = [
     { href: '/', label: 'Home' },

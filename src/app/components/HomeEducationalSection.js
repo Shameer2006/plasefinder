@@ -70,36 +70,36 @@ export default function HomeEducationalSection() {
   ];
 
   return (
-    <section 
+    <section
       id="educational-hub"
       aria-label="Educational Geography Hub"
       style={{
         position: 'relative',
         zIndex: 10,
-        background: 'linear-gradient(180deg, #090d16 0%, #060911 100%)',
-        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-        color: '#f8fafc',
+        background: '#fafafa',
+        borderTop: '2px solid #e5e7eb',
+        color: '#111827',
         fontFamily: '"Outfit", system-ui, -apple-system, sans-serif',
         padding: 'clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 3rem)',
-        pointerEvents: 'auto'
+        pointerEvents: 'auto',
       }}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        
-        {/* Semantic H1 & Header */}
+
+        {/* Section header */}
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <span style={{
             display: 'inline-block',
-            padding: '6px 16px',
+            padding: '5px 14px',
             borderRadius: '20px',
-            background: 'rgba(16, 185, 129, 0.15)',
-            border: '1px solid rgba(16, 185, 129, 0.35)',
-            color: '#34d399',
+            background: '#ecfdf5',
+            border: '1px solid #a7f3d0',
+            color: '#059669',
             fontSize: '0.82rem',
             fontWeight: 800,
             textTransform: 'uppercase',
             letterSpacing: '1px',
-            marginBottom: '1rem'
+            marginBottom: '1rem',
           }}>
             Educational Geography &amp; World Detective Platform
           </span>
@@ -109,71 +109,68 @@ export default function HomeEducationalSection() {
             lineHeight: 1.15,
             letterSpacing: '-0.02em',
             margin: '0 0 1rem',
-            background: 'linear-gradient(135deg, #ffffff 40%, #94a3b8 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
+            color: '#111827',
           }}>
             The Free World Geography Detective &amp; Street View Guessing Game
           </h1>
           <p style={{
             maxWidth: '820px',
             margin: '0 auto',
-            color: '#94a3b8',
+            color: '#4b5563',
             fontSize: 'clamp(1rem, 2vw, 1.15rem)',
-            lineHeight: 1.7
+            lineHeight: 1.7,
           }}>
             Explore 780,000+ real-world panoramas across 195+ nations. Differentiate countries by analyzing utility poles, road markings, camera generations, language scripts, and solar direction — 100% free with no subscription required.
           </p>
         </div>
 
-        {/* Section: 4-Step Methodology */}
+        {/* 4-Step Methodology */}
         <div style={{ marginBottom: '4.5rem' }}>
           <h2 style={{
             fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)',
             fontWeight: 800,
             textAlign: 'center',
             marginBottom: '2rem',
-            color: '#ffffff'
+            color: '#111827',
           }}>
             How LostStreet Works: 4 Steps to World Mastery
           </h2>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '1.5rem'
+            gap: '1.25rem',
           }}>
             {[
-              { num: "01", title: "360° Environmental Scan", text: "Look around in full panoramic view. Observe vegetation types, architectural building styles, soil colors, and road paving conditions." },
+              { num: "01", title: "360\u00b0 Environmental Scan", text: "Look around in full panoramic view. Observe vegetation types, architectural building styles, soil colors, and road paving conditions." },
               { num: "02", title: "Meta Clue Identification", text: "Inspect vehicle hardware (snorkels, roof bars), camera artifacts (Gen 2 halo blurs vs Gen 4 crisp HDR), and road delineators." },
               { num: "03", title: "Hemisphere & Script Check", text: "Check whether the sun is North (Southern Hemisphere) or South (Northern Hemisphere). Read Cyrillic, Arabic, Thai, or Latin scripts." },
               { num: "04", title: "Pin & Climb the Ranks", text: "Drop your guess pin on the interactive world map. Earn distance accuracy points, unlock daily streaks, and climb the global ELO leaderboard." }
             ].map(step => (
               <div key={step.num} style={{
-                background: 'rgba(20, 28, 48, 0.6)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                background: '#ffffff',
+                border: '1px solid #e5e7eb',
                 borderRadius: '16px',
                 padding: '1.75rem',
-                backdropFilter: 'blur(12px)',
-                position: 'relative'
+                boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                position: 'relative',
               }}>
                 <div style={{
-                  fontSize: '2.2rem',
+                  fontSize: '2rem',
                   fontWeight: 900,
-                  color: '#38bdf8',
-                  opacity: 0.8,
+                  color: '#059669',
                   fontFamily: 'monospace',
-                  marginBottom: '0.75rem'
+                  marginBottom: '0.75rem',
                 }}>
                   {step.num}
                 </div>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#f8fafc', marginBottom: '0.5rem' }}>{step.title}</h3>
-                <p style={{ fontSize: '0.92rem', color: '#94a3b8', lineHeight: 1.6, margin: 0 }}>{step.text}</p>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#111827', marginBottom: '0.5rem' }}>{step.title}</h3>
+                <p style={{ fontSize: '0.92rem', color: '#6b7280', lineHeight: 1.6, margin: 0 }}>{step.text}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Section: Masterclasses Spotlight */}
+        {/* Featured Masterclasses */}
         <div style={{ marginBottom: '4.5rem' }}>
           <div style={{
             display: 'flex',
@@ -181,13 +178,13 @@ export default function HomeEducationalSection() {
             alignItems: 'flex-end',
             flexWrap: 'wrap',
             gap: '1rem',
-            marginBottom: '2rem'
+            marginBottom: '2rem',
           }}>
             <div>
-              <span style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', color: '#38bdf8', letterSpacing: '1px' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', color: '#059669', letterSpacing: '1px' }}>
                 Strategy &amp; Knowledge Academy
               </span>
-              <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)', fontWeight: 800, color: '#ffffff', margin: '4px 0 0' }}>
+              <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)', fontWeight: 800, color: '#111827', margin: '4px 0 0', letterSpacing: '-0.01em' }}>
                 Featured Geography Masterclasses &amp; Meta Guides
               </h2>
             </div>
@@ -197,13 +194,13 @@ export default function HomeEducationalSection() {
               gap: '6px',
               padding: '8px 18px',
               borderRadius: '8px',
-              background: 'rgba(255, 255, 255, 0.08)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
-              color: '#ffffff',
+              background: '#ffffff',
+              border: '1px solid #d1d5db',
+              color: '#374151',
               textDecoration: 'none',
               fontWeight: 700,
               fontSize: '0.9rem',
-              transition: 'background 0.2s'
+              transition: 'border-color 0.2s',
             }}>
               View All 13 Guides →
             </Link>
@@ -212,12 +209,12 @@ export default function HomeEducationalSection() {
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '1.25rem'
+            gap: '1.25rem',
           }}>
             {guides.map(g => (
               <Link key={g.slug} href={`/guides/${g.slug}`} style={{
-                background: 'rgba(20, 28, 48, 0.5)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                background: '#ffffff',
+                border: '1px solid #e5e7eb',
                 borderRadius: '16px',
                 padding: '1.5rem',
                 textDecoration: 'none',
@@ -225,8 +222,12 @@ export default function HomeEducationalSection() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                transition: 'transform 0.2s, border-color 0.2s, background 0.2s'
-              }}>
+                transition: 'transform 0.2s, border-color 0.2s, box-shadow 0.2s',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = '#d1d5db'; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)'; e.currentTarget.style.borderColor = '#e5e7eb'; }}
+              >
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
                     <span style={{
@@ -237,16 +238,16 @@ export default function HomeEducationalSection() {
                       borderRadius: '12px',
                       background: `${g.color}15`,
                       color: g.color,
-                      border: `1px solid ${g.color}35`
+                      border: `1px solid ${g.color}35`,
                     }}>
                       {g.tag}
                     </span>
-                    <span style={{ color: '#64748b', fontSize: '0.85rem' }}>Read Guide →</span>
+                    <span style={{ color: '#059669', fontSize: '0.85rem', fontWeight: 700 }}>Read Guide →</span>
                   </div>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.6rem', lineHeight: 1.3 }}>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#111827', marginBottom: '0.6rem', lineHeight: 1.3 }}>
                     {g.title}
                   </h3>
-                  <p style={{ fontSize: '0.9rem', color: '#94a3b8', lineHeight: 1.6, margin: 0 }}>
+                  <p style={{ fontSize: '0.9rem', color: '#6b7280', lineHeight: 1.6, margin: 0 }}>
                     {g.desc}
                   </p>
                 </div>
@@ -255,34 +256,35 @@ export default function HomeEducationalSection() {
           </div>
         </div>
 
-        {/* Section: Comprehensive FAQ */}
+        {/* FAQ */}
         <div style={{
-          background: 'rgba(15, 23, 42, 0.6)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          background: '#ffffff',
+          border: '1px solid #e5e7eb',
           borderRadius: '24px',
-          padding: 'clamp(2rem, 4vw, 3rem)'
+          padding: 'clamp(2rem, 4vw, 3rem)',
+          boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
         }}>
           <h2 style={{
             fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)',
             fontWeight: 800,
             textAlign: 'center',
             marginBottom: '2rem',
-            color: '#ffffff'
+            color: '#111827',
           }}>
             Frequently Asked Questions
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', maxWidth: '880px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '880px', margin: '0 auto' }}>
             {faqs.map((faq, idx) => (
               <div key={idx} style={{
-                background: 'rgba(255, 255, 255, 0.03)',
-                border: '1px solid rgba(255, 255, 255, 0.06)',
+                background: '#fafafa',
+                border: '1px solid #e5e7eb',
                 borderRadius: '12px',
-                padding: '1.25rem 1.5rem'
+                padding: '1.25rem 1.5rem',
               }}>
-                <h3 style={{ fontSize: '1.08rem', fontWeight: 700, color: '#38bdf8', marginBottom: '0.5rem' }}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#111827', marginBottom: '0.5rem' }}>
                   {faq.q}
                 </h3>
-                <p style={{ fontSize: '0.92rem', color: '#cbd5e1', lineHeight: 1.7, margin: 0 }}>
+                <p style={{ fontSize: '0.92rem', color: '#374151', lineHeight: 1.7, margin: 0 }}>
                   {faq.a}
                 </p>
               </div>

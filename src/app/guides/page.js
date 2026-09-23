@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { PageShell } from '@/app/components/SiteShell';
 
 export default function GuidesPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -163,79 +164,10 @@ export default function GuidesPage() {
   const featuredGuide = guides.find(g => g.featured) || guides[0];
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      width: '100%',
-      background: '#fafafa',
-      color: '#111827',
-      display: 'flex',
-      flexDirection: 'column',
-      fontFamily: '"Outfit", system-ui, -apple-system, sans-serif',
-      overflowX: 'hidden'
-    }}>
-      {/* ── BREADCRUMB / SUB-NAV BAR ─────────────────────────────────── */}
-      <div style={{
-        background: '#ffffff',
-        borderBottom: '1px solid #e5e7eb',
-        padding: '0.85rem clamp(1rem, 3vw, 2.5rem)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '0.75rem'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <Link href="/" style={{
-            background: '#f3f4f6',
-            border: '1px solid #e5e7eb',
-            color: '#1f2937',
-            padding: '7px 14px',
-            borderRadius: '10px',
-            textDecoration: 'none',
-            fontWeight: '700',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            fontSize: '0.85rem',
-            transition: 'all 0.2s ease',
-            touchAction: 'manipulation'
-          }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            <span>Back to Game</span>
-          </Link>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{
-              width: '30px', height: '30px', borderRadius: '8px',
-              background: '#111827',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '0.95rem', color: 'white'
-            }}>
-              📖
-            </div>
-            <span style={{ fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.02em', color: '#111827' }}>
-              LostStreet <span style={{ color: '#059669' }}>Guides</span>
-            </span>
-          </div>
-        </div>
-
-        <div style={{
-          background: '#f3f4f6',
-          border: '1px solid #e5e7eb',
-          color: '#4b5563',
-          padding: '5px 14px',
-          borderRadius: '20px',
-          fontSize: '0.8rem',
-          fontWeight: 700,
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '6px'
-        }}>
-          <span>{guides.length} Pro Masterclasses</span>
-        </div>
-      </div>
+    <PageShell breadcrumb="Guides &amp; Strategy" badgeText="13 Pro Masterclasses" badgeColor="green">
 
       {/* ── EDITORIAL HERO SECTION ───────────────────────────────────── */}
+
       <section style={{
         padding: 'clamp(2.5rem, 5vw, 4rem) clamp(1rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem)',
         maxWidth: '1240px',
@@ -741,6 +673,6 @@ export default function GuidesPage() {
           box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1) !important;
         }
       `}} />
-    </div>
+    </PageShell>
   );
 }

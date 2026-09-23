@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { PageShell } from '@/app/components/SiteShell';
 
 export const metadata = {
   title: 'Flag Guesser — Free World Flag Quiz Game | LostStreet',
@@ -87,74 +88,7 @@ export default function FlagGuesserPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-      <div style={{
-        minHeight: '100vh',
-        width: '100%',
-        background: '#fafafa',
-        color: '#111827',
-        display: 'flex',
-        flexDirection: 'column',
-        fontFamily: '"Outfit", system-ui, -apple-system, sans-serif',
-        overflowX: 'hidden'
-      }}>
-
-        {/* ── BREADCRUMB / EDITORIAL SUB-NAV ──────────────────────────────── */}
-        <div style={{
-          background: '#ffffff',
-          borderBottom: '1px solid #e5e7eb',
-          padding: '0.85rem clamp(1rem, 3vw, 2.5rem)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '0.75rem'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <Link href="/" style={{
-              background: '#f3f4f6',
-              border: '1px solid #e5e7eb',
-              color: '#1f2937',
-              padding: '7px 14px',
-              borderRadius: '10px',
-              textDecoration: 'none',
-              fontWeight: '700',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontSize: '0.85rem',
-              transition: 'all 0.2s ease',
-              touchAction: 'manipulation'
-            }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline>
-              </svg>
-              <span>Back to Game</span>
-            </Link>
-
-            <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', color: '#6b7280' }}>
-              <Link href="/" style={{ color: '#6b7280', textDecoration: 'none', fontWeight: 500 }}>Home</Link>
-              <span>/</span>
-              <span style={{ color: '#d97706', fontWeight: 700 }}>Flag Guesser</span>
-            </nav>
-          </div>
-
-          <div style={{
-            background: '#fef3c7',
-            border: '1px solid #fde68a',
-            color: '#b45309',
-            padding: '5px 14px',
-            borderRadius: '20px',
-            fontSize: '0.82rem',
-            fontWeight: 800,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px'
-          }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-            <span>196 World Flags • 3 Difficulty Modes</span>
-          </div>
-        </div>
+      <PageShell breadcrumb="Flag Guesser" badgeText="196 World Flags · 3 Difficulty Modes" badgeColor="amber">
 
         {/* ── EDITORIAL HERO SECTION ───────────────────────────────────────── */}
         <section style={{
@@ -1006,7 +940,7 @@ export default function FlagGuesserPage() {
           </div>
         </section>
 
-      </div>
+      </PageShell>
     </>
   );
 }

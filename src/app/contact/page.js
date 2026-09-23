@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { PageShell } from '@/app/components/SiteShell';
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -23,78 +24,11 @@ export default function ContactPage() {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      width: '100%',
-      background: '#fafafa',
-      color: '#111827',
-      display: 'flex',
-      flexDirection: 'column',
-      fontFamily: '"Outfit", system-ui, -apple-system, sans-serif',
-      overflowX: 'hidden'
-    }}>
 
-      {/* ── BREADCRUMB / SUB-NAV BAR ─────────────────────────────────────── */}
-      <div style={{
-        background: '#ffffff',
-        borderBottom: '1px solid #e5e7eb',
-        padding: '0.85rem clamp(1rem, 3vw, 2.5rem)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '0.75rem'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <Link href="/" style={{
-            background: '#f3f4f6',
-            border: '1px solid #e5e7eb',
-            color: '#1f2937',
-            padding: '7px 14px',
-            borderRadius: '10px',
-            textDecoration: 'none',
-            fontWeight: '700',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            fontSize: '0.85rem',
-            transition: 'all 0.2s ease',
-            touchAction: 'manipulation'
-          }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12"></line>
-              <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-            <span>Back to Game</span>
-          </Link>
-
-          <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', color: '#6b7280' }}>
-            <Link href="/" style={{ color: '#6b7280', textDecoration: 'none', fontWeight: 500 }}>Home</Link>
-            <span>/</span>
-            <span style={{ color: '#059669', fontWeight: 700 }}>Contact Us</span>
-          </nav>
-        </div>
-
-        <div style={{
-          background: '#ecfdf5',
-          border: '1px solid #a7f3d0',
-          color: '#059669',
-          padding: '5px 14px',
-          borderRadius: '20px',
-          fontSize: '0.82rem',
-          fontWeight: 800,
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '6px'
-        }}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-          </svg>
-          <span>Support &amp; Editorial Desk</span>
-        </div>
-      </div>
+    <PageShell breadcrumb="Contact Us" badgeText="Support &amp; Editorial Desk" badgeColor="green">
 
       {/* ── MAIN EDITORIAL CONTAINER ─────────────────────────────────────── */}
+
       <main style={{
         maxWidth: '920px',
         margin: '0 auto',
@@ -452,6 +386,6 @@ export default function ContactPage() {
         </div>
 
       </main>
-    </div>
+    </PageShell>
   );
 }
