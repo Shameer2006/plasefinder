@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'How to Identify African Countries in Street View (2026) — Visual Clue Guide | LostStreet',
+  title: 'Africa Street View Guide (2026) | LostStreet',
   description: 'Master African countries in street view games. Region-by-region breakdown of visual clues for West, East, Southern & North Africa — road signs, vegetation, languages & more.',
   alternates: { canonical: 'https://www.loststreet.online/guides/africa-street-view-guide' },
   keywords: ['africa street view', 'african countries geography game', 'west africa street view clues', 'identify african countries', 'loststreet africa guide'],
@@ -183,6 +183,17 @@ export default function ArticlePage() {
               <li><strong>Tunisia:</strong> Arabic and French signage. Red and white flag with crescent and star. More Mediterranean feel than Morocco.</li>
               <li><strong>Egypt:</strong> Arabic signage. Red, white, black flag with an eagle. Nile Delta vegetation or desert landscape. Ancient monuments occasionally visible.</li>
             </ul>
+
+            
+            {/* ── RELATED GUIDES ─────────────────────────────────────────── */}
+            <div style={{ marginTop: '3rem', borderTop: '1px solid #e5e7eb', paddingTop: '2rem', paddingBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#111827', marginBottom: '1.25rem' }}>Continue Learning</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+                <Link href="/guides/how-to-guess-locations-from-street-view" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>Guess Countries from Road Signs & Language Clues →</Link>
+                <Link href="/guides/hardest-countries-to-guess" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>The 10 Hardest Countries to Guess in Street View →</Link>
+                <Link href="/guides/25-pro-street-view-geoguessr-secrets" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>25 Pro Street View Secrets Most Players Miss →</Link>
+              </div>
+            </div>
 
             {/* ── CTA CALLOUT ────────────────────────────────────────────── */}
             <div style={{

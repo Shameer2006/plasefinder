@@ -15,21 +15,23 @@ export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const uid = searchParams.get('uid');
+    const clientLastClaim = searchParams.get('lastClaimDate');
+    const clientStreak = parseInt(searchParams.get('streak') || '0', 10) || 0;
     const todayUTC = formatDateUTC(new Date());
 
     if (!uid || uid === 'guest' || uid.startsWith('guest_')) {
-      const status = getStreakStatus(null, todayUTC, 0);
+      const status = getStreakStatus(clientLastClaim, todayUTC, clientStreak);
       return NextResponse.json({
         success: true,
         isGuest: true,
-        canClaim: true,
+        canClaim: status.canClaim,
         streakDay: status.streakDay,
         cycleDay: status.cycleDay,
-        totalStreak: 0,
-        lastClaimDate: null,
-        coins: 50,
+        totalStreak: status.totalStreak,
+        lastClaimDate: clientLastClaim || null,
+        coins: null,
         rewardConfig: REWARD_CONFIG,
-        todayReward: getRewardForDay(1)
+        todayReward: getRewardForDay(status.streakDay)
       });
     }
 
@@ -51,7 +53,7 @@ export async function GET(request) {
       }
     }
 
-    const streakStatus = getStreakStatus(lastClaimDate, todayUTC, loginStreak);
+    const streakStatus = getStreakStatus(lastClaimDate || clientLastClaim, todayUTC, loginStreak || clientStreak);
     const todayReward = getRewardForDay(streakStatus.streakDay);
 
     return NextResponse.json({
@@ -78,7 +80,7 @@ export async function GET(request) {
       cycleDay: 1,
       totalStreak: 0,
       lastClaimDate: null,
-      coins: 50,
+      coins: null,
       rewardConfig: REWARD_CONFIG,
       todayReward
     });
@@ -87,13 +89,13 @@ export async function GET(request) {
 
 /**
  * POST /api/daily-reward
- * Body: { uid: string }
+ * Body: { uid: string, lastClaimDate?: string, streak?: number, currentCoins?: number }
  * Strictly validates claim eligibility server-side and credits coins.
  */
 export async function POST(request) {
   try {
     const body = await request.json().catch(() => ({}));
-    const { uid } = body;
+    const { uid, lastClaimDate: clientLastClaim, streak: clientStreak, currentCoins: clientCoins } = body;
     const todayUTC = formatDateUTC(new Date());
 
     if (!uid) {
@@ -103,17 +105,33 @@ export async function POST(request) {
     const isGuest = uid === 'guest' || uid.startsWith('guest_');
 
     if (isGuest) {
-      const dayReward = getRewardForDay(1);
+      const streakStatus = getStreakStatus(clientLastClaim, todayUTC, clientStreak || 0);
+      if (!streakStatus.canClaim) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: 'Daily reward has already been claimed for today. Come back tomorrow!',
+            streakDay: streakStatus.streakDay,
+            cycleDay: streakStatus.cycleDay,
+            totalStreak: streakStatus.totalStreak,
+            canClaim: false
+          },
+          { status: 400 }
+        );
+      }
+      const dayReward = getRewardForDay(streakStatus.streakDay);
+      const newTotalStreak = streakStatus.isReset ? 1 : (clientStreak || 0) + 1;
+      const baseCoins = typeof clientCoins === 'number' ? clientCoins : 50;
       return NextResponse.json({
         success: true,
         isGuest: true,
-        streakDay: 1,
-        cycleDay: 1,
-        totalStreak: 1,
+        streakDay: streakStatus.streakDay,
+        cycleDay: streakStatus.cycleDay,
+        totalStreak: newTotalStreak,
         lastClaimDate: todayUTC,
         coinsEarned: dayReward.coins,
         bonusItem: dayReward.bonusItem,
-        newBalance: 50 + dayReward.coins,
+        newBalance: baseCoins + dayReward.coins,
         todayReward: dayReward
       });
     }

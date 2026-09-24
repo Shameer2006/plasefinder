@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "The 10 Hardest Countries to Guess in Street View (2026 Clues) | LostStreet",
+  title: "10 Hardest Countries in Street View (2026) | LostStreet",
   description: "Struggling with Russia, Lesotho, or Argentina? Master the exact visual clues, road markings, and car meta to identify the 10 hardest countries instantly.",
   alternates: { canonical: "https://www.loststreet.online/guides/hardest-countries-to-guess" },
   keywords: [
@@ -12,7 +12,7 @@ export const metadata = {
     "street view guesser tips", "geography guessing game guide", "loststreet guide"
   ],
   openGraph: {
-    title: "The 10 Hardest Countries to Guess in Street View — Can You Name Them All?",
+    title: "10 Hardest Countries in Street View — Can You Guess Them?",
     description: "Russia, Mongolia, Botswana... These 10 countries stump even the best street view guessers. Learn the exact visual clues to finally crack them.",
     url: "https://www.loststreet.online/guides/hardest-countries-to-guess",
     type: "article",
@@ -20,7 +20,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "The 10 Hardest Countries to Guess in Street View (2026)",
+    title: "10 Hardest Countries in Street View (2026)",
     description: "These 10 countries stump even expert players. Free visual clues & pro tips inside.",
     images: ["/og-image.png"],
   },
@@ -213,6 +213,17 @@ export default function ArticlePage() {
                   <div style={{ padding: "0 1.1rem 1rem", color: "#4b5563", fontSize: "0.95rem", lineHeight: 1.65 }}>{faq.acceptedAnswer.text}</div>
                 </details>
               ))}
+            </div>
+
+            
+            {/* ── RELATED GUIDES ─────────────────────────────────────────── */}
+            <div style={{ marginTop: '3rem', borderTop: '1px solid #e5e7eb', paddingTop: '2rem', paddingBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#111827', marginBottom: '1.25rem' }}>Continue Learning</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+                <Link href="/guides/how-to-guess-locations-from-street-view" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>Guess Countries from Road Signs & Language Clues →</Link>
+                <Link href="/guides/hardest-countries-to-guess" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>The 10 Hardest Countries to Guess in Street View →</Link>
+                <Link href="/guides/25-pro-street-view-geoguessr-secrets" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>25 Pro Street View Secrets Most Players Miss →</Link>
+              </div>
             </div>
 
             {/* ── CTA CALLOUT ────────────────────────────────────────────── */}

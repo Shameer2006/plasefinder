@@ -51,14 +51,19 @@ export default function DailyRewardOverlay({ forceOpen = false, onClose }) {
     async function checkStatus() {
       try {
         const uid = userProfile?.uid || 'guest';
-        const res = await fetch(`/api/daily-reward?uid=${encodeURIComponent(uid)}`);
+        const urlParams = new URLSearchParams({
+          uid,
+          lastClaimDate: effectiveLastClaim || '',
+          streak: effectiveStreak.toString()
+        });
+        const res = await fetch(`/api/daily-reward?${urlParams.toString()}`);
         if (res.ok) {
           const data = await res.json();
           if (isMounted) {
-            if (data.canClaim) {
+            if (data.canClaim && streakInfo.canClaim) {
               setIsOpen(true);
             }
-            if (typeof data.coins === 'number' && data.coins !== coins) {
+            if (!data.isGuest && typeof data.coins === 'number' && data.coins !== coins) {
               setCoins(data.coins);
             }
             if (typeof data.totalStreak === 'number' && data.totalStreak !== loginStreak) {
@@ -119,16 +124,23 @@ export default function DailyRewardOverlay({ forceOpen = false, onClose }) {
     try {
       const activeReward = getRewardForDay(streakInfo.streakDay);
       const uid = userProfile?.uid || 'guest';
+      const currentBalance = userProfile?.coins !== undefined ? userProfile.coins : coins;
 
       const res = await fetch('/api/daily-reward', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ uid })
+        body: JSON.stringify({
+          uid,
+          lastClaimDate: effectiveLastClaim,
+          streak: effectiveStreak,
+          currentCoins: currentBalance
+        })
       });
 
       const data = await res.json().catch(() => ({}));
       const coinsEarned = data.coinsEarned || activeReward.coins;
       const newStreak = data.totalStreak || (streakInfo.isReset ? 1 : effectiveStreak + 1);
+      const nextBalance = typeof data.newBalance === 'number' ? data.newBalance : currentBalance + coinsEarned;
 
       // Play sound
       try {
@@ -142,16 +154,16 @@ export default function DailyRewardOverlay({ forceOpen = false, onClose }) {
       setLoginStreak(newStreak);
       setLastClaimDate(todayUTC);
 
-      if (userProfile && setUserProfile) {
+      if (setUserProfile) {
         setUserProfile(prev => ({
           ...prev,
-          coins: (prev?.coins || 0) + coinsEarned,
+          coins: nextBalance,
           loginStreak: newStreak,
           lastDailyRewardDate: todayUTC
         }));
       }
 
-      await updateUserDailyReward(uid, newStreak, todayUTC, (coins || 0) + coinsEarned);
+      await updateUserDailyReward(uid, newStreak, todayUTC, nextBalance);
 
       setClaimedReward({
         coins: coinsEarned,

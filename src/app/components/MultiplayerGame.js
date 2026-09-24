@@ -30,8 +30,8 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 export default function MultiplayerGame({ gameId }) {
-  const { userProfile } = useAuth();
-  const { setCurrentLocation, setGameState } = useGameStore();
+  const { userProfile, setUserProfile } = useAuth();
+  const { setCurrentLocation, setGameState, addCoins } = useGameStore();
   const [matchData, setMatchData] = useState(null);
   const [lastGuessDistance, setLastGuessDistance] = useState(0);
   const [roundPoints, setRoundPoints] = useState(0);
@@ -373,8 +373,19 @@ export default function MultiplayerGame({ gameId }) {
           const myScore = matchData.players[userProfile.uid].score;
           const opScore = matchData.players[opponentId].score;
           
-          const myNewElo = myScore >= opScore ? myData.elo + 25 : myData.elo - 25;
-          await updateDoc(doc(db, 'users', userProfile.uid), { elo: Math.max(0, myNewElo) });
+          const isWinner = myScore >= opScore;
+          const myNewElo = isWinner ? myData.elo + 25 : myData.elo - 25;
+          const myUpdates = { elo: Math.max(0, myNewElo) };
+          if (isWinner) {
+            const currentCoins = userProfile?.coins !== undefined ? userProfile.coins : 50;
+            const newCoins = currentCoins + 20;
+            myUpdates.coins = newCoins;
+            addCoins(20);
+            if (setUserProfile) {
+              setUserProfile(prev => ({ ...prev, elo: Math.max(0, myNewElo), coins: newCoins }));
+            }
+          }
+          await updateDoc(doc(db, 'users', userProfile.uid), myUpdates);
           
           if (!opponentData.isBot) {
             const opNewElo = opScore > myScore ? opponentData.elo + 25 : opponentData.elo - 25;

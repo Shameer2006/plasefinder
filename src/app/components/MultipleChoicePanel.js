@@ -5,6 +5,7 @@ import { useAuth } from '@/lib/AuthContext';
 import { sounds } from '@/lib/sounds';
 import { generateContextualHint } from '@/lib/hintUtils';
 import { spendCoins, canAfford } from '@/lib/coins';
+import { updateUserCoins } from '@/lib/userProfile';
 import CoinIcon from './CoinIcon';
 
 export default function MultipleChoicePanel() {
@@ -38,9 +39,13 @@ export default function MultipleChoicePanel() {
 
     const result = await spendCoins('fifty_fifty', userProfile?.uid, currentBalance);
     if (result.success) {
+      const nextBalance = typeof result.newBalance === 'number' ? result.newBalance : Math.max(0, currentBalance - 20);
       deductCoins(20);
-      if (userProfile && setUserProfile) {
-        setUserProfile(prev => ({ ...prev, coins: Math.max(0, (prev?.coins || 0) - 20) }));
+      if (setUserProfile) {
+        setUserProfile(prev => ({ ...prev, coins: nextBalance }));
+      }
+      if (userProfile?.uid) {
+        updateUserCoins(userProfile.uid, nextBalance);
       }
       setFiftyFiftyUsed(true);
 
@@ -66,9 +71,13 @@ export default function MultipleChoicePanel() {
 
     const result = await spendCoins('hint', userProfile?.uid, currentBalance);
     if (result.success) {
+      const nextBalance = typeof result.newBalance === 'number' ? result.newBalance : Math.max(0, currentBalance - 15);
       deductCoins(15);
-      if (userProfile && setUserProfile) {
-        setUserProfile(prev => ({ ...prev, coins: Math.max(0, (prev?.coins || 0) - 15) }));
+      if (setUserProfile) {
+        setUserProfile(prev => ({ ...prev, coins: nextBalance }));
+      }
+      if (userProfile?.uid) {
+        updateUserCoins(userProfile.uid, nextBalance);
       }
       setUsedHint(true);
     }

@@ -16,7 +16,7 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   return d;
 }
 
-import { addXp, updateBestScore, updateEndlessStats } from '@/lib/userProfile';
+import { addXp, updateBestScore, updateEndlessStats, updateUserCoins } from '@/lib/userProfile';
 import { saveGameResult } from '@/lib/db';
 import { useAuth } from '@/lib/AuthContext';
 import LevelUpOverlay from './LevelUpOverlay';
@@ -108,7 +108,8 @@ export default function ResultScreen() {
     currentRound, maxRounds, setMaxRounds,
     nextRound, setGameState, resetGame, addGameResult,
     isRareRound, isDailyChallenge,
-    gameMode, currentStreak, setCurrentStreak, setCurrentEndlessStreak
+    gameMode, currentStreak, setCurrentStreak, setCurrentEndlessStreak,
+    addCoins
   } = useGameStore();
 
   const [roundScore, setRoundScore] = useState(0);
@@ -247,6 +248,20 @@ export default function ResultScreen() {
     const totalScore = score + roundScore;
     const xpEarned = Math.floor(totalScore / 10);
     
+    // Gameplay coin reward: +1 coin per 1000 pts (min 5), +5 for bullseye
+    const scoreCoins = Math.max(5, Math.floor(totalScore / 1000));
+    const bullseyeCoins = (roundScore >= 4950) ? 5 : 0;
+    const coinsEarned = scoreCoins + bullseyeCoins;
+
+    addCoins(coinsEarned);
+    const currentCoins = userProfile?.coins !== undefined ? userProfile.coins : 50;
+    let nextCoins = currentCoins + coinsEarned;
+    if (setUserProfile) {
+      setUserProfile(prev => ({ ...(prev || {}), coins: nextCoins }));
+    }
+    const targetUid = user?.uid || userProfile?.uid || 'guest';
+    updateUserCoins(targetUid, nextCoins);
+
     if (gameMode !== 'ENDLESS') {
       saveGameResult(totalScore, difficulty, maxRounds);
       addGameResult({
@@ -282,6 +297,14 @@ export default function ResultScreen() {
         isLevelUp = true;
         setLevelUpData(xpResult);
         sounds.playLevelUp();
+        if (xpResult.bonusCoins > 0) {
+          addCoins(xpResult.bonusCoins);
+          nextCoins += xpResult.bonusCoins;
+          if (setUserProfile) {
+            setUserProfile(prev => ({ ...(prev || {}), coins: nextCoins }));
+          }
+          updateUserCoins(targetUid, nextCoins);
+        }
       }
     }
     
@@ -552,7 +575,7 @@ export default function ResultScreen() {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', width: '100%' }}>
               <button onClick={handleFinish} style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', border: 'none', borderRadius: '14px', padding: '13px 20px', fontWeight: 900, fontSize: '1rem', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', boxShadow: '0 8px 24px rgba(16, 185, 129, 0.35)' }}>
-                <TrophySvg size={18} color="#fff" /> Finish & Collect XP
+                <TrophySvg size={18} color="#fff" /> Finish & Collect XP + Coins 🪙
               </button>
               <div style={{ display: 'flex', gap: '8px' }}>
                 <button style={{ flex: 1, background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', borderRadius: '12px', padding: '10px 14px', fontWeight: 800, fontSize: '0.85rem', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px' }} onClick={async () => { const shareUrl = `https://www.loststreet.online/share/${score}`; const shareText = `LostStreet — ${isChoiceMode ? 'Easy/Medium' : 'Hard'} Mode\nScore: ${score.toLocaleString()} pts\nPlay free → ${shareUrl}`; if (navigator.share) { try { await navigator.share({ title: 'My LostStreet Score', text: shareText }); } catch (e) {} } else { navigator.clipboard.writeText(shareText); } }}>

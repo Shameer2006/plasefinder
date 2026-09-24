@@ -17,6 +17,9 @@ function getInitialGuestProfile() {
       displayName: 'Guest Explorer',
       countryCode: 'IN',
       totalXp: 0,
+      coins: 50,
+      loginStreak: 0,
+      lastDailyRewardDate: null,
       createdAt: new Date().toISOString(),
       onboardingComplete: true
     };
@@ -24,6 +27,23 @@ function getInitialGuestProfile() {
   const localXp = parseInt(localStorage.getItem('placefinder_total_xp') || '0', 10) || 0;
   const localUsername = localStorage.getItem('placefinder_username') || 'Guest Explorer';
   const localCountry = localStorage.getItem('placefinder_country') || 'IN';
+  
+  let localCoins = 50;
+  const rawCoins = localStorage.getItem('placefinder_coins');
+  if (rawCoins !== null && !isNaN(parseInt(rawCoins, 10))) {
+    localCoins = Math.max(0, parseInt(rawCoins, 10));
+  } else {
+    try {
+      const gs = JSON.parse(localStorage.getItem('game-storage') || '{}');
+      if (gs?.state?.coins !== undefined && !isNaN(parseInt(gs.state.coins, 10))) {
+        localCoins = Math.max(0, parseInt(gs.state.coins, 10));
+      }
+    } catch (e) {}
+  }
+
+  const localStreak = parseInt(localStorage.getItem('placefinder_login_streak') || '0', 10) || 0;
+  const localLastClaim = localStorage.getItem('placefinder_last_claim_date') || null;
+
   let guestId = localStorage.getItem('placefinder_guest_id');
   if (!guestId) {
     guestId = `guest_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 7)}`;
@@ -37,6 +57,9 @@ function getInitialGuestProfile() {
     displayName: localUsername,
     countryCode: localCountry,
     totalXp: localXp,
+    coins: localCoins,
+    loginStreak: localStreak,
+    lastDailyRewardDate: localLastClaim,
     createdAt: new Date().toISOString(),
     onboardingComplete: true
   };

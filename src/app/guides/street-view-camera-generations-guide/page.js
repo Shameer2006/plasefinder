@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "Google Street View Camera Generations (Gen 1–Gen 4) Complete Guide | LostStreet",
+  title: "Street View Camera Generations Guide (Gen 1–4) | LostStreet",
   description: "Master Street View camera generations. Learn to identify Gen 1 blur, Gen 2 purple halos, Gen 3 clarity, and Gen 4 wide-angle lenses to pinpoint countries instantly.",
   alternates: { canonical: "https://www.loststreet.online/guides/street-view-camera-generations-guide" },
   keywords: [
@@ -9,7 +9,7 @@ export const metadata = {
     "gen 4 street view countries", "geoguessr camera generations", "google street view car camera meta"
   ],
   openGraph: {
-    title: "Google Street View Camera Generations (Gen 1–Gen 4) Complete Guide",
+    title: "Street View Camera Generations Guide (Gen 1–4)",
     description: "Learn how to date and identify Street View camera generations to narrow down countries instantly.",
     url: "https://www.loststreet.online/guides/street-view-camera-generations-guide",
     type: "article",

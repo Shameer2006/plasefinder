@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "How to Identify Latin American Countries in Street View (2026 Guide) | LostStreet",
+  title: "Latin America Street View Guide (2026) | LostStreet",
   description: "Master Latin American geography clues in Street View. Discover road sign cross backings, yellow license plates, utility pole styles, and vegetation hints.",
   alternates: { canonical: "https://www.loststreet.online/guides/latin-america-street-view-guide" },
   keywords: [
@@ -9,7 +9,7 @@ export const metadata = {
     "mexico holey utility poles", "geoguessr south america guide", "identify south american countries street view"
   ],
   openGraph: {
-    title: "How to Identify Latin American Countries in Street View",
+    title: "Latin America Street View Guide (2026)",
     description: "Region-by-region breakdown of visual infrastructure clues for Central and South America.",
     url: "https://www.loststreet.online/guides/latin-america-street-view-guide",
     type: "article",

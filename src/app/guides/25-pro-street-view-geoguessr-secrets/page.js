@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "25 Pro Street View & GeoGuessr Secrets Most Players Don't Know (2026) | LostStreet",
+  title: "25 Pro Street View Secrets (2026) | LostStreet",
   description: "Discover 25 pro secrets and meta clues used by top GeoGuessr players: Kenya Snorkel, Ghana Tape, Sky Rifts, French Holey Poles & more.",
   alternates: { canonical: "https://www.loststreet.online/guides/25-pro-street-view-geoguessr-secrets" },
   keywords: [
@@ -10,7 +10,7 @@ export const metadata = {
     "geoguessr meta guide", "loststreet secrets"
   ],
   openGraph: {
-    title: "25 Pro Street View & GeoGuessr Secrets Most Players Don't Know",
+    title: "25 Pro Street View Secrets Most Players Miss",
     description: "25 pro secrets & car meta clues used by top-ranked geography players — Kenya Snorkel, Sky Rifts, Holey Poles & camera glitches.",
     url: "https://www.loststreet.online/guides/25-pro-street-view-geoguessr-secrets",
     type: "article",
@@ -338,6 +338,17 @@ export default function ArticlePage() {
                 LostStreet is widely regarded as one of the best free GeoGuessr alternatives. It offers unlimited free rounds, ranked 1v1 multiplayer duels, daily challenges, party mode, and comprehensive country guides — all without a subscription.
               </div>
             </details>
+
+            
+            {/* ── RELATED GUIDES ─────────────────────────────────────────── */}
+            <div style={{ marginTop: '3rem', borderTop: '1px solid #e5e7eb', paddingTop: '2rem', paddingBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#111827', marginBottom: '1.25rem' }}>Continue Learning</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+                <Link href="/guides/how-to-guess-locations-from-street-view" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>Guess Countries from Road Signs & Language Clues →</Link>
+                <Link href="/guides/hardest-countries-to-guess" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>The 10 Hardest Countries to Guess in Street View →</Link>
+                <Link href="/guides/25-pro-street-view-geoguessr-secrets" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>25 Pro Street View Secrets Most Players Miss →</Link>
+              </div>
+            </div>
 
             {/* ── CTA CALLOUT ────────────────────────────────────────────── */}
             <div style={{

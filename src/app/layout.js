@@ -225,8 +225,7 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="theme-color" content="#0a0a0a" />
         <meta name="msvalidate.01" content="3B92B95C23615C35821E1600A4267ABE" />
-        <link rel="alternate" hrefLang="en" href="https://www.loststreet.online" />
-        <link rel="alternate" hrefLang="x-default" href="https://www.loststreet.online" />
+        {/* hreflang removed — single-language site; was causing conflicts on all sub-pages */}
         <meta name="geo.region" content="001" />
         <meta name="geo.placename" content="Worldwide" />
         <link rel="manifest" href="/manifest.json" />

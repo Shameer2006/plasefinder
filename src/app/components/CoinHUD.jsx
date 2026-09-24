@@ -8,16 +8,26 @@ export default function CoinHUD({ onOpenDailyReward }) {
   const { coins, loginStreak, setShowDailyRewardOverlay } = useGameStore();
   const { userProfile } = useAuth();
   
-  const displayCoins = userProfile?.coins !== undefined ? userProfile.coins : coins;
-  const streak = userProfile?.loginStreak !== undefined ? userProfile.loginStreak : loginStreak;
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-  const prevCoinsRef = useRef(displayCoins);
+  const rawDisplayCoins = userProfile?.coins !== undefined ? userProfile.coins : coins;
+  const rawStreak = userProfile?.loginStreak !== undefined ? userProfile.loginStreak : loginStreak;
+
+  const displayCoins = isMounted ? rawDisplayCoins : 50;
+  const streak = isMounted ? rawStreak : 0;
+
+  const prevCoinsRef = useRef(rawDisplayCoins);
   const [delta, setDelta] = useState(null);
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    if (prevCoinsRef.current !== displayCoins) {
-      const diff = displayCoins - prevCoinsRef.current;
+    if (!isMounted) return;
+    
+    if (prevCoinsRef.current !== rawDisplayCoins) {
+      const diff = rawDisplayCoins - prevCoinsRef.current;
       if (diff !== 0) {
         setDelta(diff > 0 ? `+${diff}` : `${diff}`);
         setAnimate(true);
@@ -25,12 +35,12 @@ export default function CoinHUD({ onOpenDailyReward }) {
           setDelta(null);
           setAnimate(false);
         }, 1600);
-        prevCoinsRef.current = displayCoins;
+        prevCoinsRef.current = rawDisplayCoins;
         return () => clearTimeout(timer);
       }
     }
-    prevCoinsRef.current = displayCoins;
-  }, [displayCoins]);
+    prevCoinsRef.current = rawDisplayCoins;
+  }, [rawDisplayCoins, isMounted]);
 
   const handleClick = () => {
     if (onOpenDailyReward) {

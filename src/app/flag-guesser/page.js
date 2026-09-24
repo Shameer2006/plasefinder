@@ -89,18 +89,35 @@ export default function FlagGuesserPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
       <PageShell breadcrumb="Flag Guesser" badgeText="196 World Flags · 3 Difficulty Modes" badgeColor="amber">
+        <noscript>
+          <section style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
+            <h1>World Flag Guesser Game - Test Your Knowledge</h1>
+            <p>Identify all 196 world country flags in this free interactive quiz. Challenge yourself with multiple choice, hybrid map pinning, or extreme hard mode mapping. Perfect practice for geography students and geoguessers.</p>
+            <p>Please enable JavaScript to play the flag guesser quiz.</p>
+          </section>
+        </noscript>
 
         {/* ── EDITORIAL HERO SECTION ───────────────────────────────────────── */}
         <section style={{
           padding: 'clamp(2.5rem, 5vw, 4.5rem) clamp(1rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3rem)',
-          maxWidth: '1080px',
+          maxWidth: '1200px',
           margin: '0 auto',
           width: '100%',
-          boxSizing: 'border-box',
-          textAlign: 'center'
+          boxSizing: 'border-box'
         }}>
-          <div style={{ maxWidth: '820px', margin: '0 auto' }}>
-            
+          {/* Flex Container for Text (Left) and Image (Right) */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '3rem',
+            flexWrap: 'wrap',
+            marginBottom: '3rem'
+          }}>
+            {/* Left Column (Text) */}
+            <div style={{ flex: '1 1 500px', maxWidth: '650px', textAlign: 'left' }}>
+
             {/* Eyebrow Badge */}
             <div style={{
               display: 'inline-flex',
@@ -121,6 +138,8 @@ export default function FlagGuesserPage() {
               <span>Official LostStreet Vexillology Quiz</span>
             </div>
 
+
+
             {/* Main Heading */}
             <h1 style={{
               fontSize: 'clamp(2rem, 5vw, 3.4rem)',
@@ -139,17 +158,16 @@ export default function FlagGuesserPage() {
               lineHeight: 1.7,
               color: '#4b5563',
               maxWidth: '720px',
-              margin: '0 auto 2.25rem',
+              margin: '0 0 2.25rem 0',
               fontWeight: 400
             }}>
               How many of the world&apos;s 196 national flags can you recognize? Test your knowledge in fast-paced multiple choice, master lookalike color patterns, or drop your pin directly on the world map in pro mode.
             </p>
-
             {/* Action Buttons */}
             <div style={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
+              justifyContent: 'flex-start',
               flexWrap: 'wrap',
               gap: '1rem',
               marginBottom: '2.5rem'
@@ -197,8 +215,24 @@ export default function FlagGuesserPage() {
                 <span>Flag Identification Guide</span>
               </Link>
             </div>
+          </div>
+          {/* Right Column (Image) */}
+          <div style={{ flex: '1 1 350px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img
+              src="/blog-flag-guesser-logo.png"
+              alt="Flag Guesser Game Logo"
+              style={{
+                width: '100%',
+                maxWidth: '450px',
+                height: 'auto',
+                filter: 'drop-shadow(0 15px 35px rgba(0,0,0,0.08))',
+                transform: 'rotate(2deg)'
+              }}
+            />
+          </div>
+        </div>
 
-            {/* Stat Pill Grid */}
+        {/* Stat Pill Grid */}
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
@@ -227,9 +261,7 @@ export default function FlagGuesserPage() {
               </div>
             </div>
 
-          </div>
-        </section>
-
+          </section>
         {/* ── 3 GAMEPLAY DIFFICULTY MODES ──────────────────────────────────── */}
         <section style={{
           padding: 'clamp(2rem, 4vw, 3.5rem) clamp(1rem, 3vw, 2.5rem)',

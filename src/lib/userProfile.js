@@ -270,6 +270,8 @@ export const addXp = async (uid, xpEarned) => {
   const currentLevel = calculateLevel(currentXp);
   const newLevel = calculateLevel(newXp);
   const levelUp = newLevel > currentLevel;
+  const levelsGained = levelUp ? Math.max(1, newLevel - currentLevel) : 0;
+  const bonusCoins = levelsGained * 25;
 
   // Persist locally
   if (typeof window !== 'undefined') {
@@ -294,7 +296,8 @@ export const addXp = async (uid, xpEarned) => {
     newXp,
     levelUp,
     newLevel,
-    oldLevel: currentLevel
+    oldLevel: currentLevel,
+    bonusCoins
   };
 };
 

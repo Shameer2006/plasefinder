@@ -41,13 +41,11 @@ function SiteHeader({ onOpenDailyReward }) {
   }, [menuOpen]);
 
   const links = [
-    { href: '/', label: 'Home' },
     { href: '/flag-guesser', label: 'Flag Guesser' },
-    { href: '/guides', label: 'Guides & Strategy' },
+    { href: '/guides', label: 'Guides' },
     { href: '/leaderboard', label: 'Leaderboard' },
-    { href: '/about', label: 'About Us' },
+    { href: '/blog', label: 'Blog' },
     { href: '/community', label: 'Community' },
-    { href: '/contact', label: 'Contact Us' },
   ];
 
   return (
@@ -64,7 +62,7 @@ function SiteHeader({ onOpenDailyReward }) {
           height: '56px',
         }}>
           {/* Logo */}
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: '#fff', flexShrink: 0 }}>
+          <Link href="/" aria-label="LostStreet Homepage" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: '#fff', flexShrink: 0 }}>
             <img src="/logo-3d-square.png" alt="LostStreet" style={{ width: '30px', height: '30px', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.35))' }} />
             <span style={{ fontWeight: 800, fontSize: '1.1rem', fontFamily: '"Outfit", sans-serif' }}>LostStreet</span>
           </Link>
@@ -96,18 +94,19 @@ function SiteHeader({ onOpenDailyReward }) {
 
           {/* Coin HUD, Desktop sign-in + mobile hamburger */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <CoinHUD onOpenDailyReward={onOpenDailyReward} />
-
-            {/* Sign In (desktop) */}
-            <div className="site-nav-desktop">
-              {(!user || user.isAnonymous) ? (
+            {(!user || user.isAnonymous) ? (
+              <>
+                {/* Hide CoinHUD on mobile if logged out so we have room for Sign In */}
+                <div className="site-nav-desktop">
+                  <CoinHUD onOpenDailyReward={onOpenDailyReward} />
+                </div>
                 <button onClick={loginWithGoogle} style={{
                   background: 'transparent',
                   border: '1px solid rgba(255,255,255,0.45)',
                   color: '#fff',
-                  padding: '6px 16px',
+                  padding: '6px 14px',
                   borderRadius: '6px',
-                  fontSize: '0.88rem',
+                  fontSize: '0.85rem',
                   fontWeight: 500,
                   fontFamily: '"Outfit", sans-serif',
                   cursor: 'pointer',
@@ -119,10 +118,15 @@ function SiteHeader({ onOpenDailyReward }) {
                 >
                   Sign In
                 </button>
-              ) : (
-                <Link href="/" style={{ color: '#aaa', textDecoration: 'none', fontSize: '0.9rem' }}>Play →</Link>
-              )}
-            </div>
+              </>
+            ) : (
+              <>
+                <CoinHUD onOpenDailyReward={onOpenDailyReward} />
+                <div className="site-nav-desktop">
+                  <Link href="/" style={{ color: '#aaa', textDecoration: 'none', fontSize: '0.9rem' }}>Play →</Link>
+                </div>
+              </>
+            )}
 
             {/* Hamburger (mobile) */}
             <button
@@ -251,6 +255,11 @@ const BADGE_PRESETS = {
 };
 
 export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', children }) {
+  const pathname = usePathname();
+  const isBlogContent = pathname && pathname.startsWith('/blog/');
+  const backHref = isBlogContent ? '/blog' : '/';
+  const backText = isBlogContent ? 'Back to Blog' : 'Back to Game';
+
   const badge = BADGE_PRESETS[badgeColor] || BADGE_PRESETS.green;
   return (
     <div style={{
@@ -274,7 +283,7 @@ export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', childre
         gap: '0.75rem',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <Link href="/" style={{
+          <Link href={backHref} style={{
             background: '#f3f4f6',
             border: '1px solid #e5e7eb',
             color: '#1f2937',
@@ -293,7 +302,7 @@ export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', childre
               <line x1="19" y1="12" x2="5" y2="12" />
               <polyline points="12 19 5 12 12 5" />
             </svg>
-            <span>Back to Game</span>
+            <span>{backText}</span>
           </Link>
 
           <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', color: '#6b7280' }}>
@@ -327,14 +336,18 @@ export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', childre
 }
 
 export function SiteFooter() {
-  const links = [
+  const mainLinks = [
     { href: '/', label: 'Home' },
     { href: '/flag-guesser', label: 'Flag Guesser' },
     { href: '/guides', label: 'Guides & Strategy' },
     { href: '/leaderboard', label: 'Leaderboard' },
+    { href: '/blog', label: 'Blog' },
     { href: '/about', label: 'About Us' },
     { href: '/community', label: 'Community' },
     { href: '/contact', label: 'Contact Us' },
+  ];
+  
+  const legalLinks = [
     { href: '/privacy', label: 'Privacy Policy' },
     { href: '/terms', label: 'Terms of Service' },
     { href: '/cookies', label: 'Cookie Policy' },
@@ -342,7 +355,7 @@ export function SiteFooter() {
   ];
 
   return (
-    <footer style={{ background: '#0d0d0d', borderTop: '1px solid rgba(255,255,255,0.08)', color: '#888' }}>
+    <footer style={{ position: 'relative', zIndex: 10, background: '#0d0d0d', borderTop: '1px solid rgba(255,255,255,0.08)', color: '#888' }}>
       <div style={{
         maxWidth: '1100px', margin: '0 auto',
         padding: 'clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)',
@@ -350,7 +363,7 @@ export function SiteFooter() {
       }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '2rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', maxWidth: '280px' }}>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: '#fff' }}>
+            <Link href="/" aria-label="LostStreet Homepage" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: '#fff' }}>
               <img src="/logo-3d-square.png" alt="LostStreet" style={{ width: '30px', height: '30px', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.35))' }} />
               <span style={{ fontWeight: 800, fontSize: '1.1rem', fontFamily: '"Outfit", sans-serif' }}>LostStreet</span>
             </Link>
@@ -359,20 +372,37 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <nav aria-label="Footer Navigation" style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(0.6rem, 1.8vw, 1.2rem)', maxWidth: '650px' }}>
-            {links.map(({ href, label }) => (
-              <Link key={href} href={href} style={{
-                color: '#9ca3af', textDecoration: 'none', fontSize: '0.85rem',
-                padding: '4px 6px', minHeight: '32px', display: 'inline-flex', alignItems: 'center',
-                transition: 'color 0.2s',
-              }}
-                onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-                onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
+          <div style={{ display: 'flex', gap: 'clamp(2rem, 4vw, 4rem)', flexWrap: 'wrap' }}>
+            <nav aria-label="Footer Navigation" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', minWidth: '140px' }}>
+              <h3 style={{ color: '#fff', fontSize: '0.95rem', fontWeight: 700, margin: '0 0 0.5rem 0' }}>Explore</h3>
+              {mainLinks.map(({ href, label }) => (
+                <Link key={href} href={href} style={{
+                  color: '#9ca3af', textDecoration: 'none', fontSize: '0.85rem',
+                  display: 'inline-block', transition: 'color 0.2s',
+                }}
+                  onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+                  onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+
+            <nav aria-label="Legal Navigation" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', minWidth: '140px' }}>
+              <h3 style={{ color: '#fff', fontSize: '0.95rem', fontWeight: 700, margin: '0 0 0.5rem 0' }}>Legal</h3>
+              {legalLinks.map(({ href, label }) => (
+                <Link key={href} href={href} style={{
+                  color: '#9ca3af', textDecoration: 'none', fontSize: '0.85rem',
+                  display: 'inline-block', transition: 'color 0.2s',
+                }}
+                  onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+                  onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          </div>
         </div>
 
         <div style={{

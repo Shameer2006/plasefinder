@@ -27,6 +27,14 @@ export default function CommunityClient() {
   return (
     <PageShell breadcrumb="Community" badgeText="Join the Discussion" badgeColor="green">
 
+      <noscript>
+        <section style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
+          <h1>LostStreet Community - Geography Gamers Network</h1>
+          <p>Join the global LostStreet geography guessing community. Connect with other street view detectives on Reddit and Instagram to share tips, discuss meta clues, and organize private multiplayer duels.</p>
+          <p>Please enable JavaScript to view the full community page.</p>
+        </section>
+      </noscript>
+
       {/* ── HERO ──────────────────────────────────────────────────────── */}
       <section style={{
         background: '#ffffff',

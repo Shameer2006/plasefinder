@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Multiplayer Geography Game Tips & 1v1 Duel Strategy (2026) | LostStreet',
+  title: 'Multiplayer Geography Tips & 1v1 Strategy | LostStreet',
   description: 'Win more 1v1 duels & multiplayer geography matches. Time management, risk strategy, reading opponent guesses & clutch tips for GeoGuessr & LostStreet.',
   alternates: { canonical: 'https://www.loststreet.online/guides/multiplayer-geography-tips' },
   keywords: ['multiplayer geography tips', 'geoguessr duel strategy', '1v1 geography game', 'loststreet multiplayer tips', 'win geography duels'],
   openGraph: {
-    title: 'Multiplayer Geography Game Tips & 1v1 Duel Strategy (2026)',
+    title: 'Multiplayer Geography Tips & 1v1 Strategy (2026)',
     description: 'Time management, risk strategy & clutch tips to win more 1v1 geography duels.',
     url: 'https://www.loststreet.online/guides/multiplayer-geography-tips',
     type: 'article',
@@ -212,6 +212,17 @@ export default function ArticlePage() {
             <p>
               Following this routine for 30 days will produce a measurable improvement in your ELO and your overall geography knowledge.
             </p>
+
+            
+            {/* ── RELATED GUIDES ─────────────────────────────────────────── */}
+            <div style={{ marginTop: '3rem', borderTop: '1px solid #e5e7eb', paddingTop: '2rem', paddingBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#111827', marginBottom: '1.25rem' }}>Continue Learning</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+                <Link href="/guides/how-to-guess-locations-from-street-view" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>Guess Countries from Road Signs & Language Clues →</Link>
+                <Link href="/guides/hardest-countries-to-guess" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>The 10 Hardest Countries to Guess in Street View →</Link>
+                <Link href="/guides/25-pro-street-view-geoguessr-secrets" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>25 Pro Street View Secrets Most Players Miss →</Link>
+              </div>
+            </div>
 
             {/* ── CTA CALLOUT ────────────────────────────────────────────── */}
             <div style={{

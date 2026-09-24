@@ -450,6 +450,13 @@ export default function Home() {
       color: 'white',
       backgroundColor: '#0a0d1a'
     }}>
+      <noscript>
+        <section style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
+          <h1>LostStreet — Free World Geography Game</h1>
+          <p>LostStreet drops you onto random streets worldwide. Spot clues, guess the country, and compete with friends. 780,000+ locations, 100% free.</p>
+          <p>Please enable JavaScript to play LostStreet.</p>
+        </section>
+      </noscript>
       {/* Live 360° Panorama Background Viewer */}
       <HeroPanorama />
 
@@ -465,7 +472,7 @@ export default function Home() {
         pointerEvents: 'auto',
       }}>
         {/* Logo & Tagline */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'white', flexShrink: 0 }}>
+        <Link href="/" aria-label="LostStreet Homepage" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'white', flexShrink: 0 }}>
           <img src="/logo-3d-square.png" alt="LostStreet" style={{ width: '34px', height: '34px', objectFit: 'contain', flexShrink: 0, filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.4))' }} />
           <div>
             <div style={{ fontWeight: 800, fontSize: '1.15rem', fontFamily: '"Outfit", sans-serif', letterSpacing: '0.01em', lineHeight: 1.1, whiteSpace: 'nowrap' }}>LostStreet</div>
@@ -475,9 +482,9 @@ export default function Home() {
 
         {/* Center Nav Links (Desktop Only) */}
         <nav aria-label="Main Navigation" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px, 1.4vw, 18px)' }} className="home-header-nav">
-          <Link href="/flag-guesser" style={{ color: '#e5e7eb', fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Outfit", sans-serif', transition: 'color 0.2s' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
-            Flag Guesser
+          <Link href="/blog" style={{ color: '#e5e7eb', fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Outfit", sans-serif', transition: 'color 0.2s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Blog
           </Link>
           <Link href="/guides" style={{ color: '#e5e7eb', fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Outfit", sans-serif', transition: 'color 0.2s' }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
@@ -503,7 +510,36 @@ export default function Home() {
 
         {/* Right Status Pill, Coin HUD, Notification Bell, Settings Button, User Avatar & Mobile Menu Toggle */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <CoinHUD onOpenDailyReward={() => setShowDailyRewardOverlay(true)} />
+          {(!user || user.isAnonymous) ? (
+            <>
+              {/* Hide CoinHUD on mobile if logged out so we have room for the Login button */}
+              <div className="home-header-auth">
+                <CoinHUD onOpenDailyReward={() => setShowDailyRewardOverlay(true)} />
+              </div>
+              
+              {/* Login button - visible everywhere when logged out */}
+              <button 
+                style={{ 
+                  background: 'linear-gradient(135deg, #10b981, #059669)', 
+                  border: 'none', 
+                  color: 'white', 
+                  padding: '6px 14px', 
+                  borderRadius: '10px', 
+                  fontSize: '0.85rem', 
+                  fontWeight: 700, 
+                  cursor: 'pointer', 
+                  fontFamily: '"Outfit", sans-serif', 
+                  boxShadow: '0 4px 12px rgba(16,185,129,0.3)', 
+                  whiteSpace: 'nowrap' 
+                }} 
+                onClick={loginWithGoogle}
+              >
+                Login
+              </button>
+            </>
+          ) : (
+            <CoinHUD onOpenDailyReward={() => setShowDailyRewardOverlay(true)} />
+          )}
 
           {/* Notification Bell with unread counter */}
           <button
@@ -577,11 +613,9 @@ export default function Home() {
             <span className="home-header-settings-text">Settings</span>
           </button>
 
-          {/* Login / Avatar — hidden on mobile, accessible via hamburger */}
+          {/* User Avatar — hidden on mobile, accessible via hamburger */}
           <div className="home-header-auth">
-            {(!user || user.isAnonymous) ? (
-              <button style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none', color: 'white', padding: '6px 14px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer', fontFamily: '"Outfit", sans-serif', boxShadow: '0 4px 12px rgba(16,185,129,0.3)', whiteSpace: 'nowrap' }} onClick={loginWithGoogle}>Login</button>
-            ) : (
+            {(!user || user.isAnonymous) ? null : (
               <button onClick={() => setShowProfile(true)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }} aria-label="Open profile">
                 {user.photoURL ? (
                   <img src={user.photoURL} referrerPolicy="no-referrer" alt="Profile" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover', display: 'block', border: '2px solid rgba(255,255,255,0.3)' }} />

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "How to Get Better at Geography Guessing Games (2026) | LostStreet",
+  title: "Get Better at Geography Games (2026) | LostStreet",
   description: "Practical strategies to improve your geography game scores. Learn languages, road signs, infrastructure, climate and more — used by top GeoGuessr & LostStreet players.",
   alternates: { canonical: "https://www.loststreet.online/guides/how-to-improve-at-geography-games" },
   keywords: ["get better at geography games", "improve geography game score", "geoguessr tips", "street view guesser tips", "geography game practice", "how to improve geoguessr", "loststreet guide"],
@@ -337,6 +337,17 @@ export default function ArticlePage() {
             <h2 style={headingStyle}>Conclusion</h2>
             <p>Geography guessing games are more than just entertainment — they sharpen observation, critical thinking, and global awareness. By learning to recognize languages, road signs, infrastructure, climate, architecture, and other subtle clues, you can dramatically improve your accuracy and confidence.</p>
             <p>Whether you&apos;re playing <strong>GeoGuessr</strong>, <strong>LostStreet</strong>, <strong>OpenGuessr</strong>, <strong>WorldGuessr</strong>, or <strong>City Guesser</strong>, the key is consistent practice and careful analysis of every round. Over time, you&apos;ll begin to recognize patterns instinctively and make faster, more accurate guesses.</p>
+
+            
+            {/* ── RELATED GUIDES ─────────────────────────────────────────── */}
+            <div style={{ marginTop: '3rem', borderTop: '1px solid #e5e7eb', paddingTop: '2rem', paddingBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#111827', marginBottom: '1.25rem' }}>Continue Learning</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+                <Link href="/guides/how-to-guess-locations-from-street-view" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>Guess Countries from Road Signs & Language Clues →</Link>
+                <Link href="/guides/hardest-countries-to-guess" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>The 10 Hardest Countries to Guess in Street View →</Link>
+                <Link href="/guides/25-pro-street-view-geoguessr-secrets" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>25 Pro Street View Secrets Most Players Miss →</Link>
+              </div>
+            </div>
 
             {/* ── CTA CALLOUT ────────────────────────────────────────────── */}
             <div style={{

@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'World Flag Identification Guide (2026) — Identify Any Country Flag | LostStreet',
+  title: 'World Flag Guide — Identify Any Country Flag | LostStreet',
   description: 'Learn to identify every country flag by color, pattern & region. Tricolours, crescents, crosses, stars — plus the most commonly confused flag pairs in quiz games.',
   alternates: { canonical: 'https://www.loststreet.online/guides/flag-identification-guide' },
   keywords: ['identify flag', 'country flag identifier', 'flag identification', 'world flags quiz', 'flag guesser', 'country flag quiz', 'flags of the world identifier'],
   openGraph: {
-    title: 'World Flag Identification Guide (2026) — Identify Any Country Flag',
+    title: 'World Flag Guide — Identify Any Country Flag (2026)',
     description: 'World flags grouped by visual pattern. Tricolours, crescents, crosses, stars & confused flag pairs.',
     url: 'https://www.loststreet.online/guides/flag-identification-guide',
     type: 'article',
@@ -213,6 +213,17 @@ export default function ArticlePage() {
               <li>Use LostStreet's Flag Guesser mode for daily practice — 5 minutes a day builds recognition quickly.</li>
               <li>Associate flags with their country's history — the story behind a flag makes it memorable.</li>
             </ul>
+
+            
+            {/* ── RELATED GUIDES ─────────────────────────────────────────── */}
+            <div style={{ marginTop: '3rem', borderTop: '1px solid #e5e7eb', paddingTop: '2rem', paddingBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#111827', marginBottom: '1.25rem' }}>Continue Learning</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+                <Link href="/guides/how-to-guess-locations-from-street-view" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>Guess Countries from Road Signs & Language Clues →</Link>
+                <Link href="/guides/hardest-countries-to-guess" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>The 10 Hardest Countries to Guess in Street View →</Link>
+                <Link href="/guides/25-pro-street-view-geoguessr-secrets" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>25 Pro Street View Secrets Most Players Miss →</Link>
+              </div>
+            </div>
 
             {/* ── CTA CALLOUT ────────────────────────────────────────────── */}
             <div style={{

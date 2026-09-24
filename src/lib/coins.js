@@ -89,14 +89,25 @@ export async function spendCoins(itemId, uid, currentBalance = 0) {
     }
 
     const data = await res.json();
+    const finalBalance = typeof data.newBalance === 'number' ? data.newBalance : optimisticBalance;
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('placefinder_coins', finalBalance.toString());
+      } catch (e) {}
+    }
     return {
       success: true,
-      newBalance: typeof data.newBalance === 'number' ? data.newBalance : optimisticBalance,
+      newBalance: finalBalance,
       item
     };
   } catch (err) {
     console.warn('Spend API network warning, applying local fallback:', err);
     // Offline / guest fallback
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('placefinder_coins', optimisticBalance.toString());
+      } catch (e) {}
+    }
     return {
       success: true,
       newBalance: optimisticBalance,

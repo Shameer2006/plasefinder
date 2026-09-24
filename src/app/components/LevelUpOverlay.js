@@ -215,6 +215,26 @@ export default function LevelUpOverlay({ data, onClose }) {
           <p>You reached Level <strong>{data?.newLevel || 2}</strong></p>
         </div>
 
+        {/* Bonus Coins Reward */}
+        {data?.bonusCoins > 0 && (
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            background: 'rgba(234, 179, 8, 0.18)',
+            border: '1px solid rgba(234, 179, 8, 0.45)',
+            borderRadius: '20px',
+            padding: '8px 18px',
+            color: '#fef08a',
+            fontWeight: 800,
+            fontSize: '1.05rem',
+            margin: '0 auto 1.25rem',
+            boxShadow: '0 4px 15px rgba(234, 179, 8, 0.25)'
+          }}>
+            <span>🪙 +{data.bonusCoins} Bonus Coins!</span>
+          </div>
+        )}
+
         {/* CTA button */}
         <div>
           <button className="lu-btn btn" onClick={onClose}>Awesome!</button>

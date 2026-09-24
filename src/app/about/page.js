@@ -178,6 +178,9 @@ export default function AboutPage() {
               Unlike other platforms, it requires <strong>no subscription</strong> and offers unlimited daily plays,
               real-time ELO-based multiplayer duels, and private party modes for up to 20 players.
             </p>
+            <p style={{ margin: '1rem 0 0 0', color: '#374151', lineHeight: 1.7, fontSize: '0.98rem' }}>
+              We prioritize player experience and privacy. See our <Link href="/privacy" style={{ color: '#059669', textDecoration: 'underline' }}>Privacy Policy</Link> for details on data handling and terms.
+            </p>
           </div>
 
           {/* ── FEATURE GRID ────────────────────────────────────────────── */}

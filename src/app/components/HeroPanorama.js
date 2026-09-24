@@ -78,10 +78,10 @@ export default function HeroPanorama() {
 
   return (
     <div className="hero-panorama-container" style={{
-      position: 'absolute',
+      position: 'fixed',
       inset: 0,
       width: '100%',
-      height: '100%',
+      height: '100dvh',
       overflow: 'hidden',
       zIndex: 0,
       backgroundColor: '#0f172a'

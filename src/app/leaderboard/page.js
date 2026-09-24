@@ -89,6 +89,13 @@ export default function LeaderboardPage() {
         boxSizing: 'border-box',
         padding: 'clamp(2rem, 5vw, 3.5rem) clamp(1rem, 3vw, 2rem) 4rem',
       }}>
+        <noscript>
+          <section>
+            <h1>Global Leaderboard & Rankings - LostStreet</h1>
+            <p>See the top 50 geography guessers on LostStreet. Check player ELO ratings from 1v1 duels, view the most experienced players by total XP, and see current daily challenge streaks.</p>
+            <p>Please enable JavaScript to view the full interactive real-time leaderboard.</p>
+          </section>
+        </noscript>
 
         {/* Header Title Section */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>

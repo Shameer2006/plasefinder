@@ -14,12 +14,18 @@ const GUIDE_SLUGS = [
   'multiplayer-geography-tips',
 ];
 
+const BLOG_SLUGS = [
+  'what-is-loststreet',
+  'flag-guesser-journey',
+];
+
 export default function sitemap() {
   const now = new Date();
 
   const baseRoutes = [
     { url: 'https://www.loststreet.online', lastModified: now, changeFrequency: 'daily', priority: 1.0 },
     { url: 'https://www.loststreet.online/guides', lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: 'https://www.loststreet.online/blog', lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: 'https://www.loststreet.online/flag-guesser', lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
     { url: 'https://www.loststreet.online/leaderboard', lastModified: now, changeFrequency: 'daily', priority: 0.85 },
     { url: 'https://www.loststreet.online/about', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
@@ -38,5 +44,12 @@ export default function sitemap() {
     priority: 0.85,
   }));
 
-  return [...baseRoutes, ...guideRoutes];
+  const blogRoutes = BLOG_SLUGS.map(slug => ({
+    url: `https://www.loststreet.online/blog/${slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.85,
+  }));
+
+  return [...baseRoutes, ...guideRoutes, ...blogRoutes];
 }

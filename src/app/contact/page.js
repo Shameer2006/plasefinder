@@ -37,6 +37,14 @@ export default function ContactPage() {
         padding: 'clamp(2rem, 5vw, 3.5rem) clamp(1rem, 3vw, 2rem) 4rem',
       }}>
 
+        <noscript>
+          <section>
+            <h1>Contact LostStreet Support</h1>
+            <p>Have questions about our free street view geography game? Found a bug in a map or want to suggest new locations? Reach out to the LostStreet team.</p>
+            <p>Please enable JavaScript to use our contact form.</p>
+          </section>
+        </noscript>
+
         {/* Hero Header */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <span style={{

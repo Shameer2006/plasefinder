@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "The Map Sleuth's Guide: Guessing Countries Using Road Signs & Language Toponymy | LostStreet",
+  title: "Guess Countries from Road Signs & Language | LostStreet",
   description: "Drop into any random street view location and guess the country in under a minute using road sign hardware, bollards, utility poles, and language toponymy clues.",
   alternates: { canonical: "https://www.loststreet.online/guides/how-to-guess-locations-from-street-view" },
   keywords: [
@@ -9,7 +9,7 @@ export const metadata = {
     "language toponymy clues", "cyrillic vs latin road signs", "street view sign backings", "geoguessr guide"
   ],
   openGraph: {
-    title: "The Map Sleuth's Guide: Guessing Countries Using Road Signs & Language Toponymy",
+    title: "Guess Countries from Road Signs & Language Clues",
     description: "Learn how to identify countries in Street View using road hardware, sign backings, bollards, utility poles, and language toponymy.",
     url: "https://www.loststreet.online/guides/how-to-guess-locations-from-street-view",
     type: "article",
@@ -266,6 +266,17 @@ export default function ArticlePage() {
             <p>
               Pay attention to the suffixes on town entry signs. A town ending in <strong>-grad</strong> or <strong>-vo</strong> points to Slavic regions, while <strong>-burg</strong> or <strong>-dorf</strong> indicates Germanic influence. In Central Asia, the <strong>-abad</strong> and <strong>-stan</strong> suffixes dominate the map.
             </p>
+
+            
+            {/* ── RELATED GUIDES ─────────────────────────────────────────── */}
+            <div style={{ marginTop: '3rem', borderTop: '1px solid #e5e7eb', paddingTop: '2rem', paddingBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#111827', marginBottom: '1.25rem' }}>Continue Learning</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+                <Link href="/guides/how-to-guess-locations-from-street-view" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>Guess Countries from Road Signs & Language Clues →</Link>
+                <Link href="/guides/hardest-countries-to-guess" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>The 10 Hardest Countries to Guess in Street View →</Link>
+                <Link href="/guides/25-pro-street-view-geoguessr-secrets" style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '10px', textDecoration: 'none', color: '#111827', fontWeight: 700, transition: 'border-color 0.2s', display: 'block' }}>25 Pro Street View Secrets Most Players Miss →</Link>
+              </div>
+            </div>
 
             {/* ── CTA CALLOUT ────────────────────────────────────────────── */}
             <div style={{
