@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "Best Free GeoGuessr Alternatives & Street View Guessers (2026)",
+  title: "GeoGuessr Alternative: The Best Free Street View Games (2026)",
   description: "Discover the top free GeoGuessr alternatives and free street view guesser games in 2026. Explore LostStreet for unlimited 360° panoramas, 1v1 duels, and zero subscriptions.",
   alternates: { canonical: "https://www.loststreet.online/guides/best-free-geoguessr-alternatives" },
   keywords: [
@@ -9,7 +9,7 @@ export const metadata = {
     "best free street view guesser game", "geoguessr alternative no subscription", "online map guessing games"
   ],
   openGraph: {
-    title: "Best Free GeoGuessr Alternatives & Street View Guessers (2026)",
+    title: "GeoGuessr Alternative: The Best Free Street View Games",
     description: "Looking for a free street view guesser game? Discover the top free GeoGuessr alternatives featuring LostStreet multiplayer and unlimited rounds.",
     url: "https://www.loststreet.online/guides/best-free-geoguessr-alternatives",
     type: "article",

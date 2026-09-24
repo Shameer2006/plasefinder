@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "10 Hardest Countries in Street View (2026) | LostStreet",
-  description: "Struggling with Russia, Lesotho, or Argentina? Master the exact visual clues, road markings, and car meta to identify the 10 hardest countries instantly.",
+  title: "Top 10 Hardest Countries to Guess in Street View (2026)",
+  description: "Looking for the hardest country to guess in street view? Discover the top 10 most difficult countries and learn the exact visual clues to identify them instantly.",
   alternates: { canonical: "https://www.loststreet.online/guides/hardest-countries-to-guess" },
   keywords: [
     "hardest countries to guess", "hardest country to guess", "hard countries to guess",
@@ -12,7 +12,7 @@ export const metadata = {
     "street view guesser tips", "geography guessing game guide", "loststreet guide"
   ],
   openGraph: {
-    title: "10 Hardest Countries in Street View — Can You Guess Them?",
+    title: "Top 10 Hardest Countries to Guess in Street View",
     description: "Russia, Mongolia, Botswana... These 10 countries stump even the best street view guessers. Learn the exact visual clues to finally crack them.",
     url: "https://www.loststreet.online/guides/hardest-countries-to-guess",
     type: "article",
