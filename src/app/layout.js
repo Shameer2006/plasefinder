@@ -102,12 +102,6 @@ const jsonLd = [
       "World Flag quiz mode",
       "Helpful power-ups including 50/50 and smart clues"
     ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "312",
-      "bestRating": "5"
-    },
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -165,7 +159,7 @@ const jsonLd = [
     "logo": "https://www.loststreet.online/icon.png",
     "sameAs": [
       "https://www.reddit.com/r/LostStreet",
-      "https://www.instagram.com/loststreet.online"
+      "https://www.instagram.com/loststreet.co"
     ]
   },
   {
@@ -238,14 +232,7 @@ export default function RootLayout({ children }) {
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
           />
         ))}
-        {/* AdSense — lazyOnload so it does not compete with main thread first paint */}
-        <Script
-          id="adsense"
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1006713173738488"
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
-        />
+        {/* AdSense script is loaded once in the body below — removed duplicate from head */}
       </head>
       <body suppressHydrationWarning={true}>
         {/* GTM noscript fallback */}
