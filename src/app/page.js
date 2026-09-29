@@ -35,6 +35,9 @@ export default function Home() {
   } = useGameStore();
   const [isQueuing, setIsQueuing] = useState(false);
   const [queueSub, setQueueSub] = useState(null);
+  const [queueType, setQueueType] = useState('unranked');
+  const [queueElapsed, setQueueElapsed] = useState(0);
+  const [queueEloRange, setQueueEloRange] = useState(100);
   const [showSettings, setShowSettings] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showDifficulty, setShowDifficulty] = useState(false);
@@ -59,6 +62,19 @@ export default function Home() {
   const [pendingMode, setPendingMode] = useState('CLASSIC');
   const [flagDifficulty, setFlagDifficulty] = useState('EASY');
   const toast = useToast();
+
+  // Queue elapsed timer
+  useEffect(() => {
+    if (!isQueuing) { setQueueElapsed(0); setQueueEloRange(100); return; }
+    const start = Date.now();
+    const tick = setInterval(() => {
+      const secs = Math.floor((Date.now() - start) / 1000);
+      setQueueElapsed(secs);
+      // mirror ELO widening: +100 every 5s, max 500
+      if (queueType === 'ranked') setQueueEloRange(Math.min(100 + Math.floor(secs / 5) * 100, 500));
+    }, 1000);
+    return () => clearInterval(tick);
+  }, [isQueuing, queueType]);
 
   // Always reset to MENU on fresh page load/launch, or launch FLAG_GAME if requested
   useEffect(() => {
@@ -243,8 +259,18 @@ export default function Home() {
   if (loading && !userProfile) return <Spinner text="Loading LostStreet..." />;
 
   if (matchFoundData) {
+    const opp = matchFoundData.opponentData;
+    const oppName = opp?.displayName || 'Opponent';
+    const oppElo = opp?.elo;
+    const oppCountry = opp?.countryCode;
+    const oppAvatarColor = opp?.avatarColor || 'ef4444';
+    const oppAvatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(oppName)}&background=${oppAvatarColor}&color=fff&size=120&bold=true&rounded=true`;
+    const flagEmoji = (cc) => {
+      if (!cc || cc.length !== 2) return null;
+      return String.fromCodePoint(...[...cc.toUpperCase()].map(c => 0x1F1E6 - 65 + c.charCodeAt(0)));
+    };
     return (
-      <div style={{ position: 'fixed', inset: 0, zIndex: 10000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(10, 10, 26, 0.95)', backdropFilter: 'blur(15px)' }}>
+      <div style={{ position: 'fixed', inset: 0, zIndex: 10000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(10, 10, 26, 0.97)', backdropFilter: 'blur(20px)' }}>
         <style>{`
           @keyframes clash-left {
             0% { transform: translateX(-100vw) rotate(-10deg); opacity: 0; }
@@ -259,23 +285,46 @@ export default function Home() {
             50% { transform: scale(1.5) rotate(10deg); opacity: 1; }
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
           }
+          @keyframes vs-glow { 0%,100% { text-shadow: 0 0 20px #fbbf24; } 50% { text-shadow: 0 0 50px #f59e0b, 0 0 80px #fbbf24; } }
+          @keyframes badge-slide { 0% { opacity:0; transform: translateY(-10px); } 100% { opacity:1; transform: translateY(0); } }
         `}</style>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '3rem', margin: '0 auto', maxWidth: '800px', flexWrap: 'wrap', justifyContent: 'center' }} className="vs-match-screen">
+        {/* Match type badge */}
+        <div style={{ animation: 'badge-slide 0.4s ease forwards', marginBottom: '2rem', padding: '6px 18px', borderRadius: '20px', background: matchFoundData.type === 'ranked' ? 'linear-gradient(135deg,#f59e0b,#dc2626)' : 'linear-gradient(135deg,#3b82f6,#6366f1)', fontSize: '0.75rem', fontWeight: 900, letterSpacing: '2px', color: 'white', textTransform: 'uppercase' }}>
+          {matchFoundData.type === 'ranked' ? '★ Ranked Duel' : 'Unranked Match'}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(1.5rem, 5vw, 4rem)', margin: '0 auto', maxWidth: '800px', flexWrap: 'wrap', justifyContent: 'center' }} className="vs-match-screen">
+          {/* Player card */}
           <div style={{ animation: 'clash-left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards', textAlign: 'center' }}>
-            <img src={user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName}`} className="vs-avatar" style={{ width: '120px', height: '120px', borderRadius: '50%', border: '4px solid var(--primary-color)', boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' }} />
-            <h3 style={{ fontSize: 'clamp(1rem, 3vw, 1.5rem)', marginTop: '1rem', color: 'white' }}>{user.displayName}</h3>
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              <img src={user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName || 'Me')}&background=3b82f6&color=fff&size=120&bold=true&rounded=true`} className="vs-avatar" style={{ width: '110px', height: '110px', borderRadius: '50%', border: '4px solid #3b82f6', boxShadow: '0 0 25px rgba(59,130,246,0.6), 0 0 60px rgba(59,130,246,0.2)', display: 'block' }} />
+              {userProfile?.countryCode && <span style={{ position: 'absolute', bottom: 4, right: 4, fontSize: '1.4rem', filter: 'drop-shadow(0 1px 2px #000)' }}>{flagEmoji(userProfile.countryCode)}</span>}
+            </div>
+            <h3 style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1.3rem)', marginTop: '0.75rem', color: 'white', fontWeight: 800 }}>{user.displayName}</h3>
+            {userProfile?.elo && <p style={{ fontSize: '0.78rem', color: '#93c5fd', margin: '2px 0 0', fontWeight: 700 }}>ELO {userProfile.elo}</p>}
+            <p style={{ fontSize: '0.7rem', color: '#60a5fa', marginTop: 2, fontWeight: 600, letterSpacing: '1px' }}>YOU</p>
           </div>
-          <div style={{ animation: 'vs-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.3s', opacity: 0, fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: '900', fontStyle: 'italic', background: 'linear-gradient(to bottom, #fbbf24, #f59e0b)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          {/* VS */}
+          <div style={{ animation: 'vs-pop 0.6s cubic-bezier(0.175,0.885,0.32,1.275) forwards 0.3s, vs-glow 2s ease-in-out infinite 1s', opacity: 0, fontSize: 'clamp(2.5rem, 7vw, 4.5rem)', fontWeight: 900, fontStyle: 'italic', background: 'linear-gradient(to bottom, #fbbf24, #f59e0b)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
             VS
           </div>
+          {/* Opponent card */}
           <div style={{ animation: 'clash-right 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards', textAlign: 'center' }}>
-            <div className="vs-avatar" style={{ width: '120px', height: '120px', borderRadius: '50%', border: '4px solid #ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(239, 68, 68, 0.2)', boxShadow: '0 0 20px rgba(239, 68, 68, 0.5)' }}>
-              <span style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>?</span>
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              {opp ? (
+                <img src={oppAvatarUrl} style={{ width: '110px', height: '110px', borderRadius: '50%', border: `4px solid #${oppAvatarColor}`, boxShadow: `0 0 25px rgba(239,68,68,0.6), 0 0 60px rgba(239,68,68,0.2)`, display: 'block' }} alt={oppName} />
+              ) : (
+                <div style={{ width: '110px', height: '110px', borderRadius: '50%', border: '4px solid #ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(239,68,68,0.15)', boxShadow: '0 0 25px rgba(239,68,68,0.5)' }}>
+                  <span style={{ fontSize: '3rem' }}>?</span>
+                </div>
+              )}
+              {oppCountry && <span style={{ position: 'absolute', bottom: 4, right: 4, fontSize: '1.4rem', filter: 'drop-shadow(0 1px 2px #000)' }}>{flagEmoji(oppCountry)}</span>}
             </div>
-            <h3 style={{ fontSize: 'clamp(1rem, 3vw, 1.5rem)', marginTop: '1rem', color: 'white' }}>Opponent</h3>
+            <h3 style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1.3rem)', marginTop: '0.75rem', color: 'white', fontWeight: 800 }}>{oppName}</h3>
+            {oppElo && <p style={{ fontSize: '0.78rem', color: '#fca5a5', margin: '2px 0 0', fontWeight: 700 }}>ELO {oppElo}</p>}
+            {opp?.isBot && <p style={{ fontSize: '0.7rem', color: '#f87171', marginTop: 2, fontWeight: 600, letterSpacing: '1px' }}>AI BOT</p>}
           </div>
         </div>
-        <h2 style={{ animation: 'fade-in 0.5s ease forwards 1s', opacity: 0, marginTop: '3rem', color: '#ccc', fontSize: 'clamp(0.9rem, 2vw, 1.2rem)', letterSpacing: '2px' }}>PREPARING MATCH...</h2>
+        <h2 style={{ animation: 'badge-slide 0.5s ease forwards 1s', opacity: 0, marginTop: '2.5rem', color: '#9ca3af', fontSize: 'clamp(0.8rem, 2vw, 1rem)', letterSpacing: '3px', fontWeight: 700 }}>PREPARING MATCH...</h2>
       </div>
     );
   }
@@ -326,21 +375,33 @@ export default function Home() {
     }
 
     const { joinRankedQueue, leaveRankedQueue, joinUnrankedQueue, leaveUnrankedQueue } = await import('@/lib/matchmaking');
+    const { getDoc, doc: fsDoc } = await import('firebase/firestore');
+    setQueueType(type);
     setIsQueuing(true);
-    toast.info(`Searching for an opponent... (${type})`);
 
     const joinQueue = type === 'ranked' ? joinRankedQueue : joinUnrankedQueue;
     const leaveQueue = type === 'ranked' ? leaveRankedQueue : leaveUnrankedQueue;
 
-    const result = await joinQueue(userProfile, (gameId) => {
+    const result = await joinQueue(userProfile, async (gameId) => {
       setIsQueuing(false);
-      sounds.playMatchFound();
-      toast.success("Match found!");
-      setMatchFoundData({ gameId, type });
+      try { sounds.playMatchFound(); } catch {}
+
+      // Fetch match doc to get real opponent data
+      let opponentData = null;
+      try {
+        const snap = await getDoc(fsDoc(db, 'matches', gameId));
+        if (snap.exists()) {
+          const players = snap.data().players || {};
+          const oppEntry = Object.entries(players).find(([uid]) => uid !== userProfile.uid);
+          if (oppEntry) opponentData = { uid: oppEntry[0], ...oppEntry[1] };
+        }
+      } catch (e) { console.warn('Could not fetch opponent data:', e); }
+
+      setMatchFoundData({ gameId, type, opponentData });
       setTimeout(() => {
         setMatchFoundData(null);
         setGameState(`MULTIPLAYER_${gameId}`);
-      }, 2500); // Wait 2.5 seconds to show the VS screen
+      }, 2800);
     });
 
     if (result && result.unsubscribe) {
@@ -459,6 +520,18 @@ export default function Home() {
       </noscript>
       {/* Live 360° Panorama Background Viewer */}
       <HeroPanorama />
+
+      {/* Searching overlay — shown while queue is active */}
+      {isQueuing && !matchFoundData && (
+        <SearchingOverlay
+          queueType={queueType}
+          elapsed={queueElapsed}
+          eloRange={queueEloRange}
+          onCancel={cancelMatchmaking}
+          userElo={userProfile?.elo || 1000}
+        />
+      )}
+
 
       {/* ── Homepage Header Bar ── */}
       <header className="home-header" style={{
@@ -1532,3 +1605,137 @@ const MatchmakingMenu = ({ onBack, onSelect }) => (
     </div>
   </div>
 );
+
+const QUEUE_TIPS = [
+  'A bot will join automatically if no player is found in time.',
+  'Ranked matches affect your ELO rating — play your best!',
+  'Drop your pin quickly for maximum points.',
+  'Look for road signs, car plates, and sun angle for clues.',
+  'Pro tip: bollard colors can reveal the country instantly.',
+  'Unranked matches are great for practicing new strategies.',
+];
+
+const SearchingOverlay = ({ queueType, elapsed, eloRange, onCancel, userElo }) => {
+  const [tipIndex, setTipIndex] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setTipIndex(i => (i + 1) % QUEUE_TIPS.length), 4000);
+    return () => clearInterval(t);
+  }, []);
+
+  const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
+  const secs = String(elapsed % 60).padStart(2, '0');
+
+  return (
+    <div style={{
+      position: 'fixed', inset: 0, zIndex: 9000,
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      background: 'rgba(8, 10, 22, 0.96)', backdropFilter: 'blur(24px)',
+      color: 'white', textAlign: 'center', padding: '2rem',
+    }}>
+      <style>{`
+        @keyframes sonar-ring {
+          0% { transform: scale(0.3); opacity: 0.75; }
+          100% { transform: scale(2.8); opacity: 0; }
+        }
+        @keyframes sonar-center-pulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(99,102,241,0.7); }
+          50% { box-shadow: 0 0 0 16px rgba(99,102,241,0); }
+        }
+        @keyframes tip-fade {
+          0% { opacity: 0; transform: translateY(6px); }
+          15% { opacity: 1; transform: translateY(0); }
+          85% { opacity: 1; transform: translateY(0); }
+          100% { opacity: 0; transform: translateY(-6px); }
+        }
+        @keyframes elo-bar-fill { from { width: 0; } to { width: var(--bar-w); } }
+      `}</style>
+
+      {/* Sonar pulse rings */}
+      <div style={{ position: 'relative', width: '140px', height: '140px', marginBottom: '2.5rem', flexShrink: 0 }}>
+        {[0, 0.7, 1.4].map((delay, i) => (
+          <div key={i} style={{
+            position: 'absolute', inset: 0, borderRadius: '50%',
+            border: `2px solid ${queueType === 'ranked' ? '#f59e0b' : '#6366f1'}`,
+            animation: `sonar-ring 2.1s ease-out ${delay}s infinite`,
+          }} />
+        ))}
+        {/* Center icon */}
+        <div style={{
+          position: 'absolute', inset: '25%', borderRadius: '50%',
+          background: queueType === 'ranked' ? 'linear-gradient(135deg,#f59e0b,#dc2626)' : 'linear-gradient(135deg,#6366f1,#3b82f6)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          animation: 'sonar-center-pulse 2s ease-in-out infinite',
+        }}>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+        </div>
+      </div>
+
+      {/* Queue type badge */}
+      <div style={{
+        padding: '5px 16px', borderRadius: '20px', marginBottom: '1rem',
+        background: queueType === 'ranked' ? 'linear-gradient(135deg,#f59e0b,#dc2626)' : 'linear-gradient(135deg,#6366f1,#3b82f6)',
+        fontSize: '0.7rem', fontWeight: 900, letterSpacing: '2px', textTransform: 'uppercase',
+      }}>
+        {queueType === 'ranked' ? '★ Ranked Duel' : 'Unranked Match'}
+      </div>
+
+      {/* Headline */}
+      <h2 style={{ fontSize: 'clamp(1.2rem, 4vw, 1.8rem)', fontWeight: 800, marginBottom: '0.4rem', letterSpacing: '-0.02em' }}>
+        Searching for an Opponent...
+      </h2>
+
+      {/* Elapsed timer */}
+      <p style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', fontWeight: 900, fontVariantNumeric: 'tabular-nums', color: queueType === 'ranked' ? '#fbbf24' : '#818cf8', margin: '0.5rem 0 1.2rem', letterSpacing: '0.05em' }}>
+        {mins}:{secs}
+      </p>
+
+      {/* ELO range indicator (ranked only) */}
+      {queueType === 'ranked' && (
+        <div style={{ width: '100%', maxWidth: '280px', marginBottom: '1.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#9ca3af', marginBottom: '6px', fontWeight: 600 }}>
+            <span>ELO Range</span>
+            <span style={{ color: '#fbbf24' }}>±{eloRange} ({Math.max(400, userElo - eloRange)} – {userElo + eloRange})</span>
+          </div>
+          <div style={{ height: '6px', borderRadius: '3px', background: 'rgba(255,255,255,0.1)', overflow: 'hidden' }}>
+            <div style={{
+              height: '100%', borderRadius: '3px',
+              background: 'linear-gradient(90deg,#f59e0b,#dc2626)',
+              width: `${(eloRange / 500) * 100}%`,
+              transition: 'width 0.8s ease',
+            }} />
+          </div>
+          <p style={{ fontSize: '0.68rem', color: '#6b7280', marginTop: '5px' }}>Range widens every 5 seconds until a match is found</p>
+        </div>
+      )}
+
+      {/* Rotating tip */}
+      <div style={{ minHeight: '2.5rem', maxWidth: '320px', marginBottom: '2rem', position: 'relative' }}>
+        <p key={tipIndex} style={{
+          animation: 'tip-fade 4s ease forwards',
+          fontSize: '0.8rem', color: '#9ca3af', lineHeight: 1.6, margin: 0,
+        }}>
+          <span style={{ color: queueType === 'ranked' ? '#fbbf24' : '#818cf8', fontWeight: 700 }}>TIP: </span>
+          {QUEUE_TIPS[tipIndex]}
+        </p>
+      </div>
+
+      {/* Cancel button */}
+      <button onClick={onCancel} style={{
+        padding: '12px 32px', borderRadius: '10px', border: '2px solid rgba(239,68,68,0.5)',
+        background: 'rgba(239,68,68,0.1)', color: '#f87171', cursor: 'pointer',
+        fontSize: '0.875rem', fontWeight: 700, letterSpacing: '0.05em',
+        transition: 'all 0.2s',
+      }}
+        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.25)'; e.currentTarget.style.borderColor = '#ef4444'; }}
+        onMouseLeave={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.1)'; e.currentTarget.style.borderColor = 'rgba(239,68,68,0.5)'; }}
+      >
+        Cancel Search
+      </button>
+    </div>
+  );
+};
+

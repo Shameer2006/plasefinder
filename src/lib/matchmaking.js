@@ -1,6 +1,32 @@
 import { collection, doc, setDoc, getDocs, query, where, orderBy, limit, runTransaction, onSnapshot, deleteDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { db } from './firebase';
 
+// Bot identity pools
+const BOT_NAMES = [
+  'MapMaster', 'GlobalGuesser', 'StreetExplorer', 'GeoPro', 'LostFinder',
+  'WorldWalker', 'PinPoint', 'GlobeTrotter', 'UrbanSleuth', 'NomadEye',
+  'TerraTracker', 'RouteRover', 'CompassRose', 'LandmarkLee', 'SignalFox'
+];
+const BOT_COUNTRIES = [
+  'US', 'GB', 'DE', 'FR', 'JP', 'BR', 'AU', 'CA', 'IN', 'MX',
+  'IT', 'ES', 'KR', 'AR', 'ZA', 'NL', 'SE', 'NO', 'PL', 'TR',
+  'TH', 'ID', 'NG', 'EG', 'CL', 'CO', 'PT', 'RO', 'HU', 'CZ'
+];
+const BOT_AVATAR_COLORS = [
+  'ef4444', 'f97316', 'eab308', '22c55e', '06b6d4',
+  '6366f1', 'ec4899', '14b8a6', 'a855f7', 'f43f5e'
+];
+const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const makeBotProfile = (userElo, spreadFactor = 100) => ({
+  displayName: pickRandom(BOT_NAMES),
+  countryCode: pickRandom(BOT_COUNTRIES),
+  avatarColor: pickRandom(BOT_AVATAR_COLORS),
+  elo: Math.max(400, userElo + Math.round((Math.random() - 0.5) * spreadFactor)),
+  isBot: true,
+  score: 0,
+  ready: false,
+});
+
 // --- Ranked Duel Queue ---
 export const joinRankedQueue = async (userProfile, onMatchFound) => {
   if (!db || !userProfile) return null;
@@ -114,9 +140,7 @@ export const joinRankedQueue = async (userProfile, onMatchFound) => {
     await deleteDoc(myQueueRef);
 
     const gameId = `ranked_bot_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    const botNames = ['MapMaster 🤖', 'GlobalGuesser 🤖', 'StreetExplorer 🤖', 'GeoPro 🤖', 'LostFinder 🤖'];
-    const selectedBotName = botNames[Math.floor(Math.random() * botNames.length)];
-    const botElo = Math.max(400, userElo + Math.round((Math.random() - 0.5) * 100));
+    const bot = makeBotProfile(userElo, 100);
 
     const gameRef = doc(db, 'matches', gameId);
     await setDoc(gameRef, {
@@ -129,14 +153,7 @@ export const joinRankedQueue = async (userProfile, onMatchFound) => {
           score: 0,
           ready: false
         },
-        'bot_opponent': {
-          displayName: selectedBotName,
-          elo: botElo,
-          countryCode: '',
-          score: 0,
-          ready: false,
-          isBot: true
-        }
+        'bot_opponent': bot
       },
       health: {
         [userProfile.uid]: 5000,
@@ -275,9 +292,7 @@ export const joinUnrankedQueue = async (userProfile, onMatchFound) => {
     await deleteDoc(myQueueRef);
 
     const gameId = `unranked_bot_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    const botNames = ['MapMaster 🤖', 'GlobalGuesser 🤖', 'StreetExplorer 🤖', 'GeoPro 🤖', 'LostFinder 🤖'];
-    const selectedBotName = botNames[Math.floor(Math.random() * botNames.length)];
-    const botElo = Math.max(400, (userProfile.elo || 1000) + Math.round((Math.random() - 0.5) * 120));
+    const bot = makeBotProfile(userProfile.elo || 1000, 120);
 
     const gameRef = doc(db, 'matches', gameId);
     await setDoc(gameRef, {
@@ -290,14 +305,7 @@ export const joinUnrankedQueue = async (userProfile, onMatchFound) => {
           score: 0,
           ready: false
         },
-        'bot_opponent': {
-          displayName: selectedBotName,
-          elo: botElo,
-          countryCode: '',
-          score: 0,
-          ready: false,
-          isBot: true
-        }
+        'bot_opponent': bot
       },
       status: 'waiting_for_players',
       round: 1,
