@@ -1,10 +1,11 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/lib/AuthContext';
 import { collection, query, orderBy, limit, getDocs, getCountFromServer, where } from 'firebase/firestore';
 import { PageShell } from '@/app/components/SiteShell';
+import { useGameToast } from '@/app/components/GameToast';
 
 export default function LeaderboardPage() {
   const [players, setPlayers] = useState([]);
@@ -15,6 +16,9 @@ export default function LeaderboardPage() {
 
   const [myRank, setMyRank] = useState(null);
   const [myScore, setMyScore] = useState(null);
+  const gameToast = useGameToast();
+  const toastFiredRef = useRef(false);
+  const firstLoadRef = useRef(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,6 +81,84 @@ export default function LeaderboardPage() {
     };
     fetchData();
   }, [sortBy, userProfile]);
+
+  // ── Rank notification after data loads ───────────────────────────────────
+  useEffect(() => {
+    if (loading || error) return;
+
+    // Only fire once per page session (not on every sort switch)
+    if (toastFiredRef.current) return;
+    toastFiredRef.current = true;
+
+    if (!userProfile) {
+      // Logged-out users: invite to sign in
+      setTimeout(() => {
+        gameToast?.info?.(
+          '🔒 Sign in to see your rank',
+          'Create a free account and compete on the global leaderboard!'
+        );
+      }, 1200);
+      return;
+    }
+
+    if (myRank !== null) {
+      setTimeout(() => {
+        if (myRank === 1) {
+          gameToast?.rank?.(
+            '👑 You are #1 Worldwide!',
+            'Defend your crown — every duel counts.'
+          );
+        } else if (myRank <= 3) {
+          gameToast?.rank?.(
+            `🥇 Top 3 — You are Rank #${myRank}!`,
+            'A few more wins and you could take the crown.'
+          );
+        } else if (myRank <= 10) {
+          gameToast?.rank?.(
+            `🏆 Top 10 — You are Rank #${myRank}`,
+            'Keep dueling to climb even higher!'
+          );
+        } else if (myRank <= 25) {
+          gameToast?.info?.(
+            `📊 Your Rank: #${myRank}`,
+            'Win more duels to crack the Top 10!'
+          );
+        } else {
+          gameToast?.info?.(
+            `📊 Your Rank: #${myRank}`,
+            'Play daily challenges to boost your streak & ELO.'
+          );
+        }
+      }, 1000);
+    } else if (userProfile && !loading) {
+      // Signed in but no rank yet (fresh account)
+      setTimeout(() => {
+        gameToast?.info?.(
+          '🎯 No rank yet!',
+          'Win your first duel match to appear on the leaderboard.'
+        );
+      }, 1200);
+    }
+  }, [loading, error, myRank, userProfile, gameToast]);
+
+  // ── Daily tip notification ─────────────────────────────────────────────
+  useEffect(() => {
+    if (!firstLoadRef.current) return;
+    firstLoadRef.current = false;
+    const lastTip = typeof window !== 'undefined' ? localStorage.getItem('ls_lb_tip_date') : null;
+    const today = new Date().toDateString();
+    if (lastTip !== today) {
+      setTimeout(() => {
+        gameToast?.rank?.(
+          '💡 Leaderboard Tip',
+          'Duel in ranked matches to earn & protect your ELO rating!',
+          { duration: 8000 }
+        );
+        if (typeof window !== 'undefined') localStorage.setItem('ls_lb_tip_date', today);
+      }, 3500);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <PageShell breadcrumb="Leaderboard" badgeText="Official Top 50 Rankings" badgeColor="green">

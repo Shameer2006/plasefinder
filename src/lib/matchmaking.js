@@ -372,7 +372,7 @@ export const createParty = async (userProfile) => {
     players: {
       [userProfile.uid]: { 
         displayName: userProfile.username || userProfile.displayName, 
-        elo: userProfile.elo, 
+        elo: userProfile.elo || 1000, 
         countryCode: userProfile.countryCode || '',
         score: 0, 
         ready: false,

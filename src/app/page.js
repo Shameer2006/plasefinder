@@ -9,6 +9,7 @@ import { db } from '@/lib/firebase';
 import dynamic from 'next/dynamic';
 import Spinner from './components/Spinner';
 import { useToast } from './components/Toast';
+import { useGameToast } from './components/GameToast';
 import { sounds } from '@/lib/sounds';
 import HeroPanorama from './components/HeroPanorama';
 import CoinHUD from './components/CoinHUD';
@@ -25,6 +26,7 @@ const ProfileModal = dynamic(() => import('./components/ProfileModal'), { ssr: f
 const OnboardingModal = dynamic(() => import('./components/OnboardingModal'), { ssr: false });
 const DailyRewardOverlay = dynamic(() => import('./components/DailyRewardOverlay'), { ssr: false });
 const NotificationsPanel = dynamic(() => import('./components/NotificationsPanel'), { ssr: false });
+const LoginRequiredModal = dynamic(() => import('./components/LoginRequiredModal'), { ssr: false });
 
 export default function Home() {
   const { user, userProfile, setUserProfile, loading, loginWithGoogle, logout } = useAuth();
@@ -50,6 +52,10 @@ export default function Home() {
   const [joinError, setJoinError] = useState('');
   const [isJoining, setIsJoining] = useState(false);
   const [partyStartedModal, setPartyStartedModal] = useState(null);
+  const [loginModal, setLoginModal] = useState({ isOpen: false, feature: 'find_match' });
+
+  const openLoginModal = (feature) => setLoginModal({ isOpen: true, feature });
+  const closeLoginModal = () => setLoginModal(prev => ({ ...prev, isOpen: false }));
 
   useEffect(() => {
     setUnreadNotifications(getUnreadCount());
@@ -62,6 +68,7 @@ export default function Home() {
   const [pendingMode, setPendingMode] = useState('CLASSIC');
   const [flagDifficulty, setFlagDifficulty] = useState('EASY');
   const toast = useToast();
+  const gameToast = useGameToast();
 
   // Queue elapsed timer
   useEffect(() => {
@@ -72,6 +79,19 @@ export default function Home() {
       setQueueElapsed(secs);
       // mirror ELO widening: +100 every 5s, max 500
       if (queueType === 'ranked') setQueueEloRange(Math.min(100 + Math.floor(secs / 5) * 100, 500));
+      // Queue progress notifications
+      if (secs === 15) {
+        gameToast?.searching?.(
+          '⏳ Still searching...',
+          'Expanding ELO range to find you a match faster.'
+        );
+      }
+      if (secs === 45) {
+        gameToast?.warning?.(
+          '🤖 Taking a while...',
+          'If no player is found soon, a bot opponent will join.'
+        );
+      }
     }, 1000);
     return () => clearInterval(tick);
   }, [isQueuing, queueType]);
@@ -369,8 +389,8 @@ export default function Home() {
   };
 
   const startMatchmaking = async (type = 'unranked') => {
-    if (!userProfile) {
-      toast.error("Please login first to play multiplayer!");
+    if (!user || user.isAnonymous) {
+      openLoginModal('find_match');
       return;
     }
 
@@ -378,6 +398,19 @@ export default function Home() {
     const { getDoc, doc: fsDoc } = await import('firebase/firestore');
     setQueueType(type);
     setIsQueuing(true);
+
+    // Notify what mode they selected
+    if (type === 'ranked') {
+      gameToast?.rank?.(
+        '⚔️ Ranked Match Selected',
+        'Your ELO rating is on the line. Play your best!'
+      );
+    } else {
+      gameToast?.info?.(
+        '😊 Casual Match Selected',
+        'Relax — no ELO is at stake. Just have fun!'
+      );
+    }
 
     const joinQueue = type === 'ranked' ? joinRankedQueue : joinUnrankedQueue;
     const leaveQueue = type === 'ranked' ? leaveRankedQueue : leaveUnrankedQueue;
@@ -396,6 +429,13 @@ export default function Home() {
           if (oppEntry) opponentData = { uid: oppEntry[0], ...oppEntry[1] };
         }
       } catch (e) { console.warn('Could not fetch opponent data:', e); }
+
+      // Match found notification
+      const oppName = opponentData?.displayName || 'an opponent';
+      gameToast?.match?.(
+        '✅ Opponent Found!',
+        `You are matched against ${oppName}. Preparing the arena...`
+      );
 
       setMatchFoundData({ gameId, type, opponentData });
       setTimeout(() => {
@@ -419,11 +459,12 @@ export default function Home() {
     }
     setIsQueuing(false);
     toast.info("Matchmaking cancelled.");
+    gameToast?.warning?.('❌ Search Cancelled', 'You have left the matchmaking queue.');
   };
 
   const handleCreateParty = async () => {
-    if (!userProfile) {
-      toast.error("Please login first to create a party!");
+    if (!user || user.isAnonymous) {
+      openLoginModal('create_party');
       return;
     }
     const { createParty } = await import('@/lib/matchmaking');
@@ -431,17 +472,23 @@ export default function Home() {
       const gameId = await createParty(userProfile);
       if (gameId) {
         setGameState(`PARTY_LOBBY_${gameId}`);
+        gameToast?.room?.(
+          '🎉 Party Room Created!',
+          'Share the room code with friends to invite them.'
+        );
       }
     } catch (e) {
       console.error(e);
       toast.error("Failed to create party.");
+      gameToast?.error?.('💥 Room Creation Failed', 'Could not create the party. Please try again.');
     }
   };
 
   const handleJoinPartySubmit = async (e) => {
     e.preventDefault();
-    if (!userProfile) {
-      toast.error("Please login first to join a party!");
+    if (!user || user.isAnonymous) {
+      setShowJoinModal(false);
+      openLoginModal('join_party');
       return;
     }
     const cleanCode = joinCode.trim().toUpperCase();
@@ -563,10 +610,16 @@ export default function Home() {
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
             Guides
           </Link>
-          <Link href="/leaderboard" style={{ color: '#e5e7eb', fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Outfit", sans-serif', transition: 'color 0.2s' }}>
+          <button
+            onClick={() => {
+              if (!user || user.isAnonymous) { openLoginModal('leaderboard'); return; }
+              window.location.href = '/leaderboard';
+            }}
+            style={{ background: 'none', border: 'none', color: '#e5e7eb', fontSize: '0.88rem', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Outfit", sans-serif', transition: 'color 0.2s', padding: 0 }}
+          >
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path></svg>
             Leaderboard
-          </Link>
+          </button>
           <Link href="/about" style={{ color: '#e5e7eb', fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Outfit", sans-serif', transition: 'color 0.2s' }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
             About
@@ -822,15 +875,27 @@ export default function Home() {
                   onSingleplayer={() => { setPendingMode('CLASSIC'); setShowDifficulty(true); }}
                   onEndlessMode={() => { setPendingMode('ENDLESS'); setShowDifficulty(true); }}
                   onGuides={handleGuides}
-                  onFindMatchClick={() => setShowMatchmaking(true)}
+                  onFindMatchClick={() => {
+                    if (!user || user.isAnonymous) { openLoginModal('find_match'); return; }
+                    setShowMatchmaking(true);
+                  }}
                   isQueuing={isQueuing}
                   cancelMatchmaking={cancelMatchmaking}
                   onDailyChallenge={handleDailyChallenge}
                   streak={streak}
                   playedToday={playedToday}
-                  onCreateParty={handleCreateParty}
-                  onJoinParty={() => setShowJoinModal(true)}
-                  onLeaderboard={() => window.location.href = '/leaderboard'}
+                  onCreateParty={() => {
+                    if (!user || user.isAnonymous) { openLoginModal('create_party'); return; }
+                    handleCreateParty();
+                  }}
+                  onJoinParty={() => {
+                    if (!user || user.isAnonymous) { openLoginModal('join_party'); return; }
+                    setShowJoinModal(true);
+                  }}
+                  onLeaderboard={() => {
+                    if (!user || user.isAnonymous) { openLoginModal('leaderboard'); return; }
+                    window.location.href = '/leaderboard';
+                  }}
                   onAbout={() => window.location.href = '/about'}
                   onFlagGuesser={() => { setPendingMode('FLAG_GAME'); setShowDifficulty(true); }}
                 />
@@ -1139,6 +1204,12 @@ export default function Home() {
           />
         </div>
       )}
+      {/* Login Required Modal — full-screen prompt for auth-gated features */}
+      <LoginRequiredModal
+        isOpen={loginModal.isOpen}
+        feature={loginModal.feature}
+        onClose={closeLoginModal}
+      />
 
 
 

@@ -1,6 +1,7 @@
 import "./globals.css";
 import { AuthProvider } from "@/lib/AuthContext";
 import { ToastProvider } from "@/app/components/Toast";
+import { GameToastProvider } from "@/app/components/GameToast";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
@@ -248,7 +249,9 @@ export default function RootLayout({ children }) {
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <AuthProvider>
           <ToastProvider>
-            <SiteShell>{children}</SiteShell>
+            <GameToastProvider>
+              <SiteShell>{children}</SiteShell>
+            </GameToastProvider>
           </ToastProvider>
         </AuthProvider>
         <SpeedInsights />

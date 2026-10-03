@@ -1,10 +1,11 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '@/lib/AuthContext';
 import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useGameStore } from '@/lib/store';
 import { leaveParty } from '@/lib/matchmaking';
+import { useGameToast } from '@/app/components/GameToast';
 
 export default function PartyLobby({ gameId }) {
   const { userProfile } = useAuth();
@@ -20,6 +21,8 @@ export default function PartyLobby({ gameId }) {
   const [isStarting, setIsStarting] = useState(false);
   const [showLeaveConfirm, setShowLeaveConfirm] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
+  const gameToast = useGameToast();
+  const prevPlayerCountRef = useRef(null);
 
   useEffect(() => {
     fetch('/countries.json')
@@ -56,6 +59,39 @@ export default function PartyLobby({ gameId }) {
     return () => unsub();
   }, [gameId, setGameState, userProfile?.uid]);
 
+  // ── Detect players joining (notify host) ─────────────────────────────────
+  useEffect(() => {
+    if (!matchData || !userProfile) return;
+    const players = matchData.players || {};
+    const playerCount = Object.keys(players).length;
+    const isHost = players[userProfile.uid]?.host;
+
+    if (prevPlayerCountRef.current === null) {
+      prevPlayerCountRef.current = playerCount;
+      return;
+    }
+
+    if (playerCount > prevPlayerCountRef.current && isHost) {
+      // A new player joined — find out who
+      const newEntry = Object.entries(players).find(([uid, p]) => {
+        return !p.host && uid !== userProfile.uid;
+      });
+      const newName = newEntry?.[1]?.displayName || 'A player';
+      gameToast?.room?.(
+        `👋 ${newName} joined!`,
+        `Party now has ${playerCount} player${playerCount !== 1 ? 's' : ''}. Ready to start?`
+      );
+    } else if (playerCount < prevPlayerCountRef.current && isHost && playerCount > 0) {
+      gameToast?.warning?.(
+        '🚪 Player left the party',
+        `${playerCount} player${playerCount !== 1 ? 's' : ''} remaining in the lobby.`
+      );
+    }
+
+    prevPlayerCountRef.current = playerCount;
+  }, [matchData?.players, userProfile, gameToast]);
+
+
   if (!matchData || !userProfile) {
     return (
       <div style={{
@@ -91,8 +127,21 @@ export default function PartyLobby({ gameId }) {
 
   const handleStartGame = async () => {
     if (!isHost || isStarting) return;
+
+    // Warn if only 1 player
+    if (playersList.length < 2) {
+      gameToast?.warning?.(
+        '⚠️ Not Enough Players',
+        'You need at least 2 players in the lobby to start a game.'
+      );
+      return;
+    }
+
     setIsStarting(true);
-    
+    gameToast?.room?.(
+      '🚀 Game Starting!',
+      `Preparing match for ${playersList.length} players...`
+    );
     try {
       const { fetchRandomLocation } = await import('@/lib/locationManager');
       const { location, options: locationOptions } = await fetchRandomLocation(options);
@@ -106,6 +155,7 @@ export default function PartyLobby({ gameId }) {
     } catch (e) {
       console.error("Failed to start game:", e);
       setIsStarting(false);
+      gameToast?.error?.('💥 Start Failed', 'Could not start the game. Please try again.');
     }
   };
 
@@ -130,6 +180,7 @@ export default function PartyLobby({ gameId }) {
     navigator.clipboard.writeText(matchData.code);
     setCopiedCode(true);
     setTimeout(() => setCopiedCode(false), 2000);
+    gameToast?.copied?.('📋 Room Code Copied!', `Share code ${matchData.code} with your friends.`);
   };
 
   const handleShareLink = async () => {
@@ -165,6 +216,7 @@ export default function PartyLobby({ gameId }) {
       }
       setCopiedLink(true);
       setTimeout(() => setCopiedLink(false), 2500);
+      gameToast?.copied?.('🔗 Invite Link Copied!', 'Send this link to your friends to join the party.');
     } catch (e) {
       console.warn("Failed to copy link:", e);
     }
