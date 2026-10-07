@@ -53,6 +53,7 @@ export const getOrCreateUserProfile = async (user) => {
       triggerWelcomeEmail(user, data.username || data.displayName);
     }
     return {
+      uid: user.uid,
       ...data,
       coins: data.coins !== undefined ? data.coins : 50,
       loginStreak: data.loginStreak || 0,

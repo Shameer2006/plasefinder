@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '@/lib/AuthContext';
-import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { doc, onSnapshot, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useGameStore } from '@/lib/store';
 import { leaveParty } from '@/lib/matchmaking';
@@ -23,6 +23,7 @@ export default function PartyLobby({ gameId }) {
   const [isLeaving, setIsLeaving] = useState(false);
   const gameToast = useGameToast();
   const prevPlayerCountRef = useRef(null);
+  const wasInPartyRef = useRef(false);
 
   useEffect(() => {
     fetch('/countries.json')
@@ -48,8 +49,15 @@ export default function PartyLobby({ gameId }) {
 
         if (data.status === 'playing') {
           setGameState(`MULTIPLAYER_${gameId}`);
-        } else if (data.status === 'abandoned' || (userProfile?.uid && data.players && !data.players[userProfile.uid])) {
+        } else if (data.status === 'abandoned') {
           setGameState('MENU');
+        } else if (userProfile?.uid && data.players) {
+          if (data.players[userProfile.uid]) {
+             wasInPartyRef.current = true;
+          } else if (wasInPartyRef.current) {
+             // Only kick if they were previously in the party to avoid cached snapshot kick
+             setGameState('MENU');
+          }
         }
       } else {
         setGameState('MENU');
@@ -603,6 +611,9 @@ export default function PartyLobby({ gameId }) {
               </div>
             </div>
 
+            {/* Inline Lobby Chat (Left Column) */}
+            <LobbyChat gameId={gameId} matchData={matchData} userProfile={userProfile} />
+
             {/* Action Buttons */}
             <div className="pl-actions">
               <button
@@ -893,9 +904,7 @@ export default function PartyLobby({ gameId }) {
                 )}
               </div>
             </div>
-
           </div>
-
         </div>
 
       </div>
@@ -993,4 +1002,93 @@ export default function PartyLobby({ gameId }) {
   );
 }
 
+function LobbyChat({ gameId, matchData, userProfile }) {
+  const [message, setMessage] = useState('');
+  const messagesEndRef = useRef(null);
+  const messages = matchData?.chat || [];
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  const handleSend = async (e) => {
+    e.preventDefault();
+    if (!message.trim() || !userProfile || !db) return;
+    const newMsg = {
+      uid: userProfile.uid,
+      displayName: userProfile.displayName || 'Player',
+      text: message.trim(),
+      timestamp: Date.now()
+    };
+    setMessage('');
+    await updateDoc(doc(db, 'matches', gameId), {
+      chat: arrayUnion(newMsg)
+    });
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1, justifyContent: 'flex-end' }}>
+      <div style={{
+        background: '#0a0f1d',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+        borderRadius: '12px',
+        padding: '12px 16px',
+        height: '140px',
+        overflowY: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '8px'
+      }}>
+        {messages.length === 0 ? (
+           <div style={{ color: '#6b7280', fontSize: '0.9rem', fontStyle: 'italic', margin: 'auto' }}>No messages yet...</div>
+        ) : (
+          messages.map((msg, i) => (
+            <div key={i} style={{ fontSize: '0.95rem' }}>
+              <span style={{ color: '#a855f7', fontWeight: 600 }}>{msg.displayName}:</span>
+              <span style={{ color: '#e5e7eb', marginLeft: '6px' }}>{msg.text}</span>
+            </div>
+          ))
+        )}
+        <div ref={messagesEndRef} />
+      </div>
+
+      <form onSubmit={handleSend} style={{ display: 'flex', gap: '10px' }}>
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Say something to the lobby"
+          maxLength={100}
+          style={{
+            flex: 1,
+            background: 'rgba(255, 255, 255, 0.05)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '12px',
+            padding: '12px 16px',
+            color: 'white',
+            outline: 'none',
+            fontSize: '0.95rem'
+          }}
+        />
+        <button 
+          type="submit" 
+          disabled={!message.trim()}
+          style={{
+            background: '#facc15',
+            color: '#111827',
+            fontWeight: 800,
+            border: 'none',
+            borderRadius: '12px',
+            padding: '0 24px',
+            cursor: message.trim() ? 'pointer' : 'not-allowed',
+            opacity: message.trim() ? 1 : 0.6,
+            fontSize: '0.95rem',
+            transition: 'opacity 0.2s'
+          }}
+        >
+          Send
+        </button>
+      </form>
+    </div>
+  );
+}

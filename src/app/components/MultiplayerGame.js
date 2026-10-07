@@ -417,6 +417,19 @@ export default function MultiplayerGame({ gameId }) {
     }
   };
 
+  // Auto-advance round when timer hits 0
+  useEffect(() => {
+    if (nextRoundDelay === 0 && isRoundOver && !showMapOnly && !isAdvancingRef.current) {
+      if (!matchData || !userProfile) return;
+      const playerIdsLocal = Object.keys(matchData.players || {});
+      const isHostLocal = matchData.players?.[userProfile.uid]?.host || playerIdsLocal[0] === userProfile.uid;
+      
+      if (isHostLocal) {
+        startNextRound();
+      }
+    }
+  }, [nextRoundDelay, isRoundOver, showMapOnly, matchData, userProfile]);
+
   const renderQuitModal = () => {
     if (!showQuitConfirm) return null;
 
@@ -686,50 +699,26 @@ export default function MultiplayerGame({ gameId }) {
                 </div>
               ))}
             </div>
-            {isHost ? (
-              <button
-                className="btn"
-                onClick={startNextRound}
-                style={{
-                  marginTop: '1rem',
-                  width: '100%',
-                  cursor: 'pointer',
-                  background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                  fontWeight: 900,
-                  fontSize: '1rem',
-                  boxShadow: '0 8px 20px rgba(16,185,129,0.35)',
-                  padding: '12px 20px',
-                  borderRadius: '12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px'
-                }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                {matchData.round < (matchData.options?.rounds || 5)
-                  ? `Next Round ${nextRoundDelay > 0 ? `(${nextRoundDelay}s)` : ''}`
-                  : 'Finish Game'}
-              </button>
-            ) : (
-              <div style={{
-                padding: '12px',
-                color: '#38bdf8',
-                marginTop: '1rem',
-                background: 'rgba(56, 189, 248, 0.1)',
-                border: '1px solid rgba(56, 189, 248, 0.25)',
-                borderRadius: '12px',
-                fontWeight: 700,
-                textAlign: 'center',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px'
-              }}>
-                <span className="online-pulse-dot" />
-                {nextRoundDelay > 0 ? `Next round begins in ${nextRoundDelay}s...` : 'Starting next round...'}
-              </div>
-            )}
+            <div style={{
+              padding: '12px',
+              color: '#38bdf8',
+              marginTop: '1rem',
+              background: 'rgba(56, 189, 248, 0.1)',
+              border: '1px solid rgba(56, 189, 248, 0.25)',
+              borderRadius: '12px',
+              fontWeight: 700,
+              textAlign: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px'
+            }}>
+              <span className="online-pulse-dot" />
+              {matchData.round < (matchData.options?.rounds || 5)
+                ? (nextRoundDelay > 0 ? `Next round begins in ${nextRoundDelay}s...` : 'Starting next round...')
+                : (nextRoundDelay > 0 ? `Game finishes in ${nextRoundDelay}s...` : 'Finishing game...')
+              }
+            </div>
 
             <button
               type="button"

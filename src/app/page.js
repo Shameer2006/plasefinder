@@ -143,8 +143,9 @@ export default function Home() {
 
   // Handle party invite links (?party=CODE or #party=CODE)
   const handledPartyCodeRef = useRef(null);
+  const promptedPartyCodeRef = useRef(null);
   useEffect(() => {
-    if (typeof window === 'undefined' || !userProfile || loading) return;
+    if (typeof window === 'undefined' || loading) return;
 
     const urlParams = new URLSearchParams(window.location.search);
     let partyCode = urlParams.get('party');
@@ -152,47 +153,64 @@ export default function Home() {
       partyCode = window.location.hash.replace('#party=', '');
     }
 
-    if (partyCode && handledPartyCodeRef.current !== partyCode.trim().toUpperCase()) {
+    if (partyCode) {
       const cleanCode = partyCode.trim().toUpperCase();
-      handledPartyCodeRef.current = cleanCode;
-      
-      const joinFromInviteLink = async () => {
-        try {
-          toast.info(`Joining party ${cleanCode}...`);
-          const { joinParty } = await import('@/lib/matchmaking');
-          const result = await joinParty(userProfile, cleanCode);
-          const gameId = typeof result === 'object' ? result.gameId : result;
-          const status = typeof result === 'object' ? result.status : 'waiting_for_players';
-          
-          if (gameId) {
+
+      if (!user || user.isAnonymous) {
+        if (promptedPartyCodeRef.current !== cleanCode) {
+          promptedPartyCodeRef.current = cleanCode;
+          toast.info("Please log in to join the party!");
+          setLoginModal({ isOpen: true, feature: 'join_party' });
+        }
+        return;
+      }
+
+      if (!userProfile || userProfile.uid !== user.uid) {
+        return;
+      }
+
+      if (handledPartyCodeRef.current !== cleanCode) {
+        handledPartyCodeRef.current = cleanCode;
+        
+        const joinFromInviteLink = async () => {
+          try {
+            toast.info(`Joining party ${cleanCode}...`);
+            const { joinParty } = await import('@/lib/matchmaking');
+            const result = await joinParty(userProfile, cleanCode);
+            const gameId = typeof result === 'object' ? result.gameId : result;
+            const status = typeof result === 'object' ? result.status : 'waiting_for_players';
+            
+            if (gameId) {
+              window.history.replaceState({}, '', window.location.pathname);
+              if (status === 'playing') {
+                setGameState(`MULTIPLAYER_${gameId}`);
+                toast.success("Rejoined Active Match!");
+              } else {
+                setGameState(`PARTY_LOBBY_${gameId}`);
+                toast.success("Joined Party Lobby!");
+              }
+            }
+          } catch (err) {
+            console.error("Invite join error:", err);
             window.history.replaceState({}, '', window.location.pathname);
-            if (status === 'playing') {
-              setGameState(`MULTIPLAYER_${gameId}`);
-              toast.success("Rejoined Active Match!");
+            if (err.code === 'PARTY_ALREADY_STARTED') {
+              setPartyStartedModal(err.partyDetails || { code: cleanCode, round: 1, totalRounds: 5 });
             } else {
-              setGameState(`PARTY_LOBBY_${gameId}`);
-              toast.success("Joined Party Lobby!");
+              toast.error(err.message || "Failed to join party from link.");
             }
           }
-        } catch (err) {
-          console.error("Invite join error:", err);
-          window.history.replaceState({}, '', window.location.pathname);
-          if (err.code === 'PARTY_ALREADY_STARTED') {
-            setPartyStartedModal(err.partyDetails || { code: cleanCode, round: 1, totalRounds: 5 });
-          } else {
-            toast.error(err.message || "Failed to join party from link.");
-          }
-        }
-      };
+        };
 
-      joinFromInviteLink();
+        joinFromInviteLink();
+      }
     }
-  }, [userProfile, loading, setGameState, toast]);
+  }, [userProfile, user, loading, setGameState, toast]);
 
   // Handle Friend invite links (?friend=UID or ?invite=UID)
   const handledFriendInviteRef = useRef(null);
+  const promptedFriendInviteRef = useRef(null);
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || loading) return;
 
     const urlParams = new URLSearchParams(window.location.search);
     let friendUid = urlParams.get('friend') || urlParams.get('invite');
@@ -201,6 +219,19 @@ export default function Home() {
     }
 
     if (!friendUid) return;
+
+    if (!user || user.isAnonymous) {
+      if (promptedFriendInviteRef.current !== friendUid) {
+        promptedFriendInviteRef.current = friendUid;
+        toast.info("Please log in to add friend!");
+        setLoginModal({ isOpen: true, feature: 'add_friend' });
+      }
+      return;
+    }
+
+    if (!userProfile || userProfile.uid !== user.uid) {
+      return;
+    }
 
     if (userProfile && userProfile.uid && userProfile.uid !== friendUid) {
       if (handledFriendInviteRef.current !== friendUid) {
@@ -223,7 +254,7 @@ export default function Home() {
         processFriendInvite();
       }
     }
-  }, [userProfile, toast]);
+  }, [userProfile, user, loading, toast]);
   useEffect(() => {
     if (userProfile && gameState === 'MENU') {
       const hasShownToast = sessionStorage.getItem('friendScoreToastShown');
@@ -1318,182 +1349,161 @@ const HeroMenuButton = ({ title, subtitle, iconClass, svgIcon, onClick, badge, b
   </button>
 );
 
-const MainMenu = ({ onQuickPlay, onSingleplayer, onEndlessMode, onGuides, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxWidth: '340px', width: '100%' }}>
-    <HeroMenuButton
-      title="SINGLEPLAYER"
-      subtitle="Play solo and explore"
-      iconClass="icon-red"
-      onClick={onSingleplayer}
-      svgIcon={
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <circle cx="12" cy="12" r="6"></circle>
-          <circle cx="12" cy="12" r="2"></circle>
-        </svg>
-      }
-    />
-
-    <HeroMenuButton
-      title="FLAG GUESSER"
-      subtitle="Guess the flag, earn points"
-      iconClass="icon-orange"
-      onClick={onFlagGuesser}
-      svgIcon={
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-          <line x1="4" y1="22" x2="4" y2="15"></line>
-        </svg>
-      }
-    />
-
-    <HeroMenuButton
-      title="ENDLESS MODE"
-      subtitle="How far can you go?"
-      iconClass="icon-rose"
-      onClick={onEndlessMode}
-      svgIcon={
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-          <polyline points="17 6 23 6 23 12"></polyline>
-        </svg>
-      }
-    />
-
-    <HeroMenuButton
-      title="GUIDES & STRATEGY"
-      subtitle="13 Pro Masterclasses & Meta"
-      iconClass="icon-gold"
-      onClick={onGuides}
-      badge="13 GUIDES"
-      badgeStyle={{ background: 'linear-gradient(135deg, #10b981, #059669)', color: '#ffffff', fontSize: '0.58rem', padding: '1.5px 6px', borderRadius: '4px', fontWeight: '900', letterSpacing: '0.5px', boxShadow: '0 2px 6px rgba(16, 185, 129, 0.35)' }}
-      svgIcon={
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-        </svg>
-      }
-    />
-
-    <HeroMenuButton
-      title={isQueuing ? "CANCEL SEARCH..." : "FIND A MATCH"}
-      subtitle="Play with random players"
-      iconClass="icon-green"
-      onClick={isQueuing ? cancelMatchmaking : onFindMatchClick}
-      svgIcon={
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-      }
-    />
-
-    <HeroMenuButton
-      title="CREATE PARTY"
-      subtitle="Create your own party"
-      iconClass="icon-blue"
-      onClick={onCreateParty}
-      svgIcon={
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-          <circle cx="9" cy="7" r="4"></circle>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-        </svg>
-      }
-    />
-
-    <HeroMenuButton
-      title="JOIN PARTY"
-      subtitle="Join your friends"
-      iconClass="icon-purple"
-      onClick={onJoinParty}
-      svgIcon={
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-          <circle cx="8.5" cy="7" r="4"></circle>
-          <line x1="20" y1="8" x2="20" y2="14"></line>
-          <line x1="23" y1="11" x2="17" y2="11"></line>
-        </svg>
-      }
-    />
-
-    <HeroMenuButton
-      title="LEADERBOARD"
-      subtitle="See top players"
-      iconClass="icon-teal"
-      onClick={onLeaderboard}
-      svgIcon={
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-          <path d="M4 22h16"></path>
-          <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-          <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-          <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path>
-        </svg>
-      }
-    />
-
-    <HeroMenuButton
-      title="ABOUT"
-      subtitle="About LostStreet"
-      iconClass="icon-orange"
-      onClick={onAbout}
-      svgIcon={
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="16" x2="12" y2="12"></line>
-          <line x1="12" y1="8" x2="12.01" y2="8"></line>
-        </svg>
-      }
-    />
-
-    <HeroMenuButton
-      title="DAILY CHALLENGE"
-      subtitle={playedToday ? "Played today" : (streak > 0 ? `Don't lose your ${streak} day streak!` : "New challenge every day")}
-      iconClass="icon-rose"
-      onClick={onDailyChallenge}
-      disabled={playedToday}
-      svgIcon={
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-          <line x1="16" y1="2" x2="16" y2="6"></line>
-          <line x1="8" y1="2" x2="8" y2="6"></line>
-          <line x1="3" y1="10" x2="21" y2="10"></line>
-        </svg>
-      }
-      extraRight={
-        <span style={{ background: '#f97316', color: 'white', padding: '3px 8px', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '4px', boxShadow: '0 2px 8px rgba(249, 115, 22, 0.4)' }}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
-          12:45:30
-        </span>
-      }
-    />
-
-    <div style={{ marginTop: '8px', padding: '0 4px' }}>
-      <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#9ca3af', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-        Masterclass Guides &amp; Tips
-      </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-        {[
-          ['/guides/25-pro-street-view-geoguessr-secrets', '25 Pro Secrets'],
-          ['/guides/street-view-camera-generations-guide', 'Camera Gens'],
-          ['/guides/latin-america-street-view-guide', 'Latin America'],
-          ['/flag-guesser', 'Flag Guesser'],
-          ['/guides', 'All Guides →']
-        ].map(([href, label]) => (
-          <Link key={href} href={href} style={{ padding: '4px 10px', background: 'rgba(18, 24, 38, 0.85)', borderRadius: '10px', fontSize: '0.78rem', color: '#e5e7eb', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.12)', fontWeight: '600' }}>
-            {label}
-          </Link>
-        ))}
-      </div>
+const MainMenu = ({ onQuickPlay, onSingleplayer, onEndlessMode, onGuides, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => {
+  const CategoryHeader = ({ title }) => (
+    <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#9ca3af', marginTop: '12px', marginBottom: '-2px', textTransform: 'uppercase', letterSpacing: '1.5px', paddingLeft: '6px' }}>
+      {title}
     </div>
-  </div>
-);
+  );
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxWidth: '340px', width: '100%' }}>
+      <CategoryHeader title="Solo" />
+      <HeroMenuButton
+        title="SINGLEPLAYER"
+        subtitle="Play solo and explore"
+        iconClass="icon-red"
+        onClick={onSingleplayer}
+        svgIcon={
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+        }
+      />
+
+      <HeroMenuButton
+        title="FLAG GUESSER"
+        subtitle="Guess the flag, earn points"
+        iconClass="icon-orange"
+        onClick={onFlagGuesser}
+        svgIcon={
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+            <line x1="4" y1="22" x2="4" y2="15"></line>
+          </svg>
+        }
+      />
+
+      <HeroMenuButton
+        title="ENDLESS MODE"
+        subtitle="How far can you go?"
+        iconClass="icon-rose"
+        onClick={onEndlessMode}
+        svgIcon={
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+        }
+      />
+
+      <HeroMenuButton
+        title="DAILY CHALLENGE"
+        subtitle={playedToday ? "Played today" : (streak > 0 ? `Don't lose your ${streak} day streak!` : "New challenge every day")}
+        iconClass="icon-rose"
+        onClick={onDailyChallenge}
+        disabled={playedToday}
+        svgIcon={
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        }
+        extraRight={
+          <span style={{ background: '#f97316', color: 'white', padding: '3px 8px', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '4px', boxShadow: '0 2px 8px rgba(249, 115, 22, 0.4)' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            12:45:30
+          </span>
+        }
+      />
+
+      <CategoryHeader title="Compete" />
+      <HeroMenuButton
+        title={isQueuing ? "CANCEL SEARCH..." : "FIND A MATCH"}
+        subtitle="Play with random players"
+        iconClass="icon-green"
+        onClick={isQueuing ? cancelMatchmaking : onFindMatchClick}
+        svgIcon={
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        }
+      />
+
+      <HeroMenuButton
+        title="LEADERBOARD"
+        subtitle="See top players"
+        iconClass="icon-teal"
+        onClick={onLeaderboard}
+        svgIcon={
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+            <path d="M4 22h16"></path>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path>
+          </svg>
+        }
+      />
+
+      <CategoryHeader title="Together" />
+      <HeroMenuButton
+        title="CREATE PARTY"
+        subtitle="Create your own party"
+        iconClass="icon-blue"
+        onClick={onCreateParty}
+        svgIcon={
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        }
+      />
+
+      <HeroMenuButton
+        title="JOIN PARTY"
+        subtitle="Join your friends"
+        iconClass="icon-purple"
+        onClick={onJoinParty}
+        svgIcon={
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="8.5" cy="7" r="4"></circle>
+            <line x1="20" y1="8" x2="20" y2="14"></line>
+            <line x1="23" y1="11" x2="17" y2="11"></line>
+          </svg>
+        }
+      />
+
+      <CategoryHeader title="Extras" />
+      <HeroMenuButton
+        title="GUIDES & STRATEGY"
+        subtitle="13 Pro Masterclasses & Meta"
+        iconClass="icon-gold"
+        onClick={onGuides}
+        badge="13 GUIDES"
+        badgeStyle={{ background: 'linear-gradient(135deg, #10b981, #059669)', color: '#ffffff', fontSize: '0.58rem', padding: '1.5px 6px', borderRadius: '4px', fontWeight: '900', letterSpacing: '0.5px', boxShadow: '0 2px 6px rgba(16, 185, 129, 0.35)' }}
+        svgIcon={
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+        }
+      />
+    </div>
+  );
+};
 
 const SettingsMenu = ({ onBack, units, setUnits, mapType, setMapType, emotesEnabled, setEmotesEnabled, soundEnabled, setSoundEnabled }) => {
   return (
