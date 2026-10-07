@@ -17,7 +17,7 @@ export default function GuidesPage() {
       readTime: "12 min read",
       category: "Street View Meta",
       icon: "🏆",
-      image: "/kenya-snorkel-car.jpg",
+      image: "/kenya-snorkel-car.png",
       featured: true
     },
     {
@@ -58,7 +58,7 @@ export default function GuidesPage() {
       readTime: "5 min read",
       category: "Strategy & Reviews",
       icon: "🎮",
-      image: "/Screenshot 2026-08-16 195723.png"
+      image: "/bolivia-colonial-street.png"
     },
     {
       title: "The 10 Hardest Countries to Guess in Street View",
@@ -88,7 +88,7 @@ export default function GuidesPage() {
       readTime: "10 min read",
       category: "Street View Meta",
       icon: "🛑",
-      image: "/french-holey-pole.jpg"
+      image: "/french-holey-pole.png"
     },
     {
       title: "How to Identify African Countries in Street View",
@@ -98,7 +98,7 @@ export default function GuidesPage() {
       readTime: "7 min read",
       category: "Continent Guides",
       icon: "🌍",
-      image: "/nigeria-follow-car-meta.jpg"
+      image: "/nigeria-follow-car-meta.png"
     },
     {
       title: "How to Identify Asian Countries in Street View",
@@ -138,7 +138,7 @@ export default function GuidesPage() {
       readTime: "7 min read",
       category: "Flag & Strategy",
       icon: "⚡",
-      image: "/Screenshot 2026-08-16 202137.png"
+      image: "/mongolia-steppe-road.png"
     }
   ];
 
