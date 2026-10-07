@@ -13,6 +13,8 @@ const outfit = Outfit({
   weight: ["300", "400", "600", "700", "800"],
   display: "swap",
   variable: "--font-outfit",
+  adjustFontFallback: true,
+  preload: true,
 });
 
 const oswald = Oswald({
@@ -20,6 +22,8 @@ const oswald = Oswald({
   weight: ["400", "500", "700"],
   display: "swap",
   variable: "--font-oswald",
+  adjustFontFallback: true,
+  preload: true,
 });
 
 export const metadata = {
@@ -75,8 +79,8 @@ export const viewport = {
   themeColor: "#0a0d1a",
   width: "device-width",
   initialScale: 1.0,
-  maximumScale: 1.0,
-  userScalable: false,
+  maximumScale: 5.0,
+  userScalable: true,
   viewportFit: "cover",
 };
 
@@ -224,6 +228,14 @@ export default function RootLayout({ children }) {
         <meta name="geo.region" content="001" />
         <meta name="geo.placename" content="Worldwide" />
         <link rel="manifest" href="/manifest.json" />
+        
+        {/* Resource Hints for Third Parties */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        <link rel="preconnect" href="https://maps.googleapis.com" />
+        <link rel="preconnect" href="https://maps.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.clarity.ms" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
         {/* JSON-LD structured data */}
         {jsonLd.map((schema, i) => (
@@ -270,25 +282,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
 
-        {/* GA4 — afterInteractive prevents SSR/client script-order mismatch */}
-        <Script
-          id="gtag-loader"
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-DCGEKHZZHL"
-        />
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-DCGEKHZZHL');
-            `,
-          }}
-        />
-
         {/* Microsoft Clarity — lazyOnload to prioritize user interaction */}
         <Script
           id="microsoft-clarity"
@@ -307,7 +300,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {/* Google AdSense Verification & Auto Ads */}
         <Script
           id="google-adsense"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1006713173738488"
           crossOrigin="anonymous"
