@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import CoinHUD from './CoinHUD';
+import AntiqueCompassBackground from './AntiqueCompassBackground';
 
 const DailyRewardOverlay = dynamic(() => import('./DailyRewardOverlay'), { ssr: false });
 
@@ -255,27 +256,37 @@ const BADGE_PRESETS = {
   gray:  { bg: '#f3f4f6', border: '#e5e7eb', color: '#6b7280' },
 };
 
-export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', children }) {
+export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', variant = 'default', children }) {
   const pathname = usePathname();
   const isBlogContent = pathname && pathname.startsWith('/blog/');
   const backHref = isBlogContent ? '/blog' : '/';
   const backText = isBlogContent ? 'Back to Blog' : 'Back to Game';
 
   const badge = BADGE_PRESETS[badgeColor] || BADGE_PRESETS.green;
+  const isVintage = variant === 'vintage';
+
   return (
     <div style={{
+      position: 'relative',
       width: '100%',
-      background: '#fafafa',
-      color: '#111827',
+      background: isVintage ? '#f6efe2' : '#fafafa',
+      color: isVintage ? '#1b120c' : '#111827',
       display: 'flex',
       flexDirection: 'column',
       fontFamily: '"Outfit", system-ui, -apple-system, sans-serif',
       overflowX: 'hidden',
+      minHeight: '100vh',
     }}>
+      {isVintage && <AntiqueCompassBackground />}
+
       {/* Sub-nav breadcrumb bar */}
       <div style={{
-        background: '#ffffff',
-        borderBottom: '1px solid #e5e7eb',
+        position: 'relative',
+        zIndex: 10,
+        background: isVintage ? 'rgba(254, 250, 243, 0.92)' : '#ffffff',
+        backdropFilter: isVintage ? 'blur(10px)' : 'none',
+        WebkitBackdropFilter: isVintage ? 'blur(10px)' : 'none',
+        borderBottom: isVintage ? '1px solid rgba(190, 160, 120, 0.35)' : '1px solid #e5e7eb',
         padding: '0.85rem clamp(1rem, 3vw, 2.5rem)',
         display: 'flex',
         alignItems: 'center',
@@ -285,9 +296,9 @@ export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', childre
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <Link href={backHref} style={{
-            background: '#f3f4f6',
-            border: '1px solid #e5e7eb',
-            color: '#1f2937',
+            background: isVintage ? 'rgba(240, 230, 215, 0.9)' : '#f3f4f6',
+            border: isVintage ? '1px solid rgba(190, 160, 120, 0.45)' : '1px solid #e5e7eb',
+            color: isVintage ? '#3c2514' : '#1f2937',
             padding: '7px 14px',
             borderRadius: '10px',
             textDecoration: 'none',
@@ -306,10 +317,10 @@ export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', childre
             <span>{backText}</span>
           </Link>
 
-          <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', color: '#6b7280' }}>
-            <Link href="/" style={{ color: '#6b7280', textDecoration: 'none', fontWeight: 500 }}>Home</Link>
+          <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', color: isVintage ? '#7c6146' : '#6b7280' }}>
+            <Link href="/" style={{ color: isVintage ? '#7c6146' : '#6b7280', textDecoration: 'none', fontWeight: 500 }}>Home</Link>
             <span>/</span>
-            <span style={{ color: '#059669', fontWeight: 700 }}>{breadcrumb}</span>
+            <span style={{ color: isVintage ? '#b45309' : '#059669', fontWeight: 700 }}>{breadcrumb}</span>
           </nav>
         </div>
 
@@ -331,10 +342,13 @@ export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', childre
         )}
       </div>
 
-      {children}
+      <div style={{ position: 'relative', zIndex: 5, width: '100%', flex: 1, display: 'flex', flexDirection: 'column' }}>
+        {children}
+      </div>
     </div>
   );
 }
+
 
 export function SiteFooter() {
   const mainLinks = [

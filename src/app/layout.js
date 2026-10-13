@@ -218,6 +218,11 @@ const jsonLd = [
   }
 ];
 
+const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ||
+  process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID ||
+  "G-DCGEKHZZHL";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${outfit.variable} ${oswald.variable}`} suppressHydrationWarning>
@@ -268,6 +273,30 @@ export default function RootLayout({ children }) {
         </AuthProvider>
         <SpeedInsights />
         <Analytics />
+
+        {/* Google Analytics (GA4) */}
+        {GA_MEASUREMENT_ID && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+            />
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${GA_MEASUREMENT_ID}', {
+                    page_path: window.location.pathname,
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
 
         {/* GTM — afterInteractive prevents SSR/client script-order mismatch */}
         <Script

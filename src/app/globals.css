@@ -2037,3 +2037,27 @@ button, input, select, textarea, a, [role="button"] {
 .coin-icon-wrapper:hover {
   transform: scale(1.1);
 }
+
+
+/* ── Vintage Antique Compass Animations ── */
+@keyframes antiqueCompassRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.antique-compass-spinning {
+  animation: antiqueCompassRotate 90s linear infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .antique-compass-spinning {
+    animation: none !important;
+    transform: none !important;
+  }
+}

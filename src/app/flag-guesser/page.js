@@ -16,13 +16,13 @@ export const metadata = {
     description: "Test your knowledge of world flags in LostStreet's free flag quiz. Identify 196 national flags across multiple choice and world map modes with zero sign-up.",
     url: 'https://www.loststreet.online/flag-guesser',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: '/flag-guesser-logo.png', width: 1024, height: 1024 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Flag Guesser — Free World Flag Quiz Game | LostStreet',
     description: "Test your knowledge of world flags in LostStreet's free flag quiz. Identify 196 national flags across multiple choice and world map modes with zero sign-up.",
-    images: ['/og-image.png'],
+    images: ['/flag-guesser-logo.png'],
   },
 };
 
@@ -88,7 +88,7 @@ export default function FlagGuesserPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-      <PageShell breadcrumb="Flag Guesser" badgeText="196 World Flags · 3 Difficulty Modes" badgeColor="amber">
+      <PageShell breadcrumb="Flag Guesser" badgeText="196 World Flags · 3 Difficulty Modes" badgeColor="amber" variant="vintage">
         <noscript>
           <section style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
             <h1>World Flag Guesser Game - Test Your Knowledge</h1>
@@ -219,8 +219,10 @@ export default function FlagGuesserPage() {
           {/* Right Column (Image) */}
           <div style={{ flex: '1 1 350px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <img
-              src="/blog-flag-guesser-logo.png"
+              src="/flag-guesser-logo.png?v=2"
               alt="Flag Guesser Game Logo"
+              width={450}
+              height={450}
               style={{
                 width: '100%',
                 maxWidth: '450px',
