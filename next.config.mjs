@@ -42,6 +42,18 @@ const nextConfig = {
           { key: 'Cache-Control', value: 'public, max-age=86400' },
         ],
       },
+      {
+        source: '/chronicles/:path*',
+        headers: [
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
+        ],
+      },
+      {
+        source: '/chronicles',
+        headers: [
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
+        ],
+      },
     ];
   },
 };
