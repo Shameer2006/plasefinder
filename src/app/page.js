@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAuth } from '@/lib/AuthContext';
 import { useGameStore } from '@/lib/store';
 import { updateDailyChallengeStreak } from '@/lib/userProfile';
@@ -30,10 +31,10 @@ const LoginRequiredModal = dynamic(() => import('./components/LoginRequiredModal
 
 export default function Home() {
   const { user, userProfile, setUserProfile, loading, loginWithGoogle, logout } = useAuth();
-  const { 
-    gameState, setGameState, setDifficulty, setGameMode, setIsDailyChallenge, 
-    soundEnabled, setSoundEnabled, initSounds, units, setUnits, mapType, setMapType, 
-    emotesEnabled, setEmotesEnabled, showDailyRewardOverlay, setShowDailyRewardOverlay 
+  const {
+    gameState, setGameState, setDifficulty, setGameMode, setIsDailyChallenge,
+    soundEnabled, setSoundEnabled, initSounds, units, setUnits, mapType, setMapType,
+    emotesEnabled, setEmotesEnabled, showDailyRewardOverlay, setShowDailyRewardOverlay
   } = useGameStore();
   const [isQueuing, setIsQueuing] = useState(false);
   const [queueSub, setQueueSub] = useState(null);
@@ -171,7 +172,7 @@ export default function Home() {
 
       if (handledPartyCodeRef.current !== cleanCode) {
         handledPartyCodeRef.current = cleanCode;
-        
+
         const joinFromInviteLink = async () => {
           try {
             toast.info(`Joining party ${cleanCode}...`);
@@ -179,7 +180,7 @@ export default function Home() {
             const result = await joinParty(userProfile, cleanCode);
             const gameId = typeof result === 'object' ? result.gameId : result;
             const status = typeof result === 'object' ? result.status : 'waiting_for_players';
-            
+
             if (gameId) {
               window.history.replaceState({}, '', window.location.pathname);
               if (status === 'playing') {
@@ -415,7 +416,7 @@ export default function Home() {
   const handleGuides = () => {
     try {
       if (typeof sounds?.playClick === 'function') sounds.playClick();
-    } catch {}
+    } catch { }
     window.location.href = '/guides';
   };
 
@@ -448,7 +449,7 @@ export default function Home() {
 
     const result = await joinQueue(userProfile, async (gameId) => {
       setIsQueuing(false);
-      try { sounds.playMatchFound(); } catch {}
+      try { sounds.playMatchFound(); } catch { }
 
       // Fetch match doc to get real opponent data
       let opponentData = null;
@@ -673,22 +674,22 @@ export default function Home() {
               <div className="home-header-auth">
                 <CoinHUD onOpenDailyReward={() => setShowDailyRewardOverlay(true)} />
               </div>
-              
+
               {/* Login button - visible everywhere when logged out */}
-              <button 
-                style={{ 
-                  background: 'linear-gradient(135deg, #10b981, #059669)', 
-                  border: 'none', 
-                  color: 'white', 
-                  padding: '6px 14px', 
-                  borderRadius: '10px', 
-                  fontSize: '0.85rem', 
-                  fontWeight: 700, 
-                  cursor: 'pointer', 
-                  fontFamily: '"Outfit", sans-serif', 
-                  boxShadow: '0 4px 12px rgba(16,185,129,0.3)', 
-                  whiteSpace: 'nowrap' 
-                }} 
+              <button
+                style={{
+                  background: 'linear-gradient(135deg, #10b981, #059669)',
+                  border: 'none',
+                  color: 'white',
+                  padding: '6px 14px',
+                  borderRadius: '10px',
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  fontFamily: '"Outfit", sans-serif',
+                  boxShadow: '0 4px 12px rgba(16,185,129,0.3)',
+                  whiteSpace: 'nowrap'
+                }}
                 onClick={loginWithGoogle}
               >
                 Login
@@ -969,20 +970,63 @@ export default function Home() {
                     <div style={{ position: 'absolute', bottom: '6px', fontSize: '0.65rem', color: '#9ca3af', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>World View</div>
                   </div>
 
-                  {/* Forest Green Highway Signboard */}
-                  <div className="highway-signboard">
-                    <div className="highway-signboard-inner">
-                      <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', color: '#86efac' }}>WELCOME TO</span>
-                      <h1 style={{ fontSize: '2rem', fontWeight: 900, fontFamily: '"Outfit", sans-serif', color: '#fef08a', margin: 0, lineHeight: 1.1, textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>LOSTSTREET</h1>
-                      <div style={{ width: '60px', height: '2px', background: 'rgba(254, 240, 138, 0.4)', margin: '2px 0' }} />
-                      <p style={{ fontSize: '0.88rem', color: '#e5e7eb', lineHeight: 1.4, margin: 0 }}>
-                        Travel the world from your couch! Spot funny clues, pin your best guess, and see how well you know the planet.
-                      </p>
-                      <button className="highway-quickplay-btn" onClick={() => handleStart('EASY')} aria-label="Quick Play - start a game instantly">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                        QUICK PLAY
-                      </button>
+                  {/* Mascot Banner & Quick Play Button */}
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', gap: '12px' }}>
+                    <div
+                      style={{
+                        position: 'relative',
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        cursor: 'pointer'
+                      }}
+                      onClick={() => handleStart('EASY')}
+                      title="Quick Play - start a game instantly"
+                    >
+                      <Image
+                        src="/cheerful-mascot.png"
+                        alt="LostStreet Explorer Mascot"
+                        width={340}
+                        height={340}
+                        priority
+                        className="mascot-interactive"
+                        style={{
+                          width: '100%',
+                          maxWidth: '320px',
+                          height: 'auto',
+                          objectFit: 'contain',
+                          userSelect: 'none',
+                          filter: 'drop-shadow(0 16px 32px rgba(0,0,0,0.55)) drop-shadow(0 4px 12px rgba(0,0,0,0.35))',
+                          transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease'
+                        }}
+                      />
                     </div>
+
+                    <button
+                      className="highway-quickplay-btn"
+                      onClick={() => handleStart('EASY')}
+                      aria-label="Quick Play - start a game instantly"
+                      style={{
+                        width: '100%',
+                        padding: '15px 28px',
+                        fontSize: '1.2rem',
+                        fontWeight: 900,
+                        letterSpacing: '1px',
+                        borderRadius: '16px',
+                        boxShadow: '0 8px 24px rgba(245, 158, 11, 0.45), 0 2px 10px rgba(0,0,0,0.3)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '10px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                      </svg>
+                      QUICK PLAY
+                    </button>
                   </div>
                 </div>
               )}

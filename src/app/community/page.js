@@ -1,14 +1,14 @@
 export const metadata = {
   title: "Community — LostStreet Player Network & Hub | LostStreet",
-  description: "Connect with the global LostStreet geography community. Join discussions on Reddit and Instagram, share panoramic tips, and participate in duels.",
+  description: "Connect with the global LostStreet geography community. Follow updates on Instagram, share panoramic tips, and participate in duels.",
   alternates: { canonical: "https://www.loststreet.online/community" },
   keywords: [
     "loststreet community", "street view guesser community", "geoguessr alternative community",
-    "geography guessing reddit", "loststreet discord instagram", "street view clues community"
+    "geography guessing online", "loststreet instagram community", "street view clues community"
   ],
   openGraph: {
     title: "Community — LostStreet Player Network & Hub | LostStreet",
-    description: "Connect with the global LostStreet geography community. Join discussions on Reddit and Instagram, share panoramic tips, and participate in duels.",
+    description: "Connect with the global LostStreet geography community. Follow updates on Instagram, share panoramic tips, and participate in duels.",
     url: "https://www.loststreet.online/community",
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
@@ -16,7 +16,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Community — LostStreet Player Network & Hub | LostStreet",
-    description: "Connect with the global LostStreet geography community. Join discussions on Reddit and Instagram, share panoramic tips, and participate in duels.",
+    description: "Connect with the global LostStreet geography community. Follow updates on Instagram, share panoramic tips, and participate in duels.",
     images: ["/og-image.png"],
   },
 };

@@ -69,7 +69,7 @@ export default function FlagGuesserJourneyPage() {
       `}</style>
       <PageShell breadcrumb="Blog / Flag Guesser Journey" badgeText="LostStreet Articles" badgeColor="green">
         <main style={{
-          background: '#f9fafb',
+          background: 'transparent',
           minHeight: '100vh',
           fontFamily: '"Inter", sans-serif',
           paddingBottom: '6rem'

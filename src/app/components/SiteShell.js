@@ -19,7 +19,7 @@ export default function SiteShell({ children }) {
   if (GAME_PATHS.includes(pathname)) return children;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f6efe2' }}>
       <SiteHeader onOpenDailyReward={() => setShowDailyRewards(true)} />
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>{children}</main>
       <SiteFooter />
@@ -256,14 +256,14 @@ const BADGE_PRESETS = {
   gray:  { bg: '#f3f4f6', border: '#e5e7eb', color: '#6b7280' },
 };
 
-export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', variant = 'default', children }) {
+export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', variant = 'vintage', children }) {
   const pathname = usePathname();
   const isBlogContent = pathname && pathname.startsWith('/blog/');
   const backHref = isBlogContent ? '/blog' : '/';
   const backText = isBlogContent ? 'Back to Blog' : 'Back to Game';
 
   const badge = BADGE_PRESETS[badgeColor] || BADGE_PRESETS.green;
-  const isVintage = variant === 'vintage';
+  const isVintage = variant !== 'none';
 
   return (
     <div style={{
@@ -277,7 +277,17 @@ export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', variant
       overflowX: 'hidden',
       minHeight: '100vh',
     }}>
-      {isVintage && <AntiqueCompassBackground />}
+      {isVintage && (
+        <>
+          <AntiqueCompassBackground />
+          <style>{`
+            .vintage-shell-content > main,
+            .vintage-shell-content main {
+              background: transparent !important;
+            }
+          `}</style>
+        </>
+      )}
 
       {/* Sub-nav breadcrumb bar */}
       <div style={{
@@ -342,7 +352,7 @@ export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', variant
         )}
       </div>
 
-      <div style={{ position: 'relative', zIndex: 5, width: '100%', flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="vintage-shell-content" style={{ position: 'relative', zIndex: 5, width: '100%', flex: 1, display: 'flex', flexDirection: 'column' }}>
         {children}
       </div>
     </div>

@@ -79,7 +79,7 @@ export default function BlogPost() {
   return (
     <PageShell breadcrumb="Blog" badgeText="Featured Article" badgeColor="green">
       <main style={{
-        background: '#f9fafb',
+        background: 'transparent',
         minHeight: '100vh',
         fontFamily: '"Inter", system-ui, sans-serif'
       }}>
