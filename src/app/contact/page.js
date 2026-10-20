@@ -13,14 +13,34 @@ export default function ContactPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [referenceId, setReferenceId] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    setErrorMessage('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formState),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Failed to deliver message. Please contact us directly.');
+      }
+
+      setReferenceId(data.referenceId || '');
       setSubmitted(true);
-    }, 600);
+    } catch (err) {
+      console.error('Contact submit error:', err);
+      setErrorMessage(err.message || 'Something went wrong while sending your message. You can reach us directly via email.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -194,10 +214,15 @@ export default function ContactPage() {
               </div>
               <h3 style={{ color: '#065f46', margin: '0 0 0.5rem 0', fontWeight: 800, fontSize: '1.2rem' }}>Thank You for Reaching Out!</h3>
               <p style={{ color: '#047857', margin: 0, fontSize: '0.96rem', lineHeight: 1.6 }}>
-                Your message has been received. Our editorial and support team will review your inquiry and get back to you shortly.
+                Your message has been safely received. Our support and editorial desk will review your inquiry and get back to you shortly.
               </p>
+              {referenceId && (
+                <div style={{ marginTop: '0.85rem', fontSize: '0.85rem', color: '#047857' }}>
+                  Inquiry Reference ID: <strong style={{ fontFamily: 'monospace', background: '#d1fae5', padding: '2px 6px', borderRadius: '4px' }}>{referenceId}</strong>
+                </div>
+              )}
               <button
-                onClick={() => { setSubmitted(false); setFormState({ name: '', email: '', subject: 'general', message: '' }); }}
+                onClick={() => { setSubmitted(false); setFormState({ name: '', email: '', subject: 'general', message: '' }); setReferenceId(''); }}
                 style={{
                   marginTop: '1.5rem',
                   background: '#059669',
@@ -215,6 +240,28 @@ export default function ContactPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              {errorMessage && (
+                <div style={{
+                  background: '#fef2f2',
+                  border: '1px solid #fecaca',
+                  borderRadius: '12px',
+                  padding: '1rem',
+                  color: '#991b1b',
+                  fontSize: '0.92rem',
+                  lineHeight: 1.5,
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '10px'
+                }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                  <div>
+                    <strong>Unable to send:</strong> {errorMessage}
+                    <div style={{ marginTop: '4px' }}>
+                      Alternatively, email us directly at <a href={`mailto:support@loststreet.online?subject=Contact%20Inquiry%20from%20${encodeURIComponent(formState.name)}&body=${encodeURIComponent(formState.message)}`} style={{ color: '#b91c1c', fontWeight: 700, textDecoration: 'underline' }}>support@loststreet.online</a>.
+                    </div>
+                  </div>
+                </div>
+              )}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
                 <div>
                   <label htmlFor="name" style={{ display: 'block', fontSize: '0.88rem', fontWeight: 700, color: '#374151', marginBottom: '0.4rem' }}>

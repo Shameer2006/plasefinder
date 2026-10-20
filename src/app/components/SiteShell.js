@@ -426,6 +426,30 @@ export function SiteFooter() {
                   {label}
                 </Link>
               ))}
+              <button
+                type="button"
+                onClick={() => {
+                  if (typeof window !== 'undefined') {
+                    window.dispatchEvent(new CustomEvent('open-cookie-settings'));
+                  }
+                }}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  padding: 0,
+                  margin: 0,
+                  textAlign: 'left',
+                  color: '#9ca3af',
+                  fontSize: '0.85rem',
+                  cursor: 'pointer',
+                  fontFamily: 'inherit',
+                  transition: 'color 0.2s',
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+                onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
+              >
+                Cookie Preferences
+              </button>
             </nav>
           </div>
         </div>

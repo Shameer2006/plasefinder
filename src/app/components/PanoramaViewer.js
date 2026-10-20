@@ -58,7 +58,7 @@ export default function PanoramaViewer({ onStaticImageReady }) {
   }
 
   return (
-    <div style={{ width: '100%', height: '100%', position: 'absolute', inset: 0, backgroundColor: '#1a1a2e', overflow: 'hidden' }}>
+    <div className="google-anno-skip" style={{ width: '100%', height: '100%', position: 'absolute', inset: 0, backgroundColor: '#1a1a2e', overflow: 'hidden' }}>
       {/* Interactive iframe — always visible, pointer events disabled during circle search */}
       <iframe
         ref={iframeRef}

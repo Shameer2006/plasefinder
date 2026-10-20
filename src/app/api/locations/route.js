@@ -163,6 +163,21 @@ function pickCountryLocations(count = 5, countryCode) {
   return result;
 }
 
+const FALLBACK_LOCATIONS = [
+  { lat: -29.6200, lng: 28.2500, country: 'LS', heading: 90, pitch: 0 },
+  { lat: 64.9125, lng: -14.2384, country: 'IS', heading: 140, pitch: 0 },
+  { lat: 35.2890, lng: -113.5684, country: 'US', heading: 260, pitch: 0 },
+  { lat: -44.8210, lng: 168.0410, country: 'NZ', heading: 320, pitch: 2 },
+  { lat: 51.5204, lng: -116.4802, country: 'CA', heading: 350, pitch: 0 },
+  { lat: -38.6811, lng: 143.1492, country: 'AU', heading: 240, pitch: 0 },
+  { lat: -34.0883, lng: 18.3582, country: 'ZA', heading: 190, pitch: 0 },
+  { lat: -49.3315, lng: -72.8860, country: 'AR', heading: 170, pitch: 0 },
+  { lat: 35.6595, lng: 139.7005, country: 'JP', heading: 20, pitch: 0 },
+  { lat: 48.8698, lng: 2.3075, country: 'FR', heading: 290, pitch: 0 },
+  { lat: 28.6139, lng: 77.2090, country: 'IN', heading: 45, pitch: 0 },
+  { lat: 40.4168, lng: -3.7038, country: 'ES', heading: 180, pitch: 0 },
+];
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -177,12 +192,14 @@ export async function GET(request) {
       locations = pickDiverseLocations(count, minContinents);
     }
 
+    if (!locations || locations.length === 0) {
+      locations = [...FALLBACK_LOCATIONS].sort(() => Math.random() - 0.5).slice(0, count);
+    }
+
     return NextResponse.json({ locations });
   } catch (error) {
-    console.error('Error serving locations:', error);
-    return NextResponse.json(
-      { error: 'Failed to load locations' },
-      { status: 500 }
-    );
+    console.error('Error serving locations from chunks, falling back to emergency locations:', error);
+    const fallbackSlice = [...FALLBACK_LOCATIONS].sort(() => Math.random() - 0.5).slice(0, 5);
+    return NextResponse.json({ locations: fallbackSlice }, { status: 200 });
   }
 }

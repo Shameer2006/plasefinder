@@ -13,6 +13,9 @@ const nextConfig = {
       { protocol: 'https', hostname: '**.files.wordpress.com' },
     ],
   },
+  outputFileTracingIncludes: {
+    '/api/**/*': ['./public/locations/**/*'],
+  },
   experimental: {
     optimizePackageImports: ['leaflet', 'react-leaflet', '@googlemaps/js-api-loader'],
   },

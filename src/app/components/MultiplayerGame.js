@@ -43,6 +43,7 @@ export default function MultiplayerGame({ gameId }) {
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
   const [isQuitting, setIsQuitting] = useState(false);
   const isAdvancingRef = useRef(false);
+  const isGeneratingFirstLocationRef = useRef(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -128,13 +129,14 @@ export default function MultiplayerGame({ gameId }) {
 
   // Host (Player 1) logic: generate location if needed
   useEffect(() => {
-    if (!matchData || !userProfile) return;
+    if (!matchData || !userProfile || isGeneratingFirstLocationRef.current) return;
     
-    // Check if we are player 1 (host)
-    const playerIds = Object.keys(matchData.players);
-    const isHost = playerIds[0] === userProfile.uid;
+    // Check if we are player 1 (host) or playing against a bot
+    const playerIdsLocal = Object.keys(matchData.players || {});
+    const isHostLocal = matchData.players?.[userProfile.uid]?.host || playerIdsLocal[0] === userProfile.uid || matchData.players?.['bot_opponent'] !== undefined;
 
-    if (isHost && matchData.status === 'waiting_for_players') {
+    if (isHostLocal && (matchData.status === 'waiting_for_players' || (!matchData.location && matchData.status !== 'finished'))) {
+      isGeneratingFirstLocationRef.current = true;
       // Generate first location
       import('@/lib/locationManager').then(({ fetchRandomLocation }) => {
         fetchRandomLocation(matchData.options || {}).then(({ location, options }) => {
@@ -142,9 +144,19 @@ export default function MultiplayerGame({ gameId }) {
             location: location,
             locationOptions: options,
             status: 'playing',
-            round: 1
+            round: 1,
+            roundStartTime: Date.now()
+          }).catch(err => {
+            console.error("Error setting first location:", err);
+            isGeneratingFirstLocationRef.current = false;
           });
+        }).catch(err => {
+          console.error("Error fetching first location:", err);
+          isGeneratingFirstLocationRef.current = false;
         });
+      }).catch(err => {
+        console.error("Error loading locationManager:", err);
+        isGeneratingFirstLocationRef.current = false;
       });
     }
   }, [matchData, userProfile, gameId]);
@@ -272,22 +284,18 @@ export default function MultiplayerGame({ gameId }) {
     return () => clearInterval(interval);
   }, [matchData?.status, matchData?.round, matchData?.roundStartTime, matchData?.options?.timeLimit, isRoundOver, matchData?.players, gameId, userProfile?.uid]);
 
-  if (!matchData || !userProfile) {
-    return <Spinner text="Loading Match..." />;
-  }
-
-  const myData = matchData.players?.[userProfile.uid] || {};
-  const playerIds = Object.keys(matchData.players || {});
-  const isHost = matchData.players?.[userProfile.uid]?.host || playerIds[0] === userProfile.uid;
+  const myData = matchData?.players?.[userProfile?.uid] || {};
+  const playerIds = Object.keys(matchData?.players || {});
+  const isHost = matchData?.players?.[userProfile?.uid]?.host || playerIds[0] === userProfile?.uid || matchData?.players?.['bot_opponent'] !== undefined;
   
   // Sort active players by score for leaderboards
-  const sortedPlayers = Object.entries(matchData.players || {})
+  const sortedPlayers = Object.entries(matchData?.players || {})
     .filter(([_, data]) => !data.left)
     .map(([uid, data]) => ({ uid, ...data }))
     .sort((a, b) => b.score - a.score);
 
   const handleMapGuess = async (lat, lng) => {
-    if (myData.ready || matchData.status !== 'playing') return;
+    if (!matchData || !userProfile || myData.ready || matchData.status !== 'playing') return;
     
     const loc = matchData.location;
     const distance = calculateDistance(lat, lng, loc.lat, loc.lng);
@@ -306,7 +314,7 @@ export default function MultiplayerGame({ gameId }) {
   };
 
   const handleChoiceGuess = async (iso, countryName) => {
-    if (myData.ready || matchData.status !== 'playing') return;
+    if (!matchData || !userProfile || myData.ready || matchData.status !== 'playing') return;
     
     const isCorrect = iso === matchData.location.iso;
     const points = isCorrect ? 5000 : 0;
@@ -318,18 +326,12 @@ export default function MultiplayerGame({ gameId }) {
       [`players.${userProfile.uid}.score`]: myData.score + points,
       [`players.${userProfile.uid}.roundScore`]: points,
       [`players.${userProfile.uid}.ready`]: true,
-      // For multiple choice, we still need a lastGuess to not break the ResultsMap
-      // We can just set it to the actual location if correct, or somewhere else if wrong
-      // But it's easier to just pass the actual location coordinates for now
-      // so the map pin at least renders somewhere (or skip rendering if not provided)
       [`players.${userProfile.uid}.lastGuess`]: { lat: matchData.location.lat, lng: matchData.location.lng, choice: countryName, isCorrect }
     });
   };
 
-  // Variables moved to the top level
-
   const startNextRound = async () => {
-    if (!userProfile || isAdvancingRef.current) return;
+    if (!userProfile || !matchData || isAdvancingRef.current) return;
     
     if (isHost) {
       isAdvancingRef.current = true;
@@ -343,8 +345,8 @@ export default function MultiplayerGame({ gameId }) {
       if (isDuel && playerIds.length === 2) {
         const p1 = playerIds[0];
         const p2 = playerIds[1];
-        const rs1 = matchData.players[p1].roundScore || 0;
-        const rs2 = matchData.players[p2].roundScore || 0;
+        const rs1 = matchData.players[p1]?.roundScore || 0;
+        const rs2 = matchData.players[p2]?.roundScore || 0;
         const h1 = matchData.health?.[p1] ?? 5000;
         const h2 = matchData.health?.[p2] ?? 5000;
 
@@ -370,8 +372,8 @@ export default function MultiplayerGame({ gameId }) {
           // Simple ELO update for 1v1 duel (winner +25, loser -25)
           const opponentId = playerIds.find(id => id !== userProfile.uid);
           const opponentData = matchData.players[opponentId];
-          const myScore = matchData.players[userProfile.uid].score;
-          const opScore = matchData.players[opponentId].score;
+          const myScore = matchData.players[userProfile.uid]?.score || 0;
+          const opScore = opponentData?.score || 0;
           
           const isWinner = myScore >= opScore;
           const myNewElo = isWinner ? myData.elo + 25 : myData.elo - 25;
@@ -387,7 +389,7 @@ export default function MultiplayerGame({ gameId }) {
           }
           await updateDoc(doc(db, 'users', userProfile.uid), myUpdates);
           
-          if (!opponentData.isBot) {
+          if (opponentData && !opponentData.isBot) {
             const opNewElo = opScore > myScore ? opponentData.elo + 25 : opponentData.elo - 25;
             await updateDoc(doc(db, 'users', opponentId), { elo: Math.max(0, opNewElo) });
           }
@@ -545,6 +547,15 @@ export default function MultiplayerGame({ gameId }) {
       </div>
     );
   };
+
+  if (!matchData || !userProfile || matchData.status === 'waiting_for_players' || (!matchData.location && matchData.status !== 'finished')) {
+    return (
+      <>
+        {renderQuitModal()}
+        <Spinner text="Preparing Match Arena..." />
+      </>
+    );
+  }
 
   if (matchData.status === 'finished') {
     return (
@@ -750,25 +761,82 @@ export default function MultiplayerGame({ gameId }) {
   }
 
   return (
-    <div style={{ display: 'flex', width: '100vw', height: '100vh', position: 'relative' }}>
+    <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}>
       {matchData.options?.mode === 'Flag Guesser' ? (
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#111' }}>
-          <img src={`https://flagcdn.com/w320/${matchData.location.iso.toLowerCase()}.png`} style={{ maxWidth: '80%', maxHeight: '60%', border: '4px solid white', borderRadius: '10px', boxShadow: '0 10px 30px rgba(0,0,0,0.8)' }} />
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#111' }}>
+          {matchData.location?.iso && (
+            <img 
+              src={`https://flagcdn.com/w320/${matchData.location.iso.toLowerCase()}.png`} 
+              alt={matchData.location.country || 'Flag'}
+              style={{ maxWidth: '80%', maxHeight: '60%', border: '4px solid white', borderRadius: '10px', boxShadow: '0 10px 30px rgba(0,0,0,0.8)' }} 
+            />
+          )}
         </div>
       ) : (
-        <div style={{ flex: 1, position: 'relative' }}>
-          <PanoramaViewer />
-        </div>
+        <PanoramaViewer />
       )}
 
-      <MultiplayerHUD 
-        matchData={matchData} 
-        timeLeft={timeLeft} 
-        isMobile={isMobile} 
-        sortedPlayers={sortedPlayers} 
-        userProfile={userProfile} 
-        onQuit={() => setShowQuitConfirm(true)}
-      />
+      {/* Top HUD: In Ranked Duels show the Duel Health Bar + Round & Timer */}
+      {matchData.gameType === 'ranked_duel' && matchData.players && matchData.health ? (
+        <div style={{
+          position: 'absolute',
+          top: isMobile ? '8px' : '16px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 100,
+          width: '95%',
+          maxWidth: '850px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '8px',
+          pointerEvents: 'auto'
+        }}>
+          <DuelHealthBar players={matchData.players} health={matchData.health} isMobile={isMobile} />
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
+            padding: '6px 16px',
+            background: 'rgba(0,0,0,0.7)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            borderRadius: '12px',
+            border: '1px solid rgba(255,255,255,0.1)'
+          }}>
+            <div style={{ fontSize: isMobile ? '0.85rem' : '1rem', fontWeight: 800, color: 'white' }}>
+              Round {matchData.round} / {matchData.options?.rounds || 5}
+            </div>
+            {timeLeft !== null && (
+              <div style={{
+                fontSize: isMobile ? '0.9rem' : '1.1rem',
+                fontWeight: 900,
+                color: timeLeft <= 10 ? '#ef4444' : '#fbbf24'
+              }}>
+                ⏱️ {timeLeft}s
+              </div>
+            )}
+            <button
+              type="button"
+              className="btn btn-game-quit"
+              onClick={() => setShowQuitConfirm(true)}
+              style={{ padding: '4px 10px', fontSize: '0.8rem' }}
+            >
+              Quit
+            </button>
+          </div>
+        </div>
+      ) : (
+        <MultiplayerHUD 
+          matchData={matchData} 
+          timeLeft={timeLeft} 
+          isMobile={isMobile} 
+          sortedPlayers={sortedPlayers} 
+          userProfile={userProfile} 
+          onQuit={() => setShowQuitConfirm(true)}
+        />
+      )}
 
       {isMultipleChoice ? (
         <div 
@@ -799,7 +867,7 @@ export default function MultiplayerGame({ gameId }) {
             }}>
               {matchData.locationOptions?.map((opt, i) => {
                 const isSelected = myData.ready;
-                const isCorrect = opt.iso === matchData.location.iso;
+                const isCorrect = Boolean(matchData.location?.iso && opt.iso === matchData.location.iso);
                 const isMyGuess = myData.lastGuess?.choice === opt.country;
                 
                 let btnStyle = {

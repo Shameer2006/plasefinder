@@ -1,6 +1,6 @@
 export default function MultiplayerHUD({ matchData, timeLeft, isMobile, sortedPlayers, userProfile, onQuit }) {
   return (
-    <div className="hud-center" style={{ 
+    <div className="hud-center google-anno-skip" style={{ 
       background: 'rgba(0,0,0,0.8)',
       padding: isMobile ? '6px 12px' : '10px 20px',
       borderRadius: '20px',
@@ -64,9 +64,9 @@ export default function MultiplayerHUD({ matchData, timeLeft, isMobile, sortedPl
         {sortedPlayers.slice(0, 3).map((player) => (
           <div key={player.uid} style={{ textAlign: 'center', minWidth: isMobile ? '60px' : '80px' }}>
             <div style={{ fontSize: isMobile ? '0.75rem' : '0.8rem', color: '#ccc', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              {player.uid === userProfile.uid ? 'You' : player.displayName}
+              {player.uid === userProfile?.uid ? 'You' : player.displayName}
             </div>
-            <div style={{ fontSize: isMobile ? '1rem' : '1.2rem', fontWeight: 'bold', color: player.uid === userProfile.uid ? 'var(--primary-color)' : 'white' }}>
+            <div style={{ fontSize: isMobile ? '1rem' : '1.2rem', fontWeight: 'bold', color: player.uid === userProfile?.uid ? 'var(--primary-color)' : 'white' }}>
               {player.score}
             </div>
           </div>

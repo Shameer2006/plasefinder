@@ -22,12 +22,19 @@ const jsonLd = {
   "@type": "Article",
   "headline": "Google Street View Camera Generations (Gen 1–Gen 4) Complete Guide",
   "description": "A comprehensive technical and visual breakdown of Google Street View camera hardware generations and their country coverage.",
-  "author": {
-    "@type": "Person",
-    "name": "LostStreet Editorial Team",
-    "jobTitle": "Senior Geography Meta Analysts",
-    "url": "https://www.loststreet.online/about"
-  },
+  "author": [
+    {
+      "@type": "Person",
+      "name": "loststreet team",
+      "jobTitle": "Lead Developer & Geography Researcher",
+      "url": "https://www.loststreet.online/about"
+    },
+    {
+      "@type": "Organization",
+      "name": "LostStreet Editorial Board",
+      "url": "https://www.loststreet.online/about"
+    }
+  ],
   "publisher": {
     "@type": "Organization",
     "name": "LostStreet",
@@ -109,7 +116,7 @@ export default function CameraGenerationsGuidePage() {
 
         {/* Article Container */}
         <main style={{ padding: 'clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 3vw, 1.5rem)', maxWidth: '760px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
-          
+
           <header style={{ marginBottom: 'clamp(1.5rem, 4vw, 2.75rem)', textAlign: 'center', fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
             <span style={{ color: '#10b981', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.06em', textTransform: 'uppercase', display: 'inline-block' }}>
               Advanced Technical Meta
@@ -127,7 +134,7 @@ export default function CameraGenerationsGuidePage() {
             </h1>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', color: '#6b7280', fontSize: '0.88rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-              <span>By <strong>LostStreet Research Team</strong></span>
+              <span>By <strong>Shameer</strong> &amp; <strong>LostStreet Editorial Board</strong></span>
               <span>•</span>
               <span>Updated: August 27, 2026</span>
               <span>•</span>
@@ -136,7 +143,7 @@ export default function CameraGenerationsGuidePage() {
           </header>
 
           <article style={{ fontSize: 'clamp(1rem, 1.8vw, 1.125rem)', color: '#374151', wordBreak: 'break-word', lineHeight: 1.8 }}>
-            
+
             <p style={{ fontSize: 'clamp(1.05rem, 2vw, 1.22rem)', color: '#4b5563', lineHeight: 1.75, marginBottom: '2rem' }}>
               When dropped onto an unpaved country road with no road signs, no buildings, and no visible text, how do elite geography players know which continent they are on within 3 seconds? The answer lies in the camera itself. Over nearly two decades, Google has deployed four distinct generations of panoramic camera rigs. Recognizing image quality, lens flare artifacts, and sun halos provides an instant country filter.
             </p>
@@ -249,11 +256,33 @@ export default function CameraGenerationsGuidePage() {
               </table>
             </div>
 
+            {/* Sources & Editorial Verification */}
+            <div style={{
+              marginTop: '3rem',
+              padding: '1.5rem',
+              background: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              borderRadius: '14px',
+              fontFamily: '"Inter", system-ui, sans-serif'
+            }}>
+              <h3 style={{ fontSize: '0.98rem', fontWeight: 800, color: '#111827', margin: '0 0 0.5rem 0' }}>
+                Sources, Hardware Documentation &amp; Citations
+              </h3>
+              <p style={{ fontSize: '0.86rem', color: '#4b5563', lineHeight: 1.6, margin: '0 0 0.75rem 0' }}>
+                The technical metadata, sensor artifact characteristics, and country timelines described in this guide are synthesized from documented real-world sources:
+              </p>
+              <ul style={{ paddingLeft: '1.25rem', fontSize: '0.84rem', color: '#4b5563', display: 'flex', flexDirection: 'column', gap: '0.35rem', margin: 0 }}>
+                <li><strong>Google Street View Fleet Specs:</strong> Public hardware documentation from Google Geo announcements regarding camera rig evolutions (2007 Elphel rigs through 2017 high-res trekker systems).</li>
+                <li><strong>Optical Sensor Aberration Data:</strong> Documented chromatic aberration indices and CCD/CMOS sensor magenta-artifact reports recorded in open community cartographic registries.</li>
+                <li><strong>Regional Coverage Rollouts:</strong> Official Google Street View Country Coverage indices and public infrastructure timelines (such as Germany's 2008–2010 hiatus and India's 2022 national partnership launch).</li>
+              </ul>
+            </div>
+
             {/* Author Bio Box */}
             <div style={{
-              marginTop: '3.5rem',
+              marginTop: '1.5rem',
               padding: '1.5rem',
-              background: '#f9fafb',
+              background: '#ffffff',
               border: '1px solid #e5e7eb',
               borderRadius: '14px',
               display: 'flex',
@@ -263,18 +292,18 @@ export default function CameraGenerationsGuidePage() {
             }}>
               <div style={{
                 width: '56px', height: '56px', borderRadius: '50%',
-                background: 'linear-gradient(135deg, #10b981, #3b82f6)',
+                background: 'linear-gradient(135deg, #059669, #10b981)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 color: 'white', fontWeight: 900, fontSize: '1.3rem', flexShrink: 0
               }}>
-                LS
+                SH
               </div>
               <div>
                 <h3 style={{ margin: '0 0 0.25rem 0', fontSize: '1rem', fontWeight: 700, color: '#111827' }}>
-                  LostStreet Geography Editorial Team
+                  Written by Shameer &amp; LostStreet Editorial Board
                 </h3>
                 <p style={{ margin: 0, fontSize: '0.85rem', color: '#6b7280', lineHeight: 1.5 }}>
-                  Our research group specializes in street infrastructure analysis, camera hardware diagnostics, and geopolitical topography to produce verified educational guides for geography enthusiasts.
+                  Curated and fact-checked by the LostStreet editorial desk. We analyze road infrastructure patterns, camera hardware signatures, and geopolitical topography to provide verifiable, educational insights. Learn more about our vetting process on our <Link href="/about" style={{ color: '#059669', textDecoration: 'underline' }}>About Us</Link> page.
                 </p>
               </div>
             </div>

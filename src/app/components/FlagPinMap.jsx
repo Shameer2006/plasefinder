@@ -102,7 +102,7 @@ export default function FlagPinMap({
   };
 
   return (
-    <div style={containerStyle}>
+    <div className="google-anno-skip" style={containerStyle}>
       <MapContainer
         center={[20, 0]}
         zoom={2}

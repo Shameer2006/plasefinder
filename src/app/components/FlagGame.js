@@ -418,7 +418,7 @@ export default function FlagGame({ onReturnToMenu, initialDifficulty = 'EASY' })
     }
 
     return (
-      <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
+      <div className="google-anno-skip" style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
         {TopHUD}
 
         {/* 1. Full-Screen World Map as the Main Stage */}
@@ -600,7 +600,7 @@ export default function FlagGame({ onReturnToMenu, initialDifficulty = 'EASY' })
 
   // ── SCENARIO B: MULTIPLE CHOICE ROUND (Easy Mode & Medium Mode Odd Rounds)
   return (
-    <div style={{
+    <div className="google-anno-skip" style={{
       position: 'relative',
       width: '100vw',
       minHeight: '100dvh',

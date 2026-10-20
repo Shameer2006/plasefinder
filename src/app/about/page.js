@@ -298,8 +298,8 @@ export default function AboutPage() {
               <p style={{ color: '#374151', lineHeight: 1.85, fontSize: '0.98rem', margin: '0 0 1rem' }}>
                 LostStreet started from a simple frustration: the best geography guessing games on the internet
                 were locked behind paywalls or had strict daily limits. As geography enthusiasts, we wanted
-                to explore every corner of the planet — Mongolia's open steppes, Senegal's red-earth roads,
-                Bolivia's colonial plazas — without watching a timer run out or hitting a subscription wall.
+                to explore every corner of the planet — Mongolia&apos;s open steppes, Senegal&apos;s red-earth roads,
+                Bolivia&apos;s colonial plazas — without watching a timer run out or hitting a subscription wall.
               </p>
               <p style={{ color: '#374151', lineHeight: 1.85, fontSize: '0.98rem', margin: '0 0 1rem' }}>
                 So in June 2026, we started building. What began as a personal project quickly grew into
@@ -307,17 +307,17 @@ export default function AboutPage() {
                 and the response from the geography and gaming community has inspired us to keep building.
               </p>
               <p style={{ color: '#374151', lineHeight: 1.85, fontSize: '0.98rem', margin: 0 }}>
-                Today, LostStreet features over <strong>780,000 hand-picked Street View locations</strong> across
-                195+ countries, real-time multiplayer duels, private party rooms, daily challenges, a flag guesser
-                quiz, and a growing library of pro strategy guides. And it is — and always will be — <strong>100% free</strong>.
+                Today, LostStreet features over <strong>780,000 verified Street View coordinates</strong> across
+                100+ covered countries and territories, algorithmically filtered and curated to ensure public road
+                navigability and 360° panoramic fidelity. And it is — and always will be — <strong>100% free</strong>.
               </p>
             </div>
           </section>
 
           {/* ── WHO WE ARE ─────────────────────────────────────────────── */}
           <section style={{ marginBottom: '4rem' }}>
-            <h2 style={sectionHeadingStyle}>Who We Are</h2>
-            <p style={sectionSubStyle}>A small, independent team united by a love of geography and exploration.</p>
+            <h2 style={sectionHeadingStyle}>Who We Are &amp; Editorial Leadership</h2>
+            <p style={sectionSubStyle}>A dedicated, independent team united by cartography, web engineering, and world exploration.</p>
 
             <div style={{
               display: 'grid',
@@ -335,8 +335,7 @@ export default function AboutPage() {
                 </div>
                 <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#111827', margin: '0 0 0.4rem' }}>Independent Studio</h3>
                 <p style={{ fontSize: '0.9rem', color: '#6b7280', lineHeight: 1.6, margin: 0 }}>
-                  We are a small, self-funded team building LostStreet independently — no VC funding, no corporate backing.
-                  Just a passion project that grew into something real.
+                  Founded and led by <strong>Shameer</strong>, a software engineer and geography enthusiast, alongside an independent network of community researchers and players.
                 </p>
               </div>
               <div style={{ ...cardStyle, textAlign: 'center' }}>
@@ -365,11 +364,47 @@ export default function AboutPage() {
                 </div>
                 <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#111827', margin: '0 0 0.4rem' }}>Always Reachable</h3>
                 <p style={{ fontSize: '0.9rem', color: '#6b7280', lineHeight: 1.6, margin: 0 }}>
-                  We genuinely read player feedback. Email us at{' '}
+                  We genuinely read player feedback. Reach us at{' '}
+                  <a href="mailto:support@loststreet.online" style={{ color: '#059669', textDecoration: 'underline', fontWeight: 700 }}>
+                    support@loststreet.online
+                  </a>{' '}
+                  or{' '}
                   <a href="mailto:loststreet.contact@gmail.com" style={{ color: '#059669', textDecoration: 'underline' }}>
                     loststreet.contact@gmail.com
-                  </a>{' '}
-                  — bug reports, feature ideas, and partnership inquiries are all welcome.
+                  </a>.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── EDITORIAL STANDARDS & SOURCING ─────────────────────────── */}
+          <section style={{ marginBottom: '4rem' }}>
+            <h2 style={sectionHeadingStyle}>Editorial Standards &amp; Fact-Checking</h2>
+            <p style={sectionSubStyle}>How our team researches, verifies, and maintains educational content.</p>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '1.25rem',
+            }}>
+              <div style={cardStyle}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#059669', margin: '0 0 0.5rem' }}>1. Geographic Accuracy</h3>
+                <p style={{ fontSize: '0.9rem', color: '#4b5563', lineHeight: 1.6, margin: 0 }}>
+                  All road markings, highway signage standards, and utility pole patterns featured in our strategy guides are verified against official transportation ministry documentation (such as AASHTO in the US, Vienna Convention standards in Europe, and national transport ministries).
+                </p>
+              </div>
+
+              <div style={cardStyle}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#2563eb', margin: '0 0 0.5rem' }}>2. Hardware Meta Verification</h3>
+                <p style={{ fontSize: '0.9rem', color: '#4b5563', lineHeight: 1.6, margin: 0 }}>
+                  Camera generation guides, sensor lens artifacts, and vehicle roof rack notes are cross-referenced with public Google Street View release documentation and confirmed through active in-game telemetry across covered territories.
+                </p>
+              </div>
+
+              <div style={cardStyle}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#b45309', margin: '0 0 0.5rem' }}>3. Coordinate Integrity</h3>
+                <p style={{ fontSize: '0.9rem', color: '#4b5563', lineHeight: 1.6, margin: 0 }}>
+                  Our database of 780,000+ coordinates undergoes continuous automated health checks to prune dead panoramas, private-property anomalies, or low-resolution interior captures, ensuring every round presents a fair, playable visual challenge.
                 </p>
               </div>
             </div>
@@ -396,7 +431,7 @@ export default function AboutPage() {
                 margin: '0 auto',
                 fontStyle: 'italic',
               }}>
-                "To make the joy of exploring the world through Google Street View completely free and accessible to everyone — forever."
+                &ldquo;To make the joy of exploring the world through Google Street View completely free and accessible to everyone — forever.&rdquo;
               </p>
             </div>
           </section>

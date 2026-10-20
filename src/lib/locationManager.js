@@ -52,24 +52,39 @@ function formatLocationResult(locations) {
     else break;
   }
 
-  const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+  let getCountryName;
+  try {
+    const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+    getCountryName = (code) => {
+      if (!code) return 'Unknown';
+      try {
+        return regionNames.of(code.toUpperCase()) || code;
+      } catch {
+        return code;
+      }
+    };
+  } catch {
+    getCountryName = (code) => code || 'Unknown';
+  }
+
   wrongCountries.sort(() => Math.random() - 0.5);
   const selectedWrong = wrongCountries.slice(0, 3).map(code => ({ 
-    country: regionNames.of(code) || code,
-    iso: code.toLowerCase() 
+    country: getCountryName(code),
+    iso: String(code || '').toLowerCase() 
   }));
 
+  const locIso = String(location.country || '').toLowerCase();
   const options = [...selectedWrong, { 
-    country: regionNames.of(location.country) || location.country,
-    iso: location.country.toLowerCase()
+    country: getCountryName(location.country),
+    iso: locIso
   }];
   options.sort(() => Math.random() - 0.5);
 
   return {
     location: {
       ...location,
-      country: regionNames.of(location.country) || location.country,
-      iso: location.country.toLowerCase()
+      country: getCountryName(location.country),
+      iso: locIso
     },
     options
   };

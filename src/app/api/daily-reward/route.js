@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { getStreakStatus, getRewardForDay, formatDateUTC, REWARD_CONFIG } from '@/lib/dailyReward';
 
+export const dynamic = 'force-dynamic';
+
 // Check if Firebase admin service account credentials are provided
 const hasAdminCredentials = () => {
   return !!(process.env.FIREBASE_SERVICE_ACCOUNT_KEY || process.env.GOOGLE_APPLICATION_CREDENTIALS);
@@ -13,7 +15,7 @@ const hasAdminCredentials = () => {
  */
 export async function GET(request) {
   try {
-    const { searchParams } = new URL(request.url);
+    const searchParams = request.nextUrl ? request.nextUrl.searchParams : new URL(request.url).searchParams;
     const uid = searchParams.get('uid');
     const clientLastClaim = searchParams.get('lastClaimDate');
     const clientStreak = parseInt(searchParams.get('streak') || '0', 10) || 0;

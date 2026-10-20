@@ -84,7 +84,7 @@ export default function ResultsMap({ location, players, height = '400px' }) {
   }).filter(Boolean);
 
   return (
-    <div style={{ height, width: '100%', borderRadius: '12px', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.2)' }}>
+    <div className="google-anno-skip" style={{ height, width: '100%', borderRadius: '12px', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.2)' }}>
       <MapContainer 
         center={actualPos} 
         zoom={2} 

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import CookieSettingsTrigger from '@/app/components/CookieSettingsTrigger';
 
 export const metadata = {
   title: "Privacy Policy — LostStreet Free Street View Guesser",
@@ -188,6 +189,9 @@ export default function PrivacyPolicy() {
             <p>
               Our third-party advertising partners also set cookies to measure campaign performance and deliver relevant context. For a detailed breakdown of all cookie types and comprehensive instructions on managing or disabling them, please visit our dedicated <Link href="/cookies" style={{ color: '#059669', fontWeight: 600, textDecoration: 'underline' }}>Cookie Policy</Link>.
             </p>
+            <div style={{ margin: '0.5rem 0' }}>
+              <CookieSettingsTrigger label="Open Cookie Preferences" />
+            </div>
 
             <h2 style={{ color: '#111827', fontSize: '1.28rem', fontWeight: 800, marginTop: '1rem', borderBottom: '1px solid #f3f4f6', paddingBottom: '0.5rem' }}>
               4. How We Use Collected Data

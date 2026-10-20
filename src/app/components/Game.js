@@ -105,7 +105,7 @@ export default function Game() {
   }
 
   return (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
+    <div className="google-anno-skip" style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
       {/* Eye-opening cinematic intro */}
       {showIntro && gameMode === 'STORY' && (
         <EyeOpeningIntro onComplete={() => setShowIntro(false)} />

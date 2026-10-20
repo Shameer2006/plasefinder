@@ -2061,3 +2061,36 @@ button, input, select, textarea, a, [role="button"] {
     transform: none !important;
   }
 }
+
+/* -- Google AdSense Gameplay Policy Compliance -- */
+/* google-anno-skip is an AdSense selector marker; does not need styling */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.adsense-placement-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justifyContent: center;
+  margin: 2.5rem auto;
+  max-width: 100%;
+  clear: both;
+}
+
+.adsense-placement-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}

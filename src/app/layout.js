@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
 import SiteShell from "@/app/components/SiteShell";
+import CookieConsentBanner from "@/app/components/CookieConsentBanner";
 import { Outfit, Oswald } from "next/font/google";
 
 const outfit = Outfit({
@@ -242,6 +243,22 @@ export default function RootLayout({ children }) {
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
+        {/* Google Consent Mode v2 Default (Deny until user accepts) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'analytics_storage': 'denied',
+                'wait_for_update': 500
+              });
+            `,
+          }}
+        />
         {/* JSON-LD structured data */}
         {jsonLd.map((schema, i) => (
           <script
@@ -268,6 +285,7 @@ export default function RootLayout({ children }) {
           <ToastProvider>
             <GameToastProvider>
               <SiteShell>{children}</SiteShell>
+              <CookieConsentBanner />
             </GameToastProvider>
           </ToastProvider>
         </AuthProvider>

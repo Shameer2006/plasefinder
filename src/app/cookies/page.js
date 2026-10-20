@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { PageShell } from '@/app/components/SiteShell';
+import CookieSettingsTrigger from '@/app/components/CookieSettingsTrigger';
 
 export const metadata = {
   title: "Cookie Policy — LostStreet Free World Geography Game",
@@ -112,8 +113,32 @@ export default function CookiePolicyPage() {
               3. Managing Your Cookie &amp; Advertising Preferences
             </h2>
             <p>
-              You maintain complete control over how cookies and behavioral advertising tracking are applied:
+              LostStreet supports <strong>Google Consent Mode v2</strong> and GDPR/ePrivacy standards. You can change your preferences at any time:
             </p>
+
+            <div style={{
+              background: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              padding: '1.25rem 1.5rem',
+              borderRadius: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '1rem',
+              flexWrap: 'wrap',
+              margin: '0.5rem 0 1rem'
+            }}>
+              <div>
+                <div style={{ fontWeight: 800, color: '#111827', fontSize: '0.98rem' }}>
+                  Interactive Consent Manager
+                </div>
+                <div style={{ fontSize: '0.86rem', color: '#6b7280', marginTop: '2px' }}>
+                  Adjust analytics and Google AdSense personalization toggles directly.
+                </div>
+              </div>
+              <CookieSettingsTrigger label="Open Consent Settings" />
+            </div>
+
             <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
               <li>
                 <strong>Google Ads Personalization:</strong> You can manage or disable personalized advertising at any time by visiting <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#059669', fontWeight: 600, textDecoration: 'underline' }}>Google My Ad Center</a>.

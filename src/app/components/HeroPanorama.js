@@ -77,7 +77,7 @@ export default function HeroPanorama() {
   const currentPano = STREET_VIEW_LOCATIONS[currentIdx] || STREET_VIEW_LOCATIONS[0];
 
   return (
-    <div className="hero-panorama-container" style={{
+    <div className="hero-panorama-container google-anno-skip" style={{
       position: 'fixed',
       inset: 0,
       width: '100%',

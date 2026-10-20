@@ -103,7 +103,7 @@ export default function GuessingMap({ onGuess, country }) {
     <>
       {/* The map panel */}
       <div 
-        className={`glass-panel map-container ${isExpanded ? 'expanded' : ''}`}
+        className={`glass-panel map-container ${isExpanded ? 'expanded' : ''} google-anno-skip`}
         style={{
           transition: 'all 0.3s ease',
           zIndex: 10,

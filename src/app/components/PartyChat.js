@@ -51,7 +51,7 @@ export default function PartyChat({ gameId, matchData }) {
   };
 
   return (
-    <div style={{
+    <div className="google-anno-skip" style={{
       position: 'absolute',
       bottom: isMobile ? '90px' : '20px',
       left: isMobile ? '10px' : '20px',

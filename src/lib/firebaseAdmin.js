@@ -31,11 +31,26 @@ function initFirebaseAdmin() {
   }
 
   // Last resort: initialize without config (works with GOOGLE_APPLICATION_CREDENTIALS env var)
-  return initializeApp();
+  try {
+    return initializeApp();
+  } catch (err) {
+    console.warn('Firebase Admin initializeApp fallback skipped:', err?.message || err);
+    return null;
+  }
 }
 
-const adminApp = initFirebaseAdmin();
-const adminDb = getFirestore(adminApp);
-const adminAuth = getAuth(adminApp);
+let adminApp = null;
+let adminDb = null;
+let adminAuth = null;
+
+try {
+  adminApp = initFirebaseAdmin();
+  if (adminApp) {
+    adminDb = getFirestore(adminApp);
+    adminAuth = getAuth(adminApp);
+  }
+} catch (e) {
+  console.warn('Firebase Admin SDK initialization skipped:', e?.message || e);
+}
 
 export { adminApp, adminDb, adminAuth };

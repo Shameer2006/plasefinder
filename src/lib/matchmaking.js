@@ -142,6 +142,23 @@ export const joinRankedQueue = async (userProfile, onMatchFound) => {
     const gameId = `ranked_bot_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     const bot = makeBotProfile(userElo, 100);
 
+    const matchOptions = {
+      rounds: 5,
+      timeLimit: 60,
+      difficulty: 'HARD'
+    };
+
+    let initialLocation = null;
+    let initialOptions = null;
+    try {
+      const { fetchRandomLocation } = await import('./locationManager');
+      const locRes = await fetchRandomLocation(matchOptions);
+      initialLocation = locRes.location;
+      initialOptions = locRes.options;
+    } catch (e) {
+      console.warn("Could not pre-fetch location for ranked bot match:", e);
+    }
+
     const gameRef = doc(db, 'matches', gameId);
     await setDoc(gameRef, {
       gameType: 'ranked_duel',
@@ -159,15 +176,13 @@ export const joinRankedQueue = async (userProfile, onMatchFound) => {
         [userProfile.uid]: 5000,
         'bot_opponent': 5000
       },
-      status: 'waiting_for_players',
+      status: initialLocation ? 'playing' : 'waiting_for_players',
+      location: initialLocation || null,
+      locationOptions: initialOptions || null,
       round: 1,
-      roundStartTime: null,
+      roundStartTime: initialLocation ? Date.now() : null,
       createdAt: serverTimestamp(),
-      options: {
-        rounds: 5,
-        timeLimit: 60,
-        difficulty: 'HARD'
-      }
+      options: matchOptions
     });
 
     onMatchFound(gameId);
@@ -294,6 +309,23 @@ export const joinUnrankedQueue = async (userProfile, onMatchFound) => {
     const gameId = `unranked_bot_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     const bot = makeBotProfile(userProfile.elo || 1000, 120);
 
+    const matchOptions = {
+      rounds: 5,
+      timeLimit: 30,
+      difficulty: 'HARD'
+    };
+
+    let initialLocation = null;
+    let initialOptions = null;
+    try {
+      const { fetchRandomLocation } = await import('./locationManager');
+      const locRes = await fetchRandomLocation(matchOptions);
+      initialLocation = locRes.location;
+      initialOptions = locRes.options;
+    } catch (e) {
+      console.warn("Could not pre-fetch location for unranked bot match:", e);
+    }
+
     const gameRef = doc(db, 'matches', gameId);
     await setDoc(gameRef, {
       gameType: 'unranked_multiplayer',
@@ -307,15 +339,13 @@ export const joinUnrankedQueue = async (userProfile, onMatchFound) => {
         },
         'bot_opponent': bot
       },
-      status: 'waiting_for_players',
+      status: initialLocation ? 'playing' : 'waiting_for_players',
+      location: initialLocation || null,
+      locationOptions: initialOptions || null,
       round: 1,
-      roundStartTime: null,
+      roundStartTime: initialLocation ? Date.now() : null,
       createdAt: serverTimestamp(),
-      options: {
-        rounds: 5,
-        timeLimit: 30,
-        difficulty: 'HARD'
-      }
+      options: matchOptions
     });
 
     onMatchFound(gameId);
