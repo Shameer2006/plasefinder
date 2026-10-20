@@ -117,6 +117,8 @@ function formatPost(post) {
     desc: cleanExcerpt || 'Read the full article on LostStreet.',
     content: post.content?.rendered || '',
     date: formattedDate,
+    isoDate: post.date ? new Date(post.date).toISOString() : new Date().toISOString(),
+    modifiedDate: post.modified ? new Date(post.modified).toISOString() : new Date().toISOString(),
     readTime,
     image: imageUrl,
     author: authorName,

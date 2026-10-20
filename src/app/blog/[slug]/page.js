@@ -31,7 +31,8 @@ export async function generateMetadata({ params }) {
       description: post.desc,
       url: articleUrl,
       type: 'article',
-      publishedTime: post.date,
+      publishedTime: post.isoDate || post.date,
+      modifiedTime: post.modifiedDate || post.date,
       authors: [post.author],
       images: [
         {
@@ -58,6 +59,33 @@ export default async function BlogPostPage({ params }) {
   if (!post) {
     notFound();
   }
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.desc,
+    image: post.image ? [post.image] : ['https://www.loststreet.online/og-image.png'],
+    datePublished: post.isoDate || post.date,
+    dateModified: post.modifiedDate || post.date,
+    author: {
+      '@type': 'Person',
+      name: post.author || 'LostStreet Editorial Team',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'LostStreet',
+      url: 'https://www.loststreet.online',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.loststreet.online/icon.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://www.loststreet.online/blog/${slug}`,
+    },
+  };
 
   return (
     <>
@@ -164,6 +192,12 @@ export default async function BlogPostPage({ params }) {
       `}</style>
 
       <PageShell breadcrumb={post.title} badgeText="LostStreet Blog" badgeColor="green">
+        {/* Google Article / BlogPosting Structured Data Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
         <main style={{
           background: 'transparent',
           minHeight: '100vh',

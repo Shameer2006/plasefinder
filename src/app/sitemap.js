@@ -1,3 +1,5 @@
+import { getAllPostSlugs } from '@/lib/wordpress';
+
 const GUIDE_SLUGS = [
   '25-pro-street-view-geoguessr-secrets',
   'street-view-camera-generations-guide',
@@ -14,12 +16,12 @@ const GUIDE_SLUGS = [
   'multiplayer-geography-tips',
 ];
 
-const BLOG_SLUGS = [
+const BASELINE_BLOG_SLUGS = [
   'what-is-loststreet',
   'flag-guesser-journey',
 ];
 
-export default function sitemap() {
+export default async function sitemap() {
   const now = new Date();
 
   const baseRoutes = [
@@ -44,7 +46,18 @@ export default function sitemap() {
     priority: 0.85,
   }));
 
-  const blogRoutes = BLOG_SLUGS.map(slug => ({
+  // Fetch dynamic slugs from headless WordPress
+  let wpSlugs = [];
+  try {
+    wpSlugs = await getAllPostSlugs();
+  } catch (err) {
+    console.warn('[sitemap] Failed to fetch WordPress slugs:', err);
+  }
+
+  // Deduplicate baseline posts and WordPress posts
+  const allBlogSlugs = Array.from(new Set([...BASELINE_BLOG_SLUGS, ...wpSlugs]));
+
+  const blogRoutes = allBlogSlugs.map(slug => ({
     url: `https://www.loststreet.online/blog/${slug}`,
     lastModified: now,
     changeFrequency: 'weekly',
