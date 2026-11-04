@@ -1,18 +1,26 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "GeoGuessr Alternative: The Best Free Street View Games (2026)",
-  description: "Discover the top free GeoGuessr alternatives and free street view guesser games in 2026. Explore LostStreet for unlimited 360° panoramas, 1v1 duels, and zero subscriptions.",
+  title: "Best Free GeoGuessr Alternatives in 2026 (No Paywall) | LostStreet",
+  description: "Looking for a free GeoGuessr alternative? Play LostStreet for 100% free street view guessing, 1v1 multiplayer duels, flag guesser, and zero subscriptions.",
   alternates: { canonical: "https://www.loststreet.online/guides/best-free-geoguessr-alternatives" },
   keywords: [
-    "free geoguessr alternative", "street view guesser", "loststreet", "free geography guesser",
-    "best free street view guesser game", "geoguessr alternative no subscription", "online map guessing games"
+    "geoguessr alternative", "free geoguessr alternative", "best free geoguessr alternatives",
+    "geoguessr alternative no subscription", "geoguessr free", "play geoguessr free no paywall",
+    "street view guesser", "loststreet", "free geography games like geoguessr"
   ],
   openGraph: {
     title: "GeoGuessr Alternative: The Best Free Street View Games",
     description: "Looking for a free street view guesser game? Discover the top free GeoGuessr alternatives featuring LostStreet multiplayer and unlimited rounds.",
     url: "https://www.loststreet.online/guides/best-free-geoguessr-alternatives",
     type: "article",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Free GeoGuessr Alternatives in 2026 (No Paywall)",
+    description: "Looking for a free GeoGuessr alternative? Play LostStreet for 100% free street view guessing, 1v1 multiplayer, and zero subscriptions.",
+    images: ["/og-image.png"],
   },
 };
 
@@ -32,7 +40,7 @@ const jsonLd = {
     "logo": { "@type": "ImageObject", "url": "https://www.loststreet.online/icon.png" }
   },
   "datePublished": "2026-08-15T00:00:00.000Z",
-  "dateModified": "2026-08-15T00:00:00.000Z"
+  "dateModified": "2026-11-04T00:00:00.000Z"
 };
 
 const headingStyle = {

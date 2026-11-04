@@ -219,10 +219,8 @@ const jsonLd = [
   }
 ];
 
-const GA_MEASUREMENT_ID =
-  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ||
-  process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID ||
-  "G-DCGEKHZZHL";
+// GA4 is fired exclusively via GTM (GTM-5HMDH2F4).
+// No direct gtag/js script needed -- GTM handles all GA4 tracking.
 
 export default function RootLayout({ children }) {
   return (
@@ -292,29 +290,6 @@ export default function RootLayout({ children }) {
         <SpeedInsights />
         <Analytics />
 
-        {/* Google Analytics (GA4) */}
-        {GA_MEASUREMENT_ID && (
-          <>
-            <Script
-              strategy="afterInteractive"
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-            />
-            <Script
-              id="google-analytics"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${GA_MEASUREMENT_ID}', {
-                    page_path: window.location.pathname,
-                  });
-                `,
-              }}
-            />
-          </>
-        )}
 
         {/* GTM — afterInteractive prevents SSR/client script-order mismatch */}
         <Script

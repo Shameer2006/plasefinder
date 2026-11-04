@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "loststreet.vercel.app"
+        }
+      ],
+      "destination": "https://www.loststreet.online/$1",
+      "permanent": true
+    }
+  ]
+}
+

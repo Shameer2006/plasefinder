@@ -1,16 +1,22 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Asia Street View Guide (2026) | LostStreet',
-  description: 'Identify Asian countries from street view clues. Covers East Asia, Southeast Asia, South Asia & Central Asia — scripts, bollards, architecture & driving side tips.',
+  title: 'How to Identify Asian Countries in Street View (2026) | LostStreet',
+  description: 'Master Asian countries in Street View games. Covers East Asia, Southeast Asia, South Asia & Central Asia — scripts, utility poles, architecture & driving side tips.',
   alternates: { canonical: 'https://www.loststreet.online/guides/asia-street-view-guide' },
-  keywords: ['asia street view', 'asian countries geography game', 'southeast asia street view clues', 'identify asian countries', 'loststreet asia guide'],
+  keywords: ['asia street view', 'hardest country to guess in asia', 'asian countries geography game', 'southeast asia street view clues', 'mongolia street view meta', 'indonesia street view meta', 'identify asian countries', 'loststreet asia guide'],
   openGraph: {
     title: 'How to Identify Asian Countries in Street View (2026)',
     description: 'Visual clues for identifying Asian countries in geography guessing games.',
     url: 'https://www.loststreet.online/guides/asia-street-view-guide',
     type: 'article',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'How to Identify Asian Countries in Street View (2026)',
+    description: 'Master Asian countries in Street View games. Scripts, utility poles, architecture & driving side tips for East, SE, South & Central Asia.',
+    images: ['/og-image.png'],
   },
 };
 
@@ -22,7 +28,7 @@ const jsonLd = {
   author: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online/about' },
   publisher: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online', logo: { '@type': 'ImageObject', url: 'https://www.loststreet.online/icon.png' } },
   datePublished: '2026-07-18T00:00:00.000Z',
-  dateModified: '2026-08-06T00:00:00.000Z',
+  dateModified: '2026-11-04T00:00:00.000Z',
   image: 'https://www.loststreet.online/og-image.png',
 };
 

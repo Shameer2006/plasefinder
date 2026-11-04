@@ -1,12 +1,13 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "Street View Camera Generations Guide (Gen 1–4) | LostStreet",
+  title: "Google Street View Camera Generations Guide (Gen 1–4) | LostStreet",
   description: "Master Street View camera generations. Learn to identify Gen 1 blur, Gen 2 purple halos, Gen 3 clarity, and Gen 4 wide-angle lenses to pinpoint countries instantly.",
   alternates: { canonical: "https://www.loststreet.online/guides/street-view-camera-generations-guide" },
   keywords: [
-    "street view camera generations", "gen 1 street view", "gen 2 purple halo", "gen 3 street view meta",
-    "gen 4 street view countries", "geoguessr camera generations", "google street view car camera meta"
+    "google street view camera generations", "street view camera generations", "geoguessr camera generations",
+    "gen 1 street view", "gen 2 purple halo", "gen 3 street view meta", "gen 4 street view countries",
+    "gen 3 vs gen 4 geoguessr", "google street view car camera meta", "street view meta clues"
   ],
   openGraph: {
     title: "Street View Camera Generations Guide (Gen 1–4)",
@@ -14,6 +15,12 @@ export const metadata = {
     url: "https://www.loststreet.online/guides/street-view-camera-generations-guide",
     type: "article",
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Google Street View Camera Generations Guide (Gen 1–4)',
+    description: 'Master Street View camera generations. Learn to identify Gen 1 blur, Gen 2 purple halos, Gen 3 clarity, and Gen 4 wide-angle lenses to pinpoint countries instantly.',
+    images: ['/og-image.png'],
   },
 };
 

@@ -2,6 +2,21 @@
 const nextConfig = {
   compress: true,
   trailingSlash: false,
+
+  // Redirect all vercel.app traffic to the canonical custom domain.
+  // Prevents Google from indexing the blog under loststreet.vercel.app
+  // as a separate site — consolidates all SEO authority under loststreet.online.
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'loststreet.vercel.app' }],
+        destination: 'https://www.loststreet.online/:path*',
+        permanent: true, // 301 — tells Google to fully transfer authority to .online
+      },
+    ];
+  },
+
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 86400,
@@ -65,4 +80,3 @@ const nextConfig = {
 };
 
 export default nextConfig;
-
