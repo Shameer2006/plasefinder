@@ -29,6 +29,7 @@ export default async function sitemap() {
     { url: 'https://www.loststreet.online/guides', lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: 'https://www.loststreet.online/blog', lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: 'https://www.loststreet.online/flag-guesser', lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
+    { url: 'https://www.loststreet.online/outline-guesser', lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
     { url: 'https://www.loststreet.online/leaderboard', lastModified: now, changeFrequency: 'daily', priority: 0.85 },
     { url: 'https://www.loststreet.online/about', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: 'https://www.loststreet.online/community', lastModified: now, changeFrequency: 'weekly', priority: 0.75 },

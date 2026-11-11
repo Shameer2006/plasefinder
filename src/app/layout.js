@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
 import SiteShell from "@/app/components/SiteShell";
 import CookieConsentBanner from "@/app/components/CookieConsentBanner";
+import PlaygamaBridgeInit from "@/app/components/PlaygamaBridgeInit";
 import { Outfit, Oswald } from "next/font/google";
 
 const outfit = Outfit({
@@ -226,6 +227,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${outfit.variable} ${oswald.variable}`} suppressHydrationWarning>
       <head>
+        {/* Playgama Bridge SDK must be the first script in <head> */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="https://bridge.playgama.com/v2/stable/playgama-bridge.js"></script>
         <meta name="theme-color" content="#0a0a0a" />
         <meta name="msvalidate.01" content="3B92B95C23615C35821E1600A4267ABE" />
         {/* hreflang removed — single-language site; was causing conflicts on all sub-pages */}
@@ -284,6 +288,7 @@ export default function RootLayout({ children }) {
             <GameToastProvider>
               <SiteShell>{children}</SiteShell>
               <CookieConsentBanner />
+              <PlaygamaBridgeInit />
             </GameToastProvider>
           </ToastProvider>
         </AuthProvider>

@@ -21,6 +21,7 @@ import { SiteFooter } from './components/SiteShell';
 
 const Game = dynamic(() => import('./components/Game'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
 const FlagGame = dynamic(() => import('./components/FlagGame'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
+const OutlineGame = dynamic(() => import('./components/OutlineGame'), { ssr: false, loading: () => <Spinner text="Loading game..." /> });
 const MultiplayerGame = dynamic(() => import('./components/MultiplayerGame'), { ssr: false });
 const PartyLobby = dynamic(() => import('./components/PartyLobby'), { ssr: false });
 const ProfileModal = dynamic(() => import('./components/ProfileModal'), { ssr: false });
@@ -97,13 +98,18 @@ export default function Home() {
     return () => clearInterval(tick);
   }, [isQueuing, queueType]);
 
-  // Always reset to MENU on fresh page load/launch, or launch FLAG_GAME if requested
+  // Always reset to MENU on fresh page load/launch, or launch FLAG_GAME / OUTLINE_GAME if requested
   useEffect(() => {
     const params = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
     const initialHash = typeof window !== 'undefined' ? window.location.hash.replace('#', '') : '';
 
-    if (initialHash === 'FLAG_GAME' || params?.get('play') === 'flag' || params?.get('mode') === 'flag') {
+    const isFlagDirect = initialHash === 'FLAG_GAME' || params?.get('play') === 'flag' || params?.get('mode') === 'flag';
+    const isOutlineDirect = initialHash === 'OUTLINE_GAME' || params?.get('play') === 'outline' || params?.get('mode') === 'outline';
+
+    if (isFlagDirect) {
       setGameState('FLAG_GAME');
+    } else if (isOutlineDirect) {
+      setGameState('OUTLINE_GAME');
     } else {
       setGameState('MENU');
       if (typeof window !== 'undefined' && window.location.hash) {
@@ -114,7 +120,7 @@ export default function Home() {
     const handlePopState = () => {
       const hash = window.location.hash.replace('#', '');
       if (hash && (
-        ['MENU', 'LOADING', 'EXPLORING', 'RESULT', 'FLAG_GAME'].includes(hash) ||
+        ['MENU', 'LOADING', 'EXPLORING', 'RESULT', 'FLAG_GAME', 'OUTLINE_GAME'].includes(hash) ||
         hash.startsWith('MULTIPLAYER_') ||
         hash.startsWith('PARTY_LOBBY_')
       )) {
@@ -125,10 +131,13 @@ export default function Home() {
     };
     window.addEventListener('popstate', handlePopState);
 
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      window.requestIdleCallback(() => prefetchLocations());
-    } else {
-      setTimeout(() => prefetchLocations(), 500);
+    // Only prefetch Street View locations when user is on the main Street View menu
+    if (!isFlagDirect && !isOutlineDirect) {
+      if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+        window.requestIdleCallback(() => prefetchLocations());
+      } else {
+        setTimeout(() => prefetchLocations(), 500);
+      }
     }
 
     return () => window.removeEventListener('popstate', handlePopState);
@@ -393,6 +402,10 @@ export default function Home() {
 
   if (gameState === 'FLAG_GAME') {
     return <div className="game-area"><FlagGame initialDifficulty={flagDifficulty} onReturnToMenu={() => setGameState('MENU')} /></div>;
+  }
+
+  if (gameState === 'OUTLINE_GAME') {
+    return <div className="game-area"><OutlineGame onReturnToMenu={() => setGameState('MENU')} /></div>;
   }
 
   if (gameState !== 'MENU') {
@@ -930,6 +943,7 @@ export default function Home() {
                   }}
                   onAbout={() => window.location.href = '/about'}
                   onFlagGuesser={() => { setPendingMode('FLAG_GAME'); setShowDifficulty(true); }}
+                  onOutlineQuiz={() => setGameState('OUTLINE_GAME')}
                 />
               </>
             )}
@@ -1393,7 +1407,7 @@ const HeroMenuButton = ({ title, subtitle, iconClass, svgIcon, onClick, badge, b
   </button>
 );
 
-const MainMenu = ({ onQuickPlay, onSingleplayer, onEndlessMode, onGuides, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser }) => {
+const MainMenu = ({ onQuickPlay, onSingleplayer, onEndlessMode, onGuides, onFindMatchClick, isQueuing, cancelMatchmaking, onDailyChallenge, streak, playedToday, onCreateParty, onJoinParty, onLeaderboard, onAbout, onFlagGuesser, onOutlineQuiz }) => {
   const CategoryHeader = ({ title }) => (
     <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#9ca3af', marginTop: '12px', marginBottom: '-2px', textTransform: 'uppercase', letterSpacing: '1.5px', paddingLeft: '6px' }}>
       {title}
@@ -1426,6 +1440,20 @@ const MainMenu = ({ onQuickPlay, onSingleplayer, onEndlessMode, onGuides, onFind
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
             <line x1="4" y1="22" x2="4" y2="15"></line>
+          </svg>
+        }
+      />
+
+      <HeroMenuButton
+        title="OUTLINE QUIZ"
+        subtitle="Identify country by map shape"
+        iconClass="icon-teal"
+        onClick={onOutlineQuiz}
+        svgIcon={
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+            <line x1="8" y1="2" x2="8" y2="18"></line>
+            <line x1="16" y1="6" x2="16" y2="22"></line>
           </svg>
         }
       />

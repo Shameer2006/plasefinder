@@ -12,6 +12,7 @@
 /.env.local
 # testing
 /coverage
+/.vscode
 
 # next.js
 /.next/

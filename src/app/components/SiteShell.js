@@ -43,6 +43,7 @@ function SiteHeader({ onOpenDailyReward }) {
   }, [menuOpen]);
 
   const links = [
+    { href: '/outline-guesser', label: 'Outline Quiz' },
     { href: '/flag-guesser', label: 'Flag Guesser' },
     { href: '/guides', label: 'Guides' },
     { href: '/leaderboard', label: 'Leaderboard' },
@@ -363,6 +364,7 @@ export function PageShell({ breadcrumb, badgeText, badgeColor = 'green', variant
 export function SiteFooter() {
   const mainLinks = [
     { href: '/', label: 'Home' },
+    { href: '/outline-guesser', label: 'Outline Quiz' },
     { href: '/flag-guesser', label: 'Flag Guesser' },
     { href: '/guides', label: 'Guides & Strategy' },
     { href: '/leaderboard', label: 'Leaderboard' },

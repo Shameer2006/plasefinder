@@ -5,6 +5,8 @@ class SoundEngine {
   constructor() {
     this.ctx = null;
     this.enabled = true;
+    this.platformMuted = false;
+    this.paused = false;
     this.volume = 0.5;
   }
 
@@ -15,9 +17,9 @@ class SoundEngine {
         this.ctx = new AudioContext();
       }
     }
-    // Resume context if suspended (browser autoplay policy)
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
+    // Resume context if suspended (only when not muted/paused by platform)
+    if (this.ctx && this.ctx.state === 'suspended' && !this.platformMuted && !this.paused) {
+      this.ctx.resume().catch(() => {});
     }
   }
 
@@ -25,12 +27,34 @@ class SoundEngine {
     this.enabled = enabled;
   }
 
+  setPlatformMuted(muted) {
+    this.platformMuted = !!muted;
+    if (this.ctx) {
+      if (this.platformMuted || this.paused) {
+        this.ctx.suspend?.().catch(() => {});
+      } else if (this.enabled && this.ctx.state === 'suspended') {
+        this.ctx.resume?.().catch(() => {});
+      }
+    }
+  }
+
+  setPaused(paused) {
+    this.paused = !!paused;
+    if (this.ctx) {
+      if (this.paused || this.platformMuted) {
+        this.ctx.suspend?.().catch(() => {});
+      } else if (this.enabled && this.ctx.state === 'suspended') {
+        this.ctx.resume?.().catch(() => {});
+      }
+    }
+  }
+
   setVolume(volume) {
     this.volume = Math.max(0, Math.min(1, volume));
   }
 
   playTone(frequency, type, duration, volMultiplier = 1, slideToFreq = null) {
-    if (!this.enabled) return;
+    if (!this.enabled || this.platformMuted || this.paused) return;
     this.init();
     if (!this.ctx) return;
 

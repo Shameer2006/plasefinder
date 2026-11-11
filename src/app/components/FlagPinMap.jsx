@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Polyline, Tooltip, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -26,11 +26,27 @@ const actualIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 
+const WORLD_BOUNDS = [
+  [-85, -180],
+  [85, 180]
+];
+
+// Calculate minimum zoom so a single 360-degree world fills the viewport width without repeating or leaving margins
+function computeSingleWorldMinZoom(width) {
+  if (!width || width <= 0) return 2;
+  const rawZoom = Math.log2(width / 256);
+  // Snap up to nearest 0.25 step, clamped between 2.0 and 3.5
+  const snapped = Math.ceil(rawZoom * 4) / 4;
+  return Math.max(2, Math.min(3.5, snapped));
+}
+
 function MapClickHandler({ onLocationSelect, disabled }) {
   useMapEvents({
     click(e) {
       if (disabled) return;
-      onLocationSelect({ lat: e.latlng.lat, lng: e.latlng.lng });
+      // Clamp longitude cleanly within [-180, 180]
+      const wrappedLng = ((((e.latlng.lng + 180) % 360) + 360) % 360) - 180;
+      onLocationSelect({ lat: e.latlng.lat, lng: wrappedLng });
       try {
         sounds.playPinDrop();
       } catch (err) {}
@@ -39,14 +55,19 @@ function MapClickHandler({ onLocationSelect, disabled }) {
   return null;
 }
 
-function MapResizer() {
+function MapResizer({ minZoom }) {
   const map = useMap();
   useEffect(() => {
+    if (!map) return;
+    map.setMinZoom(minZoom);
+    if (map.getZoom() < minZoom) {
+      map.setZoom(minZoom);
+    }
     const timeout = setTimeout(() => {
-      if (map) map.invalidateSize();
+      map.invalidateSize();
     }, 250);
     return () => clearTimeout(timeout);
-  }, [map]);
+  }, [map, minZoom]);
   return null;
 }
 
@@ -77,6 +98,15 @@ export default function FlagPinMap({
   height = '100%'
 }) {
   const { mapType } = useGameStore();
+  const [minZoom, setMinZoom] = useState(() =>
+    typeof window !== 'undefined' ? computeSingleWorldMinZoom(window.innerWidth) : 2.5
+  );
+
+  useEffect(() => {
+    const updateMinZoom = () => setMinZoom(computeSingleWorldMinZoom(window.innerWidth));
+    window.addEventListener('resize', updateMinZoom);
+    return () => window.removeEventListener('resize', updateMinZoom);
+  }, []);
 
   const bounds = isResultMode && userPin && targetLocation
     ? [[userPin.lat, userPin.lng], [targetLocation.lat, targetLocation.lng]]
@@ -89,25 +119,35 @@ export default function FlagPinMap({
     height: '100vh',
     overflow: 'hidden',
     zIndex: 1,
-    background: '#0a0f1d'
+    background: '#75cff0'
   } : {
     width: '100%',
     height,
     borderRadius: '16px',
     overflow: 'hidden',
-    border: '1px solid rgba(255, 255, 255, 0.15)',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+    border: '1px solid rgba(160, 125, 85, 0.35)',
+    boxShadow: '0 8px 32px rgba(60, 37, 20, 0.2)',
     position: 'relative',
-    background: '#0d1117'
+    background: '#75cff0'
   };
 
   return (
     <div className="google-anno-skip" style={containerStyle}>
+      <style>{`
+        .leaflet-container {
+          background: ${mapType === 'satellite' ? '#0b192c' : '#75cff0'} !important;
+        }
+      `}</style>
       <MapContainer
         center={[20, 0]}
-        zoom={2}
-        minZoom={1.5}
+        zoom={minZoom}
+        minZoom={minZoom}
         maxZoom={18}
+        zoomSnap={0.25}
+        zoomDelta={0.5}
+        worldCopyJump={false}
+        maxBounds={WORLD_BOUNDS}
+        maxBoundsViscosity={1.0}
         style={{ height: '100%', width: '100%' }}
         attributionControl={false}
       >
@@ -116,9 +156,11 @@ export default function FlagPinMap({
           url={`https://mt{s}.google.com/vt/lyrs=${mapType === 'satellite' ? 'y' : 'm'}&x={x}&y={y}&z={z}&scale=2`}
           subdomains={['0', '1', '2', '3']}
           maxZoom={20}
+          noWrap={true}
+          bounds={WORLD_BOUNDS}
         />
 
-        <MapResizer />
+        <MapResizer minZoom={minZoom} />
         <MapClickHandler onLocationSelect={onPinSelect} disabled={isResultMode} />
 
         {/* User's Placed Pin */}

@@ -38,6 +38,14 @@ export const useGameStore = create(
       lastClaimDate: null,
       showDailyRewardOverlay: false,
       fiftyFiftyUsed: false,
+      platformPaused: false,
+      platformLanguage: 'en',
+
+      setPlatformPaused: (paused) => {
+        sounds.setPaused(paused);
+        set({ platformPaused: !!paused });
+      },
+      setPlatformLanguage: (lang) => set({ platformLanguage: lang || 'en' }),
 
       setGameState: (state) => set({ gameState: state }),
       setGameMode: (mode) => set({ gameMode: mode }),
