@@ -13,11 +13,13 @@
 # testing
 /coverage
 /.vscode
-
+/playgama-builds
+/playgama-dist
 # next.js
 /.next/
 /out/
-
+/loststreet-v1.0.3.zip
+/generate-covers.py
 # production
 /build
 

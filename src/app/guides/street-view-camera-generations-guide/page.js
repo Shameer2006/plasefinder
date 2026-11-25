@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "Google Street View Camera Generations Guide (Gen 1–4) | LostStreet",
-  description: "Master Street View camera generations. Learn to identify Gen 1 blur, Gen 2 purple halos, Gen 3 clarity, and Gen 4 wide-angle lenses to pinpoint countries instantly.",
+  title: "Street View Camera Generations Guide (Gen 1–4) | 2026",
+  description: "Spot Gen 1 blur, Gen 2 purple halos, Gen 3 clarity, and Gen 4 wide-angle lenses in seconds to narrow down any country.",
   alternates: { canonical: "https://www.loststreet.online/guides/street-view-camera-generations-guide" },
   keywords: [
     "google street view camera generations", "street view camera generations", "geoguessr camera generations",
@@ -48,8 +48,27 @@ const jsonLd = {
     "logo": { "@type": "ImageObject", "url": "https://www.loststreet.online/icon.png" }
   },
   "datePublished": "2026-08-25T00:00:00.000Z",
-  "dateModified": "2026-08-27T00:00:00.000Z",
+  "dateModified": "2026-11-25T00:00:00.000Z",
   "mainEntityOfPage": "https://www.loststreet.online/guides/street-view-camera-generations-guide"
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.loststreet.online" },
+    { "@type": "ListItem", position: 2, name: "Guides", item: "https://www.loststreet.online/guides" },
+    { "@type": "ListItem", position: 3, name: "Camera Generations Guide", item: "https://www.loststreet.online/guides/street-view-camera-generations-guide" }
+  ]
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    { "@type": "Question", name: "How do you identify Gen 2 Street View?", acceptedAnswer: { "@type": "Answer", text: "Gen 2 Street View has a distinctive circular blur at the bottom covering the Google car and often shows purple lens-flare halos around bright sunlight." } },
+    { "@type": "Question", name: "What is the difference between Gen 3 and Gen 4 Street View?", acceptedAnswer: { "@type": "Answer", text: "Gen 4 uses newer sensors with noticeably sharper colors, higher dynamic range, and a wider-angle lens compared to Gen 3, plus a smaller car blur." } }
+  ]
 };
 
 const headingStyle = {
@@ -81,6 +100,8 @@ export default function CameraGenerationsGuidePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div style={{
         minHeight: '100vh',
         background: '#fafafa',

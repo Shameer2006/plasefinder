@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'How to Identify African Countries in Street View (2026) | LostStreet',
-  description: 'Which African countries have Street View? Master visual clues for Kenya, Senegal, Ghana, Nigeria, Botswana, South Africa, and more with pro meta tips.',
+  title: 'African Countries with Street View: Full Guide (2026)',
+  description: 'Which African countries have Street View? Spot Kenya, Senegal, Ghana, Nigeria, Botswana & South Africa with pro visual clues.',
   alternates: { canonical: 'https://www.loststreet.online/guides/africa-street-view-guide' },
   keywords: ['africa street view', 'african countries with street view', 'hardest country to guess in africa', 'african countries geography game', 'kenya snorkel geoguessr', 'ghana tape geoguessr', 'senegal street view', 'identify african countries', 'loststreet africa guide'],
   openGraph: {
@@ -28,8 +28,27 @@ const jsonLd = {
   author: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online/about' },
   publisher: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online', logo: { '@type': 'ImageObject', url: 'https://www.loststreet.online/icon.png' } },
   datePublished: '2026-07-15T00:00:00.000Z',
-  dateModified: '2026-11-04T00:00:00.000Z',
+  dateModified: '2026-11-25T00:00:00.000Z',
   image: 'https://www.loststreet.online/og-image.png',
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.loststreet.online' },
+    { '@type': 'ListItem', position: 2, name: 'Guides', item: 'https://www.loststreet.online/guides' },
+    { '@type': 'ListItem', position: 3, name: 'Africa Street View Guide', item: 'https://www.loststreet.online/guides/africa-street-view-guide' },
+  ],
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'Which African countries have official Google Street View?', acceptedAnswer: { '@type': 'Answer', text: 'Major African Street View countries include South Africa, Botswana, Eswatini, Lesotho, Kenya, Uganda, Ghana, Nigeria, Senegal, Rwanda, Tunisia, and Madagascar.' } },
+    { '@type': 'Question', name: 'How do you recognize Kenya vs Ghana in Street View?', acceptedAnswer: { '@type': 'Answer', text: 'Kenya features a distinctive black snorkel on the front-right of the Google car, while Ghana has black tape wrapped around one of its roof rack bars.' } },
+  ],
 };
 
 const headingStyle = {
@@ -69,6 +88,8 @@ export default function ArticlePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div style={{
         minHeight: '100vh',
         background: '#fafafa',

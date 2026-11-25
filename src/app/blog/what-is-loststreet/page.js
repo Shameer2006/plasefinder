@@ -152,7 +152,7 @@ export default function BlogPost() {
 
           <h2 style={headingStyle}>What Is LostStreet?</h2>
           <p style={pStyle}>
-            LostStreet is a browser-based geography and street-view guessing game built around real-world panoramas. According to its website, the game includes more than 780,000 panoramas covering over 195 nations. Players explore a location, inspect its surroundings, place a pin on an interactive map, and receive a score based on the accuracy of their guess.
+            LostStreet is a browser-based geography and street-view guessing game built around real-world panoramas. The platform features more than 780,000 curated Street View panoramas covering over 195 nations and territories. Players explore a location, inspect its surroundings, place a pin on an interactive map, and receive a score based on the accuracy of their guess.
           </p>
 
           <p style={pStyle}>The game combines three familiar ideas:</p>
@@ -165,7 +165,7 @@ export default function BlogPost() {
           <p style={pStyle}>
             Unlike a traditional quiz, LostStreet does not always give players an obvious question. Instead, it presents an environment and asks them to interpret it. A road sign may reveal the language, a line marking may suggest a region, and a camera artifact may provide a clue about the source or age of the imagery.
           </p>
-          <p style={pStyle}>This makes the game accessible to beginners but potentially deep for experienced players.</p>
+          <p style={pStyle}>This makes the game welcoming for beginners while offering deep meta mastery for experienced players.</p>
 
           <h2 style={headingStyle}>How a Typical Round Works</h2>
           <p style={pStyle}>A LostStreet round follows a straightforward loop:</p>
@@ -175,7 +175,7 @@ export default function BlogPost() {
             <li style={liStyle}>They form a country or regional hypothesis.</li>
             <li style={liStyle}>They place a guess on the world map.</li>
             <li style={liStyle}>The game measures the distance between the guess and the actual location.</li>
-            <li style={liStyle}>The player receives points, feedback, and potentially progress toward streaks or rankings.</li>
+            <li style={liStyle}>The player receives points, distance feedback, and progress toward daily streaks or ELO rankings.</li>
           </ol>
 
           <p style={pStyle}>The simple structure hides a demanding reasoning process. Players are not only asking, “Where is this?” They are also asking:</p>
@@ -254,7 +254,7 @@ export default function BlogPost() {
 
           <h2 style={headingStyle}>Game Modes and Competitive Features</h2>
           <p style={pStyle}>
-            LostStreet is not limited to one type of round. Its website describes unlimited single-player games, daily challenges, 1v1 ranked duels, private party lobbies, and flag-based quizzes. Private multiplayer rooms can support groups of up to 20 players, while ranked matches use an ELO-style system.
+            LostStreet is not limited to one type of round. You can play unlimited single-player games, daily challenges, 1v1 ranked duels, private party lobbies, and flag-based quizzes. Private multiplayer rooms support groups of up to 20 players, while ranked matches use an ELO-style rating system.
           </p>
 
           <h3 style={subHeadingStyle}>Single-player exploration</h3>

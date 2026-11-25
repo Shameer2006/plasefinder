@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { PageShell } from '@/app/components/SiteShell';
 
 export const metadata = {
-  title: 'Flag Guesser — Free World Flag Quiz Game | LostStreet',
-  description: "Test your knowledge of world flags in LostStreet's free flag quiz. Identify 196 national flags across multiple choice and world map modes with zero sign-up.",
+  title: 'Flag Guesser — Free World Flag Quiz & Identifier Game',
+  description: "Play Flag Guesser free! Identify 196 world flags in multiple choice or interactive world map modes — zero sign-up required.",
   alternates: { canonical: 'https://www.loststreet.online/flag-guesser' },
   keywords: [
     'flag identifier', 'country flag identifier', 'identify flag', 'flag guesser',
@@ -12,16 +12,16 @@ export const metadata = {
     'flag identification', 'flag guessing game free', 'geography quiz online'
   ],
   openGraph: {
-    title: 'Flag Guesser — Free World Flag Quiz Game | LostStreet',
-    description: "Test your knowledge of world flags in LostStreet's free flag quiz. Identify 196 national flags across multiple choice and world map modes with zero sign-up.",
+    title: 'Flag Guesser — Free World Flag Quiz & Identifier Game',
+    description: "Play Flag Guesser free! Identify 196 world flags in multiple choice or interactive world map modes — zero sign-up required.",
     url: 'https://www.loststreet.online/flag-guesser',
     type: 'website',
     images: [{ url: '/flag-guesser-logo.png', width: 1024, height: 1024 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Flag Guesser — Free World Flag Quiz Game | LostStreet',
-    description: "Test your knowledge of world flags in LostStreet's free flag quiz. Identify 196 national flags across multiple choice and world map modes with zero sign-up.",
+    title: 'Flag Guesser — Free World Flag Quiz & Identifier Game',
+    description: "Play Flag Guesser free! Identify 196 world flags in multiple choice or interactive world map modes — zero sign-up required.",
     images: ['/flag-guesser-logo.png'],
   },
 };
@@ -73,6 +73,20 @@ const faqJsonLd = {
   ]
 };
 
+const gameJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'LostStreet Flag Guesser',
+  alternateName: ['FlagGuesser', 'World Flag Identifier Quiz'],
+  url: 'https://www.loststreet.online/flag-guesser',
+  applicationCategory: 'GameApplication',
+  applicationSubCategory: 'Geography Quiz',
+  operatingSystem: 'Web',
+  isAccessibleForFree: true,
+  description: 'Free online world flag quiz and flag identifier game covering 196 countries across multiple choice and interactive world map modes.',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -87,6 +101,7 @@ export default function FlagGuesserPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(gameJsonLd) }} />
 
       <PageShell breadcrumb="Flag Guesser" badgeText="196 World Flags · 3 Difficulty Modes" badgeColor="amber" variant="vintage">
         <noscript>

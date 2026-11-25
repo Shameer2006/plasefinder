@@ -208,11 +208,28 @@ export default function ArticlePage() {
             <h2 style={headingStyle}>Tips for Memorising Flags</h2>
             <ul style={listStyle}>
               <li>Group flags by region — neighbouring countries often share colour schemes.</li>
-              <li>Learn the unique flags first (Nepal's double pennant, Switzerland's square, Vatican's vertical bicolour).</li>
+              <li>Learn the unique flags first (Nepal&apos;s double pennant, Switzerland&apos;s square, Vatican&apos;s vertical bicolour).</li>
               <li>Focus on the easily confused pairs — these are the ones that cost points in games.</li>
-              <li>Use LostStreet's Flag Guesser mode for daily practice — 5 minutes a day builds recognition quickly.</li>
-              <li>Associate flags with their country's history — the story behind a flag makes it memorable.</li>
+              <li>Use LostStreet&apos;s Flag Guesser mode for daily practice — 5 minutes a day builds recognition quickly.</li>
+              <li>Associate flags with their country&apos;s history — the story behind a flag makes it memorable.</li>
             </ul>
+
+            <h2 style={headingStyle}>How Flag Colors &amp; Symbols Reveal Geography</h2>
+            <p>
+              When you spot a flag on a storefront or municipal pole during a Street View round, even partial visibility is often enough to narrow the continent:
+            </p>
+            <ul style={listStyle}>
+              <li><strong>Nordic Crosses (Scandinavia):</strong> Off-center crosses point immediately to Denmark, Norway, Sweden, Finland, or Iceland. Look at the background color: blue for Sweden, white for Finland, red for Denmark and Norway.</li>
+              <li><strong>Pan-African Colors (Red, Yellow, Green, Black):</strong> Widely used across Sub-Saharan Africa — including Ghana, Senegal, Kenya, Cameroon, and Ethiopia. Check star placement and stripe orientation to separate them quickly.</li>
+              <li><strong>Pan-Slavic Tricolors (White, Blue, Red):</strong> Common across Eastern Europe and the Balkans (Russia, Serbia, Slovakia, Slovenia, Croatia). Small coats of arms or shields are the fastest tiebreakers.</li>
+              <li><strong>Central American Blue-White-Blue Stripes:</strong> Honduras, El Salvador, Nicaragua, and Guatemala all descend from the Federal Republic of Central America flag, differing mainly by their central emblem or stripe angle.</li>
+              <li><strong>Union Jack Cantons (Oceania &amp; Commonwealth):</strong> Australia, New Zealand, Fiji, and Tuvalu place the Union Jack in the upper-left corner paired with Southern Cross stars or national crests.</li>
+            </ul>
+
+            <h2 style={headingStyle}>Practicing Flag Recognition on LostStreet</h2>
+            <p>
+              Memorizing flashcards is slow compared to active recall. Inside <Link href="/flag-guesser" style={{ color: '#059669', fontWeight: 700 }}>LostStreet Flag Guesser</Link>, you can train across three progressive tiers: <strong>Easy Mode</strong> (4-option multiple choice), <strong>Medium Mode</strong> (alternating choices and world map pin drops), and <strong>Hard Mode</strong> (pure world map pinning with zero hints). Mastering flag-to-country mapping directly boosts your speed in 1v1 Street View duels whenever a national flag appears on a passing truck, embassy, or gas station.
+            </p>
 
             
             {/* ── RELATED GUIDES ─────────────────────────────────────────── */}

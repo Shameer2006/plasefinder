@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: "25 Pro GeoGuessr Secrets & Street View Meta Clues (2026) | LostStreet",
-  description: "Crush your next geography duel with 25 pro GeoGuessr secrets: Kenya Snorkel, Ghana roof tape, Senegal sky rifts, French holey poles, and car camera metas.",
+  title: "25 Pro GeoGuessr Secrets & Car Metas Most Miss (2026)",
+  description: "Win more duels with 25 pro Street View metas: Kenya Snorkel, Ghana roof tape, Senegal sky rifts, French holey poles & more.",
   alternates: { canonical: "https://www.loststreet.online/guides/25-pro-street-view-geoguessr-secrets" },
   keywords: [
     "geoguessr tips", "geoguessr secrets", "street view meta clues", "geoguessr tricks", "street view car metas",
@@ -32,8 +32,18 @@ const jsonLd = {
   author: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online/about' },
   publisher: { '@type': 'Organization', name: 'LostStreet', url: 'https://www.loststreet.online', logo: { '@type': 'ImageObject', url: 'https://www.loststreet.online/icon.png' } },
   datePublished: '2026-08-09T00:00:00.000Z',
-  dateModified: '2026-11-04T00:00:00.000Z',
+  dateModified: '2026-11-25T00:00:00.000Z',
   image: 'https://www.loststreet.online/og-image.png',
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.loststreet.online' },
+    { '@type': 'ListItem', position: 2, name: 'Guides', item: 'https://www.loststreet.online/guides' },
+    { '@type': 'ListItem', position: 3, name: '25 Pro Secrets', item: 'https://www.loststreet.online/guides/25-pro-street-view-geoguessr-secrets' },
+  ],
 };
 
 const faqLd = {
@@ -96,6 +106,7 @@ export default function ArticlePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <div style={{
         minHeight: '100vh',
         background: '#fafafa',
@@ -179,7 +190,7 @@ export default function ArticlePage() {
             <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2.5rem 0' }} />
 
             {/* PART 1 */}
-            <h2 style={headingStyle}>🚘 Part 1: The &quot;Car Metas&quot; (Looking Down)</h2>
+            <h2 style={headingStyle}>Part 1: The &quot;Car Metas&quot; (Looking Down)</h2>
             <p>
               When you don't know where you are, look straight down at the vehicle you are riding in. Google used different cars and camera mounts in different countries.
             </p>
@@ -229,7 +240,7 @@ export default function ArticlePage() {
             <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2.5rem 0' }} />
 
             {/* PART 2 */}
-            <h2 style={headingStyle}>📷 Part 2: The Sky &amp; Camera Glitches</h2>
+            <h2 style={headingStyle}>Part 2: The Sky &amp; Camera Glitches</h2>
             <p>
               Sometimes, the camera itself gives away the location due to dust, poor stitching, or the generation of the camera used.
             </p>
@@ -264,7 +275,7 @@ export default function ArticlePage() {
             <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2.5rem 0' }} />
 
             {/* PART 3 */}
-            <h2 style={headingStyle}>🛑 Part 3: Road Infrastructure &amp; Poles</h2>
+            <h2 style={headingStyle}>Part 3: Road Infrastructure &amp; Poles</h2>
             <p>
               Every country has distinct building codes for roads.
             </p>
@@ -293,7 +304,7 @@ export default function ArticlePage() {
             <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2.5rem 0' }} />
 
             {/* PART 4 */}
-            <h2 style={headingStyle}>🌍 Part 4: Environment &amp; Oddities</h2>
+            <h2 style={headingStyle}>Part 4: Environment &amp; Oddities</h2>
             <p>
               Finally, the literal ground you walk on holds secrets.
             </p>

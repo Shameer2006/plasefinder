@@ -153,24 +153,17 @@ export default function ArticlePage() {
               These roadside markers are some of the most reliable clues in the game. For example, <strong>Austria</strong> uses a distinct white bollard with a black top section featuring a red or yellow rectangular reflector. Meanwhile, <strong>Australian</strong> bollards often feature a red strip on a white post, and <strong>Italy</strong> uses a bold black-and-white striped design.
             </p>
 
-            <figure style={{ margin: 'clamp(1.5rem, 3vw, 2.5rem) 0', textAlign: 'center' }}>
-              <img
-                src="/austrian-delineator-bollard.jpg"
-                alt="Austrian delineator bollard"
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  maxHeight: '480px',
-                  objectFit: 'cover',
-                  borderRadius: '12px',
-                  border: '1px solid #e5e7eb',
-                  display: 'block'
-                }}
-              />
-              <figcaption style={{ textAlign: 'center', color: '#6b7280', fontSize: '0.85rem', marginTop: '0.65rem', fontFamily: '"Inter", system-ui, sans-serif' }}>
-                Austrian delineator bollard. Source: David Crespo / Getty Images
-              </figcaption>
-            </figure>
+            <div style={{ margin: '1.5rem 0', padding: '1.25rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '1.25rem', fontFamily: '"Inter", system-ui, sans-serif' }}>
+              <svg width="56" height="84" viewBox="0 0 56 84" aria-label="Austrian delineator bollard diagram" style={{ flexShrink: 0 }}>
+                <rect x="18" y="8" width="20" height="70" rx="4" fill="#ffffff" stroke="#cbd5e1" strokeWidth="2" />
+                <path d="M18 18 L38 24 L38 42 L18 36 Z" fill="#1e293b" />
+                <rect x="22" y="23" width="12" height="12" rx="1.5" fill="#dc2626" />
+              </svg>
+              <div>
+                <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '0.95rem', marginBottom: '4px' }}>Field Note: Austrian Delineator Bollard</div>
+                <div style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.55 }}>White roadside post with a slanted black top band and a red (or yellow/white) rectangular reflector — a classic instant tell for Austria and neighboring Central European roads.</div>
+              </div>
+            </div>
 
             <h3 style={subHeadingStyle}>Poles</h3>
             <p>
@@ -182,24 +175,18 @@ export default function ArticlePage() {
               The back of a road sign is often more helpful than the front. In <strong>Colombia</strong>, road signs are almost always reinforced with a distinctive metallic cross-frame on the back. In contrast, if you see road signs whose backs are painted completely black, you are almost certainly in <strong>Brazil</strong>.
             </p>
 
-            <figure style={{ margin: 'clamp(1.5rem, 3vw, 2.5rem) 0', textAlign: 'center' }}>
-              <img
-                src="/colombian-road-sign.jpg"
-                alt="Colombian road sign cross back"
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  maxHeight: '480px',
-                  objectFit: 'cover',
-                  borderRadius: '12px',
-                  border: '1px solid #e5e7eb',
-                  display: 'block'
-                }}
-              />
-              <figcaption style={{ textAlign: 'center', color: '#6b7280', fontSize: '0.85rem', marginTop: '0.65rem', fontFamily: '"Inter", system-ui, sans-serif' }}>
-                Colombian road sign cross back. Source: EGT / Getty Images
-              </figcaption>
-            </figure>
+            <div style={{ margin: '1.5rem 0', padding: '1.25rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '1.25rem', fontFamily: '"Inter", system-ui, sans-serif' }}>
+              <svg width="64" height="76" viewBox="0 0 64 76" aria-label="Colombian cross-back road sign diagram" style={{ flexShrink: 0 }}>
+                <rect x="29" y="42" width="6" height="30" fill="#94a3b8" />
+                <polygon points="32,6 56,28 32,50 8,28" fill="#cbd5e1" stroke="#64748b" strokeWidth="2" />
+                <rect x="29" y="14" width="6" height="28" fill="#475569" />
+                <rect x="18" y="25" width="28" height="6" fill="#475569" />
+              </svg>
+              <div>
+                <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '0.95rem', marginBottom: '4px' }}>Field Note: Colombian Cross-Back Sign</div>
+                <div style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.55 }}>Pan behind any diamond yellow sign in South America: a galvanized metal cross-brace on the reverse side is a signature Colombian marker.</div>
+              </div>
+            </div>
 
             <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2.5rem 0' }} />
 
@@ -214,24 +201,15 @@ export default function ArticlePage() {
               Certain characters belong to very specific countries. <strong>Poland</strong> is incredibly easy to spot if you look for letters like <strong>ą, ę, ł, ń, ó, ż,</strong> or <strong>ź</strong>. If you are torn between Scandinavian countries, remember that <strong>Swedish</strong> uses <strong>ö</strong> and <strong>ä</strong>, while <strong>Norway</strong> and <strong>Denmark</strong> use <strong>ø</strong> and <strong>æ</strong>.
             </p>
 
-            <figure style={{ margin: 'clamp(1.5rem, 3vw, 2.5rem) 0', textAlign: 'center' }}>
-              <img
-                src="/polish-town-entry-sign.jpg"
-                alt="Polish town entry sign"
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  maxHeight: '480px',
-                  objectFit: 'cover',
-                  borderRadius: '12px',
-                  border: '1px solid #e5e7eb',
-                  display: 'block'
-                }}
-              />
-              <figcaption style={{ textAlign: 'center', color: '#6b7280', fontSize: '0.85rem', marginTop: '0.65rem', fontFamily: '"Inter", system-ui, sans-serif' }}>
-                Polish town entry sign. Source: RobsonPL / Getty Images
-              </figcaption>
-            </figure>
+            <div style={{ margin: '1.5rem 0', padding: '1.25rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '1.25rem', fontFamily: '"Inter", system-ui, sans-serif' }}>
+              <div style={{ flexShrink: 0, background: '#16a34a', color: '#ffffff', border: '2px solid #ffffff', outline: '2px solid #16a34a', borderRadius: '6px', padding: '8px 14px', fontWeight: 800, fontSize: '0.95rem', letterSpacing: '0.02em' }}>
+                Łódź
+              </div>
+              <div>
+                <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '0.95rem', marginBottom: '4px' }}>Field Note: Polish Town Entry Sign</div>
+                <div style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.55 }}>Green rectangular town-entry boards paired with slashed L (ł) or accented letters (ą, ę, ź, ż) confirm Poland immediately.</div>
+              </div>
+            </div>
 
             <h3 style={subHeadingStyle}>The &quot;Street&quot; Test</h3>
             <p>
@@ -243,24 +221,16 @@ export default function ArticlePage() {
               Some countries regularly mix alphabets on their signage. <strong>Serbia</strong> is famous for dual-script road signs, displaying both Cyrillic and Latin alphabets one above the other.
             </p>
 
-            <figure style={{ margin: 'clamp(1.5rem, 3vw, 2.5rem) 0', textAlign: 'center' }}>
-              <img
-                src="/serbian-dual-script-road-sign.jpg"
-                alt="Serbian dual-script road sign"
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  maxHeight: '480px',
-                  objectFit: 'cover',
-                  borderRadius: '12px',
-                  border: '1px solid #e5e7eb',
-                  display: 'block'
-                }}
-              />
-              <figcaption style={{ textAlign: 'center', color: '#6b7280', fontSize: '0.85rem', marginTop: '0.65rem', fontFamily: '"Inter", system-ui, sans-serif' }}>
-                Serbian dual-script road sign. Source: Emily_M_Wilson / Getty Images
-              </figcaption>
-            </figure>
+            <div style={{ margin: '1.5rem 0', padding: '1.25rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '1.25rem', fontFamily: '"Inter", system-ui, sans-serif' }}>
+              <div style={{ flexShrink: 0, background: '#facc15', color: '#111827', border: '2px solid #111827', borderRadius: '6px', padding: '6px 12px', textAlign: 'center', fontWeight: 800, fontSize: '0.85rem', lineHeight: 1.3 }}>
+                <div>БЕОГРАД</div>
+                <div>BEOGRAD</div>
+              </div>
+              <div>
+                <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '0.95rem', marginBottom: '4px' }}>Field Note: Serbian Dual-Script Sign</div>
+                <div style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.55 }}>Directional signs displaying Cyrillic on top and Latin directly underneath are a hallmark of Serbia (and parts of Montenegro/Bosnia).</div>
+              </div>
+            </div>
 
             <h3 style={subHeadingStyle}>Toponymy (Place Names)</h3>
             <p>

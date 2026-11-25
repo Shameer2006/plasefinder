@@ -29,8 +29,8 @@ const oswald = Oswald({
 });
 
 export const metadata = {
-  title: "LostStreet — The Fun Free World Detective & Geography Game",
-  description: "Get dropped onto random streets around the world! Look for silly clues, guess where you are, duel your friends in 1v1 battles, and explore 780,000+ locations for free.",
+  title: "LostStreet — Free Street View Geography Game & Map Quiz",
+  description: "Play the free GeoGuessr alternative! Drop onto 780,000+ real streets, spot clues, play Flag Guesser & 1v1 duels — no signup.",
   metadataBase: new URL("https://www.loststreet.online"),
   alternates: {
     canonical: "/",
@@ -220,8 +220,8 @@ const jsonLd = [
   }
 ];
 
-// GA4 is fired exclusively via GTM (GTM-5HMDH2F4).
-// No direct gtag/js script needed -- GTM handles all GA4 tracking.
+// GA4 Measurement ID (G-DCGEKHZZHL) is loaded directly via gtag.js below,
+// alongside GTM (GTM-5HMDH2F4) and Google Consent Mode v2.
 
 export default function RootLayout({ children }) {
   return (
@@ -258,6 +258,20 @@ export default function RootLayout({ children }) {
                 'analytics_storage': 'denied',
                 'wait_for_update': 500
               });
+            `,
+          }}
+        />
+        {/* Google Analytics 4 (G-DCGEKHZZHL) in <head> for instant tag detection */}
+        {/* eslint-disable-next-line @next/next/next-script-for-ga */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-DCGEKHZZHL"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){window.dataLayer.push(arguments);}
+              window.gtag = window.gtag || gtag;
+              gtag('js', new Date());
+              gtag('config', 'G-DCGEKHZZHL');
             `,
           }}
         />
